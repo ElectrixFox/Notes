@@ -139,6 +139,8 @@ Similarly we can write
 \newpage
 
 \section{Functions of a real variable}
+
+\subsection{Functions of a real variable}
 A real function is a map, $f$, that associates a real number to every element of a set $S$. $S$ is called the domain (or domain of definition) of the function, it can be any set: the real numbers, the unit interval $[0,\,1]$, and so on. \\
 For each number $x$ in $S$, we write $f(x)$ for the number assigned to $x$ by $f$. \\
 \\
@@ -195,6 +197,86 @@ f : \R ^ 2 &\rightarrow \R \\
 \end{align*}
 Defines a function taking two reals as inputs $x$ and $y$, producing $f(x, y) = x\sin{(y)}$. \\
 \\
-A function $f$ is even if for all $x$ $f(x) = f(-x)$\footnote{This means that the graph has reflectional symmetry around $x = 0$.}.
+A function $f$ is even if for all $x$, $f(x) = f(-x)$\footnote{This means that the graph has reflectional symmetry around $x = 0$.}. A function $f$ is odd if for all $x$, $f(x) = -f(-x)$\footnote{Its graph has rotational symmetry around the origin (and that we must have $f(0) = 0$).}.
+
+
+\subsubsection{Inverses}
+Given a function $f$ with domain $S$ and image $I$, an inverse function is a function $g$ with domain $I$ and image $S$ such that, for every $y \in I$,
+\[
+f(g(y)) = y.
+\]
+Usually, the inverse is denoted $f ^ {-1}$. \\
+Often, an inverse function can be found by writing
+\[
+y = f(x)
+\]
+and then rearranging so that $x$ is the subject. \\
+We can't always find the inverse of a function over a given domain. For example, $f(x) = x ^ 2$ doesn't have an inverse over whole real line, because there are two $x$-values for each $y$-value. If only the positive part of the real line is considered, an inverse can be found: $f ^ {-1}(x) = \sqrt{x}$.
+
+
+\subsubsection{Graphs and transformations}
+The graph of a function $f : \R \rightarrow \R$ can be shifted, reflected and rescaled. \\
+\textbf{Translation:} \\
+$f(x) + a$ shifts the graph of $f(x)$ up by an amount $a$. \\
+$f(x + b)$ shifts the graph of $f(x)$ to the left by an amount $b$. \\
+\textbf{Reflection:} \\
+$-f(x)$ reflects the graph of $f(x)$ about the $x$-axis. \\
+$f(-x)$ reflects the graph of $f(x)$ about the $y$-axis. \\
+$|f(x)|$ reflects the portions of the graph of $f(x)$ that are below the $x$-axis about the $x$-axis. \\
+\textbf{Scaling:} \\
+$\lambda f(x)$ is a vertical stretch of the graph of $f(x)$ if $\lambda > 1$ and a vertical contraction if $0 < \lambda < 1$. \\
+$f(\mu x)$ is a horizontal contraction of the graph of $f(x)$ if $\mu > 1$ and a horizontal stretch if $0 < \mu < 1$. \\
+\\
+Tips for graphing reciprocal $\frac{1}{f(x)}$ from the graph of $f(x)$:
+\begin{itemize}
+    \item If $f(x)$ is increasing (decreasing) then $\frac{1}{f(x)}$ is decreasing (increasing).
+    \item The graphs of $f(x)$ and $\frac{1}{f(x)}$ intersect exactly when $f(x) = \pm 1$.
+\end{itemize}
+The graph of the inverse of a function, $f ^ {-1} (x)$, is found by reflecting the graph of $f(x)$ in the line $y = x$.
+
+\subsection{Exponentials and logarithms}
+An exponential function is any function of the form $f(x) = b ^ x$, where $b$ (called the base) is a positive real number not equal to $1$. \\
+For all values of $b$, the graph passes through $(0, 1)$. There are two types of behaviour:
+\begin{itemize}
+    \item If $b > 1$, the graph is increasing and has a horizontal asymptote $y = 0$ along the negative $x$-axis.
+    \item If $0 < b < 1$, the graph is decreasing and has a horizontal asymptote $y = 0$ along the positive $x$-axis.
+\end{itemize}
+Two important properties of exponential functions are
+\[
+b ^ x b ^ y = b ^ {x + y}\quad\textnormal{and}\quad\left(b ^ x\right) ^ y = b ^ {xy}.
+\]
+A special base is $e$, called the natural base.
+\[
+\dfrac{d}{dx}e ^ x = e ^ x\footnote{It's gradient is always $e ^ x$}.
+\]
+We can define $e$ as such,
+\[
+e = 1 + \dfrac{1}{1!} + \dfrac{1}{2!} + \dfrac{1}{3!} + \dfrac{1}{4!} + \dotsc = \sum_{i = 0}^{\infty}{\dfrac{1}{i!}}.
+\]
+$e$ is transcendental: it is not the root of any polynomial equation with rational coefficients.
+
+
+\subsubsection{Logarithms}
+A logarithm is the inverse of an exponential function: if $y = b ^ x$, then $x = \log_{b}{(y)}$. \\
+When the base of the logarithm is $e$, we call the function the natural logarithm, usually denoted by $\ln{(x)}$. \\
+The logarithm has a vertical asymptote at $x = 0$. \\
+Some properties of logarithms are:
+\begin{itemize}
+    \item $\log_{b}{1} = 0$ (this follows from $b ^ 0 = 1$.)
+    \item $\log_{b}{b ^ x} = x$ (from the definition as the inverse of an exponential)
+    \item $\log_{b}{(\alpha \beta)} = \log_{b}{\alpha} + \log_{b}{\beta}$ (compare this to $b ^ \alpha b ^ \beta = b ^ {\alpha + \beta}$)
+    \item $\log_{b}{(\frac{\alpha}{\beta})} = \log_{b}{\alpha} - \log_{b}{\beta}$ (compare to $\frac{b ^ \alpha}{b ^ \beta} = b ^ {\alpha - \beta}$)
+    \item $\log_{b}{x ^ r} = r\log_{b}{x}$ (from $\left(a ^ x\right) ^ r = a ^ {xr}$)
+\end{itemize}
+
+\subsection{Trigonometry}
+$\sin$ and $\cos$ have the domain $\R$ and the image $[-1,\,1]$. $\sin{(x)}$ is an odd function, $\cos{(x)}$ is an even function. $\sin{(x)} = \cos{(x - \frac{\pi}{2})}$, and $\cos{(x)} = \sin{(\frac{\pi}{2} - x)}$. Both $\sin{(x)}$ and $\cos{(x)}$ are periodic, with period $2\pi$. \\
+\\
+\textbf{Periodic functions} A function $f(x)$ is periodic if we can find $p > 0$ such that $f(x + p) = f(x)$ is true for every $x$. The smallest value of $p$ is called the period of $f$. \\
+\\
+$\tan{x} = \frac{\sin{x}}{\cos{x}}$ has period $\pi$. It has vertical asymptotes at $x = \left(\frac{1}{2} + n\right)\pi$, corresponding with the roots of $\cos$. Its domain is $\R \setminus \{x = \left(\frac{1}{2} + n\right)\pi\textnormal{ for } n \in \Z\}$. Its image is $\R$. \\
+\\
+
+
 
 \end{document}
