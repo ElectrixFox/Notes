@@ -1,0 +1,200 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{thmtools}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+
+\declaretheoremstyle[
+    notefont = \normalfont\itshape,
+    notebraces={(}{)}
+]{avgstyle}
+\declaretheoremstyle[
+    bodyfont = \normalfont,
+    notefont = \normalfont\itshape,
+    spaceabove = 1em,
+    spacebelow = 1em
+]{defstyle}
+\declaretheoremstyle[
+    bodyfont = \normalfont,
+    notefont = \normalfont,
+    spaceabove = 1em,
+    spacebelow = 1em
+]{exampstyle}
+
+\declaretheorem[style = avgstyle]{theorem}
+\declaretheorem[]{lemma}
+\declaretheorem{proposition, corollary, remark}[style=plain]
+\declaretheorem{definition}[style=defstyle, numbered=unless unique]
+\declaretheorem{example}[style=exampstyle, numberwithin=section]
+
+\title{Induction Notes}
+\author{Luke Phillips}
+\date{September 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Here I have made notes for all of the induction questions.
+
+\newpage
+
+\section{Set Theory}
+
+\subsection{Basic definitions}
+A set is defined by the elements that belong to the set. If an element $x$ belongs to a set $S$, we write $x \in S$. \\
+\\
+Sets can be finite or countably infinite, this means they can be written as a finite or infinite list. For example, a finite set with finitely many integers, 
+\[
+S = \{e_1, e_2,\dotsc,e_n\}.
+\]
+An example of a countably infinite set, with elements labelled by all positive integers,
+\[
+S = \{e_1, e_2, e_3, \dotsc\}.
+\]
+Elements of a set are listed between the curly braces. The order of elements in a set is unimportant, for example
+\[
+\{0, 1, 2, 3\} = \{3, 1, 2, 0\}.
+\]
+When we work with sets, we ignore repeated elements,
+\[
+\{0, 1, 1, 2, 1, 3\} = \{0, 1, 2, 3\}.
+\]
+Sets can also be defined using the following notation,
+\[
+S = \{n : n \textnormal{ is an integer},\,0 \leq n \leq 9\}
+\]
+this means all $n$ such that the properties right of the ':'\footnote{Some books use '$\mid$' instead of ':'.} hold. \\
+\\
+\subsection{Standard sets}
+$\Z = \{\dotsc, -2, -1, 0, 1, 2, \dotsc\} = \{0, \pm 1, \pm 2, \dotsc\}$, the set of integers (whole numbers: positive, negative, and zero). \\
+$\N = \{1, 2, \dotsc\} = \{n: n \in \Z, n > 0\}$, the set of natural number (positive integers). \\
+$\R$ is the set of real numbers. \\
+$\emptyset = \{\}$ is the empty set (the set with no elements). \\
+\\
+Some useful sets are intervals in the real line, for all real numbers between $a$ and $b$, we write
+\[
+[a,\,b] = \{x \in \R : a \leq x \leq b\}.
+\]
+Square brackets are used when we want to include the endpoints: $a \in [a,\,b]$ and $b \in [a,\,b]$. When endpoints shouldn't be included, we use round brackets and write
+\[
+(a,\,b) = \{x \in \R : a < x < b\}.
+\]
+$[a,\,b]$ is a closed interval, and $(a,\,b)$ is an open interval. These can be mixed, for example $[a,\,b) = \{x \in \R : a \leq x < b\}$.
+
+\subsection{More notation}
+$x \in S$ means the element $x$ is an element of the set $S$. The negation is $x \notin S$. For example, $3 \in \Z$ but $-4 \notin \N$. \\
+If $R$ and $S$ are sets, then $R \subseteq S$ means that $R$ is a subset of $S$, every element of $R$ is also an element of $S$. \\
+For any set $S$, we have $\emptyset \subseteq S$ and $S \subseteq S$. We also have $\N \subseteq \Z \subseteq \R$. \\
+If $S$ is a finite set, its size or cardinality, denoted by $|S|$, is the number of elements it contains. For example, $|\{1, 3, 5, 7, 9\}| = 5$ and $|\emptyset| = 0$.
+
+\subsection{Set operations}
+Given several sets, there are a few important ways of combining them to make further sets. \\
+Given sets $A$ and $B$, $A \cup B$ is the union of $A$ and $B$ (the set consisting of elements in $A$, $B$, or $A$ and $B$). For example,
+\[
+\{-2, -1, 0\} \cup \{0, 1, 2\} = \{-2, -1, 0, 1, 2\}.
+\]
+$A \cap B$ is the intersection of sets $A$ and $B$ (the set consisting of elements in both $A$ and $B$). For example,
+\[
+\{-2, -1, 0\} \cap \{0, 1, 2\} = \{0\}.
+\]
+From the definitions,
+\[
+A \cup B = B \cup A
+\]
+and
+\[
+A \cap B = B \cap A.
+\]
+Additionally, $A \cup \emptyset = A$ and $A \cap \emptyset = \emptyset$. \\
+The set difference between $A$ and $B$, sometimes called $A$ minus $B$, is the set of elements of $A$ not in $B$. Written as
+\[
+A \setminus B = \{x \in A : x \notin B\}.
+\]
+For example,
+\[
+\Z \setminus \N = \{0, -1, -2, \dotsc\}.
+\]
+
+\subsection{Many sets}
+If we want to take the union or intersection of several sets, we can use the following notation,
+\[
+\bigcap_{i = 1}^{n}{A_i} = A_1 \cap A_2 \cap A_3 \cap \cdots \cap A_n = \{x : x \in A_i \textnormal{ for every } i\}.
+\]
+Similarly we can write
+\[
+\bigcup_{i = 1}^{n}{A_i} = A_1 \cup A_2 \cup A_3 \cup \cdots \cup A_n = \{x : x \in A_i \textnormal{ for at least one } i\}.
+\]
+
+\newpage
+
+\section{Functions of a real variable}
+A real function is a map, $f$, that associates a real number to every element of a set $S$. $S$ is called the domain (or domain of definition) of the function, it can be any set: the real numbers, the unit interval $[0,\,1]$, and so on. \\
+For each number $x$ in $S$, we write $f(x)$ for the number assigned to $x$ by $f$. \\
+\\
+For example, we can take $S$ to be the set of reals, and $f(x) = 2x ^ 2 + 3$ for each $x \in \R$. Another example, take $S = [0,\,4]$, and define $g$ as follows
+\[
+g(x) =
+\begin{cases}
+    x ^ 2 + 3 &\textnormal{if } 0 \leq x < 2 \\
+    -x - 2 &\textnormal{if } 2 < x \leq 4 \\
+    0 &\textnormal{if } x = 2.
+\end{cases}
+\]
+This is a valid function as it defines a value for each $x \in [0,\,4]$. Note, cannot say what $g(5)$ is, as it is undefined, since $5$ isn't in the domain of $g$.  Drawing a graph of $g$ would look as follows,
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}
+        [
+        xmin = -2, xmax = 6,
+        ymin = -8, ymax = 8,
+        axis x line = center,
+        axis y line = center,
+        xtick = {-2, 2, 4, 6},
+        ytick = {-6, -4, -2, 2, 4, 6}
+        ]
+        \addplot [domain=0:1.999, smooth, thick] { x ^ 2 + 3 };
+        \addplot [domain=1.999:4, smooth, thick] { -x - 2 };
+        \addplot [only marks, mark=*, mark options = {fill=black}] coordinates {(2, 0)};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{The function $g$.}
+    \label{fig:func1}
+\end{figure}
+If the domain of a function isn't given, take it to be the largest possible subset of $\R$. \\
+We call the set of values taken by the function its image. We say the image as the set $I$ defined by
+\[
+I = \{y : y = f(x) \textnormal{ for some } x \in S\}.
+\]
+The image of our first function ($f$) is the set of all $y \geq 3$, so we could write $I = \{y : y \geq 3\}$, or $I = [3,\,\infty)$. \\
+The image of the second function is more complicated. The image of $g$ is
+\[
+I = [-6,\,-4) \cup [3,\,7) \cup \{0\}.
+\]
+We often want to describe the domain and the image of a function in its definition, as well as what it does. We often use notation such as:
+\begin{align*}
+f : S &\rightarrow I \\
+x &\mapsto 2x ^ 2 + 3.
+\end{align*}
+This is read as, $f$ is defined as a function from $S$ to $I$ which assigns the value $2x ^ 2 + 3$ to each $x$. \\
+This notation is helpful when defining complicated functions, e.g.
+\begin{align*}
+f : \R ^ 2 &\rightarrow \R \\
+(x, y) &\mapsto x\sin{(y)}.
+\end{align*}
+Defines a function taking two reals as inputs $x$ and $y$, producing $f(x, y) = x\sin{(y)}$. \\
+\\
+A function $f$ is even if for all $x$ $f(x) = f(-x)$\footnote{This means that the graph has reflectional symmetry around $x = 0$.}.
+
+\end{document}
