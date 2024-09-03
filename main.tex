@@ -1,13 +1,12 @@
 \documentclass[10pt, a4paper]{article}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{amsthm}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{thmtools}
+\usepackage{parskip}
 \usepackage{tikz}
 \usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -42,12 +41,17 @@
 
 \begin{document}
 
+
 \maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
 
 \section{Introduction}
 Here I have made notes for all of the induction questions.
-
-\newpage
 
 \section{Set Theory}
 
@@ -276,7 +280,325 @@ $\sin$ and $\cos$ have the domain $\R$ and the image $[-1,\,1]$. $\sin{(x)}$ is 
 \\
 $\tan{x} = \frac{\sin{x}}{\cos{x}}$ has period $\pi$. It has vertical asymptotes at $x = \left(\frac{1}{2} + n\right)\pi$, corresponding with the roots of $\cos$. Its domain is $\R \setminus \{x = \left(\frac{1}{2} + n\right)\pi\textnormal{ for } n \in \Z\}$. Its image is $\R$. \\
 \\
+\textbf{Reciprocals of trigonometric functions} \\
+\[
+    \mathrm{cosec}{(x)} = \dfrac{1}{\sin{(x)}} \qquad \qquad \sec{(x)} = \dfrac{1}{\cos{(x)}} \qquad \qquad \cot{(x)} = \dfrac{1}{\tan{(x)}}.
+\]
+The domain of $\mathrm{cosec}(x)$ is the set of $x$ for which $\sin{(x)}$ is not $0$, so it is
+\[
+\mathrm{dom}(\mathrm{cosec}) = \R \setminus \{x = 2\pi n \textnormal{ for an integer } n\}.
+\]
+Its image is $\R \setminus (-1, 1)$. \\
+\\
+\textbf{Inverses of trigonometric functions} \\
+The inverse of $\sin$ is usually denoted $\sin^{-1}(x)$ or $\arcsin(x)$. It is defined as the value of $\theta \in (-\frac{\pi}{2}, \frac{\pi}{2}]$ such that $\sin(\theta) = x$. We similarly define $\arccos(x)$ and $\arctan(x)$. \\
+\\
+\textbf{Trigonometric identities} \\
+Here are some important identities:
+\[
+\sin^2(x) + \cos^2(x) = 1
+\]
+\[
+\tan^2(x) + 1 = \sec^2(x)
+\]
+
+\textbf{Addition Formulae} \\
+\begin{align*}
+    \sin(x \pm y) &= \sin(x)\cos(y) \pm \cos(x)\sin(y) \\
+    \cos(x \pm y) &= \cos(x)\cos(y) \mp \sin(x)\sin(y) \\
+    \tan(x \pm y) &= \dfrac{\tan(x) \pm \tan(y)}{1 \mp \tan(x)\tan(y)}.
+\end{align*}
+From these we can obtain the double-angle formulae
+\begin{align*}
+    \sin(2x) &= 2\sin(x)\cos(x) \\
+    \cos(2x) &= \cos^2(x) - \sin^2(x) \\
+    \tan(2x) &= \dfrac{2\tan(x)}{1 - \tan^2(x)}.
+\end{align*}
+The half-angle formulae:
+\begin{align*}
+    \sin^2(x) &= \frac{1}{2} - \frac{1}{2}\cos(2x) \\
+    \cos^2(x) &= \frac{1}{2} + \frac{1}{2}\cos(2x).
+\end{align*}
+The sum of two trigonometric functions can be written as follows \\
+\[
+a\cos(x) + b\sin(x) = R\sin\left(x + \arctan\left(\frac{a}{b}\right)\right) = R\cos\left(x - \arctan\left(\frac{a}{b}\right)\right),
+\]
+where $R = \sqrt{a ^ 2 + b ^ 2}$.
+
+\newpage
+
+\section{Algebra}
+
+\subsection{Polynomials and rational functions}
+
+\subsubsection{Polynomials}
+A polynomial is a function of the form
+\[
+p(x) = a_n x ^ n + \dotsc + a_1 x + a_0.
+\]
+When $a_n \neq 0$, we say that $n$ is the degree of $p(x)$. A polynomial of degree $n$ has at most $n$ distinct roots, values $\alpha$ such that $p(\alpha) = 0$. If $\alpha$ is a root of $p(x)$, then $(x - \alpha)$ is a factor of $p(x)$. If there are $n$ distinct roots, then $p(x)$ can be completely factorised into linear (degree $1$) terms of the form $x - \alpha$ to give
+\[
+p(x) = a_n (x - \alpha_1)(x - \alpha_2)\dotsc(x - a_n). 
+\]
+When the coefficients $a_i$ are real, the roots of $p(x)$ are either real or occur in complex conjugate pairs. This means $p(x)$ will have linear factors of the form $x - \alpha$ as well as quadratic factors of the form $x ^ 2 + \beta x + \gamma$ which will have no real roots. \\
+With quadratics of the form $p(x) = ax ^ 2 + bx + c$, it is helpful to complete the square, by writing them in the following form,
+\[
+p(x) = \pm (Ax - B) ^ 2 + C.
+\]
+Completing the square yields a formula for the roots of the quadratic. \\
+Assume that $a > 0$. Comparing coefficients between
+\[
+p(x) = ax ^ 2 + bx + c
+\]
+and
+\[
+p(x) = (Ax - B) ^ 2 + C = A ^ 2 x ^ 2 - 2ABx + B ^ 2 + C,
+\]
+we see that $a = A ^ 2$, $b = -2AB$, and $c = B ^ 2 + C$. We can rearrange to find $A, B$ and $C$: $A = \sqrt{a}, B = \frac{-b}{2\sqrt{a}}$, and $C = c - \frac{b ^ 2}{4a}$. As long as $C < 0$, we can write our quadratic as
+\[
+p(x) = \left(\sqrt{a}x + \dfrac{b}{2\sqrt{a}}\right) ^ 2 + c - \dfrac{b ^ 2}{4a} = a(x - \alpha_1)(x - \alpha_2),
+\]
+with roots given by
+\[
+\alpha_1 = \dfrac{-b - \sqrt{b ^ 2 - 4ac}}{2a},\qquad\alpha_2 = \dfrac{-b + \sqrt{b ^ 2 - 4ac}}{2a}.
+\]
+
+\subsubsection{Rational functions}
+A rational function is a quotient of two polynomials $f(x) = \frac{p(x)}{q(x)}$. \\
+\\
+\textbf{Partial fractions} \\
+Partial fractions means simplifying a quotient function and writing it as a sum of fractions with lower-degree polynomials in their denominators.
+\[
+\dfrac{5}{(x + 5)(x - 5)} = \dfrac{1}{2}\dfrac{1}{x - 5} - \dfrac{1}{2}\dfrac{1}{x + 5}.
+\]
+To do this we do as follows,
+\begin{align*}
+\dfrac{5}{(x + 5)(x - 5)} &= \dfrac{A}{x - 5} + \dfrac{B}{x + 5} \\
+&= \dfrac{A(x - 5) + B(x + 5)}{(x + 5)(x - 5)}.
+\end{align*}
+Since we need
+\[
+5 = (A + B)x + (5A - 5B)
+\]
+to be true for all $x$, so we solve
+\begin{align*}
+    A + B &= 0 \\
+    5A - 5B &= 5
+\end{align*}
+to find $A$ and $B$. \\
+\\
+When there is a repeated factor in the denominator, a term is needed for each exponent. For example,
+\[
+\dfrac{2x + 3}{(x - 1) ^ 3 (x + 1)},
+\]
+we would need to write
+\[
+\dfrac{2x + 3}{(x - 1) ^ 3 (x + 1)} = \dfrac{A}{x - 1} + \dfrac{B}{(x - 1) ^ 2} + \dfrac{C}{(x - 1) ^ 3} + \dfrac{D}{x +1}
+\]
+and then find $A, B, C$, and $D$. \\
+When there is an irreducible quadratic factor in the denominator, we coefficients are needed.
+\[
+\dfrac{x + 5}{(x + 2)(x ^ 2 + 3)} = \dfrac{A}{x + 2} + \dfrac{Bx + C}{x ^ 2 + 3}.
+\]
+\textbf{Proper fractions} \\
+When the degree of the numerator is greater than (or equal to) that of the denominator, rational functions can be rewritten as a sum of a polynomial and a proper fraction. For example:
+\[
+\dfrac{x ^ 3 + 2x - 6}{x ^ 2 - x - 2} = x + 1 + \dfrac{2}{x - 2} + \dfrac{3}{x + 1}.
+\]
 
 
+\subsection{Series and summations}
+
+\subsubsection{Series notation}
+When writing the sum of a sequence of terms in a predictable way we would use series notation. For example, for the sum of integers starting at $1$ and ending at $100$, we would write
+\[
+M = \sum_{j = 1}^{100}{j}.
+\]
+We use the $\Sigma$ symbol to tell us that we are adding. $j = 1$ indicates what changes per term (in this case $j$) and what the first value of $j$ is. $100$ indicates where the addition stops. \\
+\textbf{Example}: \\
+The formula for the sum of the first $n$ integers, we'll call $M(n)$. Instead of adding $1$, then $2$, then $3$, we add $n$, then $n - 1$, then $n - 2$. This means that
+\[
+M(n) = \sum_{j = 1}^{n}{j} = \sum_{j = 1}^{n}{(n + 1 - j)}.
+\]
+If we add both 'versions' of $M(n)$ we get
+\[
+2M(n) = \sum_{j = 1}^{n}
+\]
+The right hand side shows adding $n$ copies of $n + 1$ (usually called multiplication) which leads us to
+\[
+M(n) = \frac{1}{2}n(n + 1).
+\]
+
+
+\subsubsection{Some properties of series}
+If all the terms in the series are the same
+\[
+\sum_{j = 1}^{n}{c} = c \times n
+\]
+
+If all of the terms are multiplied by a common factor, the sum can be multiplied by this too.
+\[
+\sum_{j = 1}^{n}{a \times f(j)} = a \times \sum_{j = 1}^{n}{f(j)}.
+\]
+Two series can be added together (providing the number of terms is the same)
+\[
+\sum_{j = 1}^{n}{f(j)} + \sum_{k = 1}^{n}{g(k)} = \sum_{j = 1}^{n}{f(j) + g(j)}.
+\]
+
+
+\subsubsection{Useful series to know}
+\textbf{Sums of powers}
+\begin{align*}
+    \sum_{j = 1}^{n}{j} &= \frac{n}{2}(n + 1) \\
+    \sum_{j = 1}^{n}{j ^ 2} &= \frac{n}{6}(n + 1)(2n + 1) \\
+    \sum_{j = 1}^{n}{j ^ 3} &= \left(\frac{n}{2}(n + 1)\right) ^ 2.
+\end{align*}
+
+\textbf{Geometric series}
+\[
+S_n = a + ar + ar ^ 2 + \dotsc + ar ^ {n - 1},
+\]
+then multiplying both sides by $r$ we can see that
+\begin{align*}
+    S_n &= a + ar + ar ^ 2 + \dotsc + ar ^ {n - 1} \\
+    rS_n &= \phantom{ } + ar + ar ^ 2 + \dotsc + ar ^ {n - 1} + ar ^ n.
+\end{align*}
+Subtracting the second line from the first
+\[
+(1 - r)S_n = a - ar ^ n,
+\]
+so (as long as $r \neq 1$) the sum of the first $n$ terms of a geometric series is
+\[
+S_n = \dfrac{a(1 - r ^ n)}{1 - r}.
+\]
+If $|r| < 1$, then the series approaches a finite limit. The value of the limit is
+\[
+S = \dfrac{a}{1 - r}.
+\]
+
+\textbf{Binomial expansions}
+\[
+(a + b) ^ n = \sum_{k = 0}^{n}{\binom{n}{k}a ^ k b ^ {n - k}}.
+\]
+Here $\binom{n}{k}$ represents the choose function, which counts how many different ways there are of choosing $k$ distinct options from a list of $n$ items. When $n \geq k$ we define
+\[
+\binom{n}{k} = \dfrac{n!}{k!(n - k)!}.
+\]
+Some useful properties of the choose function include:
+\begin{itemize}
+    \item $\binom{n}{0}$ is always $1$: there is only one way to choose nothing.
+    \item $\binom{n}{1}$ is always $n$: there are $n$ different ways to choose, for each of the $n$ options.
+    \item $\binom{n}{k} = \binom{n}{n - k}$ counting the ways of selecting $k$ things is equivalent to counting the different ways of leaving $n - k$ things behind.
+\end{itemize}
+
+\subsection{Power series}
+When a series is of the form
+\[
+P(x) = \sum_{n = 0}^{\infty}b_n x ^ n,
+\]
+we say that it is a power series. Examples of power series include the geometric series, when $b_n$ is always equal to $a$, and a Maclaurin series, which allow us to represent a function as a sum of polynomial terms. \\
+\\
+\textbf{Maclaurin series} \\
+The Maclaurin series expansion of a function $f(x)$ is a way of expressing it as a power series. Suppose we can write
+\[
+f(x) = b_0 + b_1 x + b_2 x ^ 2 + \dots = \sum_{n = 0}^{\infty}b_n x ^ n.
+\]
+This relationship has to be true for every $x$, so when $x = 0$ we get $f(0) = b_0$. \\
+As long as we can differentiate both sides, we get
+\[
+f'(x) = b_1 + 2b_2 x + 3b_3 x ^ 2 + \dots = \sum_{n = 0}^{\infty}(n + 1)b_{n + 1} x ^ n.
+\]
+This also has to be true for every $x$; setting $x = 0$ again, we get $f'(0) = b_1$.
+
+We can keep repeating this trick of differentiating and setting $x = 0$; if we do it one more time, we get
+\[
+f''(x) = 2b_2 + 2 \times 3b_3 x + 3 \times 4b_4 x ^ 2 + \dots = \sum_{n = 0}^{\infty}(n + 1)(n + 2)b_{n + 2} x ^ n.
+\]
+We can see that $f''(0) = 2 \times b_2$, and if we continue the pattern, we always get $f^{(k)}(0) = k! \times b_k$.
+
+Now we know each of our $b$s we have found our Maclaurin series:
+\[
+f(x) = f(0) + f'(0)x + \frac{f''(0)}{2}x ^ 2 + \dots + \frac{f^{(k)}(0)}{k!}x ^ k + \dotsc.
+\]
+To make this work, we need to be able to differentiate $f$ as many times as we wanted to: it had to be continuous. We say that the Maclaurin series converges whenever the value of the function is equal to the value of the series. For some functions, this is for all $x$, but for others, it only works in a certain interval. If it converges whenever $|x| < R$, we say that $R$ is the radius of convergence of the series.
+\\
+
+\textbf{Examples of Maclaurin series}
+
+\begin{itemize}
+    \item $e ^ x = 1 + x + \frac{x ^ 2}{2!} + \frac{x ^ 3}{3!} + \dots + \frac{x ^ k}{k!} + \dotsc$
+    \item $\cos(x) = 1 - \frac{x ^ 2}{2!} + \frac{x ^ 4}{4!} - \frac{x ^ 6}{6!} + \dotsc$
+    \item $\sin(x) = x - \frac{x ^ 3}{3!} + \frac{x ^ 5}{5!} - \frac{x ^ 7}{7!} + \dotsc$
+\end{itemize}
+
+\textbf{Building new Maclaurin series}
+
+We can build new series with the ones we already know. For example,
+\[
+\sin(2x) = 2x - \frac{(2x) ^ 3}{3!} + \frac{(2x) ^ 5}{5!} + \dotsc
+\]
+
+We can add and multiply Maclaurin series. For example,
+\begin{align*}
+    \sin(x) + \cos(x) &= \left(1 - \frac{x ^ 2}{2!} + \frac{x ^ 4}{4!} - \frac{x ^ 6}{6!} + \dotsc\right) + \left(x - \frac{x ^ 3}{3!} + \frac{x ^ 5}{5!} - \frac{x ^ 7}{7!} + \dotsc\right) \\
+    &= 1 + x - \frac{x ^ 2}{2!} - \frac{x ^ 3}{3!} + \frac{x ^ 4}{4!} + \frac{x ^ 5}{5!} - \dotsc.
+\end{align*}
+
+Similarly, we can multiply the series for products of series. For example,
+\begin{align*}
+    e ^ x \cos(x) &= \left(1 + x + \frac{x ^ 2}{2!} + \frac{x ^ 3}{3!} + \dotsc\right) \left(1 - \frac{x ^ 2}{2!} + \frac{x ^ 4}{4!} - \frac{x ^ 6}{6!} + \dotsc\right) \\
+    &= 1 + x - \frac{2x ^ 3}{3} - \frac{7x ^ 4}{4!} + \dotsc.
+\end{align*}
+
+\textbf{Taylor series} \\
+A Taylor series around a point $x = a$ looks like:
+\[
+f(x) = f(a) + (x - a)f'(a) + \frac{(x - a) ^ 2}{2}f''(a) + \dots + \frac{(x - a) ^ k}{k!}f^{(k)}(a) + \dotsc.
+\]
+
+\subsection{Proof techniques}
+\subsubsection{Direct proof}
+In direct proof, we start from the facts we are given and combine them into logically-equivalent statements until we reach the conclusion we want.
+
+\textbf{Example: sums of even numbers} \\
+To prove that the sum of any two even numbers is an even number, using the definition of an even number. $x$ is even if and only if $x = 2a$ where $a$ is an integer. If we have two even numbers $x$ and $y$ we must be able to find integers $a$ and $b$ such that $x = 2a$ and $y = 2b$. Then we know their sum is $x + y = 2a + 2b = 2(a + b)$. Since $a$ and $b$ were integers, $a + b$ must be an integer too. So $x + y$ is two times an integer which is also an even number.
+
+\subsubsection{Proof by induction}
+Suppose we want to prove a statement for all integers $n$. To use proof by induction prove that the statement is true for an early case, usually $n = 0$ or $n = 1$. Next, prove that "the statement is true when $n = N$" implies that "the statement is true for $n = N + 1$". By combining these two facts, we know that the statement must be true for every possible value of $n$.
+
+\textbf{Example: sum of squares} \\
+\[
+\sum_{j = 1}^{n}{j ^ 2} = \frac{n}{6}(n + 1)(2n + 1)
+\]
+Starting with the base case, $n = 1$. On the left $1 ^ 2 = 1$ which holds. On the right, $\frac{1}{6} \times (1 + 1) \times (2 \times 1 + 1) = 1$. So the formula holds when $n = 1$.
+
+Next, assume the sum of the first $N$ squares is
+\[
+\sum_{j = 1}^{N}{j ^ 2} = \frac{N}{6}(N + 1)(2N + 1).
+\]
+Now using the assumption we can write
+\[
+\sum_{j = 1}^{N + 1}{j ^ 2} = \sum_{j = 1}^{N}{j ^ 2} + (N + 1) ^ 2.
+\]
+
+\begin{align*}
+    \sum_{j = 1}^{N + 1}{j ^ 2} &= \sum_{j = 1}^{N}{j ^ 2} + (N + 1) ^ 2 \\
+    &= \frac{N}{6}(N + 1)(2N + 1) + (N + 1) ^ 2 \\
+    &= \frac{N + 1}{6}(N + 1)\left(N(2N + 1) + 6(N + 1)\right) \\
+    &= \frac{N + 1}{6}(N + 1)(N + 2)(2N + 3).
+\end{align*}
+Finally, it is true for $n = 1$, then by the inductive step it is true for $n = N$ then we have shown that it is true for $n = N + 1$ for all of the integers by induction.
+
+\subsubsection{Proof by contradiction}
+To prove that a statement is true by contradiction, we start off by assuming that it is false, and then look for a series of logical steps that ends with something impossible\footnote{This is also called "reductio ad impossibile"}.
+
+\textbf{Example: infinitely many primes} \\
+Assume that there are only finitely many primes.
+
+Now, if there are a finite number of primes, we can make a complete list out of them:
+\[
+p_1, p_2, \dotsc, p_n.
+\]
+Next, we will construct a number which causes a problem. If we take a multiple of $k$ and then add on $1$, we no longer have a multiple of $k$ (as long as $k \neq 1$). So if we multiply all the primes in our list and add on $1$ we will get a number which is either a prime itself or a composite number whose prime factor(s) are missing from our list. Either way, there is a prime missing from our list. This contradicts our assumption that we could make a finite list of every prime number. Hence there must be infinitely many prime numbers.
 
 \end{document}
