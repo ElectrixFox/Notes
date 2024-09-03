@@ -4,6 +4,7 @@
 \usepackage{enumitem}
 \usepackage{thmtools}
 \usepackage{parskip}
+\usepackage{microtype}
 \usepackage{tikz}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
@@ -601,4 +602,112 @@ p_1, p_2, \dotsc, p_n.
 \]
 Next, we will construct a number which causes a problem. If we take a multiple of $k$ and then add on $1$, we no longer have a multiple of $k$ (as long as $k \neq 1$). So if we multiply all the primes in our list and add on $1$ we will get a number which is either a prime itself or a composite number whose prime factor(s) are missing from our list. Either way, there is a prime missing from our list. This contradicts our assumption that we could make a finite list of every prime number. Hence there must be infinitely many prime numbers.
 
+\newpage
+
+\section{Differentiation and Integration}
+
+\subsection{Differentiation}
+Given a suitable function $f(x)$, the derivative of $f(x)$ is another function denoted by $f'(x)$ or $\dfrac{df}{dx}$. It is the rate of change of $f(x)$ with respect to $x$, and $f'(a)$ is the gradient of the tangent to the graph of $y = f(x)$ at $x = a$. This allows us, to locate stationary points such as maximum and minima since the tangent will be horizontal here and $f'(x) = 0$.
+
+Here are some derivatives
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        $f(x)$ & $f'(x)$ \\
+        \hline
+        $x ^ n$ & $nx ^ {n - 1}$ for constant $n$ \\
+        \hline
+        $e ^ x$ & $e ^ x$ \\
+        \hline
+        $\ln{x}$ & $x ^ {-1}$ \\
+        \hline
+        $\sin{x}$ & $\cos{x}$ \\
+        \hline
+        $\cos{x}$ & $-\sin{x}$ \\
+        \hline
+    \end{tabular}
+\end{table}
+
+We then differentiate more general functions by applying various rules:
+
+\textbf{Sum Rule}: $(f(x) + g(x))' = f'(x) + g'(x)$.
+
+\textbf{Product Rule}: $(f(x)g(x))' = f'(x)g(x) + f(x)g'(x)$.
+
+\textbf{Chain Rule}: $f(g(x))' = f'(g(x))g'(x)$. \\
+
+The chain rule can also be remembered as 
+\[
+\frac{d}{dx}f(g(x)) = \frac{df}{dy}\frac{dy}{dx}.
+\]
+The derivative of a reciprocal
+\[
+\frac{d}{dx}\left(\frac{1}{g(x)}\right) = -\frac{g'(x)}{g(x) ^ 2}.
+\]
+Applying the product rule,
+\[
+\left(\frac{f(x)}{g(x)}\right)' = \left(f(x) \cdot \frac{1}{g(x)}\right)' = f'(x) \cdot \frac{1}{g(x)} - f(x) \cdot \frac{g'(x)}{g(x) ^ 2} = \frac{f'(x)g(x) - f(x)g'(x)}{g(x) ^ 2}.
+\]
+
+\subsection{Integration}
+Given a suitable function $f(x)$ and real numbers $a \leq b$, the definite integral $\displaystyle\int_{a}^{b}f(x)\,dx$ is the area under the graph of $y = f(x)$ between $x = a$ and $x = b$. \\
+\[
+F(x) = \int_{a}^{x}f(t)\,dt\qquad\implies\qquad F'(x) = f(x).
+\]
+A function $F(x)$ satisfying $F'(x) = f(x)$ is called an indefinite integral of $f(x)$ and is denoted by $\displaystyle\int f(x)\,dx$. since constants have zero derivative, if $F(x)$ is an indefinite integral of $f(x)$, then so is $F(x) + c$ for any constant $c$ so indefinite integrals are only defined up to adding this constant\footnote{Don't forget to add the constant for indefinite integrals.}.
+
+The indefinite integral is denoted as such,
+
+Let $\displaystyle F(x) = \int f(x)\,dx$
+\[
+\int_{a}^{b}f(x)\,dx = F(b) - F(a).
+\]
+Here are some standard indefinite integrals
+
+\begin{minipage}{0.55\textwidth}
+\centering
+\bgroup
+\def\setlength{25pt}
+\def\arraystretch{2}
+\begin{tabular}{|c|c|}
+    \hline
+    $f(x)$ & $\displaystyle\int f(x)\,dx$ \\
+    \hline
+    $x ^ n$ & $\dfrac{x ^ {n + 1}}{n + 1} + c$ for constant $n \neq 1$ \\
+    \hline
+    $\dfrac{1}{x}$ & $\ln{x}$ \\
+    \hline
+    $e ^ x$ & $e ^ x + c$ \\
+    \hline
+    $\sin{x}$ & $-\cos{x} + c$ \\
+    \hline
+    $\cos{x}$ & $\sin{x} + c$ \\
+    \hline
+\end{tabular}
+\egroup
+\end{minipage}
+\begin{minipage}{0.55\textwidth}
+\centering
+\bgroup
+\def\setlength{25pt}
+\def\arraystretch{2}
+\begin{tabular}{|c|c|}
+    \hline
+    $f(x)$ & $\displaystyle\int f(x)\,dx$ \\
+    \hline
+    $\sec ^ 2 x$ & $\tan x + c$ \\
+    \hline
+    $\csc ^ 2 x$ & $-\cot x + c$ \\
+    \hline
+    $\dfrac{1}{1 + x ^ 2}$ & $\tan ^ {-1} x + c$ \\
+    \hline
+    $\dfrac{1}{\sqrt{1 - x ^ 2}}$ & $\sin ^ {-1} x + c$ \\
+    \hline
+    $\dfrac{1}{\sqrt{1 + x ^ 2}}$ & $\sinh ^ {-1} x + c$ \\
+    \hline
+\end{tabular}
+\egroup
+\end{minipage}
 \end{document}
