@@ -9,6 +9,8 @@
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\R}{\mathbb{R}}
@@ -710,4 +712,91 @@ Here are some standard indefinite integrals
 \end{tabular}
 \egroup
 \end{minipage}
+
+\textbf{Integration by substitution}: This arises by integrating the chain rule:
+\[
+F(x) = \int f(x)\,dx\qquad\implies\qquad F(u(x)) = \int f(u(x))u'(x)\,dx.
+\]
+In practice, we are substituting from $x$ to $u(x)$ and obtaining
+\[
+\int f(x)\,dx = \int f(u)\,du\qquad\text{ where }\qquad du = u'(x)\,dx.
+\]
+For example, to calculate $\int \cot x \, dx$, make the substitution $u = \sin x,\ du = \cos x\ dx$ and rewrite the integral in terms of $u$:
+
+\begin{align*}
+\int\cot x\ dx = \int \frac{1}{\sin x}\cos x\ dx &= \int \frac{1}{u}\ du \\
+&= \ln |u| + c = \ln |\sin x| + c.
+\end{align*}
+When we are integrating a fraction where the numerator is the derivative of the denominator $\frac{g'(x)}{g(x)}$ for some function $g(x)$, then substitute $u = g(x)$. We have $du - g'(x)\ dx$ and so
+\[
+\int \frac{g'(x)}{g(x)}\ dx = \int \frac{1}{u}\ du = \ln |u| + c = \ln |g(x)| + c.
+\]
+
+\textbf{Integration by parts}: This arises by integrating the product rule and rearranging
+\[
+\int f(x)g'(x)\ dx = f(x)g(x) - \int f'(x)g(x)\ dx.
+\]
+This expresses the integral of one product $f(x)g'(x)$ in terms of the integral of another product $f'(x)g(x)$ which we hope is easier to find.
+
+For example, with $f(x) = x$ and $g'(x) = \cos x$, we take $f'(x) = 1$ and $g(x) = \sin x$ so
+\[
+\int x\cos x\ dx = x\sin x - \int \sin x\ dx = x\sin x + \cos x + c.
+\]
+
+\textbf{Integration of rational functions}: To integrate a rational function, we can use partial fractions. Factorise the denominator into linear terms $x - \alpha$ and quadratic terms which have no real roots $x ^ 2 \beta x + \gamma$. Then the partial fractions will take the forms
+\[
+\frac{A}{(x - \alpha) ^ k}\qquad\text{and}\qquad\frac{Bx + C}{(x ^ 2 + \beta x + \gamma) ^ l}
+\]
+Then the partial fractions can be integrated using the usual techniques such as substitution. For example,
+\begin{align*}
+\int \frac{x ^ 3 + 2x - 6}{x ^ 2 - x - 2}\ dx &= \int x + 1 + \frac{2}{x - 2} + \frac{3}{x + 1}\ dx \\
+&= \frac{x ^ 2}{2} + x + 2\ln |x - 2| + 3\ln |x + 1| + c.
+\end{align*}
+
+\newpage
+
+\section{Hyperbolic functions}
+The three fundamental hyperbolic functions are
+\[
+\sinh x = \frac{e ^ x - e ^ {-x}}{2},\quad\cosh x = \frac{e ^ x + e ^ {-x}}{2},\quad\tanh x = \frac{\sinh x}{\cosh x}.
+\]
+
+$\cosh x$ is an even function. On the other hand, $\sinh x$ and $\tanh x$ is an odd function. \\
+We can see that 
+\begin{align*}
+    \cosh ^ 2 \theta - \sinh ^ 2 \theta &= \frac{(e ^ \theta + e ^ {-\theta}) ^ 2}{4} - \frac{(e ^ \theta - e ^ {-\theta}) ^ 2}{4} \\
+    &= \frac{(e ^ {2\theta} + 2 + e ^ {-2\theta}) - (e ^ {2\theta} - 2 + e ^ {-2\theta})}{4} \\
+    &= \frac{4}{4} \\
+    &= 1.
+\end{align*}
+
+\subsection{The relationship between cosh and cos (and sinh and sin)}
+Euler's formula states $e ^ {i\theta} = \cos \theta + i\sin \theta$. By considering $e ^ {-i\theta} = \cos \theta - i\sin \theta$ we can define the trigonometric functions $\sin$ and $\cos$ using exponentials and complex numbers:
+\[
+\sin \theta = \frac{e ^ {i\theta} - e ^ {-i\theta}}{2i},\qquad\cos \theta = \frac{e ^ {i\theta} + e ^ {-i\theta}}{2}.
+\]
+Comparing with the definitions, we can see that:
+\[
+\sin (\theta) = -i\sinh (i\theta),\qquad\cos (\theta) = \cosh (i\theta).
+\]
+
+\subsubsection{Reciprocals}
+We also define
+\[
+\csch (\theta) = \frac{1}{\sinh (\theta)},\qquad\sech (\theta) = \frac{1}{\cosh (\theta)},\qquad\text{and}\qquad\coth (\theta) = \frac{1}{\tanh (\theta)}.
+\]
+We can also combine our definitions to derive new ones.
+\[
+1 - \tanh ^ 2 (\theta) = \sech ^ 2 (\theta).
+\]
+
+\textbf{Osborn's rule} helps us to remember how hyperbolic identities correspond to standard trigonometric identities: it tells us that we can take a standard trigonometric identity, swap $\sin$ for $\sinh$ and $\cos$ for $\cosh$, and then change the sign anywhere there is a product of two $\sinh$ terms. This includes "implied" products of $\sinh$ terms, such as $\tanh ^ 2$.
+
+\subsection{Addition Formulae}
+This formulae for $\sinh (\theta \pm \phi)$ and $\cosh (\theta \pm \phi)$ are similar to those for $\sin (\theta \pm \phi)$ and $\cos (\theta \pm \phi)$. We have
+\begin{align*}
+    \sinh (\theta \pm \phi) &= \sinh \theta \cosh \phi \pm \cosh \theta \sinh \phi \\
+    \cosh (\theta \pm \phi) &= \cosh \theta \cosh \phi \pm \sinh \theta \sinh \phi.
+\end{align*}
+
 \end{document}
