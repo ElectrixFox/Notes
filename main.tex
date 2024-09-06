@@ -799,4 +799,178 @@ This formulae for $\sinh (\theta \pm \phi)$ and $\cosh (\theta \pm \phi)$ are si
     \cosh (\theta \pm \phi) &= \cosh \theta \cosh \phi \pm \sinh \theta \sinh \phi.
 \end{align*}
 
+\begin{align*}
+    \sinh \theta \cosh \phi + \cosh \theta \sinh \phi &= \left(\frac{e ^ \theta - e ^ {-\theta}}{2}\right)\left(\frac{e ^ \phi + e ^ {-\phi}}{2}\right) + \left(\frac{e ^ \theta + e ^ {-\theta}}{2}\right)\left(\frac{e ^ \phi - e ^ {-\phi}}{2}\right) \\
+    &= \frac{e ^ {\theta + \phi} + e ^ {\theta - \phi} - e ^ {-\theta + \phi} - e ^ {-\theta -\phi}}{4} + \frac{e ^ {\theta + \phi} - e ^ {\theta - \phi} + e ^ {-\theta - \phi} - e ^ {-\theta -\phi}}{4} \\
+    &= \frac{e ^ {\theta + \phi} - e ^ {-(\theta + \phi)}}{2} \\
+    &= \sinh (\theta + \phi)
+\end{align*}
+
+Similarly, for the case where $\theta = \phi$.
+\[
+\sinh (2\theta) = 2\sinh\theta\cosh\theta\qquad\text{and}\qquad\cosh (2\theta) = \cosh ^ 2 \theta + \sinh ^ 2 \theta. 
+\]
+
+\subsection{Differentiation and Integration}
+Here we can use the definitions of $\sinh$ and $\cosh$ to make hyperbolic calculus easy.
+\[
+\frac{d}{dx}\sinh x = \frac{d}{dx}\frac{e ^ x - e ^ {-x}}{2} = \frac{e ^ x + e ^ {-x}}{2} = \cosh x.
+\]
+Similarly,
+\[
+\frac{d}{dx}\cosh x = \frac{d}{dx}\frac{e ^ x + e ^ {-x}}{2} = \frac{e ^ x  e ^ {-x}}{2} = \sinh x.
+\]
+The integration of these functions is just the reverse.
+
+\newpage
+
+\section{Complex numbers}
+A complex number is written as follows $z = x + yi$, where $x, y$ are real numbers and $i$ is the imaginary unit (which means $i = \sqrt{-1}$). $x$ is the real part of $z$ notated as $\operatorname{Re}(z) = x$. Similarly, $y$ is the imaginary part of $z$ notated as $\operatorname{Im}(z) = y$.
+
+\textbf{Modulus} \\
+The modulus of a complex number $z$ written as $|z|$ defines the distance of a complex number from the origin.
+\[
+|z| = \sqrt{x ^ 2 + y ^ 2}.
+\]
+
+\textbf{Argument} \\
+The argument of a complex number $z$ written as $\arg (z)$ defines the anticlockwise angle from the real axis. 
+\[
+\arg (z) = \tan ^ {-1} \left(\frac{y}{x}\right).
+\]
+We usually choose to represent $\arg (z)$ using the principal argument which is the value of $\arg (z)$ in the interval $(-\pi, \pi]$. So the principle argument of $i$ is $\frac{\pi}{2}$.
+
+\subsection{Polar form and De Moivre}
+The location of a complex number could be represented in polar form where $r = |z|$ and $\theta = \arg (z)$ which allows us to write the coordinate as $[r, \theta]$.
+
+Via basic trigonometry we can see that
+\[
+z = x + iy = r\cos\theta + ir\sin\theta = r(\cos\theta + i\sin\theta).
+\]
+Often this is written as $z = re ^ {i\theta}$ where $e ^ {i\theta}$ is defined by Euler's formula
+\[
+e ^ {i\theta} = \cos\theta + i\sin\theta.
+\]
+
+\textbf{De Moivre's identity} \\
+For any integer $n$ we have
+\[
+\left(e ^ {i\theta}\right) ^ n = (\cos\theta + i\sin\theta) ^ n = \cos (n\theta) + i\sin (n\theta) = e ^ {in\theta}.
+\]
+This is usually proving by induction.
+
+\newpage
+
+\section{Vectors and Matrices}
+
+\subsection{Vectors}
+A vector is "something" that has direction and magnitude.
+\[
+\mathbf{v} = 
+\begin{bmatrix}
+   a \\
+   b
+\end{bmatrix}
+\]
+
+The length (or magnitude) of a vector $\mathbf{v}$ is given by $|\mathbf{v}|$ which is written as
+\[
+|\mathbf{v}| = \sqrt{a ^ 2 + b ^ 2}.
+\]
+There is a special vector ${\mathbf{0}}=\begin{bmatrix} 0 \\ 0 \end{bmatrix}$ which corresponds to the origin.
+
+Similar can be done in $3$-dimensional space,
+\[
+\mathbf{v} = 
+\begin{bmatrix}
+a \\
+b \\
+c
+\end{bmatrix}
+\qquad\text{and}\qquad|\mathbf{v}| = \sqrt{a ^ 2 + b ^ 2 + c ^ 2}.
+\]
+This can be scaled up to $n$-dimensional vectors for any $n$. \\
+
+Vector addition is done by adding vectors by their respective components. For example, $2$-dimensional vectors are added as follows,
+\[
+\begin{bmatrix} v_1 \\ v_2 \end{bmatrix} + \begin{bmatrix} w_1 \\ w_2 \end{bmatrix} = \begin{bmatrix} v_1 + w_1 \\ v_2 + w_2 \end{bmatrix}.
+\]
+Vector multiplication is done by simply multiplying each component of a given vector $\mathbf{v}$ by a scalar $\lambda \in \R$ to form a new vector $\lambda\mathbf{v}$. For example, a $2$-dimensional vector multiplied by $\lambda$ results in
+\[
+\lambda\begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} \lambda v_1 \\ \lambda v_2 \end{bmatrix}.
+\]
+
+\subsection{Matrices}
+A matrix is a rectangular array of entries arranged in rows and columns. A matrix has $m$ rows and $n$ columns, matrices are defined by their dimensions, $m\times n$ matrices. For example,
+\[
+\begin{bmatrix}
+    1 & 2 \\ 
+    3 & 4
+\end{bmatrix}
+\]
+is a $2\times 2$ matrix.
+
+Matrix addition is very similar to vector addition, it is done by adding corresponding entries. For example,
+\[
+\begin{bmatrix}
+    1 & 2 \\ 
+    3 & 4
+\end{bmatrix} + 
+\begin{bmatrix}
+    5 & 6 \\ 
+    7 & 8
+\end{bmatrix} = 
+\begin{bmatrix}
+    6 & 8 \\ 
+    10 & 12
+\end{bmatrix}.
+\]
+However, the matrices need to be of the same size.
+
+Similar to vectors, matrix multiplication by a scalar $\lambda \in \R$ can be performed by multiplying each entry by the scalar $\lambda$. For example,
+\[
+\lambda\begin{bmatrix}
+    1 & 2 \\ 
+    3 & 4
+\end{bmatrix} = \begin{bmatrix}
+    \lambda & 2\lambda \\ 
+    3\lambda & 4\lambda
+\end{bmatrix}
+\]
+
+\subsubsection{Matrix multiplication}
+Two matrices $A$ and $B$ can be multiplied together to produce a matrix $AB$ providing that if $A$ is an $m\times n$ matrix and $B$ is an $n\times r$. In other words, $A$ must have the same number of columns as $B$ has rows. Here is an example of matrix multiplication,
+\[
+\begin{bmatrix}
+    10 & 20 \\ 
+    30 & 40
+\end{bmatrix}
+\begin{bmatrix}
+    1 & 2 & 3 \\ 
+    4 & 5 & 6
+\end{bmatrix}
+=
+\begin{bmatrix}
+    10 \times 1 + 20 \times 4 & 10 \times 2 + 20 \times 5 & 10 \times 3 + 20 \times 6 \\ 
+    30 \times 1 + 40 \times 4 & 30 \times 2 + 40 \times 5 & 30 \times 3 + 40 \times 6
+\end{bmatrix}
+=
+\begin{bmatrix}
+    90 & 120 & 150 \\ 
+    190 & 260 & 330
+\end{bmatrix}.
+\]
+Matrix multiplication isn't commutative $AB \neq BA$ for some $A$, $B$. There is a special matrix $I$ (the identity matrix) for which for all square matrices $A$ when multiplied by $I$ have this property $AI = IA = A$. This leads to the idea of an inverse matrix which is a matrix $B$ for which when multiplied by the square matrix $A$, $AB = BA = I$. \\
+
+Given a square matrix $A$, there exists the determinant of this matrix $\det (A)$. The determinant for a $2\times 2$ matrix $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$, is defined by the formula
+\[
+\det (A) = \det \begin{bmatrix} a & b \\ c & d \end{bmatrix} = ad - bc.
+\]
+The determinant tells us when the inverse of a square matrix exists. $A$ is invertible when $\det (A) \neq 0$.
+
+The formula for the inverse of $A$ (a $2\times 2$ matrix) uses the determinant
+\[
+A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}\qquad\implies\qquad A ^ {-1} = \frac{1}{ad - bc}\begin{bmatrix} d & -b \\ -c & a \end{bmatrix}.
+\]
+
 \end{document}
