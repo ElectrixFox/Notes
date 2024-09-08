@@ -76,5 +76,138 @@ Often the above display is abbreviated to simply
 \]
 and refer to $x_{ij}$ as the $(i, j)$-th element or the $(i, j)$-th entry of the matrix.
 
+Hence we can use $X = [x_{ij}]_{m\times n}$ which means that $X$ is the $m\times n$ matrix whose $(i, j)$-th element is $x_{ij}$.
+
+\begin{example}
+    The $3\times 3$ matrix $X = \begin{bmatrix} a & a & a \\ 0 & a & a \\ 0 & 0 & a \end{bmatrix}$ can be expressed as $X = [x_{ij}]_{3\times 3}$ where
+    \[
+    x_{ij} = 
+    \begin{cases}
+        a & \text{if } i \leq j; \\
+        0 & \text{otherwise}.
+    \end{cases}
+    \]
+\end{example}
+
+\begin{definition}
+    If $A = [a_{ij}]_{m\times n}$ and $B = [b_{ij}]_{p\times q}$ then we shall say that $A$ and $B$ are equal (and write $A = B$) if and only if
+    \begin{enumerate}[label = (\arabic*)]
+        \item $m = p$ and $n = q$
+        \item $a_{ij} = b_{ij}$ for all $i,j$.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Given $m\times n$ matrices $A = [a_{ij}]$ and $B = [b_{ij}]$, we define the sum $A + B$ to be the $m\times n$ matrix whose $(i, j)$-th element is $a_{ij} + b_{ij}$.
+\end{definition}
+
+\begin{theorem}\label{thm:matr_add_comm}
+    Addition of matrices is
+    \begin{enumerate}[label = (\arabic*)]
+        \item commutative [in the sense that if $A, B$ are the same size then we have $A + B = B + A$]
+        \item associative [in the sense that if $A, B, C$ are of the same size then we have $A + (B + C) = (A + B) + C$].
+    \end{enumerate}
+    \begin{proof}
+    \phantom{}
+    \begin{enumerate}[label = (\arabic*)]
+        \item If $A$ and $B$ are each of size $m\times n$ then $A + B$ and $B + A$ are both of size $m\times n$ by the definition of matrix addition
+        \[
+        A + B = [a_{ij} + b_{ij}],\qquad B + A = [b_{ij} + a_{ij}].
+        \]
+        Since addition is commutative $a_{ij} + b_{ij} = b_{ij} + a_{ij}$, for all $i, j$ and so, by the definition of equality for matrices, we can conclude that $A + B = B + A$.
+        \item If $A, B$ and $C$ are each of size $m\times n$ then $A + (B + C)$ and $(A + B) + C$ are both of size $m\times n$. Now the $(i, j)$-th element of $A + (B + C)$ is $a_{ij} + (b_{ij} + c_{ij})$ and the $(i, j)$-th element of $(A + B) + C$ is $(a_{ij} + b_{ij}) + c_{ij}$. Since addition is associative $a_{ij} + (b_{ij} + c_{ij}) = (a_{ij} + b_{ij}) + c_{ij}$ for all $i, j$ and so, by the definition of equality for matrices, we can conclude that $A + (B + C) = (A + B) + C$.
+    \end{enumerate}
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}\label{thm:matr_add_identity}
+    There is a unique $m\times n$ matrix $M$ such that, for every $m\times n$ matrix $A$, $A + M = A$.
+    \begin{proof}
+        Consider the matrix $M = [m_{ij}]_{m\times n}$ all of whose entries are $0$; i.e. $m_{ij} = 0$ for all $i, j$. For every matrix $A = [a_{ij}]_{m\times n}$ we have
+        \[
+        A + M = [a_{ij} + m_{ij}]_{m\times n} = [a_{ij} + 0]_{m\times n} = [a_{ij}]_{m\times n} = A.
+        \]
+        Suppose that $B = [b_{ij}]_{m\times n}$ is also such that $A + B = A$ for every matrix $m\times n$ matrix $A$. In particular we have $M + B = M$. But, taking $B$ instead of $A$ in the property for $M$, we have $B + M = B$. It follows by \autoref{thm:matr_add_comm}(1) that $B = M$.
+    \end{proof}
+\end{theorem}
+
+\begin{definition}
+    The unique matrix arising from \autoref{thm:matr_add_identity} is called the $m\times n$ zero matrix and will be denoted by $0_{m\times n}$, or simply by $0$ if no confusion arises.
+\end{definition}
+
+\begin{theorem}\label{thm:matr_add_inv}
+    For every $m\times n$ matrix $A$ there is a unique $m\times n$ matrix $B$ such that $A + B = 0$.
+
+    \begin{proof}
+        Given $A = [a_{ij}]_{m\times n}$, consider $B = [b_{ij}]_{m\times n}$. Clearly, we have
+        \[
+        A + B = [a_{ij} + (-a_{ij})]_{m\times n} = 0.
+        \]
+        To establish uniqueness of such a matrix $B$, suppose that $C = [c_{ij}]_{m\times n}$ is also such that $A + C = 0$. Then for all $i, j$ we have $a_{ij} + c_{ij} = 0$ and consequently $c_{ij} = -a_{ij}$ which means, by the above definition of equality, that $C = B$.
+    \end{proof}
+\end{theorem}
+
+\begin{definition}
+    The unique matrix $B$ arising from \autoref{thm:matr_add_inv} is called the additive inverse of $A$ denoted by $-A$. Thus $-A$ is the matrix whose elements are the additive inverses of the corresponding elements of $A$.
+\end{definition}
+
+\begin{definition}
+    Given a matrix $A$ and a number $\lambda$ we define the product of $A$ by $\lambda$ to be the matrix denoted by $\lambda A$, that is obtained from $A$ by multiplying every element of $A$ by $\lambda$.
+
+    Thus, if $A = [a_{ij}]_{m\times n}$ then $\lambda A = [\lambda a_{ij}]_{m\times n}$.
+\end{definition}
+
+\begin{theorem}
+    If $A$ and $B$ are $m\times n$ matrices then, for any scalars $\lambda$ and $\mu$,
+    \begin{enumerate}[label = (\arabic*)]
+        \item $\lambda (A + B) = \lambda A + \lambda B$
+        \item $(\lambda  + \mu)A = \lambda A + \mu A$
+        \item $\lambda (\mu A) = (\lambda \mu) A$
+        \item $(-1)A = -A$
+        \item $0A = 0_{m\times n}$.
+    \end{enumerate}
+    \begin{proof}
+        Let $A = [a_{ij}]_{m\times n}$ and $B = [b_{ij}]_{m\times n}$. Then the above equalities follow from the following observations
+        \begin{enumerate}[label = (\arabic*)]
+            \item $\lambda (a_{ij} + b_{ij}) = \lambda a_{ij} + \lambda b_{ij}$
+            \item $(\lambda  + \mu)a_{ij} = \lambda a_{ij} + \mu a_{ij}$
+            \item $\lambda (\mu a_{ij}) = (\lambda \mu) a_{ij}$
+            \item $(-1)a_{ij} = -a_{ij}$
+            \item $0a_{ij} = 0$.
+        \end{enumerate}
+    \end{proof}
+\end{theorem}
+
+\begin{definition}
+    Let $A = [a_{ij}]_{m\times n}$ and $B = [b_{ij}]_{n\times p}$. Then we define the product $AB$ to be the $m\times p$ matrix whose $(i, j)$-th element is
+    \[
+    [AB]_{ij} = a_{i1}b_{1j} +a_{i2}b_{2j} + a_{i3}b_{3j} + \dotsc + a_{in}b_{nj}.
+    \]
+    The $(i, j)$-th element of the product $AB$ is obtained by summing the products of the elements of the $i$-th row of $A$ with the corresponding elements in the $j$-th column of $B$\footnote{It is easier to remember this as "rows by columns".}.
+\end{definition}
+The above expression for $[AB]_{ij}$ can be abbreviated to the following
+\[
+[AB]_{ij} = \sum_{k = 1}^{n}{a_{ik}b_{kj}}.
+\]
+
+\begin{theorem}
+    Matrix multiplication is associative [when the products are defined, $A(BC) = (AB)C$].
+
+    \begin{proof}
+        For $A(BC)$ to be defined we require the respective sizes to be $m\times n,\, n\times p,\, p\times q$ in which case the product $A(BC)$ is also defined. Computing the $(i, j)$-th element of this product, we obtain
+        \begin{align*}
+            [A(BC)]_{ij} &= \sum_{k = 1}^{n}{a_{ik}[BC]_{kj}} \\
+            &= \sum_{k = 1}^{n}{a_{ik}\left(\sum_{l = 1}^{p}{b_{kl}c_{lj}}\right)} \\
+            &= \sum_{k = 1}^{n}{\sum_{l = 1}^{p}{a_{ik}b_{kl}c_{lj}}}
+        \end{align*}
+        Similarly computing the $(i, j)$-th element of the $(AB)C$, we obtain the same
+        \begin{align*}
+            [(AB)C]_{ij} &= \sum_{l = 1}^{p} [AB]_{il}c_{lj} \\
+            &= \sum_{l = 1}^{p}\left(\sum_{k = 1}^{n} a_{il} b_{kl}\right)c_{kj} \\
+            &= \sum_{l = 1}^{p}{\sum_{k = 1}^{n}{a_{il}b_{kl}c_{kj}}}
+        \end{align*}
+    \end{proof}
+    Consequently we see that $A(BC) = (AB)C$.
+\end{theorem}
 
 \end{document}
