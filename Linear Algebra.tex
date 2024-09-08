@@ -1,0 +1,80 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{thmtools}
+\usepackage{parskip}
+\usepackage{microtype}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\limas}[3][n]{#2 \rightarrow #3 \text{ as } #1 \rightarrow \infty}
+\newcommand{\sumfrto}[3][n = 1]{\sum_{#1}^{#2}{#3}} % this is for set start
+\newcommand{\sumto}[2][\infty]{\sumfrto{#1}{#2}}
+\newcommand{\seq}[1][x_n]{\left\langle #1 \right\rangle}
+
+\declaretheoremstyle[
+    notefont = \normalfont\itshape,
+    notebraces={(}{)}
+]{avgstyle}
+\declaretheoremstyle[
+    bodyfont = \normalfont,
+    notefont = \normalfont\itshape,
+    spaceabove = 1em,
+    spacebelow = 1em
+]{defstyle}
+\declaretheoremstyle[
+    bodyfont = \normalfont,
+    notefont = \normalfont,
+    spaceabove = 1em,
+    spacebelow = 1em
+]{exampstyle}
+
+\declaretheorem[style = avgstyle]{theorem}
+\declaretheorem[]{lemma}
+\declaretheorem{proposition, corollary, remark}[style=plain]
+\declaretheorem{definition}[style=defstyle, numbered=unless unique]
+\declaretheorem{outline}[style=plain, numbered=no]
+\declaretheorem{example}[style=exampstyle, numberwithin=section]
+
+\title{Linear Algebra}
+\author{Luke Phillips}
+\date{September 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+If $n$ and $m$ are positive integers then by a matrix of size $m$ by $n$, or an $n \times n$ matrix, some examples of matrices are
+\[
+\text{size}\quad 1\times 5 : \begin{bmatrix} 10 & 9 & 8 & 7 & 6 \end{bmatrix}
+\]
+\[
+\text{size}\quad 3\times 2 : \begin{bmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{bmatrix}
+\]
+We display a general $m \times n$ matrix as
+\[
+\begin{bmatrix}
+    x_{11} & x_{12} & x_{13} & \dots & x_{1n} \\
+    x_{21} & x_{22} & x_{23} & \dots & x_{2n} \\
+    x_{31} & x_{32} & x_{33} & \dots & x_{3n} \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    x_{m1} & x_{m2} & x_{m3} & \dots & x_{mn}
+\end{bmatrix}
+\]
+The first suffix gives the number of the row and the second suffix gives the column, so $x_{ij}$ appears at the intersection of the $i$-th row and the $j$-th column. 
+
+Often the above display is abbreviated to simply
+\[
+[x_{ij}]_{m\times n}
+\]
+and refer to $x_{ij}$ as the $(i, j)$-th element or the $(i, j)$-th entry of the matrix.
+
+
+\end{document}
