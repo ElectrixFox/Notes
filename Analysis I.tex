@@ -1,0 +1,1158 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{amsmath, amsfonts, amsthm, amssymb}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{thmtools}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\limas}[3][n]{#2 \rightarrow #3 \text{ as } #1 \rightarrow \infty}
+\newcommand{\sumfrto}[3][n = 1]{\sum_{#1}^{#2}{#3}} % this is for set start
+\newcommand{\sumto}[2][\infty]{\sumfrto{#1}{#2}}
+\newcommand{\seq}[1][x_n]{\left\langle #1 \right\rangle}
+
+\declaretheoremstyle[
+    notefont = \normalfont\itshape,
+    notebraces={(}{)}
+]{avgstyle}
+\declaretheoremstyle[
+    bodyfont = \normalfont,
+    notefont = \normalfont\itshape,
+    spaceabove = 1em,
+    spacebelow = 1em
+]{defstyle}
+\declaretheoremstyle[
+    bodyfont = \normalfont,
+    notefont = \normalfont,
+    spaceabove = 1em,
+    spacebelow = 1em
+]{exampstyle}
+
+\declaretheorem[style = avgstyle]{theorem}
+\declaretheorem[]{lemma}
+\declaretheorem{proposition, corollary, remark}[style=plain]
+\declaretheorem{definition}[style=defstyle, numbered=unless unique]
+\declaretheorem{outline}[style=plain, numbered=no]
+\declaretheorem{example}[style=exampstyle, numberwithin=section]
+
+\title{Analysis Notes}
+\author{Luke Phillips}
+\date{July 2024}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Introduction}
+\subsection{Goals}
+The aim of these notes is to cover the following topics.
+\begin{enumerate}
+    \item Numbers: real and complex number systems.
+    \item sup and inf of subsets of R and of real valued functions.
+    \item Convergence of sequences: Examples, Basic theorems.
+    \item Bolzano-Weierstrass theorem.
+    \item Convergence of series: Examples, tests for convergence, absolute convergence, conditional convergence.
+    \item Limits and Continuity: Functions of a real and complex variable.
+    \item Epsilon-delta definition of limit of a function.
+    \item Continuity.
+    \item Basic theorems on continuity.
+    \item Intermediate Value theorem.
+    \item Differentiability: Definition.
+    \item Differentiability implies continuity.
+    \item Basic theorems on differentiability.
+    \item Proof of Rolle's theorem, Mean Value theorem.
+    \item Step \& regulated functions.
+    \item Integration for regulated functions.
+    \item Fundamental theorem of calculus.
+    \item Basic theorems on integration.
+    \item Pointwise and uniform convergence.
+    \item Limit theorems.
+    \item Real (and complex) power series: Radius of convergence, Basic theorems.
+    \item Taylor series.
+\end{enumerate}
+
+\newpage
+
+\subsection{List of theorems}
+
+\listoftheorems[ignoreall, onlynamed, title={}, swapnumber]
+% show={theorem}
+
+\newpage
+
+\section{Continuum Property}
+Every non-empty set of real numbers which is bounded above has a smallest upper bound. Every non-empty set of real numbers which is bounded below has a largest lower bound.
+
+\subsection{Supremum and infimum}
+If a non-empty set $S$ is bounded above, then, by the Continuum Property, it has a smallest upper bound $B$. This smallest upper bound $B$ is the supremum of the set $S$. $B = \sup{S}$ or \\ $$B = \sup_{x \in S}{x}.$$
+Similarly, a set which is bounded below has a largest lower bound $b$. The largest lower bound $b$ is the infimum of the set $S$. $b = \inf{S}$ or $$b = \inf_{x \in S}{x}.$$
+When $\sup{S} = +\infty$ this means that $S$ is unbounded above. Similarly $\inf{S} = -\infty$ this means that $S$ is unbounded below.
+
+\begin{theorem}\label{sup_inf_add}
+    Let $A, B \subseteq \R$ are sets of real numbers.\footnote{\autoref{sup_inf_add} relies on the Minkowski sum of two sets}
+    \begin{enumerate}[label = (\alph*)]
+        \item $\sup{(A + B)} = \sup{A} + \sup{B}$
+        \item $\inf{(A + B)} = \inf{A} + \inf{B}$
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+    Suppose that $S$ is bounded above $$\inf_{x \in S}{(-x)} = -\sup_{x \in S}{x}$$
+    \begin{proof}
+        
+    \end{proof}
+\end{theorem}
+
+\subsection{Maximum and Minimum}
+If a set $S$ has a largest element $M$, we call $M$ the maximum of the set $S$ and write $M = \max{S}$. If $S$ has a smallest element $m$, we call $m$ the minimum of $S$ and write $m = \min{S}.$ \\
+It is obvious to see that if $S$ has a maximum $M$, then it is bounded above and its smallest upper bound is $M$. Thus, in this case, $\sup{S} = \max{S}$. The smallest upper bound of a set $S$ isn't always the maximum of the set. However, some sets which are bounded above do not have a maximum\footnote{The set $\{ x : 1 \leq x < 2 \}$ has no maximum but has a smallest upper bound, $2$}. This is similar for the largest lower bound and minima of a set.
+
+\newpage
+
+\section{Convergent Sequences}
+A sequence $\langle x_{n} \rangle$\footnote{$\langle x_n \rangle$ means the sequence whose $n$th term is $x$.} is said to converge to the limit $l$ if and only if the following is fulfilled. \\
+Given any $\epsilon > 0$, we can find an $N$ such that, for any $n > N$, $|x_n - l| < \epsilon$. \\
+$x_n \rightarrow l$ as $n \rightarrow \infty$ or $\displaystyle\lim_{n \rightarrow \infty} x_n = l$ \\
+\\
+A sequence $\seq$ is said to be increasing if $x_n \leq x_{n + 1}\quad(n = 1, 2, \dots)$ and decreasing if $x_{n + 1} \leq x_n\quad(n = 1, 2, \dots)$. A sequence is strictly increasing if $x_n < x_{n + 1}\quad(n = 1, 2, \dots)$ and strictly decreasing if $x_{n + 1} < x_n\quad(n = 1, 2, \dots)$. A monotone sequence is a sequence which is either increasing or else decreasing.
+
+\begin{theorem}\label{thm_oneLimit}
+    A sequence can have at most one limit.
+    \begin{proof}
+        Suppose that $\limas{x_n}{l}$ and $\limas{x_n}{m}$. Let $\epsilon > 0$ be given. Then, \\
+        $|l - m| = |l - x_n + x_n - m| \leq |l - x_n| + |x_n - m| < \epsilon + \epsilon = 2\epsilon$ \\
+        provided that $n$ is sufficiently large. But for any $\epsilon > 0$ if $l < m + \epsilon$ then $l \leq m$\footnote{$l - m \leq 0$} therefore if $0 \leq \frac{1}{2}|l - m| < \epsilon$ for every $\epsilon > 0$ then $|l - m| = 0$ hence $l = m$.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}\label{thm_seq_convisbound}
+    Any convergent sequence is bounded.
+    \begin{proof}
+        Let $\limas{x_n}{l}$. We have to find a $K$ such that $|x_n| \leq K$.
+        It is true that, for any $\epsilon > 0$, there exists an $N$ such that, for any $n > N$, $|x_n - l| < \epsilon$. In particular, this is true when $\epsilon = 1$, there exists an $N_1$ such that, for any $n > N_1$,
+        $$|x_n - l| < 1.$$
+        It follows that, for any $n > N_1$,
+        \begin{align*}
+            |x_n| - |l| &\leq |x_n - l| < 1 \\
+            |x_n| < |l| + 1.
+        \end{align*}
+        The result now follows if we take
+        $$K = \max{\{|x_1|, |x_2|, \dotsc, |x_{N_1}|, |l| + 1\}}.$$
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}\label{thm_seq_convisbounds}
+    Suppose that $\limas{x_n}{l}$.
+    \begin{enumerate}[label = (\roman*)]
+        \item If $x_n \geq a\,(n = 1, 2, \dotsc)$, then $l \geq a$.
+        \item If $x_n \leq b\,(n = 1, 2, \dotsc)$, then $l \leq b$.
+    \end{enumerate}
+    \begin{proof}
+        If $x_n \leq b\,(n = 1, 2, \dotsc)$, then $-x_n \geq -b\,(n = 1, 2, \dotsc)$. Hence it is only necessary to prove (i).
+        Let $\epsilon > 0$. Then there exists an $N$ such that, for any $n > N$,
+        $$|x_n - l| < \epsilon.$$
+        But $|x_n - l| < \epsilon \implies l - \epsilon < x_n < l + \epsilon$. But $x_n \geq a\,(n = 1, 2, \dotsc)$ and so, for any $n > N$, $a \leq x_n < l + \epsilon$. Hence, given any $\epsilon > 0,\, a < l + \epsilon$ which it follows that $a \leq l$.
+    \end{proof}
+\end{theorem}
+
+\subsection{Some Converging Sequences}
+\begin{theorem}
+    Let $r$ be any positive rational number. $\dfrac{1}{n ^ r} \rightarrow 0$ as $n \rightarrow \infty$.
+    \begin{proof}
+        Let $\epsilon > 0$ be given, we must find a value $N$ such that $n > N$, $\left| \dfrac{1}{n ^ r} - 0 \right| < \epsilon$.
+        \begin{align*}
+            \left| \dfrac{1}{n ^ r} - 0 \right| &= \left| \dfrac{1}{n ^ r} \right| \\
+            &= \dfrac{1}{n ^ r}
+        \end{align*}
+        Now we must find an $N$ such that for any $n > N$, $\dfrac{1}{n ^ r} < \epsilon$, i.e. $n > \dfrac{1}{\sqrt[r]{\epsilon}}$. This solves the problem, $n > N = \dfrac{1}{\sqrt[r]{\epsilon}}$.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Let $r$ be any positive rational number. $\dfrac{1}{r ^ n} \rightarrow 0$ as $n \rightarrow \infty$ where $|n| > 1$.    
+    \begin{proof}
+        
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Let $\lambda$ be a real number. If $\limas{x_n}{l}$, $\limas{\lambda x_n}{\lambda l}$
+    \begin{proof}
+        
+    \end{proof}
+\end{theorem}
+
+\begin{example}\label{examp_limscale}
+    Let $\lambda$ be any real number. If $\limas{x_n}{l}$, prove that $\limas{\lambda x_n}{\lambda l}$.
+    \begin{proof}
+        Let $\epsilon > 0$ be given. We must find a value of $N$ such that, for any $n > N$,
+        $$\lambda x_n - \lambda l < \epsilon.$$
+        If $\lambda = 0$ there is nothing to prove. Assuming $\lambda \neq 0$. We are given that $\limas{x_n}{l}$. Since $\frac{\epsilon}{|\lambda|} > 0$\footnote{Since we can always find an $N$ so that $|x_n - l| < \epsilon$ for all $\epsilon > 0$ then we can do the same with $\frac{\epsilon}{|\lambda|}$.} it follows that we can find an $N$ such that, for any $n > N$,
+        $$|x_n - l| < \frac{\epsilon}{|\lambda|}$$
+        i.e.
+        $$|\lambda x_n - \lambda l| < \epsilon.$$
+        This completes the proof.
+    \end{proof}
+\end{example}
+
+\begin{proposition}[combination theorem]\label{prop_limcomb}
+    Let $\limas{x_n}{l}$ and $\limas{y_n}{m}$ and let $\lambda$ and $\mu$ be any real numbers. Then
+    \begin{enumerate}[label = (\roman*)]
+        \item $\limas{\lambda x_n + \mu y_n}{\lambda l + \mu m}$
+        \item $\limas{x_n y_n}{lm}$
+        \item $\limas{\dfrac{x_n}{y_n}}{\dfrac{l}{m}}$\qquad(provided that $m \neq 0$)
+    \end{enumerate}
+    \begin{proof}
+    (i) After \autoref{examp_limscale} it is only necessary to show that, if $\limas{x_n}{l}$ and $\limas{y_n}{m}$, then $\limas{x_n + y_n}{l + m}$. \\
+    Let $\epsilon > 0$ be given. Then $\frac{\epsilon}{2} > 0$. Since $\limas{x_n}{l}$, it follows that we can find an $N_1$ such that, for any $n > N_1$,
+    $$|x_n - l| < \frac{\epsilon}{2}.\qquad(1).$$
+    Similarly, we can find an $N_2$ such that, for any $n > N_2$,
+    $$|y_n - m| < \frac{\epsilon}{2}.\qquad(2).$$
+    Let $N$ be the max of $N_1$ and $N_2$, i.e. $N = \max{\{N_1, N_2\}}$. Then, if $n > N$, both inequalities (1) and (2) are true simultaneously. Thus, for any $n > N$,
+    \begin{align*}
+        |(x_n + y_n) - (l + m)| &= |(x_n - l) + (y_n - m)| \\
+        &\leq |x_n - l| + |y_n - m| \\
+        &< \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon. \\        
+    \end{align*}
+    Given any $\epsilon > 0$ we have found a value of $N$ ($N = \max{\{N_1, N_2\}}$) such that, for any $n > N$, $|(x_n + y_n) - (l + m)| < \epsilon$. Hence $\limas{x_n + y_n}{l + m}$.
+    \end{proof}
+\end{proposition}
+
+\begin{theorem}[the sandwich theorem]\label{thm_lim_sandwich}
+    Suppose that $\limas{y_n}{l}$ and that $\limas{z_n}{l}$. If $y_n \leq x_n \leq z_n\,(n = 1, 2, \dots)$, then $\limas{x_n}{l}$.
+    \begin{proof}
+        It is useful to note the inequality $|x - l| < \epsilon$ iff $l - \epsilon < x < l + \epsilon$ \\
+        Let $\epsilon > 0$ be given. We have to find an $N$ such that, for any $n > N$,
+        $$|x_n - l| < \epsilon.$$
+        Since $\limas{y_n}{l}$, there exists an $N_1$ such that $n > N_1$,
+        $$|y_n - l| < \epsilon.$$
+        Similarly, there is a value $N_2$ such that for any $n > N_2$,
+        $$|z_n - l| < \epsilon.$$
+        Simplifying this we can state that $N = \max{\{N_1, N_2\}}$. Then, if $n > N$, both of the inequalities are true. We can rewrite both of these conditions as such. For $n > N$,
+        \begin{align*}
+            l - \epsilon < &y_n < l + \epsilon \\
+            l - \epsilon < &z_n < l + \epsilon
+        \end{align*}
+        But $y_n \leq x_n \leq z_n$ hence
+        $$l - \epsilon < y_n \leq x_n \leq z_n < l + \epsilon,$$
+        which implies $l - \epsilon < x_n < l + \epsilon$ which in turn means that $|x_n - l| < \epsilon$ for $n > N$. Hence $\limas{x_n}{l}$.
+    \end{proof}
+\end{theorem}
+
+\begin{corollary}
+    Suppose that $\limas{y_n}{0}$ and that
+    $$|x_n - l| \leq y_n\quad(n = 1, 2, \dots).$$
+    Then $\limas{x_n}{l}$.
+    \begin{proof}
+        
+    \end{proof}
+\end{corollary}
+
+\begin{example}\label{examp_sand1}
+    Prove that $$\limas{\sqrt{n + 1} - \sqrt{n}}{0}.$$
+    \begin{proof}
+        \begin{align*}
+            0 &\leq \sqrt{n + 1} - \sqrt{n} \\
+            &= \frac{(\sqrt{n + 1} - \sqrt{n})(\sqrt{n + 1} + \sqrt{n})}{\sqrt{n + 1} + \sqrt{n}} \\ 
+            &= \frac{n + 1 - n}{\sqrt{n + 1} + \sqrt{n}} \\
+            &= \frac{1}{\sqrt{n + 1} + \sqrt{n}} \\
+            &< \frac{1}{\sqrt{n}}.
+        \end{align*}
+        But $\limas{\frac{1}{\sqrt{n}}}{0}$ therefore we can establish that by the sandwich theorem (\autoref{thm_lim_sandwich}) it follows that $\limas{\sqrt{n + 1} - \sqrt{n}}{0}$.
+    \end{proof}
+\end{example}
+
+\begin{theorem}\label{thm_logdiverge}\footnote{This is not nearly as hard to understand as it looks.}
+    $\limas{\log{n}}{\infty}$
+    \begin{proof}
+        First we can rewrite $\log{x}$ as $\displaystyle\log{x} = \int_{1}^{x}{\dfrac{1}{t}}\,dt$, for $x > 0$. Then, we have for $n > 1$
+        \begin{align*}
+            \int_{1}^{2 ^ n}{\dfrac{1}{t}}\,dt &= \int_{1}^{2}{\dfrac{1}{t}}\,dt + \int_{2}^{4}{\dfrac{1}{t}}\,dt + \dots + \int_{2 ^ {n-1}}^{2 ^ n}{\dfrac{1}{t}}\,dt \\
+            &\geq \int_{1}^{2}{\dfrac{1}{2}}\,dt + \int_{2}^{4}{\dfrac{1}{4}}\,dt + \dots + \int_{2 ^ {n-1}}^{2 ^ n}{\dfrac{1}{2 ^ n}}\,dt \\
+            &= \dfrac{1}{2}(2 - 1) + \dfrac{1}{4}(4 - 2) + \dots + \dfrac{1}{2 ^ n}(2 ^ n - 2 ^ {n - 1}) \\
+            &= \dfrac{n}{2}
+        \end{align*}
+        which tends to infinity as $n \rightarrow \infty$
+    \end{proof}
+\end{theorem}
+
+\newpage
+
+\section{Subsequences}
+
+\subsection{Subsequences}
+Suppose that $\seq$ is a sequence and that $\seq[n_r]$ is a strictly increasing sequence of natural numbers. Then the sequence $\seq[x_{n_r}]$ is called a subsequence of $\seq$. \\
+\\
+\begin{remark}\label{remark_subseq_nrgeqr}
+Given that $\seq$ is a sequence and $\seq[n_r]$ is a strictly increasing sequence of natural numbers. $\seq[n_r]$ is strictly increasing means that $n_r \geq r\quad(r = 1, 2,\dots).$
+\begin{proof}
+    Take $r = 1$. For $r = 1$, $n_1 \geq 1$ since $\seq[n_r]$ is a strictly increasing sequence of natural numbers $n_1 \geq 1$. \\
+    Assume $n_k \geq k\quad(k = 1, 2,\dots)$ is true for $r = k$. \\
+    Now take $r = k + 1$,
+    \begin{align*}
+        n_{k + 1} &> n_k \\
+        &\geq n_k + 1\qquad\text{since $n_k$ is a natural} \\
+        &\geq k + 1\qquad\text{using the assumption}
+    \end{align*}
+    Hence we have shown that $n_r \geq r$ for $r = 1$ then assumed true for $r = k$ then proven $n_r \geq r$ is true for $r = k + 1$ for all $r \in \N$.
+\end{proof}
+\end{remark}
+
+\begin{theorem}\label{thm_limsubseq}
+    Suppose that $\limas{x_n}{l}$ and that $\seq[x_{n_r}]$ is a subsequence of $\seq$. Then $$\limas[r]{x_{n_r}}{l}$$.
+    \begin{proof}
+        Let $\epsilon > 0$ be given. Since $\limas{x_n}{l}$, there exists an $N$ such that, for any $n > N$ $|x_n - l| < \epsilon$. \\
+        Take $R = N$, if $\limas[r]{x_{n_r}}{l}$ this means that there exists an $R$ such that, for any $n_r > R$, $n_r \geq r > R = N$ and so $n_r > N$. Thus, $|x_{n_r} - l| < \epsilon.$ \\
+        We have shown that, given any $\epsilon > 0$, we can find an $R$ (namely $R = N$) such that, for any $r > R$, $|x_{n_r} - l| < \epsilon.$ Hence $\limas[r]{x_{n_r}}{l}$.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}\label{thm_seqhasmono}
+    Every sequence has a monotone subsequence.
+    \begin{proof}
+    Let $\seq$ be a sequence and $\seq[x_{n_r}]$ be a subsequence of $\seq$. If $\seq[x_{n_r}]$ is monotone then it is increasing or decreasing. Considering these cases separately.
+    \begin{enumerate}[label = (\roman*)]
+        \item Every set $\{x_n: n > N\}$ has a maximum. In this case we find a sequence $\seq[n_r]$ of natural numbers such that\footnote{This is easiest to understand if the sequence is shuffled and then done manually.}
+        \begin{align*}
+            x_{n_1} &= \max_{n > 1}{x_n} \\
+            x_{n_2} &= \max_{n > n_1}{x_n} \\
+            x_{n_3} &= \max_{n > n_2}{x_n}
+        \end{align*}
+        and so on.  Obviously $n_1 < n_2 < n_3 < \dots$ and so, at each stage we are taking the maximum of a smaller set than the previous stage of the sequence. Hence $\seq[x_{n_r}]$ is a decreasing subsequence of $\seq$.
+        \item Suppose that it is not true that all of the sets $\{x_n: n > N\}$ have a maximum. Then, for some $N_1$, the set $\{x_n: n > N_1\}$ has no maximum. It follows that given any $x_m$ with $m > N_1$, we can find an $x_n$ following $x_m$ such that $x_n > x_m$. We define $x_{n_1} = x_{N_1 + 1}$ and then let $x_{n_2}$ be the first term following $x_{n_1}$ which $x_{n_2} > x_{n_1}$ and so on obtaining an increasing subsequence of $\seq$. 
+    \end{enumerate}
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}[Bolzano-Weierstrass theorem]\label{thm_BolzanoWeierstrass}
+    Every bounded sequence of real numbers has a convergent subsequence.
+    \begin{proof}
+        Let $\seq$ be a bounded sequence. By \autoref{thm_seqhasmono}, $\seq$ has a monotone subsequence $\seq[x_{n_r}]$. Since $\seq$ is bounded, so is $\seq[x_{n_r}]$. Hence by \autoref{thm_limsubseq}, $\seq[x_{n_r}]$ converges.
+    \end{proof}
+\end{theorem}
+
+\subsection{Lim sup and lim inf}
+Suppose that $\seq$ is a bounded sequence and let $L$ denote the set of all real numbers which are the limit of some subsequence of $\seq$. We know from the \autoref{thm_BolzanoWeierstrass} (Bolzano-Weierstrass theorem) that $L$ is not empty. Of course, if $\seq$ converges, $L$ will just consist of a single point (by \autoref{thm_limsubseq})
+
+\begin{proposition}\label{prop_Lmaxmin}
+    Let $\seq$ be a bounded subsequence and let $L$ be the set of all real numbers which are the limit of some subsequence of $\seq$. Then $L$ has a maximum and a minimum.
+\end{proposition}
+\phantom{}
+\\
+Since $L$ is a bounded set following from \autoref{thm_seq_convisbounds}. Hence $L$ certainly has a supremum and infimum. \autoref{prop_Lmaxmin} asserts that these actually belong to the set $L$. \\
+\\
+If $\seq$ is a bounded sequence, denote the maximum of $L$ by $\bar{l}$ and the minimum by $\underline{l}$. Then $\bar{l}$ is the largest number to which a subsequence of $\seq$ converges and $\underline{l}$ is the smallest number to which a subsequence of $\seq$ converges. We call $\bar{l}$ the limit superior of $\seq$ and write
+$$\bar{l} = \displaystyle \lim_{n \rightarrow \infty} \sup{x_n}.$$
+Similarly, $\underline{l}$ is the limit inferior of $\seq$ and we write
+$$\underline{l} = \displaystyle \lim_{n \rightarrow \infty} \inf{x_n}$$
+$\displaystyle \lim_{n \rightarrow \infty} \sup{x_n} = + \infty.$ means that $\seq$ is unbounded above similarly $\displaystyle \lim_{n \rightarrow \infty} \inf{x_n} = - \infty.$ means $\seq$ is unbounded below.
+
+\subsection{Cauchy sequences}
+$\seq$ is a Cauchy sequence if, given any $\epsilon > 0$, we can find an $N$ such that, for any $m > N$ and any $n > N$,$$|x_m - x_n| < \epsilon.\footnote{This is saying that the distance between two elements in the sequence decreases for larger $N$ and is less than $\epsilon$ for sufficiently large $N$.}$$
+\begin{proposition}\label{prop_seq_conviscauch}
+    Any convergent sequence is a Cauchy sequence.
+    \begin{proof}
+        Let $\seq$ be a convergent sequence such that $\limas{x_n}{l}$. Let $\epsilon > 0$ be given. Then $\frac{\epsilon}{2} > 0$. There exists a value of $N$ such that, for any $n > N$,
+        $$|x_n - l| < \frac{\epsilon}{2}.$$
+        But also, for this value $N$, for any $m > N$,
+        $$|x_m - l| < \frac{\epsilon}{2}.$$
+        \begin{align*}
+            |x_m - x_n| &= |(x_m - l) + (l - x_n)| \\
+            &\leq |x_m - l| + |x_n - l| \\
+            &< \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon. \\
+        \end{align*}
+        Hence we have shown that any convergent sequence is a Cauchy sequence. 
+    \end{proof}
+\end{proposition}
+\begin{proposition}\label{prop_seq_cauchisbound}
+    Any Cauchy sequence is bounded.
+    \begin{proof}
+        Let $\seq$ be a Cauchy sequence. Then there exists an $N \in \N$ such that, for all $m, n \geq N$,
+        $$|x_m - x_n| < 1.$$
+        In particular, for all $m \geq N$,
+        \begin{align*}
+            |x_m| &= |x_N + x_m - x_N| \\
+            &\leq |x_N| + |x_m - x_N| \\
+            &\leq |x_N| + 1.
+        \end{align*}
+        So $\seq$ is bounded. 
+    \end{proof}
+\end{proposition}
+
+\begin{theorem}\label{thm_seq_cauchconverge}
+    Every Cauchy sequence converges.
+    \begin{proof}
+        Let $\seq$ be a Cauchy sequence. By \autoref{prop_seq_cauchisbound}, $\seq$ is bounded. Hence, by the Bolzano-Weierstrass theorem, it has a convergent subsequence $\seq[x_{n_r}]$. Suppose that $\limas[r]{x_{n_r}}{l}$. We shall show that $\limas{x_n}{l}$. \\
+        \\
+        (1) Let $\epsilon > 0$. Then $\frac{\epsilon}{2} > 0$. Hence there exists an $R$ such that, for any $r > R$, $$|x_{n_r} - l| < \frac{\epsilon}{2}.$$
+        (2) Since $\seq$ is a Cauchy sequence, there exists an $N$ such that, for any $m > N$ and any $n > N$, $$|x_m - x_n| < \frac{\epsilon}{2}$$
+        Now suppose that $n > N$ and choose $r$ so large that $n_r > N$ and $r > R$. Then both (1) and (2) are satisfied with $m = n_r$. Thus, for any $n > N$,
+        \begin{align*}
+            |x_n - l| &= |x_n - x_{n_r} + x_{n_r} - l| \\
+            &\leq |x_n - x_{n_r}| + |x_{n_r} - l| \\
+            &< \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+        \end{align*}
+        Given any $\epsilon > 0$, we have found an $N$ such that, for any $n > N$, $|x_n - l| < \epsilon$. Thus $\limas{x_n}{l}$.
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    Suppose that $0 < \alpha < 1$ and that $\seq$ is a sequence which satisfies $|x_{n + 1} - x_n| \leq \alpha ^ n\quad(n = 1, 2, \dotsc)$. Prove that $\seq$ is a Cauchy sequence and hence converges.
+    \begin{proof}
+        If $n > m$\footnote{A Cauchy sequence is defined by $|a_n - a_m| < \epsilon$ for $n, m > N$ so if $n > m$ $|a_n - a_m|$ is positive, allowing us to use the triangle inequality.} \\
+        \begin{align*}
+            |x_n - x_m| &\leq |x_n - x_{n - 1}| + |x_{n - 1} - x_{n - 2}| + \dotsc + |x_{m + 1} - x_m| \\
+            &\leq \alpha ^ {n - 1} + \alpha ^ {n - 2} + \dotsc + \alpha ^ m \\
+            &= \alpha ^ m (1 + \alpha + \alpha ^ 2 + \dotsc + \alpha ^ {n - m - 1}) \\
+            &= \alpha ^ m \dfrac{1 - \alpha ^ {n - m}}{1 - \alpha} \\
+            &< \dfrac{\alpha ^ m}{1 - \alpha}.
+        \end{align*}
+        Given $\epsilon > 0$, we can choose an $N$ such that for any $m > N$, $\dfrac{\alpha ^ m}{1 - \alpha} < \epsilon$. Then the result follows.
+    \end{proof}
+\end{example}
+
+\newpage
+
+\section{Series}
+Given a sequence $\seq[a_n]$ of real numbers the sequence $\seq[s_N]$ defined by
+\[
+s_N = \sumto[N]{a_n} = a_1 + a_2 + \dots + a_N
+\]
+is called the sequence of partial sums of the series
+\[
+\sumto{a_n}.
+\]
+If $\limas[N]{s_N}{s}$, the series is said to converge to the sum $s$, written as
+\[
+s = \sumto{a_n}.
+\]
+
+\subsection{Series of positive terms}
+The series whose terms are all positive are easy to deal with. This is because the sequence of partial sums of such a series is increasing. Thus, to show that a series of positive terms converges, we only need to show that its sequence of partial sums is bounded above. If the sequence of partial sums is unbounded above, then the series diverges to $+\infty$. \\
+\\
+However, we can also show that a series converges by showing that the expression for the sum of the series converges.
+\begin{example}\label{examp_series_powtwoconv}
+    Show that $\frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \dotsc$ has sum $1$.
+    \begin{proof}
+        The $n$th partial sum of $\sum_{r = 1}^{\infty}{\left(\frac{1}{2}\right) ^ r}$ is
+        \[
+        s_n = \frac{1}{2} + \frac{1}{4} + \dotsc + \left(\frac{1}{2}\right) ^ n
+        \]
+        Multiplying this by $2$ gives
+        \[
+        2s_n = 1 + \frac{1}{2} + \frac{1}{4} + \dotsc + \left(\frac{1}{2}\right) ^ {n - 1}
+        \]
+        Subtracting these two expressions gives $s_n = 1 - \left(\frac{1}{2}\right) ^ n$. Since $\limas{s_n}{1}$, it can be deduced that $\sum_{r = 1}^{\infty}{\left(\frac{1}{2}\right) ^ r}$ converges and has sum $1$.
+    \end{proof}
+\end{example}
+
+
+\begin{theorem}
+    The series
+    \[
+    \sumto{\dfrac{1}{n}}
+    \]
+    diverges to $+\infty.$
+    \begin{proof}
+        Since the partial sums of this series increase, we only need to show that they are unbounded above. But
+        \begin{align*}
+            s_{2 ^ N} &= 1 + \frac{1}{2} + \frac{1}{3} + \dotsc + \frac{1}{2 ^ N} \\
+            &= 1 + \frac{1}{2} + \left(\frac{1}{3} + \frac{1}{4}\right) + \left(\frac{1}{5} + \frac{1}{6} + \frac{1}{7} + \frac{1}{8}\right) + \dotsc + \left(\frac{1}{2 ^ {N - 1} + 1} + \dotsc + \frac{1}{2 ^ N}\right) \\
+            &\geq 1 + \frac{1}{2} + \left(\frac{1}{4} + \frac{1}{4}\right) + \left(\frac{1}{8} + \frac{1}{8} + \frac{1}{8} + \frac{1}{8}\right) + \dotsc + \left(\frac{1}{2 ^ N} + \frac{1}{2 ^ N}\right) \\
+            &= 1 + \frac{1}{2} + \frac{2}{4} + \frac{4}{8} + \dotsc + \frac{2 ^ {N - 1}}{2 ^ N} = 1 + \frac{N}{2}.
+        \end{align*}
+        Thus the partial sums are unbounded above and the theorem follows.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Let $\alpha$ be a rational number such that $\alpha > 1$. Then the series
+    \[
+    \sumto{\frac{1}{n ^ \alpha}}
+    \]
+    converges.
+    \begin{proof}
+        Since the partial sums of this series increase, we only need to show that they are bounded above. For $N > 1$\footnote{We use $2 ^ N - 1$ so that we can get a nice expression for the infinite sum where we can establish an upper bound but if we used $2 ^ N$ we wouldn't be able to group the terms into bigger chunks.},
+        \begin{align*}
+            s_N &\leq s_{2 ^ N - 1} \\
+            &= 1 + \left(\frac{1}{2 ^ \alpha} + \frac{1}{3 ^ \alpha}\right) + \left(\frac{1}{4 ^ \alpha} + \frac{1}{5 ^ \alpha} + \frac{1}{6 ^ \alpha} + \frac{1}{7 ^ \alpha}\right) + \dotsc + \left(\frac{1}{2 ^ {(N - 1)\alpha}} + \dotsc + \frac{1}{(2 ^ N - 1) ^ \alpha}\right) \\
+            &\leq 1 + \left(\frac{1}{2 ^ \alpha} + \frac{1}{2 ^ \alpha}\right) + \left(\frac{1}{4 ^ \alpha} + \frac{1}{4 ^ \alpha} + \frac{1}{4 ^ \alpha} + \frac{1}{4 ^ \alpha}\right) + \dotsc + \left(\frac{1}{2 ^ {(N - 1)\alpha}} + \frac{1}{2 ^ {(N - 1)\alpha}}\right) \\
+            &= 1 + \frac{2}{2 ^ \alpha} + \frac{4}{4 ^ \alpha} + \dotsc + \frac{2 ^ {N - 1}}{2 ^ {(N - 1)\alpha}} \\
+            &= 1 + \frac{1}{2 ^ {\alpha - 1}} + \left(\frac{1}{2 ^ {\alpha - 1}}\right) ^ 2 + \dotsc + \left(\frac{1}{2 ^ {\alpha - 1}}\right) ^ {N - 1} \\
+            &= \dfrac{1 - \left(\frac{1}{2 ^ {\alpha - 1}}\right) ^ N}{1 - \frac{1}{2 ^ {\alpha - 1}}} \\
+            &\leq \dfrac{1}{1 - \frac{1}{2 ^ {\alpha - 1}}}.
+        \end{align*}
+        Provided that $\dfrac{1}{2 ^ {\alpha - 1} < 1}$ but this follows from the assumption that $\alpha > 1$. Hence $\seq[s_N]$ is bounded above and the theorem follows.
+    \end{proof}
+\end{theorem}
+
+\subsection{Properties of series}
+
+\begin{theorem}
+    Suppose that the series $\sumto{a_n}$ and $\sumto{b_n}$ converge to $\alpha$ and $\beta$ respectively. Then, if $\lambda$ and $\mu$ are real numbers, the series $\sumto{(\lambda a_n + \mu b_n)}$ converges to $\lambda\alpha + \mu\beta$.
+    \begin{proof}
+        We have
+        \begin{align*}
+            \sumto[N]{(\lambda a_n + \mu b_n)} &= \lambda \sumto[N]{a_n} + \mu \sumto[N]{b_n} \\ &\limas[N]{}{\lambda\alpha + \mu\beta} % some truely hidious syntax xD
+        \end{align*}
+        by \autoref{prop_limcomb}.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Suppose that the series $\sumto{a_n}$ converges. Then $\limas{a_n}{0}$.
+    \begin{proof}
+        Let the sum of the series be $s$. Then \\
+        \[
+        s_N = \limas{\sumto[N]{a_n}}{s}.
+        \]
+        Also $\limas{s_{N - 1}}{s}$. \\
+        Then
+        \begin{align*}
+            a_N &= (a_1 + a_2 + \dotsc + a_N) - (a_1 + a_2 + \dotsc + a_{N - 1}) \\
+            &= \limas[N]{s_N - s_{N - 1}}{s - s = 0}
+        \end{align*}
+    \end{proof}
+    \phantom{} \\
+    Shortening the proof.
+    \begin{proof}
+        Suppose that $(s_n)$ converges to some limit $s$. Hence $(s_{n - 1})$ also converges to $s$. But $a_n = s_n - s_{n - 1}$, and so $\limas{a_n}{0}$.
+    \end{proof}
+\end{theorem}
+
+\begin{proposition}\label{prop_series_tailconv}\footnote{This is sometimes referred to as the tail of a convergent series tends to $0$.}
+    Suppose that the series $\sumto{a_n}$ converges. Then, for each natural number $N$, the series $\sum_{n = N}^{\infty}{a_n}$ converges and
+    \[
+    \limas[N]{\sum_{n = N}^{\infty}{a_n}}{0}.
+    \]
+    \begin{proof}
+        Let the sum of the series be $s$. Then
+        \begin{align*}
+            \sum_{n = N}^{\infty}{a_n} &= \sumto{a_n} - \sumto[N - 1]{a_n} \\  
+            &= s - s_{N - 1}.
+        \end{align*}
+        But $\limas[N]{N - 1}{\infty}$ therefore $\limas[N]{s_{N - 1}}{s}$. Then
+        \[
+        s - s_{N - 1} \limas[N]{}{s - s = 0}
+        \]
+    \end{proof}
+\end{proposition}
+
+\subsection{Series and Cauchy sequences}
+
+\begin{theorem}\label{thm_series_altconv}
+    Suppose that $\seq$ is a decreasing sequence of positive numbers such that $\limas{a_n}{0}$. Then the series
+    \[
+    \sumto{(-1) ^ {n - 1} a_n} = a_1 - a_2 + a_3 - a_4 + \dotsc
+    \]
+    converges.
+    \begin{proof}
+        We will show that the sequence $\seq[s_n]$ of partial sums of the series is a Cauchy sequence. From \autoref{thm_seq_cauchconverge}, then it follows that the series converges. The proof depends on the fact that, for each $n > m$, we have the inequality\footnote{This inequality is because of the sequence is decreasing the difference between consecutive terms is always positive therefore $0 \leq$ but since there is a difference it is $\leq a_{m + 1}$.}
+        \[
+        0 \leq a_{m + 1} - a_{m + 2} + a_{m + 3} - \dotsc a_n \leq a_{m + 1}.
+        \]
+        This follows from the fact $a_k - a_{k + 1}$ is always non-negative since $\seq[a_k]$ decreases. \\
+        Let $\epsilon > 0$ be given\footnote{The most absolutely standard sentence ever}. Since $\limas{a_n}{0}$ we can find an $N$ such that, for any $n > N$, $a_n < \epsilon$. But for any $n > m > N$,
+        \begin{align*}
+            |s_n - s_m| &= |(a_1 - a_2 + a_3 - \dotsc a_n) - (a_1 - a_2 + \dotsc a_m)| \\
+            &= |(a_{m + 1} - a_{m + 2} + a_{m + 3} - \dotsc a_n)| \\
+            &\leq a_{m + 1} < \epsilon \quad(\text{because } m > N).
+        \end{align*}
+        Thus, $\seq[s_n]$ is a Cauchy sequence and the theorem follows.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}[comparison test]\label{thm_series_comptest}
+    Let $\sumto{b_n}$ be a convergent series of positive real numbers. If
+    \[
+    |a_n| \leq b_n\footnote{This can also be $|a_n| \leq Hb_n$ and this still works.}\quad(n = 1, 2,\dotsc)
+    \]
+    then the series $\sumto{a_n}$ converges.
+    \begin{proof}
+        Let $\epsilon > 0$ be given. Since $\sumto{b_n}$ converges this implies that the tail of the series tends to $0$ (by \autoref{prop_series_tailconv}). Hence we can find an $N$ such that for any $n > N$ $$\sumfrto[k = n + 1]{\infty}{b_k} < \epsilon.$$
+        Let $\seq[s_n]$ be the series of partial sums of $\sumto{a_n}$ then for $N < m < n$ we have
+        \begin{align*}
+            |s_n - s_m| &= |(a_n + a_{n - 1} + \dotsc + a_1) - (a_m + a_{m + 1} + \dotsc + a_1)| \\
+            &= |a_{m + 1} + a_{m + 2} + \dotsc + a_n| \\
+            &\leq |a_{m + 1}| + |a_{m + 2}| + \dotsc + |a_n| \\
+            &\leq b_{m + 1} + b_{m + 2} + \dotsc + b_n \\
+            &\leq \sumfrto[k = {m + 1}]{\infty}{b_k} < \epsilon \\
+        \end{align*}
+        Thus $\seq[s_n]$ is a Cauchy sequence and the theorem follows.
+    \end{proof}
+\end{theorem}
+\begin{outline}
+Since the sum of $b_n$ converges its tail converges to $0$ for $n$ larger than $N$ where we can start our tail sum in order for it to be less than $\epsilon$. Then we need to show that the sum of $a_n$ converges we can do this by showing that the series of partial sums is a Cauchy sequence hence we need an $m$ less than $n$ but this $n$ has to be greater than $N$ therefore $N < m < n$ in order for the tail to still be less than $\epsilon$. Then after some manipulation we show that $|s_n - s_m| < \epsilon$ hence proving that $\seq[s_n]$ is a Cauchy sequence.
+\end{outline}
+
+\begin{proposition}[ratio test]\label{thm_series_rattest}
+    Let $\sumto{a_n}$ be a series which satisfies $$\lim_{n \rightarrow \infty}{\left|\dfrac{a_{n + 1}}{a_n}\right|} = l.$$
+    If $l > 1$, the series diverges, if $l < 1$, the series converges.
+
+    \begin{proof}
+        If $l < 1$, we may take $\epsilon > 0$ so small that $l + \epsilon < 1$ the for a sufficiently large $N$.
+        $$|a_n| = \left|\dfrac{a_n}{a_{n - 1}}\right| \cdot \left|\dfrac{a_{n - 1}}{a_{n - 2}}\right| \cdots \left|\dfrac{a_{N + 2}}{a_{N + 1}}\right| |a_{N + 1}| < (l + \epsilon)^{n - (N + 1)}|a_{N + 1}|\footnote{The limit of the ratio add $\epsilon$ for $n - (N + 1)$ terms (the number of terms from $n$ to $N + 1$ multiplied by the starting element of the sequence.}$$
+        The series $\sumto{a_n}$ then converges by comparison with the geometric series $\sumto{(l + \epsilon) ^ n}$ if $l > 1$. The proof of divergence for $l > 1$ is a similar proof.
+    \end{proof}
+\end{proposition}
+\begin{outline}
+    Since
+    $$\lim_{n \rightarrow \infty}{\left|\dfrac{a_{n + 1}}{a_n}\right|} = l \implies \limas{\left|\dfrac{a_{n + 1}}{a_n}\right|}{l},$$
+    we can say that, given $\epsilon > 0$, we can find an $N$ such that, for any $n > N$,
+    $$\left|\left|\dfrac{a_{n + 1}}{a_n}\right| - l\right| < \epsilon.$$
+    This can be rewritten as
+    $$l - \epsilon < \left|\dfrac{a_{n + 1}}{a_n}\right| < l + \epsilon.$$
+    The fact that the middle is absolute means that $\left|\dfrac{a_{n + 1}}{a_n}\right| < l + \epsilon$ should be used. Now we can apply this fact to the expression for $|a_n|$, which we have provided in terms of a chain of products, to obtain an inequality showing that the series converges.
+\end{outline}
+
+\begin{proposition}[$n$th root test]\label{thm_series_nthrttest}
+    Let $\sumto{a_n}$ be a series which satisfies $\limsup_{n \rightarrow \infty}{|a_n|^{\frac{1}{m}}} = l$.
+    If $l > 1$, the series diverges and, if $l < 1$, the series converges.
+    \begin{proof}
+        If $l < 1$ we take $\epsilon > 0$ so small that $l + \epsilon < 1$ then for sufficiently large $N$.
+        $$|a_n| < (l + \epsilon) ^ n\quad(n > N)$$
+        and the result follows from the comparison test. If $l > 1$, $\epsilon$ is chosen so that $l - \epsilon > 1$. Then for some subsequence $\seq[a_{n_k}]$,
+        $$|a_{n_k}| > \limas[k]{(l - \epsilon) ^ {n_k}}{\infty}$$
+        and so the terms of $\sumto{a_n}$ do not tend to zero.
+    \end{proof}
+\end{proposition}
+
+\subsection{Absolute and conditional convergence}
+A series $\sumto{a_n}$ is said to converge absolutely if the series $\sumto{|a_n|}$ converges. A series which converges but doesn't converge absolutely is said to be conditionally convergent\footnote{The comparison, ratio and $n$th root tests all demonstrate absolute convergence. The only criterion given which can establish the convergence of a series which is only conditionally convergent is \autoref{thm_series_altconv}.}.
+
+\begin{theorem}
+    Every absolutely convergent series is convergent.
+    \begin{proof}
+        Simply take $b_n = |a_n|$ in the comparison test.
+    \end{proof}
+\end{theorem}
+\phantom{} \\
+Infinite series can only be manipulated like finite sums only if they are absolutely convergent series. If an attempt to manipulate a conditionally convergent or divergent series, nonsense can be expected.
+
+\begin{example}
+    We know that the series
+    $$1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \frac{1}{7} - \dotsc$$
+    converges conditionally. Denote its sum by $s$. We rearrange the order in which the terms of the series appear and obtain
+    $$1 - \frac{1}{2} - \frac{1}{4} + \frac{1}{3} - \frac{1}{6} - \frac{1}{8} + \frac{1}{5} - \frac{1}{10} - \frac{1}{12} + \frac{1}{7} - \dotsc$$
+    Let the $n$th partial sum of this series be $t_n$. Then
+    \begin{align*}
+        t_{3n} &= 1 - \frac{1}{2} - \frac{1}{4} + \frac{1}{3} - \dotsc + \frac{1}{2n - 1} - \frac{1}{4n - 2} - \frac{1}{4n} \\
+        &= \left(1 + \frac{1}{3} + \dotsc + \frac{1}{2n - 1}\right) - \left(\frac{1}{2} + \frac{1}{6} +  \dotsc + \frac{1}{4n - 2}\right) - \left(\frac{1}{4} + \frac{1}{8} + \dotsc +\frac{1}{4n}\right) \\
+        &= \left(1 + \frac{1}{3} + \dotsc + \frac{1}{2n - 1}\right) - \frac{1}{2}\left(1 + \frac{1}{3} +  \dotsc + \frac{1}{2n - 1}\right) - \frac{1}{2}\left(\frac{1}{2} + \frac{1}{4} +  \dotsc + \frac{1}{2n}\right) \\
+        &= \frac{1}{2}\left(1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \dotsc + \frac{1}{2n - 1} - \frac{1}{2n}\right) \\
+        &\limas{}{\frac{1}{2}s}.
+    \end{align*}
+    The finite sum for $t_{3n}$ can validly be rearranged in any way we like. Since $\limas{t_{3n + 1} - t_{3n}}{0}$ and $\limas{t_{3n + 2} - t_{3n}}{0}$, it follows that the rearranged series converges to $\frac{1}{2}s$ which isn't the same as the sum $s$ of our original series (because $s \neq 0$).
+\end{example}
+
+\newpage
+
+\section{Functions}
+A function $f$ from a set $A$ to a set $B$ (write $f : A \rightarrow B$) defines a rule which assigns to each $x \in A$ a unique element $y \in B$. The element $y$ is called the image of the element $x$ and we write $y = f(x)$.
+\\
+If $f$ is a function from $A$ to $B$ and $S \subset A$, we say that $f$ is defined on the set $S$. The largest set on which $f$ is defined is the set $A$. We call $A$ the domain of $f$.
+\\
+If $f$ is defined on a set $S$, we use the notation
+$$f(S) = \{f(x) : x \in S\}$$
+and say that $f(S)$ is the image of the set $S$ under the function $f$. The set $f(A)$ is called the range of $f$.
+
+\subsection{Polynomial and rational functions}
+If $a_0, a_1, a_2, \dotsc a_n$ are all real numbers, then the equation
+$$y = a_0 + a_1x + a_2x ^ 2 + \dotsc + a_nx ^ n$$
+defines a function from $\R$ to itself. Any value of $x$ substituted on the right hand side generates a unique corresponding value of $y$. If $a_n \neq 0$, we call this function a polynomial of degree $n$. A polynomial of degree $0$ is called a constant. \\
+Suppose that $P$ and $Q$ are polynomial functions. Let $S$ denote the set $\R$ with the values of $x$ for which $Q(x) = 0$ removed. (If $Q$ is of degree $m$, it follows that there can be at most $m$ such values.) Then the equation
+$$y = \frac{P(x)}{Q(x)}$$
+defines a function from $S$ to $\R$. Such a function is called a rational function.
+
+\subsection{Combining functions}
+If $S \subset \R$ and $f$ and $g$ are two functions from $S$ to $\R$, then we define the function $f + g$ to be that function from $S$ to $\R$ which satisfies
+$$(f + g)(x) = f(x) + g(x)\quad(x \in S).$$
+Similarly, if $\lambda$ is any real number, we define $\lambda f$ to be the function from $S$ to $\R$ which satisfies
+$$(\lambda f)(x) = \lambda f(x)\quad(x \in S).$$
+Again, we define the functions $fg$ and $f/g$ by
+$$(fg)(x) = f(x) \cdot g(x)\quad(x \in S)$$
+$$(f/g)(x) = f(x)/g(x)\quad(x \in S).$$
+For the latter definition to make sense, it is essential that $g(x) \neq 0$ for all $x \in S$.
+\\
+The operation of composition. Let $S$ and $T$ be subsets of $\R$ and suppose that $g: S \rightarrow T$ and $f : T \rightarrow \R$. Then we define the composite function $f \circ g: s \rightarrow \R$ by
+$$f \circ g(x) = f(g(x))\quad(x \in S).$$
+
+\subsection{Inverse functions}
+Suppose that $A$ and $B$ are sets and $f$ is a function from $A$ to $B$. This means that each element $a \in A$ has a unique image $b = f(a) \in B$.
+We say that $f ^ {-1}$ is the inverse function to $f$ if $f ^ {-1}$ is a function from $B$ to $A$ which has the property that $x = f ^ {-1}(y)$ if an only if $y = f(x)$.
+\\
+Not all functions have an inverse. The function $f : A \rightarrow B$ has an inverse function $f ^ {-1}: B \rightarrow A$ if and only if each $b \in B$ is the image of a unique $a \in A$. A function which has this property is said to be a $1:1$ correspondence between $A$ and $B$.
+
+\subsection{Bounded functions}
+Let $f$ be defined on $S$. We say that $f$ is bounded above on $S$ by the upper bound $H$ iff, for any $x \in S$,
+\[
+f(x) \leq H.
+\]
+This is equivalent to saying the set
+\[
+f(S) = \{f(x): x \in S\}
+\]
+is bounded above by $H$.
+\\
+If $f$ is bounded above on $S$, it follows from the continuum property that it has a smallest upper bound (or supremum) on $S$. Suppose that
+\[
+B = \sup_{x \in S}f(x) = \sup{f(S)}.
+\]
+
+\subsection{Limits of functions}
+\subsection{Limits from the left}
+Suppose that $f$ is defined on the interval $(a, b)$. We say that $f(x)$ tends to a limit $l$ as $x$ tends to $b$ from left and write
+\[f(x) \rightarrow l \text{ as } x \rightarrow b-\]
+or, alternatively,
+\[\lim_{x \rightarrow b-}{f(x)} = l\]
+if the following criterion is satisfied. \\
+\\
+Given any $\epsilon > 0$, we can find a $\delta > 0$ such that
+\[|f(x) - l| < \epsilon\]
+provided that $b - \delta < x < b$.
+
+\subsection{Limits from the right}
+Suppose that $f$ is defined on the interval $(a, b)$. We say that $f(x)$ tends to a limit $l$ as $x$ tends to $a$ from right and write
+\[f(x) \rightarrow l \text{ as } x \rightarrow a+\]
+or, alternatively,
+\[\lim_{x \rightarrow a+}{f(x)} = l\]
+if the following criterion is satisfied. \\
+\\
+Given any $\epsilon > 0$, we can find a $\delta > 0$ such that
+\[|f(x) - l| < \epsilon\]
+provided that $a < x < a + \delta$. \\
+\\
+\subsection{Limits at a point}
+$f(x) \rightarrow l$ as $x \rightarrow \xi$ Suppose that $f$ is defined on the interval $(a, b)$ except possibly for some point $\xi \in (a, b)$. We say that $f(x)$ tends to a limit $l$ as $x$ tends to $\xi$ and write
+\[f(x) \rightarrow l \text{ as } x \rightarrow \xi\]
+or, alternatively,
+\[\lim_{x \rightarrow \xi}{f(x)} = l\]
+if the following criterion is satisfied. \\
+\\
+Given any $\epsilon > 0$, we can find a $\delta > 0$ such that
+\[|f(x) - l| < \epsilon\]
+provided that $0 < |x - \xi| < \delta$.
+
+\begin{proposition}
+    Let $f$ be defined on an interval $(a, b)$ except possibly at a point $\xi \in (a, b)$. Then $f(x) \rightarrow l$ as $x \rightarrow \xi$ iff $f(x) \rightarrow l$ as $x \rightarrow \xi-$ and $f(x) \rightarrow l$ as $x \rightarrow \xi+$.
+\end{proposition}
+\begin{proof}
+    % Suppose that $f(x) \rightarrow l$ as $x \rightarrow \xi$. Given any $\epsilon > 0$, we can find a $\delta > 0$ such that
+    % \[
+    % |f(x) - l| < \epsilon
+    % \]
+    % provided that $0 < |x - \xi| < \delta$. The condition $0 < |x - \xi| < \delta$ is equivalent to saying that $x$ satisfies one of the following inequalities $\xi - \delta < x < \xi$ or $\xi < x < \xi + \delta$. \\
+    % $\xi - \delta < $
+\end{proof}
+
+\begin{example}
+    Let $f$ be the function from $\R$ to itself defined by
+    \[ f(x) = \begin{cases}
+        1 - x & (x \leq 1) \\
+        2x & (1 > x) \\
+    \end{cases} \]
+    Then 
+    \[\textnormal{(i)}\,\lim_{x \rightarrow 1-}{f(x)} = 0\qquad\textnormal{(ii)}\,\lim_{x \rightarrow 1+}{f(x)} = 2.\]
+    \begin{proof}
+        \textnormal{(i)} $f(x) \rightarrow 0$ as $x \rightarrow 1-$. Given any $\epsilon > 0$ we can find a $\delta > 0$ such that $$|f(x) - 0| < \epsilon$$
+        provided that $1 - \delta < x < 1$. \\
+        This condition $|f(x) - 0| < \epsilon$ can be rearranged as follows, $|1 - x| < \epsilon$ which is equivalent to $-\epsilon < |x - 1|$ this is then equal to $-\epsilon < x - 1 < \epsilon$ adding $1$ to both sides gets us $1 - \epsilon < x < 1 + \epsilon$. \\
+        We can restate the problem as, given any $\epsilon > 0$, find a $\delta > 0$ such that $1 - \epsilon < x < 1 + \epsilon$ provided that $1 - \delta < x < 1$. \\
+        Obviously, we can see that $\delta = \epsilon$ is the correct choice for $\delta$ since $|1 - x| < \epsilon \implies -\epsilon < x - 1 < \epsilon \implies 1 - \epsilon < x < 1 + \epsilon$ then we can match this to the required form completing the proof that $f(x) \rightarrow 0$ as $x \rightarrow 1-$. \\
+        \textnormal{(ii)} $f(x) \rightarrow 2$ as $x \rightarrow 1+$. Given any $\epsilon > 0$ we can find a $\delta > 0$ such that $$|f(x) - 2| < \epsilon$$
+        provided that $1 < x < 1 + \delta$. \\
+        Similarly, this condition can be rearranged as follows, $|2x - 2| < \epsilon$ which can be written as $-\epsilon < 2x - 2 < \epsilon$ adding $2$ to both sides $2 - \epsilon < 2x < 2 + \epsilon$ then dividing both sides by $2$, $1 - \frac{\epsilon}{2} < x < 1 + \frac{\epsilon}{2}$. Hence, we can restate the problem as, given any $\epsilon > 0$, find a $\delta > 0$ such that $1 - \frac{\epsilon}{2} < x < 1 + \frac{\epsilon}{2}$ provided that $1 < x < 1 + \delta$. Obviously, we choose $\delta = \frac{\epsilon}{2}$ which suffices to make this true and completes the proof that $f(x) \rightarrow 2$ as $x \rightarrow 1+$.
+    \end{proof}
+\end{example}
+
+\subsection{Continuity at a point}
+Suppose that $f$ is defined on an interval $(a, b)$ and $\xi \in (a, b)$. Then we say that $f$ is continuous at the point $\xi$ iff
+$$f(x) \rightarrow f(\xi) \textnormal{ as } x \rightarrow \xi.$$
+If $f$ is defined on an interval $(a, b]$ and $f(x) \rightarrow f(b)$ as $x \rightarrow b-$, we say that $f$ is continuous on the left at point $b$. If $f$ is defined on an interval $[a, b)$ and $f(x) \rightarrow f(a)$ as $x \rightarrow a+$, then we say that $f$ is continuous on the right at the point $a$.
+
+\begin{example}\label{examp_cont_monomial}
+    For any real numbers $\alpha$ and $\beta$, the function $f: \R \rightarrow \R$ defined by
+    $$f(x) = \alpha x + \beta$$
+    is continuous at every real number $\xi$.
+    \begin{proof}
+        Assume $\alpha \neq 0$. Let $\epsilon > 0$ be given. Choose $\delta = \frac{\epsilon}{|\alpha|}$\footnote{Choose
+        $\frac{\epsilon}{|\alpha|}$ since $|f(x) - f(\xi)| < \epsilon \implies |x - \xi| < \frac{\epsilon}{|\alpha|}$ after rearrangement, but $|x - \xi| < \delta$ hence $\delta = \frac{\epsilon}{|\alpha|}$.}. Then, provided that $|x - \xi| < \delta$,
+        $$|f(x) - f(\xi)| = |\alpha(x - \xi)| = |\alpha|\cdot|x - \xi| < |\alpha|\cdot\delta = \epsilon.$$
+    \end{proof}
+\end{example}
+
+\subsection{Connection with convergent sequences}
+\begin{theorem}\label{thm_fun_lim_relseq}
+    Let $f$ be defined on $(a, b)$ except possibly for $\xi \in (a, b)$. Then $f(x) \rightarrow l$ as $x \rightarrow \xi$ if and only if, for each sequence $\seq$ of points of $(a, b)$ such that $x_n \neq \xi\,(n = 1, 2, \dotsc)$ and $\limas{x_n}{\xi}$, it is true that $\limas{f(x_n)}{l}$.
+    \begin{proof}
+        Suppose that $f(x) \rightarrow l$ as $x \rightarrow \xi$. Let $\epsilon > 0$ be given. Then we can find a $\delta > 0 $ such that $|f(x) - l| < \epsilon$ provided that $0 < |x - \xi| < \delta$. Suppose that $\seq$ is a sequence of points of $(a, b)$ such that $x_n \neq \xi\,(n = 1, 2, \dotsc)$ and $\limas{x_n}{\xi}$. Since $\delta > 0$ we can find an $n$ such that for any $n > N$, $0 < |x_n - \xi| < \delta$\footnote{Because this is in the correct range.}. But this implies $|f(x_n) - l| < \epsilon$. Given any $\epsilon > 0$, we have found an $N$ such that, for any $n > N$, $|f(x_n) - l| < \epsilon$. This $\limas{f(x_n)}{l}$. \\
+        \\
+        Now suppose that, for each sequence $\seq$ of points of $(a, b)$ such that $x_n \neq \xi\,(n = 1, 2, \dotsc)$ and $\limas{x_n}{\xi}$, it is true that $\limas{f(x_n)}{l}$. We now suppose that it is not true that $f(x) \rightarrow l$ as $x \rightarrow \xi$, then for some $\epsilon > 0$, it must be true that for each value $\delta > 0$ we can find an $x$ satisfying $0 < |x - \xi| < \delta$ such that $|f(x) - l| \geq \epsilon$. In particular, if $\delta = \frac{1}{n}$, then we can find an $x_n$ satisfying $0 < |x - \xi| < \frac{1}{n}$ such that $|f(x_n) - l| \geq \epsilon$. But then $\seq$ is a sequence of points of $(a, b)$ such that $x_n \neq \xi\,(n = 1, 2, \dotsc)$ and $\limas{x_n}{\xi}$ but for which it is not true that $\limas{f(x_n)}{l}$. This contradicts our assumption above.
+    \end{proof}
+\end{theorem}
+
+\subsection{Properties of limits}
+The following propositions are analogues of the combination theorem and the sandwich theorem. They are easily deduced from these results with the help of \autoref{thm_fun_lim_relseq}.
+\begin{proposition}\label{prop_fun_lim_combthms}
+    Let $f$ and $g$ be defined on an interval $(a, b)$ except possibly at $\xi \in (a, b)$. Suppose that $f(x) \rightarrow l$ as $x \rightarrow \xi$ and $g(x) \rightarrow m$ as $x \rightarrow \xi$ and suppose that $\lambda$ and $\mu$ are real numbers. then
+    \begin{enumerate}[label = (\roman*)]
+        \item $\lambda f(x) + \mu g(x) \rightarrow \lambda l + \mu m$ as $x \rightarrow \xi$
+        \item $f(x)g(x) \rightarrow lm$ as $x \rightarrow \xi$
+        \item $\frac{f(x)}{g(x)} \rightarrow \frac{l}{m}$ as $x \rightarrow \xi$\quad(provided that $m \neq 0$).
+    \end{enumerate}
+\end{proposition}
+
+\begin{theorem}
+    A polynomial is continuous at every point. A rational function is continuous at every point at which it is defined.
+    \begin{proof}
+        \autoref{examp_cont_monomial} shows that $x \rightarrow \xi$ as $x \rightarrow \xi$. Repeated application of \autoref{prop_fun_lim_combthms}(ii) then shows that $x ^ k \rightarrow \xi ^ k$ as $x \rightarrow \xi$ for each $k \in \N$. Hence, if
+        $$P(x) = a_n x ^ n + a_{n - 1} x ^ {n - 1} + \dotsc + a_1 x + a_0,$$
+        then a repeated application of \autoref{prop_fun_lim_combthms}(i) yields $P(x) \rightarrow P(\xi)$ as $x \rightarrow \xi$, i.e. P is continuous at $\xi$. To show that a rational function is continuous wherever it is defined appeal to \autoref{prop_fun_lim_combthms}(iii).
+    \end{proof}
+\end{theorem}
+
+\begin{proposition}[sandwich theorem]
+    Let $f, g$ and $h$ be defined on $(a, b)$ except possibly at $\xi \in (a, b)$. Suppose that $g(x) \rightarrow l$ as $x \rightarrow \xi$, $h(x) \rightarrow l$ as $x \rightarrow \xi$ and that
+    $$g(x) \leq f(x) \leq h(x)$$
+    except possibly when $x = \xi$. Then $f(x) \rightarrow l$ as $x \rightarrow \xi$.
+\end{proposition}
+
+\subsection{Limits of composite functions}
+
+\begin{theorem}\label{thm_lim_compfunc}
+    Suppose that $f(y) \rightarrow l$ as $y \rightarrow \eta$ and that $g(x) \rightarrow \eta$ as $x \rightarrow \xi$. Then either of the two conditions below is sufficient to ensure that
+    $$f(g(x)) \rightarrow l \textnormal{ as } x \rightarrow \xi$$
+    \begin{enumerate}[label = (\roman*)]
+        \item $f$ is continuous at $\eta$ (i.e. $l = f(\eta)$).
+        \item For some open interval $I$ containing $\xi$, it is true that $g(x) \neq \eta$ for any $x \in I$, except possibly $x = \xi$.
+        \begin{proof}
+            Let $\epsilon > 0$ be given. Since $f(y) \rightarrow l$ as $y \rightarrow \eta$, we can find a $\Delta > 0$ such that $|f(y) - l| < \epsilon$ provided that $0 < |y - \eta| < \Delta$. Writing $y = g(x)$, we obtain
+            $$|f(g(x)) - l| < \epsilon\qquad(1)$$
+            provided that
+            $$0 < |g(x) - \eta| < \Delta\qquad(2)$$
+            $g(x) \rightarrow \eta$ as $x \rightarrow \xi$ and $\Delta > 0$. Hence we can find a $\delta > 0$ such that
+            $$|g(x) - \eta| < \Delta\qquad(3)$$
+            provided that
+            $$0 < |x - \xi| < \delta.\qquad(4)$$
+            It would be ideal to say that (4) implies (3) which implies (2) which implies (1). This would complete the proof but (3) doesn't imply (2) in general. Therefore we need to use one of the hypotheses (i) or (ii) of the theorem. \\
+            If we assume $f$ is continuous at $\eta$, then $l = f(\eta)$ and so $|f(y) - l| < \epsilon$ even when $y = \eta$. Thus, in this case replace condition (2) by condition (3) and the argument above goes through. \\
+            If hypothesis (ii) is assumed, then we can be sure that $g(x) \neq \eta$ provided that $x$ satisfies (4) for a sufficiently small value $\delta > 0$. But then condition (3) can be replaced by condition (2) and the argument goes through again.
+        \end{proof}
+    \end{enumerate}
+\end{theorem}
+
+\subsection{Divergence}
+We say that $f(x) \rightarrow +\infty$ as $x \rightarrow \xi+$ if, given any $H > 0$, we can find a $\delta > 0$ such that
+$$f(x) > H$$
+provided that $\xi < x < \xi + \delta$. \\
+We say that $f(x) \rightarrow l$ as $x \rightarrow -\infty$ if, given any $\epsilon > 0$, we can find an $X$ such that
+$$|f(x) - l| < \epsilon$$
+provided that $x < X$.
+
+\newpage
+
+\section{Continuity}
+A function $f$ is continuous at a point $\xi$ iff $f(x) \rightarrow f(\xi)$ as $x \rightarrow \xi$. \\
+\\
+A function $f$ is continuous on an open interval $I$ if and only if it is continuous at each point of $I$. \\
+\\
+A function $f$ is continuous on a compact interval $[a,\,b]$ if and only if it is continuous at each point of $(a,\,b)$ and continuous on the right at $a$ and on the left at $b$. \\
+
+\begin{proposition}
+    Let $f$ be defined on an interval $I$. Then $f$ is continuous on $I$ if and only if, given any $x \in I$ and any $\epsilon > 0$, we can find a $\delta > 0$ such that
+    $$|f(x) - f(y)| < \epsilon$$
+    provided that $y \in I$ and satisfies $|x - y| < \delta$.
+\end{proposition}
+
+\begin{proposition}
+    Let $\lambda$ and $\mu$ be real numbers and suppose that the functions $f$ and $g$ are continuous on an interval $I$. Then so are the functions
+    \begin{enumerate}[label = (\roman*)]
+        \item $\lambda f + \mu g$
+        \item $fg$
+        \item $\frac{f}{g}$\qquad(provided $g(x) \neq 0$ for any $x \in I$).
+    \end{enumerate}
+\end{proposition}
+
+\begin{proposition}
+    Let $g : I \rightarrow J$ be continuous on the interval $I$ and let $f : J \rightarrow \R$ be continuous on the interval $J$. Then $f \circ g$ is continuous on $I$.
+\end{proposition}
+
+\begin{proposition}\label{prop_cont_seq_imgconv}
+    Let $f$ be continuous on the interval $I$. If $\xi \in I$ and $\seq$ is a sequence of points of $I$ such that $\limas{x_n}{\xi}$, then
+    $$\limas{f(x_n)}{f(\xi)}.$$
+\end{proposition}
+\phantom{} \\
+Note: This proposition can be remembered in the form
+\[
+\lim_{n \rightarrow \infty}{f(x_n)} = f(\lim_{n \rightarrow \infty}{x_n})
+\]
+in other words, for a continuous function the limit and function symbols can be validly exchanged. (The symbols commute.)
+
+\begin{theorem}[continuity property]
+    Let $f$ be continuous on a compact interval $[a,\,b]$. Then the image of $[a,\,b]$ under $f$ is also a compact interval.
+\end{theorem}
+
+\begin{theorem}\label{thm_cont_imgofcontfisinterval}
+    Let $f$ be continuous on an interval $I$. Then the image of $I$ under $f$ is also an interval.
+    \begin{proof}
+        To show that $J = f(I) = \{f(x): x \in I\}$ is an interval, we need to show that, if $y_1$ and $y_2$ are elements of $J$\footnote{and we choose $y_1$ and $y_2$ such that $y_1 \leq y_2$} and $y_1 \leq \lambda \leq y_2$, then $\lambda \in J$. \\
+        Since $y_1 \in J$ and $y_2 \in J$, the subsets of $I$ defined by
+        $$S = \{x : f(x) \leq \lambda\};\qquad T = \{x : f(x) \geq \lambda\}$$
+        are non-empty. Also, every point of the interval $I$ belongs to one or the other of the sets. It follows that a point of one of the sets is at zero distance from the other. Suppose that $s \in S$ is at zero distance from $T$. Then a sequence $\seq[t_n]$ of points of $T$ can be found such that $\limas{t_n}{s}$. Since $f$ is continuous on $I$, it follows that $\limas{f(t_n)}{f(s)}$ (by \autoref{prop_cont_seq_imgconv}). But
+        $$f(t_n) \geq \lambda\quad(n = 1, 2, \dotsc)$$
+        and therefore $f(s) \geq \lambda$. We already know that $f(s) \leq \lambda$ and so it follows that $f(s) = \lambda$. Hence $\lambda \in J$. A similar argument applies if a point of $T$ is at zero distance from $S$.
+    \end{proof}
+\end{theorem}
+\begin{outline}
+To prove $f(I)$ is an interval we need to show the set of $f(I)$ always has an element $\lambda$ such that for any $y_1 \in f(I)$ and $y_2 \in f(I)$ such that $y_1 \leq y_2$, then there exists a $\lambda$ such that $y_1 \leq \lambda \leq y_2$. \\
+We need to subset $f(I)$ into two sets in order to show that there exists a $\lambda$ in $f(I)$, we do this as so
+$$S = \{x : f(x) \leq \lambda\} \textnormal{ and } T = \{x : f(x) \geq \lambda\}$$
+since $I$ is non-empty, these subsets are also non-empty. There must be a point $s \in S$ at which $S = T$. Suppose $s \in S$ is the point such that $S = T$ then a sequence of points $\seq[t_n]$ in $T$ can be found such that $\limas{t_n}{s}$. \\
+Since $f$ is continuous on $I$, $\limas{f(t_n)}{f(s)}$. But $f(t_n) \geq \lambda \quad(n = 1, 2, \dotsc)$ (as $\seq[t_n] \in T$). We already know that $f(s) \leq \lambda$ (as $s \in S$) therefore it follows that $f(s) = \lambda$. Hence $\lambda \in J$. Similar argument if a point of $T$ is zero distance from $S$.
+\end{outline}
+
+\begin{corollary}[intermediate value theorem]\label{col_cont_intermval}
+    Let $f$ be continuous on an interval $I$ containing $a$ and $b$. If $\lambda$ lies between $f(a)$ and $f(b)$, then we can find a $\xi$ between $a$ and $b$ such that $\lambda = f(\xi)$.
+    \begin{proof}
+        This is a restatement of \autoref{thm_cont_imgofcontfisinterval}. By \autoref{thm_cont_imgofcontfisinterval} the image of $I$ under $f$ is also an interval. Thus, if $\xi$ lies between $f(a)$ and $f(b)$ then $\xi \in f(I)$.
+    \end{proof}
+\end{corollary}
+
+\begin{theorem}[intermediate value theorem]\label{thm_cont_intermval}
+    Let $f$ be continuous on the interval $[a,\,b]$ and suppose that $f(a) = \alpha$ and $f(b) = \beta$. For every real number $\gamma$ between $\alpha$ and $\beta$ there exists a number $c$, $a < c < b$, with $f(c) = \gamma$.
+    \begin{proof}
+        
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}\label{thm_cont_compboundonint}
+    Let $f$ be continuous on the compact interval $[a,\,b]$. Then $f$ is bounded on $[a,\,b]$.
+    \begin{proof}
+    Suppose that $f$ is unbounded on $[a,\,b]$. Then we can find a sequence $\seq$ of points of $[a,\,b]$ such that
+    \begin{equation}
+        \limas{|f(x_n)|}{+\infty}.
+    \end{equation}
+    Since $[a,\,b]$ is compact, there exists a subsequence $\seq[x_{n_r}]$, which converges to a point $\xi \in [a,\,b]$ by the \autoref{thm_BolzanoWeierstrass}. Because $f$ is continuous on $[a,\,b],\, \limas[r]{f(x_{n_r})}{f(\xi)}$. But this contradicts $(1)$.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Let $f$ be continuous on the compact interval $[a,\,b]$. Then $f$ achieves a maximum value $d$ and a minimum value $c$ on $[a,\,b]$.
+    \begin{proof}
+        From \autoref{thm_cont_compboundonint} we know that $f$ is bounded on $[a,\,b]$. Let $d$ be the supremum of $f$ on $[a,\,b]$ and consider a sequence $\seq$ of points of $[a,\,b]$ such that $\limas{f(x_n)}{d}$. Since $[a,\,b]$ is compact, $\seq$ contains a subsequence $\seq[x_{n_r}]$ which converges to a point $\xi \in [a,\,b]$. Because $f$ is continuous on $[a,\,b]$, it follows that $\limas[r]{f(x_{n_r})}{f(\xi)}$. Hence $f(\xi) = d$ and thus the supremum $d$ is actually a maximum. A similar argument shows the infimum to be a minimum.
+    \end{proof}
+\end{theorem}
+
+\newpage
+
+\section{Differentiation}
+
+\subsection{Derivatives}
+Suppose that $f$ is defined on an open interval $I$ containing the point $\xi$. Then $f$ is said to be differentiable at the point $\xi$ if and only if the limit
+\[
+\lim_{x \rightarrow \xi}{\dfrac{f(x) - f(\xi)}{x - \xi}}
+\]
+exists. If the limit exists, it is called the derivative of $f$ at the point $\xi$ and denoted by $f'(\xi)$ or $Df(\xi)$. \\
+For a function $f$ which is differentiable at $\xi$ we therefore have
+\[
+f'(\xi) = \lim_{x \rightarrow \xi}{\dfrac{f(x) - f(\xi)}{x - \xi}}.
+\]
+Equivalently, we may write
+\[
+f'(\xi) = \lim_{h \rightarrow 0}{\dfrac{f(\xi + h) - f(\xi)}{h}}.
+\]
+Note: It follows immediately from our definition that a function $f$ is differentiable at $\xi$ if and only if there exists an $l$\footnote{Write $\lim_{x \rightarrow \xi}{\frac{f(x) - f(\xi)}{x - \xi}} = l$.} such that
+\[f(\xi + h) - f(\xi) - lh = o(h)\quad(h \rightarrow 0).\]
+Here $o(h)$ denotes a quantity which tends to zero when divided by $h$.
+
+\subsection{Higher derivatives}
+If $f$ is differentiable at each point of an open interval $I$, we say $f$ is differentiable on $I$. It is natural to define $f'$ or $Df$ to be the function from $I$ to $\R$ whose value at each point $x \in I$ is $f'(x)$. We can then define the second derivative $f''(\xi)$ or $D ^ 2 f(\xi)$ at the point $\xi$ by
+\[
+f''(\xi) = \lim_{x \rightarrow \xi}{\dfrac{f'(x) - f'(\xi)}{x - \xi}}
+\]
+provided that the limit exists. Similarly for third derivatives and so on.
+
+\subsection{More notation}
+\[
+f'(x) = \lim_{\delta x \rightarrow 0}{\dfrac{f(x + \delta x) - f(x)}{\delta x}} = \lim_{\delta x \rightarrow 0}{\dfrac{\delta y}{\delta x}}.
+\]
+If $y = f(x)$, the quantity $\delta y = f(x + \delta x) - f(x)$ is usually said to be the 'small change in $y$ consequent on the small change $\delta x$ in $x$'.
+\[
+f'(x) = \dfrac{dy}{dx}.
+\]
+This notation uses the $x$ symbol ambiguously. It is used as the point at which the derivative is to be evaluated and the variable with respect to which one is differentiating at the same time. \\
+The differential $df$ of a function $f$ may be regarded as the function of two variables given by
+\[
+df(x; h) = f'(x)h.
+\]
+
+\subsection{Properties of differentiable functions}
+\begin{theorem}
+    Let $f$ be defined on an open interval $I$ which contains the point $\xi$. If $f$ is differentiable at $\xi$, then $f$ is continuous at $\xi$.
+
+    \begin{proof}
+        \[
+        f(x) - f(\xi) = \dfrac{f(x) - f(\xi)}{x - \xi} \cdot (x - \xi) \rightarrow f'(\xi) \cdot 0 \textnormal{ as } x \rightarrow \xi.
+        \]
+        Hence $f(x) \rightarrow f(\xi)$ as $x \rightarrow \xi$\footnote{By the definition of continuity at a point.} and the proof is complete.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Suppose that $f$ and $g$ are defined on an open interval $I$ containing the point $\xi$. Let $\lambda$ and $\mu$ be any real numbers. Then, if $f$ and $g$ are differentiable at $\xi$,
+    \begin{enumerate}[label = (\roman*)]
+        \item $D\{\lambda f + \mu g\} = \lambda Df + \mu Dg$
+        \item $D\{fg\} = fDg + gDf$
+        \item $D\left\{\frac{f}{g}\right\} = \dfrac{gDf - fDg}{g ^ 2}$\quad(provided $g(\xi) \neq 0$)
+    \end{enumerate}
+    at the point $\xi$.
+    \begin{proof}
+        \phantom{} \\
+        \begin{enumerate}[label = (\roman*)]
+            \item
+                \begin{align*}
+                    \frac{1}{h}\{\lambda f(\xi + h) + \mu g(\xi + h) - \lambda f(\xi) - \mu g(\xi)\} &= \lambda \left\{\dfrac{f(\xi + h) - f(\xi)}{h}\right\} + \mu \left\{\dfrac{g(\xi + h) - g(\xi)}{h}\right\} \\
+                    &\rightarrow \lambda f'(\xi) + \mu g'(\xi) \textnormal{ as } h \rightarrow 0.
+                \end{align*}
+            \item
+                \begin{align*}
+                    \dfrac{f(\xi + h)g(\xi + h) - f(\xi)g(\xi)}{h} &= \frac{1}{h}\left\{f(\xi + h)g(\xi + h) - f(\xi)g(\xi + h) + f(\xi)g(\xi + h) - f(\xi)g(\xi)\right\} \\
+                    &= g(\xi + h) \left\{\dfrac{f(\xi + h) - f(\xi)}{h}\right\} + f(\xi) \left\{\dfrac{g(\xi + h) - g(\xi)}{h}\right\} \\
+                    &\rightarrow g(\xi)f'(\xi) + f(\xi)g'(\xi) \textnormal{ as } h \rightarrow 0.
+                \end{align*}
+            \item
+                \begin{align*}
+                    \frac{1}{h}\left\{\dfrac{f(\xi + h)}{g(\xi + h)} - \dfrac{f(\xi)}{g(\xi)}\right\} &= \dfrac{f(\xi + h)g(\xi) - g(\xi + h)f(\xi)}{hg(\xi + h)g(\xi)} \\
+                    &= \dfrac{1}{g(\xi + h)g(\xi)}\left\{g(\xi)\dfrac{f(\xi + h) - f(\xi)}{h} - f(\xi)\dfrac{g(\xi + h) - g(\xi)}{h}\right\} \\
+                    &\rightarrow\frac{1}{(g(\xi)) ^ 2}\{g(\xi)f'(\xi) - f(\xi)g'(\xi)\} \textnormal{ as } h \rightarrow 0.
+                \end{align*}
+        \end{enumerate}
+    \end{proof}
+\end{theorem}
+
+\subsection{Composite functions}
+\begin{theorem}
+    Suppose that $g$ is differentiable at the point $x$ and that $f$ is differentiable at the point $y = g(x)$. Then
+    \[
+    (f \circ g)'(x) = f'(y)g'(x).
+    \]
+    \begin{proof}
+        Recall that $f \circ g(x) = f(g(x))$. We therefore have to consider
+        \[
+        \dfrac{f(g(x + h)) - f(g(x))}{h}.
+        \]
+        Write $k = g(x + h) - g(x)$. Since $g$ is differentiable at $x$, it is continuous there and so $k \rightarrow 0$ as $h \rightarrow 0$. Suppose that $k \neq 0$. Then
+        \begin{align*}
+            \dfrac{f(g(x + h)) - f(g(x))}{h} &= \dfrac{f(g(x + h)) - f(g(x))}{g(x + h) - g(x)} \cdot \dfrac{g(x + h) - g(x)}{h} \\
+            &= \dfrac{f(y + k) - f(y)}{k} \cdot \dfrac{g(x + h) - g(x)}{h}.
+        \end{align*}
+        If for some values of $h$, $k = g(x + h) - g(x) = 0$ then this causes an issue. To get around this difficulty we introduce the function
+        \[
+        F(k) =
+        \begin{cases}
+            \dfrac{f(y + k) - f(y)}{k} &(k \neq 0) \\
+            f'(y) &(k = 0)
+        \end{cases}
+        \]
+        Since $f$ is differentiable at $y$, $F(k) \rightarrow f'(y)$ as $k \rightarrow 0$. Because $F(0) = f'(y)$, it follows that $F$ is continuous at the point $0$. From \autoref{thm_lim_compfunc}(i) we deduce that
+        \[
+        F(k) \rightarrow f'(y) \textnormal{ as } h \rightarrow 0
+        \]
+        where $k = g(x + h) - g(x)$.
+        For $k \neq 0$ we have shown that
+        \[
+        \dfrac{f(g(x + h)) - f(g(x))}{h} = F(k) \cdot \dfrac{g(x + h) - g(x)}{h}.
+        \]
+        But this equation is also true when $k = 0$ since then both sides are zero. It follows that
+        \[
+        \dfrac{f(g(x + h)) - f(g(x))}{h} \rightarrow f'(y)g'(x) \textnormal{ as } h \rightarrow 0
+        \]
+        and this is what had to be proved. 
+    \end{proof}
+\end{theorem}
+
+\newpage
+
+\section{Mean Value Theorems}
+\subsection{Local maxima and minima}
+Let $f$ be defined on an open interval $(a,\,b)$ and let $\xi \in (a,\,b)$. We say that $f$ has a local maximum at $\xi$ if
+\[
+f(x) \leq f(xi)
+\]
+for all values of $x$ in some open interval $I$ which contains $\xi$. Similarly for a local minimum. \\
+If $f(\xi)$ is the maximum value of $f$ on the whole interval $(a,\,b)$, then obviously $f$ has a local maximum at $\xi$.
+
+\begin{theorem}
+    Suppose that $f$ is differentiable on $(a,\,b)$ and that $\xi \in (a,\,b)$. If $f$ has a local maximum or minimum at $\xi$, then
+    \[
+    f'(\xi) = 0.
+    \]
+    \begin{proof}
+        
+    \end{proof}
+\end{theorem}
+
+\newpage
+
+\section{Proof Steps}
+This section contains notes about how to prove general results using methods which are repeated throughout various examples.
+\\
+Obviously, these methods won't work if the hypotheses for the definitions are not true. For example, prove that $\limas{\frac{1}{n}}{1}$, this is plainly false.
+
+\subsection{Sequence Convergence}
+Here are some general methods for proving the convergence of sequences. \\
+\\
+When the sequence given is easy to prove convergence through manipulation
+\begin{theorem}
+    Prove that $\limas{a_n}{l}$
+    \begin{proof}
+    Let $\epsilon > 0$ be given, we must find a value $N$ such that, for any $n > N$,
+    \[|a_n - l| < \epsilon\]
+    Do some manipulation and rearrange to find an $N$ (sometimes in terms of $\epsilon$) or apply theorems and lemmas to show that an $N$ exists. \\
+    Given any $\epsilon > 0$ we have found a value of $N$ (optional, can quote the expression here) such that, for any $n > N$, $|a_n - l| < \epsilon$. Hence $\limas{a_n}{l}$
+    \end{proof}
+\end{theorem}
+\phantom{}
+\\
+Proving that a sequence converges can also be done by showing that it is a Cauchy sequence then implying the theorem (\autoref{thm_seq_cauchconverge}) which states that every Cauchy sequence converges. \\
+\begin{theorem}
+    Prove that $\seq$ is a Cauchy sequence, given that $x_n = f(n)$.
+    \begin{proof}
+        Establish an expression for $|x_n - x_m|$ where $n > m$. This can be started by showing that for example $x_{n + 2} - x_{n + 1} = f(n + 2) - x_{n + 1}$ then taking $|x_{n + 2} - x_{n + 1}| = |f(n + 2) - x_{n + 1}|$ which equals $|f(n + 2) - f(n + 1)|$ and so on which then forms an expression with a constant term (for generality I will denote this $d(n)$) and then the difference of two elements e.g. $\frac{1}{3 ^ n}|x_2 - x_1|$.
+        \\
+        Once a constant (non-recursive) expression for the difference between two consecutive elements has been found.
+        \\
+        Hence, if $n > m$,
+        \begin{align*}
+            |x_n - x_m| &= |x_n - x_{n - 1} + x_{n - 1} - x_{n - 2} - \dotsc + x_{m + 1} - x_m| \\
+            &\leq |x_n - x_{n - 1}| + |x_{n - 1} - x_{n - 2}| + \dotsc + |x_{m + 1} - x_m| \\
+            &\leq (d(n - 2) + d(n - 3) + \dotsc + d(m - 1))\footnote{(factor out the constant term in order to get a geo series)} \\
+            &= \textnormal{pre-geo series form e.g. $A(1 + r + r ^ 2 + \dotsc + r ^ n)$} \\
+            &= \textnormal{geo series form} \leq \textnormal{inf geo series}.
+        \end{align*}
+        Let $\epsilon > 0$ be given. Choose $N$ so large that $$\textnormal{inf geo series} < \epsilon.$$
+        Then, for any $n > N$ and any $m > N$.
+        \[|x_n - x_m| \leq \textnormal{inf geo series (with $N$ instead of $n$)} < \epsilon.\]
+        Thus $\seq$ is a Cauchy sequence.
+    \end{proof}
+\end{theorem}
+
+\subsubsection{Tips}
+When looking at finding an $N$ always entertain the possibility that it can use functions such as $\max$, for example when trying to find an $N$ which satisfies two inequalities you can use $N = \max{\{N_1, N_2\}}$. \\
+\\
+Always bear in mind that adding and subtracting something can lead to another inequality being able to be established. For example, $|x_m - x_n| = |(x_m - l) + (l - x_n)| \leq |x_m - l| + |x_n - l|\dotsc$. Following from adding and subtracting the same thing, multiplying and dividing by the same thing is also very useful when dealing with things like roots in order to obtain a fraction which allows for easy inequalities to be obtained (see \autoref{examp_sand1}). \\
+\\
+When using the definition of a Cauchy sequence be aware that if $N$ is a natural then $N \geq n, m$ can be applied. \\
+\\
+The sequence $a_n$ is divergent if $a_n$ has two convergent subsequences with different limits. \\
+\\
+The sequence $a_n$ is divergent if $a_n$ has a subsequence which tends to infinity or minus infinity.
+
+\end{document}
