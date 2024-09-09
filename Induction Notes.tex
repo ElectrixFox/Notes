@@ -1,49 +1,11 @@
 \documentclass[10pt, a4paper]{article}
-\usepackage{amsmath, amsfonts, amssymb, amsthm}
-\usepackage{hyperref}
-\usepackage{enumitem}
-\usepackage{thmtools}
-\usepackage{parskip}
-\usepackage{microtype}
-\usepackage{tikz}
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.18}
-
-\DeclareMathOperator{\sech}{sech}
-\DeclareMathOperator{\csch}{csch}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\R}{\mathbb{R}}
-
-\declaretheoremstyle[
-    notefont = \normalfont\itshape,
-    notebraces={(}{)}
-]{avgstyle}
-\declaretheoremstyle[
-    bodyfont = \normalfont,
-    notefont = \normalfont\itshape,
-    spaceabove = 1em,
-    spacebelow = 1em
-]{defstyle}
-\declaretheoremstyle[
-    bodyfont = \normalfont,
-    notefont = \normalfont,
-    spaceabove = 1em,
-    spacebelow = 1em
-]{exampstyle}
-
-\declaretheorem[style = avgstyle]{theorem}
-\declaretheorem[]{lemma}
-\declaretheorem{proposition, corollary, remark}[style=plain]
-\declaretheorem{definition}[style=defstyle, numbered=unless unique]
-\declaretheorem{example}[style=exampstyle, numberwithin=section]
+\usepackage{preamble}
 
 \title{Induction Notes}
 \author{Luke Phillips}
 \date{September 2024}
 
 \begin{document}
-
 
 \maketitle
 
