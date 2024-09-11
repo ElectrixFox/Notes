@@ -1,0 +1,167 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\newcommand{\limas}[3][n]{#2 \rightarrow #3 \text{ as } #1 \rightarrow \infty}
+\newcommand{\sumfrto}[3][n = 1]{\sum_{#1}^{#2}{#3}} % this is for set start
+\newcommand{\sumto}[2][\infty]{\sumfrto{#1}{#2}}
+\newcommand{\seq}[1][x_n]{\left\langle #1 \right\rangle}
+
+\title{Analysis Problems}
+\author{Luke Phillips}
+\date{September 2024}
+
+\begin{document}
+
+\section{Introduction}
+The problems in this sheet are from the course given by Dirk Schuetz.
+
+\section{Sequences}
+
+\subsection{Basics about sequences and limits}
+
+\begin{example}
+    Use the definition of convergence to show that the following sequences converge to $0$.
+    \begin{enumerate}[label = \alph*.]
+        \item $x_n = \dfrac{1}{n ^ 2}$.
+        \item $y_n = \dfrac{1}{\sqrt{n}}$.
+    \end{enumerate}
+    \begin{proof}
+    Considering the sequences separately.
+    \begin{enumerate}[label = \alph*.]
+    \item
+        Let $\epsilon > 0$ be given, we now must find a value $N$ such that for all $n > N$,
+        \[
+        \left|\frac{1}{n ^ 2} - 0\right| < \epsilon.
+        \]
+        Now we need an $N$ such that for any $n > N$, $\frac{1}{n ^ 2} < \epsilon$, i.e. $n > \frac{1}{\sqrt{\epsilon}}$. This solves the problem, $n > N = \frac{1}{\sqrt{\epsilon}}$.
+    \item
+        Let $\epsilon > 0$ be given, we now must find a value $N$ such that for all $n > N$,
+        \[
+        \left|\frac{1}{\sqrt{n}} - 0\right| < \epsilon.
+        \]
+        Now we need an $N$ such that for any $n > N$, $\frac{1}{\sqrt{n}} < \epsilon$, i.e. $n > \frac{1}{\epsilon ^ 2}$. This solves the problem, $n > N = \frac{1}{\epsilon ^ 2}$.
+    \end{enumerate}
+    \end{proof}
+\end{example}
+
+\begin{example}
+    Let $(x_n)_{n \in \N}$ be a sequence of real numbers with $x_n \geq 0$ and $\limas{x_n}{0}$. Using the definition of convergence, show that $\limas{\sqrt{x_n}}{0}$.
+    \begin{proof}
+        Let $\epsilon > 0$ be given. To show that $\limas{\sqrt{x_n}}{0}$ we must find an $N$ such that for all $n \geq N$,
+        \[
+        |\sqrt{x_n} - 0| < \epsilon.
+        \]
+        Given that $\limas{x_n}{0}$ there exists an $N$ such that for all $n \geq N$,
+        \[
+        |x_n - 0| < \epsilon ^ 2.
+        \]
+        $x_n \geq 0$ implies that $|x_n| = x_n$ which means that $x_n < \epsilon$ and then $\sqrt{x_n} < \epsilon$ by simple deduction.
+    \end{proof}
+\end{example}
+
+\begin{example}
+    Let $X \subset \R$ and assume that $C \in \R$ is an upper bound for $X$. Show that $C = \sup X$ if and only if there exists a sequence $(x_n)_{n\in\N}$ with $x_n\in X$ for all $n$ and $\lim_{n\rightarrow\infty} x_n = C$.
+    \begin{proof}
+        $C = \sup X$ if $C$ is an upper bound of $X$ (which is assumed). Hence, we need to show that whenever $B \in \R$ is an upper bound of $X$, then $C \leq B$. Using the fact that $\lim_{n\rightarrow\infty} x_n = C$ this implies that given any $\epsilon > 0$ there exists an $N$ such that for all $n > N$,
+        \[
+        |x_n - C| < \epsilon.
+        \]
+        This implies that for all $n > N$, $C - \epsilon < x_n < C + \epsilon$ which since for all $n,\, x_n \in X$, $X \leq C + \epsilon$ we can take $B = C + \epsilon$ then it is trivial to show that our $B$ satisfies the condition for $C$ to be the supremum.
+    \end{proof}
+\end{example}
+
+\subsection{Convergence criteria}
+
+\begin{example}
+    Calculate $\lim_{n \rightarrow \infty} x_n$ (or show that no limit exists) for 
+    \[
+    x_n = \frac{(-1) ^ n}{\sqrt{n ^ 2 + n}}.
+    \]
+    \begin{proof}
+        For this we can apply the sandwich theorem and previous observations. \\
+        Since 
+        \[
+        \limas{\frac{1}{\sqrt{n}}}{0}
+        \]
+        and
+        \[
+        \left|\frac{(-1) ^ n}{\sqrt{n ^ 2 + n}}\right| \leq \frac{1}{\sqrt{n}}
+        \]
+        then by the sandwich theorem we can state that $x_n$ converges to $0$.
+    \end{proof}
+\end{example}
+
+\begin{example}
+    Let $(x_n)_{n \in \N}$ and $(y_n)_{n \in \N}$ be two convergent sequences with limits $x$ and $y$, respectively. Let $a, b \in \R$. Show that $(ax_n + by_n)_{n \in \N}$ is also convergent with limit $ax + by$.
+    \begin{proof}
+        Let $\epsilon > 0$ be given, then obviously $\dfrac{\epsilon}{|a| + |b|} > 0$. Since $x_n$ and $y_n$ are convergent, we will assume that $ax_n$ and $by_n$ are convergent too. Working from our assumption we will say that there exists an $N$ such that for all $n \geq N$,
+        \[
+        |ax_n - ax| < \frac{\epsilon}{|a| + |b|}\text{and}\qquad|by_n - by| < \frac{\epsilon}{|a| + |b|}.
+        \]
+        Then we have
+        \begin{align*}
+            |(ax_n + by_n) - (ax + by)| &= |(ax_n - ax) + (by_n - by)| \\
+            &\leq |ax_n - ax| + |by_n - by| \\
+            &= |a||x_n - x| + |b||y_n - y| \\
+            &< |a|\frac{\epsilon}{|a| + |b|} + |b|\frac{\epsilon}{|a| + |b|} \\
+            &= \frac{\epsilon}{|a| + |b|}\left(|a| + |b|\right) = \epsilon.
+        \end{align*}
+        This concludes our proof since we have shown that as $\epsilon > 0$ becomes small we can find an $N$ such that for all $n \geq N$,
+        \[
+        |(ax_n + by_n) - (ax + by)| < \epsilon
+        \]
+        hence $(ax_n + by_n)_{n \in \N}$ converges to $ax + by$.
+    \end{proof}
+\end{example}
+
+\subsection{The Bolzano-Weierstrass Theorem}
+
+\begin{example}
+    Let $x_n = \sqrt{n}(\sqrt{n}+(-1)^n\sqrt{n - 1})$. Show that this sequence has a convergent subsequence, and calculate its limit.
+    \begin{proof}
+        Take $x_{2n + 1}$ then
+        \begin{align*}
+        x_{2n + 1} &= \sqrt{2n + 1}(\sqrt{2n + 1} - \sqrt{2n}) \\
+        &= \frac{\sqrt{2n + 1}}{\sqrt{2n + 1} + \sqrt{2n}}.
+        \end{align*}
+        Hence we can do some manipulation to see that,
+        \begin{align*}
+        \frac{\sqrt{2n + 1}}{\sqrt{2n + 1} + \sqrt{2n}} &= \frac{\sqrt{2n + 1}}{\sqrt{2n + 1}\left(1 + \sqrt{\frac{2n}{2n + 1}}\right)} \\
+        &= \frac{1}{1 + \sqrt{\frac{2n}{2n + 1}}} \\
+        &= \frac{1}{1 + \sqrt{\frac{2n + 1}{2n + 1} - \frac{1}{2n + 1}}} \\
+        &= \frac{1}{1 + \sqrt{1 - \frac{1}{2n + 1}}}
+        \end{align*}
+        which after applying the sandwich theorem to $\frac{1}{2n + 1}$ to obtain $\limas{\frac{1}{2n + 1}}{0}$ we can clearly see the following,
+        \[
+        \lim_{n \rightarrow \infty}\frac{1}{1 + \sqrt{1 - \frac{1}{2n + 1}}} = \frac{1}{1 + \sqrt{1 - 0}} = \frac{1}{2}.
+        \]
+        Concluding that $\limas{x_{2n + 1}}{\dfrac{1}{2}}$.
+    \end{proof}
+\end{example}
+
+\begin{example}
+    Let $(a_n)_{n \in \N}$ and $(b_n)_{n \in \N}$ be bounded sequences, such that $(a_n \cdot b_n)_{n \in \N}$ converges to 0. Show that $(a_n)_{n \in \N}$ or $(b_n)_{n \in \N}$ has a subsequence which converges to $0$.
+    \begin{proof}
+        By the Bolzano-Weierstrass Theorem there is a convergent subsequence $(a_{n_i})_{i \in \N}$ which is convergent with limit $l$. If $l = 0$ then we have proven the statement. Otherwise, we can take $l \neq 0$ so $a_{n_i} \neq 0$ for all $i \in \N$ which means we can use $(b_{n_i})$ for our subsequence. But $\limas{a_n \cdot b_n}{0}$ therefore we can use COLT\footnote{Calculus of limit theorems} to see that,
+        \[
+        \lim_{n \rightarrow \infty}\frac{a_n \cdot b_n}{a_n} = \frac{l \cdot b_n}{l} = b_n.
+        \]
+        So $(b_{n_i})$ is the required subsequence
+    \end{proof}
+\end{example}
+
+\subsection{Lim sup and lim inf}
+
+\begin{example}
+    Let $(x_n)_{n \in \N}$ be a bounded sequence. Show that $(x_n)_{n \in \N}$ is convergent if and only if $\liminf_{n \rightarrow \infty} x_n = \limsup_{n \rightarrow \infty} x_n.$
+\end{example}
+
+
+\subsection{Cauchy sequences}
+
+\begin{example}
+    Let $(y_n)_{n \in \N}$ be the Fibonacci sequence, that is, $y_2 = y_1 = 1$ and $y_n = y_{n - 1} + y_{n - 2}$
+\end{example}
+
+
+\end{document}
