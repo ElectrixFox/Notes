@@ -2,9 +2,8 @@
 \usepackage{preamble}
 
 \newcommand{\limas}[3][n]{#2 \rightarrow #3 \text{ as } #1 \rightarrow \infty}
-\newcommand{\sumfrto}[3][n = 1]{\sum_{#1}^{#2}{#3}} % this is for set start
-\newcommand{\sumto}[2][\infty]{\sumfrto{#1}{#2}}
-\newcommand{\seq}[1][x_n]{\left\langle #1 \right\rangle}
+\newcommand{\infsum}[1][n = 1]{\sum_{#1}^{\infty}}
+\newcommand{\seq}[2][x]{(#1_{#2})_{#2 \in \N}}
 
 \title{Analysis Problems}
 \author{Luke Phillips}
@@ -160,7 +159,285 @@ The problems in this sheet are from the course given by Dirk Schuetz.
 \subsection{Cauchy sequences}
 
 \begin{example}
-    Let $(y_n)_{n \in \N}$ be the Fibonacci sequence, that is, $y_2 = y_1 = 1$ and $y_n = y_{n - 1} + y_{n - 2}$
+    Let $f : \R \rightarrow \R$ be a function with
+    \[
+    |f(x) - f(y)| \leq \frac{1}{2}|x - y|
+    \]
+    for all $x, y \in \R$.
+    \begin{enumerate}[label = \alph*.]
+        \item Pick any $x_1 \in \R$ and for $n \geq 2$ let $x_n = f(x_{n - 1})$. Show that $\seq{n}$ is a Cauchy sequence.
+        \item Let $x = \lim_{n \rightarrow \infty} x_n$ with the sequence as in (a). Show that $f(x) = x$.
+        \item Show that there is exactly one $a \in \R$ with $f(a) = a$.
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    Let $(y_n)_{n \in \N}$ be the Fibonacci sequence, that is, $y_2 = y_1 = 1$ and $y_n = y_{n - 1} + y_{n - 2}$ for $n \geq 3$. Let $x_n = \frac{y_{n + 1}}{y_n}$.
+    \begin{enumerate}[label = \alph*.]
+        \item Show that
+        \[
+        \frac{1}{y_n y_{n + 1}} \leq \frac{1}{y_n} - \frac{1}{y_{n + 1}}
+        \]
+        for all $n \geq 2$.
+        \item Show that $y_{n + 2}y_n - y_{n + 1}^2 = (-1)^{n + 1}$ for all $n \in \N$ by induction.
+        \item Show that $(x_n)_{n \in \N}$ is a Cauchy sequence.
+        \item Calculate $\lim_{n \rightarrow \infty}x_n$.
+    \end{enumerate}
+
+    \begin{proof}
+        \begin{enumerate}[label = \alph*.]
+        \item
+            \[
+            \frac{1}{y_n y_{n + 1}} \leq \frac{1}{y_n} - \frac{1}{y_{n + 1}} \implies 1 \leq y_{n + 1} - y_n.
+            \]
+            Now, using $y_n = y_{n - 1} + y_{n - 2}$,
+            \begin{align*}
+                1 &\leq y_{n + 1} - y_n \\
+                &= y_n - y_{n - 1} - y_n = y_{n - 1}.
+            \end{align*}
+            $1 \leq y_{n - 1}$ completes the proof since $y_n$ starts at $y_1$ therefore $n - 1 \geq 1$ which is equivalent to $n \geq 2$. Hence the inequality holds.
+            \item
+                For $n = 1$
+                \begin{align*} 
+                    y_3 y_1 - y_2 ^ 2 &= 2(1) - 1 ^ 2 \\
+                    &= 2 - 1 \\
+                    &= 1 = (-1) ^ 2
+                \end{align*}
+
+                Assume true for $n = k$
+                \[
+                y_{k + 2}y_k - y_{k + 1} ^ 2 = (-1)^{k + 1}.
+                \]
+
+                Then for $n = k + 1$,
+                \begin{align*}
+                    y_{k + 3}y_{k + 1} - y_{k + 2} ^ 2 &= (y_{k + 2} + y_{k + 1})(y_{k + 1}) - y_{k + 2} ^ 2 \\
+                    &= y_{k + 2}y_{k + 1} + y_{k + 1} ^ 2 - y_{k + 2} ^ 2 \\
+                    &= y_{k + 2}y_{k + 1} + (y_{k + 1} - y_{k + 2})(y_{k + 1} + y_{k + 2}) \\
+                    &= y_{k + 2}y_{k + 1} + (-y_k)(y_{k + 1} + y_{k + 2}) \\
+                    &= y_{k + 2}y_{k + 1} - y_ky_{k + 1} + y_ky_{k + 2} \\
+                    &= y_{k + 1}(y_{k + 2} - y_k) + y_ky_{k + 2} \\
+                    &= y_{k + 1}y_{k + 1} - y_ky_{k + 2} \\
+                    &= -1(y_ky_{k + 2} - y_{k + 1}^2) \\
+                    &= -1(-1)^{k + 1} \\
+                    &= (-1)^{k + 2}
+                \end{align*}
+                We have shown true for $n = 1$ then assumed true for $n = k$, using this we have then proven this true for $n = k + 1$ for all $n \in \N$.
+        \end{enumerate}
+    \end{proof}
+\end{example}
+
+\begin{example}
+    Let $0 < b \leq a$ and define a sequence $(x_n)_{n \in \N}$ by
+    \[
+    x_1 = a,\qquad x_2 = b,
+    \]
+    and for $n \geq 1$ let
+    \begin{align*}
+        x_{2n + 1} &= \frac{x_{2n} + x_{2n - 1}}{2}, \\
+        x_{2n + 2} &= \sqrt{x_{2n + 1}x_{2n}}.
+    \end{align*}
+    For $n \geq 1$ let $A(n)$ be the statement that
+    \[
+    x_{2n} \leq x_m \leq x_{2n + 1}\quad\text{for all } m \geq 2n.
+    \]
+    \begin{enumerate}[label = \alph*.]
+        \item Show that $A(n)$ is true for all $n \in \N$.
+        \item Show that $(x_n)_{n \in \N}$ is a Cauchy sequence.
+    \end{enumerate}
+\end{example}
+
+\newpage
+
+\section{Series}
+
+\subsection{Fundamental notions and properties of series}
+
+\begin{example}
+    Let $(x_n){n \in \N}$ be a sequence. Show that the series
+    $(x_1 - x_2) + (x_2 - x_3) + (x_3 - x_4) + \cdots$ converges if and only if the sequence $(x_n){n \in \N}$ converges.
+    \begin{proof}
+        Assume that the series $(x_1 - x_2) + (x_2 - x_3) + (x_3 - x_4) + \cdots$ converges. Let $\seq{s}$ be the sequence of partial sums,
+        \[
+        s_n = \sum_{i = 1}^{n}(x_i - x_{i + 1}).
+        \]
+        Then we can see that $x_n = x_1 - s_{n - 1}$. Since $s$ converges so does $s_{n - 1}$, this implies that $\limas{x_n = x_1 - s_{n - 1}}{x_1 - s}$ which means that $x_n$ converges (by COLT). \\
+
+        Next, assume that $\seq{x}$ converges. Using the partial sums we can get $s_n = x_1 - x_{n + 1}$. $\limas{x_n}{l}$ implies that $\limas{x_{n + 1}}{l}$ which means that $\limas{s_n = x_1 - x_{n + 1}}{x_1 - l}$, hence $\seq{x}$ converges (by COLT).
+    \end{proof}
+\end{example}
+
+\begin{example}
+    Let $q \in (-1, 1)$ and $N \in \N$. Find a formula for
+    \[
+    \infsum[k = N]{q ^ k}.
+    \]
+    \begin{proof}
+        Using the general geometric series formula
+        \[
+        \infsum[k = N] q ^ k = q ^ N \infsum[k = 0] q ^ k = \frac{q ^ N}{1 - q}.
+        \]
+    \end{proof}
+\end{example}
+
+\begin{example}
+    Calculate the limit of the following series.
+    \begin{enumerate}[label = \alph*.]
+        \item $\displaystyle \infsum[k = 0] \left(\frac{1}{2 ^ k} + \frac{(-1) ^ k}{3 ^ k}\right).$
+        \item $\displaystyle \infsum[k = 1] \frac{1}{k(k + 2)}.$
+        \item $\displaystyle \infsum[k = 1] \frac{1}{k(k + 1)(k + 2)}.$
+        \item $\displaystyle \infsum[k = 1] \frac{4k + 1}{(2k - 1)(2k)(2k + 1)(2k + 2)}.$
+    \end{enumerate}
+    \begin{proof}
+        \begin{enumerate}[label = \alph*.]
+        \item 
+        Using the geometric series sum to infinity and COLT we can obtain 
+        \[
+        \infsum[k = 0] \left(\frac{1}{2 ^ k} + \frac{(-1) ^ k}{3 ^ k}\right) = \frac{1}{1 - \frac{1}{2}} + \frac{1}{1 -- \frac{1}{3}} = \frac{11}{4}.
+        \]
+        \item
+        In order to simplify our expression we will write the sum as a sum of partial fractions,
+        \[
+        \sum_{k = 1}^{n} \frac{1}{k(k + 2)} = \frac{1}{2}\sum_{k = 1}^{n} \left(\frac{1}{k} - \frac{1}{k + 2}\right).
+        \]
+        Now we can determine a formula for this sum
+        \[
+        \frac{1}{2}\sum_{k = 1}^{n} \left(\frac{1}{k} - \frac{1}{k + 2}\right) = \frac{3}{4} - \frac{1}{2}\left(\frac{1}{n + 1} + \frac{1}{n + 2}\right).
+        \]
+        Finally, we can see that using some standard limits and COLT that
+        \[
+        \sum_{k = 1}^{n} \frac{1}{k(k + 2)} = \frac{3}{4}.
+        \]
+    \end{enumerate}
+    \end{proof}
+\end{example}
+
+\begin{example}
+    Show that the series
+    \[
+    \sum_{n = 2}^{\infty}\frac{1}{n\log n}
+    \]
+    is divergent, using an argument similar to the one that was used for the harmonic series.
+\end{example}
+
+\begin{example}
+    Let $\seq[a]{n}$ be a monotonically increasing bounded sequence of positive real numbers. Show that the series
+    \[
+    \sum_{n = 1}^{\infty}\left(\frac{a_{n + 1}}{a_n} - 1\right)
+    \]
+    is convergent.
+\end{example}
+
+\subsection{Convergence criteria}
+
+\begin{example}
+    Decide which of the following series is convergent or not.
+    \begin{enumerate}[label = \alph*.]
+        \item $\displaystyle \sum_{k = 1}^{\infty}\frac{k}{\sqrt{1 + k ^ 6}}.$
+        \item $\displaystyle \sum_{k = 1}^{\infty}\frac{1}{k + \sqrt{k}}.$
+        \item $\displaystyle \sum_{k = 1}^{\infty}\frac{(-1) ^ k}{\log{(k ^ 2 + 1)}}.$
+        \item $\displaystyle \sum_{k = 1}^{\infty}\frac{(\log k) ^ 4}{k ^ 2}.$
+        \item $\displaystyle \sum_{k = 1}^{\infty}(-1)^{k + 1}\frac{k - 1}{\sqrt[3]{8k ^ 3 + k ^ 2 + 12}}.$
+        \item $\displaystyle \sum_{k = 1}^{\infty}\left(\sqrt{1 + k ^ 2} - k\right).$
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    Show that the series
+    \[
+    \sum_{k = 1}^{\infty} (-1)^{k + 1} \left|\frac{1}{k} + \frac{(-1) ^ {k + 1}}{\sqrt{k}}\right|
+    \]
+    is divergent.
+\end{example}
+
+\begin{example}
+    Decide whether the following series converges.
+    \[
+    \sum_{n = 2}^{\infty} \frac{(-1)^{n + 1}}{n + (-1) ^ n}.
+    \]
+    is divergent.
+\end{example}
+
+\subsection{Absolute Convergence}
+
+\begin{example}
+    Assume that $\infsum x_n$ converges, and $\infsum y_n$ converges absolutely. Show that $\infsum x_ny_n$ converges absolutely. If we knew only that $\infsum x_n$ and $\infsum y_n$ converge, would it follow that $\infsum x_ny_n$ converged as well?
+\end{example}
+
+\begin{example}
+    Determine whether or not the following series converge.
+    \begin{enumerate}[label = \alph*.]
+        \item $\displaystyle \infsum[k = 0]\frac{(2k)!}{5 ^ k (k!) ^ 2}.$
+        \item $\displaystyle \infsum[k = 0]\frac{2 ^ k (2k)!}{9 ^ k (k!) ^ 2}.$
+        \item $\displaystyle \infsum[k = 0]\frac{k - 1}{(k ^ 2 + 2)\sqrt[4]{(k ^ 2 + 1)}}.$
+        \item $\displaystyle \infsum[k = 0]\frac{(k!) ^ 2}{(2k)!}.$
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    Determine for which values of $\alpha \in \R$ the following series converge.
+    \begin{enumerate}[label = \alph*.]
+        \item $\displaystyle \infsum\alpha ^ n n ^ \alpha.$
+        \item $\displaystyle \infsum\frac{\alpha ^ {n - 1}}{n 3 ^ n}.$
+        \item $\displaystyle \infsum[n = 0] n! \alpha ^ n.$
+        \item $\displaystyle \infsum\frac{n \alpha ^ n}{2 ^ n (3n - 1)}.$
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    Test the following series for convergence.
+    \[
+    \infsum \left(n ^ 4\left(\frac{2n}{3n ^ 3 - 2n ^ 2 + 5}\right) ^ 2\right) ^ n.
+    \]
+\end{example}
+
+\begin{example}
+    Test the following series for convergence.
+    \[
+    \infsum \frac{(3n - 1)! - 4 ^ {n + 1}}{(3n)!}.
+    \]
+\end{example}
+
+\subsection{Rearrangements of series}
+
+\begin{example}
+    Consider the series
+    \[
+    \infsum (-1)^{n + 1} \frac{1}{\sqrt{n}}
+    \]
+    \begin{enumerate}[label = \alph*.]
+        \item Show that this series is conditionally convergent.
+        \item Consider the rearrangement given by
+        \[
+        1 + \frac{1}{\sqrt{3}} - \frac{1}{\sqrt{2}} + \frac{1}{\sqrt{5}} + \frac{1}{\sqrt{7}} - \frac{1}{\sqrt{4}} + \frac{1}{\sqrt{9}} + \frac{1}{\sqrt{11}} - \frac{1}{\sqrt{6}} + \dotsc
+        \]
+        Decide whether this converges or not.
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    For $n \in \N_0$ let $a_n = \frac{1}{2 ^ n} = b_n$.
+    \begin{enumerate}[label = \alph*.]
+        \item Work out a simple formula for
+        \[
+        c_n = \sum_{k = 0}^n a_k b_{n - k}.
+        \]
+        \item Show that
+        \[
+        \infsum \frac{n(n + 1)}{2 ^ n} = 8.
+        \]
+        \item Show that
+        \[
+        \infsum \frac{n(n + 1)(n + 2)}{2 ^ n} = 48.
+        \]
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    Show that the Cauchy product is not necessarily convergent if both series $\infsum[k = 0] a_k$ and $\infsum[k = 0] b_k$ are only conditionally convergent by discussing the choice
+    \[
+    a_k = b_k = \frac{(-1) ^ k}{\sqrt{k + 1}}.
+    \]
 \end{example}
 
 

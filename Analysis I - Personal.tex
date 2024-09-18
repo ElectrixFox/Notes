@@ -1101,8 +1101,28 @@ When the sequence given is easy to prove convergence through manipulation
     Given any $\epsilon > 0$ we have found a value of $N$ (optional, can quote the expression here) such that, for any $n > N$, $|a_n - l| < \epsilon$. Hence $\limas{a_n}{l}$
     \end{proof}
 \end{theorem}
-\phantom{}
-\\
+
+In order to prove that something is convergent you can use the sandwich theorem in order to show that sequences converge (especially alternating sequences). For example
+\begin{example}
+    Calculate $\lim_{n \rightarrow \infty} x_n$ (or show that no limit exists) for 
+    \[
+    x_n = \frac{(-1) ^ n}{\sqrt{n ^ 2 + n}}.
+    \]
+    \begin{proof}
+        For this we can apply the sandwich theorem and previous observations. \\
+        Since 
+        \[
+        \limas{\frac{1}{\sqrt{n}}}{0}
+        \]
+        and
+        \[
+        \left|\frac{(-1) ^ n}{\sqrt{n ^ 2 + n}}\right| \leq \frac{1}{\sqrt{n}}
+        \]
+        then by the sandwich theorem we can state that $x_n$ converges to $0$.
+    \end{proof}
+\end{example}
+
+\subsection{Cauchy Sequences}
 Proving that a sequence converges can also be done by showing that it is a Cauchy sequence then implying the theorem (\autoref{thm_seq_cauchconverge}) which states that every Cauchy sequence converges. \\
 \begin{theorem}
     Prove that $\seq$ is a Cauchy sequence, given that $x_n = f(n)$.
@@ -1125,6 +1145,13 @@ Proving that a sequence converges can also be done by showing that it is a Cauch
         Thus $\seq$ is a Cauchy sequence.
     \end{proof}
 \end{theorem}
+
+\subsection{Series}
+When trying to show that a series converges there are multiple methods which we can use. Showing that the series is bounded above shows that the series converges, if we can determine an expression for the sequence of partial sums in terms of $n$ this allows us to simply take the limit of the expression for the partial sums and then this will be the limit of the sequence (if the series converges).
+
+
+
+\newpage
 
 \subsubsection{Tips}
 When looking at finding an $N$ always entertain the possibility that it can use functions such as $\max$, for example when trying to find an $N$ which satisfies two inequalities you can use $N = \max{\{N_1, N_2\}}$. \\
