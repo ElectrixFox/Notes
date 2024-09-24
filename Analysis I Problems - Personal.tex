@@ -393,10 +393,35 @@ The problems in this sheet are from the course given by Dirk Schuetz.
         diverges by the comparison test.
 
         \item
-
+        \[
+        \infsum[k = 1]\frac{(-1) ^ k}{\log{(k ^ 2 + 1)}} = \infsum[k = 1](-1) ^ k \cdot \frac{1}{\log{(k ^ 2 + 1)}}.
+        \]
+        Since $\limas[k]{\dfrac{1}{\log(k ^ 2 + 1)}}{0}$ by the alternating sign test
         \[
         \infsum[k = 1]\frac{(-1) ^ k}{\log{(k ^ 2 + 1)}}
         \]
+        converges.
+
+        \item
+        We have the following inequality
+        \[
+        \frac{\log k}{\sqrt[8]{k}} \leq 1
+        \]
+        which can be changed to show this
+        \[
+        (\log k) ^ 4 \leq \sqrt{k}.
+        \]
+        Using this inequality we can see that
+        \[
+        \frac{(\log k) ^ 4}{k ^ 2} \leq \frac{\sqrt{k}}{k ^ 2} = \frac{1}{k ^ {\frac{3}{2}}}.
+        \]
+        Hence by the comparison test we can see that
+        \[
+        \infsum[k = 1]\frac{(\log k) ^ 4}{k ^ 2}
+        \]
+        converges.
+        
+        
     \end{enumerate}
     \end{proof}
 \end{example}
