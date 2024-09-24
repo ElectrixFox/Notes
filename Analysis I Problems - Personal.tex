@@ -169,6 +169,36 @@ The problems in this sheet are from the course given by Dirk Schuetz.
         \item Let $x = \lim_{n \rightarrow \infty} x_n$ with the sequence as in (a). Show that $f(x) = x$.
         \item Show that there is exactly one $a \in \R$ with $f(a) = a$.
     \end{enumerate}
+
+    \begin{proof}
+    \begin{enumerate}[label = \alph*.]
+        \item 
+        To start observe that we can have the following inequality for the function
+        \begin{align*}
+            |x_{n + 1} - x_n| &= |f(x_{n}) - f(x_{n - 1})| \\
+            &\leq \frac{1}{2}|x_{n} - x_{n - 1}| \\
+            &= \frac{1}{2}|f(x_{n - 1}) - f(x_{n - 2})| \\
+            &\leq \frac{1}{4}|x_{n - 1} - x_{n - 2}| \\
+            \vdots \\
+            &\leq \frac{1}{2 ^ {n - 1}}|x_2 - x_1|.
+        \end{align*}
+        Now we have an inequality we can then say that for all $n, m$ where $m > n$ the following is true,
+        \begin{align*}
+            |x_m - x_n| &= |(x_m - x_{m - 1}) + (x_{m - 1} - x_{m - 2}) + \cdots + (x_{n - 1} - x_{n})| \\
+            &\leq |x_m - x_{m - 1}| + |x_{m - 1} - x_{m - 2}| + \cdots + |x_{n - 1} - x_{n}| \\
+            &\leq |x_2 - x_1|\frac{1}{2 ^ {m - 1}} + |x_2 - x_1|\frac{1}{2 ^ {m - 2}} + \cdots + |x_2 - x_1|\frac{1}{2 ^ {n - 1}} \\
+            &= |x_2 - x_1|\frac{1}{2 ^ {n - 1}}\left(1 + \frac{1}{2} + \frac{1}{4} + \cdots + \frac{1}{2 ^ {m - n - 2}}\right) \\
+            &= |x_2 - x_1|\frac{1}{2 ^ {n - 1}}\left(\frac{1 - \left(\frac{1}{2}\right) ^ {m - n - 2}}{1 - \frac{1}{2}}\right) \\
+            &< |x_2 - x_1|\frac{1}{2 ^ {n - 1}} \cdot \frac{1}{1 - \frac{1}{2}} \\
+            &= |x_2 - x_1|\frac{1}{2 ^ {n - 2}}.
+        \end{align*}
+        Let $\epsilon > 0$ be given. Therefore we can say that we can find an $N \in \N$ such that $\frac{|x_2 - x_1|}{2 ^ {N - 2}} < \epsilon$ for any $n, m \geq N$,
+        \[
+        |x_m - x_n| < \epsilon
+        \]
+        hence, $x_n$ is a Cauchy sequence.
+    \end{enumerate}
+    \end{proof}
 \end{example}
 
 \begin{example}
