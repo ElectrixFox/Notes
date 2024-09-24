@@ -370,6 +370,35 @@ The problems in this sheet are from the course given by Dirk Schuetz.
         \item $\displaystyle \sum_{k = 1}^{\infty}(-1)^{k + 1}\frac{k - 1}{\sqrt[3]{8k ^ 3 + k ^ 2 + 12}}.$
         \item $\displaystyle \sum_{k = 1}^{\infty}\left(\sqrt{1 + k ^ 2} - k\right).$
     \end{enumerate}
+    \begin{proof}
+    \begin{enumerate}[label = \alph*.]
+        \item \phantom{}
+        \[
+        \left|\frac{k}{\sqrt{1 + k ^ 6}}\right| \leq \frac{1}{k ^ 2}. 
+        \]
+        Hence,
+        \[
+        \infsum[k = 1]\frac{k}{\sqrt{1 + k ^ 6}}
+        \]
+        converges by the comparison test.
+
+        \item
+        \[
+        \frac{1}{2k} \leq \frac{1}{k + \sqrt{k}}. 
+        \]
+        Hence,
+        \[
+        \infsum[k = 1]\frac{1}{k + \sqrt{k}}
+        \]
+        diverges by the comparison test.
+
+        \item
+
+        \[
+        \infsum[k = 1]\frac{(-1) ^ k}{\log{(k ^ 2 + 1)}}
+        \]
+    \end{enumerate}
+    \end{proof}
 \end{example}
 
 \begin{example}
