@@ -1,0 +1,167 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\newcommand{\mbf}[1]{\mathbf{#1}}
+
+\title{Linear Algebra I \\
+    \large Prereading}
+\author{Luke Phillips}
+\date{October 2024}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{The vector space \(\R ^ n\)}
+\begin{definition}[$n$-dimensional real space]
+    The space $\R ^ n$ ($n$-dimensional real space) is the collection of all (column) vectors of the form
+    \[
+    \mathbf{x} =
+    \begin{pmatrix}
+        x_1 \\
+        \vdots \\
+        x_n
+    \end{pmatrix}.
+    \]
+\end{definition}
+Vectors are typically denoted by bold letters such as $\mathbf{x}$ and sometimes using underlined letters $\underline{x}$ to differentiate them from ordinary real numbers.
+
+We write $\mathbf{0}$ for the zero-vector
+\[
+\mathbf{0} = \begin{pmatrix}
+    0 \\
+    \vdots \\
+    0
+\end{pmatrix}
+\]
+this is the point of origin of $\R ^ n$.
+
+There are two important operations which can be performed on vectors.
+
+\textbf{Addition}: for any vectors $\mathbf{v}$ and $\mathbf{w}$, we define
+\[
+\mathbf{v + w} =
+\begin{pmatrix}
+    v_1 \\
+    \vdots \\
+    v_n
+\end{pmatrix}
++
+\begin{pmatrix}
+    w_1 \\
+    \vdots \\
+    w_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+    v_1 + w_1 \\
+    \vdots \\
+    v_n + w_n
+\end{pmatrix}
+\]
+this is component-wise addition.
+
+
+\textbf{Scalar multiplication}: for any vector $\mathbf{v} \in \R ^ n$ and real number $\lambda \in \R$ we define
+\[
+\lambda\mathbf{v} =
+\lambda\begin{pmatrix}
+    v_1 \\
+    \vdots \\
+    v_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+    \lambda v_1 \\
+    \vdots \\
+    \lambda v_n
+\end{pmatrix}
+\]
+this is component-wise multiplication by $\lambda$.
+
+\begin{proposition}
+    These operations satisfy the axioms of a real vector space
+\end{proposition}
+
+{\large \textbf{Axioms for Addition}}
+\begin{enumerate}[label = (\roman*)]
+    \item existence of additive identity: there is a vector $\mathbf{0}$ in $\R ^ n$ so that $\mathbf{v} + \mathbf{0} = \mathbf{v} = \mathbf{0} + \mathbf{v}$ for all $\mathbf{v}$ in $\R ^ n$.
+    \item commutativity: $\mbf{v + w = w + v}$ for all $\mathbf{v}$ and $\mathbf{w}$ in $\R ^ n$
+    \item existence of additive inverses: for each $\mbf{v}$ in $\R ^ n$ there is an element $-\mbf{v}$ in $\R ^ n$ such that $\mbf{v + (-v) = 0 = (-v) + v}$
+    \item associativity: $\mbf{u + (v + w) = (u + v) + w}$ for all $\mbf{u, v, w}$ in $\R ^ n$
+\end{enumerate}
+these axioms can be summarised by saying that $\R ^ n$ is an abelian group under addition.
+
+
+{\large\textbf{Axioms for Scalar Multiplication}}
+\begin{enumerate}[label = (\roman*)]
+    \item multiplication by 0: $0\mbf{v = 0}$ for all $\mbf{v}$ in $\R ^ n$
+    \item multiplication by 1: $1\mbf{v = v}$ for all $\mbf{v}$ in $\R ^ n$
+    \item associativity: $(\lambda\mu)\mbf{v} = \lambda (\mu\mbf{v})\ \forall \lambda, \mu \in \R$ and $\forall \mbf{v} \in \R ^ n$
+    \item distributivity: $(\lambda + \mu)\mbf{v} = \lambda\mbf{v} + \mu\mbf{v}$ and $\lambda (\mbf{v + w}) = \lambda\mbf{v} + \lambda\mbf{w}$ $\forall \lambda, \mu \in \R$ and $\forall \mbf{v, w} \in \R ^ n$
+\end{enumerate}
+
+\begin{proof}
+    The above axioms ate trivially satisfied by $\R$ (the case $n = 1$), many of the proofs follow from this observation. Once we set
+    \[
+    \mbf{0} = \begin{pmatrix}
+        0 \\
+        \vdots \\
+        0
+    \end{pmatrix},
+    \qquad
+    -\mbf{v} = -\begin{pmatrix}
+        v_1 \\
+        \vdots \\
+        v_n
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        -v_1 \\
+        \vdots \\
+        -v_n
+    \end{pmatrix}
+    =
+    (-1)\begin{pmatrix}
+        v_1 \\
+        \vdots \\
+        v_n
+    \end{pmatrix}
+    \]
+    then the proofs are very straight forward
+\end{proof}
+
+\begin{definition}[Standard basis vectors]
+    We set
+    \[
+    \mbf{e_1} = \begin{pmatrix}
+        1 \\
+        0 \\
+        \vdots \\
+        0
+    \end{pmatrix},
+    \ 
+    \mbf{e_2} = \begin{pmatrix}
+        0 \\
+        1 \\
+        \vdots \\
+        0
+    \end{pmatrix},
+    \dotsc,\ 
+    \mbf{e_n} = \begin{pmatrix}
+        0 \\
+        0 \\
+        \vdots \\
+        1
+    \end{pmatrix}
+    \]
+    and call these vectors the standard basis vectors of $\R ^ n$.
+\end{definition}
+
+\end{document}
