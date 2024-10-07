@@ -1,0 +1,185 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\newcommand{\mbf}[1]{\mathbf{#1}}
+
+\title{Linear Algebra I}
+\author{Luke Phillips}
+\date{October 2024}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\section{Vectors and vector spaces}
+
+\subsection{Vector space $\R ^ n$}
+
+\begin{definition}
+    $n$-dimensional real space $\R ^ n$ a set of elements as such\[
+    \R ^ n = \left\{\underline{x} = \begin{pmatrix}
+        x_1 \\
+        x_2 \\
+        \vdots \\
+        x_n
+    \end{pmatrix}
+    \quad:\ x_i \in \R
+    \right\}\footnote{Vectors are $\underline{x}$ or $\mbf{x}$.}\]
+\end{definition}
+
+\begin{definition}
+    The zero vector is defined as
+    \[
+    \mbf{0} = \begin{pmatrix}
+        0 \\
+        0 \\
+        \vdots \\
+        0
+    \end{pmatrix}
+    \in \R ^ n
+    \]
+\end{definition}
+
+There are two operations on $\R ^ n$
+
+\textbf{Vector addition}:
+
+Vector addition is a function defined as such
+\[
+\R ^ n \times \R ^ n \mapsto \R ^ n
+\]
+This function takes two vectors $\mbf{v, w}$ and obtains
+\[
+(\mbf{v, w})\mapsto \mbf{v + w}
+\]
+For example
+\[
+\mbf{v + w} = \begin{pmatrix}
+    v_1 \\
+    v_2 \\
+    \vdots \\
+    v_n
+\end{pmatrix} + \begin{pmatrix}
+    w_1 \\
+    w_2 \\
+    \vdots \\
+    w_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+    v_1 + w_1 \\
+    v_2 + w_2 \\
+    \vdots \\
+    v_n + w_n
+\end{pmatrix}
+=
+\mbf{v + w}
+\]
+
+\textbf{Scalar multiplication}:
+
+Scalar multiplication is defined as a function
+\[
+\R \times \R ^ n \mapsto \R ^ n.
+\]
+This is written as follows
+\[
+(\lambda, \mbf{v}) \mapsto \lambda\mbf{v}
+\]
+The operation is defined as such
+\[
+\lambda\mbf{v} = \lambda\begin{pmatrix}
+    v_1 \\
+    v_2 \\
+    \vdots \\
+    v_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+    \lambda v_1 \\
+    \lambda v_2 \\
+    \vdots \\
+    \lambda v_n
+\end{pmatrix}
+\]
+
+\textbf{Intuition}
+
+Vectors can be thought of a point in $n$-dimensional space
+
+\textbf{Gr1}
+
+As a direction to a point
+
+\textbf{Gr2}
+
+As up to translation
+
+\textbf{Gr3}
+
+
+Vector addition
+
+\textbf{Gr4}
+
+Scalar multiplication
+
+\textbf{Gr5}
+
+
+These operations satisfy the \textbf{axioms} of a real vector space.
+\begin{enumerate}[label = (\roman*)]
+    \item There exists an additive identity $\mbf{0} \in \R ^ n$ such that
+    \[
+    \mbf{0 + v = v + 0 = v} \ \forall \mbf{v} \in \R ^ n.
+    \]
+    \item Commutativity
+    \[
+    \forall\mbf{w, v} \in \R ^ n\quad\mbf{w + v =  v + w}
+    \]
+    \item Existence of additive inverses
+    \[
+    \forall\mbf{v} \in \R ^ n\ \exists\mbf{-v} \in \R ^ n \text{ s.t. } \mbf{v + (-v) = (-v) + v = 0}
+    \]
+    \item Associativity
+    $\forall\mbf{u, v, w} \in \R ^ n$
+    \[
+    (\mbf{u + v}) + \mbf{w} = \mbf{u} + (\mbf{v + w})
+    \]
+\end{enumerate}
+(i), (iii), (iv) $\iff (\R ^ n, +)$ is a group
+
+(i), (ii), (iii), (iv) $\iff (\R ^ n, +)$ is an abelian group \\
+
+
+\textbf{Axioms} for scalar multiplication
+\begin{enumerate}[label = (\roman*)]
+    \item $0\mbf{v} = \mbf{0}\quad\forall\mbf{v}\in \R ^ n$.
+    \item $1\mbf{v} = \mbf{v}\quad\forall\mbf{v}\in \R ^ n$.
+    \item Associativity
+    \[
+    \lambda (\mu\mbf{v}) = (\lambda\mu)\mbf{v}\quad\forall\lambda,\mu \in \R\quad\forall\mbf{v}\in\R ^ n
+    \]
+    \item Distributivity, $\forall\lambda,\mu\in\R\quad\forall\mbf{v, w} \in \R ^ n$
+    \begin{align*}
+    (\lambda + \mu)\mbf{v} &= \lambda\mbf{v} + \mu\mbf{v} \\
+    \lambda(\mbf{v + w}) &= \lambda\mbf{v} + \lambda\mbf{w}
+    \end{align*}
+\end{enumerate}
+
+$\R ^ n$ clearly satisfies these axioms (if not obvious check) because they can be checked component-wise once we set 
+\[
+-\mbf{v} = \begin{pmatrix}
+    -v_1 \\
+    -v_2 \\
+    \vdots \\
+    -v_n
+\end{pmatrix}
+\]
+
+
+
+
+\end{document}

@@ -1,0 +1,85 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\title{Discrete Mathematics \\
+    \large Prereading}
+\author{Luke Phillips}
+\date{October 2024}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\section{Introduction}
+
+\subsection{Set notation}
+\textbf{Basic notation}
+
+A set is defined by the elements that belong to the set.
+
+If an element $x$ belongs to a set $S$, we write $x \in S$.
+
+Finite or countably infinite sets are those which we can write as a (finite or infinite) list, such as
+\[
+S = \{e_1, e_2, \dots, e_n\},
+\]
+(a finite set, with elements labelled by finitely many integers) or
+\[
+S = \{e_1, e_2, e_3, \dots\},
+\]
+(representing a countably infinite set, with elements labelled by all positive integers).
+
+The order of elements in a set is unimportant.
+
+A set can be described using the following notation
+\[
+S = \{n: n \text{ is an integer}, 0\leq n \leq 9\}
+\]
+which means all $n$ such that the properties to the right of the '$:$' hold.
+
+\textbf{Examples of standard sets}
+\begin{itemize}
+    \item $\Z = \{\dots, -2, -1, 0, 1, 2, \dots\} = \{0, \pm1, \pm2, \dots\}$, the set of integers (whole numbers).
+    \item $\N = \{1, 2, \dots\} = \{n: n\in\Z, n>0\}$, the natural numbers (positive integers).
+    \item $\emptyset = \{\}$ is the empty set (the set with no elements).
+\end{itemize}
+
+\textbf{More notation}
+
+As mentioned before, $x \in S$ means element $x$ is a member of the set $S$. The negation is $x \notin S$.
+
+If $R$ and $S$ are sets, then $R \subseteq S$ means that $R$ is a subset of $S$, i.e., every element of $R$ is also an element of $S$. That is, for all $x;\ x \in R \implies x \in S$.
+
+Note that $R = S$ if and only if $R \subseteq S$ and $S \subseteq R$.
+
+$R \subset S$ is used to denote that $R$ is a strict subset of $S$, meaning $R \subseteq S$ and $R \neq S$.
+
+If $S$ is a finite set, its size or cardinality, denoted by $|S|$, is the number of elements that it contains.
+
+
+\textbf{Set operations}
+
+Given several sets $A$ and $B$, $A \cup B$ is the union of $A$ and $B$, which is the set consisting of those elements that are in $A$ or in $B$ (or both)
+
+$A \cap B$ is the intersection of sets $A$ and $B$, which is the set consisting of those elements that are in both $A$ and $B$.
+
+If two sets $A$ and $B$ do not intersect ($A \cap B = \emptyset$) we say that $A$ and $B$ are disjoint.
+
+A collection of sets can be indexed by numbers, e.g. $A_1, A_2, \dots, A_n$.
+
+Then we may use compact notation for multiple unions and intersections:
+\begin{align*}
+    \bigcup_{i = 1}^{n}{A_i} &= A_1 \cup A_2 \cup \dots \cup A_n \\
+    &= \{x: x \in A_i \text{ for at least one } i\};
+\end{align*}
+
+\begin{align*}
+    \bigcap_{i = 1}^{n}{A_i} &= A_1 \cap A_2 \cap \dots \cap A_n \\
+    &= \{x: x \in A_i \text{ for every } i\};
+\end{align*}
+
+
+
+\end{document}

@@ -1,0 +1,88 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\title{Analysis I}
+\author{Luke Phillips}
+\date{October 2024}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\section{Basic logic and sets}
+
+\subsection{Logic}
+\begin{definition}
+    A statement is a sentence which is either true or false.
+\end{definition}
+\begin{example}
+    \phantom{}
+    \begin{itemize}
+        \item There exist infinitely many prime numbers.
+        \item There exists a rational number $x$ with $x ^ 2 = 2$.
+    \end{itemize}
+\end{example}
+
+\begin{definition}
+    Let $A$ and $B$ be statements.
+    \begin{enumerate}[label = (\alph*)]
+        \item "$A$ and $B$" is the statement that is true when exactly both $A$ and $B$ are true, otherwise false.
+        \item "$A$ or $B$" is the statement which is false exactly when both $A$ and $B$ are false, otherwise true.
+        \item "Not $A$"\footnote{Called the negation.} is the statement which is true when $A$ is false, and false when $A$ is true.
+    \end{enumerate}
+
+    The truth tables are as follows
+    \textbf{Gr6}
+\end{definition}
+
+\begin{definition}
+    Let $A$ and $B$ be statements. The statement "if $A$ then $B$" is defined to be false when $A$ is true and $B$ is false, and true in all other cases.
+
+    The truth table for this is as follows
+    \textbf{Gr7}
+\end{definition}
+\begin{example}
+    If $p$ is a prime number, then $p$ is an odd number. (this is false)
+
+    If $p \geq 3$ is a prime number, then $p$ is an odd number. (this is true)
+\end{example}
+
+\begin{definition}
+    Let $A$ and $B$ be statements. The statement $A$ is equivalent to $B$ for the statement $A \implies B$ and $B \implies A$, or $A \iff B$.
+    
+    The truth table for this is as follows
+    \textbf{Gr8}
+\end{definition}
+
+Often statements depend on a variable $x$. This is called a conditional statement $A(x)$.
+
+We can turn a conditional statement $A(x)$ into an unconditional statement using the quantifiers "for all" and "there is"
+
+\begin{example}
+    \phantom{}
+    
+    $\forall x$, we have $A(x)$
+    
+    $\exists x$ such that $A(x)$
+\end{example}
+
+
+\subsection{Sets}
+A set $X$ is a collection of objects. We write $x \in X$ if the object $x$ is contained in the set $X$\footnote{$x \notin X$ for $x$ not in $X$}.
+
+\[
+X = \{x\,|\,A(x)\}
+\]
+is a set of all objects $x$ for which the conditional statement $A(x)$ is true.
+
+\begin{definition}
+    Let $X, Y$ be sets.
+    \begin{enumerate}[label = (\alph*)]
+        \item We say $X$ is a subset of $Y$, write $X \subset Y$, if $x \in X$ implies $x \in Y$
+        \item We say that $X$ is equal to $Y$, write $X = Y$, if $X \subset Y$ and $Y \subset X$.
+    \end{enumerate}
+\end{definition}
+
+\end{document}

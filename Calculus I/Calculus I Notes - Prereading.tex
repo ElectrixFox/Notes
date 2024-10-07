@@ -1,0 +1,105 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\Ran}{Ran}
+
+\title{Calculus I \\
+    \large Prereading}
+\author{Luke Phillips}
+\date{October 2024}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+A function $f$ is a correspondence between two sets $D$ (called the domain) and $C$ (called the codomain), that assigns to each element of $D$ one and only one element of $C$. The notation to indicate the domain and codomain is $f : D \mapsto C$.
+
+For $x \in D$ we write $f(x)$ to denote the assigned element in $C$, this value of $f$ at $x$, or the image of $x$ under $f$, where $x$ is called the argument of the function.
+
+The set of all images is called the range of $f$ and our notation for the domain and range is
+\[
+\Dom f\qquad\text{and}\qquad\Ran f = \{f(x): x \in \Dom f\}.
+\]
+
+If the domain of a function $f$ is not explicitly given, then it is taken to be the maximal set of real numbers $x$ for which $f(x)$ is a real number.
+
+E.g. $f(x) = \sqrt{2x + 4}$. Here $\Dom f = [-2, \infty)$ and $\Ran f = [0, \infty)$.
+
+The element $x$ in the domain is called the independent variable and the element $y$ in the range is called the dependent variable.
+
+The graph of a function $f$ is the set of all points $(x, y)$ in the $xy$-plane with $x \in \Dom f$ and $y = f(x)$, ie.
+\[
+\mathrm{graph} f = \{(x, y) : x \in \Dom f \text{ and } y = f(x)\}.
+\]
+
+The vertical line test
+
+If any vertical line intersects the curve more than once then the curve is not the graph of a function, otherwise it is. \\
+
+
+\textbf{Even and odd functions}
+
+A function $f$ is even if $f(x) = f(-x)\,\forall\pm x\in\Dom f$.
+
+A function $f$ is odd if $f(x) = -f(-x)\,\forall\pm x\in\Dom f$.
+
+\textbf{Piecewise functions}
+
+Some functions are defined piecewise, different expressions are given for different intervals in the domain.
+
+A \textbf{step function} is a piecewise function which is constant on each piece. An example is the Heaviside step function $H(x)$ defined by
+\[
+H(x) = \begin{cases}
+    0\quad\text{if } x < 0 \\
+    1\quad\text{if } x > 0
+\end{cases}
+\]
+Note that with this definition $\Dom H = \R \setminus \{0\}$. It is sometimes convenient to extend the domain to $\R$ by defining the value of $H(0)$.
+
+\subsection{Operations with functions}
+Given two functions $f$ and $g$ we can define the following:
+
+\begin{itemize}
+    \item the sum is $(f + g)(x) = f(x) + g(x)$, with domain $\Dom f \cap \Dom g$.
+    \item the difference is $(f - g)(x) = f(x) - g(x)$, with domain $\Dom f \cap \Dom g$.
+    \item the product is $(fg)(x) = f(x)g(x)$, with domain $\Dom f \cap \Dom g$.
+    \item the ratio is $(\frac{f}{g})(x) = \frac{f(x)}{g(x)}$, with domain $(\Dom f \cap \Dom g) \setminus \{x: g(x) = 0\}$.
+    \item the composition is $(f \circ g)(x) = f(g(x))$, with domain $\{x \in \Dom g : g(x) \in \Dom f\}$.
+\end{itemize}
+
+\subsection{Inverse functions}
+\begin{definition}
+    A function $f: D \mapsto C$ is surjective (or onto) if $\Ran f = C$,
+    \[
+    \text{if} \forall y \in C \exists x \in D \text{ s.t. } f(x) = y.
+    \]
+\end{definition}
+
+\begin{definition}
+    A function $f: D \mapsto C$ is injective (or one-to-one) if $\forall x_1, x_2 \in D$ with $x_1 \neq x_2$ then $f(x_1) \neq f(x_2)$.
+\end{definition}
+
+\textbf{The horizontal line test}
+
+If no horizontal line intersects the graph of $f$ more than once then $f$ is injective, otherwise it is not.
+
+\begin{definition}
+    A function $f : D \mapsto C$ is bijective if it is both surjective and injective.
+\end{definition}
+
+\subsection{Theorem of inverse functions}
+A bijective function $f$ admits a unique inverse, denoted $f ^ {-1}$, such that
+\[
+(f ^ {-1} \circ f)(x) = x = (f \circ f ^ {-1})(x).
+\]
+It is clear from the definition that $\Dom f^{-1} = \Ran f$ and $\Ran f^{-1} = \Dom f$.
+
+As the inverse undoes the effect of the function an equivalent definition is
+\[
+f(x) = y\quad\text{iff}\quad f^{-1}(y) = x.
+\]
+
+\end{document}

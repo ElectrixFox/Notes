@@ -1,0 +1,92 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\newcommand{\mbf}[1]{\mathbf{#1}}
+
+\title{Probability I}
+\author{Luke Phillips}
+\date{October 2024}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\section{Introduction}
+
+Probability is based on axioms
+
+
+Events are based on sets
+
+\begin{definition}
+    A set $S$ is a\footnote{Unordered} collection of elements or objects.    
+\end{definition}
+\begin{example}
+    Let $S$ be the set of all even integers from $1$ to $9$.
+    \[
+    S =  \{2, 4, 6, 8\} = \{4, 6, 2, 8\}.
+    \]
+\end{example}
+
+$\Z$ is the set of all integers.
+
+$\N$ is the set of all natural numbers.\footnote{Positive integers}
+
+$\N$ can also be defined as follows
+\[
+\N = \{x \in \Z^+: x > 0\}.
+\]
+
+$\varnothing$ denotes the empty set.
+
+\begin{definition}
+    Let $A, B$ be sets. $A \subseteq B \iff x \in A \implies x \in B$.
+
+    A strict subset $A \subset B$ means that there is an $x \in B$ such that $x \notin A$ 
+\end{definition}
+
+\begin{definition}
+    Let $A, B$ be sets. $A = B \iff A\subseteq B \And B \subseteq A$
+\end{definition}
+
+\subsection{Basic set operations}
+
+\begin{definition}
+    Let $A, B$ be sets. The union of $A, B$ is denoted by $A \cup B$. The union of two sets is the set of elements in $A$ or $B$ or both.
+    \[
+    A \cup B = \{x: x \in A \text{ or } x \in B \text{ or } x \in A\And B\}.
+    \]
+\end{definition}
+
+\begin{definition}
+    Let $A, B$ be sets. The intersection of $A, B$ is denoted by $A \cap B$. The intersection of two sets is the collection of elements that are in both $A$ and $B$.
+    \[
+    A \cap B = \{x: x \in A \And x \in B\}.
+    \]
+\end{definition}
+
+\begin{definition}
+    Let $A$ be a set. The complement of a set $A$ is denoted by $A ^ c$. A complement is the collection of elements not in $A$.
+    \[
+    A ^ c = \{x: x \notin A\}.
+    \]
+\end{definition}
+
+\begin{example}
+    Let $S :=$ collection of integers from $1$ to $9$ 
+    $S = \{x \in \N: 1 \leq x \leq 9\}$
+    
+    Let $A :=$ collection of even integers from $1$ to $9$ 
+    $A = \{x \in \N, x \text{ is even}: 1 \leq x \leq 9\}$
+
+    $A \subseteq S\quad A \subseteq \N\quad S\subseteq\N$
+
+    Let $B :=$ collection of odd integers from $1$ to $9$ 
+    $B = \{x \in \N, x \text{ is odd}: 1 \leq x \leq 9\}$
+
+    $A \cap B = \varnothing$,\qquad $A ^ c = \{x \in \N: 1\leq x \leq 9, x \notin A\}$
+\end{example}
+
+\end{document}

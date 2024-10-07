@@ -163,5 +163,178 @@ these axioms can be summarised by saying that $\R ^ n$ is an abelian group under
     \]
     and call these vectors the standard basis vectors of $\R ^ n$.
 \end{definition}
+Sometimes the entries of a vector are referred to as the Cartesian coordinates of a point in space.
+
+Addition can be thought of as an operation that inputs a pair of vectors, each from $\R ^ n$, and outputs a single vector in $\R ^ n$. In other words, addition is a function $\R ^ n \times \R ^ n \mapsto \R ^ n$. Similarly, scalar multiplication is a function $\R \times \R ^ n \mapsto \R ^ n$. The domains of each of these functions are called Cartesian products.
+
+\section{The scalar product in $\R ^ n$}
+
+\begin{definition}[Scalar product]
+    The scalar (or dot) product is a function
+    \[
+    \R ^ n \times \R ^ n \mapsto \R
+    \]
+    defined as follows. For $\mbf{v, w}$ in $\R ^ n$ set
+    \[
+    \mbf{v \cdot w} =
+    \begin{pmatrix}
+        v_1 \\
+        \vdots \\
+        v_n
+    \end{pmatrix}
+    \cdot
+    \begin{pmatrix}
+        w_1 \\
+        \vdots \\
+        w_n
+    \end{pmatrix}
+    =
+    v_1 w_1 + \cdots + v_n w_n.
+    \]
+    This is a real number, a scalar.
+\end{definition}
+
+The transpose $\mbf{v} ^ t$ of $\mbf{v}$ is defined to be the row vector with the same entries as the column vector $\mbf{v}$. So if
+\[
+\mbf{v} = \begin{pmatrix}
+    v_1 \\
+    \vdots \\
+    v_n
+\end{pmatrix}
+\qquad\text{then}
+\qquad\mbf{v} ^ t = (v_1,\ \dots,\ v_n).
+\]
+
+The dot product of $\mbf{v}$ and $\mbf{w}$ is then obtained by matrix multiplying $\mbf{v} ^ t$ and $\mbf{w}$.
+
+\begin{proposition}[Properties of the scalar product]
+\begin{enumerate}[label = (\roman*)]
+    \item Symmetry
+    \[
+    \mbf{u \cdot v = v \cdot u}\qquad\text{for all }\mbf{u, v}\text{ in } \R ^ n
+    \]
+    \item Linearity in first factor
+    \begin{enumerate}[label = (\alph*)]
+        \item $(\mbf{u} + \mbf{v}) \cdot \mbf{w} = \mbf{u} \cdot \mbf{w} + \mbf{v} \cdot \mbf{w}$\qquad for all $\mbf{u,\ v,\ w}$ in $\R ^ n$
+        \item $(\lambda\mbf{u}) \cdot \mbf{v} = \lambda(\mbf{u} \cdot \mbf{v})$\qquad for all $\lambda \in \R$ and all $\mbf{u,\ v}$ in $\R ^ n$
+    \end{enumerate}
+    \item Linearity in the second factor
+    \begin{enumerate}[label = (\alph*)]
+        \item $\mbf{u} \cdot (\mbf{v} + \mbf{w}) = \mbf{u} \cdot \mbf{w} + \mbf{u} \cdot \mbf{v}$\qquad for all $\mbf{u,\ v,\ w}$ in $\R ^ n$
+        \item $\mbf{u} \cdot (\lambda\mbf{v}) = \lambda(\mbf{u} \cdot \mbf{v})$\qquad for all $\lambda \in \R$ and all $\mbf{u,\ v}$ in $\R ^ n$
+    \end{enumerate}
+    \item Positivity
+    
+    $\mbf{v \cdot v} \geq 0$ for all $v$, and $\mbf{v \cdot v} = 0$ if and only if $\mbf{v = 0}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{definition}[Magnitude]
+    Suppose
+    \[
+    \mbf{v} = \begin{pmatrix}
+        v_1 \\
+        \vdots \\
+        v_n
+    \end{pmatrix}
+    \]
+    then $\mbf{v \cdot v} = v_1 ^ 2 + \dotsc + v_n ^ 2$ which is a non-negative real number. We define the magnitude (or length) of $\mbf{v}$, denoted $|\mbf{v}|$, by
+    \[
+    |\mbf{v}| = \sqrt{\mbf{v \cdot v}}.
+    \]
+    So long as the $n$ coordinate directions are mutually orthogonal, the magnitude
+    \[
+    |\mbf{v}| = \sqrt{\mbf{v \cdot v}} = \sqrt{x_1 ^ 2 + \cdots + v_n ^ 2}
+    \]
+    is the euclidean distance from the origin to the point with coordinates given by $\mbf{v}$. We say that a vector is non-trivial if it has positive length. It is easy to see that the only trivial vector in $\R ^ n$ is the zero vector $\mbf{0}$.
+\end{definition}
+
+
+We can describe the position of a point by what direction it lies and what distance away from us it is, using polar coordinates. \\
+
+
+Using the length of a vector in $\R ^ 2$ we define polar co-ordinates on $\R ^ 2$ as follows. Let $\mbf{v} = \left(\frac{x}{y}\right)$ be a non-trivial vector with length $|\mbf{v}| = r > 0$. Let $\theta \in [0, 2\pi)$ be the angle at origin $\mbf{0}$ measured in an anticlockwise direction from the $x$-axis to $\mbf{v}$. By basic trigonometry
+\[
+\cos(\theta) = \frac{x}{r},\qquad\sin(\theta) = \frac{y}{r}.
+\]
+We define the polar coordinates of $\mbf{v \neq 0}$ to be the unique $(r, \theta)$ in $\R_+ \times [0, 2\pi)$ so that
+\[
+\mbf{v} = \begin{pmatrix}
+    r\cos(\theta) \\
+    r\sin(\theta)
+\end{pmatrix}
+=
+r\begin{pmatrix}
+    \cos(\theta)
+    \sin(\theta)
+\end{pmatrix}
+\]
+
+\begin{lemma}
+    Suppose that $\mbf{v}$ and $\mbf{w}$ are vectors in $\R ^ 2$ of length $r > 0 $ and $s > 0$ respectively. Let $\theta$ be the angle between them. Then
+    \[
+    \mbf{v \cdot w} = rs\cos(\theta).
+    \]
+    In particular, we have
+    \[
+    |\mbf{v \cdot w}| \leq |\mbf{v}||\mbf{w}|
+    \]
+    with equality if and only if $\mbf{v}$ and $\mbf{w}$ are collinear, i.e. are scalar multiples of each other.
+
+    \begin{proof}
+        Suppose that $\mbf{v}$ has polar coordinates $(r, \gamma)$ and $\mbf{w}$ has polar coordinates $(s, \rho)$. The angle between $\mbf{v}$ and $\mbf{w}$ is $\theta = |\gamma - \rho|$. Then
+        \[
+        \mbf{v} = \begin{pmatrix}
+            r\cos\gamma \\
+            r\sin\gamma
+        \end{pmatrix},
+        \qquad
+        \mbf{w} = \begin{pmatrix}
+            s\cos\rho \\
+            s\sin\rho
+        \end{pmatrix}.
+        \]
+        Applying the dot product using these definitions of $\mbf{v}$ and $\mbf{w}$ we obtain the following, applying trigonometric addition formula and the fact that cosine is even we get,
+        \[
+        \mbf{v \cdot w} =  rs\cos\gamma\cos\rho + rs\sin\gamma\sin\rho = rs(\cos(\gamma - \rho)) = rs\cos(|\gamma - \rho|) = rs\cos\theta.
+        \]
+    \end{proof}
+\end{lemma}
+Note that using this lemma we can obtain an expression for the angle between two vectors
+\[
+\cos(\theta) = \frac{\mbf{v \cdot w}}{|\mbf{v}||\mbf{w}|}
+\]
+
+\begin{theorem}[Cauchy-Schwarz inequality]
+    Suppose that $\mbf{v}$ and $\mbf{w}$ are vectors in $\R ^ n$. Then
+    \[
+    |\mbf{v \cdot w}| \leq |\mbf{v}||\mbf{w}|
+    \]
+    with equality if and only if $\mbf{v}$ and $\mbf{w}$ are collinear
+
+    \begin{proof}
+        
+    \end{proof}
+\end{theorem}
+
+\begin{definition}[Angle between two vectors]\label{def_linalg_vec_angbetvecs}
+    Suppose that $\mbf{v}$ and $\mbf{w}$ are vectors in $\R ^ n$ of length $r > 0$ and $s > 0$ respectively. Then we define the angle $\theta \in [0, \pi]$ between them by
+    \[
+    \cos(\theta) = \frac{\mbf{v \cdot w}}{rs}.
+    \]
+\end{definition}
+
+We say that the vectors $\mbf{v}$ and $\mbf{w}$ are orthogonal (or perpendicular) if the angle between them is $\frac{\pi}{2}$. \\
+
+\begin{corollary}
+    The non-trivial vectors $\mbf{v}$ and $\mbf{w}$ in $\R ^ n$ are orthogonal if and only if we have $\mbf{v \cdot w} = 0$.
+
+    \begin{proof}
+        By \autoref{def_linalg_vec_angbetvecs} we have that\footnote{Since $\cos\theta$ can only be $0$ when $\theta = \frac{\pi}{2}$ then they have to be orthogonal and the converse is true too.}
+        \[
+        \mbf{v \cdot w} = 0 \iff \cos\theta = 0 \iff \theta = \frac{\pi}{2}.
+        \]
+    \end{proof}
+\end{corollary}
 
 \end{document}
