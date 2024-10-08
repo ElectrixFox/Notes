@@ -208,6 +208,7 @@ The transpose $\mbf{v} ^ t$ of $\mbf{v}$ is defined to be the row vector with th
 The dot product of $\mbf{v}$ and $\mbf{w}$ is then obtained by matrix multiplying $\mbf{v} ^ t$ and $\mbf{w}$.
 
 \begin{proposition}[Properties of the scalar product]
+\phantom{}
 \begin{enumerate}[label = (\roman*)]
     \item Symmetry
     \[
@@ -227,6 +228,27 @@ The dot product of $\mbf{v}$ and $\mbf{w}$ is then obtained by matrix multiplyin
     
     $\mbf{v \cdot v} \geq 0$ for all $v$, and $\mbf{v \cdot v} = 0$ if and only if $\mbf{v = 0}$.
 \end{enumerate}
+
+\begin{proof}
+    \phantom{}
+    \begin{enumerate}[label = (\roman*)]
+        \item
+        First we can determine some expressions for $\mbf{u\cdot v}$ and $\mbf{v\cdot u}$
+        
+        $\mbf{u\cdot v} = u_1 v_1 + u_2 v_2 + \dotsc + u_n v_n$ and
+
+        $\mbf{v\cdot u} = v_1 u_1 + v_2 u_2 + \dotsc + v_n u_n$.
+
+        Then by the commutativity of multiplication we have
+        \begin{align*}
+            \mbf{u\cdot v} &= u_1 v_1 + u_2 v_2 + \dotsc + u_n v_n \\
+            &= v_1 u_1 + v_2 u_2 + \dotsc + v_n u_n \\
+            &= \mbf{v \cdot u}
+        \end{align*}
+        which proves our goal as required
+        
+    \end{enumerate}
+\end{proof}
 \end{proposition}
 
 \begin{definition}[Magnitude]
@@ -336,5 +358,7 @@ We say that the vectors $\mbf{v}$ and $\mbf{w}$ are orthogonal (or perpendicular
         \]
     \end{proof}
 \end{corollary}
+
+
 
 \end{document}

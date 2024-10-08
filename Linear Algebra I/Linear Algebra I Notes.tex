@@ -179,7 +179,211 @@ $\R ^ n$ clearly satisfies these axioms (if not obvious check) because they can 
 \end{pmatrix}
 \]
 
+\begin{definition}
+    Standard basis vectors
+    
+    For $1 \leq i \leq n$ we define $\mbf{e}_i \in \R ^ n$
+    \[
+    \mbf{e}_i = \begin{pmatrix}
+        0 \\
+        0 \\
+        \vdots \\
+        0 \\
+        1\footnote{$i$th position from the top.} \\
+        0 \\
+        \vdots \\
+        0
+    \end{pmatrix}
+    \]    
+\end{definition}
 
+\begin{example}
+    \[
+    \mbf{e}_1 = \begin{pmatrix}
+        1 \\
+        0 \\
+        \vdots \\
+        0
+    \end{pmatrix}
+    \]
+    \[
+    \mbf{e}_2 = \begin{pmatrix}
+        0 \\
+        1 \\
+        \vdots \\
+        0
+    \end{pmatrix}
+    \]
+\end{example}
+
+We can express any vector $\mbf{x} \in \R ^ n$ uniquely as a linear combination of the standard basis vectors.
+
+\begin{example}
+    \begin{align*}
+    \mbf{x} &= \begin{pmatrix}
+        x_1 \\
+        x_2 \\
+        \vdots \\
+        x_n
+    \end{pmatrix}
+    =
+    x_1 \begin{pmatrix}
+        1 \\
+        0 \\
+        \vdots \\
+        0
+    \end{pmatrix}
+    +
+    x_2 \begin{pmatrix}
+        0 \\
+        1 \\
+        \vdots \\
+        0
+    \end{pmatrix}
+    +
+    \dots
+    +
+    x_n \begin{pmatrix}
+        0 \\
+        0 \\
+        \vdots \\
+        0 \\
+        1
+    \end{pmatrix} \\
+    &= x_1 \mbf{e}_1 + x_2 \mbf{e}_2 + \dots + x_n \mbf{e}_n
+    \end{align*}
+\end{example}
+The $x_i$'s are sometimes called the Cartesian coordinates of the vector $\mbf{x}$.
+
+\subsection{The scalar (or dot) product in $\R ^ n$}
+
+\begin{definition}
+    The scalar product is defined as $\R ^ n \times \R ^ n \mapsto \R$, $(\mbf{u, v}) \mapsto \mbf{u \cdot v}$
+    \begin{align*}
+    \mbf{u \cdot v} &= \begin{pmatrix}
+        u_1 \\
+        u_2 \\
+        \vdots \\
+        u_n
+    \end{pmatrix} \cdot
+    \begin{pmatrix}
+        v_1 \\
+        v_2 \\
+        \vdots \\
+        v_n
+    \end{pmatrix} \\
+    &= u_1 v_1 + u_2 v_2 + \dots + u_n v_n  \\
+    &= \sum_{i = 1}^{n}u_iv_i \in \R
+    \end{align*}
+\end{definition}
+
+\begin{example}
+    \[
+    \begin{pmatrix}
+        4 \\
+        1 \\
+        2
+    \end{pmatrix}
+    \cdot
+    \begin{pmatrix}
+        -3 \\
+        -2 \\
+        1
+    \end{pmatrix}
+    =
+    -12 - 2 + 2 = -12.
+    \]
+\end{example}
+
+
+\textbf{Axioms} of the scalar product
+% To-Do add in the foralls here
+\begin{enumerate}[label = (\roman*)]
+    \item Symmetry
+    \[
+    \mbf{u \cdot v = v \cdot u}\qquad\forall\mbf{u, v} \in \R ^ n
+    \]
+    \item Linearity (1)
+    \begin{align*}
+    (\mbf{u + v)\cdot w}) &= \mbf{u \cdot w + v \cdot w}\qquad\forall \lambda \in \R\\
+    \lambda\mbf{u})\cdot \mbf{w} &= \lambda (\mbf{u \cdot w})\qquad\forall\mbf{u, v, w} \in \R ^ n
+    \end{align*}
+    \item Linearity (2)
+    \begin{align*}
+        \mbf{u} \cdot (\mbf{v + w}) &= \mbf{u} \cdot \mbf{v} + \mbf{u} \cdot \mbf{w}\qquad \forall \lambda \in \R \\
+        \mbf{u} \cdot \lambda\mbf{v} &= \lambda(\mbf{u \cdot v})\qquad \forall\mbf{u, v, w} \in \R ^ n
+    \end{align*}
+    \item Positivity
+    \begin{align*}
+        \mbf{v \cdot v} \geq 0\quad \forall \mbf{v} \in \R ^ n \\
+        \text{and } \mbf{v \cdot v} = 0 \iff \mbf{v = 0}
+    \end{align*}
+\end{enumerate}
+
+\begin{definition}
+    Given a vector $\mbf{v} \in \R ^ n$ we define its magnitude (or length) to be
+    \[
+    |\mbf{v}| = \sqrt{\mbf{v \cdot v}}
+    \]
+\end{definition}
+Note $\mbf{v \cdot v} \geq 0$ so positive square roots exist. Likewise note
+
+$|\mbf{v}| \geq 0 \text{ and } |\mbf{v}| = 0 \iff \mbf{v = 0}$
+
+\begin{example}
+    \[
+    \left|\begin{pmatrix}
+        -3 \\
+        4
+    \end{pmatrix}\right|
+    = \sqrt{(-3) ^ 2 + 4 ^ 2} = \sqrt{25} = 5
+    \]
+\end{example}
+
+Thinking about a vector $\mbf{v} \in \R ^ 2$ where $\mbf{v \neq 0}$
+
+\textbf{Gr9}
+
+\[
+\mbf{v}  = \begin{pmatrix}
+    r\cos\theta \\
+    r\sin\theta
+\end{pmatrix}
+\]
+where
+$r = |\mbf{v}|$ and $0 \leq \theta < 2\pi$, $\theta$ is the angle made by $\mbf{v}$ in an anticlockwise direction with the positive real axis.
+
+We define $(r, \theta) \in (0, \infty) \times [0, 2\pi)$
+to be the unique numbers such that
+$\mbf{v}  = \begin{pmatrix}
+    r\cos\theta \\
+    r\sin\theta
+\end{pmatrix}$
+we call $(r, \theta)$ the polar coordinates of $\mbf{v}$
+
+\begin{example}
+    Suppose $\mbf{v} = \begin{pmatrix}
+        2 \\
+        3
+    \end{pmatrix}$,
+    what are its polar coordinates?
+
+    $r = |\mbf{v}| = \sqrt{2 ^ 2 + 3 ^ 2} = \sqrt{13}$
+
+    $\theta = \arcsin \left({\dfrac{3}{\sqrt{13}}}\right)$
+\end{example}
+
+\begin{example}
+    Suppose $\mbf{v} = \begin{pmatrix}
+        2 \\
+        -2
+    \end{pmatrix}$,
+    what are its polar coordinates?
+
+    $r = |\mbf{v}| = \sqrt{2 ^ 2 + (-2) ^ 2} = \sqrt{8} = 2\sqrt{2}$
+
+    $\theta = \dfrac{7\pi}{4}$
+\end{example}
 
 
 \end{document}
