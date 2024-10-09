@@ -1,0 +1,45 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\Ran}{Ran}
+
+\title{Calculus I}
+\author{Luke Phillips}
+\date{October 2024}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\section{Functions}
+
+\subsection{Functions, domain \& range}
+
+\textbf{Gr10}
+
+\begin{definition}
+    A function $f : D \rightarrow C$ is a map ($f$) from a set $D$ called the domain ($\Dom f$) to a set $C$ called the codomain ($\mathrm{Codom}\ f$).
+    
+    For any $x \in D$, there is a unique $f(x) \in C$ called the image of $x$ under $f$.
+\end{definition}
+
+Sometimes  write $f : D \rightarrow C$ $x \mapsto f(x)$.
+
+\begin{definition}
+    The range of a function $f$ is the set of all images of $f$. This is a subset of the codomain.
+    
+    We can write $\Ran f = \{f(x)\,|\,x \in \Dom f\} \subseteq \mathrm{Codom}\ f$
+\end{definition}
+
+Real-valued functions\footnote{Always assume codomain is $\R$.} (i.e. the codomain is $\R$, or a subset) of a single real variable (i.e. the domain is $\R$, or a subset)
+
+\begin{example}
+    $f : \R \rightarrow \R$ given by $f(x) = x ^ 2\ \forall x \in \R$
+
+    So $\Dom f = \R$ and $\mathrm{Codom}\ f = \R$ \& $\Ran f = [0, \infty)$.
+\end{example}
+
+\end{document}

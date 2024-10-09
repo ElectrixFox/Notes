@@ -1,0 +1,162 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\title{Probability I \\
+    \large Prereading}
+\author{Luke Phillips}
+\date{October 2024}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\section{Introduction}
+
+\subsection{Sets}
+
+A set is an unordered collection of distinguishable objects. 
+
+\begin{definition}[Empty Set]
+    The set with no outcomes is called the empty set denoted as $\emptyset$.
+    \[
+    \emptyset = \{\}
+    \]
+\end{definition}
+
+\begin{definition}[Subset]
+    For two sets $A$ and $B$, $A$ is a subset of $B$, and we write $A \subseteq B$ (or $B \supseteq A$), whenever every element in $A$ also belongs to $B$, for all $x \in A$ we have $x \in B$.
+\end{definition}
+
+\begin{example}
+    For instance, $\{2, 4, 5\} \subseteq \{1, 2, 3, 4, 5\}$.    
+\end{example}
+
+\begin{definition}[Power Set]
+    The power set is the set consisting of all subsets of a set $A$, this is denoted as $2 ^ A$\footnote{I have also seen it denoted as $\mathbb{P}(A)$.}.
+    \[
+    2 ^ A = \{B: B \subseteq A\}.
+    \]
+\end{definition}
+
+\begin{example}
+    The power set of the set $A = \{1, 2, 3\}$ is
+    \[
+    2 ^ A = \{\emptyset, \{1\}, \{2\}, \{3\}, \{1, 2\}, \{1, 3\}, \{2, 3\}, \{1, 2, 3\}\}.
+    \]
+\end{example}
+
+\subsection{Sample space and events}
+A sample space is a set of all outcomes for this scenario such that one and only one will occur.
+
+The usual notation for a sample space will be $\Omega$, and a generic outcome is $\omega \in \Omega$.
+
+\begin{definition}
+    A set $A$ is countable if either:
+    \begin{enumerate}[label = (\roman*)]
+        \item $A$ is finite, or
+        \item there is a bijection (one-to-one and onto mapping) between $A$ and the set of natural numbers $\N$.
+    \end{enumerate}
+\end{definition}
+
+An even is just a collection of possible outcomes, i.e., a subset of $\Omega$.
+
+\begin{definition}[Events]
+    Associated to our sample space $\Omega$ is a collection $\mathcal{F}$ of all events:
+    \[
+    A \subseteq \Omega \text{ for every } A \in \mathcal{F}.
+    \]
+    We say that an event $A$ occurs when the outcome that occurs at the end of the scenario is in the set $A$.
+\end{definition}
+
+If $\Omega$ is discrete, we can always take $\mathcal{F} = 2 ^ \Omega$, so that every subset of $\Omega$ is an event.
+
+The empty set $\emptyset$ represents the impossible event.
+
+The sample space $\Omega$ represents the certain event, i.e. it will always occur.
+
+\begin{definition}[Complement]
+    For an event $A \in \mathcal{F}$, we define its complement, denoted $A ^ c$ (or sometimes $\overline{A}$) and read "not $A$", to be $A ^ c := \Omega \setminus A = \{\omega \in \Omega : \omega \notin A\}$.
+\end{definition}
+
+\begin{definition}[Disjoint]
+    We say that events $A$ and $B$ are disjoint, mutually exclusive, or incompatible if $A \cap B = \emptyset$, i.e. it is impossible for $A$ and $B$ both to occur.
+\end{definition}
+
+We can simplify unions and intersections of multiple sets to being written as:
+\[
+\bigcup_{i = 1}^{n}{A_i} := A_1 \cup A_2 \cup \dotsi \cup A_n = \{\omega \in \Omega : \omega \in A_i \text{ for at least one } i \in \{1,\dots, n\}\}
+\]
+and
+\[
+\bigcap_{i = 1}^{n}{A_i} := A_1 \cap A_2 \cap \dotsi \cap A_n = \{\omega \in \Omega : \omega \in A_i \text{ for every } i \in \{1,\dots, n\}\}.
+\]
+
+Occasionally, we will need to take infinite unions and intersections over sequences of sets:
+\[
+\bigcup_{i = 1}^{\infty}{A_i} := A_1 \cup A_2 \cup A_3 \cup \dotsi = \{\omega \in \Omega : \omega \in A_i \text{ for at least one } i \in \N\}
+\]
+and
+\[
+\bigcap_{i = 1}^{\infty}{A_i} := A_1 \cap A_2 \cap A_3 \cap \dotsi = \{\omega \in \Omega : \omega \in A_i \text{ for every } i \in \N\}.
+\]
+
+Additionally, we can use De Morgan's Laws for a collection of events $A_i$,
+\begin{enumerate}[label = (\alph*)]
+    \item $\left(\bigcup_i A_i\right) ^ c = \bigcap_i A_i ^ c$, and
+    \item $\left(\bigcap_i A_i\right) ^ c = \bigcup_i A_i ^ c$.
+\end{enumerate}
+
+\subsection{The axioms of probability}
+
+\begin{definition}[Probability]
+    A probability $\mathbb{P}$ on a sample space $\Omega$ with collection $\mathcal{F}$ of events is a function mapping every event $A \in \mathcal{F}$ to a real number $\mathbb{P}(A)$, obeying the following axioms:
+    \begin{enumerate}[label = A\arabic*]
+        \item $\mathbb{P}(A) \geq 0$ for every $A \in \mathcal{F}$
+        \item $\mathbb{P}(\Omega) = 1$ and
+        \item if $A$ and $B$ are disjoint events (i.e. if $A, B \in \mathcal{F}$ have $A \cap B = \emptyset$) then
+        \[
+        \mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B).
+        \]
+        We call the number $\mathbb{P}(A)$ the probability of $A$.
+        \item Countable additivity. For any infinite sequence $A_1, A_2, \dots$ of pairwise disjoint events (so $A_i \cap A_j = \emptyset$ for all $i \neq j$),
+        \[
+        \mathbb{P}\left(\bigcup_{i = 1}^{\infty}A_i\right) = \sum_{i = 1}^{\infty}\mathbb{P}(A_i).
+        \]
+    \end{enumerate}
+\end{definition}
+
+\subsection{Consequences of the axioms}
+\begin{enumerate}[label = C\arabic*]
+    \item For any two events $A$ and $B$,
+    \[
+    \mathbb{P}(B \setminus A) = \mathbb{P}(B) - \mathbb{P}(A \cap B).
+    \]
+    \item For any event $A$, $\mathbb{P}(A ^ c) = 1 - \mathbb{P}(A)$.
+    \item $\mathbb{P}(\emptyset) = 0$.
+    \item For any event $A,\ \mathbb{P}(A) \leq 1$.
+    \item Monotonicity. If $A \subseteq B$ then $\mathbb{P}(A) \leq \mathbb{P}(B)$.
+    \item For any two events $A$ and $B$,
+    \[
+    \mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A \cap B).
+    \]
+    \item Finite additivity. If $A_1, A_2, \dots, A_k$ are pairwise disjoint (so $A_i \cap A_j = \emptyset$ if $i \neq j$) then
+    \[
+    \mathbb{P}\left(\bigcup_{i = 1}^{k}A_i\right) = \sum_{i = 1}^{k}\mathbb{P}(A_i).
+    \]
+    \item Boole's inequality. For any events $A_1, A_2, \dots,$ (these need not to be pairwise disjoint),
+    \[
+    \mathbb{P}\left(\bigcup_{i = 1}^{\infty}A_i\right) \leq \sum_{i = 1}^{\infty}\mathbb{P}(A_i).
+    \]
+    \item Continuity along monotone limits. If $A_1 \subseteq A_2 \subseteq \dotsi$ is an increasing sequence of events, then
+    \[
+    \mathbb{P}\left(\bigcup_{n = 1}^{\infty}A_n\right) = \lim_{n \rightarrow \infty}\mathbb{P}(A_n).
+    \]
+    If $A_1 \supseteq A_2 \supseteq \dotsi$ is an decreasing sequence of events, then
+    \[
+    \mathbb{P}\left(\bigcap_{n = 1}^{\infty}A_n\right) = \lim_{n \rightarrow \infty}\mathbb{P}(A_n).
+    \]
+\end{enumerate}
+
+\end{document}
