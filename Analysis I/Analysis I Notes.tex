@@ -33,15 +33,43 @@
         \item "Not $A$"\footnote{Called the negation.} is the statement which is true when $A$ is false, and false when $A$ is true.
     \end{enumerate}
 
-    The truth tables are as follows
-    \textbf{Gr6}
+    The truth tables are as follows 
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            $A$ & $B$ & $A \text{ and } B$ & $A \text{ or } B$ & $\text{not } A$ \\
+            \hline
+            T & T & T & T & F \\
+            T & F & F & T & F \\
+            F & T & F & T & T \\
+            F & F & F & F & T \\
+            \hline
+        \end{tabular}
+        \caption{Graph 6}
+        \label{tab:Gr6}
+    \end{table}
 \end{definition}
 
 \begin{definition}
     Let $A$ and $B$ be statements. The statement "if $A$ then $B$" is defined to be false when $A$ is true and $B$ is false, and true in all other cases.
 
     The truth table for this is as follows
-    \textbf{Gr7}
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|}
+            \hline
+            $A$ & $B$ & $\text{if } A \text{ then } B$ \\
+            \hline
+            T & T & T \\
+            T & F & F \\
+            F & T & T \\
+            F & F & T \\
+            \hline
+        \end{tabular}
+        \caption{Graph 7}
+        \label{tab:Gr7}
+    \end{table}
 \end{definition}
 \begin{example}
     If $p$ is a prime number, then $p$ is an odd number. (this is false)
@@ -53,7 +81,21 @@
     Let $A$ and $B$ be statements. The statement $A$ is equivalent to $B$ for the statement $A \implies B$ and $B \implies A$, or $A \iff B$.
     
     The truth table for this is as follows
-    \textbf{Gr8}
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            $A$ & $B$ & $\text{if } A \text{ then } B$ & $\text{if } B \text{ then } A$ & $A \iff B$ \\
+            \hline
+            T & T & T & T & T \\
+            T & F & F & T & F \\
+            F & T & T & F & F \\
+            F & F & T & T & T \\
+            \hline
+        \end{tabular}
+        \caption{Graph 8}
+        \label{tab:Gr8}
+    \end{table}
 \end{definition}
 
 Often statements depend on a variable $x$. This is called a conditional statement $A(x)$.

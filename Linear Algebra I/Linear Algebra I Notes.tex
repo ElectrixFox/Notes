@@ -108,24 +108,76 @@ The operation is defined as such
 \textbf{Intuition}
 
 Vectors can be thought of a point in $n$-dimensional space
-
-\textbf{Gr1}
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}
+    \draw[->] (0,0) -- (0,2);
+    \draw[->] (0,0) -- (2,0);
+    \draw[->] (0,0) -- (1.5,1);
+    \filldraw (1,1) circle (2pt);
+    \end{tikzpicture}
+    \caption{Graph 1}
+    \label{fig:Gr1}
+\end{figure}
 
 As a direction to a point
-
-\textbf{Gr2}
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}
+    \draw[->] (0,0) -- (0,2);
+    \draw[->] (0,0) -- (2,0);
+    \draw[->] (0,0) -- (0.75,0.5);
+    \draw[-] (0.75,0.5) -- (1.5,1);
+    \draw[->] (0,0) -- (0.5, 0.5);
+    \draw[->] (0.5,0.5) -- (1, 1);
+    \filldraw (1,1) circle (2pt);
+    \end{tikzpicture}
+    \caption{Graph 2}
+    \label{fig:Gr2}
+\end{figure}
 
 As up to translation
-
-\textbf{Gr3}
-
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}
+    \draw[->] (0,0) -- (0,2);
+    \draw[->] (0,0) -- (2,0);
+    \draw[->] (0,0) -- (0.75,0.5);
+    \draw[-] (0.75,0.5) -- (1.5,1);
+    \draw[->] (0,0) -- (0.5, 0.5);
+    \draw[-] (0.5,0.5) -- (1, 1);
+    \end{tikzpicture}
+    \caption{Graph 3}
+    \label{fig:Gr3}
+\end{figure}
 
 Vector addition
-
-\textbf{Gr4}
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}
+    \draw[->] (0,0) -- (0.5,1);
+    \draw[-] (0.5,1) -- (1,2) node [midway, left] {$\mbf{v}$};
+    \draw[->] (1,2) -- (2,2.5);
+    \draw[-] (2,2.5) -- (3,3) node [midway, left] {$\mbf{w}$};
+    \draw[->] (0,0) -- (1.5,1.5) node [right] {$\mbf{v + w}$};
+    \draw[-] (1.5,1.5) -- (3,3);
+    \end{tikzpicture}
+    \caption{Graph 4}
+    \label{fig:Gr4}
+\end{figure}
 
 Scalar multiplication
-
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}
+    \draw[->] (2,2) -- (3,3) node[left] {$\mbf{v}$};
+    \draw[-] (3,3) -- (4,4);
+    \draw[->] (2,0) -- (4,2) node[left] {$\mbf{\lambda v}$};
+    \draw[->] (4,2) -- (6,4);
+    \end{tikzpicture}
+    \caption{Graph 5}
+    \label{fig:Gr5}
+\end{figure}
 \textbf{Gr5}
 
 
@@ -341,8 +393,20 @@ $|\mbf{v}| \geq 0 \text{ and } |\mbf{v}| = 0 \iff \mbf{v = 0}$
 \end{example}
 
 Thinking about a vector $\mbf{v} \in \R ^ 2$ where $\mbf{v \neq 0}$
-
-\textbf{Gr9}
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}
+    \draw[->] (0,0) -- (0,2);
+    \draw[->] (0,0) -- (2,0);
+    \draw[->] (0,0) -- (1,1) node[left] {$\mbf{v}$};
+    \draw[-] (1,1) -- (2,2);
+    \draw[-] (2,0) -- (2,2) node[midway, right] {$r\sin\theta$};
+    \draw[-] (0,0) -- (2,0) node[midway, below] {$r\cos\theta$};
+    \filldraw (2,2) circle (1pt);
+    \end{tikzpicture}
+    \caption{Graph 9}
+    \label{fig:Gr9}
+\end{figure}
 
 \[
 \mbf{v}  = \begin{pmatrix}
