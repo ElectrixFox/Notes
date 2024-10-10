@@ -85,6 +85,96 @@ $\varnothing$ denotes the empty set.
     $B = \{x \in \N, x \text{ is odd}: 1 \leq x \leq 9\}$
 
     $A \cap B = \varnothing$,\qquad $A ^ c = \{x \in \N: 1\leq x \leq 9, x \notin A\}$
+
+    \begin{align*}
+    D &:= \text{All integers in } S \text{ that are divisible by 3} \\
+    &= \{3, 6, 9\}
+    \end{align*}
+    $D \cap B = \{3, 9\}\quad D\cap A = \{6\}$.
 \end{example}
+
+\subsection{Cardinality}
+\begin{definition}[Cardinality]
+    Let $A$ be a finite set. Cardinality or the size of $A$ denoted by
+    \[
+    |A|
+    \]
+    is the number of elements it contains.
+\end{definition}
+
+If $|A| = m$, $A = \{x_1, x_2, \dots, x_n\}$\footnote{List or sequence or length $m$.}.
+
+\textbf{Types of infinity}:
+
+There are two types of infinity. Countable infinities implies that we can write it as a sequence of possibly infinite length. Uncountable infinities, for example $\R$ cannot be written as a sequence.
+
+$\N = \{1, 2, 3, \dots\}$ can be written as a list.
+
+$[a, b] = \{x \in \R : a \leq x \leq b\}$ for example take $a = 1$ and $b = 2$ and you can keep taking the midpoint between any two numbers infinitely and not find all numbers.
+
+When you have a finite number of sets
+\[
+A_1, \dots A_n, \quad\text{abbreviation: } \bigcup_{i = 1}^{n}A_i = A_1 \cup A_2 \cup \dotsi \cup A_n\footnote{Finite union.}
+\]
+Similarly
+\[
+\bigcap_{i = 1}^{n}A_i = A_1 \cap A_2 \cap \dotsi \cap A_n\footnote{Finite intersection.}
+\]
+
+\begin{definition}[Power set]
+    For a set $A$, its power set denoted by $2 ^ A$\footnote{or $\mathcal{P}(A)$} is the set containing all subsets of $A$.
+    \[
+    2 ^ A = \{B : B \subseteq A\}.
+    \]
+    $\emptyset,\,A \in 2 ^ A$.
+\end{definition}
+
+
+\subsection{Axiomatic Probability}
+\begin{enumerate}[label = (\roman*)]
+    \item Sample, space \& events
+
+    Throw a  six-sided die, and note the score, that can be a number from $1$ to $6$.
+
+    Outcomes are the score, which we can write as $1, 2, 3, 4, 5, 6$.
+
+    The outcomes are collected in the sample space
+    \begin{definition}[Sample space]
+        The collection of all outcomes is called the sample space, denoted by $\Omega$.
+        \[
+        \Omega := \text{ collection of all possible outcomes}.
+        \]
+        and $\omega \in \Omega$, we say $\omega$ is an outcome.
+    \end{definition}
+    \begin{example}\phantom{}
+    
+        Throw a die, $\Omega = \{1, 2, 3, 4, 5, 6\}$.\footnote{$|\Omega| = 6$.}
+
+        $6$ is an outcome.
+    \end{example}
+
+    In many examples, $\Omega$ will be finite or countably infinite
+
+    \begin{definition}[Event]
+        An event $A$ is a subset of the sample space $\Omega$.
+    \end{definition}
+    \begin{example} \phantom{}
+    
+        $A := \text{Even score} = \{2, 4, 6\} \subseteq \Omega$.
+
+        $\emptyset := \text{Impossible event}.$ 
+    \end{example}
+
+    \begin{definition}[Probability]
+        Associated to $\Omega$, there is a collection denoted by $\mathcal{F}$, which is the collection of all possible events.
+
+        \[
+        \mathcal{F} = \{A : A \subseteq \Omega\}.
+        \]
+        Discrete (for finite $\Omega$) we will take $\mathcal{F} = 2 ^ \Omega$.
+
+        Probability is a measure of randomness that is associated that we assign to events $A \in \mathcal{F}$.
+    \end{definition}
+\end{enumerate}
 
 \end{document}
