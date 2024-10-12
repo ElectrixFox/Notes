@@ -449,5 +449,125 @@ we call $(r, \theta)$ the polar coordinates of $\mbf{v}$
     $\theta = \dfrac{7\pi}{4}$
 \end{example}
 
+\begin{proposition}
+    Suppose $\mbf{v}, \mbf{w} \in \R ^ n$
+    \[
+    |\mbf{v}| = r,\quad|\mbf{w}| = s
+    \]
+    Suppose that $\mbf{v}, \mbf{w}$ make an angle of $\alpha$ with each other $0 \leq \alpha \leq \pi$
+    
+    Then $\mbf{v}\cdot\mbf{w} = rs\cos(\alpha)$.
+    \begin{proof}
+        Suppose polar coordinated of $\mbf{v}$ are $(r, \theta)$, and of $\mbf{w}$ are $(s, \varphi)$.
+
+        Then $\mbf{v} = \begin{pmatrix}
+            r\cos\theta \\
+            r\sin\theta
+        \end{pmatrix}$, $\mbf{w} = \begin{pmatrix}
+            s\cos\varphi \\
+            s\sin\varphi
+        \end{pmatrix}$
+        \begin{align*}
+        \mbf{v\cdot w} &= \begin{pmatrix}
+            r\cos\theta \\
+            r\sin\theta
+        \end{pmatrix} \cdot \begin{pmatrix}
+            s\cos\varphi \\
+            s\sin\varphi
+        \end{pmatrix} \\
+        &= rs\cos\theta\cos\varphi + rs\sin\theta\sin\varphi \\
+        &= rs(\cos\theta\cos\varphi + \sin\theta\sin\varphi) \\
+        &= rs(\cos(\theta - \varphi) \\
+        &= rs\cos(\pm\alpha) = rs\cos\alpha.
+        \end{align*}
+    \end{proof}
+\end{proposition}
+
+\begin{corollary}
+    If $\mbf{v} \neq \mbf{0}$ and $\mbf{w} \neq \mbf{0}$.
+    $\mbf{v}$ and $\mbf{w}$ are orthogonal if and only if
+    \[
+    \mbf{v \cdot w} = 0.
+    \]
+    \begin{proof}
+        \[
+        \mbf{v \cdot w} = 0 \iff \cos(\alpha) = 0 \iff \alpha = \frac{\pi}{2}
+        \]
+    \end{proof}
+\end{corollary}
+
+\begin{example}
+    $\mbf{v} = \begin{pmatrix}
+        6 \\
+        -2
+    \end{pmatrix}\qquad
+    \mbf{w} = \begin{pmatrix}
+        -1 \\
+        -3
+    \end{pmatrix}$
+
+    Then $\mbf{v\cdot w} = 6(-1) + (-2)(-3) = 0$
+
+    So $\mbf{v, w}$ are orthogonal.
+\end{example}
+
+
+\begin{theorem}[Cauchy-Schwarz inequality]
+    Suppose $\mbf{u, v} \in \R ^ n$, $\mbf{u, v} \neq 0$ then we have
+    \[
+    |\mbf{u}||\mbf{v}| \geq |\mbf{u \cdot v}|
+    \]
+    with equality if and only if $\mbf{u, v}$ are parallel (multiples of each other).
+\end{theorem}
+
+\begin{definition}
+    Suppose $\mbf{u, v} \in \R ^ n$ with $\mbf{u, v \neq 0}$ then we define the angle between them to be the unique $0 \leq \theta \leq \pi$ such that $\mbf{u \cdot v} = |\mbf{u}||\mbf{v}|\cos\theta$.
+\end{definition}
+
+\begin{example}
+    Find the angle between the vectors 
+    \[
+    \mbf{v} = \begin{pmatrix}
+        1 \\ 2 \\ 1 \\ 3
+    \end{pmatrix}, \quad \mbf{w} = \begin{pmatrix}
+        1 \\ 3 \\ -1 \\ 3
+    \end{pmatrix} \in \R ^ 4.
+    \]
+    Find $\theta$ s.t. $\mbf{v\cdot w} = |\mbf{v}||\mbf{w}|\cos\theta$
+
+    $|\mbf{v}| = \sqrt{1 ^ 2 + 2 ^ 2 + 1 ^ 2 + 3 ^ 2} = \sqrt{1 + 4 + 1 + 9} = \sqrt{15}$
+    
+    $|\mbf{w}| = \sqrt{1 ^ 2 + 3 ^ 2 + (-1) ^ 2 + 3 ^ 2} = \sqrt{1 + 9 + 1 + 9} = \sqrt{20} = 2\sqrt{5}$
+
+    $\mbf{v \cdot w} = 1 + 6 + -1 + 9 = 15$
+    \[
+    \cos\theta = \frac{\mbf{v \cdot w}}{|\mbf{v}||\mbf{w}|} = \frac{15}{\sqrt{15}\sqrt{20}} = \frac{\sqrt{15}}{\sqrt{20}} = \frac{\sqrt{3}}{\sqrt{4}} = \frac{\sqrt{3}}{2}
+    \]
+    $\theta = \dfrac{\pi}{6}$.
+\end{example}
+
+For $\mbf{v, w} \in \R ^ n$ $\mbf{v, w \neq 0}$ if $\mbf{v \cdot w} = 0$ (so they make an angle of $\frac{\pi}{2}$) we call $\mbf{v, w}$ orthogonal.
+
+\begin{example}
+    Find all unit\footnote{$|\mbf{w}| = 1$} vectors $\mbf{w} \in \R ^ 3$ that make an angle of $\frac{\pi}{4}$ with both.
+    \[
+    \mbf{u} = \begin{pmatrix} 1 \\ -1 \\ 0 \end{pmatrix},
+    \quad\mbf{v} = \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}.
+    \]
+
+    Suppose $\mbf{w} = \begin{pmatrix} w_1 \\ w_2 \\ w_3 \end{pmatrix}$ is a solution.
+
+    First note $|\mbf{u}| = \sqrt{1 ^ 2 + (-1) ^ 2} = \sqrt{2}$,\quad$|\mbf{v}| = \sqrt{1 ^ 2 + 1 ^ 2} = \sqrt{2}$
+    Now $\mbf{u \cdot w} = |\mbf{u}||\mbf{w}|\cos\left(\frac{\pi}{4}\right) = \sqrt{2} \cdot 1 \cdot \frac{1}{\sqrt{2}} = 1$
+
+    and $\mbf{v \cdot w} = |\mbf{v}||\mbf{w}|\cos\left(\frac{\pi}{4}\right) = \sqrt{2} \cdot 1 \cdot \frac{1}{\sqrt{2}} = 1$.
+
+    So $w_1 - w_2 = 1$ and $w_1 + w_3 = 1$. So $w_2 = w_1 - 1$ and $w_3 = 1 - w_1$.
+    Also $\mbf{w \cdot w} = 1$ so $w_1 ^ 2 + w_2 ^ 2 + w_3 ^ 2 = 1$.
+    Hence $w_1 ^ 2 + (w_1 - 1) ^ 2 + (1 - w_1) ^ 2 = 1$
+    solve for $w_1$ (two solutions)
+\end{example}
+
+
 
 \end{document}

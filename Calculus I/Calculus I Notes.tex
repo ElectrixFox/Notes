@@ -42,4 +42,132 @@ Real-valued functions\footnote{Always assume codomain is $\R$.} (i.e. the codoma
     So $\Dom f = \R$ and $\mathrm{Codom}\ f = \R$ \& $\Ran f = [0, \infty)$.
 \end{example}
 
+If domain of $f$ isn't explicitly given, we take it to be the maximal subset of $\R$ for which the function is defined.
+
+\subsection{The graph of a function}
+\begin{definition}[Graph]
+    The graph of $f$ is the set of all points $(x, y) \in \R ^ 2$ such that $x \in \Dom f$ $y = f(x)$.
+\end{definition}
+To sketch $f$, we often just restrict to an interval of the domain, $[a, b]$.
+
+We often pick a region such that the graph shows significant features like turning points \& intercepts.
+
+When necessary we use a closed shaded circle to indicate an included point, and an open unshaded circle to denote an excluded point.
+
+\textbf{The vertical line test}
+
+If any vertical line intersects the curve more than once then the curve is not the graph of a function.
+
+\subsection{Even and odd functions}
+\begin{definition}
+    A function is even if $f(x) = f(-x)$ $\forall x \in \Dom f$
+    
+    A function is odd if $f(x) = -f(-x)$ $\forall x \in \Dom f$
+\end{definition}
+\begin{example}
+    $f(x) = x ^ 2$ is even
+
+    $f(x) = x ^ 3$ is odd
+\end{example}
+
+All functions can be written as the sum of an odd part and an even part.
+\[
+f(x) = f_{even}(x) + f_{odd}(x)
+\]
+where $f_{even}(x) = \frac{1}{2}\left(f(x) + f(-x)\right)$,
+$f_{odd}(x) = \frac{1}{2}\left(f(x) - f(-x)\right)$
+
+\begin{example}
+    $f(x) = e ^ x$ with
+    
+    $f_{even}(x) = \frac{1}{2}(e ^ x + e ^ {-x}) =: \cosh(x)$
+    
+    $f_{odd}(x) = \frac{1}{2}(e ^ x - e ^ {-x}) =: \sinh(x)$
+\end{example}
+
+\begin{example}
+    $f(x) = (\cos x + x)\sin x$ with
+
+    $f_{even}(x) = x\sin x$
+    
+    $f_{odd}(x) = \cos x \sin x$
+\end{example}
+
+Product of two odd functions is an even function, product of an odd function and an even function is an odd function.
+
+\subsection{Piecewise functions}
+Some functions may be defined piecewise, i.e. with different expressions for different intervals in the domain.
+
+\begin{example}
+    \begin{align*}
+        f(x) &= |x| \\
+        &= \begin{cases}
+            \phantom{-}x\quad \text{if} &x \geq 0 \\
+            -x\quad \text{if} &x < 0
+        \end{cases}
+    \end{align*}
+\end{example}
+
+A step function is a piecewise function which is constant on each piece.
+\begin{example}
+    Heaviside step function
+    \[
+    H(x) = \begin{cases}
+        0 & x < 0 \\
+        1 & x > 0
+    \end{cases}
+    \]
+    Here $\Dom H = \R \setminus \{0\}$ though it is sometimes useful to extend the domain to $\R$ by defining $H(0): (0, 1, \frac{1}{2})$
+\end{example}
+
+\subsection{Operations with functions}
+Given two functions $f, g\  \&\  c \in \R$, we can define the following functions:
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Name & Definition & Domain \\
+        \hline
+        Sum $(f + g)$ & $(f + g)(x) = f(x) + g(x)$ & $\Dom (f + g) = \Dom f \cap \Dom g$ \\
+        Difference $(f - g)$ & $(f - g)(x) = f(x) - g(x)$ & $\Dom (f - g) = \Dom f \cap \Dom g$ \\
+        Product $(fg)$ & $(fg)(x) = f(x)g(x)$ & $\Dom (fg) = \Dom f \cap \Dom g$ \\
+        Ratio $\left(\frac{f}{g}\right)$ & $\left(\frac{f}{g}\right)(x) = \frac{f(x)}{g(x)}$ & $\Dom \left(\frac{f}{g}\right) = (\Dom f \cap \Dom g) \setminus \{x\,|\,g(x) = 0\}$ \\
+        Composition $(f\circ g)$ & $(f \circ g)(x) = f(g(x))$ & $\Dom (f \circ g) = \{x \in \Dom g\,|\, g(x) \in \Dom f\}$ \\
+        Scalar Multiplication $(cf)$ & $(cf)(x) = cf(x)$ & $\Dom (cf) = \Dom f$ \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Unlike multiplication, composing functions in opposite order changes the function (generally).
+
+Using the above we can also form more general linear combinations, such as $(af + bg)(x)$ with $(af + bg)(x) = af(x) + bg(x)$ \& $\Dom (af + bg) = \Dom f \cap \Dom g$.
+
+\subsection{Inverse Functions}
+\begin{definition}[Surjective function]
+    A function $f : D \rightarrow C$ is surjective if $\Ran f = \mathrm{Codom}\, f = C$, i.e. if $\forall\, y \in C\, \exists\, x \in D$ such that $f(x) = y$
+\end{definition}
+\begin{example}
+    $f : \R \rightarrow \R$, $x \mapsto 2x + 1$ is surjective.
+
+    $f : \R \rightarrow \R$, $x \mapsto x ^ 2$ is not surjective since for example $(-2)$ is not the image of any $x \in \R$ (in fact true $\forall\,u < 0,\, u \in \R$).
+\end{example}
+
+\begin{definition}[Injective function]
+    $f : D \rightarrow C$ is injective if $\forall\, x_1, x_2 \in \R$ with $x_1 \neq x_2,\, f(x_1) \neq f(x_2)$.
+\end{definition}
+
+\begin{example}
+    $f(x) = 2x + 1$ is injective since $f(x_1) = f(x_2)$ implies that $x_1 = x_2$.
+
+    $f(x) = x ^ 2$ is not injective since $f(2) = f(-2)$ (in fact $f(x) = f(-x)$ but $x \neq -x\, \forall\, x\neq 0$).
+\end{example}
+
+\textbf{Horizontal line test}
+
+If no horizontal line intersects the graph of $f$ more than once then $f$ is injective, otherwise it is not.
+
+\begin{definition}[Bijective function]
+    A function $f : D \rightarrow C$ is bijective if it is both injective and surjective.
+\end{definition}
+
 \end{document}

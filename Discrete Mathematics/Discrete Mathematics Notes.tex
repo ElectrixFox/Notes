@@ -38,6 +38,58 @@ there of making the purchase with at most 3 stamps?
 
 The number of balls in a box can represent the value of a single stamp, i.e. each box is a stamp and each ball is a 1 pence coin.
 
+\subsection{Set notation}
+\begin{itemize}
+    \item $x \in S$, $x$ is in $x$.
+    \item $x \notin S$, $x$ is not in $x$.
+    \item $R \subseteq S$, $R$ is a subset of $S$\footnote{$x \in R \implies x \in S$}.
+    \item $S \setminus R$, $S$ minus $R$, $S \setminus R = \{x: x \in S \text{ and } x \notin R\}$.
+    \item $R \cup S =  \{x : x \in R \text{ or } x \in S\}$.
+    \item $R \cap S =  \{x : x \in R \text{ and } x \in S\}$.
+\end{itemize}
 
+If $S$ is a finite set its size or cardinality, denoted as $|S|$, is the number of elements in $S$.
+
+\textbf{Cartesian product}
+
+If $X$ and $Y$ are two sets then, 
+\[
+X \times Y = \{(x, y) : x \in X \text{ and } y \in Y\},
+\]
+the set of ordered pairs.
+
+\begin{example}
+    $X = \{1, 2, 3\}\quad Y = \{a, b\}$
+    \[
+    X \times Y = \{(1, a), (1, b), (2, a), (2, b), (3, a), (3, b)\}.
+    \]
+    \[
+    Y \times X = \{(a, 1), (a, 2), (a, 3), (b, 1), (b, 2), (b, 3)\}.
+    \]
+\end{example}
+We can write $X \times X = X ^ 2$.
+\[
+X ^ n = X \times X \times \dotsi X = \{(x_1, x_2, \dots, x_n) : x_i \in X \text{ for all } i\}
+\]
+
+\begin{proposition}
+    Let $X$ and $Y$ be finite sets.
+    \begin{enumerate}[label = (\alph*)]
+        \item $|X \times Y| = |X|\cdot|Y|$
+        \item $|X ^ n| = |X| ^ n$
+    \end{enumerate}
+\end{proposition}
+
+\begin{example}
+    Let $A = \{1, 2, 3, 4, 5, 6\}$. How many subsets does $A$ have?
+    \[
+    2 ^ 6
+    \]
+    Let $I = \{0, 1\}$ consider $I ^ 6 = \{(a_1, a_2, \dots, a_6) : a_i \in I\}$
+
+    $|I ^ 6| = 2 ^ 6$
+    
+    Consider the set of all subsets of set $\{1, 2, \dots, 6\}$ we construct a bijection between $I ^ 6$ and the set of subsets. $A \mapsto (1, 1, 1, 1, 1, 1)$, $\{1, 4, 5\} \mapsto (1, 0, 0, 1, 1, 0)$
+\end{example}
 
 \end{document}

@@ -144,7 +144,7 @@ Similarly
         \[
         \Omega := \text{ collection of all possible outcomes}.
         \]
-        and $\omega \in \Omega$, we say $\omega$ is an outcome.
+        and $\omega \in \Omega$, we say $\omega$\footnote{Also known as a sample point.} is an outcome.
     \end{definition}
     \begin{example}\phantom{}
     
@@ -167,7 +167,6 @@ Similarly
 
     \begin{definition}[Probability]
         Associated to $\Omega$, there is a collection denoted by $\mathcal{F}$, which is the collection of all possible events.
-
         \[
         \mathcal{F} = \{A : A \subseteq \Omega\}.
         \]
@@ -176,5 +175,124 @@ Similarly
         Probability is a measure of randomness that is associated that we assign to events $A \in \mathcal{F}$.
     \end{definition}
 \end{enumerate}
+
+Set operation is the same as event calculus.
+
+\newpage
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        Notations & Set theory language & Prob analogue & Meaning as events \\ [0.1em]
+        \hline
+        $A \cup B$ & $A$ union $B$ & $A$ or $B$ & $A$ occurs or $B$ occurs or both occur \\
+        \hline
+        $A \cap B$ & $A$ intersect $B$ & $A$ and $B$ & both $A$ and $B$ occur \\
+        \hline
+        $A^c$ & $A$ complement & not $A$ & $A$ does not occur \\
+        $A \setminus B$ & $A$ set minus $B$ & $A$ but not $B$ & $A$ occurs but $B$ does not \\
+        \hline
+        $A \subseteq B$ & $A$ subset $B$ & $A$ implies $B$ & if $A$ occurs then $B$ also occurs \\
+        \hline
+        $\emptyset$ & null set & impossible event & \phantom{1} \\
+        \hline
+    \end{tabular}
+    \caption{Set operations in event calculus}
+\end{table}
+
+$A \cap B = \emptyset$, $A$ and $B$ are mutually exclusive.
+
+In order of the event calculus table here are the event notations for each thing. 
+
+\begin{itemize}
+    \item $A \cup B = \{\omega : \omega \in A \text{ or } \omega \in B\}$
+    \item $A \cap B = \{\omega : \omega \in A \text{ and } \omega \in B\}$
+    \item $A \setminus B = \{\omega : \omega \in A \text{ but } \omega \notin B\}$
+    \item $A \subseteq B \text{ if } \omega \in A \implies \omega \in B$
+\end{itemize}
+
+\newpage
+
+\textbf{De-Morgan's Laws}
+
+\begin{enumerate}[label = (\roman*)]
+    \item
+    \[
+    \left(\bigcup_{i = 1}^{n} A_i\right) ^ c = \bigcap_{i = 1}^{n} A_i ^ c
+    \]
+    \item
+    \[
+    \left(\bigcap_{i = 1}^{n} A_i\right) ^ c = \bigcup_{i = 1}^{n} A_i ^ c
+    \]
+\end{enumerate}
+
+Non-examined
+\begin{enumerate}[label = (\roman*)]
+    \item
+    \[
+    \left(\bigcup_{n = 1}^{\infty} A_n\right) ^ c = \bigcap_{n = 1}^{\infty} A_n ^ c
+    \]
+    \item
+    \[
+    \left(\bigcap_{n = 1}^{\infty} A_n\right) ^ c = \bigcup_{n = 1}^{\infty} A_n ^ c
+    \]
+\end{enumerate}
+
+\begin{definition}
+    A probability "$\mathbb{P}$" on a sample space $\Omega$, with $\mathcal{F}$ (collection of events) is a mapping such that for every $A$ in $\mathcal{F}$, $\mathbb{P}(A)$ is a real number satisfying.
+    \begin{enumerate}[label = A\arabic*]
+        \item $\mathbb{P}(A) \geq 0$ (Prob is always non-negative)
+        \item $\mathbb{P}(\Omega) = 1$ (Sample space has full probability)
+        \item If $A, B \in \mathcal{F}$, and $A$ and $B$ are disjoint\footnote{$A$ and $B$ are mutually exclusive.}, that is $A \cap B = \emptyset$, then \[\mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B)\]
+        (finite additivity)
+        \item (Countable additivity). $A_1, A_2, \dots$ are pairwise disjoint, i.e. $A_i \cap A_j = \emptyset$, for all $i \neq j$, then
+        \[
+        \mathbb{P}\left(\bigcup_{n = 1}^{\infty}A_n\right) = \sum_{n = 1}^{\infty}\mathbb{P}(A_n).
+        \]
+    \end{enumerate}
+\end{definition}
+
+$(\Omega, \mathcal{F}, \mathbb{P})$, this triplet is known as the probability space.
+
+\begin{example}
+    $\Omega = \{\omega_1, \omega_2, \dots, \omega_m\}$, let $\omega_i$'s $1 \leq i \leq m$ be distinct. $A\subseteq \Omega,\ \mathbb{P}(A)$. $A = \{\omega_1, \omega_2, \omega_3\}$.
+    \[
+    \{\omega_1\} \subseteq \Omega, \{\omega_2\} \subseteq \Omega, \{\omega_3\} \subseteq \Omega.
+    \]
+    Therefore by (A3)
+    \[
+    \mathbb{P}(A) = \mathbb{P}(\{\omega_1\} \cup \{\omega_2\} \cup \{\omega_3\}) = \sum_{i = 1}^{3}\mathbb{P}(\{\omega_i\}).
+    \]
+\end{example}
+
+\textbf{Equally likely outcomes}
+
+\[
+\mathbb{P}(\{\omega_i\}) = p_i \geq 0,\quad 1 \leq i \leq m,
+\]
+such that $\sum_{i = 1}^{m}p_i = 1$. $\Omega = \bigcup_{i = 1}^{m}\{\omega_i\}$, therefore $\mathbb{P}(\Omega) =\footnote{From A3.} \sum_{i = 1}^{m}\mathbb{P}(\{\omega_i\}) = 1\footnote{From A2.}$
+
+Then $A \subseteq \Omega$,
+\[
+\mathbb{P}(A) = \sum_{i : \omega_i \in A}p_i
+\]
+
+Equally likely outcomes it means that $p_i$ are all equal and in this example $p_1 = p_2 = \dotsi = p_m = \frac{1}{m}$
+
+\begin{example}
+    Throw a fair die
+
+    $\Omega = \{1, 2, \dots, 6\}$
+
+    Fair = equally likely
+    \[
+    \mathbb{P}(\{1\}) = \mathbb{P}(\{2\}) = \dotsi = \mathbb{P}(\{6\}) = \frac{1}{6}
+    \]
+    $A = \{\text{even score}\} = \{2, 4, 6\}$
+    \[
+    \mathbb{P}(A) = \sum_{i : \omega_i \in A}p_i = \frac{1}{6}|A| = \frac{3}{6} = \frac{1}{2}.
+    \]
+\end{example}
 
 \end{document}

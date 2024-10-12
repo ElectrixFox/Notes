@@ -127,4 +127,159 @@ is a set of all objects $x$ for which the conditional statement $A(x)$ is true.
     \end{enumerate}
 \end{definition}
 
+\begin{remark}
+    \begin{enumerate}[label = (\alph*)]
+        \item The order of elements in a set is irrelevant.
+        \item There is a set $\emptyset$ which doesn't contain any elements. In particular $\emptyset \subset X$ for every $X$ a set.
+        \item There is no biggest set $U$, such that $X \subset U$ for every $X$.
+    \end{enumerate}
+\end{remark}
+
+\begin{definition}
+    Let $X, Y$ be sets.
+    \begin{enumerate}[label = (\alph*)]
+        \item The union of $X$ and $Y$ is given by
+        \[
+        X \cup Y = \{x\, |\, x \in X\text{ or } x \in Y\}.
+        \]
+        \item The intersection of $X$ and $Y$ is given by
+        \[
+        X \cap Y = \{x\, |\, x \in X\text{ and } x \in Y\}.
+        \]
+        \item The complement of $Y$ in $X$ is given by
+        \[
+        X \setminus Y = \{x\, |\, x \in X \text{ and } x \notin Y\}.
+        \]
+    \end{enumerate}
+\end{definition}
+
+Given two objects $a, b$ there is an object $(a, b)$ called the ordered pair of $a$ and $b$.
+
+We require $(a_1, b_1) = (a_2, b_2) \iff a_1 = a_2 \text{ and } b_1 = b_2$
+
+\begin{definition}[Cartesian product]
+    The Cartesian product of two sets $X, Y$ is given by
+    \[
+    X \times Y = \{(x, y)\, |\, x \in X, y \in Y\}.
+    \]
+\end{definition}
+
+\begin{definition}[Function]
+    Let $X, Y$ be sets.
+    A function $f$ from $X$ to $Y$ is a subset $f \subset X \times Y$ such that
+    for every $x \in X$ there exists exactly one $y \in Y$ with $(x, y) \in f$.
+    
+    We write $f : X \rightarrow Y$ for a function and
+    write $f(x)$ for the unique element of $y$ with $(x, f(x)) \in f$
+
+    $X$ is called the domain,
+    $Y$ is called the co-domain of $f$.
+\end{definition}
+We write function often with a formula
+\[
+f(x) = x ^ 2 + 3.
+\]
+Need a domain $X$ e.g. $X = \R$ or $X = (0, \infty)$.
+
+\begin{example}
+    $\sqrt{\phantom{1}} : [0, \infty) \rightarrow \R$
+
+    $\sqrt{4} = +2$ not $\pm2$
+\end{example}
+\begin{example}
+    \[
+    g(x) = \frac{1}{x}
+    \]
+    only works for domains not containing $0$, $g: \R \rightarrow \R$ not defined by formula.
+\end{example}
+
+\begin{definition}
+    Let $f : X \rightarrow Y$ be a function between sets $X$ and $Y$. If $A \subset X$ we define the image of $A$ as
+    \[
+    f(A) = \{f(a) \in Y\,|\, a \in A\} \subset Y.
+    \]
+    For $B \subset Y$ we define the pre-image of $B$ as
+    \[
+    f^{-1}(B) = \{x \in X\,|\,f(x) \in B\} \subset X.
+    \]
+\end{definition}
+
+\begin{example}
+    $f: [-1, 1] \rightarrow \R$ $f(x) = x ^ 2 + 3$
+
+    $f([-1, 1]) = [3, 4]$
+
+    $f\left(\left(\frac{1}{2}, 1\right)\right) = \left(\frac{13}{4}, 4\right)$
+
+    $B = (-\infty, 0)$
+    $f^{-1}(B) = \emptyset$
+
+    $B = [3, 4]$
+    $f^{-1}(B) = [-1, 1]$
+    
+    $f^{-1}\left(\left(\frac{13}{4}, 4\right)\right) =
+    \left(\frac{1}{2}, 1\right) \cup \left(-1, -\frac{1}{2}\right)$
+\end{example}
+
+\begin{proposition}
+    Let $f : X \rightarrow Y$ be a function, and assume that $A, B \subset X$. Then
+    \begin{itemize}
+        \item $f(A \cap B) \subset f(A) \cap f(B)$
+        \item $f(A \cup B) = f(A) \cup f(B)$
+        \item $f(X \setminus A) \supset f(X) \setminus f(A)$
+    \end{itemize}
+    Assume that $C, D \subset Y$. Then
+    \begin{itemize}
+        \item $f ^ {-1}(C \cap D) = f^{-1}(C) \cap f^{-1}(D)$
+        \item $f^{-1}(C \cup D) = f^{-1}(C) \cup f^{-1}(D)$
+        \item $f^{-1}(Y \setminus C) = X \setminus f^{-1}(C)$
+    \end{itemize}
+
+    \begin{proof}
+        Look at $f(A \cap B) \subset f(A) \cap f(B)$.
+        
+        Take $y \in f(A \cap B)$. Then there is $x \in A \cap B$ with $f(x) = y$.
+        The $x \in A$ and $x \in B$. The $y = f(x) \in f(A)$ and $y = f(x) \in f(B)$.
+        So $y \in f(A) \cap f(B)$ \\
+
+        Look at $f(A \cup B) = f(A) \cup f(B)$.
+
+        Firstly, we need to examine the two conditions for equality, $f(A \cup B) \subset f(A) \cup f(B)$ and $f(A \cup B) \supset f(A) \cup f(B)$.
+        
+        Take $y \in f(A \cup B)$. There is a unique $x \in A \cup B$ such that $f(x) = y$\footnote{By definition of image.}, this implies that $x \in A$ or $x \in B$. Hence, $y = f(x) \in f(A)$ or $y = f(x) \in f(B)$, which is equivalent to saying $y \in f(A) \cup f(B)$ which proves that $y \in f(A \cup B) \implies y \in f(A) \cup f(B)$.
+
+        Now take $y \in f(A) \cup f(B)$. There is a unique $x \in A$ or $x \in B$ such that $f(x) = y$, therefore $x \in A \cup B$ so $y = f(x) \in f(A \cup B)$. This proves the goal that $f(A \cup B) \supset f(A) \cup f(B)$.
+
+        Finally, we have proven that $f(A \cup B) = f(A) \cup f(B)$ by showing that $f(A \cup B) \subset f(A) \cup f(B)$ and that $f(A \cup B) \supset f(A) \cup f(B)$. \\
+
+        Look at $f(X \setminus A) \supset f(X) \setminus f(A)$.
+
+        Take $y \in f(X) \setminus f(A)$. Then there is a unique $x \in X$ and $x \notin A$ such that $f(x) = y$, this means that there is an $x \in X \setminus A$ such that $f(x) = y$, therefore $y = f(x) \in f(X \setminus A)$. \\
+
+        Look at $f^{-1}(C \cap B) = f^{-1}(C) \cap f^{-1}(D)$.
+
+        Take $x \in f^{-1}(C \cap B)$. The $f(x) \in C \cap D$. So $f(x) \in C$ and $f(x) \in D$. So $x \in f^{-1}(C)$ and $x \in f^{-1}(D)$. Hence $x \in f^{-1}(C) \cap f^{-1}(D)$.
+
+        Take $x \in f^{-1}(C) \cap f^{-1}(D)$. So $x \in f^{-1}(C)$ and $x \in f^{-1}(D)$ so $f(x) \in C$ and $f(x) \in D$. So $f(x) \in C \cap D$. So $x \in f^{-1}(C \cap D)$. \\
+
+        Look at $f^{-1}(C \cup D) = f^{-1}(C) \cup f^{-1}(D)$.
+
+        To prove equality we need to prove both that $f^{-1}(C \cup B) \subset f^{-1}(C) \cup f^{-1}(D)$ and that $f^{-1}(C \cup B) \supset f^{-1}(C) \cup f^{-1}(D)$.
+
+        Take $x \in f^{-1}(C \cup D)$. This implies that $f(x) \in C \cup D$ which means $f(x) \in C$ or $f(x) \in D$ therefore $x \in f^{-1}(C)$ or $x \in f^{-1}(D)$, hence $x \in f^{-1}(C) \cup f^{-1}(D)$, proving $f^{-1}(C \cup B) \subset f^{-1}(C) \cup f^{-1}(D)$.
+
+        Next, take $x \in f^{-1}(C) \cup f^{-1}(D)$. This implies that $x \in f^{-1}(C)$ or $x \in f^{-1}(D)$. Therefore $f(x) \in C$ or $f(x) \in D$ in other words $f(x) \in C \cup D$ so $x \in f^{-1}(C \cup D)$. Finally, this proves that $f^{-1}(C \cup D) = f^{-1}(C) \cup f^{-1}(D)$. \\
+
+        Look at $f^{-1}(Y \setminus C) = X \setminus f^{-1}(C)$.
+
+        We have to prove that $f^{-1}(Y \setminus C) \subset X \setminus f^{-1}(C)$ and $f^{-1}(Y \setminus C) \supset X \setminus f^{-1}(C)$ to prove the equality of the sets.
+
+        Take $x \in f^{-1}(Y \setminus C)$. $f(x) \in Y \setminus C$ therefore $f(x) \in Y$ and $f(x) \notin C$, $x \in f^{-1}(Y)$ and $f(x) \notin f^{-1}(C)$, but $x \in f^{-1}(Y) \implies x \in X$ hence, $x \in X \setminus f^{-1}(C)$.
+
+        Take $x \in X \setminus f^{-1}(C)$. $x \in X$ and $x \notin f^{-1}(C)$. But $x \in X \implies x \in f^{-1}(Y)$, so $f(x) \in Y$ and $f(x) \notin C$, therefore $f(x) \in Y \setminus C$. Hence $x \in f^{-1}(Y \setminus C)$.
+
+        This completes the proof that $f^{-1}(Y \setminus C) = X \setminus f^{-1}(C)$.
+    \end{proof}
+\end{proposition}
+
 \end{document}
