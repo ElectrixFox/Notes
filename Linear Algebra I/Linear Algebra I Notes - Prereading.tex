@@ -167,7 +167,7 @@ Sometimes the entries of a vector are referred to as the Cartesian coordinates o
 
 Addition can be thought of as an operation that inputs a pair of vectors, each from $\R ^ n$, and outputs a single vector in $\R ^ n$. In other words, addition is a function $\R ^ n \times \R ^ n \mapsto \R ^ n$. Similarly, scalar multiplication is a function $\R \times \R ^ n \mapsto \R ^ n$. The domains of each of these functions are called Cartesian products.
 
-\section{The scalar product in $\R ^ n$}
+\subsection{The scalar product in $\R ^ n$}
 
 \begin{definition}[Scalar product]
     The scalar (or dot) product is a function
@@ -359,6 +359,212 @@ We say that the vectors $\mbf{v}$ and $\mbf{w}$ are orthogonal (or perpendicular
     \end{proof}
 \end{corollary}
 
+\subsection{The vector product in $\R ^ 3$}
+\begin{definition}[Vector product in $\R ^ 3$]
+    The vector (or cross) product is a function
+    \[
+    \R ^ 3 \times \R ^ 3 \rightarrow \R ^ 3
+    \]
+    defined as follows. If $\mbf{v, w} \in \R ^ 3$, their cross product is given by
+    \[
+    \mbf{v \times w} =
+    \begin{pmatrix} v_1 \\ v_2 \\ v_3 \end{pmatrix}
+    \times
+    \begin{pmatrix} w_1 \\ w_2 \\ w_3 \end{pmatrix}
+    =
+    \begin{pmatrix} v_2 w_3 - v_3 w_2 \\ v_3 w_1 - v_1 w_3 \\ v_1 w_2 - w_1 v_2 \end{pmatrix}
+    \]
+\end{definition}
 
+\begin{example}
+    \[
+    \begin{pmatrix}
+        1 \\ 2 \\ 3
+    \end{pmatrix}
+    \times
+    \begin{pmatrix}
+        3 \\ 2 \\ 1
+    \end{pmatrix}
+    = \begin{pmatrix}
+        2 - 6 \\
+        9 - 1 \\
+        2 - 6
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        -4 \\ 8 \\ -4
+    \end{pmatrix}
+    \]
+\end{example}
+
+\begin{proposition}[Properties of the cross product]
+    \begin{enumerate}[label = (\roman*)]
+        \item Anti-Symmetry:
+        \[
+        \mbf{u \times v = -v \times u}\quad\text{for all }\mbf{u, v} \in \R ^ 3
+        \]
+        \item Linearity in first factor
+        \begin{enumerate}[label = (\arabic*)]
+            \item $(\mbf{u + v}) \times \mbf{w} = \mbf{u \times w} + \mbf{v \times w}\quad\text{for all }\mbf{u, v, w} \in \R ^ 3$
+            \item $(\lambda\mbf{u}) \times \mbf{v} = \lambda(\mbf{u \times v})\quad\text{for all } \lambda \in \R \text{ and all }\mbf{u, v} \in \R ^ 3$
+        \end{enumerate}
+        \item Linearity in the second factor
+        \begin{enumerate}[label = (\arabic*)]
+            \item $\mbf{u} \times (\mbf{v + w}) = \mbf{u \times w} + \mbf{u \times v}\quad\text{for all }\mbf{u, v, w} \in \R ^ 3$
+            \item $\mbf{u} \times (\lambda\mbf{v}) = \lambda(\mbf{u \times v})\quad\text{for all } \lambda \in \R \text{ and all }\mbf{u, v} \in \R ^ 3$
+        \end{enumerate}
+        \item Orthogonality to the input
+        \[
+        \mbf{v} \cdot (\mbf{v \times w}) = \mbf{w} \cdot (\mbf{v \times w}) = 0\quad\text{for all vectors } \mbf{v} \text{ and } \mbf{w} \text{ in } \R ^ 3
+        \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{lemma}
+    Suppose that $\mbf{v}$ and $\mbf{w}$ are vectors of length $r > 0$ and $s > 0$ respectively. Let $\theta \in [0, \pi]$ be the angle between them. Then
+    \[
+    |\mbf{v \times w}| = rs\sin(\theta).
+    \]
+    In particular, we have
+    \[
+    \mbf{v \times w = 0}\quad\iff\quad\mbf{v}\text{ and }\mbf{w}\text{ are collinear}.
+    \]
+
+    \begin{proof}
+        We have
+        \begin{align*}
+            \left|\begin{pmatrix}
+                v_2 w_3 - v_3 w_2 \\
+                v_3 w_1 - v_1 w_3 \\
+                v_1 w_2 - w_1 v_2
+            \end{pmatrix}\right| ^ 2
+            &= (v_2w_3 - v_3w_2) ^ 2 + (v_3w_1 - v_1w_3) ^ 2 + (v_1w_2 - w_1v_2) ^ 2 \\
+            &= (v_1 ^ 2 + v_2 ^ 2 + v_3 ^ 2)(w_1 ^ 2 + w_2 ^ 2 + w_3 ^ 2) - (v_1w_1 + v_2w_2 + v_3w_3) ^ 2 \\
+            &= |\mbf{v}| ^ 2 |\mbf{w}| ^ 2 - (\mbf{v \cdot w}) ^ 2 \\
+            &= |\mbf{v}| ^ 2 |\mbf{w}| ^ 2 - (|\mbf{v}||\mbf{w}|\cos(\theta)) ^ 2 \\
+            &= r^2s^2(1 - \cos(\theta)) ^ 2 \\
+            &= (rs\sin(\theta)) ^ 2.
+        \end{align*}
+        Since $\sin\theta \geq 0$ for $\theta \in [0, \pi]$, we are done.
+    \end{proof}
+\end{lemma}
+
+\subsection{Planes and Lines in $\R ^ 3$}
+\subsubsection{Planes}
+
+\textbf{Parametric Form}
+
+A plane $\Pi$ in $\R ^ 3$ can be described in parametric form as the collection of all points corresponding to vectors of the form
+\[
+\mbf{a} + \lambda\mbf{d_1} + \mu\mbf{d_2}
+\]
+where $\lambda$ and $\mu$ each run through $\R$. $\mbf{a}$ is any point on the plane and $\mbf{d_1}$ and $\mbf{d_2}$ are any two direction vectors for $\Pi$, which lie on the plane and are not collinear.
+
+For example, if $\mbf{a, b}$ and $\mbf{c}$ are all points on $\Pi$ which are not collinear then we could take $\mbf{d_1 = b - a}$ and $\mbf{d_2 = c - a}$.
+
+We write
+\[
+\Pi = \{\mbf{a} + \lambda\mbf{d_1} + \mu\mbf{d_2} : \lambda, \mu \in \R\}.
+\]
+
+\textbf{Using the normal vector}
+
+We can describe a plane via its normal vector.
+\[
+\mbf{d}_1 \cdot (\mbf{d}_1 \times \mbf{d}_2) = 0 = \mbf{d}_2 \cdot (\mbf{d}_1 \times \mbf{d}_2)
+\]
+that is, $\mbf{d}_1 \times \mbf{d}_2$ is orthogonal to both $\mbf{d}_1$ and $\mbf{d}_2$.
+
+Let us write $\mbf{n}$ for $\mbf{d}_1 \times \mbf{d}_2$. Additionally we can write the plane in terms of the dot product
+\[
+\mbf{n \cdot(x - a)} = 0.
+\]
+We can rearrange this to have the normal form of the plane $\Pi$: the plane $\Pi$ is the set of vectors satisfying
+\[
+\mbf{n \cdot x} = \ell
+\]
+where $\ell = \mbf{n \cdot a} \in \R$ since $\mbf{n \cdot a}$ doesn't depend on $\mbf{x}$ it is just a real number.
+
+
+\textbf{Cartesian form}
+
+A variation of the normal form, really just the same description but now written in Cartesian coordinates immediately follows. Set $\mbf{n} = \begin{pmatrix} a \\ b \\ c \end{pmatrix}$ and $\mbf{x} = \begin{pmatrix} x \\ y \\ z \end{pmatrix}$. Then the normal form above becomes the Cartesian (or the Cartesian form) of the plane:
+\[
+ax + by + cz = \ell
+\]
+Thus we have
+\[
+\Pi = \{\mbf{x} \in \R ^ 3 : \mbf{n \cdot x} = \ell\} = \left\{\begin{pmatrix} a \\ b \\ c \end{pmatrix}\,:\,ax + by + cz = \ell\,\right\}
+\]
+
+\subsubsection{Lines}
+\textbf{Parametric form}
+
+A line $L$ in $\R ^ 3$ can be described in parametric form as the collection of all points corresponding to vectors of the form
+\[
+\mbf{a} + t\mbf{d}
+\]
+where $t$ runs through $\R$.
+\[
+L = \{\mbf{a} + t\mbf{d} : t \in \R\}.
+\]
+
+If $\mbf{b \neq a}$ is another point on $L$, then we could take $\mbf{d = b - a}$.
+
+\textbf{Cartesian form}
+
+Suppose the line is given in parametric form by
+\[
+\begin{pmatrix}
+    x \\ y \\ z
+\end{pmatrix}
+=
+\begin{pmatrix}
+    a_1 \\ a_2 \\ a_3
+\end{pmatrix}
++
+t\begin{pmatrix}
+    d_1 \\ d_2 \\ d_3
+\end{pmatrix}.
+\]
+
+If all $d_i \neq 0$ then we may solve for $t$ in each component and obtain
+\[
+\frac{x - a_1}{d_1} = \frac{y - a_2}{d_2} = \frac{z - a_3}{d_3}.
+\]
+If one of the $d_i = 0$, such as $d_3 = 0$ then we would get two equations
+\[
+\frac{x - a_1}{d_1} = \frac{y - a_2}{d_2}\qquad\text{and}\qquad z = a_3
+\]
+
+\textbf{Solution set for a pair of linear equations}
+A pair of planes in $\R ^ 3$ is either parallel, in which case they have the same normal vector, or else they intersect in a line.
+\begin{align*}
+    ax + by + cz &= \ell \\
+    dx + ey + fz &= m
+\end{align*}
+the either the two normal vectors
+\[
+\mbf{n}_1 = \begin{pmatrix} a \\ b \\ c \end{pmatrix}\quad\text{and}\quad\mbf{n}_2 = \begin{pmatrix} d \\ e \\ f \end{pmatrix}
+\]
+are multiples of each other or else the solution is a line.
+
+\begin{definition}[Scalar triple product]
+    The scalar triple product is a function
+    \[
+    \R ^ 3 \times \R ^ 3 \times \R ^ 3 \rightarrow \R.
+    \]
+    Given three vectors $\mbf{a, b, c}$ in $\R ^ 3$ we define their scalar triple product $[\mbf{a, b, c}]$ by
+    \[
+    [\mbf{a, b, c}] = \mbf{a} \cdot(\mbf{b} \times \mbf{c}).
+    \]
+\end{definition}
+
+\begin{lemma}[Invariance under cyclic permutation]
+    For any three vectors $\mbf{a, b, c}$ in $\R ^ 3$ we have
+    \[
+    [\mbf{a, b, c}] = [\mbf{b, c, a}] = [\mbf{c, a, b}] = -[\mbf{a, b, c}] = -[\mbf{b, c, a}] = -[\mbf{c, a, b}].
+    \]
+\end{lemma}
 
 \end{document}

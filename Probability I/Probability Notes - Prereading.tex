@@ -1,6 +1,8 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage{preamble}
 
+\declaretheorem[style = avgstyle, name = Counting Principle]{countprinc}
+
 \title{Probability I \\
     \large Prereading}
 \author{Luke Phillips}
@@ -158,5 +160,128 @@ Additionally, we can use De Morgan's Laws for a collection of events $A_i$,
     \mathbb{P}\left(\bigcap_{n = 1}^{\infty}A_n\right) = \lim_{n \rightarrow \infty}\mathbb{P}(A_n).
     \]
 \end{enumerate}
+
+\section{Equally likely outcomes and counting principles}
+
+\subsection{Classical probability}
+Suppose we have a finite sample space $\Omega$, $m = |\Omega|$ possible outcomes. In the equally likely outcomes model (also sometimes known as classical probability) we suppose that each outcome has the same probability:
+\[
+\mathbb{P}(\omega) = \frac{1}{|\Omega|}\text{ for each } \omega \in \Omega,
+\]
+or, $\mathbb{P}(\omega_i) = \frac{1}{m}$ for each $i$.
+
+Then by the axioms of probability the probability of any event $A \subseteq \Omega$ by C7
+\[
+\mathbb{P}(A) = \sum_{\omega \in A}\mathbb{P}(\omega) = \frac{|A|}{|\Omega|}\text{ for any event } A \subseteq \Omega.
+\]
+
+\begin{definition}[Equally likely outcomes]
+    Consider a scenario with $m$ equally likely outcomes enumerated as $\Omega = \{\omega_1,\dots,\omega_m\}$. In the equally likely outcomes model, the probability of an event $A \subseteq \Omega$ is declared to be
+    \[
+    \mathbb{P}(A) = \frac{|A|}{|\Omega|}
+    \]
+\end{definition}
+
+\subsection{Counting principles}
+
+\begin{countprinc}[Multiplication principle]
+    Suppose that we must make $k$ choices in succession where they are:
+    \begin{itemize}
+        \item $m_1$ possibilities for the first choice,
+        \item $m_2$ possibilities for the second choice, \\
+        \vdots
+        \item $m_k$ possibilities for the $k$th choice,
+    \end{itemize}
+    and the number of possibilities at each stage does not depend on the outcomes of any previous choices. The total number of distinct possible selections is
+    \[
+    m_1 \times m_2 \times m_3 \times \dotsi \times m_k = \prod_{i = 1}^{k}m_i.
+    \]
+\end{countprinc}
+
+\begin{example}
+    PINs are made up of $4$ digits ($0$-$9$) with the exceptions that (i) they cannot be four repetitions of a single digit; (ii) they cannot form increasing or decreasing consecutive sequences, e.g. $3456$ and $8765$ are excluded. How many possible four-digit PINs are there?
+
+    There are a total of $10 ^ 4$ PINs (including the excluded ones). There are $10$ PINs with only repeated digits e.g. $0000,\,1111,\,\dotsc,\,9999$. Additionally, consecutive increasing sequences must begin with $0,\,,1,\,2,\,\dotsc,\,6$, and consecutive decreasing sequences must begin with $9,\,8,\,7,\,\dotsc,\,3$, hence there are $7$ consecutive increasing sequences and $7$ consecutive decreasing sequences. Therefore, $10 + 7 + 7 = 24$ PINs are excluded from the $10 ^ 4$ total PINs. There are $10 ^ 4 - 24$ possible PINs. 
+\end{example}
+
+\begin{countprinc}[Ordered choices of distinct objects with replacement]
+    Suppose that we have a collection of $m$ distinct objects and we select $r$ of them with replacement. The number of different ordered lists (ordered $r$-tuples) is
+    \[
+    \underbrace{m \times \dotsi \times m}_{r \text{ times}} = m ^ r
+    \]
+\end{countprinc}
+
+\begin{countprinc}[Ordered choices of distinct objects without replacement]
+    Suppose that we have a collection of $m$ distinct objects and we select $r \leq m$ of them without replacement. The number of different ordered lists (ordered $r$-tuples) is
+    \[
+    (m)_r := \underbrace{m \times (m - 1) \times (m - 2) \times \dotsi \times (m - r + 1)}_{r \text{ terms}} = \frac{m!}{(m - r)!}.
+    \]
+\end{countprinc}
+So, the falling factorial notation $(m)_r$ (sometimes also denoted $m ^ {\underline{r}}$ is simply a convenient way to write $\frac{m!}{(m - r)!}$. In the case where $r = m$ we set $0! = 1$ and then $(m)_m = m!$ is the number of permutations of the $m$ objects. If $m$ is large, and $r$ is much smaller than $m$, then $(m)_r \approx m ^ r$.
+
+\begin{example}[Birthday problem]
+    There are $n < 365$ people in a room. Let $B$ be the event that (at least) two of them have the same birthday. (We ignore leap years.) What is $\mathbb{P}(B)$? How big must $n$ be so that $\mathbb{P}(B) > \frac{1}{2}$?
+
+    The number of possible outcomes is
+    \[
+    365 \times 365 \times \dotsi \times 365 = 365 ^ n.
+    \]
+    This is the denominator of the probability. For the numerator, we must work out how many outcomes there are in $B$. In order to do this it is easier to count the number of outcomes in $B ^ c$, where everyone has a different birthday. The number of outcomes in $B ^ c$ is
+    \[
+    365 \times 364 \times \dotsi \times (365 - n + 1) = (365)_n.
+    \]
+    So
+    \[
+    \mathbb{P}(B) = 1 - \mathbb{P}(B ^ c) = 1 - \frac{(365)_n}{365 ^ n}.
+    \]
+
+    To find for what $n$ $\mathbb{P}(B) > \frac{1}{2}$ we can consider the following,
+    \[
+    \frac{(365)_n}{365 ^ n} = 1 \times \left(1 - \frac{1}{365}\right) \times \left(1 - \frac{2}{365}\right) \times \dotsi \times \left(1 - \frac{n - 1}{365}\right).
+    \]
+    For this we can see that $1 - x \leq e ^ {-x}$, in fact this is close to equality for $x = \frac{1}{365}$\footnote{Since $e^{-x}$ shrinks so rapidly and $\frac{1}{365}$ is already quite close to $0$.}, being close to zero.
+    \begin{align*}
+        \frac{(365)_n}{365 ^ n} &\leq e ^ {-x} e ^ {-2x} e ^ {-3x} \dotsi e^{-(n - 1)x} \\
+        &= \exp{-(1 + 2 + \dotsi + n - 1)x} \\
+        &= \exp{-\frac{(n - 1)n}{2 \times 365}}.
+    \end{align*}
+\end{example}
+
+\begin{countprinc}[Unordered choices of distinct objects without replacement]
+    Suppose that we have a collection of $m$ distinct objects and we select a subset of $r \leq m$ of them without replacement. The number of distinct subsets of size $r$ is
+    \[
+    \binom{m}{r} := \frac{(m)_r}{r!} = \frac{m!}{r!(m - r)!}.
+    \]
+\end{countprinc}
+
+The expression $\binom{m}{r}$ is the binomial coefficient for choosing $r$ objects from $m$ and is often called $m$-choose-$r$. Note that
+\[
+\binom{m}{r} = \binom{m}{m - r}
+\]
+
+\begin{example}
+    What is the probability of finding no aces in a four-card hand dealt from a well-shuffled deck?
+
+    There are $52$ cards in a deck and $4$ aces in a deck. To choose $4$ cards from a deck there are $\binom{52}{4}$ ways of doing this. Now, assume that we have taken all of the aces out of the deck, then there are $\binom{48}{4}$ ways of choosing $4$ cards which are not aces. Finding the probability of choosing a hand with aces we can see that it is the number of chooses without the aces compared to the chooses with aces, i.e.
+    \[
+    \frac{\binom{48}{4}}{\binom{52}{4}} = \frac{(48)_4}{(52)_4}.
+    \]
+    This is approximately $0.7$.
+\end{example}
+
+\begin{countprinc}[Ordered choices of $2$ types of objects]
+    Suppose that we have $m$ objects, $r$ of type $1$ and $m - r$ of type $2$, where objects are indistinguishable from others of their type. The number of distinct, ordered choices of the $m$ objects is
+    \[
+    \binom{m}{r}.
+    \]
+\end{countprinc}
+
+\begin{countprinc}[Ordered grouping of indistinguishable objects]
+    The number of ways to divide $m$ indistinguishable objects into $k$ distinct groups is
+    \[
+    \binom{m + k - 1}{m} = \binom{m + k - 1}{k - 1}.
+    \]
+\end{countprinc}
+
 
 \end{document}
