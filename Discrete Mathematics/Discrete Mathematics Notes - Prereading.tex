@@ -97,4 +97,42 @@ while the set $Y \times X$ is
 \{(a, 1), (a, 2), (a, 3), (b, 1), (b, 2), (b, 3)\}.
 \]
 
+\section{Arrangements and permutations}
+
+\subsection{Arrangements}
+An arrangement (or list or string) is a (finite) sequence of items in which the order of the items in the sequence matters.
+
+The length of an arrangement is the number of items in the sequence.
+
+\textbf{Multiplication Principle}. for an arrangement of length $k$, if for $i \in \{1,\,2,\,\dotsc,\,k\}$ there are $n_i$ choices for the $i$th item, regardless of previous choices, then the number of possible arrangements is $n_1n_2\dotsi n_k$.
+
+\subsection{Permutations}
+A permutation on a finite set $S$ is an arrangement of length $|S|$ that uses each item from $S$ exactly once.
+
+\begin{proposition}
+    If $|S| = n$, then there are $n!$ permutations on $S$.
+    
+    \begin{proof}
+        $n(n - 1)(n - 2)\dotsi 2 \cdot 1 = n!$\footnote{This is standard problem \#2 (no repeats) with $n = k$.}
+    \end{proof}
+\end{proposition}
+
+We can generalise this concept. For a non-negative integer $r$, an $r$-permutation on $S$ is an arrangement of $r$ distinct elements from $S$.
+
+We write $P(n,\,r)$ for the number of $r$-permutations on a set of size $n$.
+\[
+P(n, r) = n(n - 1)\dotsi (n - r + 1) = \frac{n!}{(n - r)!}, \text{ for } 0 \leq r \leq n.
+\]
+
+\subsection{Counting examples}
+
+\textbf{Addition Principle}. Let $A$ and $B$ be two finite sets that are disjoint, i.e. $A \cap B = \emptyset$. Then
+\[
+|A \cup B| = |A| + |B|.
+\]
+More generally, if $A_1,\,A_2,\,\dotsc,\,A_n$ are pairwise disjoint, meaning that $A_i \cap A_j = \emptyset$ for all $i \neq j$, then
+\[
+|A_1 \cup A_2 \cup \dotsi \cup A_n| = |A_1| + |A_2| + \dotsi + |A_n|.
+\]
+
 \end{document}

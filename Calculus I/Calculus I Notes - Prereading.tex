@@ -4,6 +4,8 @@
 \DeclareMathOperator{\Dom}{Dom}
 \DeclareMathOperator{\Ran}{Ran}
 
+\newcommand{\limas}[3][n]{#2 \rightarrow #3 \text{ as } #1 \rightarrow \infty}
+
 \title{Calculus I \\
     \large Prereading}
 \author{Luke Phillips}
@@ -103,5 +105,95 @@ As the inverse undoes the effect of the function an equivalent definition is
 \[
 f(x) = y\quad\text{iff}\quad f^{-1}(y) = x.
 \]
+
+\newpage
+
+\section{Limits and continuity}
+
+\subsection{Definition of a limit and continuity}
+A function $f(x)$ has a limit $L$ at $x = a$ if $f(x)$ is close to $L$ whenever $x$ is close to $a$.
+
+\begin{definition}
+    $f(x)$ has a limit $L$ as $x$ tends to $a$ if
+    \[
+    \forall\,\epsilon > 0\ \exists\,\delta > 0 \text{ s.t. } |f(x) - L| < \epsilon \text{ when } 0 < |x - a| < \delta.
+    \]    
+\end{definition}
+
+We write
+\[
+\lim_{x \rightarrow a}f(x) = L\text{ or equivalently } f(x)\rightarrow L \text{ as } x \rightarrow a.
+\]
+
+If there is no such $L$ we can say that no limit exists.
+
+\begin{definition}
+    A function $f(x)$ is continuous at the point $x = a$ if the following three properties all hold:
+    \begin{itemize}
+        \item $f(a)$ exists.
+        \item $\lim_{x \rightarrow a}$ exists.
+        \item $\lim_{x \rightarrow a}f(x)$ is equal to $f(a)$.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+    A function $f(x)$ is continuous on a subset $S$ of its domain if it is continuous at every point in $S$.
+\end{definition}
+
+\begin{definition}
+    A function $f(x)$ is continuous if it is continuous at every point in its domain.
+\end{definition}
+
+\subsection{Facts about limits and continuity}
+Here are some simple facts about limits (that follow from the definition)
+
+\begin{itemize}
+    \item The limit is unique
+    \item If $f(x) = g(x)$ (except possibly at $x = a$) on some open interval containing $a$ then $\lim_{x \rightarrow a}f(x) = \lim_{x \rightarrow a}g(x)$.
+    \item If $f(x) \geq K$ on either an interval $(a,\,b)$ or on an interval $(c,\,a)$ and if $\lim_{x \rightarrow a}f(x) = L$ then $L \geq K$.
+
+    \item If $\lim_{x \rightarrow a}f(x) = L$ and $\lim_{x \rightarrow a}g(x) = M$ then\footnote{The following results are sometimes (only at Durham) known as the Calculus Of Limits Theorem (COLT).}
+    \begin{enumerate}[label = (\roman*)]
+        \item $\lim_{x \rightarrow a}(f(x) + g(x)) = L + M$
+        \item $\lim_{x \rightarrow a}(f(x)g(x)) = LM$
+        \item if $M \neq 0$ then $\lim_{x \rightarrow a}\left(\frac{f(x)}{g(x)}\right) = \frac{L}{M}$
+    \end{enumerate}
+\end{itemize}
+
+Here are some simple facts about continuous functions that follow from the definition and the above results.
+
+\begin{itemize}
+    \item If $f(x)$ and $g(x)$ are continuous functions then so are $f(x) + g(x)$, $f(x)g(x)$ and $\frac{f(x)}{g(x)}$.
+    \item All polynomial, rational, trigonometric and hyperbolic functions are continuous.
+    \item If $f(x)$ is continuous then so is $|f(x)|$.
+    \item If $\lim_{x \rightarrow a}g(x) = L$ exists and $f(x)$ is continuous at $x = L$ then $\lim_{x \rightarrow a}(f \circ g)(x) = f(L)$.
+\end{itemize}
+
+\subsection{The pinching theorem}
+The pinching (squeezing) theorem: If $g(x) \leq f(x) \leq h(x)$ for all $x \neq a$ in some open interval containing $a$ and $\lim_{x \rightarrow a}g(x) = \lim_{x \rightarrow a}h(x) = L$ then $\lim_{x \rightarrow a}f(x) = L$.
+
+\subsection{Two trigonometric limits}
+Two important trigonometric limits that may be assumed to be true and used are:
+\[
+\lim_{x \rightarrow 0}\frac{\sin x}{x} = 1\qquad\text{and}\qquad\lim_{x \rightarrow 0}\frac{1 - \cos x}{x} = 0.
+\]
+
+\begin{example}
+    \[
+    \lim_{x \rightarrow 0}\frac{\sin x}{x} = 1.
+    \]
+    \begin{proof}
+        To prove this we will use the pinching theorem, in order to use this we will need to prove the following inequalities $\sin x < x < \tan x$ for $0 < x < \frac{\pi}{2}$.
+
+        \textit{Insert Proof}
+
+        Next consider upper and lower bounding functions for $\frac{x}{\sin x}$ where $x \in (0, \frac{\pi}{2})$. Using the above we have
+        \[
+        1 =  \frac{\sin x}{\sin x} < \frac{x}{\sin x} < \frac{\tan x}{\sin x} = \frac{1}{\cos x}.
+        \]
+        As all combinations of functions in this inequality produce even functions then the result extends to $x \in (-\frac{\pi}{2}, 0) \cup (0, \frac{\pi}{2})$. The limits of the bounding functions are $\lim_{x \rightarrow 0}1 = 1$ and $\lim_{x \rightarrow 0}\left(\frac{1}{\cos x}\right) = 1$ hence by the pinching theorem $\lim_{x \rightarrow 0}\left(\frac{x}{\sin x}\right) = 1$ and therefore $\lim_{x \rightarrow 0}\left(\frac{\sin x}{x}\right) = 1$
+        
+    \end{proof}
+\end{example}
 
 \end{document}
