@@ -1,6 +1,8 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage{preamble}
 
+\declaretheorem[style = avgstyle, name = Counting Principle]{countprinc}
+
 \title{Probability I}
 \author{Luke Phillips}
 \date{October 2024}
@@ -294,5 +296,91 @@ Equally likely outcomes it means that $p_i$ are all equal and in this example $p
     \mathbb{P}(A) = \sum_{i : \omega_i \in A}p_i = \frac{1}{6}|A| = \frac{3}{6} = \frac{1}{2}.
     \]
 \end{example}
+
+
+\begin{definition}[Partition]
+    $E_1, E_2,\dotsc,E_k \in \mathcal{F}$ for a finite partition of the sample space $\Omega$, if
+    \begin{enumerate}[label = (\roman*)]
+        \item $\mathbb{P}(E_i) > 0$ for all $1 \leq i \leq k$,
+        \item $E_i\,\&\,E_j$ are pairwise disjoint, i.e. $\forall i \neq j,\,E_i \cap E_j = \emptyset$,
+        \item $\displaystyle\Omega = \bigcup_{i = 1}^{k}E_i$.
+    \end{enumerate}
+\end{definition}
+Easily, we can see that
+\[
+\sum_{i = 1}^{k} \mathbb{P}(E_i) = 1.
+\]
+
+\[
+\mathbb{P}(\Omega) = \bigcup_{i = 1}^{k}(E_i) \implies 1 = \sum_{i = 1}^{k}\mathbb{P}(E_i)\qquad\text{by A3}
+\]
+
+
+\subsubsection{Sigma algebra}
+\begin{definition}
+    $\mathcal{F}$, a collection of subsets of $\Omega$ is called a $\sigma$-algebra, if it satisfies
+    \begin{enumerate}[label = (S\arabic*)]
+        \item $\Omega \in \mathcal{F}$
+        \item $A \in \mathcal{F}$, then $A ^ c \in \mathcal{F}$.
+        \item if $\underbrace{A_1,\,A_2,\,\dotsc}_{\text{countably infinite}} \in \mathcal{F}$, then $\bigcup_{n = 1}^{\infty}A_n \in \mathcal{F}$.
+    \end{enumerate}
+\end{definition}
+
+\subsection{Consequences of (A1-A3)}
+
+\begin{proposition} \phantom{} \\
+    \begin{enumerate}[label = (C\arabic*)]
+        \item $A, B \in \mathcal{F}$, then $\mathbb{P}(B \setminus A) = \mathbb{P}(B) - \mathbb{P}(A \cap B)$.
+        \item $A \in \mathcal{F}$, $\mathbb{P}(A ^ c) = 1 - \mathbb{P}(A)$ (A2 + A3)
+        \item $\mathbb{P}(\emptyset) = 0$
+        \item $\mathbb{P}(A) \leq 1,\quad\text{for } A \in \mathcal{F}$ (Hint: use C2)
+        \item Monotonicity: $A \subseteq B$
+        \[
+        \mathbb{P}(A) \leq \mathbb{P}(B)
+        \]
+        \item $\mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A \cap B)$
+        \item Finite additivity: $A_1, A_2,\dotsc, A_k$ pairwise mutually exclusive
+        \[
+        \mathbb{P}\left(\bigcup_{i = 1}^{k}\right) = \sum_{i = 1}^{k}\mathbb{P}(A)
+        \]
+        \item Boole's inequality (if they are not mutually exclusive):
+        \[
+        \mathbb{P}\left(\bigcup_{i = 1}^{n}A_i\right) \leq \sum_{i = 1}^{n}\mathbb{P}(A_i)
+        \]
+    \end{enumerate}
+    \begin{proof}
+        C2:
+        $A \cup A ^ c = \Omega$\quad$A \cap A ^ C = \emptyset$
+
+        $\mathbb{P}(A \cup A ^ c) = 1$ (from A2)
+        (from A3)
+        $\mathbb{P}(A) + \mathbb{P}(A ^ c) = 1$
+
+        C3:
+        $\mathbb{P}(\emptyset) = 1 - \mathbb{P}(\Omega) = 1 - 1 = 0$ (by A3)
+
+        C4:
+        From 1, $\mathbb{P}(A) + \mathbb{P}(A ^ c) = 1$
+        
+        $\mathbb{P}(A) \geq 0,\,\mathbb{P}(A ^ c) \geq 0$, hence $\mathbb{P}(A) \leq 1$
+    \end{proof}
+\end{proposition}
+
+\section{Counting}
+
+\subsection{Equally likely outcomes}
+Finite sample space $\Omega = \{\omega_1,\omega_2,\dotsc, \omega_m\}$, $\mathbb{P}(\omega_1) = \mathbb{P}(\omega_2) = \mathbb{P}(\omega_m) = \frac{1}{m}$\footnote{$\mathbb{P}(\{\omega_i\}) = \mathbb{P}(\omega_i)$}, $A$, $\mathbb{P}(A) = \frac{|A|}{m} = \frac{|A|}{|\Omega|}$
+
+\begin{countprinc}[Multiplication principle]
+    $k$ choices in succession, where
+    \begin{enumerate}[label = (\roman*)]
+        \item $m_1$, possibility of first choice
+        \item $m_2$, possibility of second choice \\ \vdots
+        \item $m_k$, possibility of $k$th choice
+    \end{enumerate}
+    and at each stage, our choices are not affected by the past.
+
+    The total number of distinct choices = $\underbrace{m_1 \times m_2 \times \dotsi \times m_k}_{k \text{ times}} = \prod_{i = 1}^{k}m_i$.
+\end{countprinc}
 
 \end{document}

@@ -282,4 +282,78 @@ Need a domain $X$ e.g. $X = \R$ or $X = (0, \infty)$.
     \end{proof}
 \end{proposition}
 
+
+\subsection{The set of real numbers}
+There is a set of real numbers $\R$ which admits a function $+: \R \times \R \rightarrow \R$, called addition, write $+(x, y) = x + y$
+
+Addition satisfies,
+\begin{enumerate}[label = (A.\arabic*)]
+    \item Commutativity: $a + b = b + a$ for all $a, b \in \R$.
+    \item Associativity: $(a + b) + c = a + (b + c)$ for all $a, b, c \in \R$.
+    \item Existence of $0$: There is a real number $0$ with $0 + a = a$ for all $a \in \R$.
+    \item Existence of the negative: For every $a \in \R$ there is a unique $x \in \R$ such that $a + x = 0$.
+    
+    We write $-a$ for the unique $x$ with $a + x = 0$. $a + (-a) = 0$ by (A.2) $-a + a = 0$ so by uniqueness of the negative $-(-a) = a$.
+\end{enumerate}
+
+There is also a multiplication, a function $\cdot: \R \times \R \rightarrow \R$, write $a \cdot b = ab$ for $\cdot(a, b)$.
+
+Multiplication satisfies,
+\begin{enumerate}[label = (M.\arabic*)]
+    \item Commutativity: $a \cdot b = b \cdot a$ for all $a, b \in \R$.
+    \item Associativity: $a \cdot (b \cdot c) = (a \cdot b) \cdot c$ for all $a, b, c \in \R$.
+    \item Existence of $1$: There is a real number $1$ different from $0$ such that $1 \cdot a = a$ for all $a \in \R$.
+    \item Existence of the inverse: For every $a \in \R \setminus \{0\}$ there is a unique $x \in \R$ such that $a \cdot x = 1$. We write $a ^ {-1}$ for the inverse (or $\frac{1}{a}$).
+\end{enumerate}
+\begin{enumerate}[label = (D.\arabic*)]
+    \item Distributivity : We have
+    \[
+    a \cdot (b + c) = (a \cdot b) + (a \cdot c)
+    \]
+    we'll write $a \cdot b + a\cdot c$ as multiplication has precedence over addition.
+\end{enumerate}
+
+
+Let $a \in \R$, $a \cdot 0 = a \cdot (0 + 0) = a \cdot 0 + a \cdot 0$. Recall $a \cdot 0 \in \R$ so there is a negative $-(a \cdot 0)$, add to equation to get, $0 = a \cdot 0$.
+
+Similarly we can show $-a = (-1) \cdot a$ for $a \in \R$. Also $(-a) \cdot (-a) = (-a) ^ 2 = a ^ 2$.
+
+
+The next property of the reals is an existence of an order $<$. For any $a, b \in \R$ there is a statement $a < b$. We need to specify when this is true. We read this as "$a$ is smaller than $b$".
+
+We require
+\begin{enumerate}[label = (O.\arabic*)]
+    \item Trichotomy: We either have $a < b,\, a = b,\,\text{or } b < a$ (as a true statement).
+    \item Transitivity: If $a < b$ and $b < c$, then $a < c$.
+    \item Monotony of Addition: If $a < b$, then $a + c < b + c$ for all $c \in \R$.
+    \item Monotony of Multiplication: If $a < b$ and $0 < c$ then $c \cdot a < c \cdot b$
+\end{enumerate}
+If $a < b$ we also write $b > a$, we also write $a \leq b$ for ($a < b$ or $a = b$).
+
+If $a \in \R$ different from $0$, then either $a < 0$ or $0 < a$. Then $-a$ is also different from $0$ and by   (O.3) we have $0 < -a$ or $-a < 0$.
+
+\begin{proposition}
+    Let $a, b, c, d \in \R$. Then
+    \begin{enumerate}[label = (\alph*)]
+        \item If $a \neq 0$, then $a ^ 2 > 0$. In particular $1 > 0$.
+        \item If $a < b$ and $c < d$, then $a + c < b + d$.
+        \item If $0 < a < b$ and $0 < c < d$, then $a \cdot c < b \cdot d$.
+        \item If $a < b$ and $c < 0$, then $c \cdot b < c \cdot a$.
+        \item If $0 < a < b$ then $0 < b ^ {-1} < a ^ {-1}$.
+    \end{enumerate}
+
+    \begin{proof}
+        \begin{enumerate}[label = (\alph*)]
+            \item If $a > 0$, then $a ^ 2 = a \cdot a > a \cdot 0 = 0$
+            if $a < 0$, then $-a > 0$ now we use $(-a) ^ 2 = a ^ 2$ and $(-a) ^ 2 > 0$. $1 = 1 \cdot 1 = 1 ^ 2 > 0$.
+
+            \item b
+            \item c
+            \item Use $-c > 0$ so $-c \cdot a < -c \cdot b$ now apply (O.3) adding $c \cdot a + c \cdot b$.
+            \item Note $b ^ {-1} \neq 0$
+        \end{enumerate}
+    \end{proof}
+\end{proposition}
+
+
 \end{document}

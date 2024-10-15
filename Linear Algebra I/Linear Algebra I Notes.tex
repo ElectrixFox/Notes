@@ -568,6 +568,134 @@ For $\mbf{v, w} \in \R ^ n$ $\mbf{v, w \neq 0}$ if $\mbf{v \cdot w} = 0$ (so the
     solve for $w_1$ (two solutions)
 \end{example}
 
+\subsection{The vector product}
+The vector product (or cross product)
+\[
+\R ^ 3 \times \R ^ 3 \rightarrow \R ^ 3
+\]
+\[
+(\mbf{u, v}) \mapsto \mbf{u \times v}
+\]
 
+\begin{definition}
+    \[
+    \mbf{x \times y} = \begin{pmatrix}
+        x_1 \\ x_2 \\ x_3
+    \end{pmatrix}
+    \times
+    \begin{pmatrix}
+        y_1 \\ y_2 \\ y_3
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        x_2 y_3 - x_3 y_2 \\
+        x_3 y_1 - x_1 y_3 \\
+        x_1 y_2 - x_2 y_1
+    \end{pmatrix}
+    \]
+\end{definition}
+
+\begin{example}
+    \[
+    \begin{pmatrix}
+        7 \\ -4 \\ 2   
+    \end{pmatrix}
+    \times
+    \begin{pmatrix}
+        2 \\ 3 \\ -1
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        (-4)(-1) - 2 \cdot 3 \\
+        2 \cdot 2 - 7 \cdot (-1) \\
+        7 \cdot 3 - (-4)(2)
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        -2 \\ 11 \\ 29
+    \end{pmatrix}
+    \]
+\end{example}
+
+Properties of the cross product
+\begin{enumerate}[label = (\roman*)]
+    \item Anti-symmetry: $\mbf{u \times v} = -(\mbf{v \times u})$\quad$\forall\mbf{u, v} \in \R ^ 3$
+    \item Linearity 1:
+    $(\mbf{u + v} \times \mbf{w} = \mbf{u \times w} + \mbf{v \times w}$\quad$\forall\lambda \in \R$
+    
+    $(\lambda\mbf{u}) \times \mbf{v} = \lambda(\mbf{u \times v})$\quad$\forall\mbf{u, v, w} \in \R ^ 3$
+    
+    \item Linearity 2:
+    $\mbf{u} \times (\mbf{v + w}) = \mbf{u \times v + u \times w}$\quad$\forall\lambda \in \R$
+    
+    $\mbf{u} \times (\lambda\mbf{v}) = \lambda\mbf{u \times w}$\quad$\forall\mbf{u, v, w} \in \R ^ 3$
+
+    \item Orthogonality to the input
+    \[
+    \mbf{u \cdot (u \times v)} = 0 = \mbf{v \cdot (u \times v)}\quad\forall\mbf{u, v} \in \R ^ 3
+    \]
+\end{enumerate}
+In other words $\mbf{u \times v}$ is orthogonal to $\mbf{u}$ and $\mbf{v}$.
+
+\begin{lemma}
+    Suppose that $\mbf{x, y} \in \R ^ 3$ are vectors of length $|\mbf{x}| = r > 0$, $|\mbf{y}| = s > 0$. Then
+    \[
+    |\mbf{x \times y}| = rs\sin\theta
+    \]
+    where $0 \leq \theta \leq \pi$ is the angle between $\mbf{x}$ and $\mbf{y}$.
+    
+    \begin{proof}
+        \begin{align*}
+            |\mbf{x\times y}| ^ 2 &= (\mbf{x} \times \mbf{y}) \cdot (\mbf{x} \times \mbf{y}) \\
+            &= (x_2y_3 - x_3y_2) ^ 2 + (x_3y_1 - x_1y_3) ^ 2 + (x_1y_2 - x_2y_1) ^ 2 \\
+            &= (x_1 ^ 2 + x_2 ^ 2 + x_3 ^ 2)(y_1 ^ 2 + y_2 ^ 2 + y_3 ^ 2) - (x_1y_1 + x_2y_2 + x_3y_3) ^ 2 \\
+            &= r ^ 2 s ^ 2 - (\mbf{x \cdot y}) ^ 2 \\
+            &= r ^ 2 s ^ 2 - r ^ 2 s ^ 2 \cos ^ 2\theta \\ 
+            &= r ^ 2 s ^ 2 (1 - \cos ^ 2\theta) \\ 
+            &= r ^ 2 s ^ 2 \sin ^ 2 \theta 
+        \end{align*}
+    \end{proof}
+\end{lemma}
+
+\begin{example}
+    \[
+    \left|\begin{pmatrix}
+        7 \\ -4 \\ 2   
+    \end{pmatrix}\right| = \sqrt{49 + 16 + 4} = \sqrt{69}
+    \]
+    \[
+    \left|\begin{pmatrix}
+        2 \\ 3 \\ -1
+    \end{pmatrix}\right| = \sqrt{4 + 9 + 1} = \sqrt{14}
+    \]
+    \[
+    \left|\begin{pmatrix}
+        7 \\ -4 \\ 2   
+    \end{pmatrix}
+    \times
+    \begin{pmatrix}
+        2 \\ 3 \\ -1
+    \end{pmatrix}\right| = \left|\begin{pmatrix}
+        -2 \\ 11 \\ 29
+    \end{pmatrix}\right| = \sqrt{4 + 121 + 861} = \sqrt{966}.
+    \]
+    If $\theta$ is the angle between $\begin{pmatrix}
+        7 \\ -4 \\ 2   
+    \end{pmatrix}$ and $\begin{pmatrix}
+        2 \\ 3 \\ -1
+    \end{pmatrix}$ we have $\sqrt{966} = \sqrt{69}\sqrt{14}\sin\theta$ so $\sin\theta = 1$ and $\theta = \frac{\pi}{2}$.
+\end{example}
+
+\subsection{Planes in $\R ^ 3$}
+
+\textbf{The parametric form}
+
+Let $\Pi \subseteq \R ^ 3$ be a plane. $\mbf{a} \in \Pi$, point on the plane $\Pi$. $\mbf{d}_1, \mbf{d}_2 \in \R ^ 3$ parallel to $\Pi$ but not parallel to each other (i.e. "collinear"). $\mbf{d}_1 \neq 0$, $\mbf{d}_2 \neq 0$.
+
+To get to any point $\mbf{p} \in \Pi$, first travel to the point $\mbf{a} \in \Pi$ then along $\mbf{d}_1$ and $\mbf{d}_2$ some amount. So
+\[
+\Pi = \{\mbf{a} + \lambda_1\mbf{d}_1 + \lambda_2\mbf{d}_2\,|\,\lambda_1, \lambda_2 \in \R\}.
+\]
+$\lambda_1, \lambda_2$ are called "free variables".
 
 \end{document}
