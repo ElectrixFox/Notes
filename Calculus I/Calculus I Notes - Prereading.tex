@@ -192,8 +192,85 @@ Two important trigonometric limits that may be assumed to be true and used are:
         1 =  \frac{\sin x}{\sin x} < \frac{x}{\sin x} < \frac{\tan x}{\sin x} = \frac{1}{\cos x}.
         \]
         As all combinations of functions in this inequality produce even functions then the result extends to $x \in (-\frac{\pi}{2}, 0) \cup (0, \frac{\pi}{2})$. The limits of the bounding functions are $\lim_{x \rightarrow 0}1 = 1$ and $\lim_{x \rightarrow 0}\left(\frac{1}{\cos x}\right) = 1$ hence by the pinching theorem $\lim_{x \rightarrow 0}\left(\frac{x}{\sin x}\right) = 1$ and therefore $\lim_{x \rightarrow 0}\left(\frac{\sin x}{x}\right) = 1$
-        
     \end{proof}
 \end{example}
+
+\begin{example}
+    \[
+    \lim_{x \rightarrow 0}\frac{1 - \cos x}{x} = 0.
+    \]
+    \begin{proof}
+        \[
+        \lim_{x \rightarrow 0}\frac{1 - \cos x}{x} = \lim_{x \rightarrow 0}\frac{(1 - \cos x)(1 + \cos x)}{x(1 + \cos x)} = \lim_{x \rightarrow 0}\frac{\sin ^ 2 x}{x(1 + \cos x)} = \lim_{x \rightarrow 0}\left(\frac{\sin x}{x}\right) ^ 2 \frac{x}{(1 + \cos x)} = 0.
+        \]
+    \end{proof}
+\end{example}
+
+\subsection{Classification of discontinuities}
+If a function $f(x)$ is not continuous at a point $x = a$ then we say it has a discontinuity at $x = a$.
+
+\begin{definition}
+    $f(x)$ has a right-sided limit $L^+ = \lim_{x \rightarrow a+}f(x)$ as $x$ tends to $a$ from above if, $\forall\epsilon > 0\, \exists\delta > 0$ such that
+    \[
+    |f(x) - L^+| < \epsilon\quad\text{when}\quad 0 < x - a < \delta.
+    \]
+\end{definition}
+
+\begin{definition}
+    $f(x)$ has a left-sided limit $L^- = \lim_{x \rightarrow a^-}f(x)$ as $x$ tends to $a$ from below if $\forall\epsilon > 0\, \exists\delta > 0$ such that
+    \[
+    |f(x) - L^-| < \epsilon\quad\text{when}\quad 0 < a - x < \delta.
+    \]
+\end{definition}
+
+From these we can see that $L = \lim_{x \rightarrow a}$ exists if and only if $L^+$ and $L^-$ both exist and are equal. In which case $L = L^+ = L^-$.
+
+There are $3$ types of discontinuity:
+\begin{enumerate}[label = (\roman*)]
+    \item Removable discontinuity
+
+    In this case $L$ exists but $f(a) \neq L$.
+
+    The discontinuity can be removed to make the continuous function
+    \[
+    g(x) = \begin{cases}
+        f(x) &\text{if } x \neq a \\
+        L &\text{if } x = a
+    \end{cases}
+    \]
+
+    \item Jump discontinuity
+
+    In this case both $L^+$ and $L^-$ exist but $L^+ \neq L^-$.
+
+    \item Infinite discontinuity
+
+    In this case at least one of $L^+$ or $L^-$ does not exist.
+\end{enumerate}
+
+\subsection{Limits as $x \rightarrow \infty$}
+
+\begin{definition}
+    $f(x)$ has a limit $L$ as $x$ tends to $\infty$ if
+    $\forall \epsilon > 0\ \exists S > 0$ such that
+    \[
+    |f(x) - L| < \epsilon\quad\text{when } x > S.
+    \]
+\end{definition}
+We write
+\[
+\lim_{x \rightarrow \infty}f(x) = L\quad\text{or equivalently}\quad\limas[x]{f(x)}{L}.
+\]
+If there is no such $L$ then we say that no limit exists.
+
+\begin{definition}
+    $f(x)$ has a limit $L$ as $x$ tends to $-\infty$ if, $\forall \epsilon > 0\ \exists S < 0$ such that
+    \[
+    |f(x) - L| < \epsilon\quad\text{when}\quad x < S.
+    \]
+\end{definition}
+
+\subsection{The intermediate value theorem}
+The intermediate value theorem states that if $f(x)$ is continuous on $[a, b]$ and $u$ is any number between $f(a)$ and $f(b)$ then $\exists c \in (a, b)$ such that $f(c) = u$.
 
 \end{document}

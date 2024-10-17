@@ -383,4 +383,53 @@ Finite sample space $\Omega = \{\omega_1,\omega_2,\dotsc, \omega_m\}$, $\mathbb{
     The total number of distinct choices = $\underbrace{m_1 \times m_2 \times \dotsi \times m_k}_{k \text{ times}} = \prod_{i = 1}^{k}m_i$.
 \end{countprinc}
 
+\begin{example}
+    $3$ choices for breakfast, $4$ for lunch and $5$ for dinner. The total number of choices is
+    \[
+    3 \times 4 \times 5.
+    \]
+\end{example}
+
+\begin{example}
+    Debit Card Pins
+    \begin{enumerate}[label = (\roman*)]
+        \item Cannot be the same digit at all $4$ places.
+        \item Cannot be an increasing or decreasing sequence of consecutive.
+    \end{enumerate}
+
+    $A := \text{ Number of possible PINs}$
+    
+    $A^c := \text{ Number of not possible PINs}$
+
+    The number of sequences satisfying (i) is $10$.
+
+    The number of (ii) increasing consecutive sequences can start with $0,\, 1,\, 2,\,\dotsc,\, 6$ implies $7$ options. Similarly, decreasing consecutive sequences can start with $9,\,8,\,7,\,\dotsc,\,3$.
+
+    The total number of choices satisfying (ii) is $14$.
+
+    $|A ^ c| = 10 + 14 = 24$.
+
+    The number of unrestricted choices $= 10 ^ 4$.
+
+    $|A| = 10 ^ 4 - 24$.
+\end{example}
+
+\begin{countprinc}[Ordered choice of distinct objects with replacement]
+    $m$ distinct objects, choose $r$ of them with replacement, then the number of different ordered lists (i.e. $r$-tuples) is $\underbrace{m \times m \times \dotsi \times m}_{r \text{ choices}} = m ^ r$.
+\end{countprinc}
+
+\begin{countprinc}[Ordered choices of distinct objects without replacement]
+    $m$ distinct objects, choose $r$ ($r \leq m$) of them without replacement, then the number of such choices is denoted by $(m)_r$, where $(m)_r = m \times (m - 1) \times \dotsc \times (m - r + 1) = \frac{m!}{(m - r)!}$.
+\end{countprinc}
+
+\begin{example}[Birthday Problem]
+    There are $n$ people, a year is $365$ days,
+    \[
+    B = \{\text{At least two people have the same birthday}\}
+    \]
+    Find $\mathbb{P}(B)$.
+
+    $B ^ c = \{\text{No two people have the same birth day}\}$
+\end{example}
+
 \end{document}

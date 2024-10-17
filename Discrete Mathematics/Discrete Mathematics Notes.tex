@@ -92,4 +92,54 @@ X ^ n = X \times X \times \dotsi X = \{(x_1, x_2, \dots, x_n) : x_i \in X \text{
     Consider the set of all subsets of set $\{1, 2, \dots, 6\}$ we construct a bijection between $I ^ 6$ and the set of subsets. $A \mapsto (1, 1, 1, 1, 1, 1)$, $\{1, 4, 5\} \mapsto (1, 0, 0, 1, 1, 0)$
 \end{example}
 
+\section{Arrangements and permutations}
+An arrangement (or list) is a sequence (finite) of items in which order matters.
+
+The length of the arrangement is the number of items in the sequence.
+
+Standard problem \#1
+
+How many lists of length $k$ can be made from elements of a set of size $|S|$? There are $n ^ k$
+
+Standard problem \#2
+
+How many lists of length $k$ with no repetition can be made from elements of set $S$ with $|S| = n$?
+\[
+n(n - 1)(n - 2) \dotsi (n - k + 1) = \frac{n!}{(n - k)!}\quad\text{for } k \leq n
+\]
+we use the multiplication principle.
+
+$1 \leq i \leq k$, there are $n_i$ choices for the $i$th item in the list, regardless of previous choices the number of possible lists is $n_1  \cdot n_2 \dotsi n_k$.
+
+\begin{definition}
+    A permutation on a set $S$ is a list of elements of $S$ using each element exactly once.
+\end{definition}
+
+\begin{proposition}
+    If $|S| = n$ there are $n!$ permutations on $S$.
+
+    \begin{proof}
+        Standard proof \#2 (no repeats) with $n = k$.
+    \end{proof}
+\end{proposition}
+
+An $r$-permutation on $S$ is a list of $r$ distinct elements from $S$ permutation if $r = |S|$.
+
+We write $P(n, r)$ for the number of $r$-permutations on a set of size $n$.
+\[
+P(n, r) = n(n - 1) \dotsi (n - r + 1) = \frac{n!}{(n - r)!},\text{ for } 0 \leq r \leq n.
+\]
+
+\textbf{Addition principle}. If $A$ and $B$ are finite and disjoint sets. Then
+\[
+|A \cup B| = |A| + |B|
+\]
+if $A_1, A_2, \dotsc, A_n$ are pairwise disjoint, $A_i \cap A_j = \emptyset$ for all $i \neq j$, then
+\[
+|A_1 \cup A_2 \cup \dotsi \cup A_n| = |A_1| + |A_2| + \dotsi + |A_n|.
+\]
+\[
+\left|\bigcup_{i = 1}^{n}A_i\right| = \sum_{i = 1}^{n}|A_i|.
+\]
+
 \end{document}

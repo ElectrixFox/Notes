@@ -854,5 +854,101 @@ $L \subseteq \R ^ 3$. Take $\mbf{a} \in L$, $\mbf{d} \neq 0$ parallel to $L$. Th
 L = \{\mbf{a} +\lambda\mbf{d}\,|\, \lambda \in \R\}
 \]
 
+\textbf{Cartesian}
+
+Set $\mbf{a} = \begin{pmatrix}
+    a_1 \\ a_2 \\ a_3
+\end{pmatrix},\quad\mbf{d} = \begin{pmatrix}
+    d_1 \\ d_2 \\ d_3
+\end{pmatrix}$
+
+
+\[
+\begin{pmatrix}
+    x \\ y \\ z
+\end{pmatrix} \in L \iff
+\]
+\begin{align*}
+    a_1 + \lambda d_1 &= x \\
+    a_2 + \lambda d_2 &= y \\
+    a_3 + \lambda d_3 &= z
+\end{align*}
+for some $\lambda \in \R$
+
+Suppose $d_1 \neq 0,\, d_2 \neq 0,\,d_3 \neq 0$ then
+\[
+\lambda = \frac{x - a_1}{d_1},\,\lambda = \frac{y - a_2}{d_2},\,\lambda = \frac{z - a_3}{d_3}.
+\]
+
+So
+\[
+\begin{pmatrix}
+    x \\ y \\ z
+\end{pmatrix} \in L \iff
+\frac{x - a_1}{d_1} = \frac{y - a_2}{d_2} = \frac{z - a_3}{d_3}.
+\]
+
+So 
+\[
+L = \left\{\begin{pmatrix}
+    x \\ y \\ z
+\end{pmatrix} \in \R ^ 3 | \frac{x - a_1}{d_1} = \frac{y - a_2}{d_2} = \frac{z - a_3}{d_3}\right\}.
+\]
+
+If $d_1, d_2 \neq 0,\,d_3 = 0$ then $\lambda = \frac{x - a_1}{d_1} = \frac{y - a_2}{d_2},\, z = a_3$.
+
+If $d_1 \neq 0,\,d_2 = d_3 = 0$ then $y = a_2,\, z = a_3$.
+
+
+\textbf{Intersection of two planes}
+
+Suppose $\Pi_i = \{\mbf{x} \in \R ^ 3 \,|\, n_i \cdot \mbf{x} = \ell_i\}$ for $i = 1, 2$. Then, what is
+\[
+Pi_1 \cap \Pi_2 = \{\mbf{x}\in \R ^ 3 \,|\, \mbf{n}_1 \cdot \mbf{x} = \ell_1,\,\mbf{n}_2 \cdot \mbf{x} = \ell_2\}.
+\]
+
+If $\mbf{n}_1$ and $\mbf{n}_2$ are parallel (collinear) then either $\Pi_1 = \Pi_2$ or if $\Pi_1 \neq \Pi_2$ then $\Pi_1 \cap \Pi_2 = \emptyset$.
+
+If $\mbf{n}_1$ and $\mbf{n}_2$ are not parallel then $\Pi_1 \cap \Pi_2 = L$ for some line $L$
+
+So 
+\[L = \{\mbf{x}\in \R ^ 3 \,|\, \mbf{n}_1 \cdot \mbf{x} = \ell_1,\,\mbf{n}_2 \cdot \mbf{x} = \ell_2\} = \left\{\begin{pmatrix}
+    x \\ y \\ z
+\end{pmatrix} \in \R ^ 3 |
+    ax + by + cz = \ell_1,
+    dx + ey + fz = \ell_2
+\right\}
+\]
+
+Given a description of $L$ as in the intersection of two planes, how do we get the parametric description of $L$?
+We need $\mbf{a} \in L,\,\mbf{d \neq 0}$ where $\mbf{d}$ is parallel to $L$.
+
+$\mbf{d}$ is parallel to $\Pi_1$ and $\Pi_2$ so $\mbf{d} \cdot \mbf{n}_1 = 0$, and $\mbf{d} \cdot \mbf{n}_2 = 0$ so set $\mbf{d} = \mbf{n}_1 \times \mbf{n}_2 = \begin{pmatrix}
+    a \\ b \\ c
+\end{pmatrix} \times \begin{pmatrix}
+    d \\ e \\ f
+\end{pmatrix} = \begin{pmatrix}
+    bf - ce \\
+    cd - af \\
+    ae - bd
+\end{pmatrix}$.
+
+To find $\mbf{a} \in L$
+
+If $ae - bd \neq 0$ then
+
+$\mbf{d}$ has some "$z$-component",
+
+so $L$ intersects the $(x, y)$-plane at a unique point $\mbf{a} = \begin{pmatrix}
+    g \\ h \\ 0
+\end{pmatrix}$
+
+$g, h$ satisfy
+\begin{align*}
+    ag + bh + 0 &= \ell_1 \\
+    dg + eh + 0 &= \ell_2
+\end{align*}
+Solve for $g, h$.
+
 
 \end{document}

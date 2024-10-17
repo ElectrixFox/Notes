@@ -170,4 +170,72 @@ If no horizontal line intersects the graph of $f$ more than once then $f$ is inj
     A function $f : D \rightarrow C$ is bijective if it is both injective and surjective.
 \end{definition}
 
+\begin{example}
+    We have showed that $f(x) = 2x + 1$ is both injective and surjective, so it is bijective.
+\end{example}
+
+A bijective function $f : D \rightarrow C$ has a unique inverse $f ^ {-1}$ such 
+\[
+(f \circ f ^ {-1})(x) = x = (f ^ {-1} \circ f)(x).
+\]
+We can see that $\Ran f ^ {-1} = \Dom f$, $\Dom f ^ {-1} = \Ran f$. Equivalently, $y = f ^ {-1} (x) \iff f(y) = x$.
+
+\begin{example}
+    Since $f : \R \rightarrow \R$, $x \mapsto 2x + 1$ is bijective, we can find its inverse.
+
+    Let $y = f^{-1}(x)$ then $f(y) = x = 2y + 1$ so $y = \frac{x - 1}{2}$.
+\end{example}
+
+\begin{example}
+    $f : \R \rightarrow \R$, $x \mapsto x ^ 2$ is neither injective nor surjective, but if we reduce the domain to $[0, \infty)$ then it is injective with range $[0, \infty)$. So $g : [0, \infty) \rightarrow [0, \infty)$ $x \mapsto x ^ 2$ is bijective, and so we can find an inverse.
+
+    Let $y = f^{-1}(x)$, then $f(y) = x = y ^ 2$ so $y = f^{-1}(x) = \sqrt{x}$.
+\end{example}
+
+\newpage
+
+\section{Limits and continuity}
+
+Rough idea: A function $f(x)$ has a limit $L$ at $x = a$ if $f(x)$ is close to $L$ whenever $x$ is close to $a$.
+
+More precise idea: If we have an acceptable 'error' ($\epsilon,\ \epsilon > 0$) between $f$ and $L$, then I would need
+\[
+|f(x) - L| < \epsilon\quad\forall x \in \text{some interval around } a.
+\]
+If for any $\epsilon > 0$ can find some distance ($\delta,\ \delta > 0$) such that
+\[
+|f(x) - L| < \epsilon\quad\forall\quad 0 < |x - a| < \delta
+\]
+then we say that $f(x)$ has a limit $L$ as $x$ tends to $a$.
+
+\begin{definition}
+    $f(x)$ has a limit $L$ as $x$ tends to $a$ if
+    
+    $\forall \epsilon > 0,\,\exists \delta > 0$ such that
+    \[
+    |f(x) - L| < \epsilon
+    \]
+    $\forall x$ such that
+    \[
+    0 < |x - a| < \delta
+    \]
+\end{definition}
+We write $\displaystyle\lim_{x \rightarrow a}f(x) = L$ or $f(x) \rightarrow L \text{ as } x \rightarrow a$.
+
+If there is no such $L$ then the limit doesn't exist.
+
+Note: we do not require $f(a) = L$ or for $f(a)$ to even exist, as we only consider the interval $0 < |x - a| < \delta$.
+
+\subsection{Continuity}
+
+\begin{definition}
+    A function is continuous at the point $a$ if
+    \begin{itemize}
+        \item $f(a)$ exists,
+        \item $\lim_{x \rightarrow a}f(x)$ exists,
+        \item $\lim_{x \rightarrow a}f(x) = f(a)$.
+    \end{itemize}
+\end{definition}
+
+
 \end{document}
