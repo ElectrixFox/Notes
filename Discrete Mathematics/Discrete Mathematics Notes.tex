@@ -142,4 +142,39 @@ if $A_1, A_2, \dotsc, A_n$ are pairwise disjoint, $A_i \cap A_j = \emptyset$ for
 \left|\bigcup_{i = 1}^{n}A_i\right| = \sum_{i = 1}^{n}|A_i|.
 \]
 
+If $A \cup B = \emptyset$
+\[
+|A \cup B| = |A| + |B| - |A \cap B|
+\]
+
+\subsection{Counting examples}
+
+\begin{enumerate}[label = B\arabic*]
+    \item How many $4$-letter words use the letter E at least once?
+    
+    The number of $4$-letter words is $26 ^ 4$ those that do not use $E$ is $25 ^ 4$ hence the total number is $26 ^ 4 - 25 ^ 4$.
+    \item How many $4$-letter words use the letter E exactly once?
+
+    The number of $4$-letter words which use exactly E is equivalent to the set of all $4$ letter words, $4$ possible locations with $25 ^ 3$ other letter choices hence, the total is $4 \times 25 ^ 3$.
+    
+    \item How many $4$-letter words contain no three identical letters in consecutive positions?
+
+    There are $26 ^ 4$ possible words, there are $26 + (26 \times 25) + (26 \times 25)$ words with the same letter three times.
+
+    Hence the total is $26 ^ 4 - 51 \times 26$.
+    
+    \item How many $4$-letter words use both E and T both at least once?
+
+    There are $24 ^ 4$ words with neither an E nor a T. There are $26 ^ 4 - 24 ^ 4$ words with both E and T, and $|E| = |T| = 26 ^ 4 - 25 ^ 4$ So
+    \[
+    |E \cap T| = |E| + |T| - |E \cup T| = 2(26 ^ 4 - 25 ^ 4) - (26 ^ 4 - 24 ^ 4) = 26 ^ 4 - 2 \cdot 25 ^ 4 + 24 ^ 4.
+    \]
+    
+    \item How many $3$-letter words have their letters in strict alphabetical order ("strict" no letters can be the same)?
+
+    There are $26 \times 25 \times 24$ words with $3$ distinct letters. There are $3!$ permutations of these letters but they must be in strict alphabetical order which is only one of the $6$ permutations therefore the total is $\frac{1}{6}(26)_3 = \frac{1}{6}(26 \times 25 \times 24)$.
+    
+    
+\end{enumerate}
+
 \end{document}

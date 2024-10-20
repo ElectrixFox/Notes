@@ -430,6 +430,54 @@ Finite sample space $\Omega = \{\omega_1,\omega_2,\dotsc, \omega_m\}$, $\mathbb{
     Find $\mathbb{P}(B)$.
 
     $B ^ c = \{\text{No two people have the same birth day}\}$
+
+    Birthdays of the $n$ people $(D_1, D_2, D_3, \dotsc, D_n)$
+
+    $\Omega$ is the collection of all such tuples
+
+    $|\Omega| = 365 ^ n$
+
+    Let $B_i$ denote the event that exactly $i$ people have the same birthday. Then $B = \displaystyle \bigcup_{i = 1}^{n - 1}B_i$.
+
+    \[
+    B ^ c = \bigcap_{i = 1}^{n - 1}B_i ^ c
+    \]
+    $|B ^ c| = (365)_n$
+    \[
+    \mathbb{P}(B ^ c) = \frac{(365)_n}{(365) ^ n}, \text{ hence } \mathbb{P}(B) = 1 - \frac{(365)_n}{(365) ^ n}
+    \]
+\end{example}
+
+\begin{countprinc}
+    [Unordered choices of distinct objects without replacement]
+    $m$ objects, select $r \leq m$ of them without replacement, the number of distinct subsets that we can form.
+    \[
+    \binom{m}{r}\footnote{Or $C_r ^ m$} = \frac{m(m - 1)\dotsi(m - r + 1)}{r!} = \frac{m!}{r!(m - r)!}
+    \]
+    this is read as "$m$ choose $r$".
+\end{countprinc}
+
+\[
+\binom{m}{r} = \binom{m}{m - r}.
+\]
+
+\begin{countprinc}[Ordered choices of two types of objects]
+    $m$ objects, $r$ objects of type one, $(m - r)$ of type two. The number of distinct ordered choices is $\binom{m}{r}$.
+\end{countprinc}
+
+\begin{example}
+    Toss a "fair" coin $7$ times.
+
+    $E := \{\text{There are a total of $3$ heads}\}$.
+
+    Find $\mathbb{P}(E)$
+
+    The number of all possible choices is $|\Omega| = 2 ^ 7$.
+
+    The number of possible outcomes in $E$ are $\binom{7}{3}$
+    \[
+    \mathbb{P}(E) = \frac{|E|}{|\Omega|} = \frac{\binom{7}{3}}{2 ^ 7}
+    \]
 \end{example}
 
 \end{document}

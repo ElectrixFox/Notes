@@ -567,4 +567,84 @@ are multiples of each other or else the solution is a line.
     \]
 \end{lemma}
 
+\section{Matrix algebra}
+
+\subsection{What is a matrix?}
+
+\begin{definition}[Matrix]
+    A matrix is a rectangular array of numbers (or symbols, or functions) arranged into rows and columns.
+\end{definition}
+
+\textbf{Notation and Terminology:}
+\begin{itemize}
+    \item A matrix which has $m$ rows and $n$ columns is referred to as an $m \times n$ matrix. The individual entries in the matrix are sometimes referred to as its elements. The entry in the $i$th row and $j$th column of a matrix is referred to as the $(i,\,j)$th element of a matrix $M$, usually denoted $M_{ij}$.
+    \item Matrices which consist of a single column are (column) vectors. Matrices which consist of a single row are row vectors.
+\end{itemize}
+
+\begin{definition}[Transpose]
+    Given an $m \times n$ matrix $W$ we define $W ^ t$, the transpose of $W$, to be the $n \times m$ matrix whose $(i,\,j)$th entry is the $(j,\,i)$th entry of $W$; that is the matrix fow which
+    \[
+    (W ^ t)_{ij} = W_{ji}.
+    \]
+\end{definition}
+
+A matrix which is equal to its transpose is said to be symmetric.
+
+One way of describing or otherwise specifying the elements of a matrix is as follows. If $f(i,\,j)$ is some expression depending on $i$ and $j$ then $(f(i,\,j))_{m \times n}$ stands for the $m \times n$ matrix whose $(i,\,j)$th entry is $f(i,\,j)$. We often write an $m \times n$ matrix as $X = (x_{ij})_{m \times n}$, or $X = (x_{ij})$ if the size is obvious.
+
+We write $O_{m \times n}$ for $(0)_{m \times n}$ that is the $m \times n$ matrix all of whose entries are zero, this is called the $m \times n$ zero matrix.
+
+For $r$ and $s$ integers, we define $\delta_{r\.s}$ to be $1$ if $r = s$ and to be $0$ if $r \neq s$. (This is called the Kronecker delta.) The matrix $(\delta_{ij})_{m \times n}$ is denoted $I_n$ and is referred to as the $n \times n$ identity matrix.
+
+In general, we write $M_{m \times n}(\R)$ or $M_{m, n}(\R)$ for the set of all real $m \times n$ matrices. We also write $M_n(\R)$ for the set of square matrices of size $n$, so $M_n(\R) = M_{n, n}(\R)$. $M_{m, 1}(\R)$ is the same set as $\R ^ m$.
+
+\subsection{Matrix operations I: matrix addition and scalar multiplication}
+
+\begin{enumerate}[label = (\roman*)]
+    \item Matrix addition. This is a function
+    \[
+    M_{m \times n}(\R) \times M_{m \times n}(\R) \rightarrow M_{m \times n}(\R).
+    \]
+    For $X = (x_{ij})_{m \times n}$ and $Y = (y_{ij})_{m \times n}$ both $m \times n$ matrices, we define
+    \[
+    X + Y = (x_{ij})_{m \times n} + (y_{ij})_{m \times n} = (x_{ij} + y_{ij})_{m \times n},
+    \]
+    that is, matrix addition is defined by component wise addition. Matrix addition isn't defined when the matrices are of different sizes.
+    \item Scalar multiplication. This is a function
+    \[
+    \R \times M_{m \times n}(\R) \rightarrow M_{m \times n}(\R).
+    \]
+    For $X = (x_{ij})_{m \times n}$ in $M_{m \times n}(\R)$ and $\lambda \in \R$ we set
+    \[
+    \lambda X = (\lambda x_{ij})_{m \times n}
+    \]
+    that is, we multiply every entry of the matrix by $\lambda$.
+\end{enumerate}
+
+We write $-X$ for $(-1)X$. If $X ^ t = -X$ we say that $X$ is skew-symmetric (or anti-symmetric).
+
+\begin{proposition}[Properties of matrix addition and scalar multiplication]
+    Matrix addition and scalar multiplication for $M_{m, n}(\R)$ satisfy exactly the same properties as vector addition and scalar multiplication for $\R ^ n$. That is, the operations satisfy the axioms of a (real) vector space.
+
+    \textbf{Axioms for addition}
+    \begin{enumerate}[label = (\roman*)]
+        \item existence of additive identity: there is a matrix $O_{m \times n}$ in $M_{m, n}(\R)$ so that for all $X$ in $M_{m, n}(\R)$ we have $X + O_{m \times n} = X = O_{m \times n} + X$ 
+        \item commutativity: $X + Y = Y + x$ for all $X$ and $Y$ in $M_{m, n}(\R)$
+        \item existence of additive inverses: for each $X$ in $M_{m, n}(\R)$ there is an element $-X$ in $M_{m, n}(\R)$ such that $X + (-X) = O_{m \times n} = (-X) + X$
+        \item associativity: $(X + Y) + Z = X + (Y + Z)$ for all $X, Y, Z \in M_{m, n}(\R)$
+    \end{enumerate}
+    (As before this makes $M_{m, n}(\R)$ an abelian group under addition)
+
+    \textbf{Axioms for Scalar Multiplication}
+    \begin{enumerate}[label = (\roman*)]
+        \item $0X = O_{m \times n}$ for all $X$ in $M_{m, n}(\R)$
+        \item $1X = X$ for all $X$ in $M_{m, n}(\R)$
+        \item associativity: $(\lambda\mu)X = \lambda(\mu X)$ for all $\lambda, \mu \in \R$ and for all $X \in M_{m, n}(\R)$
+        \item distributivity: $(\lambda + \mu)X = \lambda X + \mu X$ and $\lambda (X + Y) = \lambda X + \lambda Y$ for all real $\lambda, \mu$ and for all $X$ and $Y$ in $M_{m, n}(\R)$.
+    \end{enumerate}
+    \begin{proof}
+        Do
+    \end{proof}
+\end{proposition}
+
 \end{document}

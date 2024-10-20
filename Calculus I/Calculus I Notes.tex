@@ -237,5 +237,214 @@ Note: we do not require $f(a) = L$ or for $f(a)$ to even exist, as we only consi
     \end{itemize}
 \end{definition}
 
+\begin{definition}
+    $f(x)$ is continuous on a subset $S$ of its domain if it is continuous at all points in $S$.
+\end{definition}
+
+\begin{definition}
+    $f(x)$ is continuous if it is continuous at every point in its domain.
+\end{definition}
+
+\begin{example}
+    Let $f(x) = \begin{cases}
+        x ^ 2 &\text{if}\  -1\leq x < 0 \\
+        1 &\text{if}\  x = 0 \\
+        x ^ 2 &\text{if}\  0 < x \leq 1 
+    \end{cases}$
+    Then $f(x)$ is continuous on $[-1,\, 1] \setminus \{0\}$, but not continuous at $x = 0$ as $\displaystyle\lim_{x \rightarrow 0}f(x) = 0 \neq f(0)$.
+\end{example}
+
+\begin{example}
+    Let $f(x) = \begin{cases}
+        1 &\text{if}\  x \leq 0 \\
+        x ^ 2 &\text{if}\  x > 0
+    \end{cases}$
+    is not continuous at $x = 0$ as $\displaystyle\lim_{x \rightarrow 0}f(x)$ does not exist.
+\end{example}
+
+\subsection{Classification of discontinuities}
+\begin{definition}
+    $f(x)$ has a right-sided limit $\displaystyle L ^ + = \lim_{x \rightarrow a+}f(x)$ as $x$ tends to $a$ from above (or the right) if
+    $\forall\epsilon >0,\ \exists\delta > 0$ such that
+    \[
+    |f(x) - L^+| < \epsilon
+    \]
+    $\forall x$ such that $0 < x - a < \delta$.
+\end{definition}
+
+\begin{definition}
+    $f(x)$ has a left-sided limit $\displaystyle L ^ - = \lim_{x \rightarrow a-}f(x)$ as $x$ tends to $a$ from below (or the left) if
+    $\forall\epsilon >0,\ \exists\delta > 0$ such that
+    \[
+    |f(x) - L^-| < \epsilon
+    \]
+    $\forall x$ such that $0 < a - x < \delta$.
+\end{definition}
+
+$\displaystyle L = \lim_{x \rightarrow a}f(x)$ exists if and only if $L ^ +,\ L ^ -$ both exist and $L ^ + = L ^ -$. Then $L = L ^ + = L ^ -$.
+
+Using the definitions of right and left sided limits, there are three types of discontinuity.
+\begin{enumerate}[label = \roman*)]
+    \item Removable discontinuity. $L$ exists but $f(a) \neq L$, we can always 'remove' the discontinuity to make a continuous function
+    \[
+    g(x) = \begin{cases}
+        f(x) &\text{if}\ x \neq a \\
+        L &\text{if}\ x = a
+    \end{cases}
+    \]
+
+    \begin{example}
+        \[
+        f(x) = \begin{cases}
+            x ^ 2 &\text{if}\ x \neq 0 \\
+            1 &\text{if}\ x = 0
+        \end{cases}
+        \]
+        has a removable discontinuity at $x = 0$ removing this gives the continuous function $g(x) = x ^ 2$
+    \end{example}
+    
+    \item Jump discontinuity. $L ^ +$ and $L ^ -$ both exist, but $L ^ + \neq L ^ -$.
+    \begin{example}
+        \[
+        f(x) = \begin{cases}
+            1 &\text{if}\ x \leq 0 \\
+            x ^ 2 &\text{if}\ x > 0
+        \end{cases}
+        \]
+        Here $L ^ + = 0,\ L ^ - = 1$, sp $L ^ + \neq L ^ -$ and no limit exists
+    \end{example}
+
+    \item Infinite (Essential) discontinuity. At least one of $L ^ +$ and $L ^ -$ does not exist.
+    \begin{example}
+        $f(x) = \frac{1}{x}$ has an infinite discontinuity at $x = 0$. Here neither $L ^ +$ nor $L ^ -$ exists.
+    \end{example}
+    \begin{example}
+        $f(x) = \sin\left(\frac{1}{x}\right)$ has an infinite discontinuity at $x = 0$. Neither $L ^ +$ nor $L ^ -$ exists.
+    \end{example}
+\end{enumerate}
+
+\subsection{Facts about limits and continuity}
+Facts about limits
+\begin{itemize}
+    \item The limit is unique.
+    \item If $f(x) = g(x)$ (except possibly at $x = a$) in some open interval containing $a$, then
+    \[
+    \lim_{x \rightarrow a}f(x) = \lim_{x \rightarrow a}g(x).
+    \]
+    \item If $f(x) \geq K$ on either some interval $(a, b)$ or $(c, a)$ and if $\lim_{x \rightarrow a}f(x) = L$ then $L \geq K$ (Similarly replacing $\geq$ with $\leq$).
+    \item Calculus of Limits Theorem (COLT)
+    
+    If $\lim_{x \rightarrow a}f(x) = L$ and $\lim_{x \rightarrow a}g(x) = M$, then
+    \begin{enumerate}[label = \roman*)]
+        \item \[
+        \lim_{x \rightarrow a}(f(x) + g(x)) = L + M
+        \]
+        \item \[
+        \lim_{x \rightarrow a}(f(x) \cdot g(x)) = L \cdot M
+        \]
+        \item If $M \neq 0$ then \[
+            \lim_{x \rightarrow a}\left(\frac{f(x)}{g(x)}\right) = \frac{L}{M}.
+        \]
+    \end{enumerate}
+\end{itemize}
+
+The following are facts about continuity
+\begin{itemize}
+    \item If $f$ and $g$ are continuous, then so are $(f + g),\ (fg), \left(\frac{f}{g}\right)$ and $|f|$.
+    \item All polynomial, rational, trigonometric and hyperbolic functions are continuous.
+    \item If $\lim_{x \rightarrow a}g(x) = L$ and $f(x)$ is continuous at $x = L$, then
+    \[
+    \lim_{x \rightarrow a}(f \circ g)(x) = f(L).
+    \]
+\end{itemize}
+
+\begin{example}
+    The following are continuous
+    \[
+    f(x) = 2x ^ 3 + x + 7,\quad g(x) = \frac{3x}{x - 1},\quad h(x) = \left|\frac{1 + x ^ 2}{\sin x}\right|
+    \]
+\end{example}
+
+\begin{example}
+    \[
+    \lim_{x \rightarrow 0}\,\frac{1}{x}\ \text{does not exist.}
+    \]
+\end{example}
+
+\begin{example}
+    \begin{align*}
+    \lim_{x \rightarrow \frac{\pi}{2}}\,x ^ 2 \sin x &=\footnote{COLT} \left(\lim_{x \rightarrow \frac{\pi}{2}} x^ 2 \right)\left(\lim_{x \rightarrow \frac{\pi}{2}} \sin x\right) \\
+    &= \left(\frac{\pi}{2}\right) ^ 2 \cdot 1 = \frac{\pi ^ 2}{4}.
+    \end{align*}
+\end{example}
+
+\begin{example}
+    \begin{align*}
+    \lim_{x \rightarrow 3}\,\frac{2x ^ 2 - 18}{x - 3} &= \lim_{x \rightarrow 3}\, \frac{2(x + 3)(x - 3)}{x - 3} \\
+    &= \lim_{x \rightarrow 3}\,2(x + 3)\quad\text{Since the value at $x = 3$ is irrelevant for the limit.} \\
+    &= 2(6) = 12.
+    \end{align*}
+\end{example}
+
+\subsection{The pinching (squeezing) theorem}
+\begin{theorem}[Squeezing theorem]\label{calc_thm_squeze}
+    If $g(x) \leq f(x) \leq h(x)$ for all $x \neq a$ in some open interval containing $a$, and $\displaystyle \lim_{x \rightarrow a}g(x) = \lim_{x \rightarrow a} h(x) = L$ then
+    \[
+    \lim_{x \rightarrow a}f(x) = L.
+    \]
+\end{theorem}
+
+\begin{example}
+    Calculate
+    \[
+    \lim_{x \rightarrow 0} x ^ 2 \sin \left(\frac{1}{x}\right).
+    \]
+    As $-1 \leq \sin \left(\frac{1}{x}\right) \leq 1$ then $-x ^ 2 \leq x ^ 2 \sin \left(\frac{1}{x}\right) \leq x ^ 2$.
+
+    We have $\lim_{x \rightarrow 0}(-x ^ 2) = 0$, $\lim_{x \rightarrow 0}(x ^ 2) = 0$ so by \autoref{calc_thm_squeze}
+    \[
+    \lim_{x \rightarrow 0} x ^ 2 \sin \left(\frac{1}{x}\right) = 0.
+    \]
+\end{example}
+
+\subsection{Two trigonometric limits}
+Two important limits are the following
+\[
+\lim_{x \rightarrow 0}\frac{\sin x}{x} = 1
+\]
+\[
+\lim_{x \rightarrow 0}\frac{1 - \cos x}{x} = 0
+\]
+
+We can prove the first limit using \autoref{calc_thm_squeze}.
+
+\textbf{Gr11}
+
+Let $T_1$ be the area of the triangle OAB, $T_2$ be the area of the triangle OAC, $S$ be the area of sector OAB. Clearly $T_1 < S < T_2$. The length of BD is $\sin x$, the length of AC is $\tan x$
+\[
+T_1 = \frac{1}{2}\sin x\quad T_2 = \frac{1}{2}\tan x\quad S = \left(\frac{x}{2\pi}\right) \cdot \pi = \frac{x}{2}.
+\]
+Therefore $\sin x < x < \tan x$. Now for $x \in \left(0, \frac{\pi}{2}\right)$
+\[
+1 = \frac{\sin x}{\sin x} < \frac{x}{\sin x} < \frac{\tan x}{\sin x} = \frac{1}{\cos x}
+\]
+and since all these functions are even, the same holds on $\left(-\frac{\pi}{2}, 0\right)$.
+
+We also have
+\[
+\lim_{x \rightarrow 0} 1 = 1\quad\lim_{x \rightarrow 0}\frac{1}{\cos x} = 1,
+\]
+so by \autoref{calc_thm_squeze}
+\[
+\lim_{x \rightarrow 0}\frac{x}{\sin x} = 1\text{ and therefore } \lim_{x \rightarrow 0}\frac{\sin x}{x} = 1
+\]
+
+We can use this to prove the second limit
+\begin{align*}
+\lim_{x \rightarrow 0}\frac{1 - \cos x}{x} &= \lim_{x \rightarrow 0}\frac{(1 - \cos x)(1 + \cos x)}{x(1 + \cos x)} \\ 
+&= \lim_{x \rightarrow 0}\frac{\sin ^ 2 x}{x(1 + \cos x)} \\
+&= \lim_{x \rightarrow 0}\left(\frac{\sin x}{x}\right)\left(\frac{\sin x}{1 + \cos x}\right) \\
+&= 1 \cdot 0 = 0.
+\end{align*}
 
 \end{document}

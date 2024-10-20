@@ -2,6 +2,7 @@
 \usepackage{preamble}
 
 \declaretheorem[style = avgstyle, name = Counting Principle]{countprinc}
+\newcommand{\Po}{\mathbb{P}}
 
 \title{Probability I \\
     \large Prereading}
@@ -289,5 +290,44 @@ The expression $\binom{m}{r}$ is the binomial coefficient for choosing $r$ objec
     There are $\binom{6 - 3 - 1}{6} = \binom{8}{2} = 28$ ways to divide the coins amongst the people.
 \end{example}
 
+\section{Conditional probability and independence}
+
+\begin{definition}
+    For events $A, B \subseteq \Omega$, the conditional probability of $A$ given $B$ is
+    \[
+    \Po(A | B) := \frac{\Po (A \cap B)}{\Po (B)}\text{ whenever } \Po(B) > 0.
+    \]
+\end{definition}
+The usual interpretation is that $\Po(A | B)$ represents our probability for $A$ after we have observed $B$.
+
+\begin{example}
+    Roll a fair dice and let $A$ be the event that the score is odd and $B$ be the event that the score is at most $3$. What is $\Po (A | B)$?
+
+    If $A = \{1, 3, 5\}$ and $B = \{1, 2, 3\}$ we have $A \cap B = \{1, 3\}$ so
+    \[
+    \Po (A | B) = \frac{\Po(\{1, 3\})}{\Po(\{1, 2, 3\})} = \frac{\frac{2}{6}}{\frac{3}{6}} = \frac{2}{3}.
+    \]
+\end{example}
+
+\subsection{Properties of conditional probability}
+
+\begin{enumerate}[label = P\arabic*]
+    \item For any event $B \subseteq \Omega$ for which $\Po (B) > 0$, $\Po(\cdot | B)$ satisfies axioms A1-4 (i.e., is a probability on $\Omega$) and therefore satisfies also C1-10.
+
+    \item The multiplication rule for probabilities (simple version): for any events $A$ and $B$ with $\Po (A) > 0$ and $\Po(B) > 0$,
+    \[
+    \Po (A \cap B) = \Po (B) \Po(A | B) = \Po(A) \Po(B | A).
+    \]
+    More generally, for any $A, B$ and $C$:
+    \[
+    \Po(A \cap B | C) = \Po(B | C) \Po(A | B \cap C),\text{ if } \Po(B \cap C) > 0.
+    \]
+
+    \item The multiplication rule for probabilities (general version): for any events $A_0, A_1, \dotsc, A_k$ with $\Po\left(\bigcap_{i = 0}^{k - 1}A_i\right) > 0$,
+    \begin{align*}
+    \Po\left(\bigcap_{i = 1}^{k}A_i \,\middle|\, A_0\right) &= \Po(A_1 | A_0) \times \Po(A_2 | A_1 \cap A_0) \times \dotsi \\
+    &\dotsi\times \Po\left(A_{k - 2} \,\middle|\, \bigcap_{i = 0}^{k - 3}A_i\right) \times \Po\left(A_{k - 1} \,\middle|\, \bigcap_{i = 0}^{k - 2}A_i\right) \times \Po\left(A_{k} \,\middle|\, \bigcap_{i = 0}^{k - 1}A_i\right).
+    \end{align*}
+\end{enumerate}
 
 \end{document}

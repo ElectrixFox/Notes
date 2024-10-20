@@ -1,0 +1,45 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\declaretheorem[style = avgstyle, name = Problem]{problem}
+
+\newcommand{\Po}{\mathbb{P}}
+
+\title{Probability I Problem Sheet Solutions}
+\author{Luke Phillips}
+\date{October 2024}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\section{Introduction}
+
+\begin{problem}[35]
+    Find the probability that in a family of six children, the second child is a girl but they are not all girls (assuming all outcomes are equally likely)
+    
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        Let $\Po(A)$ be the probability that all children are girls and let $\Po(B)$ be the probability that the second child is a girl.
+
+        Here we can see that there are $2 ^ 6$ different possibilities hence we can apply classical probability and the definition of equally likely outcomes to see that
+        \[
+        \Po(B) = \frac{1}{2 ^ 6} \cdot 1 = \frac{1}{2 ^ 6}\quad\text{since there is only one possibility that they are all girls.}
+        \]
+        Similarly
+        \[
+        \Po(A) = \frac{1}{2 ^ 6} \cdot (2 ^ 6 - 2 ^ 5) = \frac{2 ^ 6 - 2 ^  5}{2 ^ 6}\quad\text{since there are $2 ^ 6 - 2 ^ 5$ number of possibilities where the second child is a girl.}
+        \]
+        Using these facts we can then apply C1 to obtain an expression for the probability of the event that the second child is a girl but they are not all girls
+        \begin{align*}
+            \Po(A \setminus B) &= \Po(A) - \Po(A \cap B) \\
+            &= \frac{2 ^ 6 - 2 ^ 5}{2 ^ 6} - \frac{1}{2 ^ 6} \cdot \frac{2 ^ 6 - 2 ^ 5}{2 ^ 6} \\
+            &= \frac{1}{2}\left(1 - \frac{1}{2 ^ 6}\right) \\
+            &= \frac{2 ^ 6 - 1}{2 ^ 7}.
+        \end{align*}
+        This gives us the final probability of $\dfrac{2 ^ 6 - 1}{2 ^ 7}$.
+    \end{proof}
+\end{problem}
+
+\end{document}
