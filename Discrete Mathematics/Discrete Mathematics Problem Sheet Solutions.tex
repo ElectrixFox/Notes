@@ -1,0 +1,119 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\declaretheorem[style = avgstyle, name = Problem]{problem}
+
+\title{Discrete Mathematics Problem Sheet Solutions}
+\author{Luke Phillips}
+\date{October 2024}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\section{Introduction}
+
+\begin{problem}[Q10]\phantom{}
+    \begin{enumerate}[label = (\alph*)]
+        \item In how many ways can $6$ people be seated around dinner table if all rotations of a given arrangement are regarded as the same?
+        \item In how many ways can $6$ different spherical beads be arranged on a circular ring?
+    \end{enumerate}
+    \begin{enumerate}[label = (\alph*)]
+        \item 
+        \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+            If we assign a number to each seat and a letter to each person then person $A$ has $6$ choices, person $B$ has $5$ then person $C$ has $4$ choices and so on until there is only one seat left. This looks like the following
+            \[
+            6 \times 5 \times 4 \times 3 \times 2 \times 1 = 6!,
+            \]
+            hence there are $6!$ ways of seating $6$ people around the table excluding rotations.
+        \end{proof}
+        \item
+        \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+            This is similar to the previous problem as there are $6$ different beads and they can be arranged in different ways. Therefore we get $6!$ ways of arranging the beads.
+        \end{proof}
+    \end{enumerate}
+\end{problem}
+
+\newpage
+
+\begin{problem}[Q11]
+    \begin{enumerate}[label = (\alph*)]
+        \item How many $5$ letter words can be made from $\{\text{X, Y, Z}\}$ that include at least one $X$?
+        \item How many of the words specified in (a) also contain Y?
+        \item How many of the words specified in (b) also contain Z?
+    \end{enumerate}
+
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        
+    \end{proof}
+\end{problem}
+
+\newpage
+
+\begin{problem}[Q12]\phantom{}
+    \begin{enumerate}[label = (\alph*)]
+        \item In how many ways can $8$ identical pieces be placed on the squares of an $8$-by-$8$ chess board so that no row or column contains more than one piece?
+        \item The same question as in (a) but with $n$ pieces on an $n$-by-$n$ board.
+    \end{enumerate}
+    \begin{enumerate}[label = (\alph*)]
+        \item 
+        \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+            To simplify this problem we will think of all of the different positions along the row for each piece on each row. Firstly, the first piece has $8$ options to be placed on, but since this eliminates one of the columns, the second piece (the piece on the row above the first) will only have $7$ options. This pattern continues, where the third piece only has $6$ options, the fourth $5$ options, and so on until we reach the eighth piece with only one option. Therefore using the multiplication principle we can see that the total number of ways is
+            \[
+            8 \times 7 \times 6 \times 5 \times 4 \times 3 \times 2 \times 1 = 8!.
+            \]
+        \end{proof}
+        \item 
+        \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+            Using similar logic to that of the previous question we can see that, for an $n\times n$ grid the choices go as follows,
+            \begin{enumerate}[label = {}]
+                \item $n$ choices for the $1^{\text{st}}$ row.
+                \item $n - 1$ choices for the $2^{\text{nd}}$ row.
+                \item $\vdots$
+                \item $2$ choices for the $(n - 1)^{\text{th}}$ row.
+                \item $1$ choice for the $n^{\text{th}}$ row.
+            \end{enumerate}
+            We can clearly see that the number of ways will therefore be $n!$.
+        \end{proof}
+    \end{enumerate}
+\end{problem}
+
+\newpage
+
+\begin{problem}[Q14]
+    A class consists of $n$ girls and $m$ boys. In how many ways can they stand in a single line so that all the girls are together?
+
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        
+    \end{proof}
+\end{problem}
+
+\newpage
+
+\begin{problem}[Q15]
+    How many rearrangements of the letters FORMULA contain FOR as three successive letters in that order? How about FOR together but not necessarily in that order?
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        When we are considering rearrangements of the letters of FORMULA which contain FOR as three successive letters we can see that there are $7$ letters in the word FORMULA and $3$ of them have to be taken by FOR hence there are $5$ blocks (or boxes) which can contain either a letter or FOR. The remaining $4$ letters can be placed in the blocks in $4!$ different ways. This means that there are $5$ different ways to place the FOR in the blocks and $4!$ different ways to place the rest of the letters in the blocks, hence the total number of rearrangements is
+        \[
+        5 \cdot 4! = 120.
+        \]
+        If we consider FOR still being together but not in that order we get
+        \[
+        5 \cdot 4! \cdot 3! = 720
+        \]
+        rearrangements as there are $3!$ ways of rearranging FOR when it is in its block.
+    \end{proof}
+\end{problem}
+
+\newpage
+
+\begin{problem}[Q16]
+    $6$ people sit on a row of $6$ chairs. They stand up and then sit down again (possibly on different chairs). In how many ways can the re-seating be done so that the two end chairs are each not occupied by the same person as sat on them originally.
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        
+    \end{proof}
+\end{problem}
+
+\end{document}

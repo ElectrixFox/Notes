@@ -273,4 +273,119 @@ If there is no such $L$ then we say that no limit exists.
 \subsection{The intermediate value theorem}
 The intermediate value theorem states that if $f(x)$ is continuous on $[a, b]$ and $u$ is any number between $f(a)$ and $f(b)$ then $\exists c \in (a, b)$ such that $f(c) = u$.
 
+\section{Differentiation}
+
+\subsection{Derivative as a limit}
+The derivative $f'(a)$ of a function $f(x)$ at $x = a$ is geometrically equal to the slope of the tangent to the graph of $f(x)$ at $x = a$.
+
+A secant is a line that intersects a curve at two points.
+
+The tangent is obtained in the limit as $h \rightarrow 0$ and the derivative at $a$ is the slope of the secant in this limit i.e.
+\[
+f'(a) = \lim_{h \rightarrow 0}\frac{f(a + h) - f(a)}{h}
+\]
+providing this limit exists.
+
+If this limit exists then we say that $f(x)$ is differentiable at $x = a$.
+
+If $f'(a)$ exists for all $a$ in $\Dom f$ we say that $f(x)$ is differentiable and then $f'(a)$ defines a function $f'(x)$ called the derivative.
+
+We can use the fact that the derivative is equal to the slope of the tangent of the graph to determine a Cartesian equation for the tangent by calculating the derivative. Explicitly, the tangent line at the point $(a, f(a))$ is given by $y = f(a) + f'(a)(x - a)$.
+
+A necessary condition for a function to be differentiable at a point is that it is continuous at that point.
+
+Geometrically, there are two ways a function can fail to be differentiable at a point where it is continuous: the tangent line is vertical at that point, there is no tangent line at that point.
+
+\subsection{The Leibniz and chain rules}
+If $f(x)$ is differentiable then its derivative $f'(x)$ may also be differentiable, we denote its derivative by $f''(x)$ (the second derivative of $f(x)$). In general the $n^{\text{th}}$ derivative is $f^{(n)}(x)$ (alternately $f^{(n)}(x) = \frac{d^n f}{dx ^ n}$ or $f^{(n)}(x) = D ^ n f(x)$).
+
+If the independent variable represents time, say $f(t)$, then $f'(t) = \dot{f}$ and $f''(t) = \ddot{f}$.
+
+The product rule for differentiation is just the first case of the more general Leibniz rule:
+If $f(x)$ and $g(x)$ are both differentiable $n$ times then so is the product $f(x)g(x)$ with
+\[
+D ^ n (fg) = \sum_{k = 0}^{n}\binom{n}{k}(D ^ k f)(D ^ {n - k} g).
+\]
+
+\begin{example}
+    Use the Leibniz rule to calculate $D ^ 3 (x ^ 2 \sin x)$.
+
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        \[
+        D ^ 3 (fg) = f(D ^ 3 g) + 3(Df)(D ^ 2 g) + 3(D ^ 2 f)(D g) + (D ^ 3 f)g.
+        \]
+        $f = x ^ 2,\quad Df = 2x\quad D ^ 2f = 2\quad D ^ 3 f = 0$.
+        
+        $g = \sin x,\quad Dg = \cos x\quad D ^ 2g = -\sin x\quad D ^ 3 g = -\cos x$.
+
+        \begin{align*}
+            D ^ 3(x ^ 2 \sin x) &= -x ^ 2 \cos x + 3(2x)(-\sin x) + 3(2)(\cos x) + 0(\sin x) \\
+            &= -x ^ 2 \cos x - 6x\sin x + 6\cos x \\
+            &= (6 - x ^ 2)\cos x - 6x\sin x.
+        \end{align*}
+    \end{proof}
+\end{example}
+
+To differentiate composite functions $(f \circ g)(x) = f(g(x))$ we use the following theorem
+\begin{theorem}[Chain rule theorem]
+    If $g(x)$ is differentiable at $x$ and $f(x)$ is differentiable at $g(x)$ then the composition $(f \circ g)(x)$ is differentiable at $x$ with
+    \[
+    (f \circ g)'(x) = f'(g(x))g'(x).
+    \]
+\end{theorem}
+We can use Leibniz notation to rewrite the above formula
+\[
+\frac{d}{dx}f(g(x)) = \frac{df}{dg}\frac{dg}{dx}.
+\]
+
+\subsection{L'H\^opital's rule}
+Recall that if $\lim_{x \rightarrow a}f(x) = L$ and $\lim_{x \rightarrow a}g(x) = M \neq 0$ then $\lim_{x \rightarrow a}\frac{f(x)}{g(x)} = \frac{L}{M}$. This is not applicable to the situation where $L = M = 0$, which is called an in-determinant form.
+
+\textbf{L'H\^opital's rule}
+
+Let $f(x)$ and $g(x)$ be differentiable on $I = (a - h, a) \cup (a, a + h)$ for some $h > 0$, with $\lim_{x \rightarrow a}f(x) = \lim_{x \rightarrow a}g(x) = 0$.
+
+If $\lim_{x \rightarrow a}\frac{f'(x)}{g(x)}$ exists and $g'(x) \neq 0\, \forall x \in I$ then
+\[
+\lim_{x \rightarrow a}\frac{f(x)}{g(x)} = \lim_{x \rightarrow a}\frac{f'(x)}{g'(x)}.
+\]
+\begin{proof}
+    We shall only consider the proof for the slightly easier situation in which $f(x)$ and $g(x)$ are both differentiable at $x = a$ and $g'(a) \neq 0$. In this case
+    \[
+    \lim_{x \rightarrow a}\frac{f(x)}{g(x)} = \lim_{x \rightarrow a}\frac{f(x) - f(a)}{g(x) - g(a)} = \lim_{x \rightarrow a}\frac{\frac{f(x) - f(a)}{x - a}}{\frac{g(x) - g(a)}{x - a}} = \frac{\lim_{x \rightarrow a}\frac{f(x) - f(a)}{x - a}}{\lim_{x \rightarrow a}\frac{g(x) - g(a)}{x - a}} = \frac{f'(a)}{g'(a)} = \lim_{x \rightarrow a}\frac{f'(x)}{g'(x)}.
+    \]
+\end{proof}
+
+
+\subsection{Boundedness and monotonicity}
+The following definitions apply to a function $f(x)$ defined in some interval $I$.
+
+\begin{definition}
+    If there exists a constant $k_1$ such that $f(x) \leq k_1\ \forall x \in I$ we say that $f(x)$ is bounded above in $I$ and we call $k_1$ an upper bound of $f(x)$ in $I$.
+
+    If there exists a point $x_1$ in $I$ such that $f(x_1) = k_1$ we say that the upper bound of $k_1$ is attained and we call $k_1$ the global maximum value of $f(x)$ in $I$.
+\end{definition}
+
+\begin{definition}
+    If there exists a constant $k_2$ such that $f(x) \geq k_2\ \forall x \in I$ we say that $f(x)$ is bounded below in $I$ and we call $k_2$ a lower bound of $f(x)$ in $I$.
+
+    If there exists a point $x_2$ in $I$ such that $f(x_2) = k_2$ we say that the lower bound of $k_2$ is attained and we call $k_2$ the global minimum value of $f(x)$ in $I$.
+\end{definition}
+
+\begin{definition}
+    $f(x)$ is bounded in $I$ if it is both bounded above and bounded below in $I$, i.e. if there exists a constant $k$ such that $|f(x)| \leq k\ \forall x \in I$.\footnote{If no interval $I$ is specified then it is taken to be the domain of the function.}
+\end{definition}
+
+A condition that guarantees the existence of both a global maximum and minimum value (called extreme values) is provided by the following.
+
+The extreme value theorem states that if $f$ is a continuous function on a closed interval $[a,\, b]$ then it is bounded on that interval and has upper and lower bounds that are attained i.e. there exists points $x_1$ and $x_2$ in $[a,\,b]$ such that $f(x_2) \leq f(x) \leq f(x_1)\ \forall x \in [a,\,b]$.
+
+\begin{definition}
+    $f(x)$ is monotonic increasing in $[a,\,b]$ if $f(x_1) \leq f(x_2)$ for all pairs $x_1, x_2$ with $a \leq x_1 < x_2 \leq b$.
+\end{definition}
+
+\begin{definition}
+    $f(x)$ is strictly monotonic increasing in $[a,\,b]$ if $f(x_1) < f(x_2)$ for all pairs $x_1, x_2$ with $a \leq x_1 < x_2 \leq b$.
+\end{definition}
+
 \end{document}

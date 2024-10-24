@@ -480,4 +480,161 @@ Finite sample space $\Omega = \{\omega_1,\omega_2,\dotsc, \omega_m\}$, $\mathbb{
     \]
 \end{example}
 
+\begin{countprinc}[Ordered grouping of indistinguishable objects]
+    Suppose we have $m$ indistinguishable objects and $k$ groups. The number of all possible choices is
+    \[
+    \binom{m + k - 1}{m} = \binom{m + k - 1}{k - 1}.
+    \]
+\end{countprinc}
+
+\newpage
+
+\section{Conditional probability and independence}
+
+\subsection{Conditional probability}
+
+\begin{definition}
+    Let $A,\, B \subseteq \Omega$ be $2$ events. We defined conditional probability of $A$ given $B$, and denote it by $\mathbb{P}(A | B)$, as follows
+    \[
+    \mathbb{P}(A | B) = \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)},\text{ when } \mathbb{P}(B) > 0.
+    \]
+\end{definition}
+The probability of $A$ when we have observed $B$.
+
+\begin{example}
+    Roll a fair die.
+
+    $A = \{\text{Score is odd}\} = \{1, 3, 5\}$
+    
+    $A = \{\text{Score is at most $3$}\} = \{1, 2, 3\}$
+    \[
+    \mathbb{P}(A | B) = \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}
+    \]
+    \[
+    A \cap B = \{1, 3\},\quad\mathbb{P}(A \cap B) = \frac{2}{6} = \frac{1}{3} 
+    \]
+    $\mathbb{P}(B) = \frac{3}{6} = \frac{1}{2}$
+    \[
+    \mathbb{P}(A | B) = \frac{\frac{1}{3}}{\frac{1}{2}} = \frac{2}{3}
+    \]
+\end{example}
+
+\begin{example}
+    A family has $2$ children, both sexes are equally likely.
+    \[
+    \Omega = \{\text{BB, BG, GB, GG}\}
+    \]
+    $A_1 = \{\text{Both girls}\} = \{\text{GG}\} = \frac{1}{4}$
+    
+    $A_2 = \{\text{At least one girl}\} = \{\text{BG, GB, GG}\} = \frac{3}{4}$
+
+    $A_3 = \{\text{Eldest is a girl}\} = \{\text{GB, GG}\} = \frac{2}{4} = \frac{1}{2}$
+    \[
+    \mathbb{P}(A) = \frac{|A|}{|\Omega|}
+    \]
+    \[
+    \mathbb{P}(A_1 | A_2) = \frac{\mathbb{P}(A_1 \cap A_2)}{\mathbb{P}(A_2)}
+    \]
+    $A_1 \subseteq A_2 \implies A_1 \cap A_2 = A_1$. Applying this, we get
+    \[
+    \mathbb{P}(A_1 | A_2) = \frac{\mathbb{P}(A_1)}{\mathbb{P}(A_2)} = \frac{\frac{1}{4}}{\frac{3}{4}} = \frac{1}{3}.
+    \]
+    \[
+    \mathbb{P}(A_2 | A_1) = \frac{\mathbb{P}(A_1 \cap A_2)}{\mathbb{P}(A_1)} = \frac{\mathbb{P}(A_1)}{\mathbb{P}(A_1)} = 1.
+    \]
+\end{example}
+
+\subsection{Properties of conditional probability}
+\begin{enumerate}[label = P\arabic*]
+    \item Let $B$ be an event, such that $\mathbb{P}(B) > 0$. Then $\mathbb{P}(\cdot | B)$ satisfies axioms (A1) - (A3)
+\end{enumerate}
+
+We have $(\Omega, \mathcal{F}, \mathbb{P})$
+
+Given the event $B$ with $\mathbb{P}(B) > 0$, let us define
+
+$\mathbb{P}_B : \mathcal{F} \rightarrow \R$, such that for every $A \in \mathcal{F},\,\mathbb{P}_B(A) := \mathbb{P}(A | B)$
+
+$\mathbb{P}_B$ is a probability on $(\Omega, \mathcal{F})$ i.e. $\mathbb{P}_B$ satisfies A1, A2 and A3.
+
+(A1) $\mathcal{P}_B(A) \geq 0$, for any $A \in \mathcal{F}$.
+(A1) $\mathcal{P}_B(A) = 1$.
+
+$\mathbb{P}(\cdot | B) \iff \mathbb{P}_B(A) := \mathbb{P}(A | B)$
+
+\begin{enumerate}[label = A\arabic*]
+    \item $\mathbb{P}_B(A) \geq 0$
+    \item $\mathbb{P}_B(\Omega) = 1$
+    \item Let $A_1, A_2$ be $2$ events in $\mathcal{F}$, such that, $A_1 \cap A_2 = \emptyset$, then
+    \[
+    \mathbb{P}_B(A_1 \cup A_2) = \mathbb{P}_B(A_1) + \mathbb{P}_B(A_2).
+    \]
+    \begin{proof}
+        A3
+
+        \begin{gather}
+        \mathbb{P}_B(A_1 \cup A_2) = \frac{\mathbb{P}((A_1 \cup A_2) \cap B}{\mathbb{P}(B)}          
+        \end{gather}
+        Since $A_1 \cap A_2 = \emptyset$, $(A_1 \cap B) \cap (A_2 \cap B) = \emptyset$, therefore we have
+        \begin{align*}
+            \mathbb{P}((A_1 \cap A_2) \cap B) &= \mathbb{P}((A_1 \cap B) \cup (A_2 \cap B)) \\
+            &= \mathbb{P}(A_1 \cap B) + \mathbb{P}(A_2 \cap B)
+        \end{align*}
+        $(A_1 \cap B)$ and $(A_2 \cap B)$ are mutually exclusive. Putting this into (1), we get
+        \begin{align*}
+        \mathbb{P}(A_1 \cup A_2) &= \frac{\mathbb{P}(A_1 \cap B) + \mathbb{P}(A_2 \cap B)}{\mathbb{P}(b)} \\
+        &= \frac{\mathbb{P}(A_1 \cap B)}{\mathbb{P}(B)} + \frac{\mathbb{P}(A_2 \cap B)}{\mathbb{P}(B)} \\
+        &= \mathbb{P}_B(A_1) + \mathbb{P}_B(A_2).
+        \end{align*}
+    \end{proof}
+\end{enumerate}
+
+Now that we have established that $\mathbb{P}(\cdot | B)$ is a probability, it should satisfy all the consequences.
+\begin{enumerate}[label = C\arabic*]
+    \item \phantom{}
+    \item $\mathbb{P}(A ^ c | B) = 1 - \mathbb{P}(A | B)$
+
+    Recall C2, $A \in \mathcal{F}, \mathbb{P}(A ^ c) = 1 - \mathbb{P}(A)$
+    \item \phantom{}
+    \item \phantom{}
+    \item If $A_1 \subseteq A_2,\, \mathbb{P}_B(A_1) \leq \mathbb{P}_B(A_2)$ or $\mathbb{P}(A_1 | B) \leq \mathbb{P}(A_2 | B)$.
+    \item $\mathbb{P}(A_1 \cup A_2 | B) = \mathbb{P}(A_1 | B) + \mathbb{P}(A_2 | B) - \mathbb{P}(A_1 \cup A_2 | B)$
+    \item If $A_1, A_2,\dotsc, A_n$ are pairwise disjoint, then
+    \[
+    \mathbb{P}\left(\bigcup_{i = 1}^{n}A_i|B\right) = \sum_{i = 1}^{n}\mathbb{P}(A_i | B)
+    \]
+\end{enumerate}
+
+P2: The multiplication rule
+
+For any $2$ events $A, B \in \mathcal{F}$, with $\mathbb{P}(A) \neq 0$, $\mathbb{P}(B) \neq 0$, we have
+\[
+\mathbb{P}(A \cap B) = \mathbb{P}(A | B)\mathbb{P}(B) = \mathbb{P}(B | A)\mathbb{P}(A)
+\]
+\begin{proof}
+    of the first equality.
+    
+    Since $\mathbb{P}(A) \neq 0$ and $\mathbb{P} \neq 0$, we can define $\mathbb{P}(B | A)$ and $\mathbb{P}(A | B)$.
+
+    By definition
+    \[
+    \mathbb{P}(A | B) = \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}
+    \]
+    \[
+    \mathbb{P}(A \cap B) = \mathbb{P}(A | B)\mathbb{P}(B)
+    \]
+\end{proof}
+
+More general statement, $\mathbb{P}(A \cap B) | C = \mathbb{P}(B | C)\mathbb{P}(A | B \cap C)$, if $\mathbb{P}(B \cap C) > 0$,.
+
+In the statement, it is enough to assume $\mathbb{P}(B \cap C) > 0$. Because $B \cap C \leq C$, $\mathbb{P}(B \cap C) \leq \mathbb{P}(C)$ follows from monotonicity (C5). Therefore $\mathbb{P}(C) > 0$, and hence we can define conditional probability of events, given $C$.
+
+P3, general multiplication rule. Let $A_0, A_1, \dotsc, A_k$ be events such that
+\[
+\mathbb{P}\left(\bigcap_{i = 1}^{k}A_i\right) > 0\text{, then}
+\]
+\[
+\mathbb{P}\left(\bigcap_{i = 1}^{k}A_i \middle| A_0\right) = \mathbb{P}(A_1 | A_0)\mathbb{P}(A_2 | A_1 \cap A_0)\mathbb{P}(A_3 | A_2 \cap A_1 \cap A_0) \dotsi \mathbb{P}\left(A_k \middle| \bigcap_{i = 0}^{k - 1}A_i\right)
+\]
+
 \end{document}

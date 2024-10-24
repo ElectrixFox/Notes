@@ -328,6 +328,22 @@ The usual interpretation is that $\Po(A | B)$ represents our probability for $A$
     \Po\left(\bigcap_{i = 1}^{k}A_i \,\middle|\, A_0\right) &= \Po(A_1 | A_0) \times \Po(A_2 | A_1 \cap A_0) \times \dotsi \\
     &\dotsi\times \Po\left(A_{k - 2} \,\middle|\, \bigcap_{i = 0}^{k - 3}A_i\right) \times \Po\left(A_{k - 1} \,\middle|\, \bigcap_{i = 0}^{k - 2}A_i\right) \times \Po\left(A_{k} \,\middle|\, \bigcap_{i = 0}^{k - 1}A_i\right).
     \end{align*}
+    \item The partition theorem or law of total probability. If $E_1, E_2, \dotsc, E_k$ form a partition then, for any event $A$, we have
+    \[
+    \Po(A) = \sum_{i = 1}^{k}\Po(E_i)\Po(A | E_i).
+    \]
+    More generally, if $\Po(B) > 0$,
+    \[
+    \Po(A | B) = \sum_{i = 1}^{k}\Po(E_i | B)\Po(A | E_i \cap B)
+    \]
+    \item Bayes's theorem (first version): for any events $A$ and $B$ with $\Po(A) > 0$ and $\Po(B) > 0$
+    \[
+    \Po(A | B) = \frac{\Po(A)\Po(B | A)}{\Po(B)}.
+    \]
+    More generally, if $\Po(A | C) > 0$ and $\Po(B | C) > 0$,
+    \[
+    \Po(A | B \cap C) = \frac{\Po(A | C)\Po(B | A \cap C}{\Po(B | C)}.
+    \]
 \end{enumerate}
 
 \end{document}

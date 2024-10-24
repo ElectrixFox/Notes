@@ -173,8 +173,161 @@ If $A \cup B = \emptyset$
     \item How many $3$-letter words have their letters in strict alphabetical order ("strict" no letters can be the same)?
 
     There are $26 \times 25 \times 24$ words with $3$ distinct letters. There are $3!$ permutations of these letters but they must be in strict alphabetical order which is only one of the $6$ permutations therefore the total is $\frac{1}{6}(26)_3 = \frac{1}{6}(26 \times 25 \times 24)$.
-    
-    
 \end{enumerate}
+
+\newpage
+
+\section{Combinations}
+A combination from a set of objects is an unordered selection of elements from that set (repeats may be allowed)
+
+Formally a combination on set $S$ is identified by the multiplicities $m_i,\, i \in S$, where $m_i = \text{ number of times element $i$ appeared}$.
+
+The size of a combination is the number of selection i.e. the sum of all the multiplicities $\sum_{i \in S}m_i$. We sometimes call a combination of size $k$ a $k$-combination.
+
+How many combinations without repetitions do we have from a set of size $n$?
+
+First consider the arrangements (ordered, no repetitions) there are $P(n, k) = \frac{n!}{(n - k)!}$ of these, sort into groups of arrangements using the same set of letters, each group has $k!$ lists, so the number of groups is $\frac{P(n, k)}{k!} = \frac{n!}{k!(n - k)!}$.
+
+\begin{example}
+    How many ways are there of selecting $10$ different letters of the alphabet? Or $16$
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        A $10$-combination without repetition, from size $26$ is
+        \[
+        \binom{26}{10} = \frac{26!}{10!(26 - 10)!} = \binom{26}{16}.
+        \]
+    \end{proof}
+\end{example}
+
+\begin{proposition}
+    \[
+    \binom{n}{k} = \binom{n}{n - k}.
+    \]
+    \begin{proof}
+        Each choice of $k$ objects from $n$ to take corresponds exactly to a choice of $n - k$ to leave.
+    \end{proof}
+\end{proposition}
+
+\begin{example}
+    Consider combination of $6$ distinct elements of $\{0, 1, \dotsc, 9\}$. (a) How many contain $0$? (b) And how many do not?
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        (a) We remove $0$ from the elements so choose from $\{1, 2, \dotsc, 9\}$ and much choose $5$ numbers therefore is $\binom{9}{5}$.
+
+        (b) we must choose all $6$ from $\{1, 2, \dotsc, 9\}$ so the answer is $\binom{9}{6}$.
+    \end{proof}
+\end{example}
+
+\begin{proposition}[Pascal's formula]
+    \[
+    \binom{n}{r} = \binom{n - 1}{r - 1} + \binom{n - 1}{r}\quad(1 \leq r \leq n - 1)
+    \]
+    \begin{proof}
+        
+    \end{proof}
+\end{proposition}
+
+\begin{theorem}[The binomial theorem]
+    $n$ is a positive integer, $a$ and $b$ are real numbers, then
+    \[
+    (a + b) ^ n = \sum_{k = 0}^{n}\binom{n}{k}a ^ {k} b ^ {n - k}
+    \]
+    \begin{proof}
+        \[
+        (a + b)(a + b) \dotsi (a + b)
+        \]
+        when multiplied out, gives various terms of the form $a ^ k b ^ {n - k}$. For fixed $k$, the number of terms $a ^ k b ^ {n - k}$ is $\binom{n}{k}$ since one chooses the $k$ brackets in the product.
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    Prove the following identities are valid for integer $n \geq 0$.
+    \begin{enumerate}[label = C\arabic*]
+        \item
+        \[
+        \sum_{k = 0}^n\binom{n}{k} = 2 ^ n
+        \]
+        \item
+        \[
+        \sum_{k = 0}^n\binom{n}{k}(-1) ^ k = 0
+        \]
+        \item 
+        \[
+        \sum_{k = 0}^n\binom{n}{k}2 ^ k = 3 ^ n
+        \]
+        \item
+        \[
+        \sum_{k = 0}^n\binom{n}{k}k = n2 ^ {n - 1}
+        \]
+    \end{enumerate}
+
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        All of these examples are based on the binomial theorem in the form
+        \[
+        (1 + x) ^ n = \sum_{k = 0}^{n}\binom{n}{k}x ^ k
+        \]
+        \begin{enumerate}[label = C\arabic*]
+        \item Now put $x = 1$
+        \[
+        x = 1 \implies (1 + 1) ^ n = \sum_{k = 0}^{n}\binom{n}{k}1 ^ k
+        \]
+        \item Now put $x = -1$
+        \begin{align*}
+        \underbrace{(1 - 1) ^ n}_{0 ^ n = 0} &= \sum_{k = 0}^{n}\binom{n}{k}(-1) ^ n \\
+        &= \binom{n}{0} - \binom{n}{1} + \binom{n}{2} - \binom{n}{3} + \dotsi \pm \binom{n}{k}
+        \end{align*}
+        \item Put $x = 2$
+        \[
+        3 ^ n = \sum_{k = 0}^{n}\binom{n}{k}2 ^ k
+        \]
+        \item The trick is to differentiate both sides of 
+        \[
+        n(1 + x) ^ {n - 1} = \sum_{k = 0}^{n}\binom{n}{k}kx ^ {k - 1},\quad(n \geq 1),
+        \]
+        and now set $x = 1$. Check $n = 0$ also works.
+        \end{enumerate}
+    \end{proof}
+\end{example}
+
+\begin{example}
+    A poker hand is a $5$ combination from the deck of $52$ cards $13 \times 4$, $13$ denominations $4$ suits. There are $\binom{52}{5}$ possible hands.
+    \begin{enumerate}[label = (\alph*)]
+        \item Four of a kind: $4$ cards of the same denomination the $5$th card is any.
+
+        First choose the denomination: $13$ choices, the remaining $48$ cards, the answer is $13 \times 48$.
+
+        \item Full house: A triple ($3$ cards of the same denomination) and a pair ($2$ cards of the same denomination).
+
+        First choose the denomination of triple, $13$ choices, then choose the suits for the triple. $\binom{4}{3} = 4$ ways.
+        Now choose the denomination of the pair, $12$ choices, choose suit $\binom{4}{2} = 6$. The answer is $13 \times \binom{4}{3} \times 12 \times \binom{4}{2} = 3744$.
+    \end{enumerate}
+\end{example}
+
+\section{Arrangements and combinations with repetitions}
+
+\subsection{Arrangements with repetition}
+
+(Items can be replaces)
+\begin{example}
+    How many arrangements of the letters MISSISSIPPI are there?
+
+    \begin{proof}[Solution 1]\renewcommand{\qedsymbol}{}
+        We have $4$ I's, $4$ S's, $2$ P's and $1$ M to arrange in $11$ places.
+
+        First choose $4$ places for the I's (the I's are indistinguishable): $\binom{11}{4}$ ways to do this.
+        Now choose $4$ of the remaining places for the S's there are $\binom{7}{4}$ ways.
+        Now choose $2$ places for the P's, $\binom{3}{2}$ ways to choose the P's.
+        Finally, the last place is taken by M.
+        So the answer is
+        \[
+        \binom{11}{4}\binom{7}{4}\binom{3}{2}\binom{1}{1} = \frac{11!}{4!7!}\frac{7!}{4!3!}\frac{3!}{2!1!}\frac{1!}{1!0!} = \frac{11!}{4!4!2!1!}.
+        \]
+    \end{proof}
+    \begin{proof}[Solution 2]\renewcommand{\qedsymbol}{}
+        First image all the letters are different, $I_1, I_2, I_3, I_4, S_1, S_2, S_3, S_4,\dotsc$.
+        There are $11!$ ways to arrange these.
+        This grouping has $4!$ arrangements which are the same.
+        
+    \end{proof}
+\end{example}
+
 
 \end{document}

@@ -594,7 +594,7 @@ One way of describing or otherwise specifying the elements of a matrix is as fol
 
 We write $O_{m \times n}$ for $(0)_{m \times n}$ that is the $m \times n$ matrix all of whose entries are zero, this is called the $m \times n$ zero matrix.
 
-For $r$ and $s$ integers, we define $\delta_{r\.s}$ to be $1$ if $r = s$ and to be $0$ if $r \neq s$. (This is called the Kronecker delta.) The matrix $(\delta_{ij})_{m \times n}$ is denoted $I_n$ and is referred to as the $n \times n$ identity matrix.
+For $r$ and $s$ integers, we define $\delta_{r\,s}$ to be $1$ if $r = s$ and to be $0$ if $r \neq s$. (This is called the Kronecker delta.) The matrix $(\delta_{ij})_{m \times n}$ is denoted $I_n$ and is referred to as the $n \times n$ identity matrix.
 
 In general, we write $M_{m \times n}(\R)$ or $M_{m, n}(\R)$ for the set of all real $m \times n$ matrices. We also write $M_n(\R)$ for the set of square matrices of size $n$, so $M_n(\R) = M_{n, n}(\R)$. $M_{m, 1}(\R)$ is the same set as $\R ^ m$.
 
@@ -646,5 +646,149 @@ We write $-X$ for $(-1)X$. If $X ^ t = -X$ we say that $X$ is skew-symmetric (or
         Do
     \end{proof}
 \end{proposition}
+
+\subsection{Matrix Operations II: Matrix multiplication}
+Matrix multiplication: This is a function
+\[
+M_{m \times n}(\R) \times M_{n \times p}(\R) \rightarrow M_{m \times p}(\R).
+\]
+If $X = (x_{ij})_{m \times n}$ is $m \times n$ and $Y = (y_{ij})_{n \times p}$ is $n \times p$ (if the number of columns of $X$ equals the number of rows of $Y$) then we may form the product matrix $XY$. This is defined to be the $m \times p$ matrix whose $(i,\,j)$th element $(XY)_{ij}$ is
+\[
+(XY)_{ij} = x_{i\,1}y_{1\,j} + x_{i\,2}y_{2\,j} + \dotsi + x_{i\,n}x_{n\,j} = \sum_{k = 1}^{n}{x_{ik}y_{kj}}.
+\]
+If $\mbf{x ^ t}_{i}$ denotes the $i$-th row of $X$ and $\mbf{y}_j$ denotes the $j$-th column of $Y$ then $(XY)_{ij} = \mbf{x}_i \cdot \mbf{y}_j$ (scalar product of column vectors).
+
+\begin{proposition}[Multiplication rules]
+    Let $X$ and $X'$ be $m \times n$, $Y$ and $Y'$ be $n \times p$ and $Z$ be $p \times q$ matrices. Let $\lambda$ and $\lambda'$ be scalars. Then
+    \begin{enumerate}[label = (\roman*)]
+        \item $O_{p \times m}X = O_{p \times n}$ and $XO_{n \times q} = O_{m \times q}$.
+        \item $I_{m}X = X = XI_n$.
+        \item $\lambda(XY) = (\lambda X)Y = X(\lambda Y)$.
+        \item associativity: $(XY)Z = X(YZ)$
+        \item distributive rules:
+        \begin{enumerate}[label = (\alph*)]
+            \item $(X + X')Y = XY + X'Y$ and $X(Y + Y') = XY + XY'$.
+            \item $\lambda(X + X') = \lambda X + \lambda X'$ and $(\lambda + \lambda')X = \lambda X + \lambda' X$.
+        \end{enumerate}
+    \end{enumerate}
+    \begin{proof}
+        For (iv), the $k$th entry in the $i$th row of $XY$ is given by $\sum_{r = 1}^{n}x_{ir}y_{rk}$, with $k = 1,\dotsc, p$. Hence the $(i,\,j)$th entry of $(XY)Z$ is given by
+        \[
+        ((XY)Z)_{ij} = (i\text{th row of }XY) \cdot (j\text{th column of } Z) = \sum_{k = 1}^{p}\left(\sum_{r = 1}^{n}x_{ir}y_{rk}\right)z_{kj}.
+        \]
+        On the other hand, the $r$th entry in the $j$th column of $YZ$ is given by $\sum_{k = 1}^{p}y_{rk}z_{kj}$, with $r = 1, \dotsc, n$. Hence the $(i,\,j)$th entry of $X(YZ)$ is given by
+        \[
+        (X(YZ))_{ij} = (i\text{th row of } X) \cdot (j\text{th column of } YZ) = \sum_{r = 1}^{n}x_{ir}\left(\sum_{k = 1}^{p}y_{rk}z_{kj}\right).
+        \]
+        Switching the order of summation using associativity of the usual multiplication given $(XY)Z = X(YZ)$.
+        
+        \textbf{Prove rest!}
+    \end{proof}
+\end{proposition}
+
+\textbf{Warning}: We do not necessarily have $XY = YX$ in general.
+
+\textbf{Warning}: It is possible to have $XY = O_{m \times p}$ even though both $X$ and $Y$ are non-zero.
+
+\textbf{A useful trick for sometimes multiplying big matrices more easily}
+
+Let $\begin{pmatrix}
+    A & B \\ C & D
+\end{pmatrix} \in M_{m, n}(\R)$ and $\begin{pmatrix}
+    A' & B' \\ C' & D'
+\end{pmatrix} \in M_{n, p}(\R)$ be two matrices given by blocks $A \in M_{m_1, n_1}(\R),\, B \in M_{m_1, n_2}(\R),\, C \in M_{m_2, n_1}(\R),\, D \in M_{m_2, n_2}(\R),\, A' \in M_{n_1, p_1}(\R),\, B' \in M_{n_1, p_2}(\R),\, C' \in M_{n_2, p_1}(\R),\, D' \in M_{n_2, p_2}(\R)$ (so-called block matrices) with $m_1 + m_2 = m$ and $n_1 + n_2 = n$ and $p_1 + p_2 = p$. It can easily shown that
+\[
+\begin{pmatrix}
+    A & B \\ C & D
+\end{pmatrix}
+\begin{pmatrix}
+    A' & B' \\ C' & D'
+\end{pmatrix}
+=
+\begin{pmatrix}
+    AA' + BC' & AB' + BD' \\ CA' + DC' & CB' DD'
+\end{pmatrix} \in M_{m, p}(\R)
+\]
+that is, if matrix sizes match correctly the formula for the multiplication of block matrices is the same as one of "usual two by two matrices"
+
+For example, if $A = \begin{pmatrix}
+    0 & 1 \\ 0 & 0
+\end{pmatrix}$(so that $A ^ 2 = O_{2 \times 2}$) then
+\[
+\begin{pmatrix}
+    1 & 0 & 1 & 0 \\
+    0 & 1 & 0 & 1 \\
+    0 & 1 & 0 & 1 \\
+    0 & 0 & 0 & 0
+\end{pmatrix} ^ 2
+=
+\begin{pmatrix}
+    I_2 & I_2 \\ A & A
+\end{pmatrix} ^ 2
+=
+\begin{pmatrix}
+    I & I \\ A & A
+\end{pmatrix}
+\begin{pmatrix}
+    I & I \\ A & A
+\end{pmatrix}
+=
+\begin{pmatrix}
+    I + A & I + A \\ A + A ^ 2 & A + A ^ 2
+\end{pmatrix}
+=
+\begin{pmatrix}
+    1 & 1 & 1 & 1 \\
+    0 & 1 & 0 & 1 \\
+    0 & 1 & 0 & 1 \\
+    0 & 0 & 0 & 0
+\end{pmatrix}
+\]
+
+\subsection{Inverse matrix}
+
+\begin{definition}
+    Let $A$ be a square $(n\times n)$ matrix. We say $A$ is invertible (or non-singular) if there exists an $n \times n$ matrix $B$ such that
+    \[
+    AB = BA = I_n.
+    \]
+    If such a matrix $B$ exists we call $B$ the inverse of $A$ and we write $A ^ {-1}$ for this inverse. (there can only exist at most one inverse).
+    If no such inverse $B$ exists for a matrix $A$, we say $A$ is non-invertible (or singular).
+\end{definition}
+
+\begin{proposition}[Properties of the inverse and transpose]
+    \begin{enumerate}[label = (\roman*)]
+        \item A matrix has at most one inverse.
+        \item Assume $A$ and $B$ are invertible $n \times n$ matrices. Then the product $AB$ is invertible and
+        \[
+        (AB) ^ {-1} = B ^ {-1}A ^ {-1}.
+        \]
+        \item We have $(AB) ^ t = B ^ t A ^ t$ and $(\lambda A) ^ t = \lambda A ^ t$ for any matrix $A$ and any real constant $\lambda$.
+        \item Assume $A$ is invertible. then the transpose $A ^ t$ is invertible and
+        \[
+        (A ^ t) ^ {-1} = (A ^ {-1}) ^ t.
+        \]
+        \item Let $A \in M_{n, n}(\R)$ and assume $BA = I_n$ for some $B \in M_{n, n}(\R)$. Then $AB = I_n$ as well as vice versa. So the "left inverse" is automatically the "right inverse".
+    \end{enumerate}
+    \begin{proof}
+        \begin{enumerate}[label = (\roman*)]
+            \item If $B'$ were a second inverse for $A$ then we would have
+            \[
+            B' = B'I_n = B'(AB) = (B'A)B = I_nB = B.
+            \]
+        \end{enumerate}
+    \end{proof}
+\end{proposition}
+
+\begin{remark}
+    We also have
+    \[
+    (X + Y) ^ t = X ^ t + Y ^ t,
+    \]
+    but it is not the case in general that
+    \[
+    (X + Y) ^ {-1} = X ^ {-1} + Y ^ {-1}.
+    \]
+\end{remark}
 
 \end{document}

@@ -135,4 +135,74 @@ More generally, if $A_1,\,A_2,\,\dotsc,\,A_n$ are pairwise disjoint, meaning tha
 |A_1 \cup A_2 \cup \dotsi \cup A_n| = |A_1| + |A_2| + \dotsi + |A_n|.
 \]
 
+\newpage
+
+\section{Combinations}
+
+A combination from a set of objects is an unordered selection of elements of that set.
+
+Formally, a combination on a set $S$ is identified by the multiplicities $m_i,\, i \in S$, where $m_i \in \{0, 1, 2, \dotsc\}$ determines how many times element $i$ appears in the combination.
+
+The size of a combination is the total number of selections, i.e. the sum of all the multiplicities $\sum_{i \in S}m_i$. We sometimes call a combination of size $k$ a $k$-combination.
+
+How many combinations without repetition do we have of a given size $k$ from a set of size $n$?
+
+Consider the arrangements, without repetitions, of length $k$ from the set of size $n$. There are $P(n, k) = \frac{n!}{(n - k)!}$ of those. These are ordered lists, so sort them into groups of lists using the same letters. Each group contains $k!$ lists. The number of groups is $\frac{P(n, k)}{k!}$, and each corresponds to a combination. So the number of $k$-combinations without repetitions is
+\[
+\frac{P(n, k}{k!} = \frac{n!}{k!(n - k)!}.
+\]
+This is the binomial coefficient notation
+\[
+\binom{n}{k} = \frac{n!}{k!(n - k)!}\quad\text{"$n$ choose $k$"}.
+\]
+
+\begin{proposition}
+    $\binom{n}{k} = \binom{n}{n - k}$.
+    \begin{proof}
+        Observe that each choice of $k$ objects from $n$ to take corresponds exactly to a choice of $n - k$ objects to leave.
+    \end{proof}
+\end{proposition}
+
+\begin{proposition}[Pascal's formula]
+    For $1 \leq k \leq n - 1,\, \binom{n}{k} = \binom{n - 1}{k - 1} + \binom{n - 1}{k}$.
+    \begin{proof}
+        \textbf{To do}.
+    \end{proof}
+\end{proposition}
+
+\begin{example}
+    Let $N$ be the product of $k$ consecutive positive integers. Show that $N$ is (exactly) divisible by $k!$.
+    \begin{proof}[Solution]
+        We can write $N = (a + 1)(a + 2)\dotsi (a + k)$ for some integer $a \geq 0$. But then
+        \[
+        N = \frac{(a + k)!}{a!} = \binom{a + k}{a}k!,
+        \]
+        so $\frac{N}{k!}$ is $\binom{a + k}{a}$, which is a positive integer for all positive integers $k$.
+    \end{proof}
+\end{example}
+
+\begin{theorem}[The binomial theorem]
+    If $n$ is a positive integer and $a, b$ are real numbers, then
+    \[
+    (a + b) ^ n = \sum_{k = 0}^{n}\binom{n}{k}a ^ {k} b ^ {n - k}.
+    \]
+    \begin{proof}
+        The expression
+        \[
+        (a + b)(a + b) \dotsi (a + b)
+        \]
+        when multiplied out, gives various terms of the form $a ^ k b ^ {n - k}$. For fixed $k$, the number of terms $a ^ {k} b ^ {n - k}$ is $\binom{n}{k}$ since one chooses the $k$ brackets in the product from which to choose the factor $a$ (rather than $b$).
+
+        The product gives rise to every arrangement of length $n$ using $a$ and $b$, and grouping these according to the number of times that $a$ appears gives the result.
+    \end{proof}
+\end{theorem}
+
+Prove that the following identities are valid for integer $n \geq 0$.
+\begin{enumerate}[label = (C\arabic*)]
+    \item $\sum_{k = 0}^{n}\binom{n}{k} = 2 ^ n$.
+    \item $\sum_{k = 0}^{n}\binom{n}{k}(-1) ^ k = 0$ (provided $n \geq 1$).
+    \item $\sum_{k = 0}^{n}\binom{n}{k}2 ^ k = 3 ^ n$.
+    \item $\sum_{k = 0}^{n}\binom{n}{k}k = n2 ^ {n - 1}$.
+\end{enumerate}
+
 \end{document}
