@@ -3,8 +3,6 @@
 
 \declaretheorem[style = avgstyle, name = Problem]{problem}
 
-\newcommand{\Po}{\mathbb{P}}
-
 \title{Probability I Problem Sheet Solutions}
 \author{Luke Phillips}
 \date{October 2024}
@@ -21,24 +19,52 @@
     Find the probability that in a family of six children, the second child is a girl but they are not all girls (assuming all outcomes are equally likely)
     
     \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
-        Let $\Po(A)$ be the probability that all children are girls and let $\Po(B)$ be the probability that the second child is a girl.
+        Let $\P(A)$ be the probability that all children are girls and let $\P(B)$ be the probability that the second child is a girl.
 
         Here we can see that there are $2 ^ 6$ different possibilities hence we can apply classical probability and the definition of equally likely outcomes to see that
         \[
-        \Po(B) = \frac{1}{2 ^ 6} \cdot 1 = \frac{1}{2 ^ 6}\quad\text{since there is only one possibility that they are all girls.}
+        \P{B} = \frac{1}{2 ^ 6} \cdot 1 = \frac{1}{2 ^ 6}\quad\text{since there is only one possibility that they are all girls.}
         \]
         Similarly
         \[
-        \Po(A) = \frac{1}{2 ^ 6} \cdot (2 ^ 6 - 2 ^ 5) = \frac{2 ^ 6 - 2 ^  5}{2 ^ 6}\quad\text{since there are $2 ^ 6 - 2 ^ 5$ number of possibilities where the second child is a girl.}
+        \P{A} = \frac{1}{2 ^ 6} \cdot (2 ^ 6 - 2 ^ 5) = \frac{2 ^ 6 - 2 ^  5}{2 ^ 6}\quad\text{since there are $2 ^ 6 - 2 ^ 5$ number of possibilities where the second child is a girl.}
         \]
         Using these facts we can then apply C1 to obtain an expression for the probability of the event that the second child is a girl but they are not all girls
         \begin{align*}
-            \Po(A \setminus B) &= \Po(A) - \Po(A \cap B) \\
+            \P(A \setminus B) &= \P(A) - \P(A \cap B) \\
             &= \frac{2 ^ 6 - 2 ^ 5}{2 ^ 6} - \frac{1}{2 ^ 6} \cdot \frac{2 ^ 6 - 2 ^ 5}{2 ^ 6} \\
             &= \frac{1}{2}\left(1 - \frac{1}{2 ^ 6}\right) \\
             &= \frac{2 ^ 6 - 1}{2 ^ 7}.
         \end{align*}
         This gives us the final probability of $\dfrac{2 ^ 6 - 1}{2 ^ 7}$.
+    \end{proof}
+\end{problem}
+
+\begin{problem}[68]
+    Show that if $A$ and $B$ are independent,
+    then $A$ and $B ^ c$ are also independent.
+    \begin{proof}
+        We know that
+        \begin{equation}
+            \P(A \cap B) = \P(A)\P(B).
+        \end{equation}
+
+        We have to show that $\P(A \cap B ^ c) = \P(A)\P(B ^ c)$.
+
+        Observe that $A = (A \cap B) \cup (A \cap B ^ c)$,
+        so $\P(A) \overset{A3}{=} \P(A \cap B) + \P(A \cap B ^ c)$,
+        since $(A \cap B) \cap (A \cap B ^ c) = \emptyset$
+
+        Using (1), we get
+        \[
+        \P(A) = \P(A)\P(B) + \P(A \cap B ^ c)
+        \]
+        or,
+        \begin{align*}
+            \P(A \cap B ^ c) &= \P(A) - \P(A)\P(B) \\
+            &= \P(A)\underbrace{\left[1 - \P(B)\right]}_{= \P(B ^ c)} \\
+            &= \P(A)\P(B ^ c).
+        \end{align*}
     \end{proof}
 \end{problem}
 

@@ -10,13 +10,19 @@
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 
+\setcounter{MaxMatrixCols}{20}
 \DeclareMathOperator{\sech}{sech}
 \DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\Bin}{Bin}
+\DeclareMathOperator{\Geo}{Geo}
+\DeclareMathOperator{\Po}{Po}
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
+
+\renewcommand{\P}{\mathbb{P}}
 
 \declaretheoremstyle[
     notefont = \normalfont\itshape,
@@ -35,9 +41,16 @@
     spacebelow = 1em
 ]{exampstyle}
 
-\declaretheorem[style = avgstyle]{theorem}
+\declaretheorem[style = avgstyle, numberwithin=section]{theorem}
 \declaretheorem[]{lemma}
 \declaretheorem{proposition, corollary, remark}[style=plain]
-\declaretheorem{definition}[style=defstyle, numbered=unless unique]
+\declaretheorem{definition}[style=defstyle, numbered=unless unique, numberwithin=section]
 \declaretheorem{outline}[style=plain, numbered=no]
 \declaretheorem{example}[style=exampstyle, numberwithin=section]
+
+\newenvironment{amatrix}[1]
+    {
+    \left(\begin{array}{@{}*{#1}{c}|c@{}}
+        }{
+    \end{array}\right)
+    }

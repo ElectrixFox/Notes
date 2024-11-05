@@ -637,4 +637,432 @@ P3, general multiplication rule. Let $A_0, A_1, \dotsc, A_k$ be events such that
 \mathbb{P}\left(\bigcap_{i = 1}^{k}A_i \middle| A_0\right) = \mathbb{P}(A_1 | A_0)\mathbb{P}(A_2 | A_1 \cap A_0)\mathbb{P}(A_3 | A_2 \cap A_1 \cap A_0) \dotsi \mathbb{P}\left(A_k \middle| \bigcap_{i = 0}^{k - 1}A_i\right)
 \]
 
+Recall (what does it mean for $E_i$ to be a partition:
+\[
+\bigcup_{i = 1}^{k}E_i = \Omega,\text{ where } E_i \cap E_j = \emptyset,\,\forall i, j (i \neq j)
+\]
+and $\mathbb{P}(E_i) > 0$, for each $1 \leq i \leq k$.
+
+P4:
+\begin{theorem}[Partition theorem (Law of total probability]
+    Let $E_1, E_2, \dotsc, E_k$ be a partition of $\Omega$. Then for any event $A$, we have
+    \[
+    \mathbb{P}(A) = \sum_{i = 1}^{k}\mathbb{P}(E_i)\mathbb{P}(A | E_i).
+    \]
+    \begin{proof}
+        \[
+        A = \bigcup_{i = 1}^{k}(A \cap E_i)
+        \]
+        Since $E_i$'s form a partition,
+        \[
+        (A \cap E_i) \cap (A \cap E_j) = \emptyset, \text{ for all } i \neq j.
+        \]
+        Hence, we can use A3, to get
+        \[
+        \mathbb{P}(A) = \sum_{i = 1}^{k}\mathbb{P}(A \cap E_i).
+        \]
+        Now use (P2) on the previous to get
+        \[
+        \mathbb{P}(A) = \sum_{i = 1}^{k}\mathbb{P}(E_i)\mathbb{P}(A | E_i).
+        \]
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    There are $3$ machines $A,\, B$ and $C$. $10\%$ of components produced by $A$ are faulty, $20\%$ of $B$ are faulty and $30\%$ of $C$ are faulty.
+    Equal number of components are collected from each machine. One component is selected at random. Find $\mathbb{P}(\text{the component is faulty}$.
+
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        Let $F := \{\text{the component is faulty}\}$
+
+        Let $M_A := \{\text{component comes from $A$}\}$
+
+        Similarly define $M_B$ and $M_C$.
+        \[
+        \mathbb{P}(M_A) = \mathbb{P}(M_B) = \mathbb{P}(M_C) = \frac{1}{3}.
+        \]
+        \[
+        \mathbb{P}(F | M_A) = \frac{10}{100},\,\mathbb{P}(F | M_B) = \frac{20}{200},\,\mathbb{P}(F | M_C) = \frac{30}{100}.
+        \]
+        \begin{align*}
+        \mathbb{P}(F) &= \mathbb{P}(M_A)\mathbb{P}(F | M_A) + \mathbb{P}(M_B)\mathbb{P}(F | M_B) + \mathbb{P}(M_C)\mathbb{P}(F | M_C) \\
+        &= \frac{1}{3}\times \frac{10 + 20 + 30}{100} = \frac{2}{10} = 0.2.
+        \end{align*}
+    \end{proof}
+\end{example}
+
+P5:
+\begin{theorem}[Bayes' Theorem]
+    Let $A$ and $B$ be two events, such that $\mathbb{P}(A) > 0,\, \mathbb{P}(A) > 0$, then
+    \[
+    \mathbb{P}(A | B) = \frac{\mathbb{P}(B | A)\mathbb{P}(A)}{\mathbb{P}(B)}.
+    \]
+
+    Bayes' Theorem (general)
+    Let $A,\, B$ and $C$ be three events, such that $\mathbb{P}(A | C) > 0,\, \mathbb{P}(B | C) > 0$, then
+    \[
+    \mathbb{P}(A | B \cap C) = \frac{\mathbb{P}(A | C)\mathbb{P}(B | A \cap C)}{\mathbb{P}(B | C)}.
+    \]
+\end{theorem}
+
+\begin{example}
+    Find $\mathbb{P}(M_A | F)$
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+    \[
+    \mathbb{P}(M_A | F) = \frac{\mathbb{P}(F | M_A)\mathbb{P}(M_A)}{\mathbb{P}(F)} = \frac{\frac{10}{100} \times \frac{1}{3}}{\frac{2}{10}} = \frac{1}{6}.
+    \]
+    \end{proof}
+\end{example}
+
+P6:
+\begin{theorem}[Bayes' theorem (for partitions)]
+   Let $A_1, \dotsc, A_k$ be a partition and let $B$ be an event, with $\mathbb{P}(B) > 0$. Then
+   \[
+   \mathbb{P}(A_j | B) = \frac{\mathbb{P}(A_j)\mathbb{P}(B | A_j)}{\sum_{i = 1}^{k}\mathbb{P}(B | A_i)\mathbb{P}(A_i)}
+   \]
+   \begin{proof}
+   \[
+   \mathbb{P}(A_j | B) = \frac{\mathbb{P}(A_j)\mathbb{P}(B | A_j)}{\mathbb{P}(B)}
+   \]
+   now use partition theorem to get
+   \[
+   \mathbb{P}(B) = \sum_{i = 1}^{k}\mathbb{P}(B | A_i)\mathbb{P}(A_i).
+   \]
+   \end{proof}
+\end{theorem}
+
+
+\begin{example}
+    $\mathbb{P}(\text{it rains}) = \frac{1}{2}$ if it rains, Charlie the cat will go out with probability $\frac{1}{10}$.
+    If it is day with probability $\frac{3}{5}$.
+    If Charlie goes out, find the probability that it rained.
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+       Let $R := \{\text{it rains}\}$
+
+       $C := \{\text{Charlie goes out}\}$
+
+       \[
+       \mathbb{P}(R) = \frac{1}{2},
+       \]
+       we want to find $\mathbb{P}(R | C)$.
+       \[
+       \mathbb{P}(R | C) = \frac{\mathbb{P}(R)\mathbb{P}(C | R)}{\mathbb{P}(C)} = \frac{\frac{1}{2} \times \frac{1}{10}}{\mathbb{P}(C)}.
+       \]
+       \begin{align*}
+           \mathbb{P}(C) &= \mathbb{P}(C | R)\mathbb{P}( R) + \mathbb{P}(C | R ^ c)\mathbb{P}(R ^ c) \\
+           &= \frac{1}{10} \times \frac{1}{2} + \frac{3}{5} \times \frac{1}{2} \\
+           &= \frac{1}{2} \times \frac{7}{10}
+       \end{align*}
+       \[
+       \mathbb{P}(R | C) = \frac{1}{7}.
+       \]
+    \end{proof}
+\end{example}
+
+\subsection{Independence of events}
+
+\begin{definition}[Independence of two events]
+    Let $A, B$ be $2$ events, then $A$ and $B$ are said to be independent if
+    \[
+    \mathbb{P}(A \cap B) = \mathbb{P}(A)\mathbb{P}(B).
+    \]
+\end{definition}
+Recall: $\mathbb{P}(A \cap B) = \mathbb{P}(A | B)\mathbb{P}(B)$. Then what the above formula is telling us is,
+\[
+\mathbb{P}(A | B) = \mathbb{P}(A).
+\]
+
+\begin{example}
+    Roll a fair die.
+    \[
+    A_1 = \{2, 4, 6\}(\text{even score}\}\quad A_2 = \{3, 6\}(\text{score divisible by $3$})
+    \]
+    \[
+    \mathbb{P}(A_1 \cap A_2) = \mathbb{P}(\{6\}) = \frac{1}{6}.
+    \]
+    \[
+    \mathbb{P}(A_2)\mathbb{P}(A_2) = \frac{3}{6} \times \frac{2}{6} = \frac{1}{6} = \mathbb{P}(A_1 \cap A_2).
+    \]
+     Hence, $A_1$ and $A_2$ are independent.
+
+     $A_3 = \{4, 5, 6\}$. Show that $A_1$ and $A_3$ are not independent.
+\end{example}
+
+Independence cannot be observed in a Venn diagram.
+
+\begin{theorem}
+    Let $A$ and $B$ be two events, with $\mathbb{P}(A) > 0,\,\mathbb{P}(B) > 0$, then the following are equivalent.
+    \begin{enumerate}[label = (\roman*)]
+        \item $\mathbb{P}(A \cap B) = \mathbb{P}(A)\mathbb{P}(B)$.
+        \item $\mathbb{P}(A | B) = \mathbb{P}(A)$.
+        \item $\mathbb{P}(B | A) = \mathbb{P}(B)$.
+    \end{enumerate}
+    \begin{proof}
+        We have just proved (i) $\implies$ (ii)    
+        proof of (ii) $\implies$ (iii):
+        \begin{equation}
+        \mathbb{P}(B | A)\mathbb{P}(A) = \mathbb{P}(A \cap B) = \mathbb{P}(A | B)\mathbb{P}(B).
+        \end{equation}
+        From (2) we get
+        \[
+        \mathbb{P}(B | A)\mathbb{P}(A) = \mathbb{P}(A | B)\mathbb{P}(B)
+        \]
+        Since we assume (ii), we have $\mathbb{P}(A | B) = \mathbb{P}(A)$ so,  we get $\mathbb{P}(B | A)\mathbb{P}(A) = \mathbb{P}(A)\mathbb{P}(B)$ or, $\mathbb{P}(B | A) = \mathbb{P}(B)$.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Let $A,\, B,\, C$ be $3$ events, such that $\mathbb{P}(A \cap B \cap C) > 0$, then the following are equivalent\footnote{This tells us $A$ and $B$ are conditionally independent of $C$.}
+    \begin{enumerate}[label = (\roman*)]
+        \item $\mathbb{P}(A \cap B | C) = \mathbb{P}(A | C)\mathbb{P}(B | C)$,
+        \item $\mathbb{P}(A | B \cap C) = \mathbb{P}(A | C)$,
+        \item $\mathbb{P}(B | A \cap C) = \mathbb{P}(B | C)$.
+    \end{enumerate}
+\end{theorem}
+
+\textbf{Independence of multiple events}
+\begin{definition}
+    Let $A_1, A_2, \dotsc, A_n$ be events, then they are mutually independent, if for every finite subcollection\footnote{Effectively equivalent to finite subsets.} $\mathcal{C}$ of indices $\{1, 2, \dotsc, n\}$,
+    \[
+    \mathbb{P}\left(\bigcap_{i \in \mathcal{C}}A_i\right) = \prod_{i \in \mathcal{C}}\mathbb{P}(A_i).
+    \]
+\end{definition}
+
+\newpage
+
+\section{Applications}
+
+\subsection{Reliability of networks}
+Reliability network/current flow.
+
+Series: current flows from left to right. 
+
+Parallel: current flows from left to right.
+
+Assumption: current flows/system works from left to right,
+system works if we can draw arrows from left to right.
+
+Taking a series circuit (with two components, $1$ and $2$).
+The system is functional if both components ($1$) and ($2$) are working
+
+Let $w_i := \text{event that $i$th component is working}$
+
+Let $S := \text{event system is working}$
+
+$S = W_1 \cap W_2$.
+
+\begin{definition}
+    A reliability network is a diagram of arcs and nodes.
+\end{definition}
+
+Let $W_i$ be the event that the $i^{\text{th}}$ component is working.
+
+We say that the system is working if we can go from left to right using working components only.
+
+Let $S$ denote the event that the system is working.
+
+Let $p_i$ be the probability that the $i^{\text{th}}$ component is working,
+that is,
+$\mathbb{P}(W_i) = p_i$.
+
+(A) Series case:
+System is working if both (1) and (2) are working.
+$S = W_1 \cap W_2$. \\
+
+(B) Parallel case:
+System is working if either (1) or (2) (or both) is working.
+$S = W_1 \cup W_2$. \\
+
+(C) Combination case:
+System is working if both (1) and (2) are working or (3) and (4) are working or both.
+$S = (W_1 \cap W_2) \cup (W_3 \cap W_4)$.
+
+Assumption: The components work independent of each other.
+
+We want to find
+$\P(\text{System is working)}) = \P(S).$
+
+Recall: $\P(A \cap B) = \P(A)\P(B)$ if $A$ and $B$ are independent.
+
+\begin{align*}
+    \P(S) &= \P(W_1 \cup W_2) \\
+    &= \P(W_1) + \P(W_2) - \P(W_1 \cap W_2) \\
+    &= p_1 + p_2 - p_1p_2\footnotemark
+\end{align*}
+\footnotetext{By C6: $\P(A \cup B) = \P(A) + \P(B) - \P(A \cap B)$.}
+
+(C)
+\begin{align*}
+    \P(S) &= \P((W_1 \cap W_2) \cup (W_3 \cap W_4)) \\
+    &= \P(W_1 \cap W_2) + \P(W_3 \cap W_4) - \P((W_1 \cap W_2) \cap (W_3 \cap W_4)) \\
+    &= p_1p_2 + p_3p_4 - p_1p_2p_3p_4\footnotemark
+\end{align*}
+\footnotetext{Because they are independent.}
+
+\begin{example}
+    Find $\P(S)$ for the following diagram
+    
+    \textbf{Gr12}
+\end{example}
+
+
+\subsection{Genetics}
+\begin{example}
+    A gene $X$ can have either allele $A$ or $a$.
+\end{example}
+
+Female: $XX$.
+
+Male: $XY$.
+
+Usually $A$ means dominant gene,
+and $a$ means recessive gene.
+
+A male child gets $X$ from mother and $Y$ from father.
+
+So the allele on the male child's $X$ chromosome is from the mother.
+So equal chance to inherit either of the alleles.
+
+
+\begin{example}
+    $aa$ is unhealthy (female).
+    $a$ is unhealthy (male).
+    
+    Jane is healthy. Maternal aunt of Jane has an unhealthy son. ($a$ - allele). Jane's maternal grandparent's and father are healthy.
+    \begin{enumerate}[label = (\roman*)]
+        \item Find $\P(\text{Jane is } Aa)$.
+    \end{enumerate}
+
+    \textbf{Gr13}
+    
+    Let $J := \{\text{Jane is } Aa\}$.
+    
+    Let $M_1 := \{\text{Jane's mother is } AA\}$.
+    
+    Let $M_2 := \{\text{Jane's mother is } Aa\}$.
+
+    Let $J := \{\text{Jane is } Aa\}$
+
+    \[
+    \P(M_2) = \P(\text{Jane's mother got $a$ from her mother}) = \frac{1}{2}.
+    \]
+    
+    \begin{align*}
+    \P(J) &= \underbrace{\P(J | M_1)}_{= 0}\P(M_1) + \P(J | M_2)\P(M_2) \\
+    &= \P(J | M_2)\P(M_2) \\
+    &= \frac{1}{2} \cdot \frac{1}{2}.
+    \end{align*}
+\end{example}
+
+\newpage
+
+\section{Random variables}
+
+\subsection{Definition and notation}
+
+Notation:
+
+$X, Y$ is a general random variable.
+
+\begin{example}[label = exmp1]
+    Toss a coin three times. Let $X$ denote the number of heads.
+
+    $H$ - Heads
+    
+    $T$ - Tails
+
+    $\Omega = \{(H, H, H), (H, H, T), (H, T, H), (H, T, T), (T, H, H), (T, H, T), (T, T, H), (T, T, T)\}$.
+
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{c|cccccccc}
+             $\omega$ & $HHH$ & $HHT$ & $HTH$ & $HTT$ & $THT$ & $TTH$ & $THH$ & $TTT$ \\
+             \hline
+             $X(\omega)$ & 3 & 2 & 2 & 1 & 1 & 1 & 2 & 0 
+        \end{tabular}
+    \end{table}
+\end{example}
+
+$X : \Omega \rightarrow \R$
+$X$ is a map from $\omega \mapsto X(\omega) \in \R$
+
+\begin{definition}[Random variable]
+    A random variable on $\Omega$ is a mapping from $\Omega$ to some set of possible values,
+    which we denote by $X(\Omega) = \{X(\omega) : \omega \in \Omega\}$
+    \footnote{We will most be concerned with $X(\Omega) \subseteq \R$ or $X(\Omega) \subseteq \R ^ d$, $X$ is real-values or vector valued.}.
+\end{definition}
+
+$X : \Omega \rightarrow \chi$.
+For our examples
+$\chi = \R \text{ or } \R ^ d$.
+
+The image of $X$ is denoted by $X(\Omega) = \{X(\omega) : \omega \in \Omega\}$.
+\begin{example}
+    Throw $2$ "fair" dice and let $X$ be the random variable denoting sum of the scores.
+    \[
+    \Omega = \{(1, 1), (1, 2), \dotsc, (1, 6), (2, 1), (2, 2), \dotsc\} = \{(i, j) : 1 \leq i \leq 6,\, 1 \leq j \leq 6\}.
+    \]
+    $|\Omega| = 6 ^ 2$
+    \begin{align*}
+        X : \Omega &\rightarrow \R\qquad (i, j) \mapsto X(i, j) = i + j \\
+        \omega &\mapsto X(\omega)
+    \end{align*}
+    where $i, j$ are the scores for the first and second dice respectively.
+\end{example}
+
+Let $f : \Delta \rightarrow\R$, then the pre-image for a set $B \subseteq \R$,
+is defined as $f ^ {-1}(B) := \{x \in \Delta : f(x) \in B\}$.
+
+\begin{example}[continues = exmp1]
+    Let $A_1 = \{X = 2\}$
+    
+    $A_2 = \{X \in [0, 1.5]\}$
+    
+    $A_3 = \{2.5 \leq X \leq 4.5\}$.
+
+    $A_1 = \{\omega : X(\omega) = 2\} = X ^ {-1} = \{\text{HHT, HTH, THH}\} \subseteq \Omega$.
+    \[
+    \P(A_1) = \frac{|A_1|}{|\Omega|} = \frac{3}{2 ^ 3} = \frac{3}{8}
+    \]
+
+    $A_2 = \{\omega : 0 \leq X(\omega) \leq 1.5\} = X ^ {-1}([0, 1.5]) = \{\omega : X(\omega) = 0\text{ or }X(\omega) = 1\} = \{TTT, HTT, THT, TTH\}$
+    \[
+    \P(A_2) = \frac{|A_2|}{|\Omega|} = \frac{4}{2 ^ 3} = \frac{1}{2}
+    \]
+\end{example}
+\[
+\P_X(B) := \P(X \in B) = \P\left(X ^ {-1}(B)\right)
+\]
+\textit{Note: For us $\chi$ will be mostly in $\R$ or $\R ^ d$, or subsets of $\R$ and $\R ^ d$}
+
+\begin{definition}
+    The function $P_X : X(\Omega) \rightarrow [0, 1]$ defined by $\P_X(B) := \P(X \in B) = \P(X^{-1}(B) = \P(\{\omega : X(\omega) \in B\})$
+    for any set $B \subseteq X(\Omega)$.
+    $\P_X$ is called the distribution\footnote{Or cumulative density/distribution function.} of $X$.
+\end{definition}
+
+\begin{theorem}
+    Let $X: \Omega \rightarrow \R$ be a random variable.
+    Then $\P_X$ is a probability on $\R$.
+    \begin{proof}
+        A1, A2, A3 (prove A4)
+
+        \begin{enumerate}[label = (A\arabic*)]
+            \item
+            \item $\P_X(\R) = 1$
+            $P_X(\R) := \P(X ^ {-1}(\R)) = \P(\Omega) = 1$
+
+            $X ^ {-1}(\R) := \{\omega : X(\omega) \in \R\} = \Omega$.
+            \item Let $A, B \subseteq \R$, such that $A \cap B = \emptyset$, then
+            \[
+            P_X(A \cup B) = \P_X(A) + \P_X(B).
+            \]
+            \[
+            X^{-1}(A \cup B) = X^{-1}(A) \cup X^{-1}(B)?
+            \]
+            Since $A \cap B = \emptyset$ is it true that $X^{-1}(A)\cap X^{-1}(B) = \emptyset$
+        \end{enumerate}
+    \end{proof}
+\end{theorem}
+
 \end{document}

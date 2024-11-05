@@ -1,6 +1,8 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage{preamble}
+\usepackage{systeme}
 
+\setcounter{MaxMatrixCols}{20}
 \newcommand{\mbf}[1]{\mathbf{#1}}
 
 \title{Linear Algebra I \\
@@ -756,7 +758,7 @@ For example, if $A = \begin{pmatrix}
     If no such inverse $B$ exists for a matrix $A$, we say $A$ is non-invertible (or singular).
 \end{definition}
 
-\begin{proposition}[Properties of the inverse and transpose]
+\begin{proposition}[Properties of the inverse and transpose, label = prop:propofinvandtransp]\label{linalg_prop_propofinvandtransp}
     \begin{enumerate}[label = (\roman*)]
         \item A matrix has at most one inverse.
         \item Assume $A$ and $B$ are invertible $n \times n$ matrices. Then the product $AB$ is invertible and
@@ -791,4 +793,720 @@ For example, if $A = \begin{pmatrix}
     \]
 \end{remark}
 
+\newpage
+
+\section{Gauss-Jordan elimination}
+
+\subsection{Solving equations and Gauss-Jordan elimination}
+We will turn to solving the general problem of solving $m$ linear equations in $n$ variables. To handle this, we need a systematic approach.
+
+We begin by setting up our notation. We shall denote our variables by $x_1,\,x_2,\dotsc,x_n$, and consider the solution of the system of $m$ linear equations
+\begin{align*}
+    a_{1 1}x_{1} &+ a_{1 2}x_2 &+ \dotsi &+ a_{1 n}x_n &= b_1; \\ 
+    a_{2 1}x_{1} &+ a_{2 2}x_2 &+ \dotsi &+ a_{2 n}x_n &= b_2; \\ 
+    \vdots & \vdots & \ddots & \vdots &\vdots \vdots; \\ 
+    a_{m 1}x_{1} &+ a_{m 2}x_2 &+ \dotsi &+ a_{m n}x_n &= b_m.
+\end{align*}
+For short we can write
+\[
+\sum_{j = 1}^{n}a_{ij}x_{j} = b_{i}\quad\text{for } i = 1,\dotsc,m.
+\]
+In vector notation we can write this using the dot product
+\[
+\mbf{a}_i \cdot \mbf{x} = \begin{pmatrix}
+    a_{i 1} \\ \vdots \\ a_{i n}
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+    x_1 \\ \vdots \\ x_n
+\end{pmatrix}
+=
+b_i\quad\text{for } i = 1, \dotsc, m.
+\]
+Each equation gives a so-called hyperplane with normal vector $\mbf{a}_i$.
+
+To solve the equations we shall go through the following process.
+\begin{itemize}
+    \item First formalise the system of equations as a single equation of matrices, this is for notational convenience and systematises our process.
+    \item Perform series of matrix operations (elementary row operations (ERO's)) that in effect change the original set of equations into a different set of linear equations, but ones that have the same solution set and are much easier to solve. This process is called Gauss-Jordan elimination, and the sort of matrix that represents the equations that are easier to solve is said to be in row reduced echelon form (RREF).
+\end{itemize}
+
+The first step we have essentially already done.
+Using the notation from before,
+the system of equations can be written as the matrix equation
+\[
+A\mbf{x} = \mbf{b}
+\]
+where $A$ is the matrix
+\[
+\begin{pmatrix}
+    a_{1 1} & a_{1 2} & \dotsi & a_{1 n} \\
+    a_{2 1} & a_{2 2} & \dotsi & a_{2 n} \\
+    \vdots & \vdots & \phantom{} & \vdots \\
+    a_{m 1} & a_{m 2} \dotsi a_{m n}
+\end{pmatrix}
+\]
+and $\mbf{b}$ is the column vector
+\[
+\begin{pmatrix}
+    b_1 \\ b_2 \\ \vdots \\ b_m
+\end{pmatrix}.
+\]
+
+The augmented matrix associated with a linear system of equations is a rectangular array of numbers,
+the coefficients of each equation are placed in order in each row,
+followed by a vertical bar where the equal signs are with the $a_{i j}$ to the left,
+and then the $b_i$ recorded to the right.
+In other words
+\[
+\left(
+\begin{array}{cccc|c}
+    a_{1 1} & a_{1 2} & \dotsi & a_{1 n} & b_1 \\
+    a_{2 1} & a_{2 2} & \dotsi & a_{2 n} & b_2 \\
+    \vdots & \vdots & \phantom{} & \vdots & \vdots \\
+    a_{m 1} & a_{m 2} & \dotsi & a_{m n} & b_m
+\end{array}
+\right).
+\]
+For example, the system
+\begin{align*}
+    3x_1 - 4x_2 + 3x_3 &= 1 \\
+    2x_1 - x_2 + 2x_3 &= 2
+\end{align*}
+has augmented matrix $\left(
+\begin{array}{ccc|c}
+    3 & -4 & 3 & 1 \\
+    2 & -1 & 2 & 2
+\end{array}
+\right).$
+
+If as before we write the matrix
+\[
+\left(
+\begin{array}{cccc|c}
+    a_{1 1} & a_{1 2} & \dotsi & a_{1 n} & b_1 \\
+    a_{2 1} & a_{2 2} & \dotsi & a_{2 n} & b_2 \\
+    \vdots & \vdots & \phantom{} & \vdots & \vdots \\
+    a_{m 1} & a_{m 2} & \dotsi & a_{m n} & b_m
+\end{array}
+\right),
+\]
+which we shall sometimes call the coefficient matrix of the linear system,
+and as above write
+\[
+\mbf{b} = \begin{pmatrix}
+    b_1 \\ \vdots \\ b_m
+\end{pmatrix}
+\quad\text{and}\quad\mbf{x} = \begin{pmatrix}
+    x_1 \\ \vdots \\ x_n
+\end{pmatrix},
+\]
+then the augmented matrix cab we written as $(A | \mbf{b})$.
+
+We call a linear system homogenous if $\mbf{b} = \mbf{0}$,
+and inhomogeneous if $\mbf{b} \neq \mbf{0}$.
+Note that a homogeneous system always has at least one solution: $\mbf{x} =\mbf{0}$.
+
+\begin{lemma}\label{linalg_lem_invprop}\phantom{}
+    \begin{enumerate}[label = (\roman*)]
+        \item Let $A \in M_{n,\,n}(\R)$ be a square matrix and let $\mbf{v} \in \R ^ n$ be a non-zero vector such that $A\mbf{v} = \mbf{0}$. Then $A$ is singular.
+        \item Let $A \in M_{n,\,n}(\R)$ be an invertible square matrix. Then the inhomogeneous system $A\mbf{x} = \mbf{b}$ has a single unique solution. In particular, the only solution to the homogeneous system $A\mbf{x} = \mbf{0}$ is $\mbf{x} = \mbf{0}$.
+    \end{enumerate}
+    \begin{proof}
+        For (i), see example 2.4.2(iii) for an easily generalisable argument. For (ii), if $A$ is invertible then
+        \[
+        \mbf{x} = I_n\mbf{x} = (A ^ {-1} A)\mbf{x} = A ^ {-1}(A\mbf{x}) = A ^ {-1}\mbf{b}.
+        \]
+    \end{proof}
+\end{lemma}
+
+\subsection{Echelon form and its application to linear systems}
+
+\begin{definition}
+    A matrix of numbers is said to be in row reduced echelon form (RREF) if
+    \begin{enumerate}[label = (\roman*)]
+        \item The first (leftmost) non-zero entry in any non-zero row is a $1$ (called its leading $1$).
+        \item If a row has its leading $1$ in the $j$th column then
+        \begin{enumerate}[label = (\alph*)]
+            \item all the other entries in the $j$th column are $0$; and
+            \item the leading $1$s of subsequent rows are in columns to the right of the $j$th column.
+        \end{enumerate}
+    \item Any row(s) of zeros come after all the rows with non-zero entries.
+    \end{enumerate}
+\end{definition}
+
+For example, the matrices
+\[
+\begin{pmatrix}
+    1 & 4 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0
+\end{pmatrix},
+\qquad
+\begin{pmatrix}
+    0 & 1 & 0 & 0 & 2 \\ 0 & 0 & 1 & 0 & 3 \\ 0 & 0 & 0 & 1 & 4
+\end{pmatrix}
+\qquad\text{and}
+\qquad
+\begin{pmatrix}
+    1 & 0 & 2 & 0 \\
+    0 & 1 & 3 & 0 \\
+    0 & 0 & 0 & 1 \\
+    0 & 0 & 0 & 0
+\end{pmatrix}
+\]
+are all in RREF.
+
+In general, an RREF matrix looks as follows:
+\[
+\left(
+\begin{array}{cccccccccccccccc}
+    1 & * & \dotsi & * & 0 & * & \dotsi & * & 0 & * & \dotsi & * & 0 & * & \dotsi & * \\
+    0 & 0 & \dotsi & 0 & 1 & * & \dotsi & * & 0 & * & \dotsi & * & 0 & * & \dotsi & * \\
+    0 & 0 & \dotsi & 0 & 0 & 0 & \dotsi & 0 & 1 & * & \dotsi & * & 0 & * & \dotsi & * \\
+    \vdots & \vdots & \phantom{} & \vdots & \vdots & \vdots & \phantom{} & \vdots & \vdots & \vdots & \phantom{} & \vdots & \vdots & \vdots & \phantom{} & \vdots \\
+    0 & 0 & \dotsi & 0 & 0 & 0 & \dotsi & 0 & 0 & 0 & \dotsi & 0 & 1 & * & \dotsi & *
+\end{array}
+\right)
+\]
+
+\begin{example}
+    Consider these three RREF's for a non-zero $2 \times 2$ matrix.
+    \[
+    (a): \begin{pmatrix}
+        1 & \alpha \\ 0 & 0
+    \end{pmatrix},\qquad
+    (b): \begin{pmatrix}
+        1 & 0 \\ 0 & 1
+    \end{pmatrix},
+    \qquad
+    (c): \begin{pmatrix}
+        0 & 1 \\ 0 & 0
+    \end{pmatrix}.
+    \]
+    Here $\alpha$ is some scalar. Viewing these as the coefficient matrix for a linear system we have the following augmented matrices:
+    \[
+    (a): \begin{amatrix}{2}
+        1 & \alpha & b_1 \\ 0 & 0 & b_2
+    \end{amatrix},
+    \qquad
+    (b): \begin{amatrix}{2}
+        1 & 0 & b_1 \\ 0 & 1 & b_2
+    \end{amatrix},
+    \qquad
+    (c): \begin{amatrix}{2}
+        0 & 1 & b_1 \\ 0 & 0 & b_2
+    \end{amatrix}.
+    \]
+\end{example}
+
+For $(a)$ and $(c)$ the correspond system has clearly only a solution if $b_2 = 0$ (because the second equation now reads $0x_1 + 0x_2 = 1$).
+In these cases we obtain for the solution sets
+\[
+(a): x_1 = b_1 - \alpha x_2,\quad (b): x_1 = b_1,\,x_2 = b_2,\quad (c): x_2 = b_1
+\]
+note for $(b)$ we have only have a unique solution, while for $(a)$ and $(c)$ the solution set is a line.
+More precisely, it is a non-horizontal line for $(a)$, and a horizontal one for $(c)$.
+
+\subsection{The Elementary Row Operations and the big theorem}
+The ERO's are simple operations you can do to a matrix to turn it into another matrix.
+There are three fundamental operations, which are as follows,
+\begin{enumerate}[label = (\alph*)]
+    \item $P_{rs}$: switch row $r$ with row $s$;
+    \item $M_{r}(\mbf{\lambda})$: multiple (all the entries in) row $r$ by the number $\lambda \neq 0$;
+    \item $A_{rs}$: add (each entry in) row $r$ to (the corresponding entry in) row $s$.
+    \item[(c')] $A_{rs}(\mbf{\lambda})$: add $\lambda$ times (each entry in) row $r$ to (the corresponding entry in) row $s$.
+\end{enumerate}
+
+Note that $A_{rs}(\lambda) = M_r\left(\frac{1}{\lambda}\right) \circ A_{rs} \circ M_r(\lambda)$,
+read from right to left (in the same way as how $f \circ g$ means do $g$ then $f$).
+\begin{example}
+    \begin{align*}
+    \begin{pmatrix}
+        1 & 3 & 2 \\
+        2 & 1 & -1 \\
+        -1 & 1 & 2
+    \end{pmatrix}
+    &\xrightarrow{
+    \begin{subarray}{c}
+        A_{12}(-2) \\ A_{13}(1)
+    \end{subarray}
+    }
+    \begin{pmatrix}
+        1 & 3 & 2 \\
+        0 & -5 & -5 \\
+        0 & 4 & 4
+    \end{pmatrix}
+    &\xrightarrow{
+    \begin{subarray}{c}
+        M_2(-1 / 5) \\ M_3(1 / 4)
+    \end{subarray}
+    }
+    \begin{pmatrix}
+        1 & 3 & 2 \\
+        0 & 1 & 1 \\
+        0 & 1 & 1
+    \end{pmatrix} 
+    \\
+    &\xrightarrow{
+    \begin{subarray}{c}
+        A_{23}(-1)
+    \end{subarray}
+    }
+    \begin{pmatrix}
+        1 & 3 & 2 \\
+        0 & 1 & 1 \\
+        0 & 0 & 0
+    \end{pmatrix}
+    &\xrightarrow{
+    \begin{subarray}{c}
+        A_{21}(-3)
+    \end{subarray}
+    }
+    \begin{pmatrix}
+        1 & 0 & -1 \\
+        0 & 1 & 1 \\
+        0 & 0 & 0
+    \end{pmatrix}
+    \end{align*}
+\end{example}
+
+\subsubsection{The basic routine}
+\begin{enumerate}[label = (\alph*)]
+    \item Find the first non-zero column (from the left).
+    \item Go down the first non-zero column and find the first non-zero entry.
+    \item If this is in the $r$-th row with $r \neq 1$ apply the elementary row operation $P_{1 r}$ to get a non-zero entry, $\lambda$ say, at the top of the first non-zero column.
+    \item Apply the elementary row operation $M_1(1 / \lambda)$ to make the first non-zero entry of the first non-zero column $a$ $1$.
+    \item Using elementary row operation of the form $A_{1 i}(\mu)$ clear all other non-zero entries in the first non-zero column.
+\end{enumerate}
+
+The resulting matrix is of the form
+\[
+\begin{pmatrix}
+    1 & * & \dotsi & * \\
+    0 & * & \dotsi & * \\
+    \vdots & \vdots & \phantom{} & \vdots \\
+    0 & * & \dotsi & *
+\end{pmatrix}
+\]
+or, if the first non-zero column is not the first one,
+\[
+\begin{pmatrix}
+    0 & \dotsi & 0 & 1 & * & \dotsi & * \\
+    0 & \dotsi & 0 & 0 & * & \dotsi & * \\
+    \vdots & \phantom{} & \vdots & \vdots & \vdots & \phantom{} & \vdots \\
+    0 & \dotsi & 0 & 0 & * & \dotsi & * \\
+\end{pmatrix}
+\]
+
+\subsubsection{The algorithm}
+Let $A$ be given $m \times n$ matrix.
+The process of Gauss-Jordan elimination applied to $A$ is described by repeatedly applying the Basic Routine in stages.
+(For simplicity of description we will assume that the first column of $A$ is non-zero).
+
+\textbf{Stage 1}
+
+Apply the basic routine to the given $m \times n$ matrix $A$.
+This gives a new $m \times n$ matrix $A_1$ of the form:
+\[
+A_1 =
+\begin{pmatrix}
+    1 & * & \dotsi & * \\
+    0 & * & \dotsi & * \\
+    \vdots & \vdots & \phantom{} & \vdots \\
+    0 & * & \dotsi & *
+\end{pmatrix}
+\]
+
+\textbf{Stage 2}
+
+If all of the remaining rows (below row $1$) are zero, it is easy to see that the matrix is now in RREF.
+Otherwise:
+\begin{enumerate}[label = (\roman*).]
+    \item Apply the basic routine to the submatrix of $A_1$ obtained by ignoring the first row.
+    This gives a new $m \times n$ matrix $\tilde{A}_2$ of the form:
+    \[
+    \begin{pmatrix}
+        0 & \dotsi & 0 & 1 & * & \dotsi & * \\
+        0 & \dotsi & 0 & 0 & * & \dotsi & * \\
+        \vdots & \phantom{} & \vdots & \vdots & \vdots & \phantom{} & \vdots \\
+        0 & \dotsi & 0 & 0 & * & \dotsi & *
+    \end{pmatrix}
+    \]
+    \item Apply an elementary row operation of the form $A_{2 1}(\mu)$,
+    if necessary, to $\tilde{A}_2$ to make the entry above the first $1$ in the second row a zero.
+    This gives a new $m \times n$ matrix $A_2$ of the form:
+    \[
+    A_2 = 
+    \begin{pmatrix}
+        1 & * & \dotsi & * & 0 & * & \dotsi & * \\
+        0 & 0 & \dotsi & 0 & 1 & * & \dotsi & * \\
+        0 & 0 & \dotsi & 0 & 0 & * & \dotsi & * \\
+        0 & 0 & \dotsi & 0 & 0 & * & \dotsi & *
+    \end{pmatrix}.
+    \]
+\end{enumerate}
+Now continue inductively.
+Assume stages $1$ to $k - 1$ have been completed (for $k - 1 < m$),
+resulting in a matrix $A_{k - 1}$.
+
+\textbf{Stage k (with $k \leq m$)}
+
+If rows $k, k + 1, \dotsc, m$ of $A_{k - 1}$ are all zero then this matrix is in RREF and the algorithm terminates.
+Similarly, if the leading $1$ in the $(k - 1)$th row of $A_{k - 1}$ lies in the $n$th column then it is easy to check that $A_{k - 1}$ is in RREF.
+Otherwise:
+\begin{enumerate}[label = (\roman*).]
+    \item Apply the basic routine to the submatrix of $A_{k - 1}$ obtained by ignoring the first $k - 1$ rows.
+    This gives a new $m \times n$ matrix $\tilde{A}_k$ of the form:
+    \[
+    \tilde{A}_k = \begin{pmatrix}
+        1 & 0 & \dotsi & * & 0 & * & \dotsi & * & * & \dotsi & * \\
+        0 & 0 & \dotsi & 0 & 1 & * & \dotsi & * & * & \dotsi & * \\
+        0 & 0 & \dotsi & 0 & 0 & 0 & \dotsi & * & * & \dotsi & * \\
+        \vdots & \vdots & \phantom{} & \vdots & \vdots & \vdots & \phantom{} & \vdots & \vdots & \phantom{} & \vdots \\
+        0 & 0 & \dotsi & 0 & 0 & 0 & \dotsi & 1 & * & \dotsi & * \\
+        0 & 0 & \dotsi & 0 & 0 & 0 & \dotsi & 0 & * & \dotsi & * \\
+        \vdots & \vdots & \phantom{} & \vdots & \vdots & \vdots & \phantom{} & \vdots & \vdots & \phantom{} & \vdots \\
+        0 & 0 & \dotsi & 0 & 0 & 0 & \dotsi & 0 & * & \dotsi & *
+    \end{pmatrix}.
+    \]
+    \item Apply elementary row operations of the form $A_{k r}(\mu)\ (\text{for } r = 1, 2, \dotsc, k - 1)$,
+    if necessary, to $\tilde{A}_k$; this ensures all remaining non-zero entries in the column containing the first $1$ in the $k$-th row equal to zero and gives a new $m \times n$ matrix $A_k$ of the form:
+    \[
+    \tilde{A}_k = \begin{pmatrix}
+        1 & 0 & \dotsi & * & 0 & * & \dotsi & 0 & * & \dotsi & * \\
+        0 & 0 & \dotsi & 0 & 1 & * & \dotsi & 0 & * & \dotsi & * \\
+        0 & 0 & \dotsi & 0 & 0 & 0 & \dotsi & 0 & * & \dotsi & * \\
+        \vdots & \vdots & \phantom{} & \vdots & \vdots & \vdots & \phantom{} & \vdots & \vdots & \phantom{} & \vdots \\
+        0 & 0 & \dotsi & 0 & 0 & 0 & \dotsi & 1 & * & \dotsi & * \\
+        0 & 0 & \dotsi & 0 & 0 & 0 & \dotsi & 0 & * & \dotsi & * \\
+        \vdots & \vdots & \phantom{} & \vdots & \vdots & \vdots & \phantom{} & \vdots & \vdots & \phantom{} & \vdots \\
+        0 & 0 & \dotsi & 0 & 0 & 0 & \dotsi & 0 & * & \dotsi & *
+    \end{pmatrix}.
+    \]
+    By induction, this process must terminate either before Stage $m$ or after Stage $m$.
+    In the former case,
+    the reason for early termination must have been that the matrix had reached RREF.
+    In the latter case we must have reached a matrix $A_m$ with a leading $1$ on every row.
+    It is then easy to check that $A_m$ is in RREF.
+\end{enumerate}
+
+\subsection{Using G-J to solve a system of linear equations}
+Recall, we are considering the solution set of a general system of $m$ linear equations in $n$ variables.
+
+Two such systems are said to be equivalent if they have the same solution set.
+We say an augmented matrix is in row reduced echelon form if the associated coefficient matrix is in row reduced echelon form.
+Applying the elementary row operations to the augmented matrix $(A | \mbf{b})$ allows us to pass to equivalent systems and eventually to a system for which it is easy to spot the solutions.
+This is justified by
+\begin{theorem}[label = thm:lintoech]\label{linalg_thm_lintoech}
+    Applying ERO's to the augmented matrix of a linear system simply changes the system to an equivalent one; that is, the solution set remains unchanged.
+\end{theorem}
+
+If a row is of the form $(0\ \dotsi\ \,|\, k)$ for $k \neq 0$ this would mean that there are no solutions,
+we call a system like this inconsistent.
+
+A quick way to solve a linear system,
+there is no need to run G-J fully.
+One can do the following:
+\begin{enumerate}[label = \arabic*) :]
+    \item Perform ERO's to bring coefficient matrix $A$ into upper triangular form,
+    that is, all the entries below the diagonal vanish.
+    (Also not necessary to scale the "leading ones" to be actually equal to $1$.)
+    \item Then go back to the linear system and use back substitution from bottom to top to solve the system.
+\end{enumerate}
+
+\begin{example}
+    \[
+    \sysdelim..\systeme{
+        x_1 + 2x_2 + 3x_3 = 1,
+        2x_1 + 3x_2 + 2x_3 = 1,
+        3x_1 + 2x_2 + x_3 = 1.
+        }
+    \]
+    We put this into matrix form then EROs to get it into upper triangular form
+    \begin{align*}
+        &\begin{amatrix}{3}
+            1 & 2 & 3 & 1 \\
+            2 & 3 & 2 & 1 \\
+            3 & 2 & 1 & 1
+        \end{amatrix}
+        &\xrightarrow{\begin{subarray}{c}
+        A_{12}(-2) \\ A_{13}(-3)
+        \end{subarray}}
+        &\begin{amatrix}{3}
+            1 & 2 & 3 & 1 \\
+            0 & -1 & -4 & -1 \\
+            0 & -4 & -8 & -2
+        \end{amatrix}
+        \\
+        \xrightarrow{A_{23}(-4)}
+        &\begin{amatrix}{3}
+            1 & 2 & 3 & 1 \\
+            0 & -1 & -4 & -1 \\
+            0 & 0 & 8 & 2
+        \end{amatrix}.
+    \end{align*}
+    Putting this back into our equations gives us:
+    
+    $3$rd equation: $x_3 = \frac{1}{4}$;
+    
+    $2$nd equation: $x_2 = -4x_3 + 1 = -4\frac{1}{4} + 1 = 0$;
+    
+    $1$st equation: $x_1 = 1 - 2x_2 - 3x_3 = 1 - \frac{3}{4} = \frac{1}{4}$, i.e.,
+    \[
+    \begin{pmatrix}
+        \frac{1}{4} \\
+        0 \\
+        \frac{1}{4}
+    \end{pmatrix}.
+    \]
+\end{example}
+
+\subsection{Inverse matrices and linear systems}
+\begin{lemma}\label{linalg_lem_solsetsam}
+    Consider an arbitrary $m \times n$ linear system $A\mbf{x} = \mbf{b}$.
+    Let $B \in M_{m \times m}(\R)$ be an invertible matrix.
+    Then the new system $(BA)\mbf{x} = B\mbf{b}$ has the same solution set as the original system.
+    \begin{proof}
+        We need to show that the two systems have the same solution set.
+        First assume that $\mbf{v}$ is a solution to the system $A\mbf{x} = \mbf{b}$, assume $A\mbf{v} = \mbf{b}$.
+        Then, $B\mbf{b} = B(A\mbf{v}) = (BA)\mbf{v}$ as required.
+        Conversely, assume $(BA)\mbf{v} = B\mbf{b}$. Then
+        \[
+        \mbf{b} = I_m\mbf{b} = (B ^ {-1}B)\mbf{b} = B ^ {-1}(B\mbf{b}) = B ^ {-1}(BA\mbf{v}) = (B ^ {-1} B) A\mbf{v} = A\mbf{v},
+        \]
+        as required.
+    \end{proof}
+\end{lemma}
+
+\begin{theorem}[continues = thm:lintoech]
+    \begin{proof}
+        Suppose we want to perform elementary row operations on a matrix with $m$ rows.
+        Then we can do this using the following $m \times m$ matrices.
+        \begin{enumerate}[label = (\alph*)]
+            \item The row operation $P_{rs}$ can be performed by left multiplication by the $m \times m$ matrix,
+            which we also call $P_{rs}$,
+            obtained from the identity by swapping the $r$th and $s$th columns.
+            That is $(p_{ij})_{m \times m}$ with $p_{ii} = 1$ when $i \neq r, s, p_{rr} = p_{ss} = 0; p_{ij} = 0$ when $i \neq j$ and $\{i, j\} \neq \{r, s\}, p_{rs} = p_{sr} = 1$. That is,
+            \[
+            P_{rs} = \begin{pmatrix}
+                1 & 0 & \dotsi & 0 & \dotsi & 0 & \dotsi & 0 \\
+                0 & 1 & \dotsi & 0 & \dotsi & 0 & \dotsi & 0 \\
+                \vdots & \vdots & \phantom{} & \vdots & \phantom{} & \vdots & \phantom{} & \vdots \\
+                0 & 0 & \dotsi & 0 & \dotsi & 1 & \dotsi & 0 \\
+                \vdots & \vdots & \phantom{} & \vdots & \phantom{} & \vdots & \phantom{} & \vdots \\
+                0 & 0 & \dotsi & 1 & \dotsi & 0 & \dotsi & 0 \\
+                \vdots & \vdots & \phantom{} & \vdots & \phantom{} & \vdots & \phantom{} & \vdots \\
+                0 & 0 & \dotsi & 0 & \dotsi & 0 & \dotsi & 1
+            \end{pmatrix}.
+            \]
+            One can check that we have $P_{rs} ^ {-1} = P_{rs}$ (swapping twice leaves you back where you started).
+            \item
+            The row operation $M_r(\lambda)$ can be performed by left multiplication by the $m \times m$ matrix,
+            which we also call $M_r(\lambda)$,
+            obtained from the identity by replacing the $r$th diagonal entry with $\lambda$.
+            That is $(m_{ij})_{m \times m}$ with $m_{ii} = 1$ when $i \neq r$ and $m_{rr} = \lambda$; $m_{ij} = 0$ when $i \neq j$.
+            That is,
+            \[
+            M_r(\lambda) = \begin{pmatrix}
+                1 & 0 & \dotsi & 0 & \dotsi & 0 \\
+                0 & 1 & \dotsi & 0 & \dotsi & 0 \\
+                \vdots & \vdots & \phantom{} & \vdots & \phantom{} & \vdots \\
+                0 & 0 & \dotsi & \lambda & \dotsi & 0 \\
+                \vdots & \vdots & \phantom{} & \vdots & \phantom{} & \vdots \\
+                0 & 0 & \dotsi & 0 & \dotsi & 1
+            \end{pmatrix}.
+            \]
+            We have $M_r(\lambda) ^ {-1} = M_r\left(\frac{1}{\lambda}\right)$.
+            \item The row operation $A_{rs}(\lambda)$ has be performed by left multiplication by the $m \times m$ matrix,
+            which we also call $A_{rs}(\lambda)$,
+            obtained from the identity matrix by replacing the entry in the $r$th column and $s$th row with $\lambda$.
+            That is $(a_{ij})_{m \times m}$ where $a_{ii} = 1; a_{ij} = 0$ when $i \neq j$ and $(i, j) \neq (s, r);\; a_{sr} = \lambda$.
+            That is,
+            \[
+            \begin{pmatrix}
+                1 & 0 & \dotsi & 0 & \dotsi & 0 & \dotsi & 0 \\
+                0 & 1 & \dotsi & 0 & \dotsi & 0 & \dotsi & 0 \\
+                \vdots & \vdots & \phantom{} & \vdots & \phantom{} & \vdots & \phantom{} & \vdots \\
+                0 & 0 & \dotsi & 1 & \dotsi & 0 & \dotsi & 0 \\
+                \vdots & \vdots & \phantom{} & \vdots & \phantom{} & \vdots & \phantom{} & \vdots \\
+                0 & 0 & \dotsi & \lambda & \dotsi & 1 & \dotsi & 0 \\
+                \vdots & \vdots & \phantom{} & \vdots & \phantom{} & \vdots & \phantom{} & \vdots \\
+                0 & 0 & \dotsi & 0 & \dotsi & 0 & \dotsi & 1
+            \end{pmatrix}.
+            \]
+            We have $A_{rs}(\lambda) ^ {-1} = A_{rs}(-\lambda)$.
+        \end{enumerate}
+        We call any of these matrices an elementary matrix.
+        Then if $E$ is an elementary $m \times m$ matrix the corresponding row operation is given by $EA\mbf{x} = E\mbf{b}$.
+    \end{proof}
+\end{theorem}
+
+\begin{remark}
+    Note that every elementary matrix is not only invertible,
+    but the inverse of any elementary matrix is also an elementary matrix.
+\end{remark}
+
+\subsection{The fundamental theorem of invertible matrices}
+\begin{lemma}\label{linalg_lem_sqmatrrefcond}
+    Let $A \in M_{n \times n}(\R)$ be a square matrix.
+    Then the following are (pairwise) equivalent,
+    that is they are either all true or all false.
+    \begin{enumerate}[label = (\roman*)]
+        \item In each column of RREF of $A$ there exists a leading $1$.
+        \item The RREF of $A$ is the identity matrix $I_n = \begin{pmatrix}
+            1 & \phantom{} & \phantom{} \\
+            \phantom{} & \ddots & \phantom{} \\
+            \phantom{} & \phantom{} & 1
+        \end{pmatrix}$.
+        \item The only solution to the system $A\mbf{x} = \mbf{0}$ is $\mbf{x} = \mbf{0}$.
+    \end{enumerate}
+    \begin{proof}
+        The equivalence of (i) and (ii) is clear:
+        if the RREF is the identity then each column has a leading $1$.
+        Conversely, if each column of the RREF has a leading $1$,
+        then the first leading $1$ is in the $1, 1$-entry,
+        the second must be in the $2, 2$-entry and so on.
+        Then all the off-diagonal entries must be zero,
+        that is, the RREF is indeed $I_n$.
+
+        Next we show that (ii) implies (iii).
+        So let's assume (ii).
+        But by \autoref{linalg_lem_solsetsam} we can replace the equation $A\mbf{x} = \mbf{0}$ with the RREF of $A$,
+        that is, we can consider $I_n\mbf{x} = \mbf{0}$,
+        which means $\mbf{x} = \mbf{0}$.
+        So (iii) holds.
+
+        What remains is to show that (iii) implies (i).
+        So let's assume (iii), that is,
+        the only solution to the system $A\mbf{x} = \mbf{0}$ is $\mbf{x} = \mbf{0}$.
+        Let's assume for a contradiction that the number of leading $1$'s in the RREF of $A$ is equal to $r < n$.
+        This means that there are $n - r > 0$ free variables (one for each column without a leading $1$).
+        To be explicit, after permutation of columns we can assume the RREF of $A$ looks as follows
+        \[
+        \begin{pmatrix}
+            I_r & A'_{r, n - r} \\
+            \mbf{0}_{n - r, r} & \mbf{0}_{n - r, n - r}
+        \end{pmatrix}
+        \]
+        for some $r \times (n - r)$ matrix $A'$.
+        But then any choice of real value for each of the free variables will yield a solution t the system $A\mbf{x} = \mbf{0}$.
+        In particular there exists a non-trivial solution to the system.
+        This is a contradiction, therefore there must have been $r = n$ leading $1$'s after all.
+    \end{proof}
+\end{lemma}
+
+\begin{theorem}[Fundamental Theorem of Invertible Matrices]\label{linalg_thm_fundthmofinvertmatr}
+    A square matrix $A \in M_{n \times n}(\R)$ is invertible if and only if any one of the conditions (i), (ii), (iii) of \autoref{linalg_lem_sqmatrrefcond} holds.
+    \begin{proof}
+        Suppose $A$ is invertible.
+        Then by \autoref{linalg_lem_invprop}(ii) the only solution of $A\mbf{x} = \mbf{0}$ is $\mbf{x} = \mbf{0}$,
+        which is \autoref{linalg_lem_sqmatrrefcond}(iii).
+
+        Now assume that any one of (i), (ii), and (iii) hold.
+        By (ii), there exist elementary matrices $E_1, E_2, \dotsc, E_\ell$ such that
+        \[
+        E_\ell E_{\ell - 1} \dotsi E_1 A = I_n.
+        \]
+        Thus $(E_\ell E_{\ell - 1} \dotsi E_1)$ is a left sided inverse of $A$.
+        We must show it is a right sided inverse too.
+        To do this, note that
+        \begin{align*}
+            AE_\ell E_{\ell - 1} \dotsi E_1 &= I_n A E_\ell E_{\ell - 1} \dotsi E_1 \\
+            &= (E_1 ^ {-1} E_2 ^ {-1} \dotsi E_{\ell} ^ {-1}E_\ell E_{\ell - 1} \dotsi E_1)AE_\ell E_{\ell - 1} \dotsi E_1 \\
+            &= E_1 ^ {-1} E_2 ^ {-1} \dotsi E_{\ell} ^ {-1}(E_\ell E_{\ell - 1} \dotsi E_1A)E_\ell E_{\ell - 1} \dotsi E_1 \\
+            &= E_1 ^ {-1} E_2 ^ {-1} \dotsi E_{\ell} ^ {-1}E_\ell E_{\ell - 1} \dotsi E_1 = I_n.
+        \end{align*}
+        So $A$ is invertible with $A ^ {-1} = E_\ell E_{\ell - 1} \dotsi E_1$.
+    \end{proof}
+\end{theorem}
+This proof immediately gives us
+\begin{corollary}
+    Any invertible square matrix is the product of elementary matrices (and vice versa).
+    \begin{proof}
+        Simply notice that $E_1 ^ {-1}E_2 ^ {-1} \dotsi E_i ^ {-1}$ is an inverse of $A ^ {-1} = E_1E_2 \dotsi E_i$.
+        But, so is the matrix $A$.
+        So, by uniqueness of the inverses,
+        we must have $A = E_1 ^ {-1} E_2 ^ {-1} \dotsi E_\ell ^ {-1}$.
+    \end{proof}
+\end{corollary}
+
+\begin{remark}
+    Note that the product above is not necessarily unique.
+\end{remark}
+
+\begin{remark}
+    We can also now show that the "left inverse" of a square matrix $A$ is also the "right inverse" of $A$,
+    that is if $BA = I_n$, then also $AB = I_n$
+\end{remark}
+
+\begin{proposition}[continues = prop:propofinvandtransp]
+    \begin{proof}[Proof of (v)]
+        Suppose that $BA = I_n$ and consider $A\mbf{x} = \mbf{0}$.
+        Left multiplication by $B$ shows that the only solution is $\mbf{x} = \mbf{0}$.
+        Hence $A$ is invertible by \autoref{linalg_thm_fundthmofinvertmatr}.
+        In particular, $A$ has an inverse $A ^ {-1}$ and we have
+        \[
+        AB = ABAA ^ {-1} = A(BA)A ^ {-1} = AA ^ {-1} = I_n.
+        \]
+        By the uniqueness of inverses, this shows that $A ^ {-1} = B$.
+    \end{proof}
+\end{proposition}
+
+\subsection{An algorithm to compute the inverse of a matrix}
+We run G-J for the matrix $A$ and keep track of the elementary operations/matrices we used.
+Concretely, we run G-J on the augmented or double matrix
+\[
+(A \,|\, I_n) =
+\left(\hspace{-5pt}
+\begin{array}{cccc|cccc}
+     a_{1 1} & a_{1 2} & \dotsi & a_{1 n} & 1 & 0 & \dotsi & 0 \\
+     a_{2 1} & a_{2 2} & \dotsi & a_{2 n} & 0 & 1 & \dotsi & 0 \\
+     \vdots & \vdots & \phantom{} & \vdots & \vdots & \vdots & \ddots & \vdots \\
+     a_{n 1} & a_{n 2} & \dotsi & a_{n n} & 0 & 0 & \dotsi & 1
+\end{array}
+\hspace{-5pt}\right).
+\]
+Now perform G-J as always and get (if $A$ is invertible)
+\[
+(I_n\,|\,E_\ell \dotsi E_1),
+\]
+and $A ^ {-1} = E_\ell \dotsi E_1$.
+If $A$ is singular,
+you will not obtain the identity matrix on the left hand side.
+
+\newpage
+
+\section{Determinants}
+The determinant of a square matrix is a scalar.
+The determinant of a matrix $A$ with real entries is a real number.
+So we can think of this as a function
+\[
+\det : M_{n \times n}(\R) \rightarrow \R.
+\]
+
+\subsection{Small values of $n$}
+We look at particular cases of the function
+\[
+\det : M_{n\times n}(\R) \rightarrow \R.
+\]
+$n = 1$:
+The equation $ax = b$ has a unique solution if and only if $a \neq 0$.
+We set
+\[
+\det(a) = a.
+\]
+
+$n = 2$:
+We know $\begin{pmatrix}
+    a & b \\ c & d
+\end{pmatrix}$
+is invertible if and only if $ad - bc \neq 0$.
+So, set
+\[
+\det\begin{pmatrix}
+    a & b \\ c & d
+\end{pmatrix} = ad - bc.
+\]
+Then the matrix equation (system of two linear equations)
+
+has a unique 
 \end{document}

@@ -2,7 +2,6 @@
 \usepackage{preamble}
 
 \declaretheorem[style = avgstyle, name = Counting Principle]{countprinc}
-\newcommand{\Po}{\mathbb{P}}
 
 \title{Probability I \\
     \large Prereading}
@@ -36,8 +35,8 @@ A set is an unordered collection of distinguishable objects.
     For instance, $\{2, 4, 5\} \subseteq \{1, 2, 3, 4, 5\}$.    
 \end{example}
 
-\begin{definition}[Power Set]
-    The power set is the set consisting of all subsets of a set $A$, this is denoted as $2 ^ A$\footnote{I have also seen it denoted as $\mathbb{P}(A)$.}.
+\begin{definition}[Pwer Set]
+    The power set is the set consisting of all subsets of a set $A$, this is denoted as $2 ^ A$\footnote{I have also seen it denoted as $\P(A)$.}.
     \[
     2 ^ A = \{B: B \subseteq A\}.
     \]
@@ -114,18 +113,18 @@ Additionally, we can use De Morgan's Laws for a collection of events $A_i$,
 \subsection{The axioms of probability}
 
 \begin{definition}[Probability]
-    A probability $\mathbb{P}$ on a sample space $\Omega$ with collection $\mathcal{F}$ of events is a function mapping every event $A \in \mathcal{F}$ to a real number $\mathbb{P}(A)$, obeying the following axioms:
+    A probability $\P$ on a sample space $\Omega$ with collection $\mathcal{F}$ of events is a function mapping every event $A \in \mathcal{F}$ to a real number $\P(A)$, obeying the following axioms:
     \begin{enumerate}[label = A\arabic*]
-        \item $\mathbb{P}(A) \geq 0$ for every $A \in \mathcal{F}$
-        \item $\mathbb{P}(\Omega) = 1$ and
+        \item $\P(A) \geq 0$ for every $A \in \mathcal{F}$
+        \item $\P(\Omega) = 1$ and
         \item if $A$ and $B$ are disjoint events (i.e. if $A, B \in \mathcal{F}$ have $A \cap B = \emptyset$) then
         \[
-        \mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B).
+        \P(A \cup B) = \P(A) + \P(B).
         \]
-        We call the number $\mathbb{P}(A)$ the probability of $A$.
+        We call the number $\P(A)$ the probability of $A$.
         \item Countable additivity. For any infinite sequence $A_1, A_2, \dots$ of pairwise disjoint events (so $A_i \cap A_j = \emptyset$ for all $i \neq j$),
         \[
-        \mathbb{P}\left(\bigcup_{i = 1}^{\infty}A_i\right) = \sum_{i = 1}^{\infty}\mathbb{P}(A_i).
+        \P\left(\bigcup_{i = 1}^{\infty}A_i\right) = \sum_{i = 1}^{\infty}\P(A_i).
         \]
     \end{enumerate}
 \end{definition}
@@ -134,31 +133,31 @@ Additionally, we can use De Morgan's Laws for a collection of events $A_i$,
 \begin{enumerate}[label = C\arabic*]
     \item For any two events $A$ and $B$,
     \[
-    \mathbb{P}(B \setminus A) = \mathbb{P}(B) - \mathbb{P}(A \cap B).
+    \P(B \setminus A) = \P(B) - \P(A \cap B).
     \]
-    \item For any event $A$, $\mathbb{P}(A ^ c) = 1 - \mathbb{P}(A)$.
-    \item $\mathbb{P}(\emptyset) = 0$.
-    \item For any event $A,\ \mathbb{P}(A) \leq 1$.
-    \item Monotonicity. If $A \subseteq B$ then $\mathbb{P}(A) \leq \mathbb{P}(B)$.
+    \item For any event $A$, $\P(A ^ c) = 1 - \P(A)$.
+    \item $\P(\emptyset) = 0$.
+    \item For any event $A,\ \P(A) \leq 1$.
+    \item Monotonicity. If $A \subseteq B$ then $\P(A) \leq \P(B)$.
     \item For any two events $A$ and $B$,
     \[
-    \mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A \cap B).
+    \P(A \cup B) = \P(A) + \P(B) - \P(A \cap B).
     \]
     \item Finite additivity. If $A_1, A_2, \dots, A_k$ are pairwise disjoint (so $A_i \cap A_j = \emptyset$ if $i \neq j$) then
     \[
-    \mathbb{P}\left(\bigcup_{i = 1}^{k}A_i\right) = \sum_{i = 1}^{k}\mathbb{P}(A_i).
+    \P\left(\bigcup_{i = 1}^{k}A_i\right) = \sum_{i = 1}^{k}\P(A_i).
     \]
     \item Boole's inequality. For any events $A_1, A_2, \dots,$ (these need not to be pairwise disjoint),
     \[
-    \mathbb{P}\left(\bigcup_{i = 1}^{\infty}A_i\right) \leq \sum_{i = 1}^{\infty}\mathbb{P}(A_i).
+    \P\left(\bigcup_{i = 1}^{\infty}A_i\right) \leq \sum_{i = 1}^{\infty}\P(A_i).
     \]
     \item Continuity along monotone limits. If $A_1 \subseteq A_2 \subseteq \dotsi$ is an increasing sequence of events, then
     \[
-    \mathbb{P}\left(\bigcup_{n = 1}^{\infty}A_n\right) = \lim_{n \rightarrow \infty}\mathbb{P}(A_n).
+    \P\left(\bigcup_{n = 1}^{\infty}A_n\right) = \lim_{n \rightarrow \infty}\P(A_n).
     \]
     If $A_1 \supseteq A_2 \supseteq \dotsi$ is an decreasing sequence of events, then
     \[
-    \mathbb{P}\left(\bigcap_{n = 1}^{\infty}A_n\right) = \lim_{n \rightarrow \infty}\mathbb{P}(A_n).
+    \P\left(\bigcap_{n = 1}^{\infty}A_n\right) = \lim_{n \rightarrow \infty}\P(A_n).
     \]
 \end{enumerate}
 
@@ -167,19 +166,19 @@ Additionally, we can use De Morgan's Laws for a collection of events $A_i$,
 \subsection{Classical probability}
 Suppose we have a finite sample space $\Omega$, $m = |\Omega|$ possible outcomes. In the equally likely outcomes model (also sometimes known as classical probability) we suppose that each outcome has the same probability:
 \[
-\mathbb{P}(\omega) = \frac{1}{|\Omega|}\text{ for each } \omega \in \Omega,
+\P(\omega) = \frac{1}{|\Omega|}\text{ for each } \omega \in \Omega,
 \]
-or, $\mathbb{P}(\omega_i) = \frac{1}{m}$ for each $i$.
+or, $\P(\omega_i) = \frac{1}{m}$ for each $i$.
 
 Then by the axioms of probability the probability of any event $A \subseteq \Omega$ by C7
 \[
-\mathbb{P}(A) = \sum_{\omega \in A}\mathbb{P}(\omega) = \frac{|A|}{|\Omega|}\text{ for any event } A \subseteq \Omega.
+\P(A) = \sum_{\omega \in A}\P(\omega) = \frac{|A|}{|\Omega|}\text{ for any event } A \subseteq \Omega.
 \]
 
 \begin{definition}[Equally likely outcomes]
     Consider a scenario with $m$ equally likely outcomes enumerated as $\Omega = \{\omega_1,\dots,\omega_m\}$. In the equally likely outcomes model, the probability of an event $A \subseteq \Omega$ is declared to be
     \[
-    \mathbb{P}(A) = \frac{|A|}{|\Omega|}
+    \P(A) = \frac{|A|}{|\Omega|}
     \]
 \end{definition}
 
@@ -221,7 +220,7 @@ Then by the axioms of probability the probability of any event $A \subseteq \Ome
 So, the falling factorial notation $(m)_r$ (sometimes also denoted $m ^ {\underline{r}}$ is simply a convenient way to write $\frac{m!}{(m - r)!}$. In the case where $r = m$ we set $0! = 1$ and then $(m)_m = m!$ is the number of permutations of the $m$ objects. If $m$ is large, and $r$ is much smaller than $m$, then $(m)_r \approx m ^ r$.
 
 \begin{example}[Birthday problem]
-    There are $n < 365$ people in a room. Let $B$ be the event that (at least) two of them have the same birthday. (We ignore leap years.) What is $\mathbb{P}(B)$? How big must $n$ be so that $\mathbb{P}(B) > \frac{1}{2}$?
+    There are $n < 365$ people in a room. Let $B$ be the event that (at least) two of them have the same birthday. (We ignore leap years.) What is $\P(B)$? How big must $n$ be so that $\P(B) > \frac{1}{2}$?
 
     The number of possible outcomes is
     \[
@@ -233,10 +232,10 @@ So, the falling factorial notation $(m)_r$ (sometimes also denoted $m ^ {\underl
     \]
     So
     \[
-    \mathbb{P}(B) = 1 - \mathbb{P}(B ^ c) = 1 - \frac{(365)_n}{365 ^ n}.
+    \P(B) = 1 - \P(B ^ c) = 1 - \frac{(365)_n}{365 ^ n}.
     \]
 
-    To find for what $n$ $\mathbb{P}(B) > \frac{1}{2}$ we can consider the following,
+    To find for what $n$ $\P(B) > \frac{1}{2}$ we can consider the following,
     \[
     \frac{(365)_n}{365 ^ n} = 1 \times \left(1 - \frac{1}{365}\right) \times \left(1 - \frac{2}{365}\right) \times \dotsi \times \left(1 - \frac{n - 1}{365}\right).
     \]
@@ -292,58 +291,502 @@ The expression $\binom{m}{r}$ is the binomial coefficient for choosing $r$ objec
 
 \section{Conditional probability and independence}
 
+\subsection{Conditional probability}
 \begin{definition}
     For events $A, B \subseteq \Omega$, the conditional probability of $A$ given $B$ is
     \[
-    \Po(A | B) := \frac{\Po (A \cap B)}{\Po (B)}\text{ whenever } \Po(B) > 0.
+    \P(A | B) := \frac{\P (A \cap B)}{\P (B)}\text{ whenever } \P(B) > 0.
     \]
 \end{definition}
-The usual interpretation is that $\Po(A | B)$ represents our probability for $A$ after we have observed $B$.
+The usual interpretation is that $\P(A | B)$ represents our probability for $A$ after we have observed $B$.
 
 \begin{example}
-    Roll a fair dice and let $A$ be the event that the score is odd and $B$ be the event that the score is at most $3$. What is $\Po (A | B)$?
+    Roll a fair dice and let $A$ be the event that the score is odd and $B$ be the event that the score is at most $3$. What is $\P (A | B)$?
 
     If $A = \{1, 3, 5\}$ and $B = \{1, 2, 3\}$ we have $A \cap B = \{1, 3\}$ so
     \[
-    \Po (A | B) = \frac{\Po(\{1, 3\})}{\Po(\{1, 2, 3\})} = \frac{\frac{2}{6}}{\frac{3}{6}} = \frac{2}{3}.
+    \P (A | B) = \frac{\P(\{1, 3\})}{\P(\{1, 2, 3\})} = \frac{\frac{2}{6}}{\frac{3}{6}} = \frac{2}{3}.
     \]
 \end{example}
 
 \subsection{Properties of conditional probability}
 
 \begin{enumerate}[label = P\arabic*]
-    \item For any event $B \subseteq \Omega$ for which $\Po (B) > 0$, $\Po(\cdot | B)$ satisfies axioms A1-4 (i.e., is a probability on $\Omega$) and therefore satisfies also C1-10.
+    \item For any event $B \subseteq \Omega$ for which $\P (B) > 0$, $\P(\cdot | B)$ satisfies axioms A1-4 (i.e., is a probability on $\Omega$) and therefore satisfies also C1-10.
 
-    \item The multiplication rule for probabilities (simple version): for any events $A$ and $B$ with $\Po (A) > 0$ and $\Po(B) > 0$,
+    \item The multiplication rule for probabilities (simple version): for any events $A$ and $B$ with $\P (A) > 0$ and $\P(B) > 0$,
     \[
-    \Po (A \cap B) = \Po (B) \Po(A | B) = \Po(A) \Po(B | A).
+    \P (A \cap B) = \P (B) \P(A | B) = \P(A) \P(B | A).
     \]
     More generally, for any $A, B$ and $C$:
     \[
-    \Po(A \cap B | C) = \Po(B | C) \Po(A | B \cap C),\text{ if } \Po(B \cap C) > 0.
+    \P(A \cap B | C) = \P(B | C) \P(A | B \cap C),\text{ if } \P(B \cap C) > 0.
     \]
 
-    \item The multiplication rule for probabilities (general version): for any events $A_0, A_1, \dotsc, A_k$ with $\Po\left(\bigcap_{i = 0}^{k - 1}A_i\right) > 0$,
+    \item The multiplication rule for probabilities (general version): for any events $A_0, A_1, \dotsc, A_k$ with $\P\left(\bigcap_{i = 0}^{k - 1}A_i\right) > 0$,
     \begin{align*}
-    \Po\left(\bigcap_{i = 1}^{k}A_i \,\middle|\, A_0\right) &= \Po(A_1 | A_0) \times \Po(A_2 | A_1 \cap A_0) \times \dotsi \\
-    &\dotsi\times \Po\left(A_{k - 2} \,\middle|\, \bigcap_{i = 0}^{k - 3}A_i\right) \times \Po\left(A_{k - 1} \,\middle|\, \bigcap_{i = 0}^{k - 2}A_i\right) \times \Po\left(A_{k} \,\middle|\, \bigcap_{i = 0}^{k - 1}A_i\right).
+    \P\left(\bigcap_{i = 1}^{k}A_i \,\middle|\, A_0\right) &= \P(A_1 | A_0) \times \P(A_2 | A_1 \cap A_0) \times \dotsi \\
+    &\dotsi\times \P\left(A_{k - 2} \,\middle|\, \bigcap_{i = 0}^{k - 3}A_i\right) \times \P\left(A_{k - 1} \,\middle|\, \bigcap_{i = 0}^{k - 2}A_i\right) \times \P\left(A_{k} \,\middle|\, \bigcap_{i = 0}^{k - 1}A_i\right).
     \end{align*}
     \item The partition theorem or law of total probability. If $E_1, E_2, \dotsc, E_k$ form a partition then, for any event $A$, we have
     \[
-    \Po(A) = \sum_{i = 1}^{k}\Po(E_i)\Po(A | E_i).
+    \P(A) = \sum_{i = 1}^{k}\P(E_i)\P(A | E_i).
     \]
-    More generally, if $\Po(B) > 0$,
+    More generally, if $\P(B) > 0$,
     \[
-    \Po(A | B) = \sum_{i = 1}^{k}\Po(E_i | B)\Po(A | E_i \cap B)
+    \P(A | B) = \sum_{i = 1}^{k}\P(E_i | B)\P(A | E_i \cap B)
     \]
-    \item Bayes's theorem (first version): for any events $A$ and $B$ with $\Po(A) > 0$ and $\Po(B) > 0$
+    \item Bayes's theorem (first version): for any events $A$ and $B$ with $\P(A) > 0$ and $\P(B) > 0$
     \[
-    \Po(A | B) = \frac{\Po(A)\Po(B | A)}{\Po(B)}.
+    \P(A | B) = \frac{\P(A)\P(B | A)}{\P(B)}.
     \]
-    More generally, if $\Po(A | C) > 0$ and $\Po(B | C) > 0$,
+    More generally, if $\P(A | C) > 0$ and $\P(B | C) > 0$,
     \[
-    \Po(A | B \cap C) = \frac{\Po(A | C)\Po(B | A \cap C}{\Po(B | C)}.
+    \P(A | B \cap C) = \frac{\P(A | C)\P(B | A \cap C}{\P(B | C)}.
     \]
 \end{enumerate}
+
+\subsection{Independence of events}
+
+\begin{definition}[Independence of two events]
+    We say that two events $A$ and $B$ are independent whenever
+    \[
+    \P(A \cap B) = \P(A)\P(B).
+    \]
+    We say that two events $A$ and $B$ are conditionally independent given a third event $C$ with $\P(C) > 0$ whenever
+    \[
+    \P(A \cap B | C) = \P(A | C)\P(B | C).
+    \]
+\end{definition}
+
+\begin{theorem}
+    Consider any two events $A$ and $B$ with $\P(A) > 0$ and $\P(B) > 0$. The following statements are equivalent.
+    \begin{enumerate}[label = (\roman*)]
+        \item $\P(A \cap B) = \P(A)\P(B)$.
+        \item $\P(A | B) = \P(A)$.
+        \item $\P(B | A) = \P(B)$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+    Consider any three events $A,\ B$, and $C$, with $\P(A \cap B \cap C) > 0$. The following statements are equivalent.
+    \begin{enumerate}[label = (\roman*)]
+        \item $\P(A \cap B | C) = \P(A | C)\P(B | C)$.
+        \item $\P(A | B \cap C) = \P(A | C)$.
+        \item $\P(B | A \cap C) = \P(B | C)$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{definition}[Independence of multiple events]\label{prob_def_indepomulev}
+    A (possible infinite) collection of events $\mathcal{A} \subseteq \mathcal{F}$ are mutually independent if for every finite non-empty $\mathcal{C} \subseteq \mathcal{A}$
+    (that is, $\mathcal{B}$ is a finite subcollection of the events in question),
+    \[
+    \P\left(\bigcap_{A \in \mathcal{C}} A \,\middle|\, B\right) = \prod_{A \in \mathcal{C}}\P(A | B).
+    \]
+    A collection of events $\mathcal{A} \subseteq \mathcal{F}$ are mutually conditionally independent given another event $B$ if for every finite non-empty subcollection $\mathcal{C} \subseteq \mathcal{A}$,
+    \[
+    \P\left(\bigcap_{A \in \mathcal{C}} A \,\middle|\, B\right) = \prod_{A \in \mathcal{C}}\P(A | B).
+    \]
+\end{definition}
+
+\newpage
+
+\section{Interpretations of probability}
+
+\subsection{Equally likely outcomes interpretation}
+The equally likely outcomes interpretation of probability has some obvious limitations in practice.
+Often we cannot find a set of outcomes that it is reasonable to think of as a priori equally likely.
+
+\subsection{Relative frequency interpretation}
+This interpretation applies to trials giving chance outcomes of an experiment that can be repeated indefinitely under essentially unchanged conditions and which exhibits long term regularity.
+Suppose that we run $n$ trials of an experiment with a known list of possible outcomes,
+and the number of trials on which event $A$ occurs is $n_A$ ($A$ is again the set of possible outcomes).
+The relative frequency of occurrence of $A$ is $\frac{n_A}{n}$.
+
+\subsection{Betting interpretation}
+A different way of interpreting probability is by considering probability as a quantification of someone's belief that an event will occur.
+Here is a simple way of doing this.
+Your subjective probability that $A$ will occur is measured by the amount 
+$\pounds p_A$ that you would consider to be a fair price for the following gable:
+\begin{itemize}
+    \item if $A$ occurs, you receive $\pounds1$;
+    \item if $A$ does not occur, you receive nothing.
+\end{itemize}
+In this interpretation,
+there are no true probabilities.
+Different individuals will have different information relevant to a problem
+and so may validly make different probability assessments.
+
+\subsection{Interpretation and the axioms}
+We claimed that the axioms of probability are the same regardless of the interpretation of the probabilities that we are using.
+A1 and A2 are clearly very sensible in any interpretation.
+The justification of A3 (and A4) needs some more thought.
+A3 is obvious for the classical model by its relation to counting:
+in the classical model if $A$ contains $m_A$ outcomes and $B$ contains $m_B$ outcomes,
+with none in common with $A$,
+then $m_{A \cup B} = m_A + m_B$.
+The argument is similar for the relative frequency model and slightly more subtle for the betting model.
+
+\newpage
+
+\section{Some applications of probability}
+
+\subsection{Reliability of networks}
+Reliability theorem concerns mathematical models of systems that are made up of individual components that may be faulty.
+If components fail randomly,
+a key objective of this theory is to determine the probability that the system as a whole works.
+
+In this course,
+to demonstrate the application of the probabilistic ideas we have covered so far,
+we address the basic question:
+Given a system made up of finitely many components,
+what is the probability that the system works?
+
+\begin{definition}[Reliability network]
+    A reliability network is a diagram of nodes and arcs.
+    The nodes represent components of a multi-component system,
+    where each node is either working or is broken,
+    and where the entire system works if it is possible to get from the left end to the right end of the diagram through working components only.
+\end{definition}
+
+Suppose the $i$th component functions with probability
+$p_i,\, i \in \{1, 2, \dotsc, k\}$,
+and different components are independent.
+The probability that the system works is then a function of the probabilities
+$p_1, \dotsc, p_k$.
+We denote this function by
+$r(p_1, p_2, \dotsc, p_k)$,
+and call it the reliability function.
+It is determined by the layout of the reliability network.
+
+\subsection{Genetics}
+Inherited characteristics are determined by genes.
+The mechanism governing inheritance is random and so the laws of probability are crucial to understanding genetics.
+Cells contain $23$ pairs of chromosomes,
+each containing many genes.
+The genes take different forms called alleles.
+Of the $23$ pairs of chromosomes,
+$22$ pairs are homologous
+(each of the pair has an allele for any gene located on this pair).
+People with different alleles are grouped by visible characteristics into phenotypes;
+often one allele,
+$A$ say,
+is dominant and another,
+$a$,
+is recessive in which case $AA$ and $Aa$ are of the same phenotype while $aa$ is distinct.
+Sometimes,
+the recessive gene is rare and the corresponding phenotype is harmful,
+for example haemophilia or sickle-cell anaemia.
+
+\textbf{Basic principle of genetics}:
+For each gene on a homologous chromosome,
+a child receives one allele from each parent,
+where each allele received is chosen independently and at random from each parent's two alleles for that gene.
+
+It is extremely important to note that genotypes of siblings are dependent if not conditioned on parental genotypes.
+For example,
+if two black mice
+(which may each be BB or Bb)
+have $100$ black offspring,
+you may conclude that the next offspring is overwhelmingly likely to also be black,
+because i is very likely that at least one parent is BB.
+
+
+\subsection{Hardy-Weinberg equilibrium}
+Consider a population of a large number of individuals evolving over successive generations.
+Consider a gene with two alleles $A$ and $a$ and genotypes $\{AA, Aa, aa\}$.
+Suppose the genotype of the proportions in the populations (uniformly for males and females) at generation $n = 0, 1, 2, \dotsc$ are
+\[
+AA \rightarrow u_n\quad Aa \rightarrow 2v_n\quad aa \rightarrow w_n
+\]
+where we have $u_n + 2v_n + w_n = 1$.
+Suppose that the proportions of the alleles in the population are
+\[
+A \rightarrow p\quad a \rightarrow q
+\]
+where $p_n + q_n = 1$.
+It is evident that
+\[
+p_n = \frac{2u_n + 2v_n}{2u_n + 4v_n + 2w_n} = u_n + v_n
+\]
+and, similarly, $q_n = v_n + w_n$.
+Suppose that
+\begin{itemize}
+    \item the gene is neutral, meaning that different genotypes have equal reproductive success;
+    \item there is random mating with respect to this gene,
+    meaning that each individual in generation $n + 1$ draws randomly two parents whose genotypes are independently in the proportions $u_n, 2v_n, w_n$.
+\end{itemize}
+How do the genotype proportions evolve over successive generations?
+
+Consider the offspring of generation $0$.
+Let $FA = $ event that child gets allele $A$ from father,
+$MA = $ event that child gets allele $A$ from mother,
+$F_{AA} = $ event that father is $AA$,
+$F_{Aa} = $ event that father is $Aa$,
+$F_{aa} = $ event that father is $aa$. Then
+\begin{align*}
+    \P(FA) &= \P(F_{AA})\P(FA | F_{AA}) + \P(F_{Aa})\P(FA | F_{Aa}) + \P(F_{aa})\P(FA | F_{aa}) \\
+    &= 1 \cdot u_0 + \frac{1}{2} \cdot 2v_0 + 0 \cdot w_0 = u_0 + v_0 = p_0.
+\end{align*}
+Similarly, $\P(MA) = p_0$.
+In particular, since parents contribute alleles independently,
+the probability distribution of the genotype of an individual in generation $1$ is
+\[
+AA \rightarrow p_0 ^ 2\quad Aa \rightarrow 2p_0(1 - p_0)\quad aa \rightarrow (1 - p_0) ^ 2.
+\]
+Provided that the population is large enough these will also be the generation $1$ proportions of $AA, Aa, aa$, i.e.
+\[
+u_1 = p_0 ^ 2,\quad v_1 = p_0(1 - p_0),\quad w_1 = (1 - p_0) ^ 2.
+\]
+Now let $p_1 = u_1 + v_1$ be the proportion of $A$ in the gene pool at generation $1$.
+Substituting the values of $u_1, v_1$ we find that
+\[
+p_1 = u_1 + v_1 = p_0 ^ 2 + p_0(1 - p_0) = p_0,
+\]
+i.e. the proportions of $A$ and $a$ in the gene pool are constant.
+The same argument applies for later generations,
+so that $p_n = p_0$ for all $n$ i.e.,
+the proportions of the two alleles in the gene pool remain constant.
+This means that, for $n \geq 1$,
+\[
+u_n = p_0 ^ 2,\quad v_n = p_0(1 - p_0),\quad w_n = (1 - p_0) ^ 2,
+\]
+so that the proportions of the three genotypes in the population remain constant in every generation after the first.
+This is called the Hardy-Weinberg equilibrium.
+
+\newpage
+
+\section{Random variables}
+
+\subsection{Definition and notation}
+
+\begin{definition}[Random Variable on a Sample Space]
+    A random variable on $\Omega$ is a mapping from the sample space $\Omega$ to some set of possible values
+    $X(\Omega) := \{X(\omega) \,:\, \omega \in \Omega\}$:
+    \[
+    X : \Omega \rightarrow X(\Omega) \text{ given by } \omega \mapsto X(\omega).
+    \]
+\end{definition}
+Typically we find the following situations:
+$X(\Omega) \subseteq \R$,
+where $X$ is a real-valued random variable.
+Or, $X(\Omega) \subseteq \R ^ d$,
+where $X$ is a vector-valued random variable.
+
+\begin{example}
+    Consider throwing two standard dice, with sample space
+    \[
+    \Omega = \{(i, j) : i \in \{1, 2, 3, 4, 5, 6\}, j \in \{1, 2, 3, 4, 5, 6\}\},
+    \]
+    so elements of $\Omega$ correspond to pairs $(i, j)$.
+    The sum of the numbers that show on the dice corresponds to a real-valued random variable $X$ defined by:
+    \[
+    X(i, j) := i + j,\text{ for all } (i, j) \in \Omega.
+    \]
+\end{example}
+
+Given a probability distribution $\P$ on the sample space $\Omega$,
+a random variable
+$X : \Omega \rightarrow X(\Omega)$ induces a probability distribution $\P_X$ on the sample space $X(\Omega)$ as follows.
+
+\begin{theorem}
+    The function $\P_X$,
+    mapping sets $B \subseteq X(\Omega)$ to a real number $\P_x(B)$,
+    defined by
+    \[
+    \P_X(B) := \P(X \in B) = \P(\{\omega \in \Omega:\, X(\omega) \in B\}),
+    \]
+    is a probability on $X(\Omega)$,
+    that is,
+    $\P_X$ satisfies the probability axioms A1-A4.
+    \begin{proof}
+        
+    \end{proof}
+\end{theorem}
+Note that $\P_X$ therefore also has properties C1-C10.
+
+\subsection{Discrete random variables}
+The function $\P_X$ tells us everything we might need to know about the random variable $X$: it is called the distribution of $X$.
+
+\begin{definition}[Discrete random variable and probability mass function]\label{prob_def_drvpmf}
+    A random variable $X : \Omega \rightarrow X(\Omega)$ is said to be discrete when there is a finite or countable set of values $\mathcal{X} \subseteq X(\Omega)$ such that $\P(X \in \mathcal{X}) = 0$.
+    The function $p: \mathcal{X} \rightarrow [0, 1]$ defined by
+    \[
+    p(x) = \P(X = x),\text{ for all } x \in \mathcal{X},
+    \]
+    is called the probability mass function of $X$.
+\end{definition}
+
+\begin{theorem}
+    Suppose that $X$ is a discrete random variable and $p : \mathcal{X} \rightarrow [0, 1]$ is its probability mass function. Then
+    \[
+    \P(X \in B) = \sum_{x \in B}p(x),\text{ for all } B \subseteq \mathcal{X},
+    \]
+    and
+    \[
+    \sum_{x \in \mathcal{X}}p(x) = 1.
+    \]
+    \begin{proof}
+        Any $A \subseteq \mathcal{X}$ is finite or countable (because it is a subset of a finite or countable set) and so
+        \[
+        \{X \in B\} = \bigcup_{x \in B}\{X = x\},
+        \]
+        this union runs over a countable number of events.
+        Hence, we may apply A4 to get
+        \[
+        \P(X \in B) = \sum_{x \in B}\P(X = x) = \sum{x \in B}p(x).
+        \]
+        In particular, take $B = \mathcal{X}$ and we get $\sum_{x \in \mathcal{X}}p(x) = \P(X \in \mathcal{X}) = 1$.
+    \end{proof}
+\end{theorem}
+The probability mass function of a discrete random variable summarises all information we have about $X$.
+Specifically, it allows us to calculate the probability of every event of the form $\{X \in B\}$.
+
+\begin{theorem}
+    A random variable $X : \Omega \rightarrow X(\Omega)$ is discrete whenever (i) $X(\Omega)$ is finite or countable,
+    or (ii) $\Omega$ is finite or countable.
+    \begin{proof}
+        Clearly, (ii) implies (i),
+        therefore if (i) then the statement holds which can be seen immediately from \autoref{prob_def_drvpmf} as we can take $\mathcal{X} = X(\Omega)$.
+    \end{proof}
+\end{theorem}
+
+\subsection{The binomial and geometric distributions}
+Consider the following random experiment,
+called a binomial scenario:
+\begin{itemize}
+    \item A sequence of $n$ trials will be carried out, where $n$ is known in advance of the experiment.
+    \item Trials are independent.
+    \item Each trial has only two outcomes, usually denoted 'success' or 'failure'.
+    \item Each trial succeeds independently with the same probability $p$.
+\end{itemize}
+Consider the random variable $X$, the total number of successes in the $n$ trials.
+The usual sample space $\Omega$ for the binomial scenario is the set of all possible length-$n$ sequences of successes and failures; if we represent success and failure by $1$ and $0$ respectively, then each $\omega \in \Omega$ is a string 
+$\omega = \omega_1 \omega_2 \dotsi \omega_n$ with each $\omega_i \in \{0, 1\}$.
+The random variable $X$ takes values in $X(\Omega) := \{0, 1, \dotsc, n\}$,
+$X(\omega) = \sum_{i = 1}^{n}\omega_i$, the total numbers of $1$s in the string.
+For each $x \in \{0, 1, \dotsc, n\}$:
+\begin{itemize}
+    \item because trials are independent (see \autoref{prob_def_indepomulev}, every sequence $\omega \in \Omega$ with exactly $x$ successes and $n - x$ failures has probability $\P(\{\omega\}) = p ^ x (1 - p) ^ {n - x}$; and
+    \item there are $\binom{n}{x}$ sequences with exactly $x$ successes.
+\end{itemize}
+By C7, we can sum the probabilities of the outcomes in the event
+\[
+\{X = x\} = \{\omega \in \Omega : \sum_i \omega_i = x\}
+\]
+to obtain
+\[
+p(x) = \P(X = x) = \sum_{\omega \in \Omega: \sum_i \omega_i = x}\P(\omega).
+\]
+Putting everything to get the following definition.
+\begin{definition}[Binomial distribution]
+    We say that a discrete random variable $X$ is binomially distributed with parameters $n \in \N$ and $p \in [0, 1]$,
+    and we write $X \sim \Bin(n, p)$,
+    when $\mathcal{X} = \{0, 1, \dotsc, n\}$ and
+    \[
+    p(x) = \binom{n}{x}p ^ x (1 - p) ^ {n - x}\text{ for all } x \in \{0, 1, 2, \dotsc, n\}.
+    \]
+\end{definition}
+In case of just a single trial ($n = 1$),
+the binomial scenario is often referred to as a Bernoulli trial,
+and $X \sim \Bin(1, p)$ is often referred to as a Bernoulli random variable with parameter $p$.
+
+Suppose we extend the binomial scenario indefinitely,
+to an unlimited number of trials,
+and we repeat the trials until we obtain the first success.
+The number of trials up to an including the first success is called the geometric distribution.
+\begin{align*}
+    \P(\text{first success occurs on trial } n) &= \P(\text{first } n - 1\text{ trials are failure, then trail } n \text{ is a success}) \\
+    &(1 - p) ^ {n - 1} p,
+\end{align*}
+
+\begin{definition}
+    We say that a discrete random variable $X$ is geometrically distributed with parameter $p \in (0, 1]$, and we write $X \sim \Geo(p)$, when $\mathcal{X} = \N := \{1, 2, 3, \dotsc\}$ and
+    \[
+    p(x) = (1 - p) ^ {x - 1} p,\text{ for all } x \in \{1, 2, 3, \dotsc\}.
+    \]
+\end{definition}
+
+\subsection{The Poisson distribution}
+
+\begin{definition}[Poisson distribution]
+    We say that a discrete random variable $X$ is Poisson distributed with parameter $\lambda$,
+    and we write $X \sim \Po(\lambda)$,
+    when $\mathcal{X} = \Z_+ := \{0, 1, 2, \dotsc\}$ and
+    \[
+    p(x) = \frac{e^{-\lambda}\lambda ^ x}{x!}\quad\text{for } x \in \Z_+.
+    \]
+\end{definition}
+The Poisson distribution is used to model counts of events which occur randomly in time at a constant average rate $r$ per unit time,
+under some natural assumptions. Specifically,
+\[
+\P(\text{event occurs in } (x, x + h)) \approx rh,\ \text{for small } h.
+\]
+If $X$ is the count of number of events over a period of length $t$ then it has distribution $\Po(rt)$.
+Thus, $\lambda$ in $\Po(\lambda)$ is interpreted as the average number events.
+
+\begin{theorem}
+    Consider any $\lambda > 0$. Let $X_n \sim \Bin(n, p_n)$ where $\lim_{n \rightarrow \infty} np_n = \lambda$, and let $Y \sim \Po(\lambda)$. Then for all $x \in \Z_+$,
+    \[
+    \lim_{n \rightarrow \infty}p_{X_n}(x) = p_Y(x).
+    \]
+    We describe this by saying that $X_n$ converges in distribution to $Y$.
+    \begin{proof}
+        Notice since $np_n \rightarrow \lambda$ we have $p_n \rightarrow 0$.
+        For fixed $x$ we have that, for $n \geq x$,
+        \[
+        \P(X_n = x) = \binom{n}{x}(p_n) ^ x (1 - p_n) ^ {n - x} = n ^ {-x}\frac{n!}{(n - x)!x!}(np_n) ^ x (1 - p_n) ^ {n - x},
+        \]
+        where we observe that, by some COLT,
+        \begin{align*}
+            \lim_{n \rightarrow \infty} (np_n) ^ x &= \lambda ^ x, \\
+            \lim_{n \rightarrow \infty} n ^ {-x} \frac{n!}{(n - x)!} &= \lim_{n \rightarrow \infty} \frac{n}{n} \cdot \frac{n - 1}{n} \dotsi \frac{n - x + 1}{n} = 1, \\
+            \lim_{n \rightarrow \infty} (1 - p_n) ^ n &= \lim_{n \rightarrow \infty}\left(1 - \frac{np_n}{n}\right) ^ n = e ^ {-\lambda}, \\
+            \lim_{n \rightarrow \infty} (1 - p_n) ^ {-x} &= 1.
+        \end{align*}
+        Collecting up terms gives
+        \[
+        \lim_{n \rightarrow \infty}\P(X_n = x) = \frac{e ^ {-\lambda}\lambda ^ x}{x!},
+        \]
+        as claimed.
+    \end{proof}
+\end{theorem}
+
+\subsection{Continuous random variables}
+\begin{definition}[Continuous random variable and probability density function]
+Consider a real-valued random variable $X : \Omega \rightarrow \R$.
+We say that $X$ is a continuous random variable,
+or that $X$ has a continuous probability distribution,
+or that $X$ is continuously distributed,
+when there is a non-negative function $f : \R \rightarrow \R$ such that
+\[
+\P(X \in [a, b]) = \int_{a}^{b}f(t)\,dt,
+\]
+for all $[a, b] \subseteq \R$.
+In this case,
+$f$ is called the probability density function of $X$.
+\end{definition}
+
+All of the continuous random variables in this course have a probability density function that is piecewise continuous.
+If the random variable under consideration is not clear from the context,
+we may write $f_X$ for the probability density function of $X$.
+
+\begin{theorem}
+    If $X$ is continuously distributed with probability density function $f$,
+    then for any $B \subseteq \R$ that is a finite union of intervals:
+    \[
+    \P(X \in B) = \int_Bf(x)\, dx
+    \]
+\end{theorem}
+The probability density function of a continuous random variable summarises practically all the information we have about $X$.
+Specifically, it allows us to calculate the probability of every event of the form $\{X \in B\}$ where $B$ is a finite union of intervals.
+
+\begin{corollary}
+    Let $X$ be a continuous random variable.
+    Then its probability density function $f$ integrates to one:
+    \[
+    \int_{-\infty}^{\infty}f(x)\,dx = 1.
+    \]
+\end{corollary}
 
 \end{document}

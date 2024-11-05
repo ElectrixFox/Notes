@@ -388,4 +388,334 @@ The extreme value theorem states that if $f$ is a continuous function on a close
     $f(x)$ is strictly monotonic increasing in $[a,\,b]$ if $f(x_1) < f(x_2)$ for all pairs $x_1, x_2$ with $a \leq x_1 < x_2 \leq b$.
 \end{definition}
 
+\subsection{Critical points}
+\begin{definition}
+    We say that $f(x)$ has a local maximum at $x = a$ if $\exists\, h > 0$ such that $f(a) \geq f(x)\, \forall x \in (a - h, a + h)$.
+\end{definition}
+
+\begin{remark}
+    If $f(x)$ has a local maximum at $x = a$ and is differentiable at this point then $f'(a) = 0$.
+
+    \begin{proof}
+        As $f(x)$ is differentiable at $a$ then
+        \[
+        \lim_{x \rightarrow a^{-}}\frac{f(x) - f(a)}{x - a} = \lim_{x \rightarrow a^{+}}\frac{f(x) - f(a)}{x - a} = f'(a).
+        \]
+        $f(x)$ has a local maximum at $a$ implies
+        \[
+        \frac{f(x) - f(a)}{x - a} \geq 0 \text{ for } x \in (a - h, a)
+        \]
+        \[
+        \text{hence } f'(a) = \lim_{x \rightarrow a^{-}}\frac{f(x) - f(a)}{x - a} \geq 0.
+        \]
+        Similarly, $f(x)$ has a local maximum at $a$ also implies
+        \[
+        \frac{f(x) - f(a)}{x - a} \leq 0 \text{ for } x \in (a, a + h)
+        \]
+        \[
+        \text{hence } f'(a) = \lim_{x \rightarrow a^{+}}\frac{f(x) - f(a)}{x - a} \geq 0.
+        \]
+        Putting these two together gives $f'(a) \leq 0 \leq f'(a)$ and thus $f'(a) = 0$.
+    \end{proof}
+\end{remark}
+
+\begin{definition}
+    We say that $f(x)$ has a local minimum at $x = a$ if $\exists h > 0$ such that $f(x) \geq f(a)\ \forall x \in (a - h, a + h)$.
+\end{definition}
+
+\begin{remark}
+    If $f(x)$ has a local minimum at $x = a$ and is differentiable at this point then $f'(a) = 0$.
+\end{remark}
+
+\begin{definition}
+    $f(x)$ has a stationary point at $x = a$ if it is differentiable at $x =a$ with $f'(a) = 0$.
+\end{definition}
+
+\begin{definition}
+    An interior point $x = a$ of the domain of $f(x)$ is called a critical point if either $f'(a) = 0$ or $f'(a)$ does not exist.
+\end{definition}
+
+Every local maximum and local minimum of a differentiable function is a stationary point but there may be other stationary points too.
+
+\begin{definition}
+    If $f(x)$ is twice differentiable in an open interval around $x = a$ with $f''(a) = 0$ and if $f''(x)$ changes sign at $x = a$ then we say that $x = a$ is a point of inflection.
+\end{definition}
+
+\textbf{The first derivative test}
+
+Suppose $f(x)$ is continuous at a critical point $x = a$.
+
+\begin{enumerate}[label = (\roman*)]
+    \item If $\exists h > 0$ such that $f'(x) < 0\ \forall x \in (a - h, a)$ and $f'(x) > 0\, \forall x \in (a, a + h)$ then $x = a$ is a local minimum.
+    \item If $\exists h > 0$ such that $f'(x) > 0\ \forall x \in (a - h, a)$ and $f'(x) < 0\, \forall x \in (a, a + h)$ then $x = a$ is a local maximum.
+    \item If $\exists h > 0$ such that $f'(x)$ has a constant sign $\forall x \neq a$ in $(a - h, a + h)$ then $x = a$ is a not a local extreme value (minimum/maximum).
+\end{enumerate}
+
+\textbf{The second derivative test}
+
+Suppose $f(x)$ is twice differentiable at $x = a$ with $f'(a) = 0$.
+\begin{enumerate}[label = (\roman*)]
+    \item If $f''(a) > 0$ then $x = a$ is a local minimum.
+    \item If $f''(a) < 0$ then $x = a$ is a local maximum.
+\end{enumerate}
+
+If a function is defined on an interval then extreme values can occur at the endpoints of the interval. Here an endpoint $x = c$ is a point at which the function is defined but where the function is undefined either to the left or right of this point. Example: if the domain of a function is $[a, b]$ then $a$ and $b$ are both endpoints.
+
+\begin{definition}
+    If $c$ is an endpoint of $f(x)$ then $f$ has an endpoint maximum at $x = c$ if $f(x) \leq f(c)$ for $x$ sufficiently close to $c$.
+\end{definition}
+
+The obvious similar definition applies for an endpoint minimum.
+
+If a function is differentiable sufficiently close to an endpoint then examining the sign of the derivative can determine if there is an endpoint maximum or minimum.
+
+If $f(x)$ is continuous on an interval $[a, b]$ then the global extreme values in the interval are attained at either critical points or end points, can be determined by examining all the possibilities.
+
+\subsection{Rolle's theorem}
+Rolle's theorem states that if $f$ is differentiable on the open interval $(a, b)$ and continuous on the closed interval $[a, b]$, with $f(a) = f(b)$, then there is at least one $c \in (a, b)$ for which $f'(c) = 0$.
+
+\begin{proof}
+    By the extreme value theorem there exists $x_1$ and $x_2$ in $[a, b]$ such that
+    \[
+    f(x_1) \leq f(x) \leq f(x_2)\ \forall x \in [a, b].
+    \]
+    If $x_1 \in (a, b)$ then $x_1$ is a local minimum and $f'(x_1) = 0$ so we are done.
+    If $x_2 \in (a, b)$ then $x_2$ is a local maximum and $f'(x_2) = 0$ so we are done.
+
+    The only case that is left is if both $x_1$ and $x_2$ are end points, $a, b$.
+    Since $f(a) = f(b)$ then in this case $f(x_1) = f(x_2) = f(a)$ so the above bound becomes $f(a) \leq f(x) \leq f(a)\, \forall x \in [a, b]$.
+    Thus $f(x) = f(a)$ is constant in the interval and $f'(x) = 0\, \forall x \in [a, b]$.
+\end{proof}
+
+A corollary of Rolle's theorem is that if $f(x)$ is differentiable at every point of an open interval $I$ then each pair of zeros of the function in $I$ is separated by at least one zero of $f'(x)$.
+This is simply the special case of Rolle's theorem with $a$ and $b$ taken to be the zeros of $f(x)$ so that $f(a) = f(b) = 0$.
+
+The above result can be used to provide a limit on the number of distinct real zeros of a function.
+
+\begin{example}
+    Show that $f(x) = \frac{1}{7}x ^ 7 - \frac{1}{5}x ^ 6 + x ^ 3 - 3x ^ 2 -x$ has no more than $3$ distinct real roots.
+
+    Suppose the result is false and there are (at least) $4$ distinct real roots of $f(x)$.
+    Then by Rolle's theorem there are (at least) $3$ distinct real roots of $f'(x)$.
+    Then continually applying this we get that there are (at least) $2$ distinct real roots of $f''(x)$.
+    However, $f''(x) = 6x ^ 5 - 6x ^ 4 + 6x - 6 = 6(x - 1)(x ^ 4 + 1)$ has only one real root (at $x = 1$).
+    This contradiction proves the required result.
+\end{example}
+
+\subsection{The mean value theorem}
+The mean value theorem states that if $f$ is differentiable on the open interval $(a, b)$ and continuous on the closed interval $[a, b]$,
+then there is at least one $c \in (a, b)$ for which
+\[
+f'(c) = \frac{f(b) - f(a)}{b - a}.
+\]
+\begin{proof}
+    Define the function
+    \[
+    g(x) = (b - a)(f(x) - f(a)) - (x - a)(f(b) - f(a)).
+    \]
+    Then $g(a) = g(b) = 0$ and as $g(x)$ satisfies the requirements of Rolle's theorem then $\exists c \in (a, b)$ for which $g'(c) = 0$.
+    As $g'(x) = (b - a)f'(x) - (f(b) - f(a))$ then setting $x = c$ yields the required result $f'(c) = \frac{f(b) - f(a)}{b - a}$.
+\end{proof}
+
+Note that Rolle's theorem is just a special case of the mean value theorem with $f(a) = f(b)$.
+
+Suppose $f(x)$ is continuous in $[a, b]$ and differentiable in $(a, b)$ with $f'(x) \geq 0$ throughout this interval.
+Then $f(x)$ is monotonic increasing in $(a, b)$.
+\begin{proof}
+    If $a \leq x_1 < x_2 \leq b$ then by the mean value theorem $\exists c \in (a, b)$ such that $f'(c) = \frac{f(x_2) - f(x_1)}{x_2 - x_1}$.
+    However, since $f'(x) \geq 0$ in $(a, b)$ then $f'(c) \geq 0$ which implies that $f(x_2) \geq f(x_1)$ i.e. $f$ is monotonic increasing.
+\end{proof}
+
+\subsection{The inverse function rule}
+The inverse function rule states that if $f(x)$ is continuous in $[a, b]$ and differentiable in $(a, b)$ with $f'(x) > 0$ throughout this interval then its inverse function $g(y)$ (recall $g(f(x)) = x$) is differentiable for all $f(a) < y < f(b)$ with $g'(y) = \frac{1}{f'(g(y))}$.
+
+\begin{example}
+    $f(x) = \sin x$ has $f'(x) = \cos x > 0$ for $x \in (-\pi / 2, \pi / 2)$.
+    Its inverse function $g(y) = \sin^{-1}y$ is therefore differentiable in $(-1, 1)$ with
+    \[
+    g'(y) = \frac{1}{f'(g(y))} = \frac{1}{\cos g(y)} = \frac{1}{\sqrt{1 - \sin ^ 2 g(y)}}
+    \]
+    but $y = f(g(y)) = \sin (g(y))$ hence $g'(y) = \frac{1}{\sqrt{1 - y ^ 2}}$.
+    Thus we have shown that
+    \[
+    \frac{d}{dx}\sin^{-1}x = \frac{1}{\sqrt{1 - x ^ 2}}.
+    \]
+\end{example}
+
+\subsection{Partial derivatives}
+
+For differentiating functions of two variables we will need to use a partial derivative.
+The partial derivative of $f$ with respect to $x$ is written as $\frac{\delta f}{\delta x}$ and is obtained by differentiating $f$ with respect to $x$,
+keeping $y$ fixed, i.e. $y$ may be treated as a constant in performing the partial differentiation with respect to $x$.
+\[
+\text{E.g.}\quad f(x, y) = x ^ 2 y ^ 3 - \sin x \cos y + y \quad\text{has}\quad\frac{\delta f}{\delta y} = 2xy ^ 3 - \cos x \cos y.
+\]
+Similarly, the partial derivative of $f$ with respect to $y$ is written as $\frac{\delta f}{\delta y}$,
+obtained by differentiating $f$ with respect to $y$, keeping $x$ fixed.
+
+Partial derivatives are defined in terms of the following limits (we assume exist)
+\[
+\frac{\delta f}{\delta x}(x, y) = \lim_{h \rightarrow 0}\frac{f(x + h, y) -f(x, y)}{h},
+\quad
+\frac{\delta f}{\delta y}(x, y) = \lim_{h \rightarrow 0}\frac{f(x, y + h) -f(x, y)}{h}
+\]
+
+An alternative notation for partial derivatives is $f_x$ for $\frac{\delta f}{\delta x}$.
+
+By applying partial differentiation to these partial derivatives we may obtain the second order partial derivatives.
+
+\[
+\frac{\delta ^ 2 f}{\delta x ^ 2} = \frac{\delta}{\delta x}\left(\frac{\delta f}{\delta x}\right),
+\quad
+\frac{\delta ^ 2 f}{\delta y ^ 2} = \frac{\delta}{\delta y}\left(\frac{\delta f}{\delta y}\right),
+\quad
+\frac{\delta ^ 2 f}{\delta y \delta x} = \frac{\delta}{\delta y}\left(\frac{\delta f}{\delta x}\right),
+\quad
+\frac{\delta ^ 2 f}{\delta x \delta y} = \frac{\delta}{\delta x}\left(\frac{\delta f}{\delta y}\right).
+\]
+It can be shown that
+\[
+\frac{\delta ^ 2 f}{\delta x \delta y} = \frac{\delta ^ 2 f}{\delta y \delta x}
+\]
+is true in general, if $f$ and all first and second order partial derivatives are continuous.
+
+An alternative notation for partial derivatives is
+\[
+\frac{\delta ^ 2 f}{\delta x ^ 2} = f_{xx}.
+\]
+
+\newpage
+
+\section{Integration}
+
+\subsection{Indefinite and definite integrals}
+\begin{definition}
+    A function $F(x)$ is called an indefinite integral or antiderivative of a function $f(x)$ in the interval $(a, b)$ if $F(x)$ is differentiable with
+
+    $F'(x) = f(x)$ throughout $(a, b)$. We then write $F(x) = \int f(x)\,dx$.
+\end{definition}
+
+Note: If $F(x)$ is an indefinite integral of $f(x)$ in $(a, b)$ then so is $F(x) + c$ for any constant $c$.
+
+Note: If $F_1(x)$ and $F_2(x)$ are both indefinite integrals of $f(x)$ in $(a, b)$ then $F_1(x) - F_2(x) = c$ for constant $c$.
+
+\begin{definition}
+    We say that $f(x)$ is integrable in $(a, b)$ if it has an indefinite integral $F(x)$ in $(a, b)$ that is continuous in $[a, b]$.
+\end{definition}
+
+\begin{definition}
+    A subdivision $S$ of $[a, b]$ is a partition into a finite number of subintervals
+    \[
+    [a, x_1], [x_1, x_2], \dotsc, [x_{n - 1}, b]
+    \]
+    where $a = x_0 < x_1 < x_2 < \dotsc < x_n = b$.
+\end{definition}
+The norm $|S|$ of the subdivision is the maximum of the subinterval lengths $|a - x_1|, |x_1 - x_2|, \dotsc, |x_{n - 1} - b|$.
+The numbers $z_1, z_2, \dotsc, z_n$ form a set of sample points from $S$ if $z_j \in [x_{j - 1}, x_j]$ for $j = 1,\dotsc, n$.
+
+\begin{definition}
+    Suppose that $f(x)$ is a function defined for $x \in [a, b]$.
+    The Riemann sum is
+    \[
+    \mathcal{R} = \sum_{j = 1}^{n}(x_j - x_{j - 1})f(z_j).
+    \]
+\end{definition}
+This leads to the definition of the definite integral as
+\[
+\int_{a}^{b}f(x)\,dx = \lim_{|S| \rightarrow 0}\mathcal{R}
+\]
+and it can be shown that this limit exists if $f(x)$ is continuous in $[a, b]$.
+
+The following results can be proved.
+In the following let $f(x)$ and $g(x)$ both be integrable in $(a, b)$.
+\begin{enumerate}[label = (\roman*)]
+    \item Linearity.
+    If $\lambda, \mu$ are any constants then $\lambda f(x) + \mu g(x)$ is integrable in $(a, b)$ with
+    \[
+    \int_{a}^{b}\left(\lambda f(x) + \mu g(x)\right)\,dx = \lambda\int_{a}^{b}f(x)\,dx + \mu\int_{a}^{b}g(x)\,dx.
+    \]
+    \item If $c \in [a, b]$ then $\int_{a}^{b}f(x)\,dx = \int_{a}^{c}f(x)\,dx + \int_{c}^{b}f(x)\,dx$.
+    \item If $f(x) \geq g(x)\,\forall x \in (a, b)$ then $\int_{a}^{b}f(x)\,dx \geq \int_{a}^{b}g(x)\,dx$.
+    \item If $m \leq f(x) \leq M\,\forall x \in [a, b]$ then
+    \[
+    m(b - a) \leq \int_{a}^{b}f(x)\,dx \leq M(b - a).
+    \]
+\end{enumerate}
+
+\subsection{The fundamental theorem of calculus}
+The fundamental theorem of calculus
+
+If $f(x)$ is continuous on $[a, b]$ then the function
+\[
+F(x) = \int_{a}^{x}f(t)\,dt
+\]
+defined for $x \in [a, b]$ is continuous on $[a, b]$ and differentiable on $(a, b)$ and is an indefinite integral of $f(x)$ on $(a, b)$ i.e.
+\[
+F'(x) = \frac{d}{dx}\int_{a}^{x}f(t)\,dt = f(x)
+\]
+throughout $(a, b)$.
+Furthermore if $\Tilde{F}(x)$ is any indefinite integral of $f(x)$ on $[a, b]$ then
+\[
+\int_{a}^{b}f(t)\,dt = \Tilde{F}(b) - \Tilde{F}(a) = [\Tilde{F}(x)]^{b}_{a}.
+\]
+
+We will now look at the important points of the proof.
+
+For $a \leq x < x + h < b$ we have that
+\[
+F(x + h) - F(x) = \int_{a}^{x + h}f(t)\,dt - \int_{a}^{x}f(t)\,dt = \int_{x}^{x + h}f(t)\,dt
+\]
+where we have used property (ii).
+
+Let $m(h)$ and $M(h)$ denote the minimum and maximum values of $f(x)$ on the interval $[x, x + h]$.
+Then by property (iv) we have that
+\[
+m(h)h \leq \int_{x}^{x + h}f(t)\,dt \leq M(h)h.
+\]
+Thus
+\[
+m(h) \leq \frac{F(x + h) - F(x)}{h} \leq M(h).
+\]
+Since $f(x)$ is continuous on $[x, x + h]$ we have that $\lim_{h \rightarrow 0^+}m(h) = \lim_{h \rightarrow 0^+}M(h) = f(x)$ and so by the pinching theorem
+\[
+\lim_{h \rightarrow 0^+}\frac{F(x + h) - F(x)}{h} = f(x).
+\]
+A similar argument applies to the limit from below and together they give
+\[
+F'(x) = \lim_{h \rightarrow 0}\frac{F(x + h) - F(x)}{h} = f(x)
+\]
+which proves that $F(x)$ is an indefinite integral of $f(x)$.
+The proof of the first part of the theorem is completed by showing that $F(x)$ is continuous from the right at $x = a$ and from the left at $x = b$.
+Both these follow by a simple consideration of the limit of the relevant quotient.
+Finally, to prove the last part of the theorem the key observation is that any indefinite integral $\Tilde{F}(x)$ is related to $F(x)$ by the addition of a constant.
+
+\subsection{Limits with logarithms, powers and exponentials}
+There are some important results concerning limits as $x \rightarrow \infty$ for the logarithm and exponential functions.
+
+\begin{lemma}
+    $\forall\, x \geq 0,\quad e ^ x \geq 1 + x$
+    \begin{proof}
+        Consider $f(x) = e ^ x - (1 + x)$ then $f(0) = 0$ and $f'(x) = e ^ x - 1 \geq 0$.
+        Hence $f(x)$ is monotonic increasing in $[0, \infty)$ so $f(x) \geq 0$ for all $x \geq 0$.
+    \end{proof}
+\end{lemma}
+
+\begin{lemma}
+    $\forall\, x \geq 0$,
+    and for any positive integer $n$,
+    $e ^ x \geq \sum_{j = 0}^{n}\frac{x ^ j}{j!}$.
+    \begin{proof}
+    The case $n = 1$ corresponds to the previous lemma.
+    The proof for general $n$ is similar to the proof of the previous lemma.
+    
+    \Large\textbf{Prove!}.
+    \end{proof}
+\end{lemma}
+
+
+
+
+
+
+
 \end{document}

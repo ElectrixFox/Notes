@@ -205,4 +205,180 @@ Prove that the following identities are valid for integer $n \geq 0$.
     \item $\sum_{k = 0}^{n}\binom{n}{k}k = n2 ^ {n - 1}$.
 \end{enumerate}
 
+\newpage
+
+\section{Arrangements and combinations with repetitions}
+
+\subsection{Arrangements with repetitions}
+\begin{theorem}
+    Given a list of $n$ objects of $r$ different types, in which objects of type $i$ occur $n_i$ times (with $n_1 + \dotsi + n_r = n$), the number of arrangements of the list is
+    \[
+    P(n; n_1, n_2, \dotsc, n_r) = \frac{n!}{n_1!n_2! \dotsi n_r!}.
+    \]
+    \begin{proof}
+        EXERCISE!!!
+    \end{proof}
+\end{theorem}
+
+\subsection{Combinations with repetitions}
+\begin{theorem}
+    The number of $k$-combinations from $n$ different objects with repetition and each object occurring at least once is $\binom{k - 1}{n - 1}$ for $k \geq n$.
+    \begin{proof}
+        Fix some order for the $n$ objects.
+        sorting each $k$-combination so that its objects respect this order.
+        There are $k - 1$ gaps between items in the list.
+        Each combination is described uniquely by inserting $n - 1$ markers into the $k - 1$ gaps,
+        where the markers indicate the boundary between successive types of object.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    The number of $k$-combinations from $n$ different objects with repetition is
+    \[
+    \binom{k + n - 1}{n - 1} = \binom{k + n - 1}{k}.
+    \]
+\end{theorem}
+
+\subsection{The extended binomial coefficients}
+
+Maclaurin’s theorem says that, for $\alpha \in \R$ and integer $k \geq 0$,
+\[
+\binom{\alpha}{k} = \frac{\alpha(\alpha - 1)\dotsi (\alpha - k + 1)}{k!}.
+\]
+
+Note:
+\begin{itemize}
+    \item If $\alpha$ is a positive integer and $0 \leq k \leq \alpha$,
+    this is just $\alpha$ choose $k$
+    \item If $\alpha$ is a positive integer and $k > \alpha$,
+    then the numerator includes a factor $0$ so $\binom{\alpha}{k} = 0$:
+    in this case the power series for $(1 + x) ^ \alpha$ terminates after finitely many terms.
+    \item In general,
+    if $\alpha$ is not an integer, then the numerator doesn't include a $0$, so
+    $\binom{\alpha}{k} \neq 0$ and the power series for $(1 + x) ^ \alpha$ has infinitely many terms
+\end{itemize}
+
+\begin{proposition}[Principle of upper negation]
+    If $n$ and $k$ are positive integers, then
+    \[
+    \binom{-n}{k} = (-1) ^ k \binom{k + n - 1}{k} = (-1) ^ k \binom{k + n - 1}{n - 1}.
+    \]
+    \begin{proof}
+        \begin{align*}
+            \binom{-n}{k} &= \frac{(-n)(-n - 1)(-n - 2)\dotsi(-n - k + 1)}{k!} \\
+            &= (-1) ^ k\frac{n(n + 1)(n + 2)\dotsi(n + k - 1)}{k!} \\
+            &= (-1) ^ k\frac{(n + k - 1)!}{(n - 1)!k!},
+        \end{align*}
+        which is as shown.
+    \end{proof}
+\end{proposition}
+
+\newpage
+
+\section{Three principles}
+
+\subsection{Mathematical induction}
+Suppose that for each integer $n = 0, 1, 2, \dotsc$ we can make a statement (or proposition) $P(n)$ associated with $n$.
+For example $P(n)$ might be the statement $2 ^ n > 2n$.
+For each integer $n$,
+$P(n)$ will be either true or false.
+In this case, $P(1)$ is false and so is $P(2)$,
+but $P(3)$ is true.
+$P(n)$ is true for any $n \geq 3$.
+We will use induction to prove this.
+
+Suppose that we know $P(n)$ is true for some fixed $n \geq 3$.
+Consider the statement $P(n + 1) : 2 ^ {n + 1} > 2(n + 1)$.
+But
+\[
+2 ^ {n + 1} = 2 \cdot 2 ^ n > 2 \cdot 2n,
+\]
+by $P(n)$, which we said was true.
+So we have established the truth of $P(n + 1)$ assuming the truth of $P(n)$,
+$n \geq 3$.
+This proves that $P(n)$ holds for all $n \geq 3$,
+by induction.
+
+\begin{theorem}[Principle of mathematical induction]
+    Suppose that $P(n)$ is a sequence of propositions labelled by integers $n \geq n_0$.
+    Suppose that
+    \begin{enumerate}[label = (\alph*)]
+        \item $P(n_0)$ is true; and
+        \item For any $n \geq n_0$, the truth of $P(n)$ implies the truth of $P(n + 1)$.
+    \end{enumerate}
+    Then, for every $n \geq n_0$,
+    $P(n)$ is true.
+    \begin{proof}
+        $P(n_0)$ is true by assumption (a).
+        Then by (b),
+        $P(n_0 + 1)$ is also true.
+        Again by (b),
+        $P(n_0 + 2)$ is also true.
+        And so on.
+        This chain of deductions eventually reaches any given $n \geq n_0$,
+        so $P(n)$ is true for all $n \geq n_0$.
+    \end{proof}
+\end{theorem}
+
+A proof by induction using the above principle consists of two parts:
+verifying the starting case (a) and then establishing the inductive step (b).
+The inductive step involves assuming the inductive hypothesis $P(n)$ and deducting $P(n + 1)$ from that.
+
+\subsection{The pigeon-hole principle}
+The pigeon-hole principle.
+If $n$ envelopes are distributed among $m$ pigeon-holes,
+and $n > m$,
+then at least one pigeon-hole contains more than one envelope.
+
+
+
+\subsection{The inclusion-exclusion principle}
+
+\begin{proposition}
+    We have
+    \[
+    |A_1 \cup A_2 \cup A_3| = |A_1| + |A_2| + |A_3| - |A_1 \cap A_2| - |A_1 \cap A_3| - |A_2 \cap A_3| + |A_1 \cap A_2 \cap A_3|.
+    \]
+    \begin{proof}
+        Apply the formula
+        \[
+        |A_1 \cup A_2| = |A_1| + |A_2| - |A_1 \cap A_2|
+        \]
+        repeatedly.
+    \end{proof}
+\end{proposition}
+
+\begin{theorem}[Inclusion-exclusion formula]
+    For a positive integer $n$ and finite sets $A_1, \dotsc, A_n$,
+    \[
+    |A_1 \cup A_2 \cup \dotsi \cup A_n| = \sum_{k = 1}^{n}(-1) ^ {k + 1}S_k,
+    \]
+    where
+    \[
+    S_k = \sum_{i_1 < i_2 < \dotsi < i_k}|A_{i1} \cap A_{i2} \cap \dotsi \cap A_{ik}|.
+    \]
+    \begin{proof}
+        The base case for this is $n = 2$ and it has been given by the previously mentioned formula
+        \[
+        |A_1 \cup A_2| = |A_1| + |A_2| - |A_1 \cap A_2|.
+        \]
+        Now assume the formula is true for all $n$.
+        Consider the case $n + 1$,
+        we need to show that
+        \[
+        |A_1 \cup A_2 \cup \dotsi \cup A_n \cup A_{n + 1}| = \sum_{k = 1}^{n + 1}(-1) ^ {k + 1}S_k.
+        \]
+        Let $A = A_1 \cup A_2 \cup \dotsi \cup A_n$, then
+        \[
+        |A \cup A_{n + 1}| = |A| + |A_{n + 1}| - |A \cap A_{n + 1}|
+        \]
+        then by the induction hypothesis
+        \[
+        
+        \]
+        
+    \end{proof}
+\end{theorem}
+
+
 \end{document}

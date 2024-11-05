@@ -1334,20 +1334,859 @@ Note: If $XY = 0$ it doesn't follow that $X = 0$ or $Y = 0$
     \end{pmatrix}$ exists.
 \end{example}
 
-\begin{proposition}[Properties of the inverse]
+\begin{proposition}[Properties of the inverse]\phantom{}
     \begin{enumerate}[label = (\roman*)]
         \item A matrix has at most one inverse.
         \item If $A, B \in M_n(\R)$ are invertible, then $AB$ is invertible and
         \[
         (AB) ^ {-1} = B^{-1}A^{-1}
         \]
-        \item \phantom{}
+        \item We have $(AB) ^ t = B ^ t A ^ t$ for all $A \in M_{m \times n}(\R),\, B \in M_{n \times p}(\R)$
         \item If $A \in M_n(\R)$ invertible then so is $A ^ t$ and
         \[
         (A ^ t)^{-1} = (A^{-1}) ^ t.
         \]
-        \item If $A, B \in M_n(\R)$ and $AB = I_n$ then $B = A^{-1}$, and $B = A^{-1}$.
+        \item If $A, B \in M_n(\R)$ and $AB = I_n$ then $B = A^{-1}$, and $A = B^{-1}$.
+    \end{enumerate}
+    \begin{enumerate}[label = (\roman*)]
+        \item
+        \begin{proof}
+        Suppose $B, C$ are inverses for $A \in M_{n}(\R)$.
+        So
+        \[
+        B = BI_n = B(AC) = (BA)C = I_n C = C.
+        \]
+        \end{proof}
+        \item \phantom{}
+        \item \phantom{}
+        \item
+        \begin{proof}
+            We have
+            \[
+            A ^ t(A ^ {-1}) ^ t = (A ^ {-1} A) ^ t = (I_n) ^ t = I_n
+            \]
+            \[
+            (A ^ {-1}) ^ t A ^ t = (A A ^ {-1}) ^ t = (I_n) ^ t = I_n
+            \]
+            so $(A ^ {-1}) ^ t = (A ^ t) ^ {-1}$.
+        \end{proof}
+        \item
+        \begin{proof}
+            
+        \end{proof}
     \end{enumerate}
 \end{proposition}
+
+\newpage
+
+\section{Gauss-Jordan elimination}
+
+We consider a system of linear equations.
+$m$ equations in $n$ unknowns.
+\begin{align*}
+    a_{1 1}x_1 + a_{1 2}x_2 + \dotsc + a_{1 n}x_n &= b_1 \\
+    a_{2 1}x_1 + a_{2 2}x_2 + \dotsc + a_{2 n}x_n &= b_2 \\
+    a_{3 1}x_1 + a_{3 2}x_2 + \dotsc + a_{3 n}x_n &= b_3 \\
+    \vdots \qquad &= \vdots \\
+    a_{m 1}x_1 + a_{m 2}x_2 + \dotsc + a_{m n}x_n &= b_m
+\end{align*}
+this is equivalent to
+\[
+\sum_{j = 1}^{n}a_{i j}x_{j} = b_i\quad\text{for } i = 1, \dotsc, m.
+\]
+We want to know how to solve such a system of equations.
+\begin{itemize}
+    \item[--] Express system as an (augmented) matrix.
+    \item[--] Perform operations called EROs (Elementary Row Operations)
+    to the matrix without changing the solution set.
+
+    Solution set = $
+    \left\{\begin{pmatrix}
+        x_1 \\ x_2 \\ \vdots \\ x_n
+    \end{pmatrix} : x_i \text{ solve the system}\right\}. $
+
+    \item[--] Get augmented matrix into RREF (Row Reduced Echelon Form). (This is the G-J\footnote{Gauss-Jordan.} algorithm).
+    \item[--] Then read off the solution set.
+\end{itemize}
+
+If $A = (a_{i j})_{m \times n} = \begin{pmatrix}
+    a_{1 1} & a_{1 2} & \dotsi & a_{1 n} \\
+    a_{2 1} & a_{2 2} & \dotsi & a_{2 n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{m 1} & a_{m 2} & \dotsi & a_{m n}
+\end{pmatrix}$\footnote{The matrix of coefficients.}
+\[
+\mbf{x} = \begin{pmatrix}
+    x_1 \\ \vdots \\ x_n
+\end{pmatrix},\quad\mbf{b} = \begin{pmatrix}
+    b_1 \\ b_2 \\ \vdots \\ b_m
+\end{pmatrix}
+\]
+The system of equations is
+\[
+A\mbf{x} = \mbf{b}.
+\]
+We're looking for
+\[
+\left\{\mbf{x} \in \R ^ n \,\middle|\, A\mbf{x} = \mbf{b}\right\}.
+\]
+The augmented matrix of the system is
+\[
+(A \,|\, \mbf{b}) =
+\begin{amatrix}{4}
+    a_{1 1} & a_{1 2} & \dotsi & a_{1 n} & b_1 \\
+    a_{2 1} & a_{2 2} & \dotsi & a_{2 n} & b_2 \\
+    \vdots & \vdots & \ddots & \vdots & \vdots \\
+    a_{m 1} & a_{m 2} & \dotsi & a_{m n} & b_m
+\end{amatrix}.
+\]
+\begin{example}
+    The augmented matrix of the system
+    \begin{align*}
+        2x_1 + 3x_2 - x_3 &= 5, \\
+        x_1 + 6x_2 &= -1\text{ is}
+    \end{align*}
+    \[
+    \begin{amatrix}{3}
+        2 & 3 & 1 & 5 \\
+        1 & 6 & 0 & -1 \\
+    \end{amatrix}.
+    \]
+\end{example}
+
+If $\mbf{b} = \mbf{0}$ we call the system "homogeneous",
+if $\mbf{b} \neq \mbf{0}$ we call it "inhomogeneous".
+
+If $\mbf{b} = \mbf{0}$ there is always the solution $\mbf{x} = \mbf{0}$.
+
+\begin{lemma}\phantom{}
+    \begin{enumerate}[label = (\roman*)]
+        \item Let $A \in M_n(\R)$ and $\mbf{v} \in \R ^ n,\ \mbf{v} \neq \mbf{0}$ such that $A\mbf{v} = \mbf{0}$ then $A$ is not invertible (i.e. is singular).
+        \item If $A \in M_n(\R)$ is invertible ("non-singular") then the system $A\mbf{x} = \mbf{b}$ has a unique solution.
+    \end{enumerate}
+    \begin{enumerate}[label = (\roman*)]
+        \item
+        \begin{proof}
+            Assume $A ^ {-1}$ exists. Then
+            \begin{align*}
+                \mbf{v} &= I_n \mbf{v} \\
+                &= A ^ {-1}(A\mbf{v}) \\
+                &= A ^ {-1}\mbf{0} \\
+                &= \mbf{0}
+            \end{align*}
+            contradiction.
+        \end{proof}
+        \item
+        \begin{proof}
+            \begin{align*}
+                A\mbf{x} &= \mbf{b} \\
+                &\iff \\
+                A ^ {-1}(A\mbf{x}) &= A ^ {-1}(\mbf{b}) \\
+                &\iff \\
+                \mbf{x} &= A ^ {-1}\mbf{b}
+            \end{align*}
+        \end{proof}
+    \end{enumerate}
+\end{lemma}
+
+Gauss-Jordan Algorithm
+
+Solve a system of linear equations
+\[
+A\mbf{x} = \mbf{b}\quad\mbf{x} = \begin{pmatrix}
+    x_1 \\ \vdots \\ x_n
+\end{pmatrix}
+\quad
+\begin{pmatrix}
+    b_1 \\ \vdots \\ b_n
+\end{pmatrix}
+\]
+$A \in M_{m \times n}(\R)$ "coefficient matrix"
+G-J finds $\{\mbf{x} \in \R ^ n | A\mbf{x} = \mbf{b}\}$ "solution set".
+
+\textbf{Gauss-Jordan Algorithm}
+\begin{itemize}
+    \item[--] Form augmented matrix $(A|\mbf{b})$
+    \item[--] Use ERO's (Elementary Row Operations) to bring any matrix into RREF (Row-Reduced Echelon Form)
+    \item[--] Read off the solution set
+\end{itemize}
+
+ERO's don't change the solution set.
+
+\begin{definition}
+    A matrix is said to be in RREF if and only if
+    \begin{enumerate}[label = (\roman*)]
+        \item The first (leftmost) non-zero entry in any row is a $1$ (called the "leading $1$" of the row).
+        \item If a row has its leading $1$ in the $j$th column then
+        \begin{enumerate}[label = (\alph*)]
+            \item All other entries in the $j$th column are $0$.
+            \item Leading $1$s of subsequent rows are to the right of the $j$th column.
+        \end{enumerate}
+        \item Any rows of all $0$'s occur after all non-zero rows.
+    \end{enumerate}
+\end{definition}
+
+\begin{example}
+    \[
+    \begin{pmatrix}
+        0 & 1 & 3 & 0 & 0 & 1 & 0 & 0 & 5 \\
+        0 & 0 & 0 & 1 & 0 & -1 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 1 & 5 & 0 & 3 & 1 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 1 & 2 & -1 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0
+    \end{pmatrix}
+    \]
+    This is a matrix in RREF.
+\end{example}
+
+\begin{example}
+    RREF's:
+    \[
+    \begin{pmatrix}
+        1 & 0 \\ 0 & 1
+    \end{pmatrix},
+    \quad
+    \overset{a \in \R}{
+    \begin{pmatrix}
+        1 & a \\ 0 & 0
+    \end{pmatrix}},
+    \quad
+    \begin{pmatrix}
+        0 & 1 \\ 0 & 0
+    \end{pmatrix},
+    \quad
+    \begin{pmatrix}
+        0 & 0 \\ 0 & 0
+    \end{pmatrix}
+    \]
+\end{example}
+Consider the system with $2$ unknowns and $2$ equations
+
+\begin{example}
+    \[
+    \begin{amatrix}{2}
+        1 & 0 & b_1 \\
+        0 & 1 & b_2
+    \end{amatrix}
+    \]
+    \begin{gather*}
+        x_1 + 0x_2 = b_1 \\
+        0x_1 + x_2 = b_2 \\
+    \end{gather*}
+    The solution set is
+    \[
+    \left\{\begin{pmatrix}
+        b_1 \\ b_2
+    \end{pmatrix}\right\}
+    \]
+    \[ 
+    \begin{amatrix}{2}
+        1 & a & b_1 \\
+        0 & 0 & b_2
+    \end{amatrix}
+    \]
+    \[
+    0x_1 + 0x_2 = b_2
+    \]
+    so empty solution set unless equals $0$.
+
+    If $b_2 = 0$ then
+    \[
+    x_1 + ax_2 = b_1
+    \]
+    so $x_1 = b_1 - ax_2$.
+    So the solution set is
+    \[
+    \left\{\begin{pmatrix}
+        b_1 - ax_2 \\ x_2
+    \end{pmatrix}\right\}
+    \,:\,
+    x_2 \in \R
+    \]
+
+    \[
+    \begin{amatrix}{2}
+        0 & 1 & b_1 \\
+        0 & 0 & b_2
+    \end{amatrix}
+    \]
+    No solutions unless $b_2 = 0$.
+    If $b_2 = 0$ then $x_2 = b_1$.
+    So the solution set is
+    \[
+    \left\{\begin{pmatrix}
+        x_1 \\ b_1
+    \end{pmatrix} \,:\, x_1 \in \R\right\}
+    \]
+\end{example}
+
+\begin{example}
+    \[
+    \begin{amatrix}{8}
+        0 & 1 & 3 & 0 & 0 & 1 & 0 & 0 & 5 \\
+        0 & 0 & 0 & 1 & 0 & -1 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 1 & 5 & 0 & 3 & 1 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 1 & 2 & -1 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0
+    \end{amatrix}
+    \]
+    has the solution set
+    \begin{align*}
+        &x_1 + &3x_2 + &\phantom{} &\phantom{} &x_5 &\phantom{} &\phantom{} &= 5 \\
+        &\phantom{} &\phantom{} &x_3 - &\phantom{} &x_5 &\phantom{} &\phantom{} &= 0 \\
+        &\phantom{} &\phantom{} &\phantom{} &x_4 + &5x_5 + &\phantom{} &4x_7 &= 1 \\
+        &\phantom{} &\phantom{} &\phantom{} &\phantom{} &\phantom{} &x_6 + &2x_7 &= -1 \\
+    \end{align*}
+    Idea: variable corresponding to non-leading $1$ positions are "free variables".
+    
+    So $x_2, x_5, x_7$ are "free variables",
+    and these determine
+    \begin{align*}
+    x_1 &= 5 - 3x_2 - x_5, \\
+    x_2 &= x_5, \\
+    x_3 &= 1 - 5x_5 - 3x_7, \\
+    x_4 &= -1 - 2x_7.
+    \end{align*}
+    So the solution set is
+    \[
+    \left\{
+    \begin{pmatrix}
+        5 - 3x_2 - x_5 \\
+        x_2 \\
+        x_5 \\
+        1 - 5x_5 - 3x_7 \\
+        x_5 \\
+        -1 -2x_7 \\
+        x_7
+    \end{pmatrix}
+    \,:\,
+    x_2, x_5, x_7 \in \R
+    \right\}.
+    \]
+    If $x_2 = \lambda_1\quad x_5 = \lambda_2\quad x_7 - \lambda_3$
+    then the solution set is
+    \[
+    \left\{
+    \begin{pmatrix}
+        5 \\ 0 \\ 0 \\ 1 \\ 0 \\ -1 \\ 0
+    \end{pmatrix}
+    + \lambda_1
+    \begin{pmatrix}
+        -3 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+    \end{pmatrix}
+    + \lambda_2
+    \begin{pmatrix}
+        -1 \\ 0 \\ 1 \\ -5 \\ 1 \\ 0 \\ 0
+    \end{pmatrix}
+    + \lambda_3
+    \begin{pmatrix}
+        0 \\ 0 \\ 0 \\ -3 \\ 0 \\ -2 \\ 1
+    \end{pmatrix}
+    \,:\,
+    \lambda_1, \lambda_2, \lambda_3 \in \R
+    \right\}.
+    \]
+\end{example}
+
+
+EROs
+
+Each ERO is a function $M_{m \times n}(\R) \rightarrow M_{m \times n}(\R)$.
+
+They are:
+\begin{enumerate}[label = (\roman*)]
+    \item $P_{rs}$ interchanges row $r$ with row $s$.\footnote{Permute.}
+    \item $M_r(\lambda)$ Multiplies the $r^{\text{th}}$ row by $\lambda \neq 0$.
+    \item $A_{rs}(\lambda)$ Adds $\lambda \in \R$ times the $r^{\text{th}}$ row to the $s^{\text{th}}$ row.
+\end{enumerate}
+
+\begin{example}
+    \begin{align*}
+    \begin{pmatrix}
+        1 & 3 & 2 \\
+        2 & 1 & -1 \\
+        -1 & 1 & 2
+    \end{pmatrix}
+    &\xrightarrow[A_{13}(1)]{A_{12}(-2)}
+    \begin{pmatrix}
+        1 & 3 & 2 \\
+        0 & -5 & -5 \\
+        0 & 4 & 4
+    \end{pmatrix} \\
+    &\xrightarrow{M_2(-\frac{1}{5})}
+    \begin{pmatrix}
+        1 & 3 & 2 \\
+        0 & 1 & 1 \\
+        0 & 4 & 4
+    \end{pmatrix} \\
+    &\xrightarrow[A_{23}(-4)]{A_{21}(-3)}
+    \begin{pmatrix}
+        1 & 0 & -1 \\
+        0 & 1 & 1 \\
+        0 & 0 & 0
+    \end{pmatrix}.
+    \end{align*}
+\end{example}
+
+
+G-J algorithm:
+\begin{theorem}
+    Using a sequence of Elementary Row Operations we can bring any matrix into Row Reduced Echelon Form.
+    \begin{proof}
+        Give the algorithm.
+
+        Basic routine:
+        \begin{enumerate}[label = (\arabic*)]
+            \item  Given a matrix,
+            identify first non-zero column.
+            \item Bring a non-zero entry in that column to the first row (if necessary) using $P_{1 r}$
+            \item Using $M_1(\lambda)$,
+            make that entry $1$.
+            \item Use $A_{1r}(\mu)$ repeatedly to clear out the rest of that column.
+        \end{enumerate}
+    \end{proof}
+\end{theorem}
+
+Result:
+\[
+\begin{pmatrix}
+    0 & 0 & \dotsi & 0 & 1 & * & * & \dotsi & * \\
+    0 & 0 & \dotsi & 0 & 0 & * & * & \dotsi & * \\
+    \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & \dotsi & 0 & 0 & * & * & \dotsi & * \\
+\end{pmatrix}
+\]
+then repeat on the matrix on the smaller matrix with only stars.
+
+Point: EROs do not change the solution set to the system of linear equations.
+system $\rightarrow$ any matrix $\rightarrow$ EROs $\rightarrow$ RREF $\rightarrow$ read off solutions
+
+\begin{example}
+    Find the intersection in $\R ^ 2$ of the three planes
+    \begin{align*}
+        x_1 + 2x_2 + 3x_3 &= 1, \\
+        2x_1 + 3x_2 + 2x_3 &= 1, \\
+        3x_1 + 2x_2 + x_3 &= 1,
+    \end{align*}
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        \begin{align*}
+        \begin{amatrix}{3}
+            1 & 2 & 3 & 1 \\
+            2 & 3 & 2 & 1 \\
+            3 & 2 & 1 & 1
+        \end{amatrix}
+        &\xrightarrow[A_{13}(-3)]{A_{12}(-2)}
+        \begin{amatrix}{3}
+            1 & 2 & 3 & 1 \\
+            0 & -1 & -4 & -1 \\
+            0 & -4 & -8 & -2
+        \end{amatrix} \\
+        &\xrightarrow{M_{2}(-1)}
+        \begin{amatrix}{3}
+            1 & 2 & 3 & 1 \\
+            0 & 1 & 4 & 1 \\
+            0 & -4 & -8 & -2
+        \end{amatrix} \\
+        &\xrightarrow[A_{12}(4)]{A_{21}(-2)}
+        \begin{amatrix}{3}
+            1 & 0 & -5 & -1 \\
+            0 & 1 & 4 & 1 \\
+            0 & 0 & 8 & 2
+        \end{amatrix} \\
+        &\xrightarrow{M_{3}(\frac{1}{8})}
+        \begin{amatrix}{3}
+            1 & 0 & -5 & -1 \\
+            0 & 1 & 4 & 1 \\
+            0 & 0 & 1 & \frac{1}{4}
+        \end{amatrix} \\
+        &\xrightarrow[A_{32}(-4)]{A_{31}(5)}
+        \begin{amatrix}{3}
+            1 & 0 & 0 & -\frac{1}{4} \\
+            0 & 1 & 0 & 0 \\
+            0 & 0 & 1 & \frac{1}{4}
+        \end{amatrix}.
+        \end{align*}
+        Solution is
+        \[
+        x_1 = \frac{1}{4}\quad x_2 = 0\quad x_3 = \frac{1}{4}
+        \]
+        solution set is
+        \[
+        \left\{\begin{pmatrix}
+            \frac{1}{4} \\ 0 \\ \frac{1}{4}
+        \end{pmatrix}\right\}.
+        \]
+    \end{proof}
+\end{example}
+    
+\begin{example}
+    Find the intersection in $\R ^ 2$ of the three planes
+    \begin{align*}
+        x_1 + 2x_2 + 11x_3 + 4x_4 &= 20, \\
+        -x_1 - 2x_2 - x_3 + x_4 &= -5, \\
+        x_1 + 2x_2 + 5x_3 + x_4 &= 11, \\
+        x_1 + 2x_2 + 7x_3 + 2x_4 &= 14
+    \end{align*}
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+    \begin{align*}
+        \begin{amatrix}{4}
+            1 & 2 & 11 & 4 & 20 \\
+            -1 & -2 & -1 & 1 & -3 \\
+            1 & 2 & 5 & 1 & 11 \\
+            1 & 2 & 7 & 2 & 14
+        \end{amatrix}
+        &\xrightarrow[
+            A_{13}(-1), A_{14}(-1)
+        ]{A_{12}(1)}
+        \begin{amatrix}{4}
+            1 & 2 & 11 & 4 & 20 \\
+            0 & 0 & 10 & 5 & 15 \\
+            0 & 0 & -6 & -3 & -9 \\
+            0 & 0 & -6 & -2 & -6
+        \end{amatrix} \\
+        &\xrightarrow{M_2(\frac{1}{10}, M_3{-\frac{1}{6}}, M_4}
+    \end{align*}
+    $\lambda = x_2$ and $\mu = x_4$ are free variables,
+    the solution set is
+    \[
+    \left\{
+    \begin{pmatrix}
+        \frac{3}{2} - 2\lambda + \frac{3}{7
+}\mu \\
+\lambda \\
+\frac{3}{2} - \frac{1}{7}\mu \\
+\mu
+    \end{pmatrix} : \lambda, \mu \in \R
+    \right\}
+    \]
+    \end{proof}
+\end{example}
+
+\begin{example}
+    Augmented matrix
+    \[
+    \begin{amatrix}{3}
+        1 & 3 & 2 & a \\
+        2 & 1 & -1 & b \\
+        -1 & 1 & 2 & c
+    \end{amatrix}
+    \]
+    \begin{align*}
+        \begin{amatrix}{3}
+            1 & 3 & 2 & a \\
+            2 & 1 & -1 & b \\
+            -1 & 1 & 2 & c
+        \end{amatrix}
+        &\xrightarrow[A_{13}(1)]{A_12(-2)}
+        \begin{amatrix}{3}
+            1 & 3 & 2 & a \\
+            0 & -5 & -5 & b - 2a \\
+            0 & 4 & 4 & c + a
+        \end{amatrix} \\
+        &\xrightarrow{M_2\left(-\frac{1}{5}\right)}
+        \begin{amatrix}{3}
+            1 & 3 & 2 & a \\
+            0 & 1 & 1 & \frac{2a - b}{5} \\
+            0 & 4 & 4 & c + a
+        \end{amatrix} \\
+        &\xrightarrow[A_{23}(-4)]{A_{21}(-3)}
+        \begin{amatrix}{3}
+            1 & 0 & -1 & \frac{3b - a}{5} \\
+            0 & 1 & 1 & \frac{2a - b}{5} \\
+            0 & 0 & 0 & \frac{4b + 5c - 3a}{20}
+        \end{amatrix}
+    \end{align*}
+    First note that unless $4b + 5c - 3a = 0$ there are no solutions.
+    (Solution set is empty.)
+
+    If $4b + 5c - 3a = 0$
+    (i.e. $c = \frac{3a - 4b}{5}$)
+    then the solution set is:
+    
+    ($x_3 = \lambda$ is the free variable)
+    \[
+    \left\{\begin{pmatrix}
+        \frac{3b - a}{5} + \lambda \\
+        \frac{2b - b}{5} - \lambda \\
+        \lambda
+    \end{pmatrix} \,:\, \lambda \in \R\right\}.
+    \]
+\end{example}
+
+\subsection{Inverse matrices (again)}
+Consider the linear system $A\mbf{x} = \mbf{b}$ where $A \in M_{m \times n}(\R)$.
+\begin{lemma}
+    If $B \in M_m(\R)$ is invertible then the system $A\mbf{x} = \mbf{b}$ has the same solution set as $(BA)\mbf{x} = (B\mbf{b})$.
+    \begin{proof}
+        First note that if $A\mbf{x} = \mbf{b}$ then
+        $(BA)\mbf{x} = B(A\mbf{x}) = B(\mbf{b}) = B\mbf{b}$.
+
+        Also if $(BA)\mbf{x} = B\mbf{b}$.
+        Then we have
+        $A\mbf{x} = (B ^ {-1} B)A\mbf{x} = B ^ {-1}(BA)\mbf{x} = B ^ {-1}(B\mbf{b}) = \mbf{b}$.
+    \end{proof}
+\end{lemma}
+
+\begin{proposition}
+    Elementary row operations do not change the solution set.
+    \begin{proof}
+        By the lemma it is enough to see that EROs can be performed by left multiplication by invertible matrices.
+        \[
+        \left((A | \mbf{b}) \xrightarrow{\text{ERO}} (BA | B\mbf{b})\right)
+        \]
+        \begin{enumerate}[label = (\roman*)]
+            \item The ERO $P_{rs}$ can be performed by left multiplication by the matrix $P_{rs}$,
+            which is obtained from $I_m$ by exchanging the $r^{\text{th}}$ and $s^{\text{th}}$ row.
+            \[
+            (P_{rs})_{ij} = \begin{cases}
+                1 &\text{if } i = j, i \neq r, s \\
+                1 &\text{if } i = r, j \neq s \\
+                1 &\text{if } i = s, j \neq r \\
+                0 &\text{otherwise}.
+            \end{cases}
+            \]
+            One can check that
+            $(P_{rs}) ^ {-1} = P_{rs}$
+            \item The matrix $M_r(\lambda)$ is given by
+            \[
+            (M_r(\lambda))_{ij} = \begin{cases}
+                1 &i = j \neq r \\
+                \lambda &i = j = r \\
+                0 &\text{otherwise}.
+            \end{cases}
+            \]
+            Check that
+            $(M_r(\lambda)) ^ {-1} = M_r\left(\frac{1}{\lambda}\right)$
+            \item The matrix $A_{rs}(\lambda)$ is given by
+            \[
+            (A_{rs}(\lambda))_{ij} = \begin{cases}
+                1 &i = j \\
+                \lambda &i = s, j = r \\
+                0 &\text{otherwise}.
+            \end{cases}
+            \]
+            Check that $(A_{rs}(\lambda)) ^ {-1} = A_{rs}(-\lambda)$.
+        \end{enumerate}
+    \end{proof}
+\end{proposition}
+
+\begin{lemma}
+    Let $A \in M_n(\R)$ be a square matrix then the following statements are each equivalent to each other
+    \begin{enumerate}[label = (\roman*)]
+        \item In each column of the row reduced echelon form of $A$,
+        there is a leading $1$.
+        \item The row reduced echelon form of $A$ is $I_n$.
+        \item The only solution to $A\mbf{x} = \mbf{0}$ is $\mbf{x} = \mbf{0}$.
+    \end{enumerate}
+    \begin{proof}
+        (ii) implies (i) clearly.
+        Also (i) implies (ii) since all non-leading $1$ entries in columns with leading $1$'s are $0$.
+        (And the leading $1$'s are arranged left-to-right and top-to-bottom.)
+
+        (ii) implies (iii). Assume (ii).
+        The solutions set to $A\mbf{x} = \mbf{0}$ agrees with the solution set to
+        $I_n\mbf{x} = \mbf{0}$. i.e. to $\mbf{x} = \mbf{0}$.
+
+        (iii) implies (i).
+        If not each column had a leading $1$ then the solution set would have some free variables i.e. more than one solution.
+    \end{proof}
+\end{lemma}
+
+\begin{theorem}
+    A square matrix $A \in M_n(\R)$ is invertible if and only if any one of the two conditions of this lemma (previous lemma) hold.
+    \begin{proof}
+        If $A ^ {-1}$ exists then
+        \[
+        A\mbf{x} = \mbf{0} \implies \mbf{x} = A ^ {-1}(A\mbf{x}) = A ^ {-1}\mbf{0} = \mbf{0}
+        \]
+        so $\mbf{x}$ is the unique solution to $A\mbf{x} = \mbf{0}$ so we have (iii).
+
+        (ii) implies that there exists a sequence of elementary matrices,
+        $E_1, \dotsc, E_r$ such that
+        \[
+        E_r \dotsi E_2E_1 = I_n
+        \]
+        so we try to show that $B = E_r \dotsi E_2 E_1$ is an inverse for $A$.
+        We have already $BA = I_n$.
+        Does $AB = I_n$?
+        \begin{align*}
+            AB &= AE_r\dotsi E_2 E_1 \\
+            &= (E_1^{-1}E_2^{-1}\dotsi E_r^{-1})(E_r \dotsi E_1)A(E_r \dotsi E_1) \\
+            &= (E_1^{-1}E_2^{-1}\dotsi E_r^{-1})(E_r \dotsi E_1) \\
+            &= I_n.
+        \end{align*}
+        So $A ^ {-1} = B = E_r \dotsi E_2E_1$.
+    \end{proof}
+\end{theorem}
+
+\begin{corollary}
+    Any invertible matrix is a product of elementary matrices.
+    \begin{proof}
+        Suppose $A \in M_n(\R)$ is invertible.
+        And $A ^ {-1} = E_r \dotsi E_2E_1$ as above.
+        Then $A = (A ^ {-1}) ^ {-1} = (E_r\dotsi E_2E_1) ^ {-1} = E_1^{-1}E_2^{-1}\dotsi E_r^{-1}$
+        and inverses of elementary matrices are elementary.
+    \end{proof}
+\end{corollary}
+
+\begin{corollary}
+    If $BA = I_n$ then $AB = I_n$. ($A, B \in M_n(\R)$)
+    \begin{proof}
+        Suppose $A\mbf{x} = \mbf{0}$ then $\mbf{x} = BA\mbf{x} = B\mbf{0} = \mbf{0}$ so by the theorem we have that $A$ is invertible.
+
+        So
+        \begin{align*}
+            AB &= AB(AA ^ {-1}) \\
+            &= A(BA)A ^ {-1} \\
+            &= AA ^ {-1} \\
+            &= I_n.
+        \end{align*}
+    \end{proof}
+\end{corollary}
+
+\subsection{Computing the inverse of a matrix $A \in M_n(\R)$}
+First:
+form an augmented matrix $(A\,|\,I_n)$.
+Second: run Gauss-Jordan i.e. left multiply by $E_1, E_2, \dotsc, E_r$.
+If $A$ is invertible it will become $I_n$. (by previous theorem).
+
+So we have
+\begin{align*}
+    E_r \dotsi E_2 E_1 (A | I_n) &= (E_r\dotsi E_2E_1A\,|\,E_r\dotsi E_2E_1I_n) \\
+    &= (I_n\,|\,E_r\dotsi E_2E_1) \\
+    &= (I_n\,|\,A ^ {-1}).
+\end{align*}
+
+Note if $A$ was not invertible then the left hand side will not become $I_n$ (RREF of $A$ is not $I_n$).
+
+\begin{example}
+    Find the inverse of $\begin{pmatrix}
+        1 & 1 & 1 \\
+        1 & 2 & 3 \\
+        1 & 3 & 4
+    \end{pmatrix} = A$
+    \begin{align*}
+    \left(\hspace{-5pt}
+    \begin{array}{ccc|ccc}
+        1 & 1 & 1 & 1 & 0 & 0 \\
+        1 & 2 & 3 & 0 & 1 & 0 \\
+        1 & 3 & 4 & 0 & 0 & 1
+    \end{array}
+    \hspace{-5pt}\right)
+    &\xrightarrow[A_{12}(-1)]{A_{13}(-1)}
+    \left(\hspace{-5pt}
+    \begin{array}{ccc|ccc}
+        1 & 1 & 1 & 1 & 0 & 0 \\
+        0 & 1 & 2 & -1 & 1 & 0 \\
+        0 & 2 & 3 & -1 & 0 & 1
+    \end{array}
+    \hspace{-5pt}\right) \\
+    &\xrightarrow[A_{21}(-1)]{A_{23}(-2)}
+    \left(\hspace{-5pt}
+    \begin{array}{ccc|ccc}
+        1 & 0 & -1 & 2 & -1 & 0 \\
+        0 & 1 & 2 & -1 & 1 & 0 \\
+        0 & 0 & -1 & 1 & -2 & 1
+    \end{array}
+    \hspace{-5pt}\right) \\
+    &\xrightarrow{M_{2}(-1)}
+    \left(\hspace{-5pt}
+    \begin{array}{ccc|ccc}
+        1 & 0 & -1 & 2 & -1 & 0 \\
+        0 & 1 & 2 & -1 & 1 & 0 \\
+        0 & 0 & 1 & -1 & 2 & -1
+    \end{array}
+    \hspace{-5pt}\right) \\
+    &\xrightarrow[A_{32}(-2)]{A_{21}(1)}
+    \left(\hspace{-5pt}
+    \begin{array}{ccc|ccc}
+        1 & 0 & 0 & 1 & 2 & -1 \\
+        0 & 1 & 0 & 1 & -3 & 2 \\
+        0 & 0 & 1 & -1 & 2 & -1
+    \end{array}
+    \hspace{-5pt}\right)
+    \end{align*}
+    So $A ^ {-1} = \begin{pmatrix}
+        1 & 2 & -1 \\
+        1 & -3 & 2 \\
+        1 & 2 & 1
+    \end{pmatrix}$.
+\end{example}
+
+\newpage
+
+\section{Determinants}
+Determinant is a function
+\[
+\det : M_n(\R) \rightarrow \R\quad
+A \mapsto \det(A)\footnotemark
+\]
+\footnotetext{Sometimes denoted as $|A|$.}
+This determines whether a matrix is invertible.
+
+$A$ is invertible $\iff \det(A) \neq 0$
+
+\textbf{Guess the definition}
+
+$n = 1\quad\det((a)) = a$
+
+$n = 2$ From a problem sheet, one knows that
+\[
+\begin{pmatrix}
+    a & b \\ c & d
+\end{pmatrix}
+\]
+is invertible if $ad - bc \neq 0$.
+\[
+\det
+\begin{pmatrix}
+    a & b \\ c & d
+\end{pmatrix} = ad - bc
+\]
+
+$n = 3$
+$\mbf{a} = \begin{pmatrix}
+    a_1 \\ a_2 \\ a_3
+\end{pmatrix}, \mbf{b} = \begin{pmatrix}
+    b_1 \\ b_2 \\ b_3
+\end{pmatrix}, \mbf{c} = \begin{pmatrix}
+    c_1 \\ c_2 \\ c_3
+\end{pmatrix}$
+$A$ is invertible if and only if $A\mbf{x} = \mbf{0}$ as the unique solution $\mbf{x} = \mbf{0}$
+if and only if
+\begin{align*}
+    a_1x + a_2y + a_3z &= 0, \\
+    b_1x + b_2y + b_3z &= 0, \\
+    c_1x + c_2y + c_3z &= 0
+\end{align*}
+have a unique solution.
+If and only if $\mbf{a}\cdot (\mbf{b}\times \mbf{c}) \neq 0$
+if and only if
+\[
+\begin{pmatrix}
+    a_1 \\ a_2 \\ a_3
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+    b_2c_3 - b_3c_2 \\
+    b_3c_1 - b_1c_3 \\
+    b_1c_2 - b_2c_1
+\end{pmatrix}
+\neq 0
+\]
+if and only if
+$a_1 \det\begin{pmatrix}
+    b_2 & b_3 \\
+    c_2 & c_3
+\end{pmatrix} - a_2\det\begin{pmatrix}
+    b_1 & b_3 \\ c_1 & c_3
+\end{pmatrix} + a_3\det\begin{pmatrix}
+    b_1 & b_2 \\ c_1 & c_2
+\end{pmatrix} \neq 0$.
+This is the determinate for the $3 \times 3$ matrix we have given.
+
+
+
+
 
 \end{document}

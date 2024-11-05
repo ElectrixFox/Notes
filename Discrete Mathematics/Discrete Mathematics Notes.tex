@@ -301,6 +301,8 @@ First consider the arrangements (ordered, no repetitions) there are $P(n, k) = \
     \end{enumerate}
 \end{example}
 
+\newpage
+
 \section{Arrangements and combinations with repetitions}
 
 \subsection{Arrangements with repetition}
@@ -325,9 +327,194 @@ First consider the arrangements (ordered, no repetitions) there are $P(n, k) = \
         First image all the letters are different, $I_1, I_2, I_3, I_4, S_1, S_2, S_3, S_4,\dotsc$.
         There are $11!$ ways to arrange these.
         This grouping has $4!$ arrangements which are the same.
-        
     \end{proof}
 \end{example}
 
+Standard problem \#4: How many arrangements are there of a list of objects in which some objects are repeated?
+
+\begin{theorem}\label{disc_thm_41}
+    Given a list of $n$ objects of $r$ different types, in which each object of type $i$ occur $n_i$ times (with $n_1 + \dotsi + n_r = n$), the number of arrangements of the list is
+    \[
+    P(n; n_1, n_2, \dotsc, n_r) = \frac{n!}{n_1!n_2!\dotsi n_r!}.
+    \]
+    \begin{proof}
+        As in example.
+    \end{proof}
+\end{theorem}
+
+\begin{example}\phantom{}
+    \begin{enumerate}[label = (D\arabic*)]
+        \item  How many arrangements of REARRANGE are there?
+        \item Of these how many of these have all the $R$s together as a block?
+        \item How many have at least two $R$s together?
+    \end{enumerate}
+
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}\phantom{}
+        \begin{enumerate}[label = (D\arabic*)]
+            \item
+            We have
+            AA EE G N RRR
+            by \autoref{disc_thm_41} we get $\frac{9!}{3!2!2!1!1!}$
+            \item Treat RRR as a single object so
+            $n = 2$ we have $2 + 2 + 1 + 1$ elements,
+            we get $\frac{7!}{2!2!}$.
+            \item
+            "At least" find first the "bad" one,
+            where we have no Rs together.
+            First arrange the other letters AAEEGB,
+            so we have $\frac{6!}{2!2!}$ ways.
+            One of possibilities: A G E E A N, G A E A E N.
+            
+            Now we need to put Rs inside,
+            so there are $\binom{7}{3}$ ways to put Rs inside.
+            So the answer for "bad" cases is $\binom{7}{3}\frac{6!}{2!3!}$,
+            so the answer is $\frac{9!}{3!2!2!} = \binom{7}{3}\frac{6!}{2!2!}$
+        \end{enumerate}
+    \end{proof}
+\end{example}
+
+\subsection{Combination with repetition}
+Standard Problem \#5: From a set of $n$ objects,
+how many $k$-combinations can be chosen if repeats are allowed?
+
+But first we consider a different question
+
+Standard problem \#6: How many $k$-combinations with repetitions from $n$ objects are there in which each object is chosen at least once?
+
+Remark, need $k \geq n$ for a non-zero answer.
+
+\begin{example}
+    Count the $5$ combinations with repetitions from set $\{1, 2, 3\}$ in which each number repeats at least once.
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        Standard problem \#6.
+
+        Since order doesn't matter we represent each combination in numerical order.
+        E.g. $11123$, $11223$, $11233$, $12223$, $12233$, $12333$.
+
+        Now insert markers where the numbers change.
+        \begin{align*}
+            111|2|3 \\
+            11|22|3 \\
+            11|2|33 \\
+            1|22|33 \\
+            1|2|333.
+        \end{align*}
+        What we did, we inserted two markers in $4$ possible gaps.
+        So the number of combinations is the number of ways to put markers,
+        \[
+        \binom{4}{2} = 6.
+        \]
+    \end{proof}
+\end{example}
+
+\begin{theorem}\label{disc_thm_kcombwrep}
+    The number of $k$-combinations from $n$ objects with repetitions and each object occurring at least once is
+    \[
+    \binom{k - 1}{n - 1}\text{ for } k \geq n.
+    \]
+    \begin{proof}
+        As in the example.
+
+        There are $k - 1$ positions and $n - 1$ markers.
+        There are $\binom{k - 1}{n - 1}$ ways to put markers.
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    A student buys $10$ bars of chocolate.
+    There are $4$ types available,
+    M, S, T, Y.
+    How many combinations are possible?
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        This is standard problem \#5 we turn it into standard problem \#6.
+    \end{proof}
+\end{example}
+
+\begin{theorem}\label{disc_thm_diffobjrep}
+    The number of $k$-combinations from $n$ different objects with repetitions is
+    \[
+    \binom{k + n - 1}{n - 1} = \binom{k + n - 1}{k}
+    \]
+    \begin{proof}
+        Consider $k + n - 1$ places and $n - 1$ markers,
+        put them in these places not more than one per place.
+        $k$ places are not "busy",
+        the number of empty places before the first marker will be $x_1$,
+        between the first and second is $x_2$ and so on to get
+        $x_1, x_2, x_3, \dotsc, x_n$ which gets
+        \[
+        x_1 + x_2 + x_3 + \dotsi + x_n = k
+        \]
+        since $x_i \geq 0\, \forall i \in \N$.
+        But how many ways are there to put markers?
+        There are
+        \[
+        \binom{n + k - 1}{n - 1}.
+        \]
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    \begin{enumerate}[label = E\arabic*]
+        \item 
+        How many $6$ letter words have the letters in weak alphabetical order (with multiple of the same letter allowed) (So both ALMOST and ACCESS are allowed.).
+        \item
+        Wimpy's offers offered W/Burgers (B), W/Cheeseburgers (C), Hawaiian Burgers (H), and Fish Specials (S).
+        Seven people each request a single meal.
+        \begin{enumerate}[label = (\alph*)]
+            \item How many different orders may the kitchen be asked to prepare?
+            \item How many omit at least one type of meal?
+            \item How many omit exactly one type of meal?
+        \end{enumerate}
+        \item How many integer solutions $(x_1, x_2, x_3, x_4)$ are there to the equation
+        \[
+        x_1 + x_2 + x_3 + x_4 = 7
+        \]
+        where
+        \begin{enumerate}[label = (\alph*)]
+            \item each $x_i$ is a positive integer?
+            \item each $x_i$ is a non-negative integer?
+            \item $x_i \geq 0$ for odd $i$ and $x_i \geq 1$ for even $i$?
+        \end{enumerate}
+    \end{enumerate}
+
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+    \begin{enumerate}[label = E\arabic*]
+        \item Each $6$-combination from A-Z (with repetitions) corresponds to a word when arranged in (weak) alphabetical order.
+        So this is Standard Problem \#5 with $k = 6$ and $n = 26$,
+        so \autoref{disc_thm_diffobjrep} gives the answer $\binom{26 + 6 - 1}{6} = \binom{31}{6}$.
+        \item
+        \begin{enumerate}[label = (\alph*)]
+            \item Again Standard Problem \#5 $k = 7$, $n = 4$
+            so we get $\binom{k + n - 1}{n - 1} = \binom{10}{3}$.
+            \item Firstly, how many use each meal at least one?
+            This is Standard Problem \#6 with $k = 7$, $n = 4$.
+            So the answer will be \autoref{disc_thm_kcombwrep} $\binom{k - 1}{n - 1}$ we get
+            \[
+            \binom{7 - 1}{4 - 1} = \binom{6}{3}.
+            \]
+            So, the orders that do not use every meal are
+            \[
+            \binom{10}{3} - \binom{6}{3}
+            \]
+            \item First choose which meal to omit $4$ choices.
+            Then count orders using the remaining $3$ types all at least once.
+            This is Standard Problem \#6 with $k = 7$, $n = 3$.
+            So the answer is $4 \cdot \binom{6}{2}$
+        \end{enumerate}
+        \item 
+        \begin{enumerate}[label = (\alph*)]
+            \item $x_i \geq 1$ corresponds to Standard Problem \#6 with $k = 7$, $n = 4$.
+            So we get $\binom{k - 1}{n - 1} = \binom{6}{3}$.
+            \item Standard Problem \#5 $\binom{k + n - 1}{n - 1} = \binom{7 + 4 - 1}{4 - 1} = \binom{10}{3}$.
+            \item $x_1 \geq 0, x_2 \geq 1, x_3 \geq 0, x_4 \geq 1$. Substitution $y_1 = x_1 + 1$, $y_2 = x_2$, $y_3 = x_3 + 1$, $y_4 = x_4$
+            \[
+            x_1 + x_2 + x_3 + x_4 + 2 = y_1 + y_2 + y_3 + y_4 = 9,
+            \]
+            so we get $\binom{8}{3}$ solutions.
+        \end{enumerate}
+    \end{enumerate}
+    \end{proof}
+\end{example}
 
 \end{document}

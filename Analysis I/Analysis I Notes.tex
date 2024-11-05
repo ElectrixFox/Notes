@@ -1,6 +1,8 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage{preamble}
 
+\newcommand{\seq}[1][x]{(#1_n)_{n \in \N}}
+
 \title{Analysis I}
 \author{Luke Phillips}
 \date{October 2024}
@@ -323,7 +325,7 @@ The next property of the reals is an existence of an order $<$. For any $a, b \i
 
 We require
 \begin{enumerate}[label = (O.\arabic*)]
-    \item Trichotomy: We either have $a < b,\, a = b,\,\text{or } b < a$ (as a true statement).
+    \item Trichotomy\label{analy_axiom_trichotomy}: We either have $a < b,\, a = b,\,\text{or } b < a$ (as a true statement).
     \item Transitivity: If $a < b$ and $b < c$, then $a < c$.
     \item Monotony of Addition: If $a < b$, then $a + c < b + c$ for all $c \in \R$.
     \item Monotony of Multiplication: If $a < b$ and $0 < c$ then $c \cdot a < c \cdot b$
@@ -666,7 +668,7 @@ For $n = 0$ use $0! = 1$.
     \]
 \end{definition}
 
-\begin{theorem}[Binomial Theorem]
+\begin{theorem}[Binomial Theorem]\label{analy_thm_binom}
     Let $a, b \in \R$ and $n \in \N$. Then
     \[
     (a + b) ^ n = \sum_{k = 0}^{n}\binom{n}{k}a^{n - k}b^{k} = a ^ n + \binom{n}{1}a^{n - 1}b + \dotsc + b ^ n.
@@ -690,7 +692,7 @@ For $n = 0$ use $0! = 1$.
     \end{proof}
 \end{theorem}
 
-\begin{theorem}[Bernoulli Inequality]
+\begin{theorem}[Bernoulli Inequality]\label{analy_thm_bernoineq}
     Let $x \geq -1$ and $n \in \N$. Then
     \[
     (1 + x) ^ n \geq 1 + nx.
@@ -742,8 +744,397 @@ For $n = 0$ use $0! = 1$.
     Similarly, $m \in X$ is called the minimum of $X$, if $m \leq x$ for all $x \in M$, we write $m = \min X$, if such $m$ exists.
 \end{definition}
 
-\begin{example}
+\begin{example}\label{examp_analy_1}
     $x = \N$ $1$ is the minimum since $1 \leq n$ for all $n \in \N$, but $1 \in \N$. This set has no maximum. A maximum would have to be some $n \in \N$. But $n < n + 1$, so $n \geq x$ for all $x \in \N$ is not possible, since $n + 1 \in \N$.
 \end{example}
+
+\begin{example}
+    $Y = \left\{\frac{1}{n} \,\middle|\, n \in \N\right\}$ is bounded above by $1$.
+    
+    $\frac{1}{n} \leq1$ for all $n \in \N$, $1$ is an upper bound.
+    Also $1 = \frac{1}{1} \in Y$, so $1 = \max\{Y\}$.
+    Note $0 < \frac{1}{n}$ for all $n \in \N$, so $Y$ is bounded below by $0$.
+    There is no minimum,
+    since $\frac{1}{n + 1} < \frac{1}{n}$ for all $n \in \N$.
+\end{example}
+
+\begin{example}
+    $Z = \{x \in \Q\,|\, x ^ 2 \leq 2\}$ bounded set.
+    If $x \in Z$,
+    then $-2 \leq x \leq 2$.
+    If there was a positive rational number $\frac{p}{q}$ with $\frac{p ^ 2}{q ^ 2} = 2$,
+    this would be the maximum.,
+    but there is no such $\frac{p}{q}$.
+\end{example}
+
+\begin{definition}
+    Let $X$ be a set which is bounded above.
+    A number $C \in \R$ is called the supremum of $X$,
+    or the least upper bound of $X$, if
+    \begin{enumerate}[label = (\alph*)]
+        \item $C$ is an upper bound of $X$.
+        \item Whenever $B \in \R$ is another upper bound of $X$, the $C \leq B$.
+    \end{enumerate}
+    We write $\sup X$ for such a $C$.
+    
+    Similarly, if $X$ is bounded below,
+    a number $c \in \R$ is called the infimum of $X$ or greatest lower bound of $X$, if
+    \begin{enumerate}[label = (\alph*)]
+        \item $c$ is an lower bound of $X$.
+        \item Whenever $b \in \R$ is a lower bound of $X$, then $b \leq c$.
+    \end{enumerate}
+    We write $\inf X$ for such $c$.
+\end{definition}
+
+Observation: if $X$ has a maximum $M = \max X$,
+then $M$ is the supremum:
+we have $x \leq M$ for all $x \in X$.
+Gives (a).
+If $B$ is an upper bound of $X$,
+then $M \leq B$ since $M \in X$,
+so (b) is also satisfied.
+
+\begin{example}
+    $X = \{x \in \R\,|\, x < 2\}$.
+
+    We want to say that $2 = \sup X$:
+    $2$ is an upper bound,
+    so (a) is satisfied.
+    For (b), take an upper bound $B$,
+    we want $2 \leq B$
+    use an indirect proof:
+    Assume $B < 2$.
+    Note $B = \frac{B + B}{2} < \frac{B + 2}{2} < \frac{2 + 2}{2} = 2$,
+    we have an upper bound $B$ and our element of $X$ $\frac{B + 2}{2}$,
+    a contradiction,
+    this implies (b) is satisfied.
+\end{example}
+
+\begin{example}\label{examp_analy_2}
+    $Y = \left\{\frac{1}{n}\,\middle|\, n \in \N\right\}$
+
+    $\sup Y = \max Y = 1$,
+    $0$ is a lower bound,
+    is it the infimum?
+    (a) is satisfied.
+    (b) same as \autoref{examp_analy_1}
+\end{example}
+
+
+The Completeness Axiom:
+
+(C.1) Every non-empty subset of $\R$ which is bounded above has a supremum.
+
+\begin{theorem}[Archimedes]\label{analy_thm_archim}
+    Let $a, b \in \R$ with $b > 0$. Then there exists an $n \in \N$ with $nb > a$.
+    [Think $b = 1$, then this is saying for every $a \in \R$ there is $n \in \N$ with $n > a$.]
+    \begin{proof}
+        Assume not.
+        Then the set $X = \{nb \in \R \,|\, n \in \N\}$ is bounded above by $a$.
+        It is also non-empty:
+        $b \in X$.
+        By (C.1.) we have a supremum $C = \sup X$.
+
+        Look at $C - b < C$,
+        this $C - b$ cannot be an upper bound of $X$.
+        So there is $x \in X$ with $nb = x > C - b \iff nb + b = \underset{\in X}{(n + 1)b} > C$
+        Contradiction $C$ being an upper bound of $X$.
+    \end{proof}
+\end{theorem}
+
+Looking back at \autoref{examp_analy_2},
+$0 = \inf Y$,
+it is a lower bound.
+Assume $b \in \R$ satisfies $0 < b$ we cannot have $b < \frac{1}{n}$ for all $n \in \N$,
+as this is equivalent to $n < \frac{1}{b}$ for all $n \in \N$.
+
+\begin{example}
+    $Z = \{x \in \R | x ^ 2 \leq 2\}$
+    bounded above by $2$.
+    $0 \in Z$, so $Z \neq \emptyset$.
+    By (C.1) $C = \sup Z$ exists.
+    We would like to have $C ^ 2 = 2$.
+    Need to rule out $C ^ 2 < 2$ and $C ^ 2 > 2$.
+    Assume $C ^ 2 < 2$,
+    show that $C$ is not an upper bound.
+    $\left(C + \frac{1}{n}\right) ^ 2 = C ^ 2 + \frac{2C}{n}+ \frac{1}{n ^ 2} = C ^ 2 + \frac{1}{n}\left(2C + \frac{1}{n}\right) < C ^ 2 + \frac{\alpha}{n}$, $\alpha = \left(2C + 1\right)$
+    We assume $C ^ 2 < 2$ so $2 - C ^ 2 > 0$.
+    Want $C ^ 2 \frac{\alpha}{n} < 2$.
+    Need $\frac{\alpha}{n} < 2 - C ^ 2 \iff n > \frac{\alpha}{2 - C ^ 2}$.
+\end{example}
+
+\begin{theorem}
+    Let $a \geq 0$ and $p \in \N$.
+    Then there exists a unique $x \geq 0$ with $x ^ p = a$.
+    We call $x$ the $p$-th root of $a$,
+    and write $\sqrt[p]{a} = x$.
+    This gives us functions $\sqrt[p]{\cdot} : [0, \infty) \rightarrow [0, \infty)$.
+
+    For odd $p$ we can extend this to $\sqrt[p]{\cdot} : \R \rightarrow \R$.
+    If $a < 0$, then let $\sqrt[p]{a} = -\sqrt[p]{-a}$.
+    \begin{proof}
+        If $a = 0$, $x = 0$ works.
+        So assume $a > 0$.
+
+        Look at $A = \{x \in \R\,|\, x ^ p < a\}$
+        $0 \in A$, so $A$ is non-empty.
+
+        Bounded above: If $a \geq 1$ then $x ^ p < a \leq a ^ p$,
+        so $x ^ p < a ^ p$ and hence $x < a$ (If $x \geq 0$). We can use $a$ as the upper bound.
+        If $a \in (0, 1)$, then $x ^ p < 1 \implies x < 1$, here we can use $1$ as an upper bound.
+        
+        By Completeness axiom, the $\sup A$ exists. 
+        
+        Call $\xi = \sup A$.
+        We want $\xi ^ p = a$.
+        To show: $\xi ^ p$ is not less than $a$ and not bigger than $a$.
+        So assume $\xi ^ p < a$, note $\xi \in A$.
+        Look at $\xi + \frac{1}{n}$ with $n \in \N$.
+        \begin{align*}
+            \left(\xi + \frac{1}{n}\right) ^ p &= \xi ^ p + \frac{1}{n} \cdot \binom{p}{1} \xi ^ {p - 1} + \frac{1}{n ^ 2} \cdot \binom{p}{2} \xi ^ {p - 2} + \dotsi + \frac{1}{n ^ p}\footnotemark \\
+            &\leq \xi ^ p + \frac{1}{n}\left(\binom{p}{2}\xi ^ {p - 1} + \binom{p}{2}\xi ^ {p - 2} + \dotsi + 1\right) \\
+            &= \xi ^ p + \frac{\alpha}{n}\quad\text{ with } \alpha > 0
+        \end{align*}
+        \footnotetext{By \autoref{analy_thm_binom}.}
+        We want $\xi ^ p + \frac{\alpha}{n} < a \iff \frac{\alpha}{n} < a - \xi ^ p \iff \alpha < \left(a - \xi ^ p\right) \cdot n$ By \autoref{analy_thm_archim} there exists such an $n \in \N$
+        so far such $n$
+        \[
+        \left(\xi + \frac{1}{n}\right) ^ p < a
+        \]
+        and therefore $\xi + \frac{1}{n} \in A$ contradicting $\xi$ is an upper bound for $A$.
+
+        So assume $\xi ^ o > a$.
+        Look at $\xi - \frac{1}{n}$ with $n \in \N$.
+        \begin{align*}
+            \left(\xi - \frac{1}{n}\right) ^ p &= \left(\xi \cdot\left(1 - \frac{1}{\xi n}\right)\right) ^ p \\
+            &= \xi ^ p \left(1 - \frac{1}{\xi n}\right) ^ p \\
+            &\geq \xi ^ p \left(1 - \frac{p}{\xi n}\right)\footnotemark \\
+            &= \xi ^ p - \frac{\xi ^ {p - 1}p}{n}
+        \end{align*}
+        \footnotetext{By \autoref{analy_thm_bernoineq}}
+        Want $\xi ^ p - \frac{\xi ^ {p - 1}p}{n} > a \iff (\xi ^ p - a) > \frac{\xi ^ {p - 1}p}{n} \iff n \cdot (\xi ^ p - a) > \xi ^ {p - 1} \cdot p \in \R$.
+        By \autoref{analy_thm_archim} there exists such $n \in \N$.
+        Contradicting $\xi$ being the supremum (We showed that $\xi - \frac{1}{n}$ is also an upper bound of $A$).
+        By \autoref{analy_axiom_trichotomy} axiom $\xi ^ p = a$.
+        \end{proof}
+\end{theorem}
+
+\begin{definition}
+    Let $a > 0$ and $r = \frac{p}{q}$ with $p, q \in \N$. Then define
+    \[
+    a ^ r = \sqrt[q]{a ^ p}\qquad a ^ {-r} = \frac{1}{a ^ r}
+    \]
+    we also set $a ^ 0 = 1$.
+\end{definition}
+
+\begin{definition}
+    Let $x \subset \R$ and $f : X \rightarrow \R$ a function.
+    If $f(x)$ is bounded above,
+    denote by $\sup(f)$ the supremum of this set $f(x)$.
+
+    If $f(x)$ is bounded below,
+    denote by $\inf(f)$ the infimum of $f(x)$.
+\end{definition}
+
+\begin{example}
+    Let $f : \R \rightarrow \R$
+    \[
+    f(x) = \frac{x}{1 + x ^ 2}
+    \]
+    we claim that $f(x) \leq \frac{1}{2}$ for all $x \in \R$.
+    \begin{proof}
+        \begin{align*}
+            &\iff \frac{x}{1 + x ^ 2} \leq \frac{1}{2} \\
+            &\iff 2x \leq 1 + x ^ 2 \\
+            &\iff  0 \leq (x - 1) ^ 2.
+        \end{align*}
+        Also, $f(1) = \frac{1}{2} \implies \sup(f) = \frac{1}{2}$.
+        Similarly $\inf(f) = -\frac{1}{2}$.
+    \end{proof}
+\end{example}
+
+\newpage
+
+\section{Sequences}
+
+\subsection{Basics about sequences and limits}
+\begin{definition}
+    A sequence of real numbers is a function from $\N \rightarrow \R$.
+\end{definition}
+
+It assigns to each $n \in \N$ an element $x_n \in \R$
+\[
+x : \N \rightarrow \R\qquad x(n) = x_n
+\]
+sequences are denoted $(x_n)_{n \in \N}$
+
+\begin{example}\phantom{}
+    \begin{enumerate}[label = (\alph*)]
+        \item Let $x_n = 5$ for $n \in \N$. This is a constant sequence.
+        \item Let $a_n = \frac{1}{n}$ for $n \in \N$.
+        \item Let $b_n = (-1) ^ n$ for $n \in \N$.
+        \item You can define sequences recursively, the $n$-th term depends on previous terms.
+        \[
+        y_1 = 1, y_2 = 1,\text{ for } n \geq 3\text{ define}
+        \]
+        \[
+        y_n = y_{n - 1} + y_{n - 2}.
+        \]
+        \item $x_1 = 1$ for $n \geq 2$ set
+        \[
+        x_n = \frac{x_{n - 1}}{2} + \frac{1}{x_{n - 1}}.
+        \]
+        Note each $x_n > 0$.
+    \end{enumerate}
+\end{example}
+
+\begin{definition}
+    A real sequence $\seq$ is said to be convergent to the limit $x \in \R$, if for every $\varepsilon > 0$, there exists an $n_0 \in \N$ with
+    \[
+    |x_n - x| < \varepsilon\text{ for all } n \geq n_0.
+    \]
+\end{definition}
+We write $x = \lim_{n \rightarrow \infty} x_n$ or we say $x_n \rightarrow x$ as $n \rightarrow \infty$.
+
+A sequence which converges to a limit is called a convergent sequence.
+If a sequence does not converge to a limit we call it a divergent sequence.
+
+\begin{example}
+    \begin{enumerate}[label = (\alph*)]
+    \item
+    $x_n = 5$ for all $n \in \N$.
+
+    Is $x = 5$ the limit.
+    Pick $\varepsilon > 0$
+    \[
+    |x_n - x| = |5 - 5| = 0 < \varepsilon
+    \]
+    and choose $n_0 = 1$,
+    then this is true for all $n \geq 1 = n_0$.
+    \item 
+    \[
+    a_n = \frac{1}{n}
+    \]
+    use $x = 0$.
+    Pick $\varepsilon > 0$
+    \[
+    \left|\frac{1}{n} - 0\right| = \frac{1}{n} < \varepsilon\text{ for all } n \geq n_0
+    \]
+    choose $n_0 \in \N$ such that $n_0 > \frac{1}{\varepsilon}$ (possible by \autoref{analy_thm_archim})
+    \item
+    \[
+    b_n = (-1) ^ n
+    \]
+    Does it converge to $1$?
+    For every $\varepsilon > 0$,
+    is there an $n_0 \in \N$ with
+    \[
+    \underbrace{|b_n - 1|}_{\begin{subarray}
+        \phantom{}= 0\ n \text{ is even} \\
+        \ 2\ n \text{ is odd}
+    \end{subarray}} < \varepsilon\text{ for all } n \geq n_0
+    \]
+    we cannot achieve this for any $\varepsilon < 2$.
+    $x = 0$ also doesn't work,
+    $|b_n - 0| = |b_n| = 1$.
+    No other $x$ works.
+    This sequence is divergent.
+    \end{enumerate}
+\end{example}
+
+\begin{theorem}[Uniqueness of the limit]
+    A convergent sequence $\seq$ has precisely one limit.
+    \begin{proof}
+        Let $x, x'$ be limits of this sequence,
+        with $x \neq x'$
+
+        Let $\varepsilon = \frac{|x - x'|}{2} > 0$.
+
+        Since $\seq$ converges to $x$,
+        there is $n_0 \in \N$ with
+        \[
+        |x_n - x| < \varepsilon\text{ for all } n \geq n_0.
+        \]
+        We also have convergence to $x'$,
+        there is $n_1 \in \N$, with
+        \[
+        |x_n - x'| < \varepsilon\text{ for all } n \geq n_1.
+        \]
+        For $n \geq \max\{n_0, n_1\}$ we now get
+        \begin{align*}
+            |x - x'| &= |x - x_n + x_n - x'| \\
+            &\leq |x - x_n| + |x_n - x'| \\
+            &< 2\varepsilon \\
+            &= \frac{|x - x'|}{2} + \frac{|x - x'|}{2} \\
+            &= |x - x'|
+        \end{align*}
+        Contradiction.
+    \end{proof}
+\end{theorem}
+
+\begin{definition}
+    Let $\seq$ be a real sequence,
+    and denote $X$ the set $\{x_n \in \R \,|\, n \in \N\}$.
+    The sequence $\seq$ is called bounded above,
+    if $X \subset \R$ is bounded above.
+
+    Bounded below, if $X \subset \R$ is bounded below.
+
+    Bounded, if $X \subset \R$ is bounded above and below\footnote{$b_n = (-1) ^ n$ is bounded $X = \{-1, 1\}$.}.
+\end{definition}
+
+\begin{example}
+    Fibonacci sequence
+    $y_1 = 1 = y_2$.
+    For $n \geq 3$
+    \[
+    y_n = y_{n - 1} + y_{n - 2}.
+    \]
+    $y_n \geq 1$ and now also $y_n \geq n - 1$ (induction)
+    this implies the sequence is not bounded above.
+\end{example}
+A sequence which is not bounded is called unbounded.
+
+\begin{theorem}\label{analy_thm_convseqisbound}
+    Every convergent sequence is bounded.
+\end{theorem}
+\begin{remark}
+    A bounded sequence need not be convergent.
+    
+    e.g. $(-1) ^ n$
+\end{remark}
+
+Contrapositive of \autoref{analy_thm_convseqisbound} says:
+An unbounded sequence is divergent.
+Fibonacci sequence is divergent.
+
+\subsection{Convergence criteria}
+\begin{theorem}[Squeezing Theorem]
+    Let $\seq$ and $\seq[y]$ be real sequences.
+    If $|x_n| \leq y_n$ for all $n \in \N$ and $y_n \rightarrow 0$ as $n \rightarrow \infty$, then
+    \[
+    \lim_{n \rightarrow \infty}x_n = 0.
+    \]
+    \begin{proof}
+        Let $\varepsilon > 0$ be given.
+        Then there is $n_0 \in \N$ with
+        \[
+        |y_n - 0| = |y_n| < \varepsilon\text{ for all } n \geq n_0.
+        \]
+        Then
+        \[
+        |x_n - 0| = |x_n| \leq y_n = |y_n| < \varepsilon\text{ for all } n \geq n_0
+        \]
+        This means $x_n \rightarrow 0$ as $n \rightarrow \infty$.
+    \end{proof}
+\end{theorem}
+
+
+
+
+
+
+
+
 
 \end{document}
