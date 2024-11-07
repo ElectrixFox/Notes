@@ -1064,5 +1064,109 @@ is defined as $f ^ {-1}(B) := \{x \in \Delta : f(x) \in B\}$.
         \end{enumerate}
     \end{proof}
 \end{theorem}
+\begin{align*}
+P_X(A \cup B) &= \P(X ^ {-1}(X \cup B)) \\
+&= \P(X ^ {-1}(A) \cup X ^ {-1}(B)) \\
+&= \P(X ^ {-1}(A) + \P(X ^ {-1}(B))) \\
+&= \P_X(A) + \P_X(B).
+\end{align*}
+Let $A$ and $B$ be disjoint, i.e. $A \cap B = \emptyset$,
+then
+\[
+X ^ {-1}(A) \cap X ^ {-1}(B) = \emptyset
+\]
+\begin{proof}
+    Let us prove by contradiction,
+    that is, let us assume that $X ^ {-1}(A) \cap X ^ {-1}(B) \neq \emptyset$,
+    and then we will arrive at a contradiction,
+    that is our assumption was not right.
+
+    If the assumption holds,
+    then $\exists \omega \in X ^ {-1}(A) \cap X ^ {-1}(B)$.
+    For this $\omega$,
+    we have $X(\omega) \in A$ and $X(\omega) \in B$.
+
+    i.e. $\omega \in X ^ {-1}(A)$ and $\omega \in X ^ {-1}(B)$.
+    From $X(\omega) \in A$ and $X(\omega) \in B$ implies that $A \cap B \neq \emptyset$,
+    which contradicts $A \cap B = \emptyset$.
+    Hence our first assumption cannot hold.
+\end{proof}
+
+\begin{definition}[Indicator random variable]
+    Let $A \subseteq \Omega$,
+    then the indicator of $A$,
+    denoted by $\mathbb{1}_A$,
+    is defined as follows,
+    \begin{align*}
+    \mathbb{1}_A(\omega) &= 1,\text{ if } \omega \in A \\
+    &= 0,\text{ if } \omega \notin A.
+    \end{align*}
+\end{definition}
+
+$\P(A) = \frac{|A|}{|\Omega|}$
+\[
+|A| = \sum_{\omega \in A}\mathbb{1}_A(\omega).
+\]
+
+\begin{example}
+    Let $\Omega = \{\omega_1, \omega_2, \dotsc, \omega_5\}$,
+    $A = \{\omega_1, \omega_2, \omega_4\}$
+    \[
+    \mathbb{1}_A(\omega_1) = \mathbb{1}_A(\omega_2) = \mathbb{1}_A(\omega_4) = 1.
+    \]
+    \[
+    \mathbb{1}_A(\omega_3) = \mathbb{1}_A(\omega_5) = 0.
+    \]
+    $\P_A(\{1\}) = \P(\{\omega\,:\,\mathbb{1}_A(\omega) = 1\}) = \P(A)$
+    \[
+    \P_A(\{0\}) = \P(\{\omega\,:\,\mathbb{1}_A(\omega) = 0\}) = \P(A ^ c)
+    \]
+\end{example}
+
+\textit{We will write $\P_X(\{x\}) = \P_X(x) = \P(\{X = x\}) = \P(X = x)$.}
+
+\subsection{Discrete random variables}
+\begin{definition}[Discrete random variable]
+    Let $X$ be a random variable $X$ is discrete if there exists $\chi \subseteq X(\Omega)$,
+    such that $\chi$ is either finite or countable.
+
+    We will define $p : \chi \rightarrow [0, 1]$,
+    given by
+    \[
+    p(x) = \P(X = x),\text{ for every } x \in \chi.
+    \]
+    This is called the probability mass function (pmf).
+\end{definition}
+
+\begin{example}[continues = exmp1]
+    Toss a fair coin three times.
+    Let $X$ denote the number of heads.
+
+    $\chi = \{0, 1, 2, 3\}$.
+
+    pmf of $X$.
+    \begin{table}[h!]
+        \begin{tabular}{c|cccc}
+            $x$ & $0$ & $1$ & $2$ & $3$\\
+            $p(x)$ & $\frac{1}{8}$ & $\frac{3}{8}$ & $\frac{3}{8}$ & $\frac{1}{8}$ \\
+        \end{tabular}
+    \end{table}
+
+    $|\Omega| = 2 ^ 3$
+
+    $\{\omega\,:\, X(\omega) = 0\} = \{\text{TTT}\}$
+    
+    $\{\omega\,:\, X(\omega) = 1\} = \{\text{HTT, THT, TTH}\}$
+    
+    $\{\omega\,:\, X(\omega) = 2\} = \{\text{HHT, HTH, THH}\}$
+    
+    $\{\omega\,:\, X(\omega) = 3\} = \{\text{HHH}\}$
+    
+\end{example}
+
+
+
+
+
 
 \end{document}

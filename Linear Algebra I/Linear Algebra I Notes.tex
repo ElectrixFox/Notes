@@ -2185,6 +2185,158 @@ $a_1 \det\begin{pmatrix}
 \end{pmatrix} \neq 0$.
 This is the determinate for the $3 \times 3$ matrix we have given.
 
+We give an inductive definition of the determinant
+
+Let $A = (a_{ij}) \in M_n(\R)$.
+
+For $1 \leq r, s \leq n$ we let
+$A_{r, s}$ be the $(r, s)^{\text{th}}$ minor of $A$ i.e. the $(n - 1) \times (n - 1)$ matrix contained by deleting the $r^{\text{th}}$ row and $s ^ {\text{th}}$ column of $A$.
+
+Let $\det(A_{r, s})$ be the $(r, s)^{\text{th}}$ unsigned cofactor of $A$.
+\[
+(-1) ^ {r + 1}\det(A_{r, s})
+\]
+is the $(r, s)^{\text{th}}$ signed cofactor of $A$.
+
+Using this we can inductively define the $\det(A)$ by setting
+\[
+\det(A) = \sum_{}^{}(-1) ^ {1 + j}a_{1j}\det(A_{1, j}).
+\]
+
+Observation
+\begin{proposition}
+    If $A \in M_n(\R)$ and $1 \leq i \leq n$ then
+    \[
+    \det(A) = \sum_{j = 1}^{n}(-1) ^ {i + j}a_{ij}\det(A_{ij})\footnotemark
+    \]
+    \footnotetext{We can expand along any row.}
+    \begin{proof}
+        Nasty,
+        see notes.
+    \end{proof}
+\end{proposition}
+
+\subsection{Fundamental properties}
+Let $A \in M_n(\R)$.
+Let $\mbf{a}_{r}$,
+be the $r ^ {\text{th}}$ row vector of $A$
+\[
+\mbf{a}_r = (a_{r1}, a_{r2}, \dotsc, a_{rn})
+\]
+so
+\[
+A = \begin{pmatrix}
+    \mbf{a}_1 \\
+    \mbf{a}_2 \\
+    \vdots \\
+    \mbf{a}_n
+\end{pmatrix}
+\]
+\begin{enumerate}[label = (\roman*)]
+    \item $\det(I_n) = 1$.
+    \item $\det(M_r(\lambda)A) = \det\begin{pmatrix}
+    \mbf{a}_1 \\
+    \mbf{a}_2 \\
+    \vdots \\
+    \lambda \mbf{a}_r \\
+    \vdots \\
+    \mbf{a}_n
+\end{pmatrix} = \lambda \det\begin{pmatrix}
+    \mbf{a}_1 \\
+    \mbf{a}_2 \\
+    \vdots \\
+    \mbf{a}_r \\
+    \vdots \\
+    \mbf{a}_n
+    \end{pmatrix} = \lambda\det(A)$
+    \item For any vector $\mbf{b}_r$ we have
+    \[
+    \det\begin{pmatrix}
+        \mbf{a}_1 \\
+        \vdots \\
+        \mbf{a}_{r - 1} \\
+        \mbf{a}_r + \mbf{b}_r \\
+        \mbf{a}_r + 1 \\
+        \vdots \\
+        \mbf{a}_n
+    \end{pmatrix}
+    =\begin{pmatrix}
+    \mbf{a}_1 \\
+    \vdots \\
+    \mbf{a}_r \\
+    \vdots \\
+    \mbf{a}_n
+    \end{pmatrix}
+    +\begin{pmatrix}
+        \mbf{a}_1 \\
+        \vdots \\
+        \mbf{a}_{r - 1} \\
+        \mbf{b}_r \\
+        \mbf{a}_r + 1 \\
+        \vdots \\
+        \mbf{a}_n
+    \end{pmatrix}
+    \]
+    \item $\det(P_{rs}A) = -\det(A)$
+    ($P_{rs}$ swaps $r ^ {\text{th}}$, $s ^ {\text{th}}$ rows of $A$).
+    \item If $A$ has two equal (or even collinear) rows then $\det(A) = 0$.
+    \item $\det(A) = 0$ if $A$ has a row of zeros.
+    \item $\det(A_{rs}(\lambda)A) = \det\begin{pmatrix}
+        \mbf{a}_1 \\ \vdots \\ \mbf{a}_r \\ \mbf{a}_s + \lambda \mbf{a}_r \\ \vdots \\ \mbf{a}_n\end{pmatrix} = \det\begin{pmatrix}
+            \mbf{a}_1 \\ \vdots \\ \mbf{a}_r \\ \vdots \mbf{a}_s \\ \vdots \mbf{a}_n
+        \end{pmatrix} = \det(A).$
+\end{enumerate}
+\begin{proof}
+    \begin{enumerate}[label = (\roman*)]
+        \item Induction on $n$.
+        $n = 1\quad\det(1) = 1$.
+        Also expanding $\det(I_n)$ along the top row gives $\det(I_n) = (I_n)_{11}^{1 + 1}\det(I_{n - 1})$ (with all other terms $0$) $= \det(I_{n - 1})$.
+        \item Expand along thr $r^{\text{th}}$ row.
+        \begin{align*}
+            \det(M_r(\lambda)A) &= \sum_{j = 1}^{n}(-1) ^ {r + j}\lambda a_{r j}\det(A_{r, j}) \\
+            &= \lambda\sum_{j = 1}^{n}(-1) ^ {r + j}\det(A_{r, j}) \\
+            &= \lambda\det(A).
+        \end{align*}
+        \item Exercise: expand along the $r^{\text{th}}$ row.
+        \item Homework.
+        \item First note that if row $r$ is collinear to row $s$ then by multiplying by $M_r(\lambda)$ for some $\lambda$ we obtain a matrix with two equal rows.
+        If the $r^{\text{th}}$ row of $A$ equals the $s ^ {\text{th}}$ row of $A$ then
+        \[
+        \det(A) = \det(P_{rs}A) = -\det(A) \text{by (iv)}
+        \]
+        so $det(A) = 0$.
+        \item Expand along the zero row.
+        \item Write $B$ for the matrix that we get by replacing the $s ^ {\text{th}}$ row of $A$ with another copy of the $r ^ {\text{th}}$ row of $A$.
+        Then $\det(B) = 0$ by (v).
+        $\det(A_{rs}(\lambda)A) = \det(A) + \det(M_r(\lambda)B = \det(A) + \lambda\det(B) = \det(A)$.
+    \end{enumerate}
+\end{proof}
+Can say that (ii) + (iii) is linearity in each row
+
+\begin{theorem}
+    Let $f : M_n(\R) \rightarrow \R$ that satisfies this list of properties.
+    Then $f(A) = \det(A)$ for all $A \in M_n(\R)$.
+    In other words
+    these properties characterise the determinant.
+    \begin{proof}
+        Let $A \in M_n(\R)$.
+        Run G-J to get Row Reduced Echelon Form of $B$.
+        As $f$ and $\det$ satisfy properties (ii), (v), (iv) as we apply elementary row operations,
+        $f$ and $\det$ change in the same way.
+        So $\det(A) = \lambda_1 \dotsi \lambda_k \det(B)$
+        
+        $f(A) = \lambda_1 \dotsi \lambda_k f(B)$,
+        where $\lambda_i$ are non-zero.
+        Then either $B = I_n$ in which case $\det(A) = f(A)$ since
+        $\det(I_n) = 1 = f(I_n)$ (i),
+        or $B$ has a row of $0$'s,
+        so $\det(B) = 0$ by (vi) so $\det(A) = 0 = f(A)$.
+    \end{proof}
+\end{theorem}
+
+
+
+
 
 
 

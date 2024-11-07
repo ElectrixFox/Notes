@@ -692,7 +692,7 @@ Finally, to prove the last part of the theorem the key observation is that any i
 \subsection{Limits with logarithms, powers and exponentials}
 There are some important results concerning limits as $x \rightarrow \infty$ for the logarithm and exponential functions.
 
-\begin{lemma}
+\begin{lemma}\label{calc_lem_lemma1}
     $\forall\, x \geq 0,\quad e ^ x \geq 1 + x$
     \begin{proof}
         Consider $f(x) = e ^ x - (1 + x)$ then $f(0) = 0$ and $f'(x) = e ^ x - 1 \geq 0$.
@@ -700,7 +700,7 @@ There are some important results concerning limits as $x \rightarrow \infty$ for
     \end{proof}
 \end{lemma}
 
-\begin{lemma}
+\begin{lemma}\label{calc_lem_lemma2}
     $\forall\, x \geq 0$,
     and for any positive integer $n$,
     $e ^ x \geq \sum_{j = 0}^{n}\frac{x ^ j}{j!}$.
@@ -712,9 +712,68 @@ There are some important results concerning limits as $x \rightarrow \infty$ for
     \end{proof}
 \end{lemma}
 
+Result $1$: powers beat logs
 
+For any constant $a > 0$
+\[
+\lim_{x \rightarrow \infty}\frac{\log x}{x ^ a} = 0.
+\]
+\begin{proof}
+    Put $x = e ^ y$ then
+    \[
+    \lim_{x \rightarrow \infty}\frac{\log x}{x ^ a} = \lim_{y \rightarrow \infty}\frac{y}{e ^ {ay}}.
+    \]
+    For $y > 0$ the by \autoref{calc_lem_lemma2} with $n = 2$
+    \[
+    0 \leq \frac{y}{e ^ {ay}} \leq \frac{y}{1 + ay + \frac{1}{2}a ^ 2 y ^ 2} \leq \frac{y}{\frac{1}{2}a ^ 2 y ^ 2} = \frac{2}{a ^ 2 y}.
+    \]
+    As $\lim_{y \rightarrow \infty}\frac{2}{a ^ 2 y} = 0$ then by the pinching theorem
+    \[
+    \lim_{y \rightarrow \infty}\frac{y}{e ^ {ay}} = 0 = \lim_{x \rightarrow \infty}\frac{\log x}{x ^ a}.
+    \]
+\end{proof}
 
+Result $2$: exponentials beat powers
 
+For any constant $a > 0$
+\[
+\lim_{x \rightarrow \infty}\frac{x ^ a}{e ^ x} = 0.
+\]
+\begin{proof}
+    Let $n$ be the smallest integer such that $n > a$.
+    By \autoref{calc_lem_lemma2},
+    for $x > 0$ we have that
+    \[
+    0 \leq \frac{x ^ a}{e ^ x} \leq \frac{x ^ a}{1 + x + \dotsc + \frac{x ^ n}{n!}} = \frac{x ^ {a - n}}{x ^ {-n} + x ^ {1 - n} + \dotsc + \frac{1}{n!}}
+    \]
+    As $a - n < 0$ then $\lim_{x \rightarrow \infty}\frac{x ^ {a - n}}{x ^ {-n} + x ^ {1 - n} + \dotsc + \frac{1}{n!}} = 0$,
+    hence by the pinching theorem $\lim_{x \rightarrow \infty}\frac{x ^ a}{e ^ x} = 0$.
+\end{proof}
+
+Result $3$: the exponential as a limit
+
+For any constant $a$
+\[
+\lim_{x \rightarrow \infty}\left(1 + \frac{a}{x}\right) ^ x = e ^ a.
+\]
+\begin{proof}[Proof (for the case $a > 0$)]
+    Recall the definition of the derivative of a function $f(x)$ at $x = b$.
+    \[
+    f'(b) = \lim_{h \rightarrow 0}\frac{f(b + h) - f(b)}{h}.
+    \]
+    Apply this to $f(x) = \log x$ so that $f'(x) = \frac{1}{x}$ and take $b = 1$.
+    \[
+    1 = \lim_{h \rightarrow 0}\frac{\log(1 + h) - \log(1)}{h} = \lim_{h \rightarrow 0}\frac{\log(1 + h)}{h}.
+    \]
+    With the change of variable $h = \frac{a}{x}$ this becomes
+    \[
+    1 = \lim_{x \rightarrow \infty}\frac{\log\left(1 + \frac{a}{x}\right)}{\frac{a}{x}}\text{ i.e. } a = \lim_{x \rightarrow \infty}\left(x\log\left(1 + \frac{a}{x}\right)\right).
+    \]
+    Since $e ^ x$ is continuous at $a$ we have that
+    \[
+    e ^ a = \lim_{x \rightarrow \infty}e ^ {x\log\left(1 + \frac{a}{x}\right)} = \lim_{x \rightarrow \infty}\left(1 + \frac{a}{x}\right) ^ x.
+    \]
+\end{proof}
 
 
 

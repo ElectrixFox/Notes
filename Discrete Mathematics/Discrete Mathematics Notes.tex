@@ -517,4 +517,70 @@ Remark, need $k \geq n$ for a non-zero answer.
     \end{proof}
 \end{example}
 
+
+\subsection{Extended binomial coefficients}
+$\binom{-1}{3}$ is the coefficient of $x ^ 3$ in the expansion of $(1 + x) ^ {-1} = \frac{1}{1 + x}$.
+\[
+(1 + x) ^ \alpha = \sum_{k = 0}^{\infty}\binom{\alpha}{k}x ^ k
+\]
+where $\alpha \in \R$.
+
+Note:
+\begin{itemize}
+    \item If $\alpha$ is a positive integer and $0 \leq k \leq \alpha$,
+    then this is just
+    \[
+    \binom{\alpha}{k} = \frac{\alpha!}{k!(\alpha - k)!}
+    \]
+    \item If $\alpha$ is a positive integer,
+    and $k > \alpha$.
+    Then $\binom{\alpha}{k} = 0$ because the numerator contains a factor $0$.
+    \item If $\alpha$ is not a positive integer,
+    there are no $0$'s in the numerator in the binomial coefficient, so $\binom{\alpha}{k} \neq 0$ for any $k$, so the power series is infinite.
+\end{itemize}
+
+\begin{proposition}[Principle of upper negation]
+    If $n$ and $k$ are positive integers,
+    then
+    \[
+    \binom{-n}{k} = (-1) ^ k\binom{k + n - 1}{k} = (-1) ^ k\binom{k + n - 1}{n - 1}.
+    \]
+    \begin{proof}
+        \begin{align*}
+            \binom{-n}{k} &= \frac{(-n)(-n-1)(-n-2)\dotsi(-n-k+1)}{k!} \\
+            &= (-1) ^ k \frac{n(n + 1)\dotsi(n + k - 1)}{k!} \\
+            &= \frac{(-1) ^ k(n + k - 1)!}{k!(n - 1)!} \\
+            &= (-1) ^ k\binom{n + k - 1}{k}.
+        \end{align*}
+    \end{proof}
+\end{proposition}
+
+\begin{example}
+    $(1 + x) ^ {-n} = \sum_{k = 1}^{\infty}\binom{-n}{k}x ^ k = \sum_{k = 1}^{\infty}(-1) ^ k\binom{k + n - 1}{n - 1}x ^ k$.
+
+    By the principle of upper negation.
+    In particular,
+    if we take $x = -y$ we have
+    \[
+    \frac{1}{(1 - y) ^ n} = (1 - y) ^ {-n} = \sum_{k = 0}^{\infty}\binom{k + n - 1}{k}y ^ k.
+    \]
+\end{example}
+
+\begin{example}
+    Expand the following as series:
+    \begin{enumerate}[label = (\roman*)]
+        \item $(1 - x) ^ {-1}$.
+        \item $(1 - x) ^ {-2}$.
+        \item $(1 - x) ^ {-3}$.
+        \item $(1 - x) ^ {-6}$.
+    \end{enumerate}
+    \begin{enumerate}[label = (\roman*)]
+        \item $\sum_{k = 0}^{\infty}x ^ k = 1 + x + x ^ 2 + \dotsi$.
+        \item $\sum_{k = 0}^{\infty}(k + 1)x ^ k = 1 + 2x + 3x ^ 2 + \dotsi$.
+    \end{enumerate}
+\end{example}
+
+
+
+
 \end{document}

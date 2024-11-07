@@ -1109,7 +1109,7 @@ An unbounded sequence is divergent.
 Fibonacci sequence is divergent.
 
 \subsection{Convergence criteria}
-\begin{theorem}[Squeezing Theorem]
+\begin{theorem}[Squeezing Theorem]\label{analy_thm_squeezethm}
     Let $\seq$ and $\seq[y]$ be real sequences.
     If $|x_n| \leq y_n$ for all $n \in \N$ and $y_n \rightarrow 0$ as $n \rightarrow \infty$, then
     \[
@@ -1129,9 +1129,146 @@ Fibonacci sequence is divergent.
     \end{proof}
 \end{theorem}
 
+\begin{example}
+    Let $c \in \R$, $x_n = c ^ n$.
+    If $c = 0$ or $c = 1$,
+    then $x_n$ is constant,
+    so we get convergence to $c$.
+    If $c = -1$,
+    then we get $x_n = (-1) ^ n$ is divergent.
+    If $c > 1$,
+    write $c = 1 + h$ with $h > 0$.
+    Now $x_n = (1 + h) ^ n \geq 1 + nh \geq nh$ (Bernoulli inequality)
+    this implies $x_n$ is unbounded so is divergent by \autoref{analy_thm_convseqisbound}.
+    If $c < -1$,
+    $x_{2n} = (c ^ 2) ^ n$ with $c ^ 2 > 1$ is also unbounded and divergent.
 
+    If $0 < c < 1$ write $c = \frac{1}{1 + h}$ with $h > 0$
+    \[
+    x_n = \frac{1}{(1 + h) ^ n} \leq \frac{1}{1 + nh} \leq \frac{1}{nh} = y_n \rightarrow 0
+    \]
+    this implies $x_n \rightarrow 0$ by \autoref{analy_thm_squeezethm}.
 
+    If $-1 < c < 0$ write $c = -\frac{1}{1 + h}$ with $h > 0$
+    \[
+    |x_n| = \frac{1}{(1 + h) ^ n} \rightarrow 0.
+    \]
+    By \autoref{analy_thm_squeezethm} $x_n \rightarrow 0$.
+\end{example}
 
+\begin{example}
+    Look at $a_n = 1 + \frac{1}{2} + \dotsc + \frac{1}{2 ^ n}$
+
+    $2 - a_n = \frac{1}{2 ^ n}$ prove by induction: $n = 1$.
+    Exercise!
+    \[
+    |a_n - 2| = \frac{1}{2 ^ n} \leq \frac{1}{2 ^ n} \rightarrow 0 \implies a_n - 2 \rightarrow 0 \implies a_n \rightarrow 2.
+    \]
+\end{example}
+
+\begin{theorem}[Calculus of Limits Theorem (COLT)]\label{analy_thm_COLT}
+    Let $\seq$ and $\seq[y]$ be sequences which are convergent with $x = \lim_{n \rightarrow \infty}x_n$ and $y = \lim_{n \rightarrow \infty}$.
+    Also, let $a, b \in \R$.
+    Then
+    \begin{enumerate}[label = (\alph*)]
+        \item $ax_n + by_n \rightarrow ax + by$ as $n \rightarrow \infty$.
+        \item $x_n \cdot y_n \rightarrow x \cdot y$ as $n \rightarrow \infty$.
+        \item $\frac{x_n}{y_n} \rightarrow \frac{x}{y}$ as $n \rightarrow \infty$ provided that $y \neq 0$ and $y_n \neq 0\,\forall n \in \N$.
+    \end{enumerate}
+    \begin{enumerate}[label = (\alph*)]
+        \item
+        \begin{proof}
+        \end{proof}
+        \item 
+        \begin{proof}
+        We need to know that
+        \begin{align*}
+        |x_n \cdot y_n - x \cdot y| &= |x_n \cdot y_n - x_n \cdot y + x_n \cdot y - x \cdot y| \\
+        &\leq |x_n (y_n - y)| + |(x_n - x)\cdot y| \\
+        &= |x_n| \cdot |y_n - y| + |x_n - x| \cdot |y|
+        \end{align*}
+        Note,
+        there is a $C > 0$ with $|x_n| \leq C$ by \autoref{analy_thm_convseqisbound}.
+        Can also assume that $C \geq |y|$.
+        Then we have
+        \[
+        |x_n \cdot y_n - x \cdot y| \leq C \cdot (|y_n - y| + |x_n - x|)
+        \]
+        Let $\varepsilon > 0$,
+        there exists an $n_0$ with
+        \[
+        |y_n - y| < \frac{\varepsilon}{2C}\text{ for all } n \geq n_0
+        \]
+        and there exists an $n_1$ with
+        \[
+        |x_n - x| < \frac{\varepsilon}{2C}\text{ for all } n \geq n_1.
+        \]
+        Then for all $n \geq \max\{n_0, n_1\}$ we have
+        \[
+        |x_n \cdot y_n - xy| \leq C \cdot (|y_n - y| + |x_n - x|) < C \cdot (\frac{\varepsilon}{2C} + \frac{\varepsilon}{2C}) = 2C \cdot \frac{\varepsilon}{2C} = \varepsilon.
+        \]
+        \end{proof}
+        \item
+        \begin{proof}
+        \end{proof}
+    \end{enumerate}
+\end{theorem}
+
+\begin{example}
+    \[
+    x_n = \frac{n ^ 3 - 2n ^ 2 + 3n - 4}{3n ^ 4 + 10n ^ 2 - 8}.
+    \]
+    \begin{align*}
+        x_n &= \frac{n ^ 3 - 2n ^ 2 + 3n - 4}{3n ^ 4 + 10n ^ 2 - 8} \\
+        &= \frac{n ^ 3 \left(1 - \frac{2}{n} + \frac{3}{n ^ 2} - \frac{4}{n ^ 3}\right)}{n ^ 4 \left(3 + \frac{10}{n ^ 2} - \frac{8}{n ^ 4} \right)} \\
+        &= \frac{1}{n} \cdot \frac{\left(1 - \frac{2}{n} + \frac{3}{n ^ 2} - \frac{4}{n ^ 3}\right)}{\left(3 + \frac{10}{n ^ 2} - \frac{8}{n ^ 4} \right)}
+    \end{align*}
+    By COLT $\lim_{n \rightarrow \infty}x_n = 0 \cdot \frac{1}{3} = 0$.
+\end{example}
+
+\begin{example}
+    \[
+    x_1 = 1\quad x_n = \frac{x_{n - 1}}{2} + \frac{1}{x_{n - 1}}\text{ for } n \geq 2.
+    \]
+    $x_n \in [1, 2]$ by induction $x_1 \in [1, 2]$
+    if $x_{n - 1} \in [1, 2]$,
+    then $\frac{x_{n - 1}}{2} \in \left[\frac{1}{2}, 1\right]$
+    $\frac{1}{x_{n - 1}}$ so in $[1, 2]$
+
+    Let us assume that $x_n$ converges to $x$.
+    Then $x_{n - 1}$ also converges to $x$
+    By \autoref{analy_thm_COLT} $x = \lim x_n = \lim \left(\frac{x_{n - 1}}{2} + \frac{1}{x_{n - 1}}\right) = \frac{x}{2} + \frac{1}{x} \implies x ^ 2 = 2$
+    Two candidates for $x$,
+    $x = \sqrt{2}$ or $x = -\sqrt{2}$ but $x_n \in [1, 2]$ so no $-\sqrt{2}$.
+    Now let's try to show convergence:
+    \begin{align*}
+        |x_n - \sqrt{2}| &= \left|\frac{x_{n - 1}}{2} + \frac{1}{x_{n - 1}} - \sqrt{2}\right| \\
+        &= \left|\frac{x_{n - 1} ^ 2 + 2 - 2\sqrt{2}\cdot x_{n - 1}}{2x_{n - 1}}\right| \\
+        &= \frac{|(x_{n - 1} - \sqrt{2}) ^ 2|}{2|x_{n - 1}|} \\
+        &\leq \frac{|x_{n - 1} - \sqrt{2}|}{2} \\
+        &\leq \frac{|x_{n - 2} - \sqrt{2}|}{4} \\
+        &\leq \frac{1}{2 ^ n} \text{by induction true for all } n \in \N.
+    \end{align*}
+    By \autoref{analy_thm_squeezethm} $x_n - \sqrt{2} \rightarrow 0$ so by \autoref{analy_thm_COLT}
+    $x_n \rightarrow \sqrt{2}$.
+\end{example}
+
+\begin{theorem}
+    Let $\seq$ be a sequence such that $x_n \in [a, b]$ for all $n$.
+    If the sequence converges to $x \in \R$.
+    Then $x \in [a, b]$.
+    \begin{proof}
+        Assume $x < a$ pick $\varepsilon - \frac{a - x}{2} > 0$.
+        By convergence there is an $n_0 \in \N$ with
+        \[
+        |x_n - x| < \varepsilon \text{ for all } n \geq n_0.
+        \]
+        In particular
+        $x - x_n > - \varepsilon$.
+        Now $a - x_n = a - x + x - x_n = 2\varepsilon + x - x_n > \varepsilon > 0 \iff a > x_n$.
+        Contradiction.
+    \end{proof}
+\end{theorem}
 
 
 
