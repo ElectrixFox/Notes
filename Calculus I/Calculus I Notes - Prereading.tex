@@ -41,7 +41,7 @@ The graph of a function $f$ is the set of all points $(x, y)$ in the $xy$-plane 
 
 The vertical line test
 
-If any vertical line intersects the curve more than once then the curve is not the graph of a function, otherwise it is. \\
+If any vertical line intersects the curve more than once then the curve is not the graph of a function, otherwise it is.
 
 
 \textbf{Even and odd functions}
@@ -431,7 +431,7 @@ The extreme value theorem states that if $f$ is a continuous function on a close
     $f(x)$ has a stationary point at $x = a$ if it is differentiable at $x =a$ with $f'(a) = 0$.
 \end{definition}
 
-\begin{definition}
+\begin{definition}[Critical point]
     An interior point $x = a$ of the domain of $f(x)$ is called a critical point if either $f'(a) = 0$ or $f'(a)$ does not exist.
 \end{definition}
 
@@ -472,24 +472,29 @@ If a function is differentiable sufficiently close to an endpoint then examining
 If $f(x)$ is continuous on an interval $[a, b]$ then the global extreme values in the interval are attained at either critical points or end points, can be determined by examining all the possibilities.
 
 \subsection{Rolle's theorem}
-Rolle's theorem states that if $f$ is differentiable on the open interval $(a, b)$ and continuous on the closed interval $[a, b]$, with $f(a) = f(b)$, then there is at least one $c \in (a, b)$ for which $f'(c) = 0$.
+\begin{theorem}[Rolle's theorem]
+    If $f$ is differentiable on the open interval $(a, b)$ and continuous on the closed interval $[a, b]$, with $f(a) = f(b)$,
+    then there is at least one $c \in (a, b)$ for which $f'(c) = 0$.
+    \begin{proof}
+        By the extreme value theorem there exists $x_1$ and $x_2$ in $[a, b]$ such that
+        \[
+        f(x_1) \leq f(x) \leq f(x_2)\ \forall x \in [a, b].
+        \]
+        If $x_1 \in (a, b)$ then $x_1$ is a local minimum and $f'(x_1) = 0$ so we are done.
+        If $x_2 \in (a, b)$ then $x_2$ is a local maximum and $f'(x_2) = 0$ so we are done.
+    
+        The only case that is left is if both $x_1$ and $x_2$ are end points, $a, b$.
+        Since $f(a) = f(b)$ then in this case $f(x_1) = f(x_2) = f(a)$ so the above bound becomes $f(a) \leq f(x) \leq f(a)\, \forall x \in [a, b]$.
+        Thus $f(x) = f(a)$ is constant in the interval and $f'(x) = 0\, \forall x \in [a, b]$.
+    \end{proof}
+\end{theorem}
 
-\begin{proof}
-    By the extreme value theorem there exists $x_1$ and $x_2$ in $[a, b]$ such that
-    \[
-    f(x_1) \leq f(x) \leq f(x_2)\ \forall x \in [a, b].
-    \]
-    If $x_1 \in (a, b)$ then $x_1$ is a local minimum and $f'(x_1) = 0$ so we are done.
-    If $x_2 \in (a, b)$ then $x_2$ is a local maximum and $f'(x_2) = 0$ so we are done.
-
-    The only case that is left is if both $x_1$ and $x_2$ are end points, $a, b$.
-    Since $f(a) = f(b)$ then in this case $f(x_1) = f(x_2) = f(a)$ so the above bound becomes $f(a) \leq f(x) \leq f(a)\, \forall x \in [a, b]$.
-    Thus $f(x) = f(a)$ is constant in the interval and $f'(x) = 0\, \forall x \in [a, b]$.
-\end{proof}
-
-A corollary of Rolle's theorem is that if $f(x)$ is differentiable at every point of an open interval $I$ then each pair of zeros of the function in $I$ is separated by at least one zero of $f'(x)$.
-This is simply the special case of Rolle's theorem with $a$ and $b$ taken to be the zeros of $f(x)$ so that $f(a) = f(b) = 0$.
-
+\begin{corollary}
+    If $f(x)$ is differentiable at every point of an open interval $I$ then each pair of zeros of the function in $I$ is separated by at least one zero of $f'(x)$.
+    \begin{proof}
+        This is simply the special case of Rolle's theorem with $a$ and $b$ taken to be the zeros of $f(x)$ so that $f(a) = f(b) = 0$.
+    \end{proof}
+\end{corollary}
 The above result can be used to provide a limit on the number of distinct real zeros of a function.
 
 \begin{example}
@@ -503,28 +508,31 @@ The above result can be used to provide a limit on the number of distinct real z
 \end{example}
 
 \subsection{The mean value theorem}
-The mean value theorem states that if $f$ is differentiable on the open interval $(a, b)$ and continuous on the closed interval $[a, b]$,
-then there is at least one $c \in (a, b)$ for which
-\[
-f'(c) = \frac{f(b) - f(a)}{b - a}.
-\]
-\begin{proof}
-    Define the function
+\begin{theorem}[Mean value theorem]
+    If $f$ is differentiable on the open interval $(a, b)$ and continuous on the closed interval $[a, b]$,
+    then there is at least one $c \in (a, b)$ for which
     \[
-    g(x) = (b - a)(f(x) - f(a)) - (x - a)(f(b) - f(a)).
+    f'(c) = \frac{f(b) - f(a)}{b - a}.
     \]
-    Then $g(a) = g(b) = 0$ and as $g(x)$ satisfies the requirements of Rolle's theorem then $\exists c \in (a, b)$ for which $g'(c) = 0$.
-    As $g'(x) = (b - a)f'(x) - (f(b) - f(a))$ then setting $x = c$ yields the required result $f'(c) = \frac{f(b) - f(a)}{b - a}$.
-\end{proof}
+    \begin{proof}
+        Define the function
+        \[
+        g(x) = (b - a)(f(x) - f(a)) - (x - a)(f(b) - f(a)).
+        \]
+        Then $g(a) = g(b) = 0$ and as $g(x)$ satisfies the requirements of Rolle's theorem then $\exists c \in (a, b)$ for which $g'(c) = 0$.
+        As $g'(x) = (b - a)f'(x) - (f(b) - f(a))$ then setting $x = c$ yields the required result $f'(c) = \frac{f(b) - f(a)}{b - a}$.
+    \end{proof}
+\end{theorem}
+\textit{Note that Rolle's theorem is just a special case of the mean value theorem with $f(a) = f(b)$.}
 
-Note that Rolle's theorem is just a special case of the mean value theorem with $f(a) = f(b)$.
-
-Suppose $f(x)$ is continuous in $[a, b]$ and differentiable in $(a, b)$ with $f'(x) \geq 0$ throughout this interval.
-Then $f(x)$ is monotonic increasing in $(a, b)$.
-\begin{proof}
-    If $a \leq x_1 < x_2 \leq b$ then by the mean value theorem $\exists c \in (a, b)$ such that $f'(c) = \frac{f(x_2) - f(x_1)}{x_2 - x_1}$.
-    However, since $f'(x) \geq 0$ in $(a, b)$ then $f'(c) \geq 0$ which implies that $f(x_2) \geq f(x_1)$ i.e. $f$ is monotonic increasing.
-\end{proof}
+\begin{proposition}
+    Suppose $f(x)$ is continuous in $[a, b]$ and differentiable in $(a, b)$ with $f'(x) \geq 0$ throughout this interval.
+    Then $f(x)$ is monotonic increasing in $(a, b)$.
+    \begin{proof}
+        If $a \leq x_1 < x_2 \leq b$ then by the mean value theorem $\exists c \in (a, b)$ such that $f'(c) = \frac{f(x_2) - f(x_1)}{x_2 - x_1}$.
+        However, since $f'(x) \geq 0$ in $(a, b)$ then $f'(c) \geq 0$ which implies that $f(x_2) \geq f(x_1)$ i.e. $f$ is monotonic increasing.
+    \end{proof}
+\end{proposition}
 
 \subsection{The inverse function rule}
 The inverse function rule states that if $f(x)$ is continuous in $[a, b]$ and differentiable in $(a, b)$ with $f'(x) > 0$ throughout this interval then its inverse function $g(y)$ (recall $g(f(x)) = x$) is differentiable for all $f(a) < y < f(b)$ with $g'(y) = \frac{1}{f'(g(y))}$.
@@ -564,15 +572,12 @@ An alternative notation for partial derivatives is $f_x$ for $\frac{\delta f}{\d
 
 By applying partial differentiation to these partial derivatives we may obtain the second order partial derivatives.
 
-\[
-\frac{\delta ^ 2 f}{\delta x ^ 2} = \frac{\delta}{\delta x}\left(\frac{\delta f}{\delta x}\right),
-\quad
-\frac{\delta ^ 2 f}{\delta y ^ 2} = \frac{\delta}{\delta y}\left(\frac{\delta f}{\delta y}\right),
-\quad
-\frac{\delta ^ 2 f}{\delta y \delta x} = \frac{\delta}{\delta y}\left(\frac{\delta f}{\delta x}\right),
-\quad
-\frac{\delta ^ 2 f}{\delta x \delta y} = \frac{\delta}{\delta x}\left(\frac{\delta f}{\delta y}\right).
-\]
+\begin{align*}
+    &\frac{\delta ^ 2 f}{\delta x ^ 2} = \frac{\delta}{\delta x}\left(\frac{\delta f}{\delta x}\right),
+    &\frac{\delta ^ 2 f}{\delta y ^ 2} = \frac{\delta}{\delta y}\left(\frac{\delta f}{\delta y}\right),
+    &\frac{\delta ^ 2 f}{\delta y \delta x} = \frac{\delta}{\delta y}\left(\frac{\delta f}{\delta x}\right),
+    &\frac{\delta ^ 2 f}{\delta x \delta y} = \frac{\delta}{\delta x}\left(\frac{\delta f}{\delta y}\right).
+\end{align*}
 It can be shown that
 \[
 \frac{\delta ^ 2 f}{\delta x \delta y} = \frac{\delta ^ 2 f}{\delta y \delta x}
@@ -627,72 +632,91 @@ This leads to the definition of the definite integral as
 and it can be shown that this limit exists if $f(x)$ is continuous in $[a, b]$.
 
 The following results can be proved.
-In the following let $f(x)$ and $g(x)$ both be integrable in $(a, b)$.
-\begin{enumerate}[label = (\roman*)]
-    \item Linearity.
-    If $\lambda, \mu$ are any constants then $\lambda f(x) + \mu g(x)$ is integrable in $(a, b)$ with
-    \[
-    \int_{a}^{b}\left(\lambda f(x) + \mu g(x)\right)\,dx = \lambda\int_{a}^{b}f(x)\,dx + \mu\int_{a}^{b}g(x)\,dx.
-    \]
-    \item If $c \in [a, b]$ then $\int_{a}^{b}f(x)\,dx = \int_{a}^{c}f(x)\,dx + \int_{c}^{b}f(x)\,dx$.
-    \item If $f(x) \geq g(x)\,\forall x \in (a, b)$ then $\int_{a}^{b}f(x)\,dx \geq \int_{a}^{b}g(x)\,dx$.
-    \item If $m \leq f(x) \leq M\,\forall x \in [a, b]$ then
-    \[
-    m(b - a) \leq \int_{a}^{b}f(x)\,dx \leq M(b - a).
-    \]
-\end{enumerate}
+\begin{proposition}
+    In the following let $f(x)$ and $g(x)$ both be integrable in $(a, b)$.
+    \begin{enumerate}[label = (\roman*)]
+        \item Linearity.
+        If $\lambda, \mu$ are any constants then $\lambda f(x) + \mu g(x)$ is integrable in $(a, b)$ with
+        \[
+        \int_{a}^{b}\left(\lambda f(x) + \mu g(x)\right)\,dx = \lambda\int_{a}^{b}f(x)\,dx + \mu\int_{a}^{b}g(x)\,dx.
+        \]
+        \item If $c \in [a, b]$ then $\int_{a}^{b}f(x)\,dx = \int_{a}^{c}f(x)\,dx + \int_{c}^{b}f(x)\,dx$.
+        \item If $f(x) \geq g(x)\,\forall x \in (a, b)$ then $\int_{a}^{b}f(x)\,dx \geq \int_{a}^{b}g(x)\,dx$.
+        \item If $m \leq f(x) \leq M\,\forall x \in [a, b]$ then
+        \[
+        m(b - a) \leq \int_{a}^{b}f(x)\,dx \leq M(b - a).
+        \]
+    \end{enumerate}
+    \begin{enumerate}[label = (\roman*)]
+        \item
+        \begin{proof}
+        \end{proof}
+        \item
+        \begin{proof}
+        \end{proof}
+        \item
+        \begin{proof}
+        \end{proof}
+        \item
+        \begin{proof}
+        \end{proof}
+    \end{enumerate}
+\end{proposition}
 
 \subsection{The fundamental theorem of calculus}
-The fundamental theorem of calculus
-
-If $f(x)$ is continuous on $[a, b]$ then the function
-\[
-F(x) = \int_{a}^{x}f(t)\,dt
-\]
-defined for $x \in [a, b]$ is continuous on $[a, b]$ and differentiable on $(a, b)$ and is an indefinite integral of $f(x)$ on $(a, b)$ i.e.
-\[
-F'(x) = \frac{d}{dx}\int_{a}^{x}f(t)\,dt = f(x)
-\]
-throughout $(a, b)$.
-Furthermore if $\Tilde{F}(x)$ is any indefinite integral of $f(x)$ on $[a, b]$ then
-\[
-\int_{a}^{b}f(t)\,dt = \Tilde{F}(b) - \Tilde{F}(a) = [\Tilde{F}(x)]^{b}_{a}.
-\]
-
-We will now look at the important points of the proof.
-
-For $a \leq x < x + h < b$ we have that
-\[
-F(x + h) - F(x) = \int_{a}^{x + h}f(t)\,dt - \int_{a}^{x}f(t)\,dt = \int_{x}^{x + h}f(t)\,dt
-\]
-where we have used property (ii).
-
-Let $m(h)$ and $M(h)$ denote the minimum and maximum values of $f(x)$ on the interval $[x, x + h]$.
-Then by property (iv) we have that
-\[
-m(h)h \leq \int_{x}^{x + h}f(t)\,dt \leq M(h)h.
-\]
-Thus
-\[
-m(h) \leq \frac{F(x + h) - F(x)}{h} \leq M(h).
-\]
-Since $f(x)$ is continuous on $[x, x + h]$ we have that $\lim_{h \rightarrow 0^+}m(h) = \lim_{h \rightarrow 0^+}M(h) = f(x)$ and so by the pinching theorem
-\[
-\lim_{h \rightarrow 0^+}\frac{F(x + h) - F(x)}{h} = f(x).
-\]
-A similar argument applies to the limit from below and together they give
-\[
-F'(x) = \lim_{h \rightarrow 0}\frac{F(x + h) - F(x)}{h} = f(x)
-\]
-which proves that $F(x)$ is an indefinite integral of $f(x)$.
-The proof of the first part of the theorem is completed by showing that $F(x)$ is continuous from the right at $x = a$ and from the left at $x = b$.
-Both these follow by a simple consideration of the limit of the relevant quotient.
-Finally, to prove the last part of the theorem the key observation is that any indefinite integral $\Tilde{F}(x)$ is related to $F(x)$ by the addition of a constant.
+\begin{theorem}[The fundamental theorem of calculus]
+    If $f(x)$ is continuous on $[a, b]$ then the function
+    \[
+    F(x) = \int_{a}^{x}f(t)\,dt
+    \]
+    defined for $x \in [a, b]$ is continuous on $[a, b]$ and differentiable on $(a, b)$ and is an indefinite integral of $f(x)$ on $(a, b)$ i.e.
+    \[
+    F'(x) = \frac{d}{dx}\int_{a}^{x}f(t)\,dt = f(x)
+    \]
+    throughout $(a, b)$.
+    Furthermore if $\Tilde{F}(x)$ is any indefinite integral of $f(x)$ on $[a, b]$ then
+    \[
+    \int_{a}^{b}f(t)\,dt = \Tilde{F}(b) - \Tilde{F}(a) = [\Tilde{F}(x)]^{b}_{a}.
+    \]
+    \begin{proof}[Proof sketch]\renewcommand{\qedsymbol}{$\triangle$}
+    For $a \leq x < x + h < b$ we have that
+    \[
+    F(x + h) - F(x) = \int_{a}^{x + h}f(t)\,dt - \int_{a}^{x}f(t)\,dt = \int_{x}^{x + h}f(t)\,dt
+    \]
+    where we have used property (ii).
+    
+    Let $m(h)$ and $M(h)$ denote the minimum and maximum values of $f(x)$ on the interval $[x, x + h]$.
+    Then by property (iv) we have that
+    \[
+    m(h)h \leq \int_{x}^{x + h}f(t)\,dt \leq M(h)h.
+    \]
+    Thus
+    \[
+    m(h) \leq \frac{F(x + h) - F(x)}{h} \leq M(h).
+    \]
+    Since $f(x)$ is continuous on $[x, x + h]$ we have that
+    \[
+    \lim_{h \rightarrow 0^+}m(h) = \lim_{h \rightarrow 0^+}M(h) = f(x)
+    \]
+    and so by the pinching theorem
+    \[
+    \lim_{h \rightarrow 0^+}\frac{F(x + h) - F(x)}{h} = f(x).
+    \]
+    A similar argument applies to the limit from below and together they give
+    \[
+    F'(x) = \lim_{h \rightarrow 0}\frac{F(x + h) - F(x)}{h} = f(x)
+    \]
+    which proves that $F(x)$ is an indefinite integral of $f(x)$.
+    The proof of the first part of the theorem is completed by showing that $F(x)$ is continuous from the right at $x = a$ and from the left at $x = b$.
+    Both these follow by a simple consideration of the limit of the relevant quotient.
+    Finally, to prove the last part of the theorem the key observation is that any indefinite integral $\Tilde{F}(x)$ is related to $F(x)$ by the addition of a constant.
+    \end{proof}
+\end{theorem}
 
 \subsection{Limits with logarithms, powers and exponentials}
 There are some important results concerning limits as $x \rightarrow \infty$ for the logarithm and exponential functions.
 
-\begin{lemma}\label{calc_lem_lemma1}
+\begin{lemma}\label{pre_calc_lem_lemma1}
     $\forall\, x \geq 0,\quad e ^ x \geq 1 + x$
     \begin{proof}
         Consider $f(x) = e ^ x - (1 + x)$ then $f(0) = 0$ and $f'(x) = e ^ x - 1 \geq 0$.
@@ -700,7 +724,7 @@ There are some important results concerning limits as $x \rightarrow \infty$ for
     \end{proof}
 \end{lemma}
 
-\begin{lemma}\label{calc_lem_lemma2}
+\begin{lemma}\label{pre_calc_lem_lemma2}
     $\forall\, x \geq 0$,
     and for any positive integer $n$,
     $e ^ x \geq \sum_{j = 0}^{n}\frac{x ^ j}{j!}$.
@@ -708,7 +732,7 @@ There are some important results concerning limits as $x \rightarrow \infty$ for
     The case $n = 1$ corresponds to the previous lemma.
     The proof for general $n$ is similar to the proof of the previous lemma.
     
-    \Large\textbf{Prove!}.
+    \Large\textbf{Prove!}
     \end{proof}
 \end{lemma}
 
@@ -723,7 +747,7 @@ For any constant $a > 0$
     \[
     \lim_{x \rightarrow \infty}\frac{\log x}{x ^ a} = \lim_{y \rightarrow \infty}\frac{y}{e ^ {ay}}.
     \]
-    For $y > 0$ the by \autoref{calc_lem_lemma2} with $n = 2$
+    For $y > 0$ the by \autoref{pre_calc_lem_lemma2} with $n = 2$
     \[
     0 \leq \frac{y}{e ^ {ay}} \leq \frac{y}{1 + ay + \frac{1}{2}a ^ 2 y ^ 2} \leq \frac{y}{\frac{1}{2}a ^ 2 y ^ 2} = \frac{2}{a ^ 2 y}.
     \]
@@ -741,7 +765,7 @@ For any constant $a > 0$
 \]
 \begin{proof}
     Let $n$ be the smallest integer such that $n > a$.
-    By \autoref{calc_lem_lemma2},
+    By \autoref{pre_calc_lem_lemma2},
     for $x > 0$ we have that
     \[
     0 \leq \frac{x ^ a}{e ^ x} \leq \frac{x ^ a}{1 + x + \dotsc + \frac{x ^ n}{n!}} = \frac{x ^ {a - n}}{x ^ {-n} + x ^ {1 - n} + \dotsc + \frac{1}{n!}}
@@ -774,6 +798,152 @@ For any constant $a$
     e ^ a = \lim_{x \rightarrow \infty}e ^ {x\log\left(1 + \frac{a}{x}\right)} = \lim_{x \rightarrow \infty}\left(1 + \frac{a}{x}\right) ^ x.
     \]
 \end{proof}
+
+\subsection{Integration using a recurrence relation}
+\begin{example}
+    Calculate $\int_0^1 x ^ 3 e ^ x\,dx$.
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        Define $I_n = \int_0^1x ^ n e ^ x\,dx$ for all integers $n \geq 0$.
+        \[
+        I_{n + 1} = \int_0^1 x ^ {n + 1}e ^ x\,dx = \left[x ^ {n + 1}e ^ x\right]_0^1 - \int_0^1(n + 1)x ^ n e ^ x\,dx = e - (n + 1)I_n.
+        \]
+        The recurrence relation $I_{n + 1} = e - (n + 1)I_n$ can be used to calculate $I_n$ for any positive integer $n$ from the starting value $I_0 = \int_0^1e ^ x\,dx = e - 1$.
+    \end{proof}
+\end{example}
+
+\subsection{Definite integrals using even and odd function}
+The definite integral of an odd function over a symmetric interval is zero.
+
+If $f_{\text{odd}}(x)$ is an integrable odd function on $[-a, a]$ then
+\[
+\int_{-a}^{a}f_{\text{odd}}(x)\,dx = 0.
+\]
+\begin{proof}
+    \begin{align*}
+        \int_{-a}^{a}f_{\text{odd}}(x)\,dx &= \int_{-a}^{0}f_{\text{odd}}(u)\,du + \int_0^af_{\text{odd}}(x)\,dx \\
+        &= -\int_{a}^{0}f_{\text{odd}}(-x)\,dx + \int_0^af_{\text{odd}}(x)\,dx \\
+        &= \int_0^a(f_{\text{odd}}(-x) + f_{\text{odd}}(x))\,dx = 0.
+    \end{align*}
+\end{proof}
+
+A similar argument shows that if $f_{\text{even}}(x)$ is an integrable even function on $[-a, a]$ then
+\[
+\int_{-a}^{a}f_{\text{even}}(x)\,dx = 2\int_0^af_{\text{even}}(x)\,dx.
+\]
+\begin{proof}
+    \begin{align*}
+        \int_{-a}^{a}f_{\text{even}}(x)\,dx &= \int_{-a}^{0}f_{\text{even}}(x)\,dx + \int_{0}^{a}f_{\text{even}}(x)\,dx \\
+        &= \int_{0}^{a}f_{\text{even}}(-x)\,dx + \int_{0}^{a}f_{\text{even}}(x)\,dx \\
+        &= \int_{0}^{a}f_{\text{even}}(x)\,dx + \int_{0}^{a}f_{\text{even}}(x)\,dx \\
+        &= 2\int_{0}^{a}f_{\text{even}}(x)\,dx.
+    \end{align*}
+\end{proof}
+
+If this limit switching seems confusing then consider the following proposition
+\begin{proposition}
+    Let $f(x)$ be an integrable function continuous on $[a, b]$.
+    Then
+    \[
+    \int_{a}^{b}f(x)\,dx = \int_{-b}^{-a}f(-x)\,dx
+    \]
+    \begin{proof}
+        \large \textbf{Please prove!}
+    \end{proof}
+\end{proposition}
+
+Recall that any function $f$ can be decomposed into a sum of odd and even functions.
+We can use this to calculate definite integrals over symmetric intervals as
+\[
+\int_{-a}^{a}f(x)\,dx = \int_{-a}^{a}f_{\text{even}}(x) + f_{\text{odd}}(x)\,dx = 2\int_0^af_{\text{even}}(x)\,dx.
+\]
+
+\newpage
+
+\section{Double integrals}
+
+\subsection{Rectangular regions}
+For a function $f(x)$ the definite integral $\int_a^bf(x)\,dx$ is the signed area under the curve $y = f(x)$ between $x = a$ and $x = b$.
+This interpretation of the definite integral can be generalised for a function of two variables to a volume under a surface.
+Given a function $f(x, y)$ and a region $D$ in the $(x, y)$ plane,
+the double integral
+\[
+\iint\limits_Df(x, y)\,dxdy
+\]
+is the signed volume of the region between the surface $z = f(x, y)$ and the region $D$ in the $z = 0$ plane.
+
+We can define the double integral as the limit of a Riemann sum of volumes of cuboids.
+
+For simplicity,
+consider the case of a rectangular region $D = [a_0, a_1] \times [b_0, b_1]$.
+We construct a subdivision $S$ of $D$ by defining the points of a two-dimensional lattice as $a_0 = x_0 < x_1 < \dotsi < x_n = a_1$ and $b_0 = y_0 < y_1 < \dotsi < y_m = b_1$.
+The edge lengths of the lattice are equal to $dx_i = x_i - x_{i - 1}$ for $i = 1, \dotsc, n$ and $dy_j = y_j - y_{j - 1}$ for $j = 1, \dotsc, m$.
+The norm of the subdivision $|S|$ is given by the maximum of all the $dx_i$ and $dy_j$.
+
+We introduce sample points $(p_i, q_j) \in [x_{i - 1}, x_i] \times [y_{j - 1}, y_j]$ inside each rectangle of the lattice.
+The area of the rectangle is $dx_idy_j$ and we associate to this rectangle a cuboid of height $f(p_i, q_j)$.
+
+The volume of all the cuboids is the Riemann sum
+\[
+\mathcal{R} = \sum_{i = 1}^{n}\sum_{j = 1}^{m}f(p_i, q_j)dx_idy_j
+\]
+and the double integral is the limit
+\[
+\iint\limits_Df(x, y)\,dxdy = \lim_{|S| \rightarrow 0}\mathcal{R}.
+\]
+In the special case that $f(x, y)$ is constant,
+say $f(x, y) = c$,
+then
+\[
+\iint\limits_Df(x, y)\,dxdy = c \times \mathrm{area}(D).
+\]
+
+For a rectangular region $D = [a_0, a_1] \times [b_0, b_1]$ a practical way to compute the double integral is to use the following iterated integral result
+(valid providing $f$ is continuous on $D$)
+\[
+\iint\limits_Df(x, y)\,dxdy = \int_{a_0}^{a_1}\left(\int_{b_0}^{b_1}f(x, y)\,dy\right)\,dx = \int_{b_0}^{b_1}\left(\int_{a_0}^{a_1}f(x, y)\,dx\right)\,dy.
+\]
+
+\subsection{Beyond rectangular regions}
+Computing double integrals beyond rectangular regions requires us to consider the following definition.
+\begin{definition}
+    A region $D$ of the plane is called $y$-simple if every line that is parallel to the $y$-axis and intersects $D$,
+    does so in a single line segment
+    (or a single point if this is on the boundary of $D$).
+\end{definition}
+
+Given a $y$-simple region with boundaries given by the curves $y = \phi_1(x)$ and $y = \phi_2(x)$ for $a_0 \leq x \leq a_1$.
+
+We can calculate the double integral as an iterated integral by integrating over $y$ first
+\begin{gather*}
+    \iint\limits_{D} f(x, y)\,dxdy = \int_{a_0}^{a_1}\left(\int_{\phi_1(x)}^{\phi_2(x)}f(x, y)\,dy\right)\,dx.
+\end{gather*}
+We can apply a similar definition for an $x$-simple region.
+\begin{definition}
+    A region $D$ of the plane is called $x$-simple if every line that is parallel to the $x$-axis and intersects $D$,
+    does so in a single line segment
+    (or a single point if this is on the boundary of $D$).
+\end{definition}
+Given an $x$-simple region with boundaries given by the curves $x = \psi_1(y)$ and $x = \psi_2(y)$ for $b_0 \leq y \leq b_1$.
+
+As we did before,
+the double integral can be calculated as an iterated integral,
+integrating over $x$ first
+\[
+\iint\limits_Df(x, y)\,dxdy = \int_{b_0}^{b_1}\left(\int_{\psi_1(y)}^{\psi_2(y)}f(x, y)\,dx\right)\,dy.
+\]
+I would like to note,
+that it is probably quite important that these expressions for calculating expressions for $x$ and $y$ simple regions are kept in mind.
+
+However,
+when a region is both $x$-simple and $y$-simple we can calculate the double integral as an iterated integral by integrating over $x$ or $y$ first.
+
+From my current understanding a region is both $x$-simple and $y$-simple if,
+the vertical line for $y$-simple can be drawn from one end of the region to another,
+and the horizontal line for an $x$-simple region can be drawn from one end to the other.
+These are both such that the line does not leave the bounds of the region,
+in other words, they "can't leave through holes in the region".
+
+
 
 
 

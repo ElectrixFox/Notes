@@ -2,6 +2,7 @@
 \usepackage{preamble}
 
 \declaretheorem[style = avgstyle, name = Counting Principle]{countprinc}
+\counterwithin*{equation}{subsection}
 
 \title{Probability I}
 \author{Luke Phillips}
@@ -1147,7 +1148,8 @@ $\P(A) = \frac{|A|}{|\Omega|}$
     pmf of $X$.
     \begin{table}[h!]
         \begin{tabular}{c|cccc}
-            $x$ & $0$ & $1$ & $2$ & $3$\\
+            $x$ & $0$ & $1$ & $2$ & $3$ \\
+            \hline
             $p(x)$ & $\frac{1}{8}$ & $\frac{3}{8}$ & $\frac{3}{8}$ & $\frac{1}{8}$ \\
         \end{tabular}
     \end{table}
@@ -1161,8 +1163,125 @@ $\P(A) = \frac{|A|}{|\Omega|}$
     $\{\omega\,:\, X(\omega) = 2\} = \{\text{HHT, HTH, THH}\}$
     
     $\{\omega\,:\, X(\omega) = 3\} = \{\text{HHH}\}$
-    
 \end{example}
+
+\begin{theorem}
+    Let $X$ be a discrete random variable,
+    with probability mass function $p$.
+    Then for any $A \subseteq \chi$,
+    \begin{equation}
+    \P(X \in A) = \sum_{x \in A}p(x).
+    \end{equation}
+    Furthermore,
+    \begin{equation}
+    \sum_{x \in \chi}p(x) = 1.
+    \end{equation}
+    \begin{proof}
+        $A \subseteq \chi$,
+        where $\chi$ is countable or finite (can enlist/enumerate the elements of $A$).
+        Let $A = \{a_1, a_2, \dotsc\} = \bigcup_{i = 1}^{\infty}\{a_i\}$
+        \[
+        \P(X \in A) = \P\left(\bigcup_{i = 1}^\infty\{X = a_i\}\right)
+        \]
+        observe that $\{X = a_i\} \cap \{X = a_j\} = \emptyset$ for $i \neq j$.
+        So
+        \begin{align*}
+        \P(X \in A) &= \P\left(\bigcup_{i = 1}^\infty\{X = a_i\}\right) \\
+        &= \sum_{i = 1}^{\infty}\P(X = a_i) &\text{by (A4)} \\
+        &= \sum_{i = 1}^{\infty}p(a_i) \\
+        &= \sum_{x \in A}p(x).
+        \end{align*}
+        Since we have established ($1$),
+        we know that
+        \begin{equation}
+        \P(x \in \chi) = \sum_{x \in \chi}p(x)
+        \end{equation}
+        and we already know that
+        \begin{equation}
+            \P(\chi) = 1
+        \end{equation}
+        ($3$) and ($4$) together complete the proof of ($2$)
+        
+    \end{proof}
+\end{theorem}
+
+$\chi$ is the collection of all values that the random variable $X$ can take.
+
+A set $A$ is countable if and only if the elements of $A$ can be written as a potentially infinite sequence or list.
+
+(A3) $\P(A \cup B) = \P(A) + \P(B)$, when $A \cap B = \emptyset$.
+
+(A4) is an extension of (A3) for countable collections.
+Let $A_1, A_2, \dotsc$ be a countable collection of pairwise disjoint sets,
+i.e. $A_i \cap A_j - \emptyset$, for all $i \neq j$.
+Then
+\[
+\P\left(\bigcup_{i = 1}^{\infty}A_i\right) = \sum_{i = 1}^{\infty}\P(A_i)
+\]
+
+\subsubsection{Summary}
+$X$ is a discrete random variable,
+the probability mass function is
+\[
+A \subseteq \chi, \P(A \in A) = \sum_{x \in A}p(x)
+\]
+and
+\[
+\sum_{x \in \chi}p(x) = 1.
+\]
+
+$\P_X(A)$ is a distribution
+\[
+\P_X(A) = \P(X \in A) = \sum_{x \in A}p(x)
+\]
+\[
+\P_X(\chi) = \P(X \in \chi) = \sum_{x \in \chi}p(x).
+\]
+
+\subsection{Binomial and geometric random variable}
+$p$ is the probability of success.
+Repeat the trials $n$-times given and fixed.
+Each trial is independent.
+The outcomes are success and failure.
+Let $X$ denote the number of successes in $n$-trials.
+
+Let $\Omega = \{\omega:\, \omega = (\omega_1\omega_2\dotsi\omega_n) \text{ where } \omega_i = \text{S/F for } 1 \leq i \leq n\}$.
+
+$X(\omega) = $ number of successes in the sequence $(\omega_1\omega_2\dotsi\omega_n)$.
+Let us assign the value $1$ to success and $0$ to failure i.e. $\omega_i = 1$ if success $\omega_i = 0$ if failure.
+
+For a given $\omega_1$
+$X(\omega) = $ number of $i$, for which $\omega_i = 1$, $X(\omega) = \sum_{i = 1}^{n}\omega_i$.
+
+Let $\omega = (\omega_1\dotsc \omega_n) \in \Omega$,
+with $x$-successes and $(n - x)$ failures.
+\[
+\P(\{\omega\}) = p ^ x (1 - p) ^ {n - x}
+\]
+therefore
+\[
+\P(X = x) = \P\left(\bigcup_{w : \sum_{i = 1}^n\omega_i = x}\{\omega\}\right) = \sum_{w : \sum_{i = 1}^n\omega_i = x}\P(\{\omega\}) = \binom{n}{x}p ^ x (1 - p) ^ {n - x}.
+\]
+\[
+\{X = x\} = \{\omega : X(\omega) = x\} = \{\omega : \omega = (\omega_1\dotsc \omega_n,\text{ then } \sum_{i = 1}^n\omega_i = x\}
+\]
+\begin{definition}[Binomial random variable]
+    A discrete random variable $X$ is binomially distributed with parameters $n$ and $p \in [0, 1]$ if $\chi = \{0, 1, \dotsc, n\}$,
+    and the probability mass function,
+    is given by
+    \[
+    p(x) = \binom{n}{x}p ^ x(1 - p) ^ {n - x},\text{ if } x \in \{0, 1, \dotsc, n\},
+    \]
+    and $= 0$ elsewhere.
+
+    We denote this as
+    $X \sim \Bin(n, p)$.
+\end{definition}
+
+
+
+
+
 
 
 

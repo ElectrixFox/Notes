@@ -580,6 +580,50 @@ Note:
     \end{enumerate}
 \end{example}
 
+\section{Three Principles}
+
+\subsection{Inclusion exclusion formula}
+\begin{align*}
+|A_1 \cup A_2 \cup A_3| &= |A_1 \cup (A_2 \cup A_3)| = |A_1| + |A_2 \cup A_3| - |A_1 \cap (A_2 \cup A_3)| \\
+&= |A_1| + |A_2| + |A_3| - |A_1 \cap A_3| - |A_1 \cap A_2| - |A_2 \cap A_3| + |A_1 \cap A_2 \cap A_3|
+\end{align*}
+\[
+A \cap (B \cup C) = (A \cap B) \cup (A \cap C)
+\]
+
+The case of general $n$ is similar but needs more notation,
+consider sets $A_1, A_2, A_3, A_4$
+\[
+|A_1 \cup A_2 \dotsi \cup A_n|
+\]
+The formulae involves a $k$-fold intersection.
+$(1 \leq k \leq n)$ $A_{i_1} \cap A_{i_2} \cap A_{i_3} \cap \dotsi \cap A_{i_k}$ where $1 \leq i_1 < i_2 < \dotsi < i_k \leq n$
+
+Let $S_k = \sum_{i_1 < i_2 < i_k}|A_{i_1} \cap \dotsi \cap A_{i_k}|$.
+The sum of all positive $k$-fold intersections
+(There are exactly $\binom{n}{k}$ terms)
+
+\begin{theorem}[Inclusion-exclusion formula]
+    For a positive integer $n$ and finite sets
+    $A_1, \dotsc, A_n$,
+    \[
+    |A_1 \cup A_2 \cup \dotsi \cup A_n| = \sum_{k = 1}^{n}(-1) ^ {k + 1}S_k,
+    \]
+    where
+    \[
+    S_k = \sum_{i_1 < i_2 < \dotsi < i_k}|A_{i_1} \cap A_{i_2} \cap \dotsi A_{i_k}|.
+    \]
+    \begin{proof}
+        Start with induction base case $n = 2$.
+        \large\textbf{Exercise!}
+    \end{proof}
+    
+\end{theorem}
+
+\begin{definition}
+    A permutation is called a dearrangement if no element ends up in its correct position.
+\end{definition}
+
 
 
 

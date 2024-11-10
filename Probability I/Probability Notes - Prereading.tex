@@ -159,7 +159,48 @@ Additionally, we can use De Morgan's Laws for a collection of events $A_i$,
     \[
     \P\left(\bigcap_{n = 1}^{\infty}A_n\right) = \lim_{n \rightarrow \infty}\P(A_n).
     \]
+    \item
+    If $E_1, E_2, \dotsc, E_k$ form a partition then
+    \[
+    \sum_{i = 1}^{k}\P(E_i) = 1.
+    \]
 \end{enumerate}
+
+\begin{definition}[Partition]
+    We say that the events $E_1, E_2, \dotsc, E_k \in \mathcal{F}$ form a (finite) partition of the sample space $\Omega$ if:
+    \begin{enumerate}[label = (\roman*)]
+        \item they all have positive probability, i.e. $\P(E_i) > 0$ for all $i$;
+        \item they are pairwise disjoint, i.e. $E_i \cap E_j = \emptyset$ whenever $i \neq j$ and
+        \item their union is the whole sample space
+        \[
+        \bigcup_{i = 1}^{k}E_i = \Omega.
+        \]
+    \end{enumerate}
+    The definition extends to countably infinite partitions.
+    We say that $E_1, E_2, \dotsc \in \mathcal{F}$ form an infinite partition of $\Omega$ if:
+    \begin{enumerate}[label = (\roman*)]
+        \item $\P(E_i) > 0$ for all $i$;
+        \item $E_i \cap E_j = \emptyset$ whenever $i \neq j$; and
+        \item
+        \[
+        \bigcup_{i = 1}^{\infty}E_i = \Omega.
+        \]
+    \end{enumerate}
+\end{definition}
+Now we will provide a good example to solidify what a partition is.
+\begin{example}
+    Consider a sample space $\Omega = \{1, 2, 3, 4, 5, 6\}$.
+    Possible partitions are:
+    \begin{multline*}
+        \{1\}, \{2\}, \{3\}, \{4\}, \{5\}, \{6\} \\
+        \{1, 2\}, \{3, 4\}, \{5, 6\} \\
+        \{1, 2, 3\}, \{4, 5, 6\} \\
+        \{1\}, \{2, 3\}, \{4, 5, 6\} \\
+        \{1, 2, 3, 4, 5, 6\}
+    \end{multline*}
+    and so on.
+\end{example}
+Effectively we can see that a partition is a collection of subsets of the sample space such that each subset is pairwise disjoint.
 
 \section{Equally likely outcomes and counting principles}
 
@@ -344,7 +385,51 @@ The usual interpretation is that $\P(A | B)$ represents our probability for $A$ 
     \[
     \P(A | B \cap C) = \frac{\P(A | C)\P(B | A \cap C}{\P(B | C)}.
     \]
+    \item Bayes's theorem (second version):
+    for any partition $A_1, \dotsc, A_k$ and any $B$ with $\P(B) > 0$,
+    \[
+    \P(A_i\,|\,B) = \frac{\P(A_i)\P(B\,|\,A_i)}{\sum_{j = 1}^{k}\P(A_j)\P(B\,|\,A_j)}.
+    \]
+    More generally,
+    if $\P(B\,|\,C) > 0$,
+    \[
+    \P(A_i\,|\,B \cap C) = \frac{\P(A_i\,|\,C)\P(B\,|\,A_i \cap C)}{\sum_{j = 1}^{k}\P(A_j\,|\,C)\P(B\,|\,A_j \cap C)}.
+    \]
 \end{enumerate}
+P6 is an immediate consequence of P4 and P5.
+
+To get the grasp of some of these consequences,
+we will provide an example involving two of them.
+\begin{example}
+    Pat ends up in the pub of an evening with probability $\frac{3}{10}$.
+    If she goes to the pub,
+    she will get drunk with probability $\frac{1}{2}$.
+    If she stays in,
+    she will get drunk with probability $\frac{1}{5}$.
+    What is the probability that she gets drunk?
+    Given that she does get drunk,
+    what is the probability that she went to the pub?
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        Firstly,
+        we can see that we have two events,
+        the event that she goes to the pub and the event that she gets drunk.
+        Let $P$ be the event that she goes to the pub.
+        Let $D$ be the event that she gets drunk.
+        Then we are told that $\P(P) = \frac{3}{10}$, $\P(D\,|\,P) = \frac{1}{2}$ and $\P(D\,|\,P ^ c) = \frac{1}{5}$.
+        We are told that she either stays in or goes out,
+        so we can use partitions $P$ and $P ^ c$ to get the following
+        \[
+        \P(D) = \P(P)\P(D\,|\,P) + \P(P ^ c)\P(D\,|\,P ^ c) = \frac{3}{10}\cdot\frac{1}{2} + \frac{7}{10}\cdot\frac{1}{5} = \frac{29}{100}.
+        \]
+        To find the probability that she went to the pub given that she gets drunk,
+        we can use Bayes's theorem to see that
+        \[
+        \P(P\,|\,D) = \frac{\P(D\,|\,P)\P(P)}{\P(D)} = \frac{\frac{3}{10}\cdot\frac{1}{2}}{\frac{29}{100}} = \frac{15}{29}.
+        \]
+        
+    \end{proof}
+\end{example}
+
 
 \subsection{Independence of events}
 
@@ -753,7 +838,7 @@ Thus, $\lambda$ in $\Po(\lambda)$ is interpreted as the average number events.
 \end{theorem}
 
 \subsection{Continuous random variables}
-\begin{definition}[Continuous random variable and probability density function]
+\begin{definition}[Continuous random variable and probability density function]\label{pre_prob_def_crvandpdf}
 Consider a real-valued random variable $X : \Omega \rightarrow \R$.
 We say that $X$ is a continuous random variable,
 or that $X$ has a continuous probability distribution,
@@ -788,5 +873,121 @@ Specifically, it allows us to calculate the probability of every event of the fo
     \int_{-\infty}^{\infty}f(x)\,dx = 1.
     \]
 \end{corollary}
+
+\subsection{The uniform distribution}
+\begin{definition}[Uniform distribution]
+Let $a$ and $b$ be real numbers with $a < b$.
+We say a continuous random variable $X$ is uniformly distributed on $[a, b]$,
+and we write $X \sim \mathrm{U}(a, b)$,
+when
+\[
+f(x) = \begin{cases}
+    \frac{1}{b - a} & \text{for all } x \in [a, b]. \\
+    0 & \text{elsewhere}.
+\end{cases}
+\]
+\end{definition}
+
+When $X \sim \mathrm{U}(a, b)$ then $X$ can take any value in the continuous range of values from $a$ to $b$ and the probability of finding $X$ in any interval $[x, x + h] \subseteq [a, b]$ does not depend on $x$.
+
+In effect,
+finding the cumulative probabilities for uniform distributions is just an integral.
+This is intuitively implied by the fact that it is a continuous random variable.
+
+\subsection{The exponential distribution}
+Suppose a bell chimes randomly in time at rate $\beta > 0$.
+Let $T > 0$ denote the time of the first chime
+(a random variable).
+The events $\{\text{no chimes in } [0, \tau]\}$ and $\{T > \tau\}$ are the same.
+We know that the number of chimes in the interval $[0, \tau]$ is $\Po(\beta\tau)$ and so the probability of no chimes is $e ^ {-\beta\tau}$.
+Hence
+\[
+\P(T > \tau) = e ^ {-\beta\tau}\quad\text{or}\quad\P(T \leq \tau) = 1 - e ^ {-\beta\tau}\quad\text{for all } \tau \geq 0.
+\]
+As $1 - e ^ {-\beta\tau} = \int_0^\tau\beta e ^ {-\beta t}\,dt$ we see that $T$ is a continuous random variable with probability density function
+$f(t) = \beta e ^ {-\beta t}$ for all $t \geq 0$.
+
+\begin{definition}[Exponential distribution]
+    Let $\beta > 0$.
+    We say a continuous random variable $X$ is exponentially distributed with parameter $\beta$,
+    and we write $X \sim \Exp(\beta)$, when
+    \[
+    f(x) = \begin{cases}
+        \beta e ^ {-\beta x} & \text{for all } x \geq 0, \\
+        0 & \text{elsewhere}.
+    \end{cases}
+    \]
+\end{definition}
+
+The exponential distribution describes the time between the event first happening,
+so in our example it describes the time taken for the bell to first chime.
+
+\subsection{The normal distribution}
+This is one of the most important probability distributions (so pay attention!).
+\begin{definition}[Normal distribution]
+    Let $\mu,\,\sigma$ be real numbers with $\sigma > 0$.
+    We say a continuous random variable $X$ is normally distributed with parameters $\mu$ and $\sigma ^ 2$,
+    and we write $X \sim \mathcal{N}(\mu,\,\sigma ^ 2)$, when
+    \[
+    f(x) =\frac{1}{\sigma\sqrt{2\pi}}e ^ {-\frac{1}{2}\left(\frac{x - \mu}{\sigma}\right) ^ 2}\text{ for all } x \in \R.
+    \]
+\end{definition}
+This is sometimes called the Gaussian distribution.
+The probability density function is bell shaped.
+In rough terms,
+the parameter $\mu$ determines the location of the bell,
+and $\sigma$ determines the spread of the bell,
+e.g. for smaller $\sigma$,
+the bell is narrower.
+
+Formally,
+we would refer to $\sigma$ as the standard deviation,
+and $\mu$ as the expectation;
+but alas we have not reached such terminology yet.
+
+\subsection{Cumulative distribution functions}
+\begin{definition}[Cumulative distribution function]
+    For any real-valued random variable $X$,
+    the function $F: \R \rightarrow [0, 1]$ defined by
+    \[
+    F(x) := \P(X \leq x)\text{ for } x \in \R
+    \]
+    is called the cumulative distribution function of $X$.
+\end{definition}
+
+\textit{Note: If the random variable under consideration is not clear from the context,
+we may write $F_X$ for the cumulative distribution function of $X$}.
+
+By C1,
+it follows immediately that:
+\[
+\P(X \in (a, b]) = \P(X \leq b) - \P(X \leq a) = F(b) - F(a).
+\]
+
+For a continuous random variable $X$ this is the same as $\P(X \in (a, b)), \P(X \in [a, b])$,
+and so on.
+
+\begin{theorem}
+    Suppose that $X$ is a continuously distributed random variable on $\R$ with probability density function $f$.
+    Then $F$ is a continuous function and,
+    for all $x \in \R$,
+    \[
+    F(x) = \int_{-\infty}^{x}f(t)\,dt,\qquad f(x) = \frac{dF}{dx}(x)\textit{ when $f$ is continuous at $x$}.
+    \]
+    \begin{proof}
+        The first equality follows from \autoref{pre_prob_def_crvandpdf},
+        and it follows that $F$ is continuous.
+        The second equality is a consequence of the fundamental theorem of calculus (the correspondence between derivative and integral).
+    \end{proof}
+\end{theorem}
+
+
+
+
+
+
+
+
+
 
 \end{document}

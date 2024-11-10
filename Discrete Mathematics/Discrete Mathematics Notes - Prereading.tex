@@ -97,17 +97,37 @@ while the set $Y \times X$ is
 \{(a, 1), (a, 2), (a, 3), (b, 1), (b, 2), (b, 3)\}.
 \]
 
+\newpage
+
 \section{Arrangements and permutations}
 
 \subsection{Arrangements}
-An arrangement (or list or string) is a (finite) sequence of items in which the order of the items in the sequence matters.
+\begin{definition}[Arrangement]
+    An \textbf{arrangement} (or list or string) is a (finite) sequence of items in which the \textbf{order} of the items in the sequence \textbf{matters}.
+\end{definition}
 
 The length of an arrangement is the number of items in the sequence.
+
+Standard problem \#1.
+How many arrangements of length $k$ can be made from elements of a set $S$ of size $|S| = n$?
+
+This would be $n ^ k$ as each arrangement has $k$ places each of which can be occupied by any one of $n$ entries.
+
+
+Standard problem \#2.
+How many arrangements of length $k$ with no repeats can be made from elements of a set $S$ of size $|S| = n$?
+
+This would be $n(n - 1)(n - 2)\dotsi(n - k + 1) = \frac{n!}{(n - k)!}$,
+provided $k \leq n$.
+This is because every time we make a choice we remove a possible option.
+
 
 \textbf{Multiplication Principle}. for an arrangement of length $k$, if for $i \in \{1,\,2,\,\dotsc,\,k\}$ there are $n_i$ choices for the $i$th item, regardless of previous choices, then the number of possible arrangements is $n_1n_2\dotsi n_k$.
 
 \subsection{Permutations}
-A permutation on a finite set $S$ is an arrangement of length $|S|$ that uses each item from $S$ exactly once.
+\begin{definition}[Permutation]
+    A permutation on a finite set $S$ is an arrangement of length $|S|$ that uses each item from $S$ exactly once.
+\end{definition}
 
 \begin{proposition}
     If $|S| = n$, then there are $n!$ permutations on $S$.
@@ -138,13 +158,15 @@ More generally, if $A_1,\,A_2,\,\dotsc,\,A_n$ are pairwise disjoint, meaning tha
 \newpage
 
 \section{Combinations}
-
-A combination from a set of objects is an unordered selection of elements of that set.
+\begin{definition}[Combination]
+    A \textbf{combination} from a set of objects is an \textbf{unordered} selection of elements of that set.
+\end{definition}
 
 Formally, a combination on a set $S$ is identified by the multiplicities $m_i,\, i \in S$, where $m_i \in \{0, 1, 2, \dotsc\}$ determines how many times element $i$ appears in the combination.
 
 The size of a combination is the total number of selections, i.e. the sum of all the multiplicities $\sum_{i \in S}m_i$. We sometimes call a combination of size $k$ a $k$-combination.
 
+Standard problem \#3.
 How many combinations without repetition do we have of a given size $k$ from a set of size $n$?
 
 Consider the arrangements, without repetitions, of length $k$ from the set of size $n$. There are $P(n, k) = \frac{n!}{(n - k)!}$ of those. These are ordered lists, so sort them into groups of lists using the same letters. Each group contains $k!$ lists. The number of groups is $\frac{P(n, k)}{k!}$, and each corresponds to a combination. So the number of $k$-combinations without repetitions is
@@ -210,6 +232,9 @@ Prove that the following identities are valid for integer $n \geq 0$.
 \section{Arrangements and combinations with repetitions}
 
 \subsection{Arrangements with repetitions}
+Standard problem \#4.
+How many arrangements are there of a list o objects in which some objects are repeated?
+
 \begin{theorem}
     Given a list of $n$ objects of $r$ different types, in which objects of type $i$ occur $n_i$ times (with $n_1 + \dotsi + n_r = n$), the number of arrangements of the list is
     \[
@@ -221,6 +246,10 @@ Prove that the following identities are valid for integer $n \geq 0$.
 \end{theorem}
 
 \subsection{Combinations with repetitions}
+Standard problem \#6.
+How many $k$-combinations with repetitions from $n$ objects are there in which each object is chosen at least once in the combination?
+
+This would be the following theorem.
 \begin{theorem}
     The number of $k$-combinations from $n$ different objects with repetition and each object occurring at least once is $\binom{k - 1}{n - 1}$ for $k \geq n$.
     \begin{proof}
@@ -232,6 +261,12 @@ Prove that the following identities are valid for integer $n \geq 0$.
     \end{proof}
 \end{theorem}
 
+Standard Problem \#5.
+Given a set of $n$ objects,
+how many combinations of size $k$ can be chosen if objects may be selected more than once?
+
+As before,
+this solution is the following theorem.
 \begin{theorem}
     The number of $k$-combinations from $n$ different objects with repetition is
     \[
@@ -373,9 +408,145 @@ then at least one pigeon-hole contains more than one envelope.
         |A \cup A_{n + 1}| = |A| + |A_{n + 1}| - |A \cap A_{n + 1}|
         \]
         then by the induction hypothesis
-        
+        \large\textbf{Continue!}
     \end{proof}
 \end{theorem}
+
+\begin{definition}[Derangement]
+    A derangement of the numbers $\{1, 2, \dotsc, n\}$ is a permutation in which no number is in its correct position.
+    That is, for every $k$, the number $k$ is not in the $k$th place.
+\end{definition}
+
+\textbf{Question}: For $n$ objects,
+how many of the $n!$ permutations are derangements?
+Denote this number by $d(n)$.
+
+We can use the inclusion-exclusion principle to find a formula for $d(n)$.
+
+Fix $n$.
+For $1 \leq i \leq n$,
+let $A_i$ be the set of permutations of $1, 2, \dotsc, n$ in which $i$ is in the $i$th place.
+
+Then $|A_i| = (n - 1)!$ since after placing $i$ in the $i$th place,
+we can arrange the remaining $n - 1$ numbers in the remaining $n - 1$ places in $(n - 1)!$ ways.
+
+Similarly, for $i \neq j,\ A_i \cap A_j$ consists of permutations with both $i$ and $j$ fixed, so
+\[
+|A_i \cap A_j| = (n - 2)!,\ \text{for } i \neq j,
+\]
+since after fixing $i$ and $j$,
+there are $n - 2$ free places.
+
+Generally, if $1 \leq i_1 < i_2 < \dotsi < i_k \leq n$, then
+\[
+|A_{i_1} \cap A_{i_2} \cap \dotsi \cap A_{i_k}| = (n - k)!,
+\]
+since we place each of the $i_j$ in its proper place and arrange the remaining $n - k$ numbers in $(n - k)!$ ways.
+
+There are $\binom{n}{k}$ ways of selecting the $i_1 < i_2 < \dotsi < i_k$.
+So
+\[
+S_k = \sum_{i_1 < i_2 < \dotsi < i_k}|A_{i_1} \cap A_{i_2} \cap \dotsi \cap A_{i_k}| = \binom{n}{k}(n - k)! = \frac{n!}{k!}.
+\]
+Then the inclusion-exclusion formula tells us that the number of non-derangements is
+\[
+|A_1 \cup A_2 \cup \dotsi \cup A_n| = \sum_{k = 1}^{n}(-1) ^ {k + 1}\frac{n!}{k!}.
+\]
+\begin{proposition}
+    The number of derangements of $1, 2, \dotsc, n$ is
+    \[
+    d(n) = \sum_{k = 0}^{n}(-1) ^ k\frac{n!}{k!}.
+    \]
+    \begin{proof}
+        We subtract from $n!$ the number of non-derangements to get
+        \begin{align*}
+            d(n) &= n! - \sum_{k = 1}^{n}(-1) ^ {k + 1}\frac{n!}{k!} \\
+            &= n!\left(1 + \sum_{k = 1}^{n}(-1) ^ k \frac{1}{k!}\right) \\
+            &= n!\sum_{k = 0}^{n}(-1) ^ k\frac{1}{k!}.
+        \end{align*}
+    \end{proof}
+\end{proposition}
+In particular, the proportion of permutations that are derangements is
+\[
+\frac{d(n)}{n!} = \sum_{k = 0}^{n}(-1) ^ k\frac{1}{k!}.
+\]
+
+\newpage
+
+\section{Recurrence relations}
+
+\subsection{Three examples}
+
+\begin{example}[H1]
+    A student has a flight of $n$ stairs to climb,
+    and can take either one or two stairs in a stride.
+    How many distinct ways of climbing the stairs does she have?
+
+    Call the answer $f_n$.
+
+    Then
+    \begin{align*}
+        f_1 &= 1 &(1 \text{ single step}); \\
+        f_2 &= 2 &(1, 1 \text{ or } 2); \\
+        f_3 &= 3 &(1, 1, 1 \text{ or } 1, 2 \text{ or } 2, 1),
+    \end{align*}
+    and so on,
+    where we are describing the ways of climbing the stairs by a sequence of $1$s and $2$s,
+    corresponding to the sequence of strides where a $1$ represents a $1$-stair stride and a $2$ represents a $2$-stair stride.
+    The sum of elements in the sequence must be $n$,
+    because $n$ stairs are traversed in total.
+
+    An effective way to generate the numbers for $f_n$ recursively by relating $f_n$ to previous values in the sequence.
+
+    Suppose $n \geq 2$.
+    The trick is to take one stride and then consider how many ways there are of mounting the remaining stairs.
+
+    This splits the configurations contributing to $f_n$ into two (disjoint) types:
+    \begin{itemize}
+        \item Those where the first stride climbs $1$ stair ($1, \dotsc$).
+        Then $n - 1$ stairs remain,
+        and these remaining stairs can, by definition,
+        be climbed in $f_{n - 1}$ ways.
+        So there are $f_{n - 1}$ configurations of this type.
+        \item Those where the first stride climbs $2$ stairs ($2, \dotsc$).
+        Then $n - 2$ stairs remain,
+        and these remaining stairs can, by definition,
+        be climbed in $f_{n - 2}$ ways.
+        So there are $f_{n - 2}$ configuration of this type.
+    \end{itemize}
+    This argument shows that
+    \[
+    f_n = f_{n - 1} + f_{n - 2},\quad(n \geq 2).
+    \]
+\end{example}
+
+\begin{example}[H2]
+    Draw $n$ infinite straight lines in the plane,
+    assumed to be non-parallel and non-concurrent.
+    Into how many contiguous regions does this divide the plane?
+
+    Let $r_n$ be the number of regions.
+    Looking at some pictures, we find
+    \[
+    r_0 = 1,\,r_1 = 2,\,r_2 = 4,\,r_3 = 7,\,r_4 = 11,\,r_5 = 16,\dotsc.
+    \]
+    Considering $n = 4$.
+    Each time the new line crosses an old line it crosses into a new region,
+    this line crosses $4$ (out of $7$) old regions.
+    Each of these $4$ old regions is split into two,
+    so the number of regions increases by $4$.
+
+    In general,
+    the $n$th line makes $n$ more regions:
+    \[
+    r_n = r_{n - 1} + n,\quad(n \geq 1).
+    \]
+
+\end{example}
+
+
+
+
 
 
 \end{document}

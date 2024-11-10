@@ -1229,6 +1229,279 @@ We say this limit exists if it is independent of subdivision and set of sample p
 \end{definition}
 It can be shown that this limit exists if $f(x)$ is continuous on the interval $[a, b]$.
 
+The definite integral satisfies the following properties.
+Let $f(x)$ and $g(x)$ be integrable in $(a, b)$.
+\begin{enumerate}[label = \roman*)]
+    \item Linearity. If $\lambda, \mu \in \R$,
+    then $(\lambda f + \mu g)(x)$ is integrable in $(a, b)$, with 
+    \[
+    \int_a^b(\lambda f + \mu g)(x)\,dx = \lambda \int_a^bf(x)\,dx + \mu\int_a^bg(x)\,dx.
+    \]
+    \item If $c \in [a, b]$, then
+    \[
+    \int_a^bf(x)\,dx = \int_a^cf(x)\,dx + \int_c^bf(x)\,dx.
+    \]
+    \item If $f(x) \geq g(x)\ \forall x \in (a, b)$,
+    then
+    \[
+    \int_a^bf(x)\,dx \geq \int_a^bg(x)\,dx.
+    \]
+    \item If $m \geq f(x) \leq M\ \forall x \in [a, b]$ then,
+    \[
+    m(b - a) \leq \int_a^bf(x)\,dx \leq M(b - a).
+    \]
+\end{enumerate}
+
+\subsection{The fundamental theorem of calculus}
+The following theorem connects definite and indefinite integrals.
+\begin{theorem}[The fundamental theorem of calculus (FTOC)]
+    If $f(x)$ is continuous on $[a, b]$,
+    then the function
+    \[
+    F(x) = \int_a^xf(t)\,dt
+    \]
+    defined for $x \in [a, b]$ it is continuous on $[a, b]$,
+    differentiable on $(a, b)$ and is an indefinite integral of $f(x)$ on $(a, b)$,
+    i.e. $F'(x) = \frac{d}{dx}\int_a^xf(t)\,dt = f(x)\ \forall x \in (a, b)$.
+
+    Furthermore if $\Tilde{F}(x)$ is any indefinite integral of $f(x)$ on $(a, b)$,
+    then
+    \[
+    \int_a^bf(t)\,dt = \Tilde{F}(b) - \Tilde{F}(a) = \left[\Tilde{F}(x)\right]^b_a
+    \]
+    \begin{proof}[Proof Sketch]\renewcommand{\qedsymbol}{$\triangle$}
+        For $a \leq x < x + h < b$,
+        we have
+        \begin{align*}
+            F(x + h) - F(x) &= \int_a^{x + h}f(t)\,dt - \int_a^xf(t)\,dt \\
+            &= \int_x^af(t)\,dt + \int_a^{x + h}f(t)\,dt \\
+            &= \int_x^{x + h}f(t)\,dt&\text{using property (ii)}.
+        \end{align*}
+        Let $m(h)$ and $M(h)$ denote the minimum and maximum values of $f(x)$ on $[x, x + h]$.
+        Then by (iv)
+        \[
+        h \cdot m(h) \leq \int_x^{x + h}f(t)\,dt \leq h \cdot M(h)
+        \]
+        and so $m(h) \leq \frac{F(x + h) - F(x)}{h} \leq M(h)$.
+        Since $f(x)$ is continuous on $[x, x + h]$ we have $\displaystyle\lim_{h \rightarrow 0 ^ +}m(h) = f(x) = \lim_{h \rightarrow 0 ^ +}M(h)$
+        and so
+        \[
+        \lim_{h \rightarrow 0 ^ +}\frac{F(x + h) - F(x)}{h} = f(x)
+        \]
+        by \autoref{calc_thm_squeze}.
+
+        We can give a similar argument for $\lim_{h \rightarrow 0 ^ -}$,
+        and putting these together
+        \[
+        \lim_{h \rightarrow 0}\frac{F(x + h) - F(x)}{h} = f(x).
+        \]
+        Showing $F(x)$ is an indefinite integral of $f(x)$.
+
+        For the final part,
+        if $\Tilde{F}(x)$ is an indefinite integral of $f(x)$ in $(a, b)$,
+        then $\Tilde{F}(x) = F(x) + c$ for some $c \in \R$,
+        and so
+        \begin{align*}
+        \left[\Tilde{F}(x)\right]_a^b &= \Tilde{F}(b) - \Tilde{F}(a) = (F(b) + c) - (F(a) + c) \\
+        &= F(b) - F(a) \\
+        &= \int_a^bf(b)\,dt - \int_a^af(t)\,dt \\
+        &= \int_a^bf(b)\,dt.
+        \end{align*}
+    \end{proof}
+\end{theorem}
+
+The fundamental theorem of calculus also gives a simple rule for differentiating a definite integral with respect to its limits.
+\begin{example}
+    \[
+    \frac{d}{dx}\int_0^x\frac{1}{1 + \sin ^ 2 (t)}\,dt = \frac{1}{1 + \sin ^ 2 (x)}.
+    \]
+\end{example}
+This can be combined with the chain rule for more complicated expressions.
+\begin{example}
+    \[
+    \frac{d}{dx}\int_0^{x ^ 2}\frac{1}{1 + e ^ t}\,dt
+    \]
+    let $u = x ^ 2$
+    \begin{align*}
+    \frac{d}{dx}\int_0^u\frac{1}{1 + e ^ t}\,dt &= \left(\frac{d}{du}\int_0^u\frac{1}{1 + e ^ t}\,dt\right)\left(\frac{du}{dx}\right) \\
+    &= \frac{1}{1 + e ^ u} \cdot 2x \\
+    &= \frac{2x}{1 + e ^ {x ^ 2}}
+    \end{align*}
+\end{example}
+
+\subsection{Limits with logarithms powers and exponentials}
+\begin{lemma}\label{calc_lem_lemma1}
+    $\forall x \geq 0\quad e ^ x \geq 1 + x$
+    \begin{proof}
+        Consider $f(x) = e ^ x - (1 + x)$.
+        We have $f(0) = 0$ and $f'(x) = e ^ x - 1 \geq 0\ \forall x \geq 0$,
+        so $f(x)$ is monotonic increasing on $[0, \infty]$.
+        So $f(x) \geq 0$ on $[0, \infty)$.
+    \end{proof}
+\end{lemma}
+\begin{lemma}\label{calc_lem_lemma2}
+    $\forall x \geq 0$ and positive integer $n$
+    \[
+    e ^ x \geq \sum_{j = 0}^{n}\frac{x ^ j}{j!}.
+    \]
+    \begin{proof}
+        Note that when $n = 1$,
+        this is \autoref{calc_lem_lemma1}.
+        Now let $f_n(x) = e ^ x - \sum_{j = 0}^n\frac{x ^ j}{j!} = e ^ x - \left(1 + x + \frac{x ^ 2}{2} + \dotsc + \frac{x ^ n}{n!}\right)$.
+        Note $f_n(0) = 0\ \forall n \in \N$
+        \[
+        f_n'(x) = e ^ x - \left(1 + x + \frac{x ^ 2}{2} + \dotsc + \frac{x ^ {n - 1}}{(n - 1)!}\right) = e ^ x - \sum_{j = 0}^{n = 1}\frac{x ^ j}{j!} = f_{n - 1}(x).
+        \]
+        So since $f_1(x) \geq 0$ by \autoref{calc_lem_lemma1},
+        $f_2'(x) = f_{n - 1}(x) \geq 0$,
+        so
+        $f_3(x) \geq 0\ \forall x \geq 0$.
+        Then $f_3'(x) \geq 0$ and so $f_3(x) \geq 0$ and so on (induction).
+    \end{proof}
+\end{lemma}
+
+Result 1: Powers beat logs
+
+For any $a > 0$, $\displaystyle\lim_{x \rightarrow \infty}\frac{\log x}{x ^ a} = 0$
+\footnote{$\log x$ generally means $\ln x$.}
+\begin{proof}
+    Let $x = e ^ y$ then $\displaystyle\lim_{x \rightarrow \infty}\frac{\log(x)}{x ^ a} = \lim_{y \rightarrow \infty}\frac{y}{e ^ {ay}}$
+    For $y > 0$,
+    then using \autoref{calc_lem_lemma2} with $n = 2$
+    \[
+    0 \leq \frac{y}{e ^ {ay}} \leq \frac{y}{1 + ay + \frac{(ay) ^ 2}{2}} \leq \frac{y}{\frac{1}{2}a ^ 2 y ^ 2} = \frac{2}{a ^ 2 y}
+    \]
+    since $\lim_{y \rightarrow \infty}\frac{2}{a ^ 2y} = 0$ then by \autoref{calc_thm_squeze}
+    \[
+    \lim_{y \rightarrow \infty}\frac{y}{e ^ {ay}} = 0 = \lim_{x \rightarrow \infty}\frac{\log(x)}{x ^ a}.
+    \]
+\end{proof}
+
+Result 2: Exponentials beat powers
+
+For any $a > 0$
+\[
+\lim_{x \rightarrow \infty}\frac{x ^ a}{e ^ x} = 0
+\]
+\begin{proof}
+    Let $n$ be the smallest integer such that $n > a$.
+    By \autoref{calc_lem_lemma2} (for $x > 0$)
+    \[
+    0 \leq \frac{x ^ a}{e ^ x} \leq \frac{x ^ a}{1 + x + \frac{x ^ 2}{2} + \dotsc + \frac{x ^ n}{n!}} = \frac{x ^ {a - n}}{x ^ {-n} + x ^ {1 - n} + \dotsc + \frac{1}{n!}}
+    \]
+    As $a - n < 0$,
+    $\displaystyle\lim_{x \rightarrow \infty}\frac{x ^ {a - n}}{x ^ {-n} + \dotsc + \frac{1}{n!}} = 0$
+    and so by \autoref{calc_thm_squeze}
+    \[
+    \lim_{x \rightarrow \infty}\frac{x ^ a}{e ^ x} = 0.
+    \]
+\end{proof}
+
+Result 3: Exponential as a limit
+
+For any $a \in \R$ $\displaystyle\lim_{x \rightarrow \infty}\left(1 + \frac{a}{x}\right) ^ x = e ^ a$
+\begin{proof}
+    Let $f(x) = \log(x)$ then $f'(x) = \frac{1}{x}$ and
+    \[
+    1 = f'(1) = \lim_{h \rightarrow 0}\frac{\log(1 + h) - \log(1)}{h} = \lim_{h \rightarrow 0}\frac{\log(1 + h)}{h}.
+    \]
+    Now letting $h = \frac{a}{x}$
+    \[
+    1 = \lim_{x \rightarrow \infty}\frac{\log\left(1 + \frac{a}{x}\right)}{\frac{a}{x}}.
+    \]
+    So
+    \[
+    a = \lim_{x \rightarrow \infty}x\log\left(1 + \frac{a}{x}\right) = \lim_{x \rightarrow \infty}\left(1 + \frac{a}{x}\right) ^ x.
+    \]
+    Now exponentiating
+    \[
+    e ^ a = e ^ {\lim_{x \rightarrow \infty}\log\left(1 + \frac{a}{x}\right) ^ x} = \lim_{x \rightarrow \infty}\left(1 + \frac{a}{x}\right) ^ x
+    \]
+    using that $e ^ x$ is continuous.
+\end{proof}
+
+\subsection{Integration using a recurrence relation}
+One common way we find integrals related by recurrence relations is when integrating by parts.
+\[
+(f(x)g(x))' = f'(x)g(x) + f(x)g'(x)\text{ by Leibniz rule}.
+\]
+So integrating over $[a, b]$ and using the fundamental theorem of calculus
+\[
+\left[f(x)g(x)\right]_a^b = \int_a^bf'(x)g(x)\,dx + \int_a^bf(x)g'(x)\,dx,
+\]
+which is usually written as
+\[
+\int_a^bf'(x)g(x)\,dx = \left[f(x)g(x)\right]_a^b - \int_a^bf(x)g'(x)\,dx.
+\]
+\begin{example}
+    Calculate
+    \[
+    \int_0^1x ^ 3 e ^ x\,dx
+    \]
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        Let $I_n = \int_0^1x ^ n e ^ x\,dx$ for all integers $n \geq 0$ and consider
+        \begin{align*}
+        I_{n + 1} &= \int_0^1 x ^ {n + 1}e ^ x\,dx \\
+        &= \left[x ^ {n + 1} e ^ x\right]_0^1 - \int_0^1(n + 1)x ^ n e ^ x\,dx &\text{Integrating by parts ($f'(x) = e ^ x,\ g(x) = x ^ {n + 1}$)} \\
+        &= e - (n + 1)I_n.
+        \end{align*}
+        Since we can easily calculate $I_0 = \int_0^1e ^ x\,dx = \left[e ^ x\right]_0^1 = (e - 1)$.
+        The recurrence relation $I_{n + 1} = e - (n + 1)I_n$ can be used to calculate $I_n$ for any $n > 0$.
+        \begin{align*}
+        I_1 &= e - I_0 = e - (e - 1) = 1 \\
+        I_2 &= e - 2I_1 = e - 2 \\
+        I_3 &= e - 3I_2 = e - 3(e - 2) = 6 - 2e
+        \end{align*}
+        
+    \end{proof}
+\end{example}
+
+Note that one can also obtain recurrence relations without integrating by parts (e.g. using trig identities).
+\begin{example}
+    Calculate
+    \[
+    \int\tan ^ 4 x\,dx.
+    \]
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        \[
+        I_n = \int\tan ^ n x\,dx\text{ for } n \geq 0\, (n \neq 1)
+        \]
+        we want to compute $I_4$.
+        \begin{align*}
+            I_n &= \int\tan ^ {n - 2}x(\sec ^ 2 x - 1)\,dx \\
+            &= \int\tan ^ {n - 2} x\sec ^ 2 x\,dx - \int\tan ^ {n - 2}\,dx
+        \end{align*}
+        Then letting $u = \tan x\quad du = \sec ^ 2 x\,dx$
+        \begin{align*}
+            I_n &= \int u ^ {n - 2}\,du - I_{n - 2} \\
+            &= \frac{u ^ {n - 1}}{n - 1} - I_{n - 2} \\
+            &= \frac{\tan ^ {n - 1} x}{n - 1} - I_{n - 2}
+        \end{align*}
+        gives a recurrence relation.
+        We have $I_0 = \int 1\,dx = x + c$,
+        so $I_2 = \tan x - (x + c)$, $I_4 = \frac{1}{3}\tan ^ 3 x - \tan x + x + a$.
+    \end{proof}
+\end{example}
+
+\subsection{Definite integrals using odd and even functions}
+If $f_{\text{odd}}(x)$ is an integrable odd function on $[-a, a]$ then
+\[
+\int_{-a}^af_{\text{odd}}(x)\,dx = 0.
+\]
+\begin{proof}
+    \begin{align*}
+        \int_{-a}^af_{\text{odd}}(x)\,dx &= \int_{-a}^0f_{\text{odd}}(x)\,dx + \int_0^af_{\text{odd}}(x)\,dx \\
+        &= -\int_a^0f_{\text{odd}}(-x)\,dx + \int_0^af_{\text{odd}}(x)\,dx \\
+        &= \int_0^af_{\text{odd}}(x)\,dx + \int_0^af_{\text{odd}}(x)\,dx \\
+        &= \int_0^a(f_{\text{odd}}(-x) + f_{\text{odd}}(x))\,dx \\
+        &= 0
+    \end{align*}
+\end{proof}
+Similarly if $f_{\text{even}}(x)$ is an integrable even function on $[-a, a]$ then
+\[
+\int_{-a}^af_{\text{even}}(x)\,dx = 2\int_0^af_{\text{even}}(x)\,dx.
+\]
+
 
 
 

@@ -1508,5 +1508,224 @@ So, set
 \]
 Then the matrix equation (system of two linear equations)
 
-has a unique 
+has a unique solution if and only if $\det\begin{pmatrix}
+    a & b \\ c & d
+\end{pmatrix} \neq 0$
+
+\subsection{General definition of determinant}
+We define the determinant of an $n \times n$ matrix inductively in terms of the determinants of certain $(n - 1)\times (n - 1)$ matrices.
+Let $A = (a_{ij})_{n \times n}$
+\begin{itemize}
+    \item For integers $r$ and $s$ between $1$ and $n$ write $A_{r, s}$ for the $(n - 1)\times (n - 1)$ matrix obtained from $A$ be deleting its $r$th row and its $s$th column.
+    Then $A_{r, s}$ is called the $(r, s)$th minor
+    \footnote{The minor is called the 'unsigned cofactor'.
+    We have defined the minor as simply a submatrix.}
+    of $A$.
+    \item The value of $\det(A_{r, s})$ i.e. the determinant of the $(r, s)$th minor of $A$,
+    is called the $(r, s)$th unsigned cofactor of $A$ and the value $(-1) ^ {r + s}\det(A_{r, s})$ is called the $(r, s)$th (signed) cofactor of $A$
+    \footnote{Some texts write 'adjunct' instead of 'cofactor'.}
+    .
+\end{itemize}
+
+For any matrix $A \in M_{n \times n}(\R)$ the determinant of $A$ is the defined inductively via expansion by the first row,
+in terms of the signed cofactors:
+\[
+\det A = \sum_{k = 1}^{n}(-1) ^ {1 + k}a_{1k}\det(A_1, k).
+\]
+
+An important observation is that we could have defined it via expansion by any given row.
+\begin{lemma}\label{pre_linalg_lem_detanyrow}
+    If $A$ is an $n \times n$ matrix then for any $1 \leq i \leq n$ we have
+    \[
+    \det(A) = \sum_{k = 1}^{n}(-1) ^ {i + k}a_{ik}\det(A_i, k).
+    \]
+    That is,
+    the determinant formula remains valid via expansion along the $i$th row
+    (note however the signs).
+    \begin{proof}
+        The proof is a very long (and involved) inductive one so$\dotsc$
+    \end{proof}
+\end{lemma}
+
+\subsection{Fundamental properties}
+In this section,
+for notational convenience,
+we write in terms of the row vector $\mbf{a}_r$ of an $n \times n$ matrix $A = (a_{ij})$ that is $\mbf{a}_r = (a_{r1}\; a_{r2}\; \dotsi \; a_{rn})$
+\begin{enumerate}[label = (\roman*)]
+    \item $\det I_n = 1$.
+    \item If one multiplies
+    (all the elements in)
+    the $r$th row by some scalar $\lambda$
+    (that is, if we apply the ERO $M_r(\lambda)$),
+    then the determinant changes by precisely this factor:
+    \[
+    \det(M_r(\lambda)A) = \det\begin{pmatrix}
+        \mbf{a} \\ \vdots \\ \lambda\mbf{a}_r \\ \vdots \\ \mbf{a}_n
+    \end{pmatrix} = \lambda\det A.
+    \]
+    \item For any row vector $\mbf{b}_r$ we have
+    \[
+    \det\begin{pmatrix}
+        \mbf{a}_1 \\ \vdots \\ \mbf{a}_r + \mbf{b}_r \\ \vdots \\ \mbf{a}_n
+    \end{pmatrix} =
+    \det \begin{pmatrix}
+        \mbf{a}_1 \\ \vdots \\ \mbf{a}_r \\ \vdots \\ \mbf{a}_n
+    \end{pmatrix}
+    +
+    \det\begin{pmatrix}
+        \mbf{a}_1 \\ \vdots \\ \mbf{b}_r \\ \vdots \\ \mbf{a}_n
+    \end{pmatrix}.
+    \]
+    Note that (ii) and (iii) can be summarised as linearity in each row.
+    \item Anti-symmetry in rows.
+    The determinant switches signs if one swaps a pair of rows (i.e. if one applies the ERO $P_{rs}$);
+    that is,
+    \[
+    \det(A) = \det\begin{pmatrix}
+        \mbf{a}_1 \\ \vdots \\ \mbf{a}_r \\ \vdots \\ \mbf{a}_s \\ \vdots \\ \mbf{a}_n
+    \end{pmatrix}
+    = -\det\begin{pmatrix}
+        \mbf{a}_1 \\ \vdots \\ \mbf{a}_s \\ \vdots \\ \mbf{a}_r \\ \vdots \\ \mbf{a}_n
+    \end{pmatrix}
+    =
+    -\det(P_{rs}A).
+    \]
+    \item $\det A = 0$ if $A$ has two rows that are equal
+    (or even two rows that are collinear - follows simply by property (ii)).
+    \item $\det A = 0$ if $A$ has a row of zeros.
+    \item The determinant does not change under the ERO $A_{rs}(\lambda)$; that is,
+    \[
+    \det(A_{rs}(\lambda)A) = \det\begin{pmatrix}
+        \mbf{a}_1 \\ \vdots \\ \mbf{a}_r \\ \vdots \\ \mbf{a}_s + \lambda\mbf{a}_r \\ \vdots \\ \mbf{a}_n
+    \end{pmatrix}
+    =
+    \det\begin{pmatrix}
+        \mbf{a}_1 \\ \vdots \\ \mbf{a}_r \\ \vdots \\ \mbf{a}_s \\ \vdots \\ \mbf{a}_n
+    \end{pmatrix}
+    = \det A.
+    \]
+    \begin{proof}
+        \begin{enumerate}[label = (\roman*)]
+            \item We perform induction on $n$.
+            The case $n = 1$ is obvious:
+            $\det(1) = 1$.
+            So now assume the claim holds for some $n \geq 1$,
+            that $\det I_n = 1$.
+            We need to establish the claim for $n + 1$.
+            But now by the definition of the determinant
+            (say, by expanding by the first row)
+            we immediately see $\det(I_{n + 1}) = 1\cdot\det(I_n) = 1 \cdot 1 = 1$,
+            as desired.
+            \item This is straightforward,
+            by expansion along the $r$th row (by \autoref{pre_linalg_lem_detanyrow}):
+            \[
+            \det(M_r(\lambda)A) = \sum_{k = 1}^{n}(-1) ^ {r + k}(\lambda a_{rk})\det(A_r, k) = \lambda\sum_{k = 1}^{n}(-1) ^ {r + k}a_{rk}\det(A_{r, k}) = \lambda\det A.
+            \]
+            \item is similar to (ii),
+            by expansion along the $r$th row.
+            \item \phantom{}
+            \item This follows directly from (iv):
+            Assume row $r$ is repeated in row $s$ then
+            \[
+            \det\begin{pmatrix}
+                \mbf{a}_1 \\ \vdots \\ \mbf{a}_r + \mbf{b}_r \\ \vdots \\ \mbf{a}_n
+            \end{pmatrix}
+            =
+            -\det\left(P_{rs}\begin{pmatrix}
+                \mbf{a}_1 \\ \vdots \\ \mbf{a}_r + \mbf{b}_r \\ \vdots \\ \mbf{a}_n
+            \end{pmatrix}\right)
+            =
+            -\det\begin{pmatrix}
+                \mbf{a}_1 \\ \vdots \\ \mbf{a}_r + \mbf{b}_r \\ \vdots \\ \mbf{a}_n
+            \end{pmatrix},
+            \]
+            and so the value of the determinant must be zero.
+            \item This follows directly from (iii) by writing $\mbf{0} = \mbf{a}_r - \mbf{a}_r$ (or from (ii) by writing $\mbf{0} = 0 \cdot \mbf{a}_r$ for some vector $\mbf{a}_r$).
+            Indeed,
+            if the row of zeros appears in row $r$ then we have
+            \[
+            \det\begin{pmatrix}
+                \mbf{a}_1 \\ \vdots \\ \mbf{a}_{r - 1} \\ \mbf{0} \\ \mbf{a}_{r + 1} \\ \vdots \\ \mbf{a}_n
+            \end{pmatrix}
+            =
+            \det\begin{pmatrix}
+                \mbf{a}_1 \\ \vdots \\ \mbf{a}_{r - 1} \\ \mbf{a}_r - \mbf{a}_r \\ \mbf{a}_{r + 1} \\ \vdots \\ \mbf{a}_n
+            \end{pmatrix}
+            =
+            \det\begin{pmatrix}
+                \mbf{a}_1 \\ \vdots \\ \mbf{a}_{r - 1} \\ \mbf{a}_r \\ \mbf{a}_{r + 1} \\ \vdots \\ \mbf{a}_n
+            \end{pmatrix}
+            -
+            \det\begin{pmatrix}
+                \mbf{a}_1 \\ \vdots \\ \mbf{a}_{r - 1} \\ \mbf{a}_r \\ \mbf{a}_{r + 1} \\ \vdots \\ \mbf{a}_n
+            \end{pmatrix}
+            = 0.
+            \]
+            \item This follows from (ii), (iii), and (iv):
+            \[
+            \det\begin{pmatrix}
+                \mbf{a}_1 \\ \vdots \\ \mbf{a}_r \\ \vdots \\ \mbf{a}_s + \lambda \mbf{a}_r \\ \vdots \\ \mbf{a}_n
+            \end{pmatrix}
+            =
+            \det\begin{pmatrix}
+                \mbf{a}_1 \\ \vdots \\ \mbf{a}_r \\ \vdots \\ \mbf{a}_s \\ \vdots \\ \mbf{a}_n
+            \end{pmatrix}
+            +
+            \lambda
+            \det\begin{pmatrix}
+                \mbf{a}_1 \\ \vdots \\ \mbf{a}_r \\ \vdots \\ \mbf{a}_r \\ \vdots \\ \mbf{a}_n
+            \end{pmatrix}
+            =
+            \det\begin{pmatrix}
+                \mbf{a}_1 \\ \vdots \\ \mbf{a}_r \\ \vdots \\ \mbf{a}_s \\ \vdots \\ \mbf{a}_n
+            \end{pmatrix}.
+            \]
+        \end{enumerate}
+    \end{proof}
+\end{enumerate}
+
+\subsection{Uniqueness of the determinant}
+We will now prove that properties (i)-(vii) completely characterise the determinant.
+We could define the function
+\[
+\det : M_{n \times n}(\R) \rightarrow \R
+\]
+as the unique function that satisfies these four properties.
+\begin{theorem}
+    Let $f: M_n(\R) \rightarrow \R$ be a function that satisfies properties (i)-(iv).
+    Then
+    \[
+    f(A) = \det(A).
+    \]
+    In other words,
+    the determinant is the only function with the properties (i)-(vii).
+    \begin{proof}
+        Apply Gauss-Jordan to the matrix $A$ to get the row reduced echelon form $A'$.
+        As $\det$ satisfies properties (ii), (iv) and (vii) and we are assuming $f$ does too,
+        during this process $\det$ and $f$ change value in exactly the same way.
+        So
+        \begin{align*}
+            \det A' &= \lambda_1\dotsi\lambda_k\det A \\
+            f(A') &= \lambda_1\dotsi\lambda_kf(A)
+        \end{align*}
+        for some non-zero scalars $\lambda_i$.
+        But $A'$ is either equal to $I_n$ in which case $f(A') = \det A' = 1$ (by property (i)),
+        or it contains a zero row in which case $f(A') = \det A' = 0$ by property (vi).
+        So in either case $f(A') = \det A'$ and we obtain
+        \[
+        \lambda_1\dotsi\lambda_kf(A) = \lambda_1\dotsi\lambda_k\det A,
+        \]
+        which gives $f(A) = \det A$ since $\lambda_i \neq 0$ for all $i$.
+    \end{proof}
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
 \end{document}
