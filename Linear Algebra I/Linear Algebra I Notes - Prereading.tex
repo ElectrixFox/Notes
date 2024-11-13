@@ -758,7 +758,7 @@ For example, if $A = \begin{pmatrix}
     If no such inverse $B$ exists for a matrix $A$, we say $A$ is non-invertible (or singular).
 \end{definition}
 
-\begin{proposition}[Properties of the inverse and transpose, label = prop:propofinvandtransp]\label{linalg_prop_propofinvandtransp}
+\begin{proposition}[Properties of the inverse and transpose, label = prop:propofinvandtransp]\label{pre_linalg_prop_propofinvandtransp}
     \begin{enumerate}[label = (\roman*)]
         \item A matrix has at most one inverse.
         \item Assume $A$ and $B$ are invertible $n \times n$ matrices. Then the product $AB$ is invertible and
@@ -1419,7 +1419,7 @@ One can do the following:
     \end{proof}
 \end{theorem}
 This proof immediately gives us
-\begin{corollary}
+\begin{corollary}\label{pre_linalg_col_invisprodofele}
     Any invertible square matrix is the product of elementary matrices (and vice versa).
     \begin{proof}
         Simply notice that $E_1 ^ {-1}E_2 ^ {-1} \dotsi E_i ^ {-1}$ is an inverse of $A ^ {-1} = E_1E_2 \dotsi E_i$.
@@ -1691,7 +1691,7 @@ We could define the function
 \det : M_{n \times n}(\R) \rightarrow \R
 \]
 as the unique function that satisfies these four properties.
-\begin{theorem}
+\begin{theorem}\label{pre_linalg_thm_uniquedet}
     Let $f: M_n(\R) \rightarrow \R$ be a function that satisfies properties (i)-(iv).
     Then
     \[
@@ -1719,8 +1719,317 @@ as the unique function that satisfies these four properties.
     \end{proof}
 \end{theorem}
 
+\subsection{Determinant calculations}
+Properties (i)-(vii) tell us how the determinant changes under the G-J algorithm,
+and hence gives us a way to compute the determinant.
+There are two basic cases.
+\begin{enumerate}[label = (\Roman*)]
+    \item The RREF $A'$ of $A$ contains a zero row.
+    Then $\det(A) = \det(A') = 0$.
+    \item The RREF $A'$ of $A$ is the identity matrix.
+    Assume that we applied the operation $P_{rs}$ of switching rows $\ell$ times and applied the scaling operations $M_{r_1}(\lambda_1), M_{r_2}(\lambda_2), \dotsc, M_{r_k}(\lambda_k)$ at some point during the algorithm.
+    Then
+    \[
+    1 = \det I_n = \det A' = (-1) ^ \ell \lambda_1 \dotsi \lambda_k\det A.
+    \]
+    So
+    \[
+    \det(A) = (-1) ^ \ell \lambda_1 ^ {-1} \dotsi \lambda_k ^ {-1}.
+    \]
+\end{enumerate}
+\begin{proposition}
+    Let $A$ be an upper (or lower) triangular $n \times n$ matrix with diagonal entries $a_{11}, a_{22}, \dotsc, a_{nn}$.
+    Then
+    \[
+    \det(A) = \prod_{k = 1}^{n}a_{kk} = a_{11} \cdot a_{22} \dotsi a_{nn}.
+    \]
+    \begin{proof}
+        
+    \end{proof}
+\end{proposition}
 
+\subsection{Several Big Theorems}
+\begin{theorem}\label{pre_linalg_thm_invifdetnonzero}
+    The $n \times n$ matrix $A$ has an inverse if and only if $\det(A) \neq 0$.
+    \begin{proof}
+        By definition we already know this for the cases $n = 1$,
+        $n = 2$ and $n = 3$.
+        For $n > 3$ we apply G-J to the matrix $A$ to get to the RREF $A'$.
+        As in the proof of \autoref{pre_linalg_thm_uniquedet},
+        during this process $\det$ changes in a clear way using properties (ii), (iv), and (vii).
+        We get
+        \[
+        \det A' = \lambda_1\dotsi\lambda_k\det A
+        \]
+        for some non-zero scalars $\lambda_i$/
+        But then
+        \[
+        \det(A) \neq 0 \iff \det(A') \neq 0 \iff A' = I_n \iff A \text{ is non-singular}.
+        \]
+    \end{proof}
+\end{theorem}
 
+\begin{theorem}\label{pre_linalg_thm_detsplits}
+    Let $A$ and $B$ be $n \times n$ matrices.
+    Then
+    \[
+    \det(AB) = \det(A)\det(B).
+    \]
+    \begin{proof}
+        We apply G-J to the matrix $A$ to get to the RREF $A'$.
+        As before there are some non-zero scalars $\lambda_i$ such that
+        \[
+        \det A' = \lambda_1\dotsi\lambda_k\det A \text{ so that } \det A = \lambda_1 ^ {-1} \dotsi\lambda_k ^ {-1}\det A'.
+        \]
+        Applying the same ERO's to the matrix $AB$ we obtain the matrix $A'B$ (ERO's are given by left multiplication of elementary matrices) and hence also
+        \[
+        \det(A'B) = \lambda_1\dotsi\lambda_k\det(AB).
+        \]
+        We now have two cases:
+        \begin{enumerate}[label = (\roman*)]
+            \item 
+            $A' = I_n$.
+            Then
+            \[
+            \det(AB) = \lambda_1 ^ {-1} \dotsi \lambda_k ^ {-1}\det(B) = \det(A)\det(B),
+            \]
+            as desired.
+            \item $A'$ contains a zero row;
+            so $\det A = \det A' = 0$.
+            But then the product $A'B$ contains also a zero row which gives $\det(A'B) = 0$.
+            Since $\det(A'B)$ and $\det(AB)$ only differ by non-zero scalars,
+            we get $\det(AB) = 0$.
+            But we also have $\det(A)\det(B) = 0$ since $\det A = 0$.
+        \end{enumerate}
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    We have
+    \[
+    \det(A ^ t) = \det(A).
+    \]
+    \begin{proof}
+        Firstly,
+        \autoref{pre_linalg_prop_propofinvandtransp}(iv) implies that either both $A$ and $A ^ t$ are invertible,
+        or neither are.
+        In the case $\det A = 0$ we have by \autoref{pre_linalg_thm_invifdetnonzero} that $A$ is singular,
+        and so $A ^ t$ is also singular.
+        Applying \autoref{pre_linalg_thm_invifdetnonzero} a second time shows that $\det(A ^ t) = 0$.
+        If $\det A \neq 0$ then $A$ is invertible.
+        But then \autoref{pre_linalg_col_invisprodofele} tells us we may write it as a product of EROs,
+        say $A = E_1E_2\dotsi E_\ell$.
+        By combining determinant properties (ii),
+        (iv) and (vii) it is easy to check that $\det(P_{rs}) = -1$,
+        $\det(M_r(\lambda)) = \lambda$ and $\det(A_{rs}(\lambda)) = 1$ for every $r$ and $s$.
+        Combining this with the observation that
+        \[
+        (P_{rs}) ^ t = P_{rs},\quad(M_{r}(\lambda)) ^ t = M_r(\lambda)\quad(A_{rs}(\lambda)) ^ t = A_{sr}(\lambda),
+        \]
+        it follows that $\det(E ^ t) = \det(E)$ for every elementary matrix $E$.
+        Thus,
+        by \autoref{pre_linalg_prop_propofinvandtransp}(iii) and \autoref{pre_linalg_thm_detsplits} we have
+        \begin{align*}
+            \det(A ^ t) &= \det((E_1\dotsi E_\ell) ^ t) &= \det(E_\ell ^ t \dotsi E_1 ^ t) &= \det(E_\ell ^ t)\dotsi\det(E_1 ^ t) \\
+            &= \det(E_\ell)\dotsi\det(E_1) &= \det(E_1)\dotsi\det(E_\ell) &= \det(E_1 \dotsi E_\ell) &= \det A.
+        \end{align*}
+    \end{proof}
+\end{theorem}
+
+\begin{corollary}
+    If $A$ is not singular,
+    then
+    \[
+    \det(A ^ {-1}) = \det((A ^ t) ^ {-1}) = \frac{1}{\det(A)}.
+    \]
+    \begin{proof}
+        Simply notice that $1 = \det(I_n) = \det(A ^ {-1}A) = \det(A ^ {-1})\det(A)$,
+        and similarly for the transpose (using \autoref{pre_linalg_prop_propofinvandtransp}(iv)).
+    \end{proof}
+\end{corollary}
+
+\subsection{Determinants and inverses; Cramer's Rule}
+\begin{definition}
+    Given a square matrix $A$,
+    we define the adjoint matrix $\Adj(A)$ by
+    \[
+    (\Adj(A))_{ij} = (-1) ^ {i + j}\det(A_{j, i}).
+    \]
+    The adjoint is the transpose of the matrix of signed cofactors.
+\end{definition}
+
+\begin{proposition}
+    Let $A \in M_n(\R)$ and $\Adj(A)$ be its adjoint.
+    Then
+    \[
+    A \cdot \Adj(A) = \det(A) \cdot I_n = \Adj(A) \cdot A.
+    \]
+    \begin{proof}
+        We first prove $A \cdot \Adj(A) = \det(A) \cdot I_n$.
+        The $(r, s)$-entry of $A \cdot \Adj(A)$ is given by
+        \[
+        \sum_{k = 1}^{n}a_{rk}(\Adj(A))_{ks} = \sum_{k = 1}^{n}a_{rk}(-1) ^ {k + s}\det(A_{s, k}).
+        \]
+        For $r = s$ this is the expansion of $\det A$ by the $s$-th row.
+        While for $r \neq s$,
+        this is the expansion of the determinant of $A$ by the $s$-th row with row $s$ replaced by the $r$th row $\mbf{a}_r$.
+        So we are looking at
+        \[
+        \det\begin{pmatrix}
+            \mbf{a}_1 \\ \vdots \\ \mbf{a}_r \\ \vdots \\ \mbf{a}_r \\ \vdots \\ \mbf{a}_n
+        \end{pmatrix} = 0.
+        \]
+        Hence in summary
+        \[
+        (r, s)-\text{entry of } A\Adj(A) = \begin{cases}
+            \det A &\text{if } r = s \\
+            0 &\text{if } r \neq s
+        \end{cases};
+        \]
+        i.e., $A \cdot \Adj(A) = (\det A)I_n$.
+        This is enough to conclude that $A ^ {-1} = \frac{1}{\det(A)}\Adj(A)$ and the second equation,
+        that $\Adj(A) \cdot A = (\det A)I_n$ follows from the uniqueness of inverses.
+    \end{proof}
+\end{proposition}
+
+\begin{theorem}[Inverse by adjoint matrix]\label{pre_linalg_thm_invbyadjmatr}
+    Let $A \in M_n(\R)$ be non-singular.
+    Then the inverse $A ^ {-1}$ is given by
+    \[
+    A ^ {-1} = \frac{1}{\det A}\Adj(A)
+    \]
+\end{theorem}
+
+\begin{theorem}[Cramer's rule]\label{pre_linalg_thm_cramersrulepre_linalg_thm_cramersrule}
+    Let $A\mbf{x} = \mbf{b}$ be a linear system with a non-singular matrix $A \in M_n(\R)$.
+    The unique solution $\begin{pmatrix}
+        x_1 \\ \vdots \\ x_n
+    \end{pmatrix}$ is given by
+    \[
+    x_i = \frac{\det(\mbf{a}_1, \dotsc, \mbf{a}_{i - 1}, \mbf{b}, \mbf{a}_{i + 1}, \dotsc, \mbf{a}_n)}{\det A}.
+    \]
+    Here $\mbf{a}_\ell$ denotes (for a change) the $\ell$-th column vector of $A$.
+\end{theorem}
+
+\begin{remark}
+    For practical computations \autoref{pre_linalg_thm_invbyadjmatr} and \autoref{pre_linalg_thm_cramersrule} are rather useless.
+    But for theoretical considerations this is very useful.
+    For example,
+    since the determinant is a polynomial in the entries of the matrix $A$,
+    the entries $A ^ {-1}$
+    (and also the solution to $A\mbf{x} = \mbf{b}$)
+    depend continuously on the entries of $A$.
+\end{remark}
+
+\subsection{Determinants, area and volume}
+
+\textbf{Area of parallelograms}
+
+Consider the pair of vectors
+\[
+\mbf{v} = \begin{pmatrix} a \\ b \end{pmatrix},
+\,\mbf{w} = \begin{pmatrix} c \\ d \end{pmatrix}.
+\]
+Now form the parallelogram $P$ with vertices $0, \mbf{v}, \mbf{v + w}, \mbf{w}$.
+Elementary trigonometry tells us
+\begin{equation}
+    \mathrm{area}(P) = |\mbf{v}| \cdot |\mbf{w}| \cdot \sin\theta,
+\end{equation}
+where $\theta \in [0, \pi]$ is the angle between $\mbf{v}$ and $\mbf{w}$.
+Recall for two vectors $\mbf{x, y} \in \R ^ 3$,
+we have
+\begin{equation}
+    |\mbf{x \times y}| = |\mbf{x}||\mbf{y}|\sin\theta.
+\end{equation}
+We use this to rewrite (1) in the following way.
+We define two auxiliary vectors $\Tilde{\mbf{v}} = \begin{pmatrix}
+    a \\ b \\ 0
+\end{pmatrix}$ and $\Tilde{\mbf{w}} = \begin{pmatrix}
+    c \\ d \\ 0
+\end{pmatrix}$ in $\R ^ 3$.
+We then have
+\[
+\Tilde{\mbf{v}} \times \Tilde{\mbf{w}} = \begin{pmatrix}
+    0 \\ 0 \\ ad - bc
+\end{pmatrix}
+\]
+So (2) becomes
+\[
+|ad - bc| = |\Tilde{\mbf{v}}||\Tilde{\mbf{w}}|\sin\theta = |\mbf{v}||\mbf{w}|\sin\theta.
+\]
+Combining this with (1) we have shown
+\begin{theorem}
+    For $\mbf{v, w} \in \R ^ 2$ two vectors in the plane,
+    form the parallelogram $P$ with vertices $\mbf{0, v, w}$ and $\mbf{v + w}$.
+    Then
+    \[
+    \mathrm{area}(P) = |\det(\mbf{v, w})|.
+    \]
+\end{theorem}
+
+\textbf{Area of triangles}
+
+The area of a triangle with vertices $\mbf{a, b}$ and $\mbf{c}$ is half the area of the parallelogram with vertices $\mbf{a}$,
+$\mbf{a + (b - a)}, \mbf{a + (c - a)} = \mbf{c}$ and $\mbf{a + (b - a) + (c - a)} = \mbf{b + c - a}$.
+In other words,
+the area of this triangle is given by:
+\begin{proposition}
+    The triangle with vertices $\mbf{a, b}$ and $\mbf{c}$ has area
+    \[
+    \frac{1}{2}|\det(\mbf{b - a, c - a})|.
+    \]
+\end{proposition}
+
+\textbf{Volume of parallelepipeds}
+
+A parallelepiped $P$ is a three dimensional polyhedron with six quadrilateral faces where opposite faces are parallel.
+A parallelepiped has twelve edges.
+These come in three families of four where all the vectors in each family are parallel;
+call a vector from the first family $\mbf{u}$,
+one from the second $\mbf{v}$ and one from the third $\mbf{w}$
+(we then say that $P$ is spanned by $\mbf{u, v}$ and $\mbf{w}$).
+The parallelepiped $P$ in $\R ^ 3$ spanned by the vectors $\mbf{u, v, w}$ hence has vertices $\mbf{0, u, v, w, u + v, u + w, v + w, u + v + w}$.
+We have
+\[
+\mathrm{vol}(P) = \mathrm{area}(\text{base}) \times \text{height}.
+\]
+As base we take the parallelogram spanned by $\mbf{v}$ and $\mbf{w}$.
+Hence, as before
+\[
+\mathrm{area}(\text{base}) = |\mbf{v \times w}|.
+\]
+For the height $h$ we have
+\[
+h = |\mbf{u}| \cdot |\sin(\mathrm{angle}(\mbf{u}, \text{base}))| = |\mbf{u}| \cdot |\cos(\mathrm{angle}(\mbf{u}, \text{normal vector to base}))|.
+\]
+A normal vector to the base is of course $\mbf{v \times w}$.
+Hence by definition of the angle between two vectors we see
+\[
+|\cos(\mathrm{angle}(\mbf{u}, \mbf{v} \times \mbf{w}))| = \frac{|\mbf{u} \cdot (\mbf{v} \times \mbf{w})}{|\mbf{u}| \cdot |\mbf{v} \times \mbf{w}|} = \frac{|\det(\mbf{u}, \mbf{v}, \mbf{w})|}{|\mbf{u}| \cdot |\mbf{v} \times \mbf{w}|}.
+\]
+Combining all of this we obtain
+\begin{proposition}
+    The volume of the parallelepiped $P$ in $\R ^ 3$ spanned by the vectors $\mbf{u, v, w}$ is given by
+    \[
+    \mathrm{vol}(P) = |\det(\mbf{u, v, w})|.
+    \]
+\end{proposition}
+
+\textbf{Other polyhedra}
+
+Similar reasoning shows that the volume of a tetrahedron $T$ is one sixth of the determinant of the matrix whose columns are the vectors along edges of $T$ based at the same vertex.
+
+\textbf{General $n$}
+
+To define this phenomenon in higher dimensions we first need to have an idea what we mean by an $n$-dimension volume.
+The $n$-dimension box spanned by $a_1\mbf{e}_1, a_2\mbf{e}_2, \dotsc, a_n\mbf{e}_n$ we define to have volume $|a_1|\dotsi|a_n|$.
+Note that $\left|\begin{pmatrix}
+    a_1 & \phantom{} & \phantom{} \\ \phantom{} & \ddots & \phantom{} \\ \phantom{} & \phantom{} & a_n
+\end{pmatrix}\right| = |a_1| \dotsi |a_n|$.
+With this definition one can show that the volume of the $n$-dimensional parallelepiped $P$ spanned by vectors $\mbf{v}_1, \dotsc, \mbf{v}_n$ is given by
+\[
+\mathrm{vol}(P) = |\det(\mbf{v}_1, \dotsc, \mbf{v}_n)|.
+\]
 
 
 

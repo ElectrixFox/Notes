@@ -981,9 +981,62 @@ and so on.
     \end{proof}
 \end{theorem}
 
+\subsection{Standard normal tables}
+\begin{definition}[Standard normal distribution]
+    A continuous random variable $Z$ is standard normally distributed when $Z \sim \mathcal{N}(0, 1)$.
+\end{definition}
+In other words,
+a standard normal is normal with $\mu = 0$ and $\sigma = 1$.
+We use a special symbol to denote its probability density function and cumulative distribution function
+\[
+\phi(z) := f(z) = \frac{1}{\sqrt{2\pi}}e ^ {-\frac{z ^ 2}{2}},\qquad\Phi(z) := F(z) = \int_{-\infty}^{z}\phi(t)\,dt.
+\]
+As already mentioned,
+$\Phi$ has no closed analytical form,
+however,
+it can be tabulated.
+Such tabulation is called a standard normal table.
+Because $\phi(z) = \phi(-z)$,
+it follows that $\Phi(z) = 1 - \Phi(-z)$.
+and so we only need to tabulate $\Phi$ for non-negative values of $z$.
 
+\subsection{Functions of random variables}
+Suppose $X : \Omega \rightarrow X(\Omega)$ is a a random variable,
+and $g : X(\Omega) \rightarrow \mathcal{S}$ is some function.
+Then $g(X)$ is also a random variable,
+namely the outcome to a 'new experiment' obtained by running the 'old experiment' to produce a value $x$ for $X$,
+and then evaluating $g(x)$.
+Formally,
+as a function of $\omega \in \Omega$,
+$g(X) := g \circ X$, i.e.,
+\[
+g(X)(\omega) := g(X(\omega))\text{ for all } \omega \in \Omega.
+\]
+For example,
+\[
+\P(g(X) \in B) = \P(\{\omega \in \Omega : g(X(\omega)) \in B\})\text{ for all } B \subseteq \mathcal{S}.
+\]
 
+\begin{theorem}[Standardising the normal distribution]
+    Suppose $\mu \in \R$ and $\sigma > 0$.
+    If $X \sim \mathcal{N}(\mu, \sigma^ 2)$ and $Z \sim \mathcal{N}(0, 1)$,
+    then
+    \[
+    \frac{X - \mu}{\sigma} \sim \mathcal{N}(0, 1),\quad\text{and}\quad\sigma Z + \mu \sim \mathcal{N}(\mu, \sigma ^ 2).
+    \]
+    \begin{proof}
+        We can prove this is via change of variable in the integral for the cumulative distribution function: see Exercise 114.
+        A shorter proof goes via the moment generating function,
+        which will be introduced later.
+    \end{proof}
+\end{theorem}
 
+\begin{corollary}
+    If $X \sim \mathcal{N}(\mu, \sigma ^ 2)$ then
+    \[
+    F(x) = \Phi\left(\frac{x - \mu}{\sigma}\right).
+    \]
+\end{corollary}
 
 
 

@@ -1253,7 +1253,7 @@ Fibonacci sequence is divergent.
     $x_n \rightarrow \sqrt{2}$.
 \end{example}
 
-\begin{theorem}
+\begin{theorem}\label{analy_thm_contofsqrt}
     Let $\seq$ be a sequence such that $x_n \in [a, b]$ for all $n$.
     If the sequence converges to $x \in \R$.
     Then $x \in [a, b]$.
@@ -1269,6 +1269,145 @@ Fibonacci sequence is divergent.
         Contradiction.
     \end{proof}
 \end{theorem}
+
+\begin{corollary}\label{analy_corol_seq_convgeq}
+    Let $\seq$ and $\seq[y]$ be convergent sequences with $x_n \leq y_n$ for all $n \in \N$.
+    Then
+    \[
+    \lim_{n \rightarrow \infty}x_n \leq \lim_{n \rightarrow \infty}y_n
+    \]
+    \begin{proof}
+        Consider $a_n = y_n - x_n$.
+        Then $a_n \geq 0$
+        By the previous $\lim_{n \rightarrow \infty}a_n \geq 0$. By \autoref{analy_thm_COLT}
+        \[
+        \lim_{n \rightarrow \infty}y_n - \lim_{n \rightarrow \infty}x_n \geq 0.
+        \]
+    \end{proof}
+\end{corollary}
+\begin{theorem}
+    Let $\seq$ be a convergent sequence with each $x_n \geq 0$.
+    Then
+    $(\sqrt{x_n})_{n \in \N}$ is a convergent sequence with
+    \[
+    \lim_{n \rightarrow \infty}\sqrt{x_n} = \sqrt{\lim_{n \rightarrow \infty}x_n}.
+    \]
+    \begin{proof}
+        Denote $x = \lim_{n \rightarrow \infty}x_n \geq 0$ by \autoref{analy_corol_seq_convgeq}.
+        Distinguish the cases $x = 0$ and $x > 0$.
+        Assume $x > 0$.
+        \begin{align*}
+            |\sqrt{x_n} - \sqrt{x}| &= \left|\frac{(\sqrt{x_n} - \sqrt{x})(\sqrt{x_n} + \sqrt{x})}{\sqrt{x_n} + \sqrt{x}}\right| \\
+            &= \frac{|x_n - x|}{\sqrt{x_n} + \sqrt{x}} \\
+            &\leq \frac{|x_n - x|}{\sqrt{x}}
+        \end{align*}
+        by \autoref{analy_thm_squeezethm} $\sqrt{x_n} - \sqrt{x} \rightarrow 0$ and by \autoref{analy_thm_COLT} $\sqrt{x_n} \rightarrow \sqrt{x}$.
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    Consider
+    \begin{enumerate}[label = (\alph*)]
+        \item 
+        \begin{align*}
+            y_n &= \frac{n ^ 2 - n(-1) ^ n}{\sqrt{n ^ 4 + 1}} \\
+            &= \frac{n ^ 2 \left(1 - \frac{(-1) ^ n}{n}\right)}{n ^ 2 \sqrt{1 + \frac{1}{n ^ 4}}} \\
+            &= \frac{1 - \frac{(-1) ^ n}{n}}{\sqrt{1 + \frac{1}{n ^ 4}}}
+        \end{align*}
+        by \autoref{analy_thm_COLT} and \autoref{analy_thm_contofsqrt} $y_n \rightarrow \frac{1 - 0}{\sqrt{1 + 0}} = 1$.
+        \item
+        \begin{align*}
+            \sqrt{n}(\sqrt{n + 1} - \sqrt{n}) &= \frac{\sqrt{n}(\sqrt{n + 1} - \sqrt{n})(\sqrt{n + 1} + \sqrt{n}}{\sqrt{n + 1} + \sqrt{n}} \\
+            &= \sqrt{n} \cdot \frac{1}{\sqrt{n + 1} + \sqrt{n}} \\
+            &= \frac{\sqrt{n}}{\sqrt{n}\left(\sqrt{\frac{n + 1}{n}} + 1\right)} \\
+            &= \frac{1}{\underbrace{\sqrt{1 + \frac{1}{n}}}_{\text{by \autoref{analy_thm_contofsqrt}} \rightarrow 0} + 1} \rightarrow \frac{1}{2}
+        \end{align*}
+        by \autoref{analy_thm_COLT}.
+    \end{enumerate}
+\end{example}
+
+\begin{theorem}\label{analy_thm_boundmonoincseqconv}
+    Let $\seq$ be a sequence which is monotonically increasing,
+    that is,
+    $x_m \leq x_n$ for $m \leq n$.
+    If $\seq$ is bounded,
+    then $\seq$ is convergent.
+    \begin{proof}
+        Look at $X = \{x_n \in \R | n \in \N\}$,
+        this is a bounded set,
+        and it is non-empty.
+        By the completeness axiom $x = \sup X$ exists.
+        To show $x = \lim_{n \rightarrow \infty}x_n$
+        let $\varepsilon > 0$.
+        Then $x - \varepsilon < x$,
+        so $x - \varepsilon$ is not an upper bound for $X$.
+        There is $x_{n_0} \in X$ with
+        $x - \varepsilon < x_{n_0} \leq x_n \leq x < x + \varepsilon$ for all $n \geq n_0$
+        this implies that
+        $|x_n - x| < \varepsilon$ for all $n \geq n_0$.
+    \end{proof}
+\end{theorem}
+Note, $\lim_{n \rightarrow \infty}x_n = \sup\{x_n \in \R | n \in \N\}$.
+\begin{example}
+    Let
+    \begin{align*}
+        x_n &= \left(1 + \frac{1}{n}\right) ^ n \\
+        &= \sum_{k = 0}^{n}\binom{n}{k}\frac{1}{n ^ k} \\
+        &= 1 + 1 + \sum_{k = 2}^{n}\binom{n}{k}\frac{1}{n ^ k}
+    \end{align*}
+    By problem $51$
+    \[
+    \frac{1}{m ^ k}\binom{m}{k} < \frac{1}{n ^ k}\binom{n}{k} \leq \frac{1}{2 ^ {k - 1}}.
+    \]
+    So $x_m \leq x_n$ for $m \leq n$ and the sequence is monotonically increasing.
+    Also $x_n \leq 2 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \dotsc + \frac{1}{2 ^ {n - 1}} < 3$
+    and the sequence is bounded.
+    By \autoref{analy_thm_boundmonoincseqconv} $\lim_{n \rightarrow \infty}x_n$ exists and is in $[2, 3]$.
+    
+    The limit is Euler's number $e = \displaystyle\lim_{n \rightarrow \infty}\left(1 + \frac{1}{n}\right) ^ n = 2.71828182\dotsc$.
+\end{example}
+
+\subsection{The exponential function and the logarithm}
+\begin{example}
+    \begin{align*}
+        y &= \left(1 + \frac{2}{n}\right) ^ n \\
+        &= \left(\frac{n + 2}{n}\right) ^ n \\
+        &= \frac{(n + 2) ^ n}{n ^ n}\frac{(n + 1) ^ n}{(n + 1) ^ n} \\
+        &= \left(\frac{n + 1}{n}\right) ^ n \cdot \left(\frac{n + 2}{n + 1}\right) ^ n \\
+        &= \left(1 + \frac{1}{n}\right) ^ n\frac{\left(1 + \frac{1}{n + 1}\right) ^ {n + 1}}{1 + \frac{1}{n + 1}}
+        &\xrightarrow{\text{COLT}}\rightarrow\frac{e \cdot e}{1} = e ^ 2
+    \end{align*}
+    Induction can show $\left(1 + \frac{k}{n}\right) ^ n \rightarrow e ^ k$ for $k \in \N$.
+
+    For $n \geq 2$
+    \begin{align*}
+        z_n &= \left(1 - \frac{1}{n}\right) ^ n \\
+        &= \left(\frac{n - 1}{n}\right) ^ n \\
+        &= \frac{1}{\left(\frac{n}{n - 1}\right) ^ n} \\
+        &= \frac{1}{\left(1 + \frac{1}{n - 1}\right) ^ {n - 1}\cdot\left(1 + \frac{1}{n - 1}\right)} \\
+        &\xrightarrow{\text{COLT}}\frac{1}{e \cdot 1} = \frac{1}{e}.
+    \end{align*}
+\end{example}
+
+Define
+\[
+e ^ x = \lim_{n \rightarrow \infty}\left(1 + \frac{x}{n}\right) ^ n\text{ for } x \in \R.
+\]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

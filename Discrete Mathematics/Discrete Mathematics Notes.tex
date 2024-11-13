@@ -624,6 +624,66 @@ The sum of all positive $k$-fold intersections
     A permutation is called a dearrangement if no element ends up in its correct position.
 \end{definition}
 
+\begin{proposition}
+    The number of dearrangements of $1, 2, \dotsc, n$ is
+    \[
+    d(n) = \sum_{k = 0}^{n}(-1) ^ k\frac{n!}{k!}.
+    \]
+    \begin{proof}
+        We subtract from $n!$ the number of non-dearrangements to get
+        \begin{align*}
+            d(n) &= n! - \sum_{k = 1}^{n}(-1) ^ {k + 1}\frac{n!}{k!} \\
+            &= n!\left(1 + \sum_{k = 1}^n(-1) ^ k\frac{1}{k!}\right) \\
+            &= n!\sum_{k = 0}^n(-1) ^ k\frac{1}{k!}.
+        \end{align*}
+    \end{proof}
+\end{proposition}
+
+\subsection{Mathematical induction}
+Suppose we have a sequence of propositions (statements) $P(n)$ labelled by integers $n = 0, 1, 2, \dotsc$ whose truth we wish to establish.
+
+\begin{theorem}[Principle of mathematics induction]
+    Suppose that $P(n)$ is a sequence of propositions labelled by integers $n \geq n_0$.
+    Suppose that
+    \begin{enumerate}[label = (\alph*)]
+        \item $P(n_0)$ is true; and
+        \item For any $n \geq n_0$,
+        the truth of $P(n)$ implies the truth of $P(n + 1)$.
+    \end{enumerate}
+    Then,
+    for every $n \geq n_0$,
+    $P(n)$ is true.
+    \begin{proof}
+        $P(n_0)$ is true by assumption (a).
+        Then by (b),
+        $P(n_0 + 1)$ is also true.
+        Again by (b),
+        $P(n_0 + 2)$ is also true.
+        And so on.
+        This chain of deductions eventually reaches any given $n \geq n_0$,
+        so $P(n)$ is true for all $n \geq n_0$.
+    \end{proof}
+\end{theorem}
+
+\subsection{The pigeon hole principle}
+If there are $n$ envelopes distributed amongst $n$ pigeon holes and $n > m$ then at least one pigeon hole contains more than one envelope.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

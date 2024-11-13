@@ -1278,6 +1278,150 @@ therefore
     $X \sim \Bin(n, p)$.
 \end{definition}
 
+For $n = 1,
+\Bin(1, p)$ is referred to as the Bernoulli random variable
+(with success parameter $p$),
+written as
+\[
+\mathrm{Ber}(p).
+\]
+
+\textbf{Geometric random variable}
+
+Let us toss a coin until we get heads.
+Let $X$ denote the number of tosses that we require
+\[
+\P(X = x) = \P(\text{first $(x - 1)$ tosses were $T$, and $x$-th toss is $H$}) = (1 - p) ^ {x - 1}p.
+\]
+
+\begin{definition}
+    $X$ is geometrically distributed with parameter $p \in (0, 1]$,
+    if $\chi = \N = \{1, 2, \dotsc\}$ with the probability mass function given by
+    \begin{align*}
+        p(x) &= (1 - p) ^ {x - 1}p,&x \in \N \\
+        &= 0,&\text{elsewhere}.
+    \end{align*}
+    This is denoted $X \sim \Geo(p)$.
+\end{definition}
+
+\begin{example}
+    $105$ people who bought a flight ticket,
+    $\P(\text{that a person misses a flight}) = 0.04$.
+    Each individual misses the flight independent of the other.
+    Find
+    \begin{enumerate}[label = (\alph*)]
+        \item $\P(\text{nobody misses the flight})$.
+        \item $\P(\text{$3$ or more people miss the flight})$.
+    \end{enumerate}
+
+    Let $X := \text{number of people who miss the flight}$, $p := \P(\text{of success}) = 0.04$.
+    $n = 105$.
+    $X \sim \Bin(105, 0.04)$.
+    \begin{enumerate}[label = (\alph*)]
+        \item
+        \begin{align*}
+        \P(\text{nobody misses the flight}) &= \P(X = 0) \\
+        &= \binom{105}{0}p ^ 0(1 - p) ^ {105 - 0} \\
+        &= (0.96) ^ {105} \approx 0.014.
+        \end{align*}
+        \item
+        \begin{align*}
+            \P(\text{$3$ or more people miss the flight}) &= \P(X \geq 3) \\
+            &= 1 - \P(X < 3) \\
+            &= 1 - p(0) - p(1) - p(2) \\
+            &= \dotsc
+        \end{align*}
+    \end{enumerate}
+\end{example}
+
+Let us come back to $\Geo(p)$,
+where $p > 0$.
+Then observe that
+\[
+\sum_{x = 1}^{\infty}(1 - p) ^ {x - 1}p = p\sum_{x = 1}^{\infty}(1 - p) ^ {x - 1}
+\]
+write $x - 1 = t$,
+then we get
+\[
+\sum_{x = 1}^{\infty}(1 - p) ^ {x - 1}p = p\left(\sum_{t = 0}^{\infty}(1 - p) ^ t\right)\text{Geometric series with common ratio $(1 - p)$.}
+\]
+which results in
+\begin{align*}
+    \P(x \in \N) &= \sum_{x = 1}^{\infty}(1 - p) ^ {x - 1}p \\
+    &= p\left(\sum_{t = 0}^{\infty}(1 - p) ^ t\right) \\
+    &= p \cdot \frac{1}{1 - (1 - p)} \\
+    &= p \cdot \frac{1}{p} = 1.
+\end{align*}
+
+\subsection{Poisson random variable}
+\begin{definition}
+    A random variable $X$ with $\chi = \Z_+ := \{0, 1, 2, \dotsc\}$ is Poisson with parameter $\lambda (> 0)$,
+    if the probability mass function
+    \begin{align*}
+        p(x) &= \P(X = x) = \frac{e ^ {-\lambda}\lambda ^ x}{x!},& x \in \Z_+ \\
+        &= 0,&\text{elsewhere}.
+    \end{align*}
+    This is denoted $\Po(x)$, with $X \sim \Po(\lambda)$.
+\end{definition}
+$\lambda$ is taken as the average number of changes in a small amount of time.
+
+\begin{example}
+    Some airline has $32$ crashes in a $25$ year period.
+    Where a year is $365$ days,
+    there are $30$ days in a month,
+    and $7$ days in a week.
+
+    Let $Y, M, W$ denote the number of crashes in the next year,
+    month
+    and week.
+    \begin{enumerate}[label = (\alph*)]
+        \item Find the distributions for $Y, M$ and $W$.
+        \item Find $\P(\text{there are no crashes in the next week})$.
+    \end{enumerate}
+    \begin{enumerate}[label = (\alph*)]
+        \item 
+        The daily rate of accidents is $\frac{32}{365 \cdot 25} = \frac{32}{9125}$.
+        $\lambda_Y$ is the average number of crashes per year which is $\frac{32}{9125} \cdot 365$,
+        $\lambda_M$ is the average number of crashes per month which is $\frac{32}{9125} \cdot 30$,
+        $\lambda_W$ is the average number of crashes per week which is $\frac{32}{9125} \cdot 7$.
+        $Y \sim \Po(\lambda_Y), M \sim \Po(\lambda_M), W \sim \Po(\lambda_W)$
+        \item
+        \begin{align*}
+            \P(\text{there are no crashes in the next week}) &= \P(W = 0) \\
+            &= e ^ {\lambda w}\frac{\lambda_W ^ 0}{0!} \\
+            &- e ^ {-\lambda_W}.
+        \end{align*}
+    \end{enumerate}
+\end{example}
+
+\subsection{Continuous random variables}
+\begin{definition}
+    Let $X : \Omega \rightarrow \R$ be a random variable.
+    We say $X$ is a continuous random variable or $X$ has a continuous probability distribution,
+    if there exists a non-negative function $f$,
+    $f : \R \rightarrow \R$,
+    such that
+    \[
+    \P(X \in [a, b]) = \int_a^bf(t)\,dt.
+    \]
+    $f$ is called the probability density function of $X$ (pdf).
+    The probability density function of $X$ is denoted $f_X$.
+\end{definition}
+Let $x \in \R$,
+choose $a = b = x$
+\[
+\P(X = x) = \int_x^xf(t)\,dx = 0.
+\]
+Given this is a continuous random variable,
+this shows us that the continuous random variable has no mass at a single point
+\[
+\P(X \in (a, b)) = \P(X \in [a, b)) = \P(X \in (a, b]) = \P(X \in [a, b]) = \int_a^bf(t)\,dt.
+\]
+Comment: $\P(X = x) \neq f(x)$
+
+
+
+
 
 
 

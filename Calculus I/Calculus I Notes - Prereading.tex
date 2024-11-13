@@ -943,8 +943,66 @@ and the horizontal line for an $x$-simple region can be drawn from one end to th
 These are both such that the line does not leave the bounds of the region,
 in other words, they "can't leave through holes in the region".
 
+\subsection{Integration using polar coordinates}
+Sometimes it is useful to describe the region of integration $D$ in terms of polar coordinates $r$ and $\theta$,
+where $x = r\cos\theta$ and $y = r\sin\theta$.
+To convert a double integral into polar coordinates we need to know what to do with the area element $dA = dxdy$.
+Thinking back to what this area element actually is,
+we can see that it is just a division of $D$ into small rectangles.
+The area which is calculated from a small rectangle with side lengths $dx$ and $dy$.
+Hence,
+we need to find the area $dA$ of a small region by taking the point with polar coordinates $(r, \theta)$
+and extending $r$ by $dr$ and $\theta$ by $d\theta$.
+We see that the area is approximately a rectangle with area $dA \approx rd\theta dr$
+providing us with the final result $dA = dxdy = rd\theta dr$.
 
+Now to convert the double integral into polar coordinates,
+we would replace $dxdy$ with $rd\theta dr$.
+We can then calculate the double integral as an iterated integral if the region $D$ is $\theta$-simple or $r$-simple
+(with the obvious definitions of these terms).
 
+\subsection{Change of variables and the Jacobian}
+\begin{definition}[The Jacobian]
+    The Jacobian of the transformation from the variables $x, y$ to $u, v$ is
+    \[
+    J = \frac{\partial(x, y)}{\partial(u, v)} = \left|\begin{array}{cc}
+        \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\
+        \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v} 
+    \end{array}\right|
+    \]
+\end{definition}
+i.e. it is the determinant of the $2 \times 2$ matrix of partial derivatives.
+
+To obtain the area element $dxdy$ in terms of the new variables we first compute the Jacobian $J$ and then use the result that
+\[
+dxdy = |J|dudv
+\]
+where $|J|$ is the absolute value of the Jacobian.
+
+\subsection{The Gaussian integral}
+An important integral that appears in a wide range of contexts is the Gaussian integral
+\[
+\int_{-\infty}^{\infty}e ^ {-ax ^ 2}\,dx = \frac{\pi}{a}
+\]
+where $a$ is a positive constant.
+
+We can derive this result using a trick that involves calculating a double integral,
+as follows.
+We define $I$ to e a required integral
+\[
+I = \int_{-\infty}^{\infty}e ^ {-ax ^ 2}\,dx
+\]
+and observe that
+\[
+I ^ 2 = \left(\int_{-\infty}^{\infty}e ^ {-ax ^ 2}\,dx\right)\left(\int_{-\infty}^{\infty}e ^ {-ay ^ 2}\,dy\right) = \iint\limits_{\R ^ 2}e ^ {-a(x ^ 2 + y ^ 2)}\,dxdy.
+\]
+We now use polar coordinates to evaluate this double integral
+\begin{align*}
+    I ^ 2 = \iint\limits_{\R}e ^ {-ar ^ 2}r\,drd\theta &= \int_0^{\infty}\left(\int_0^{2\pi}re ^ {-ar ^ 2}\,d\theta\right)\,dr = 2\pi\int_0^{\infty}re ^ {-ar ^ 2}\,dr \\
+    &= -2\pi\left[\frac{e ^ {-ar ^ 2}}{2a}\right]_0^{\infty} = \frac{\pi}{a}.
+\end{align*}
+Hence $I = \sqrt{\frac{\pi}{a}}$,
+which is the required result.
 
 
 \end{document}
