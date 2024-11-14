@@ -1402,7 +1402,7 @@ $\lambda$ is taken as the average number of changes in a small amount of time.
     $f : \R \rightarrow \R$,
     such that
     \[
-    \P(X \in [a, b]) = \int_a^bf(t)\,dt.
+    \P(X \in [a, b]) = \int_a^bf(t)\,dt,\qquad a \leq b, a, b \in \R.
     \]
     $f$ is called the probability density function of $X$ (pdf).
     The probability density function of $X$ is denoted $f_X$.
@@ -1418,6 +1418,160 @@ this shows us that the continuous random variable has no mass at a single point
 \P(X \in (a, b)) = \P(X \in [a, b)) = \P(X \in (a, b]) = \P(X \in [a, b]) = \int_a^bf(t)\,dt.
 \]
 Comment: $\P(X = x) \neq f(x)$
+
+\begin{example}
+    $f_1(x) = 1, x \in [0, 1]$ and is $0$ elsewhere.
+    $x_1$ is the random variable with the pdf $f_1$
+    
+    $f_2(x) = 1, x \in [0, 1)$ and is $0$ elsewhere.
+    $x_2$ is the random variable with pdf $p_2$.
+
+    For any interval $[a, b]$, $a \leq b$.
+    \[
+    \P(X_1 \in [a, b]) = \P(x_2 \in [a, b])
+    \]
+    \[
+    \P(x_1 \in [0, 1]) = \int_0^1f_1(t)\,dt = 1 = \P(x_2 \in [0, 1]) = \int_0^1f_2(t)\,dt.
+    \]
+
+    (For this course),
+    we will assume that pdf is unique except for a finitely many points,
+    that is,
+    if $X$ is a random variable.
+    Let $f$ and $g$ be two possible candidates for pdfs of $X$,
+    then there exists a finite $k \geq 1$,
+    and a sequence $a_1, a_2, \dotsc, a_k$,
+    such that $f(x) = g(x)$,
+    for $x \notin \{a_1, a_2, \dotsc, a_k\}$.
+
+    The pdf is unique up to a set of measure zero.
+\end{example}
+
+\begin{theorem}\label{prob_thm_622}
+    Let $B \subseteq \R$,
+    such that $\displaystyle B = \bigcup_{i = 1}^{m}[a_i, b_i]$
+    ($B$ is a finite union of intervals,
+    the intervals may be open or closed or a mixture).
+    Then
+    \[
+    \P(X \in B) = \int_Bf(x)\,dx.
+    \]
+\end{theorem}
+
+\begin{corollary}
+    If the intervals are disjoint then
+    \[
+    \P(X \in B) = \sum_{i = 1}^{m}\int_{a_i}^{b_i}f(x)\,dx.
+    \]
+\end{corollary}
+
+\begin{itemize}
+    \item 
+    \[
+    \P(X \in (-\infty, b]) = \int_{-\infty}^bf(t)\,dt.
+    \]
+    \item 
+    \[
+    \P(X \in [a, \infty)) = \int_a^{\infty}f(t)\,dt.
+    \]
+    \item 
+    \[
+    \P(-\infty < X < \infty).
+    \]
+\end{itemize}
+
+\begin{corollary}\label{prob_col_623}
+    \[
+    \P(X \in \R) = \P(-\infty < X < \infty) = \int_{-\infty}^{\infty}f(t)\,dt = 1.
+    \]
+\end{corollary}
+
+\begin{example}
+    Let $X$ be a random variable,
+    with pdf
+    \[
+    f(x) = \begin{cases}
+        k(1 + x), & -1 \leq x < 0, \\
+        k(2 - x), & 0 \leq x \leq 2, \\
+        0, & \text{elsewhere}.
+    \end{cases}
+    \]
+    So $f$ is piecewise continuous between $(-\infty, -1), [-1, 0], [0, 2]$ and $(2, \infty)$.
+
+    \textbf{Exercise: } check whether it is continuous everywhere.
+\end{example}
+
+From \autoref{prob_col_623} we know that
+\begin{equation}
+    \int_{-\infty}^{\infty}f(x) = 1,\text{ if } f \text{ is a pdf}.
+\end{equation}
+Then from \autoref{prob_thm_622},
+$(-\infty, \infty) = \underbrace{(-\infty, -1) \cup [1, 0) \cup [0, 2] \cup (2, \infty)}_{\text{disjoint}}$.
+
+So from \autoref{prob_thm_622},
+we know that
+\[
+\int_{-\infty}^{\infty}f(x)\,dx = \int_{-\infty}^{-1}f(x)\,dx + \int_{-1}^0f(x)\,dx + \int_0^2f(x)\,dx + \int_2^{\infty}f(x)\,dx.
+\]
+\begin{align*}
+    \int_{-\infty}^{\infty}f(x)\,dx &= \int_{-1}^{0}f(x)\,dx + \int_0^2f(x)\,dx \\
+    &= k\int_{-1}^0(1 + x)\,dx + k\int_0^2(2 - x)\,dx \\
+    &= \frac{k}{2}(1 + x) ^ 2\mid^0_{x = -1} - \frac{k}{2}(2 - x) ^ 2\mid^2_{x = 0} \\
+    &= \frac{k}{2} + 2k \\
+    &= \frac{5}{2}k.
+\end{align*}
+Therefore,
+putting in ($1$),
+we get $\frac{5}{2}k = 1 \implies k = \frac{2}{5}$.
+Find $\P(X \in [0, 1])$
+\[
+\P(X \in [0, 1]) = \int_0^1f(x)\,dx = k\int_0^1(2 - x)\,dx = \frac{k}{2}(2 - x) ^ 2\mid_{x = 0}^1 = \frac{3}{2}l = \frac{3}{5}
+\]
+Recall $k = \frac{2}{5}$.
+
+\subsection{Uniform distribution}
+\begin{definition}
+    Let $X$ be uniformly distribution $[a, b]$,
+    $X \sim U[a, b]$,
+    if the pdf is given by
+    \[
+    f(x) = \begin{cases}
+        \frac{1}{b - a}, & x \in [a, b] \\
+        0, & \text{elsewhere}.
+    \end{cases}
+    \]
+\end{definition}
+
+\subsection{Exponential distribution}
+\begin{definition}
+    Let $\beta > 0$.
+    We say a random variable $X$ is distributed exponentially with parameter $\beta$,
+    $X \sim \Exp(\beta)$,
+    if the pdf $f$ is given by
+    \[
+    f(x) = \begin{cases}
+        \beta e ^ {-\beta x}, & x \geq 0, \\
+        0, & \text{elsewhere}.
+    \end{cases}
+    \]
+\end{definition}
+\textbf{Exercise:} find $\P(X = 0)$,
+when $X \sim \Exp(\beta)$.
+
+\subsection{The normal distribution}
+\begin{definition}
+    A random variable $X$ is normally distributed with parameters $\mu$,
+    $\sigma ^ 2$, $(\mu, \sigma \in \R, \sigma > 0)$.
+    If the pdf is given by
+    \[
+    f(x) = \frac{1}{\sigma\sqrt{2\pi}}e ^ {-\frac{1}{2}(\frac{x - \mu}{\sigma}) ^ 2}
+    \]
+    where $x \in \R$.
+\end{definition}
+Later on we will see $\mu$ is the mean,
+and $\sigma$ is the standard deviation,
+$\sigma ^ 2$ is the variance.
+We will later see that it is enough to understand the normal distribution for $\mu = 0$ and $\sigma = 1$.
 
 
 

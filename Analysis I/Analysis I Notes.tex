@@ -1394,8 +1394,107 @@ Define
 e ^ x = \lim_{n \rightarrow \infty}\left(1 + \frac{x}{n}\right) ^ n\text{ for } x \in \R.
 \]
 
+\begin{theorem}
+    For every $x \in \R$ the sequence $\left(1 + \frac{x}{n}\right) ^ n$ is convergent.
+    The limit is denoted by $e ^ x$,
+    it satisfies $e ^ x  > 0$ and
+    \[
+    e ^ {-x} = \frac{1}{e ^ x}.
+    \]
+    \begin{proof}[Proof sketch]\renewcommand{\qedsymbol}{$\triangle$}
+        Proof for $e ^ {-x} = \frac{1}{e ^ x}$.
 
+        \begin{align*}
+            \left(1 + \frac{x}{n}\right) ^ n \cdot \frac{\left(1 - \frac{x}{n}\right) ^ n}{\left(1 - \frac{x}{n}\right) ^ n} &= \frac{\left(\left(1 + \frac{x}{n}\right)\left(1 - \frac{x}{n}\right)\right) ^ n}{\left(1 - \frac{x}{n}\right) ^ n} \\
+            &= \frac{\left(1 - \frac{x ^ 2}{n ^ 2}\right) ^ n}{\left(1 + \frac{-x}{n}\right) ^ n}
+        \end{align*}
+        \[
+        1 \geq \left(1 - \frac{x ^ 2}{n ^ 2}\right) ^ n \geq 1 - \frac{nx ^ 2}{n ^ 2} = 1 - \frac{x ^ 2}{n}
+        \]
+        By \autoref{analy_thm_bernoineq} for $n ^ 2 > x ^ 2$
+        and by \autoref{analy_thm_squeezethm}
+        \[
+        \left(1 - \frac{x ^ 2}{n ^ 2}\right) ^ n \rightarrow 1
+        \]
+        then by \autoref{analy_thm_COLT} this implies
+        \[
+        e ^ x = \frac{1}{e ^ {-x}}.
+        \]
+    \end{proof}
+\end{theorem}
 
+\begin{lemma}
+    Let $x \in (-\infty, 1)$.
+    Then
+    \[
+    1 + x \leq e ^ x \leq \frac{1}{1 - x}.
+    \]
+    \begin{proof}
+        Pick $n \in \N$ with $\frac{x}{n} > -1$.
+        Then
+        \[
+        \left(1 + \frac{x}{n}\right) ^ n \geq 1 + \frac{nx}{n} = 1 + x
+        \]
+        By Thm 2.12.,
+        $e ^ x \geq 1 + x$
+        (works for all $x \in \R$).
+        For the other inequality look at
+        \[
+        \frac{1}{\left(1 - \frac{x}{n}\right) ^ n} \leq \frac{1}{1 - x}
+        \]
+        By Thm 2.12.,
+        $e ^ x \leq \frac{1}{1 - x}$.
+    \end{proof}
+\end{lemma}
+
+\begin{theorem}
+    Let $x, y \in \R$.
+    Then
+    \[
+    e ^ {x + y} = e ^ x \cdot e ^ y.
+    \]
+\end{theorem}
+
+Since $x$ was an arbitrary real number,
+we have a function
+\[
+\exp : \R \rightarrow (0, \infty)
+\]
+\[
+x \mapsto e ^ x = \exp(x)
+\]
+If $x < y$,
+then
+\[
+\exp(y - x) = \lim_{n \rightarrow \infty}\left(1 + \frac{\overbrace{y - x}^{>0}}{n}\right) ^ n > 1
+\]
+this is a monotonically increasing sequence.
+\begin{align*}
+    &= \exp(y)\cdot\exp(-x) \\
+    &= \frac{\exp(y)}{\exp(x)} \implies \exp(x) < \exp(y).
+\end{align*}
+The exponential function is strictly monotonically increasing.
+
+We define logarithm as the inverse function of $\exp$.
+\begin{theorem}
+    Let $a > 0$.
+    Then there exists a unique $x \in \R$ with $\exp(x) = a$.
+    \begin{proof}
+        Consider $X = \{y \in \R\,|\,\exp(y) < a\}$.
+        For $n \in \N\ \exp(n) = e ^ n$,
+        which gives an unbounded sequence.
+        So there is $n \in \N$ with $e ^ n > a\ n \notin X$.
+        Also,
+        if $x < n$,
+        $e ^ n < e ^ x\ x \notin X$.
+        $n$ is an upper bound for $X$.
+        $X$ is not empty.
+        Look at $e ^ {-n} = \left(\frac{1}{e}\right) ^ n \rightarrow 0$.
+        There is $n \in \N$ with $e ^ {-n} < a$,
+        so $-n \in X$.
+        Use $x = \sup X$ from the Completeness axiom.
+    \end{proof}
+\end{theorem}
 
 
 
