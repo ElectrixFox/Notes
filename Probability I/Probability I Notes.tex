@@ -1573,9 +1573,567 @@ and $\sigma$ is the standard deviation,
 $\sigma ^ 2$ is the variance.
 We will later see that it is enough to understand the normal distribution for $\mu = 0$ and $\sigma = 1$.
 
+\subsection{Cumulative distribution functions}\footnote{cdf.}
+Recall,
+that for any random variable $X$
+\[
+\P_X(B) = \P(X \in B),\quad B \subseteq \R
+\]
+$B = (-\infty, x]$,
+\[
+\P_X((-\infty, x]) = \P(X \in (-\infty, x]) = \P(X \leq x) = F(x)
+\]
+\begin{definition}
+    A cumulative distribution function $F : \R \rightarrow [0, 1]$ is the cumulative distribution function of $x$,
+    if
+    \[
+    F(x) = \P(X \leq x)
+    \]
+\end{definition}
+
+\[
+\underset{a < b}{\P(X \in [a, b])} = F(b) - F(a).
+\]
+Recall C1,
+\[
+\P(A \setminus B) = \P(A) - \P(A \cap B)
+\]
+\[
+\P(X \in B) = \int_Bf(t)\,dt
+\]
+\[
+\{X \leq x\} = \{X \in (-\infty, x]\}
+\]
+
+Let $-\infty < a \leq b < \infty$.
+\[
+\P(X \in (a, b]) = F_X(b) - F_X(a)
+\]
+Using C1
+\begin{align*}
+    \P(X \in (a, b]) &= \P(X \in (-\infty, b) \setminus (-\infty, a]) \\
+    &= \P(X \in (-\infty, b]) - \P(X \in (-\infty, b] \cap (-\infty, a]) \\
+    &= \P(X \in (-\infty, b]) - \P(X \in (-\infty, a]) \\
+    &= F(b) - F(a)
+\end{align*}
+
+\begin{theorem}
+    Let $X$ be a continuous random variable with probability density function $f$.
+    Then $F(x) = \P(X \leq x) = \int_{-\infty}^xf(t)\,dt$.
+    Moreover,
+    $\frac{dF}{dx}(x) = f(x)$.
+\end{theorem}
+
+\begin{theorem}
+    Let $X$ be a discrete random variable with probability mass function $p$.
+    Then $F(x) = \sum_{t : t \leq x}p(t)$.
+    $F(x)$ is piecewise continuous,
+    and the discontinuities are jump-discontinuities.
+    I.e.,
+    at the points of discontinuity
+    \[
+    \lim_{y \rightarrow x^{+}}F(y) \neq F(x),
+    \]
+    but
+    \[
+    \lim_{y \rightarrow x ^ {-}}F(y) = F(x).
+    \]
+\end{theorem}
+$F$ is always right (both for discrete and continuous) continuous.
+
+For a continuous random variable,
+$F$ is continuous everywhere,
+except at countably many points,
+that is,
+\[
+\lim_{y \rightarrow x}F(y) = F(x),
+\]
+for all but countably many $x$.
+
+So for a discrete random variable $\P(X = x) = \lim_{y \rightarrow x ^ {+}}F(y) = p(x)$.
+
+\begin{theorem}
+    Let $F$ be a cumulative distribution function.
+    Then it has the following properties.
+    \begin{enumerate}[label = (\roman*)]
+        \item
+        \[
+        \lim_{x \rightarrow -\infty}F(x) = 0
+        \quad\text{and}\quad
+        \lim_{x \rightarrow \infty}F(x) = 1.
+        \]
+        \item $F$ is always right continuous.
+        \item Monotonicity: $F$ is monotonically increasing,
+        that is for any $s \leq t$,
+        $F(s) \leq F(t)$.
+    \end{enumerate}
+    \begin{proof}\phantom{}
+    \begin{enumerate}[label = (\roman*)]
+        \item $F(x) = \P(X \in (-\infty, x])$
+        \[
+        \lim_{x \rightarrow \infty}(-\infty, x] = \R
+        \]
+        \[
+        \lim_{x \rightarrow \infty}F(x) = \P(X \in \R) = 1.
+        \]
+        \[
+        \lim_{x \rightarrow -\infty}(-\infty, x] = \emptyset
+        \]
+        \[
+        \lim_{x \rightarrow -\infty}F(x) = \P(X \in \emptyset) = 0.
+        \]
+        \item \phantom{}
+        \item 
+        \[
+        F(s) = \P(X \leq s) = \P(X \in (-\infty, s]).
+        \]
+        \[
+        F(t) = \P(X \leq t) = \P(X \in (-\infty, t]).
+        \]
+        If $s \leq t$,
+        $(-\infty, s] \subseteq (-\infty, t]$
+        $\P(A) \leq \P(B)$,
+        if $A \subseteq B$,
+        using this we get
+        \[
+        F(s) \leq F(t).
+        \]
+    \end{enumerate}
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Cumulative distribution function determines a random variable completely.
+\end{theorem}
+
+\subsection{Standard Normal distributions}
+$N(0, 1)$ is the standard normal variable.
+\begin{definition}[Standard Normal distributions]
+    A random variable $Z$ is said to be standard Normal,
+    if it has the following probability distribution function.
+    \[
+    p(z) = \frac{1}{\sqrt{2\pi}}e ^ {-\frac{z ^ 2}{2}}, Z \in \R,
+    \]
+    the cumulative distribution function is
+    \[
+    \Phi(z) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^ze ^ {-\frac{t ^ 2}{2}}\,dt.
+    \]
+    $Z$ is used to denote $N(0, 1)$.
+\end{definition}
+
+\subsection{Functions of random variables}
+$f \circ X(\omega) = f(X(\omega))$.
+Then $f \circ X$ is also a random variable from $\Omega$ to $\R$.
+$\P(g(X) \leq x) = \P(\{\omega : g(X(\omega)) \leq x\})$
+\begin{example}
+    $g(x) = x ^ 2, x ^ 3$,
+    $g(x) = ax + b$
+    $a$ is the change of scale,
+    $b$ is the shift of origin.
+\end{example}
+
+\begin{theorem}
+    Let $X \sim N(\mu, \sigma ^ 2)$,
+    and $Z \sim N(0, 1)$,
+    then
+    $\frac{X - \mu}{\sigma} \sim N(0, 1)$,
+    and $\mu + \sigma Z \sim N(\mu, \sigma ^ 2)$.
+    Therefore,
+    it is enough to know the distribution of $Z$.
+    \begin{proof}
+        Let $Y = \frac{X - \mu}{\sigma}$,
+        where $X \sim N(\mu, \sigma ^ 2)$
+        \begin{align*}
+            \P(Y \leq y) &= \P\left(\frac{X - \mu}{\sigma} \leq y\right) \\
+            &= \P(X \leq \mu + \sigma Y) \\
+            &= \frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{\mu + \sigma y}e ^ {-\frac{(t - \mu) ^ 2}{2\sigma ^ 2}}\,dt.
+        \end{align*}
+        Let $Z = \frac{t - \mu}{\sigma}$,
+        then $t \rightarrow -\infty,\, z \rightarrow -\infty$,
+        $t = \mu + \sigma y,\, z = y$.
+        $\sigma dz = dt$.
+        Putting all of this into the integral,
+        we get
+        \[
+        = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{y}e ^ {-\frac{z ^ 2}{2}}\,dt = \Phi(y),
+        \]
+        where $\Phi$ is the cumulative density function of a $N(0, 1)$.
+    \end{proof}
+\end{theorem}
+
+\subsection{Properties of the standard normal}
+
+The pdf of $N(0, 1)$ is symmetric around the origin,
+
+$\phi(z) = \phi(-z)$
+\[
+\phi(z) = \frac{1}{\sqrt{2\pi}}e ^ {-\frac{z ^ 2}{2}} = \phi(-z).
+\]
+The pdf of $N(\mu, \sigma ^ 2)$ is symmetric around $\mu$.
+
+\begin{theorem}
+    \[
+    \Phi(z) = 1 - \Phi(-z)
+    \]
+    \begin{proof}
+        \begin{align*}
+            \Phi(z) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{z}e ^ {-\frac{t ^ 2}{2}}\,dt.
+        \end{align*}
+        Put $t \mapsto -u$,
+        then $dt = -du$,
+        $t \rightarrow -\infty,\, -u \rightarrow +\infty$,
+        $t = z,\, u = -z$.
+        Putting all this back in the integral,
+        \begin{align*}
+            \Phi(z) &= -\frac{1}{\sqrt{2\pi}}\int_{\infty}^{-z}e ^ {-\frac{u ^ 2}{2}}\,du \\
+            &= \frac{1}{\sqrt{2\pi}}\int_{z}^{\infty}e ^ {-\frac{u ^ 2}{2}}\,du \\
+            &= \P(Z \geq -z) \\
+            &= 1 - \Phi(-z).
+        \end{align*}
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    Consider the following,
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|ccccc}
+             $z$ & $0$ & $1.28$ & $1.64$ & $1.96$ & $2.58$  \\
+             \hline
+             $\Phi(z)$ & $0.5$ & $0.9$ & $0.95$ & $0.975$ & $0.995$
+        \end{tabular}
+    \end{table}
+    Find $\P(-1.28 \leq Z \leq 1.64$,
+    when $Z \sim N(0, 1)$.
+    \begin{align*}
+        \P(-1.28 \leq z \leq 1.64) &= \P(Z \leq 1.64) - \P(Z \leq -1.28) \\
+        &= \Phi(1.64) - \Phi(-1.28) \\
+        &= \Phi(1.64) - (1 - \Phi(1.28)) \\
+        &= \Phi(1.64) + \Phi(1.28) - 1 \\
+        &= 0.95 + 0.9 - 1 \\
+        &= 0.85.
+    \end{align*}
+\end{example}
+
+\newpage
+
+\section{Multiple random variables}
+
+\subsection{Joint probability distributions}
+$X : \Omega \rightarrow \chi$.
+Let us have $2$ or multiple random variables.
+$Y : \Omega \rightarrow \mathcal{Y}$.
+\[
+(X, Y) : \Omega \rightarrow \chi \times \mathcal{Y}
+\]
+defined by
+\[
+(X, Y)(\omega) = (X(\omega), Y(\omega)).
+\]
+Let $A \in \chi \times \mathcal{Y}$,
+How do we find $\P((X, Y) \in A)$?
+$\{(X, Y) \in A\} = \{\omega : (X(\omega), Y(\omega)) \in A\}$.
+\begin{example}
+    Suppose $\mathcal{X} = \R = \mathcal{Y}$
+    \[
+    A = [0, 1] \times [0, 1]
+    \]
+    \[
+    \P((X, Y) \in [0, 1] \times [0, 1]).
+    \]
+\end{example}
+\begin{align*}
+    \{X = x, Y = y\} &= \{\omega : X(\omega) = x, Y(\omega) = y\} \\
+    &= \{\omega : X(\omega) = x\} \cap \{\omega : Y(\omega) = y\} \\
+    &= \{X = x\} \cap \{Y = y\}.
+\end{align*}
+
+Independence:
+$A$ and $B$ are independent if and only if
+\[
+\P(A \cap B) = \P(A)\P(B).
+\]
+Let us take two sets $C \subseteq \mathcal{X}, D \subseteq \mathcal{Y}$.
+\[
+\{X \in C\} \subseteq \Omega\quad \{Y \in D\} \subseteq \Omega.
+\]
+\begin{definition}
+    Two random variables $X$ and $Y$ are independent
+    (on the same sample space $\Omega$)
+    if and only if
+    \[
+    \P(X \in C, Y \in D) = \P(X \in C)\P(Y \in D),
+    \]
+    for all sets $C, D$ such that $C \subseteq \mathcal{X}, D \subseteq \mathcal{Y}$.
+\end{definition}
+
+\subsection{Joint distributions for discrete random variables}
+\begin{definition}[Joint probability mass function]
+    Let $(X, Y)$ be bivariate
+    (a vector of size $2$),
+    such that $\P((X, Y) \in \mathcal{Z}) = 1$,
+    then the join probability mass function
+    (pmf)
+    is given by $p(x, y) = \P(X = x, Y = y)$, for all $(x, y) \in \mathcal{Z}$.
+\end{definition}
+
+For $A \subseteq \mathcal{X}, B \subseteq \mathcal{Y}$,
+\[
+\P(\mathcal{X} \in A, \mathcal{Y} \in B) = \sum_{(x, y)\,:\,x \in A, y \in B}p(x, y).
+\].
+
+\begin{theorem}
+    $p_X(x) = \sum_{y \in Y}p(x, y)$, $p_Y(y) = \sum_{x \in X}p(x, y)$.
+\end{theorem}
 
 
+\subsection{Joint distributions for continuous random variables}
+\begin{definition}[Joint probability density function]
+    Let $X, Y$ be real-valued random variables,
+    then the joint probability density function
+    (pdf)
+    is a function $f : \R ^ 2 \rightarrow \R$,
+    $f \geq 0$,
+    such that
+    \[
+    \P(X \in [a, b], Y \in [c, d]) = \int_{a}^{b}\left(\int_{c}^{d}f(x, y)\,dy\right)\,dx = \int_{c}^{d}\left(\int_{a}^{b}f(x, y)\,dx\right)\,dy.
+    \]
+\end{definition}
 
+Recall that for a continuous random variable
+\[
+\P(X \in [a, b]) = \int_{a}^{b}f(x)\,dx.
+\]
+\[
+\P(X \in [a, b], Y \in [a, b]) = \int_{a}^{b}\left(\int_{c}^{d}f(x, y)\,dy\right)\,dx
+\]
+
+\textbf{Marginal}:
+
+The marginal for $X$ is given by
+\[
+p_X(x) = \P(X = x).
+\]
+Similarly the marginal for $Y$ is given by
+\[
+p_Y(y) = \P(Y = y).
+\]
+
+\begin{theorem}
+    Let $X$ and $Y$ be two random variables on the same probability space $\Omega$.
+    Then the bivariate random variable $(X, Y)$ is discrete if and only if both $X$ and $Y$ are discrete.
+    Moreover,
+    if $\P(X \in \mathcal{X}) = \P(Y \in \mathcal{Y}) = 1$,
+    the marginal of $x$ is given by
+    \[
+    p_X(x) := \P(X = x) = \sum_{y \in Y} p(x, y)
+    \]
+    and the marginal for $y$ is given by
+    \[
+    p_Y(y) := \P(Y = y) = \sum_{x \in X} p(x, y).
+    \]
+\end{theorem}
+
+Marginals,
+\[
+p_X(x) = \sum_{y \in Y}p(x, y)
+\]
+\[
+p_Y(y) = \sum_{x \in X}p(x, y)
+\]
+
+
+\begin{align*}
+    \P(X = x) &= \P(X = x, Y \in \mathcal{Y}) \\
+    &= \P\left(\bigcup_{y \in Y}\{X = x, Y = y\}\right) \\
+    &= \sum_{y \in \mathcal{Y}}\P(X = x, Y = y) & \text{(By partition theorem)} \\
+    &= \sum_{y \in \mathcal{Y}}p(x, y).
+\end{align*}
+
+\begin{theorem}
+    If $X$ and $Y$ re jointly discrete,
+    then $A \subseteq \mathcal{Z}$,
+    where $\P((X, Y) \in \mathcal{Z}) = 1$,
+    then for any $A \in \mathcal{Z}$,
+    \[
+    \P((X, Y) \in A = \sum_{(x, y) \in A}p(x, y)
+    \]
+\end{theorem}
+
+\textbf{Independence of jointly discrete random variables}
+
+
+Recall:
+For any two sets $A, B$,
+are independent if and only if $\P(A \cap B) = \P(A)\P(B)$.
+
+\begin{definition}
+    Let $(X, Y) : \Omega \rightarrow (X \times Y)$.
+    $X$ and $Y$ are independent if and only if for all $A \subseteq X$,
+    $B \subseteq Y$
+    \[
+    \P(X \in A, Y \in B) = \underbrace{\P(X \in A)\P(Y \in B)}_{\text{product of the marginals}}
+    \]
+\end{definition}
+
+\begin{definition}
+    Let $X$ and $Y$ be discrete random variables.
+    $X$ and $Y$ are independent if and only if
+    \[
+    p_{X, Y}(x, y) = p_X(x)p_Y(y)
+    \]
+\end{definition}
+
+Conditional probability is defined as
+\[
+\P(A | B) = \frac{\P(A \cap B)}{\P(B)}\text{ when } \P(B) > 0.
+\]
+This motivates the definition of conditional probability for random variables:
+\[
+\P(X \in A\,|\,Y \in B) = \frac{\P(X \in A, Y \in B)}{\P(Y \in B)}.
+\]
+
+\begin{definition}
+    For two random variables $X$ and $Y$,
+    the conditional probability of $X$ given $Y = y$ is defined as
+    \[
+    p_{X|Y}(x | y) := \frac{p_{X, Y}(x, y)}{p_Y(y)},\text{ where } p_Y(y) > 0.
+    \]
+\end{definition}
+
+Similarly,
+\[
+p_{Y|X}(y|x)\footnotemark = \frac{p(x, y)}{p_X(x)},\text{ when }p_X(x) > 0
+\]
+\footnotetext{read as probability of $Y = y$, given $X = x$ which is equal to $\P(Y = y | X = x)$.}
+
+\begin{theorem}[Partition theorem]
+    Let $X$ and $Y$ be two discrete random variables.
+    \[
+    \P(X = x) = p_X(x) = \sum_{y \in Y}p_{X | Y}(x | y)p_Y(y)
+    \]
+    and similarly
+    \[
+    \P(Y = y) = p_Y(y) = \sum_{x \in X}p_{Y | X}(y | x)p_X(x)
+    \]
+\end{theorem}
+
+\subsection{Jointly continuous random variables}
+\begin{definition}
+    Two real-valued random variables $X$ and $Y$ are jointly continuously distributed if they have a joint probability density function,
+    i.e. a function $f : \R ^ 2 \rightarrow \R$,
+    such that $f \geq 0$.
+    And
+    \begin{align*}
+        \P(X \in [a, b], Y \in [c, d]) &= \int_{a}^{b}\left(\int_{c}^{d}f(x, y)\,dy\right)\,dx
+        &= \int_{c}^{c}\left(\int_{a}^{b}f(x, y)\,dx\right)\,dy.
+    \end{align*}
+\end{definition}
+
+For $A \subseteq \R ^ 2$
+\[
+\P((X, Y) \in A) = \iint\limits_{A}f(x, y)\,dydx
+\]
+is not necessarily true.
+\begin{theorem}
+    For a set $A \subseteq \R ^ 2$,
+    \[
+    \P((X, Y) \in A) = \iint\limits_{A}f(x, y)\,dydx,
+    \]
+    when $A$ is a finite union of sets of the following type.
+    \[
+    \{x \in [a, b], \phi_1(x) \leq y \leq \phi_2(x)\}, \{\psi_1(y) \leq x \leq \psi_2(y), y \in [c, d]\}
+    \]
+    for continuous function $\phi_1, \phi_2, \psi_1, \psi_2$.
+\end{theorem}
+
+For $A$ of special type,
+we have $\P((X, Y) \in A) = \iint\limits_{A}f(x, y)\,dxdy$.
+
+Recall:
+\[
+\P(X = 0) = 0
+\]
+\[
+\P(X \in [x, x + dx]) \approx f(x)dx
+\]
+\[
+\P(X \in [a, x + dx], Y \in [y, y + dy]) \approx f(x, y)dxdy.
+\]
+
+\begin{corollary}
+    \[
+    \iint\limits_{\R ^ 2}f(x, y)\,dxdy = 1.
+    \]
+\end{corollary}
+\[
+\R ^ 2 = (-\infty, \infty) \times (-\infty, \infty) = A := \{-\infty < x < \infty, -\infty < y < \infty\}
+\]
+\[
+\P((X, Y) \in \R ^ 2) = \P(X \in (-\infty, \infty), Y \in (-\infty, \infty)).
+\]
+\begin{corollary}
+    The marginal densities
+    (of $X$ and $Y$)
+    are given
+    (respectively)
+    by
+    \[
+    f_X(x) = \int_{-\infty}^{\infty}f(x, y)\,dy,\quad f_Y(y) = \int_{-\infty}^{\infty}f(x, y)\,dx.
+    \]
+\end{corollary}
+The converse is not true,
+i.e. if $X$ is continuous,
+$f_X$ (pdf) and $Y$ is continuous with (pdf) $f_Y$,
+then $(X, Y)$ is not necessarily continuously distributed.
+
+\begin{example}
+    Let $X$ be a continuous random variable with pdf $f_X$.
+    Define $Y = 2X$.
+    Then $(X, Y)$ is not jointly continuously distributed.
+    \begin{proof}
+        Suppose not.
+        Then there exists a joint pdf,
+        let's say $f(x, y)$
+        \[
+        \P(2X = Y) = \iint\limits_{\{(x, y)\,|\,y = 2x\}}f(x, y)\,dydx = \int_{-\infty}^{\infty}\left(\int_{2x}^{2x}f(x, y)\,dy\right)\,dx = 0.
+        \]
+        However,
+        we know that
+        \[
+        \P(Y = 2X) = 1.
+        \]
+    \end{proof}
+\end{example}
+
+\begin{theorem}
+    If $(X, Y)$ are jointly continuous,
+    then $X$,
+    is continuously distributed and $Y$ is continuously distributed,
+    with marginal pdf's,
+    \[
+    f_X(x) = \int_{-\infty}^{\infty}f(x, y)\,dy,
+    \]
+    \[
+    f_Y(y) = \int_{-\infty}^{\infty}f(x, y)\,dx,
+    \]
+\end{theorem}
+
+\begin{lemma}
+    Two continuous random variables $X$ and $Y$ are independent if and only if
+    \[
+    f(x, y) = f_X(x)f_Y(y).
+    \]
+\end{lemma}
+
+The conditional pdf of $X$ given $Y = y$,
+\[
+f_{X | Y}(x | y) = \frac{f(x, y)}{f_Y(y)},\text{ when } f_Y(y) > 0
+\]
+similarly,
+\[
+f_{Y | X}(y | x) = \frac{f(x, y)}{f_X(x)},\text{ when } f_X(x) > 0.
+\]
 
 
 

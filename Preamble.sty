@@ -1,13 +1,14 @@
 \ProvidesPackage{preamble}
 
 \usepackage{amsmath, amsfonts, amssymb, amsthm}
-\usepackage{hyperref}
+\usepackage[pdfencoding=unicode, psdextra]{hyperref}
 \usepackage{enumitem}
 \usepackage{thmtools}
-\usepackage{parskip}
 \usepackage{microtype}
-\usepackage{tikz}
 \usepackage{pgfplots}
+\usepackage{parskip}
+\usepackage{tikz}
+\usepackage{float}
 \pgfplotsset{compat=1.18}
 
 \setcounter{MaxMatrixCols}{20}
@@ -25,9 +26,11 @@
 \newcommand{\R}{\mathbb{R}}
 
 \renewcommand{\P}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
 
 \declaretheoremstyle[
     notefont = \normalfont\itshape,
+    bodyfont = \normalfont\itshape,
     notebraces={(}{)}
 ]{avgstyle}
 \declaretheoremstyle[
@@ -44,7 +47,7 @@
 ]{exampstyle}
 
 \declaretheorem[style = avgstyle, numberwithin=section]{theorem}
-\declaretheorem[]{lemma}
+\declaretheorem[numberwithin=section]{lemma}
 \declaretheorem{proposition, corollary, remark}[style=plain]
 \declaretheorem{definition}[style=defstyle, numbered=unless unique, numberwithin=section]
 \declaretheorem{outline}[style=plain, numbered=no]

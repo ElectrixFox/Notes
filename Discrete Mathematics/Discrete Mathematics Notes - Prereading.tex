@@ -544,6 +544,342 @@ In particular, the proportion of permutations that are derangements is
 
 \end{example}
 
+\begin{example}[H3]
+    The Tower of Hanoi is played with three pegs and $n$ rings of different sizes.
+    
+    The initial position is the $n$ rings are stacked in a tower on a single peg in order of decreasing size from the base of the tower.
+
+    A permitted move is to remove a ring from the top of the pile,
+    and place it on another peg provided it does not sit atop a smaller ring.
+
+    The objective is to move the whole tower from the starting peg to one of the other pegs in as few moves as possible.
+
+    What is the smallest number of necessary moves?
+
+    Call the number $t_n$.
+
+    We can see for the following cases,
+    we get the values for $t_n$:
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|ccccc}
+             $n$ & $1$ & $2$ & $3$ & $4$ & $5$ \\
+             \hline
+             $t_n$ & $1$ & $3$ & $7$ & $15$ & $31$
+        \end{tabular}
+    \end{table}
+    How do we obtain a recurrence relation?
+    To obtain this relation we need to argue that we are constructing an optimal strategy.
+    Here is the strategy to move $n$ rings:
+    \begin{enumerate}[label = (\roman*)]
+        \item Move the top $n - 1$ rings to a single pile somewhere else - this takes $t_{n - 1}$ moves to do optimally.
+        \item Move the largest ring to the empty peg - $1$ move.
+        \item Now move the $n - 1$ smaller rings back on top of the largest ring - this takes another $t_{n - 1}$ moves to do optimally.
+    \end{enumerate}
+    To move all of the rings we need to move the largest ring,
+    to move all the other rings first we need to leave an empty peg to perform move (ii).
+    So we obtain the following relation
+    \[
+    t_n = 2t_{n - 1} + 1, (n \geq 2),
+    \]
+    with initial condition $t_1 = 1$.
+    
+    We can guess the formula $t_n = 2 ^ n - 1$ for $n \geq 1$,
+    and then prove this by induction using the recurrence relation.
+\end{example}
+
+\subsection{Towards a general method}
+We will start by considering the recursion relation
+\[
+f_n = f_{n - 1} + f_{n - 2}
+\]
+with initial conditions $f_0 = f_1 = 1$.
+
+The idea (to motivate a general method):
+If we had instead $g_n = g_{n - 1} + g_{n - 1} = 2g_{n - 1}$ then $g_n = c2 ^ n$ is easily seen to be the solution
+(for any constant $c$ which would be determined by an initial condition).
+Although $f_n$ cannot look exactly like this
+(it grows more slowly)
+this suggests that we try $f_n = cx ^ n$ as a possible solution.
+
+Substituting $f_n = cx ^ n$ into the recurrence relation for $f_n$ gives
+\[
+cx ^ n = cx ^ {n - 1} + cx ^ {n - 2},
+\]
+or equivalently,
+\[
+cx ^ {n - 2}(x ^ 2 - x - 1) = 0.
+\]
+This equation has solutions $c = 0$ or $x = 0$
+(either gives the trivial solution $f_n = 0$ for all $n$)
+or
+\[
+x ^ 2 - x - 1 = 0.
+\]
+This is the characteristic equation associated with the relation.
+It has the solutions $x = \frac{1 \pm \sqrt{5}}{2}$.
+Using $\alpha = \frac{1 + \sqrt{5}}{2}$ and $\beta = \frac{1 - \sqrt{5}}{2}$.
+Then $f_n = \alpha ^ n$ and $f_n = \beta ^ n$ each are valid solutions to the recurrence relation,
+since by construction
+\[
+\alpha ^ n = \alpha ^ {n - 1} + \alpha ^ {n - 2}\text{ and } \beta ^ n = \beta ^ {n - 1} + \beta ^ {n - 2}.
+\]
+But then
+\[
+f_n = c_1\alpha ^ n + c_2\beta ^ n
+\]
+is also a solution for any constants $c_1$ and $c_2$.
+To solve this,
+use the initial conditions $f_0 = f_1 = 1$ to determine the constants $c_1$ and $c_2$.
+From the $n = 0$ and $n = 1$ cases of our expression for $f_n$ in terms of $\alpha$ and $\beta$ we get
+\[
+1 = f_0 = c_1 \alpha ^ 0 + c_2 \beta ^ 0 = c_1 + c_2
+\]
+and
+\[
+1 = f_1 = c_1\alpha + c_2\beta.
+\]
+We can solve these equations in $c_1$ and $c_2$ to find
+\[
+c_1 = \frac{\alpha}{\sqrt{5}},\text{ and } c_2 = -\frac{\beta}{\sqrt{5}}.
+\]
+So the Fibonacci sequence is given by
+\begin{align*}
+    f_n &= \frac{\alpha}{\sqrt{5}}\alpha ^ n - \frac{\beta}{\sqrt{5}}\beta ^ n \\
+    &= \frac{1}{\sqrt{5}}(\alpha ^ {n + 1} - \beta ^ {n + 1}) \\
+    &= \frac{1}{\sqrt{5}}\left(\left(\frac{1 + \sqrt{5}}{2}\right) ^ {n + 1} - \left(\frac{1 - \sqrt{5}}{2}\right) ^ {n + 1}\right).
+\end{align*}
+
+\subsection{General method for solving homogeneous linear recurrence relations}
+Let $(a_n)$ be a sequence indexed by integers $n = 0, 1, 2, \dotsc$.
+We are given
+\begin{itemize}
+    \item Initial conditions $a_0, a_1, \dotsc, a_{r - 1}$ ($r$ a positive integer).
+    \item Recurrence relation
+    \begin{equation}
+        a_n = \sum_{i = 1}^{r}c_ia_{n - i} = c_1a_{n - 1} + \dotsi + c_ra_{n - r}, (n \geq r),
+    \end{equation}
+    where $c_1, \dotsc, c_r$ are specified constants.
+\end{itemize}
+
+We want to find an explicit formula for $a_n$ in terms of $n$.
+
+The recurrence relation ($1$) is linear because no term involves more than a single factor of the $a_i$,
+and it is homogeneous because every term involves an $a_i$.
+
+We seek solutions to the recurrence relation ($1$) of the form $a_n = x ^ n$, $x \neq 0$.
+Substitute this into ($1$) to get
+\[
+x ^ n = \sum_{i = 1}^{r}c_i x ^ {n - i}, (n \geq r).
+\]
+Divide through by $x ^ {n - r}$
+(the excess powers of $x$)
+to get
+\begin{equation}
+    x ^ r - \sum_{i = 1}^{r}c_ix ^ {r - i} = 0.
+\end{equation}
+This is the characteristic equation
+\begin{enumerate}[label = \textbf{Step \arabic*}]
+    \item of the method is to write down the characteristic equation.
+    
+    In general there are $r$ roots to ($2$)
+    (possibly complex, or repeated):
+    call them $\alpha_1, \dotsc, \alpha_r$.
+    \item of the method is to find the roots $\alpha_1, \dotsc, \alpha_r$.
+    
+    Then,
+    for each $i$,
+    $a_n = d\alpha_i ^ n$ satisfies the recurrence relation ($1$) for any constant $d$.
+    By linearity,
+    any linear combination of the $\alpha_i ^ n$ also solves the recurrence relation.
+
+    If the roots $\alpha_1, \dotsc, \alpha_r$ are all distinct,
+    then the general solution to the recurrence relation is
+    \[
+    a_n = g(n) = d_1\alpha_1 ^ n + d_2\alpha_2 ^ n + \dotsi + d_r\alpha_r ^ n,
+    \]
+    for arbitrary constants $d_1, d_2, \dotsc, d_r$.
+    \item is to find the general solution to the recurrence relation.
+    \item is to apply the initial conditions given $r$ linear equations in the $r$ unknown constants $d_i$.
+    Solve these to recover the solution $a_n$ to the recurrence relation with initial conditions.
+\end{enumerate}
+
+\textbf{Repeated roots}.
+If the characteristic equation has repeated roots,
+we need to tweak the process.
+
+If $\alpha$ is a root repeated $k$ times,
+say $\alpha = \alpha_1 = \alpha_2 = \dotsi = \alpha_k$,
+then in place of the expression $d_1\alpha_1 ^ n + \dotsi + d_k\alpha_k ^ n$ in the general solution we use instead $(e_1 + e_2n + \dotsi + e_kn ^ {k - 1}) \alpha ^ n$ for constants $e_1, \dotsc, e_k$.
+
+\textit{Note the similarity with the usual approach to solving ordinary linear differential equations.}
+
+\subsection{Solving inhomogeneous linear recurrence relations}
+Assume we have the following
+\begin{itemize}
+    \item Initial conditions $a_0, a_1, \dotsc, a_{r - 1}$
+    ($r$ is a positive integer)
+    \item Recurrence relation
+    \[
+    a_n = c_1a_{n - 1} + \dotsi + c_ra_{n - r} + f(n)
+    \]
+    where $c_1, \dotsc, c_r$ are constants and $f(n)$ is an inhomogeneous part depending on $n$.
+\end{itemize}
+
+The method is now as follows
+\begin{enumerate}[label = \textbf{Step \arabic*}]
+    \item First consider the associated homogeneous problem
+    \[
+    a_n = c_1a_{n - 1} + \dotsi + c_ra_{n - r}
+    \]
+    as above.
+    Find the general solution for the homogeneous problem,
+    $a_n = g(n)$.
+    Do not attempt to find any unknown constants.
+    \item Find a specific particular solution,
+    $a_n = p(n)$.
+    \item The general solution to the inhomogeneous problem is then the sum of these:
+    \[
+    a_n = g(n) + p(n)
+    \]
+    \item Apply the initial condition to determine the unknown constants
+    (in the $g(n)$ part).
+\end{enumerate}
+
+Here is a table of particular solutions,
+well forms of them.
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c}
+         $f(n)$ & form of particular solution $p(n)$ \\
+         \hline
+         $A$ & $B_0$ (constant) \\
+         $An$ & $B_0 + B_1n$ (linear) \\
+         $An ^ 2$ & $B_0 + B_1n + B_2n ^ 2$ (quadratic) \\
+         $Aq ^ n$ & $B_0q ^ n$ (exponential) \\
+         $Anq ^ n$ & $(B_0 + B_1n)q ^ n$ (etc$\dotsc$)
+    \end{tabular}
+\end{table}
+
+However,
+there are some exceptions which need adjustment to the form of $p(n)$:
+\begin{enumerate}[label = (\alph*)]
+    \item If $f(n)$ contains $q ^ n$ and the constant $q$ is a
+    (possibly repeated)
+    root of the characteristic equation,
+    then the homogeneous part of the solution already contains a $q ^ n$ term,
+    so in $p(n)$ we should replace $q ^ n$ by $nq ^ n$
+    (or $n ^ kq ^ n$ for appropriate $k$ in the case of a repeated root).
+    \item If $1$ is a root of the characteristic equation,
+    then what looks like $f(n) = An ^ k$ should be thought of as $f(n) = An ^ k \cdot 1 ^ n$ which now puts us back in case (a),
+    and we may need to increase the powers of $n$ in the choice of $p(n)$ to deal with this.
+\end{enumerate}
+
+\newpage
+
+\section{Generating functions}
+
+\subsection{What is a generating function?}
+
+Generating function provide a powerful general method of solving counting problems,
+including recurrence relations.
+
+Generating functions encode combinatorial information in a convenient analytical form.
+
+For example,
+we have already seen that
+\[
+(1 + x) ^ n = \sum_{k = 0}^{n}\binom{n}{k}x ^ k.
+\]
+The
+(real analytic)
+function $f(x) = (1 + x) ^ n$ encodes the counting information
+\[
+\binom{n}{0}, \binom{n}{1}, \dotsc, \binom{n}{n}
+\]
+as the coefficients in the corresponding power series.
+
+Generating functions provide a systematic approach to exploiting the link between discrete and continuous mathematics.
+
+\begin{definition}
+    Let $a_0, a_1, a_2, \dotsc$ be a sequence of real numbers.
+    The
+    (ordinary)
+    generating function for the sequence $(a_k)$ is the formal sum
+    \[
+    f(x) = \sum_{k = 0}^{\infty}a_kx ^ k.
+    \]
+\end{definition}
+
+We are allowed to manipulate these generating functions without worrying about convergence of the power series,
+this is what we mean by a formal sum.
+We can do addition, multiplication, differentiation, etc.,
+in any normal way.
+
+\subsection{Counting with generating functions}
+\begin{example}
+    $7$ chocolate bars are distributed among $4$ people.
+    Alice gets at most $4$,
+    Brian gets at most $3$,
+    Claire gets at most $2$,
+    and Derek gets at most $1$.
+
+    How many ways of distributing the bars are there?
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        We are counting solutions $(e_1, e_2, e_3, e_4)$ to the equation
+        \[
+        e_1 + e_2 + e_3 + e_4 = 7,
+        \]
+        where $e_1, e_2, e_3, e_4$ are integers satisfying $0 \leq e_1 \leq 4$, $0 \leq e_2 \leq 3$, $0 \leq e_3 \leq 2$.
+        and $0 \leq e_4 \leq 1$.
+        
+        We construct an associated generating function.
+
+        Associate to each variable $e_i$ an expression with the sum of $x ^ p$ over $p$ the possible values of $e_i$.
+
+        E.g. To $e_1$ is associated the term $x ^ 0 + x ^ 1 + x ^ 2 + x ^ 3 + x ^ 4$.
+
+        Create the product of the expressions for each $e_i$:
+        \[
+        f(x) = (x ^ 0 + x ^ 1 + x ^ 2 + x ^ 3 + x ^ 4)(x ^ 0 + x ^ 1 + x ^ 2 + x ^ 3)(x ^ 0 + x ^ 1 + x ^ 2)(x ^ 0 + x ^ 1).
+        \]
+        Then each terms in $f(x)$ represents a possible product $x ^ {e_1} \cdot x ^ {e_2} \cdot x ^ {e_3} \cdot x ^ {e_4}$.
+        
+        But if the sum of the variables equals one holds,
+        we know that
+        \[
+        x ^ {e_1} \cdot x ^ {e_2} \cdot x ^ {e_3} \cdot x ^ {e_4} = x ^ {e_1 + e_2 + e_3 + e_4} = x ^ 7.
+        \]
+        So every solution $(e_1, e_2, e_3, e_4)$ to the sum corresponds uniquely to a way of multiplying out the expressions in the product $f(x)$ to accumulate $x ^ 7$.
+
+        For example,
+        the solution $(e_1, e_2, e_3, e_4) = (4, 0, 2, 1)$ corresponds to
+        \[
+        (x ^ 0 + x ^ 1 + x ^ 2 + x ^ 3 + x ^ 4)(x ^ 0 + x ^ 1 + x ^ 2 + x ^ 3)(x ^ 0 + x ^ 1 + x ^ 2)(x ^ 0 + x ^ 1)
+        \]
+        where $x ^ 4, x ^ 0, x ^ 2, x ^ 1$ are selected from each group of sums respectively,
+        which is one way of getting $x ^ 7$.
+        So the number of solutions is the coefficient of $x ^ 7$ in the series expansion of the generating function $f(x)$.
+
+        The answer is $15$.
+    \end{proof}
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

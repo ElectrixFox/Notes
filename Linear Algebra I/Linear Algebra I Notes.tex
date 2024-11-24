@@ -204,7 +204,8 @@ These operations satisfy the \textbf{axioms} of a real vector space.
 \end{enumerate}
 (i), (iii), (iv) $\iff (\R ^ n, +)$ is a group
 
-(i), (ii), (iii), (iv) $\iff (\R ^ n, +)$ is an abelian group \\
+(i), (ii), (iii), (iv) $\iff (\R ^ n, +)$ is an abelian group
+
 
 
 \textbf{Axioms} for scalar multiplication
@@ -2764,7 +2765,7 @@ $\lambda_1\mbf{u}_1 + \lambda_2\mbf{u}_2 + \dotsc + \lambda_k\mbf{u}_k$ for some
 \begin{definition}
     The span or linear span of $\mbf{u}_1, \dotsc, \mbf{u}_k \in \R ^ n$ is the subset
     \[
-    \mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_k) := \{\lambda\mbf{u}_1 + \lambda_2\mbf{u}_2 + \dotsc + \lambda_k\mbf{u}_k\,|\, \lambda_1, \dotsc, \lambda_k \in \R\}
+    \mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_k) := \{\lambda_1\mbf{u}_1 + \lambda_2\mbf{u}_2 + \dotsc + \lambda_k\mbf{u}_k\,|\, \lambda_1, \dotsc, \lambda_k \in \R\}
     \]
     i.e. all linear combinations of $\mbf{u}_1, \dotsc, \mbf{u}_k$.
 \end{definition}
@@ -2789,6 +2790,558 @@ We say that "$U$ is spanned by $\mbf{u}_1, \dotsc, \mbf{u}_k$".
     \]
     is a subspace of $\R ^ 4$.
 \end{proposition}
+
+Suppose $\mbf{u}_1, \dotsc, \mbf{u}_k \in \R ^ n$
+\[
+\mbf{u}_i = \begin{pmatrix}
+    u_{1i} \\ u_{2i} \\ \vdots \\ u_{ni}
+\end{pmatrix}.
+\]
+Form $A = \begin{pmatrix}
+    \mbf{u}_1  & \mbf{u}_2 & \dotsi & \mbf{u}_k
+\end{pmatrix} \in M_{n \times k}(\R)$.
+Then we have
+\begin{align*}
+\lambda_1\mbf{u}_1 + \lambda_2\mbf{u}_2 + \dotsc + \lambda_k\mbf{u}_k
+&= \begin{pmatrix}
+    \lambda_1u_{11} + \lambda_2u_{12} + \dotsi + \lambda_ku_{1k} \\
+    \lambda_1u_{21} + \lambda_2u_{22} + \dotsi + \lambda_ku_{2k} \\
+    \vdots \\
+    \lambda_1u_{n1} + \lambda_2u_{n2} + \dotsi + \lambda_ku_{nk}
+\end{pmatrix} \\
+&= \begin{pmatrix}
+    u_{11} & u_{12} & \dotsi & u_{1k} \\
+    u_{21} & u_{22} & \dotsi & u_{2k} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    u_{n1} & u_{n2} & \dotsi & u_{nk}
+\end{pmatrix}
+\begin{pmatrix}
+    \lambda_1 \\ \vdots \\ \lambda_k
+\end{pmatrix} \\
+&=
+A\pmb{\lambda}
+\end{align*}
+where
+\[
+\pmb{\lambda} = \begin{pmatrix}
+    \lambda_1 \\ \lambda_2 \\ \vdots \\ \lambda_k
+\end{pmatrix}.
+\]
+
+\underline{Conclusion}
+
+$\mathrm{span}\langle\mbf{u}_1, \dotsc, \mbf{u}_k\rangle = \{A\pmb{\lambda}\,|\,\pmb{\lambda} \in \R ^ k\} = \{\mbf{b} \in \R ^ n\,|\, A\pmb{\lambda} = \mbf{b}\text{ has a solution}\}$.
+
+\begin{lemma}
+    If $\mbf{u}_1, \dotsc, \mbf{u}_k \in \R ^ n$ then $U = \mathrm{span}\langle\mbf{u}_1, \dotsc, \mbf{u}_k\rangle \subseteq \R ^ n$ is a subspace of $\R ^ n$.
+    \begin{proof}
+        Check conditions to be a subspace
+        \begin{enumerate}[label = (\roman*)]
+            \item Suppose $\lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k$, $\mu_1\mbf{u}_1 + \dotsi + \mu_k\mbf{u}_k \in U$ then
+            \[
+            (\lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k) + (\mu_1\mbf{u}_1 + \dotsi + \mu_k\mbf{u}_k) = (\lambda_1 + \mu_1)\mbf{u}_1 + \dotsi + (\lambda_k + \mu_k)\mbf{u}_k \in U.
+            \]
+            \item Suppose $\lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k \in U, \lambda \in \R$ then
+            \[
+            \lambda(\lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k) = (\lambda\lambda_1)\mbf{u}_1 + \dotsi + (\lambda\lambda_k)\mbf{u}_k \in U.
+            \]
+            \item
+            \[
+            \mbf{0} = 0\mbf{u}_1 + \dotsi + 0\mbf{u}_k \in U.
+            \]
+        \end{enumerate}
+    \end{proof}
+\end{lemma}
+
+\begin{example}\phantom{}
+    \begin{enumerate}[label = (\roman*)]
+        \item $0 = \{\mbf{0}\} = \R ^ n$
+        
+        $0 = \mathrm{span}\langle\mbf{0}\rangle$.
+        \item $\R ^ n \subseteq \R ^ n$
+        
+        $\R ^ n = \mathrm{span}\langle\mbf{e}_1, \dotsc, \mbf{e}_n\rangle$.
+        \item $\Pi = \{\lambda\mbf{a} + \mu\mbf{b}\,|\,\lambda, \mu \in \R\} \subseteq \R ^ n$, $\mbf{a, b} \in \R ^ n$
+
+        $\Pi = \mathrm{span}\langle\mbf{a, b}\rangle$.
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    What is the span inside $\R ^ 3$ of
+    \[
+    \mbf{u}_1 = \begin{pmatrix}
+        1 \\ 1 \\ 1
+    \end{pmatrix},
+    \mbf{u}_2 = \begin{pmatrix}
+        -1 \\ 0 \\ 2
+    \end{pmatrix},
+    \mbf{u}_3 = \begin{pmatrix}
+        0 \\ 1 \\ 3
+    \end{pmatrix},
+    \mbf{u}_4 = \begin{pmatrix}
+        -1 \\ 1 \\ 5
+    \end{pmatrix}?
+    \]
+
+    Set $A = \begin{pmatrix}
+        \mbf{u}_1 & \mbf{u}_2 & \mbf{u}_3 & \mbf{u}_4
+    \end{pmatrix} = M_{3 \times 4}(\R)$.
+    Then,
+    given  $\mbf{b} \in \R ^ 3$,
+    we would like to know if $\exists\pmb{\lambda} \in \R ^ 4$ such that $A\pmb{\lambda} = \mbf{b}$
+    (so $\mbf{b} \in \mathrm{span}\begin{pmatrix}
+        \mbf{u}_1 & \mbf{u}_2 & \mbf{u}_3 & \mbf{u}_4
+    \end{pmatrix} = U$),
+    i.e. when does $A\pmb{\lambda} = \mbf{b}$ have solutions?
+    \begin{align*}
+        \begin{amatrix}{4}
+            1 & -1 & 0 & -1 & b_1 \\ 1 & 0 & 1 & 1 & b_2 \\ 1 & 2 & 3 & 5 & b_3
+        \end{amatrix}
+        &\xrightarrow[A_{12}(-1)]{A_{13}(-1)}\begin{amatrix}{4}
+            1 & -1 & 0 & -1 & b_1 \\
+            0 & 1 & 1 & 2 & b_2 - b_1 \\
+            0 & 3 & 3 & 6 & b_3 - b_1
+        \end{amatrix} \\
+        &\xrightarrow[A_{21}(1)]{A_{23}(-3)}
+        \begin{amatrix}{4}
+            1 & 0 & 1 & 1 & b_2 \\
+            0 & 1 & 1 & 2 & b_2 - b_1 \\
+            0 & 0 & 0 & 0 & 2b_1 - 3b_2 + b_3
+        \end{amatrix}
+    \end{align*}
+    Solutions exist exactly when
+    \[
+    2b_1 - 3b_2 + b_3 = 0.
+    \]
+    \[
+    U = \left\{\begin{pmatrix}
+        b_1 \\ b_2 \\ b_3
+    \end{pmatrix}\,\middle|\, 2b_1 - 3b_2 + b_3 = 0\right\}.
+    \]
+    $U$ is a plane inside $\R ^ 3$,
+    passing through the origin with normal vector $\begin{pmatrix}
+        2 \\ -3 \\ 1
+    \end{pmatrix}$.
+    Also $U = \mathrm{span}\langle\mbf{u}_1, \mbf{u}_2, \mbf{u}_3, \mbf{u}_4\rangle = \mathrm{span}\langle\mbf{u}_1, \mbf{u}_2\rangle = \mathrm{span}\langle\mbf{u}_i, \mbf{u}_j\rangle (i \neq j)$, $1 \leq i, j \leq 4$
+    (since $U$ is a plane).
+\end{example}
+
+\begin{lemma}
+    Suppose $\mbf{u}_1, \dotsc, \mbf{u}_k \subseteq \R ^ n$ and suppose $\mbf{u}_1 \in \mathrm{span}\langle\mbf{u}_2, \dotsc, \mbf{u}_k\rangle$ then
+    \[
+    U := \mathrm{span}\langle\mbf{u}_1, \mbf{u}_2, \dotsc, \mbf{u}_k\rangle = \mathrm{span}\langle\mbf{u}_2, \dotsc, \mbf{u}_k\rangle =: V.
+    \]
+    \begin{proof}
+        First note certainly $V \subseteq U$.
+        We must show $U \subseteq V$.
+        Since $\mbf{u}_1 \in V$ we have $\mbf{u}_1 = \mu_2\mbf{u}_2 + \dotsi + \mu_k\mbf{u}_k$ for some $\mu_i \in \R$.
+        Then
+        \begin{align*}
+        \lambda_1\mbf{u}_1 + \lambda_2\mbf{u}_2 + \dotsi + \lambda_k\mbf{u}_k &= \lambda_1(\mu_2\mbf{u}_2 + \dotsi + \mu_k\mbf{u}_k) + \lambda_2\mbf{u}_2 + \dotsi + \lambda_k \mbf{u}_k \\
+        &= (\lambda_1\mu_2 + \lambda_2)\mbf{u}_2 + \dotsi + (\lambda_1\mu_k + \lambda_k)\mbf{u}_k \\
+        &\in V.
+        \end{align*}
+    \end{proof}
+\end{lemma}
+
+\subsection{Linear Independence}
+
+\begin{definition}
+    Suppose $\mbf{u}_1, \dotsc, \mbf{u}_k \in \R ^ n$ then we say $\mbf{u}_1, \dotsc, \mbf{u}_k$ are linearly independent
+    (or $\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ is linearly independent)
+    if and only if the only solution to
+    \[
+    \lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k = \mbf{0}
+    \]
+    is $\lambda_1 = \lambda_2 = \dotsi = \lambda_k = 0$.
+\end{definition}
+
+If $A = (\mbf{u}_1 \ \dotsi \ \mbf{u}_k) \in M_{n \times k}(\R)$.
+Then $\mbf{u}_1, \dotsc, \mbf{u}_k$ are linearly independent is equivalent to $A\pmb{\lambda} = \mbf{0}$ only has the solution $\mbf{\lambda = 0}$.
+
+\begin{definition}
+    $\mbf{u}_1, \dotsc, \mbf{u}_k$ are called linearly dependent if and only if they are not linearly independent.
+\end{definition}
+
+\begin{example}
+    Suppose $\mbf{u, v} \in \R ^ n$
+    $\mbf{u \neq 0 \neq v}$.
+    Then $\{\mbf{u, v}\}$ is linearly dependent if and only if $\mbf{u, v}$ are multiples of each other (i.e. are collinear).
+    \begin{proof}
+        $\mbf{u, v}$ are linearly dependent is equivalent to $\lambda, \mu \in \R$, $\lambda, \mu$ both not $0$ such that $\lambda\mbf{u} + \mu\mbf{v} = \mbf{0}$.
+        Say $\lambda \neq 0$,
+        then
+        $\mbf{u} = \frac{-\mu}{\lambda}\mbf{v}$
+        (also since $\mbf{u \neq 0}$ we must have $\mu \neq 0$ so $\mbf{v} = \frac{-\lambda}{\mu}\mbf{u}$).
+    \end{proof}
+\end{example}
+
+$\mathrm{span}\langle\mbf{u}_1, \dotsc, \mbf{u}_k\rangle = \{\text{All linear combinations of }\mbf{u}_1, \dotsc, \mbf{u}_k\}$.
+
+\begin{proposition}
+    Suppose $\mbf{u}_1, \dotsc, \mbf{u}_r \in \R ^ n$ are linearly independent,
+    and suppose $\mbf{u} \in \R ^ n,\ \mbf{u} \notin \mathrm{span}\langle\mbf{u}_1, \dotsc, \mbf{u}_r\rangle$.
+    Then $\{\mbf{u}, \mbf{u}_1, \dotsc, \mbf{u}_r\}$ is also linearly independent.
+    \begin{proof}
+        Suppose $\mbf{u}, \mbf{u}_1, \dotsc, \mbf{u}_r$ are not linearly independent.
+        Then there exist not all zero $\lambda, \lambda_i \in \R, 1 \leq i \leq r$
+        such that
+        \[
+        \lambda\mbf{u} + \lambda_1\mbf{u}_1 + \dotsi + \lambda_r\mbf{u}_r = \mbf{0}.
+        \]
+        Two possibilities:
+        \begin{enumerate}[label = (\arabic*)]
+            \item $\lambda = 0$.
+            This implies $\lambda_1\mbf{u}_1 + \dotsi + \lambda_r\mbf{u}_r = \mbf{0}$ so $\lambda_1 = \lambda_2 = \dotsi = \lambda_r = 0$ by linear independence of $\mbf{u}_1, \dotsc, \mbf{u}_r$.
+            Contradiction.
+            \item $\lambda \neq 0$.
+            This implies $\mbf{u} = \frac{-\lambda_1}{\lambda}\mbf{u}_1 + \dotsi + \frac{-\lambda_r}{\lambda}\mbf{u}_r \in \mathrm{span}\langle\mbf{u}_1, \dotsc, \mbf{u}_r\rangle$.
+            Contradiction.
+        \end{enumerate}
+    \end{proof}
+\end{proposition}
+
+\begin{example}
+    \[
+    \mbf{u}_1 = \begin{pmatrix}
+        1 \\ 5 \\ -2
+    \end{pmatrix}, \mbf{u}_2 = \begin{pmatrix}
+        1 \\ 1 \\ 2
+    \end{pmatrix}, \mbf{u}_3 = \begin{pmatrix}
+        1 \\ -2 \\ 5
+    \end{pmatrix} \in \R ^ 3.
+    \]
+    Are these vectors linearly independent?
+
+    We want to solve
+    \[
+    \lambda_1\mbf{u}_1 + \lambda_2\mbf{u}_2 + \lambda_3\mbf{u}_3 = \mbf{0} \iff A\pmb{\lambda} = \begin{pmatrix}
+        \mbf{u}_1 & \mbf{u}_2 & \mbf{u}_3
+    \end{pmatrix}\begin{pmatrix}
+        \lambda_1 \\ \lambda_2 \\ \lambda_3
+    \end{pmatrix} = 0.
+    \]
+    Solve this system of linear equations.
+    \begin{align*}
+        \begin{amatrix}{3}
+            1 & 1 & 1 & 0 \\
+            5 & 1 & -2 & 0 \\
+            -2 & 2 & 5 & 0
+        \end{amatrix}
+        &\xrightarrow[A_{13}(2)]{A_{12}(-5)}
+        \begin{amatrix}{3}
+            1 & 1 & 1 & 0 \\
+            0 & -4 & -7 & 0 \\
+            0 & 4 & 7 & 0
+        \end{amatrix} \\
+        &\xrightarrow[M_2\left(-\frac{1}{4}\right)]{A_{23}(1)}
+        \begin{amatrix}{3}
+            1 & 1 & 1 & 0 \\
+            0 & 1 & \frac{7}{4} & 0 \\
+            0 & 0 & 0 & 0
+        \end{amatrix} \\
+        &\xrightarrow{A_{21}(-4)}
+        \begin{amatrix}{3}
+            1 & 0 & -\frac{3}{4} & 0 \\
+            0 & 1 & \frac{7}{4} & 0 \\
+            0 & 0 & 0 & 0
+        \end{amatrix}.
+    \end{align*}
+    So there is a non-trivial solution
+    (infinitely many in fact)
+    let us pick one:
+    \[
+    \lambda_3 = 4, \lambda_2 = -7, \lambda_1 = 3.
+    \]
+    So
+    \[
+    3\mbf{u}_1 - 7\mbf{u}_2 + 4\mbf{u}_3 = \mbf{0}.
+    \]
+    Hence not linearly independent.
+\end{example}
+
+\begin{example}
+    \[
+    \mbf{v}_1 = \begin{pmatrix}
+        1 \\ 3 \\ 1 \\ 2
+    \end{pmatrix},
+    \mbf{v}_2 = \begin{pmatrix}
+        2 \\ -1 \\ -5 \\ 3
+    \end{pmatrix},
+    \mbf{v}_3 = \begin{pmatrix}
+        1 \\ 0 \\ -2 \\ -1
+    \end{pmatrix} \in \R ^ 4.
+    \]
+    Are these linearly independent?
+    Same process.
+    \begin{align*}
+        \begin{amatrix}{3}
+            1 & 2 & 1 & 0 \\
+            3 & -1 & 0 & 0 \\
+            1 & -5 & -2 & 0 \\
+            2 & 3 & -1 & 0
+        \end{amatrix}
+        &\xrightarrow[A_{14}(-2)]{A_{12}(-3), A_{13}(-1)}
+        \begin{amatrix}{3}
+            1 & 2 & 1 & 0 \\
+            0 & -7 & -3 & 0 \\
+            0 & -7 & -3 & 0 \\
+            0 & -1 & -3 & 0
+        \end{amatrix} \\
+        &\xrightarrow[A_{34}(-1)]{P_{24}, M_2(-1)}
+        \begin{amatrix}{3}
+            1 & 2 & 1 & 0 \\
+            0 & 1 & 3 & 0 \\
+            0 & -7 & -3 & 0 \\
+            0 & 0 & 0 & 0
+        \end{amatrix} \\
+        &\rightarrow \dotsi \rightarrow
+        \begin{amatrix}{3}
+            1 & 0 & 0 & 0 \\
+            0 & 1 & 0 & 0 \\
+            0 & 0 & 1 & 0 \\
+            0 & 0 & 0 & 0
+        \end{amatrix}.
+    \end{align*}
+    There are no free variables so the unique solution to
+    \[
+    \lambda_1\mbf{v}_1 + \lambda_2\mbf{v}_2 + \lambda_3\mbf{v}_3 = \mbf{0}.
+    \]
+    Hence $\mbf{v}_1, \mbf{v}_2, \mbf{v}_3$ are linearly independent
+\end{example}
+
+\subsection{Real vector spaces}
+\begin{definition}
+    A real vector space is a non-empty set $V$ together with two operations:
+    \begin{enumerate}[label = (\roman*)]
+        \item Addition: $V \times V \rightarrow V$
+        \[
+        (\mbf{u}, \mbf{v}) \mapsto \mbf{u} + \mbf{v}
+        \]
+        \item Scalar multiplication
+        \[
+        \R \times V \rightarrow V
+        \]
+        \[
+        (\lambda, \mbf{v}) \mapsto \lambda\mbf{v}
+        \]
+    \end{enumerate}
+    These operations satisfy the axioms of a real vector space.
+\end{definition}
+
+Addition
+\begin{enumerate}[label = (\roman*)]
+    \item $\exists\mbf{0} \in V$ such that
+    \[
+    \mbf{0} + \mbf{v} = \mbf{v} = \mbf{v} + \mbf{0}\ \forall\mbf{v} \in V
+    \]
+    \item $\mbf{v + w = w + v}\ \forall \mbf{v, w} \in V$
+    \item $\forall\mbf{v} \in V\, \exists -\mbf{v} \in V$ such that
+    \[
+    \mbf{v} + (-\mbf{v}) = \mbf{0}.
+    \]
+    \item $\mbf{u + (v + w) = (u + v) + w}\ \forall \mbf{u, v, w} \in V$.
+\end{enumerate}
+
+Scalar multiplication
+\begin{enumerate}[label = (\roman*)]
+    \item $0\mbf{v} = \mbf{0}\ \forall v \in V$
+    \item $1\mbf{v} = \mbf{v}\ \forall v \in V$
+    \item $\lambda(\mu\mbf{v}) = (\lambda\mu)\mbf{v}\ \forall \lambda, \mu \in \R, \forall \mbf{v} \in V$
+    \item
+    \begin{align*}
+        (\lambda + \mu)\mbf{v} &= \lambda\mbf{v} + \lambda\mbf{w} \\
+        \lambda(\mbf{v} + \mbf{w}) &= \lambda\mbf{v} + \lambda\mbf{w}
+    \end{align*}
+    $\forall \lambda, \mu \in \R$ and $\forall \mbf{v, w} \in V$.
+\end{enumerate}
+
+We refer sometimes (often) to elements of $V$ as vectors
+
+\begin{example}\phantom{}
+    \begin{enumerate}[label = (\roman*)]
+        \item $\R ^ n$ is a vector space.
+        \item Subspaces of $\R ^ n$ are vector spaces.
+        \item $M_{m \times n}(\R)$ form a vector space under matrix addition and scalar multiplication.
+        \item
+        \[
+        V = \{f : [0, 1] \rightarrow \R\,|\, f \text{ is continuous}\},
+        \]
+        is a vector space.
+        Under the operations
+        \begin{align*}
+            V \times V &\rightarrow V \\
+            (f + g) &\mapsto f + g \\
+            (f + g)(t) &= f(t) + g(t) \\
+            \phantom{} \\
+            \R \times V &\rightarrow V \\
+            (\lambda, f) &\rightarrow \lambda f \\
+            (\lambda f)(t) &= \lambda f(t).
+        \end{align*}
+        Straightforward to check that this $V$ under these operations satiates the axioms.
+    \end{enumerate}
+\end{example}
+
+The "$0$-vector" in $V$ is the $0$ function
+\[
+0 : [0, 1) \rightarrow \R
+\]
+\[
+0(t) = 0\qquad\forall 0 \in t \leq 1.
+\]
+\begin{example}
+    $V = \{f : [0, 1] \rightarrow \R\,|\, f\text{ is differentiable}\}$.
+\end{example}
+\begin{example}
+    $V = \{f : [0, 1] \rightarrow \R\}$.
+\end{example}
+\begin{example}
+    \begin{align*}
+    \R[x]_n &= \{\text{polynomials (with real-valued coefficients) of degree at most } n\} \\
+    &= \{a_0 + a_1x + a_2x ^ 2 + \dotsi + a_nx ^ n\,|\, a_i \in \R, 0 \leq i \leq n\}.
+    \end{align*}
+    \[
+    \R[x] = \{\text{polynomials of real-valued coefficients}\} = \bigcup_{n = 0}^{\infty}\R[x]_n.
+    \]
+\end{example}
+
+$\R[x]_n$ and $\R[x]$ are both vector spaces under usual addition and scalar multiplication.
+i.e. $p = a_0 + a_1x + \dotsi + a_nx ^ n$, $q = b_0 + b_1x + \dotsi + b_nx ^ n$, $\lambda \in \R$.
+Then $p + q = (a_0 + b_0) + (a_1 + b_1)x + \dotsi + (a_n + b_n)x ^ n$,
+$\lambda_p = (\lambda a_0) + (\lambda a_1)x + \dotsi + (\lambda a_n)x ^ n$.
+
+\subsection{Vector subspaces}
+\begin{definition}
+    A vector subspace of $V$ is a subset $W \subseteq V$ such that $W$ itself forms a vector space under the operations inside $V$.
+\end{definition}
+
+\begin{lemma}[Subspace criterion]
+    $W \subseteq V$ is a subspace of the vector space $V$ exactly when (i), (ii), (iii) hold:
+    \begin{enumerate}[label = (\roman*)]
+        \item If $\mbf{u, v} \in W$ then $\mbf{u + v} \in W$
+        (closure under addition).
+        \item If $\mbf{u} \in W$, $\lambda \in \R$ then $\lambda\mbf{u} \in W$
+        (closure under scalar multiplication).
+        \item $\mbf{0} \in W$
+        ($W$ is non-empty).
+    \end{enumerate}
+\end{lemma}
+
+$\R ^ 1 \subseteq \R$ is a vector space. $\Z, \Q \subseteq \R$,
+$\Z, \Q$ are not subspaces of $\R$,
+since $1 \in \Z, \Q$ but $\sqrt{2} = \sqrt{2} \cdot 1 \notin \Z \text{ or } \Q$.
+
+\begin{example}
+    Function spaces
+    \[
+    \{f : [0, 1] \rightarrow \R\,|\,\text{conditions}\}.
+    \]
+\end{example}
+\begin{example}
+    \[
+    \R[x]_n \subseteq \R[x]_{n + 1} \subseteq \dotsi \subseteq \R[x].
+    \]
+\end{example}
+
+\begin{example}
+    $M_n(\R)$ is a vector space.
+    $\mathrm{sym}_n(\R) \subseteq M_n(\R)$ subset of symmetric $n \times n$ matrices.
+    \[
+    \mathrm{sym}_n(\R) := \{A \in M_n(\R)\,|\, A ^ t = A\}
+    \]
+    form a subspace.
+    \begin{proof}
+        (iii) $0 \in M_n(\R)$ zero matrix.
+        $0 ^ t = 0$ so $0 \in \mathrm{sym}_n(\R)$.
+
+        (i) Suppose $A, B \in \mathrm{sym}_n(\R)$ then $(A + B) ^ t = A ^ t + B ^ t = A + B$ so $A + B \in \mathrm{sym}_n(\R)$.
+
+        (ii) If $A \in \mathrm{sym}_n(\R)$,
+        $\lambda \in \R$ then
+        \[
+        (\lambda A) ^ t = \lambda(A) ^ t = \lambda A ^ t = \lambda A
+        \]
+        so $\lambda A \in \mathrm{sym}_n(\R)$.
+        \end{proof}
+\end{example}
+
+\begin{example}
+    The set of even polynomials
+    (the set with only even powers of $x$)
+    $\R[x]_{\text{even}} \subseteq \R[x]$
+    is a subspace of $\R[x]$.
+\end{example}
+
+
+
+The notions of linear combination, span,
+linear independence carry over to vector spaces from $\R ^ n$
+
+\begin{definition}[Basis]
+    A basis for a vector space $V$ is a finite set of vectors
+    \[
+    \{\mbf{v}_1, \mbf{v}_2, \dotsc, \mbf{v}_n\} \subseteq V
+    \]
+    such that:
+    \begin{enumerate}[label = (\roman*)]
+        \item $\{\mbf{v}_1, \dotsc, \mbf{v}_n\}$ is linearly independent
+        \item $\{\mbf{v}_1, \dotsc, \mbf{v}_n\}$ spans $V$
+    \end{enumerate}
+\end{definition}
+
+
+\begin{example}
+    $\{\mbf{e}_1, \dotsc, \mbf{e}_n\} \subseteq \R ^ n$
+    (the standard basis)
+    is a basis for $\R ^ n$.
+\end{example}
+\begin{example}
+    $\R[x]_n$
+    \[
+    \{1, x, x ^ 2, \dotsc, x ^ n\} \subseteq \R[x]_n
+    \]
+    is a basis for $\R[x]_n$.
+    Why?
+    If $p \in \R[x]_n$ then
+    $p = a_0 + a_1x + \dotsi + a_nx ^ n \in \langle 1, x, \dotsc, x ^ n\rangle$
+    so $\langle 1, x, \dotsc, x ^ n\rangle = \R[x]_n$.
+    Also if $a_0 + a_1x + \dotsi + a_nx ^ n = 0$ then $a_0 = a_1 = a_2 = \dotsi = a_n = 0$,
+    so $1, x, \dotsc, x ^ n$ are linearly independent.
+\end{example}
+
+$\R[x]$ doesn't have a basis,
+since it doesn't have a finite spanning set.
+
+\textbf{Question}:
+Are the polynomials $1 - x, x - x ^ 2, 1 - x ^ 2$ a basis for $\R[x]_2$?
+\textbf{Answer}:
+No,
+\[
+(1 - x) + (x - x ^ 2) - (1 - x ^ 2) = 0
+\]
+so these three elements are not linearly independent.
+
+\begin{example}
+    Write $E^{ij} \in M_{m \times n}(\R)$ for the matrix that has $(i, j)$\ts{th} entry $1$,
+    and all other entries $0$.
+    Then
+    \[
+    \{E ^ {ij}\,|\, 1 \leq i \leq m,\, 1 \leq j \leq n\} \subseteq M_{m \times n}(\R)
+    \]
+    is a basis for $M_{m \times n}(\R)$.
+    Why?
+    Certainly it is spanning:
+    \[
+    A = (a_{ij}) = \sum_{1 \leq i \leq m, 1 \leq j \leq n}a_{ij}E ^ {ij}.
+    \]
+    Also it is linearly independent since if
+    \[
+    \sum a_{ij}E^{ij} = 0
+    \]
+    then $a_{ij} = \left(\sum a_{ij}E^{ij}\right)_{ij} = 0_{ij} = 0$,
+    for all $i, j$.
+\end{example}
 
 
 

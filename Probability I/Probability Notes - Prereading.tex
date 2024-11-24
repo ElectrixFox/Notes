@@ -14,6 +14,10 @@
 
 \newpage
 
+\tableofcontents
+
+\newpage
+
 \section{Introduction}
 
 \subsection{Sets}
@@ -1037,6 +1041,519 @@ For example,
     F(x) = \Phi\left(\frac{x - \mu}{\sigma}\right).
     \]
 \end{corollary}
+
+\newpage
+
+\section{Multiple random variables}
+
+\subsection{Joint probability distributions}
+A bivariate random variable is a mapping from $\Omega$ into a Cartesian product of two sets,
+i.e.,
+a random variable whose values are ordered pairs of the form $(x, y)$.
+
+\begin{definition}[Bivariate random variable]
+    Consider random variables $X$ and $Y$ defined on the same sample space $\Omega$,
+    $X : \Omega \rightarrow X(\Omega)$ and $Y : \Omega \rightarrow Y(\Omega)$.
+    The mapping $(X, Y) : \Omega \rightarrow (X, Y)(\Omega)$ defined by
+    \[
+    (X, Y)(\omega) := (X(\omega), Y(\omega))
+    \]
+    is then a bivariate random variable.
+\end{definition}
+
+\begin{definition}[Independence of two random variables]
+    Two random variables $X$ and $Y$ on the same sample space $\Omega$ are independent if
+    \[
+    \P(X \in A, Y \in B) = \P(X \in A)\P(Y \in B)\text{ for all } A \subseteq X(\Omega)\text{ and } B \subseteq Y(\Omega).
+    \]
+    In other words,
+    $X$ and $Y$ are independent (as random variables) if and only if $\{X \in A\}$ and $\{Y \in B\}$ are independent as events for all sets $A$ and $B$.
+\end{definition}
+
+Three random variables,
+$X, Y$, and $Z$,
+say, are independent if the events $\{X \in A\}, \{Y \in B\}, \{Z \in C\}$ are mutually independent.
+
+\begin{example}
+    On sample space $\Omega = \{1, 2, 3, 4, 5, 6\}$,
+    define random variables $X$ and $Y$ by
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|cccccc}
+             $\omega$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ \\
+             \hline
+             $X(\omega)$ & $0$ & $0$ & $0$ & $1$ & $1$ & $1$ \\
+             $Y(\omega)$ & $0$ & $1$ & $0$ & $2$ & $0$ & $3$
+        \end{tabular}
+    \end{table}
+    Then the bivariate random variable $(X, Y)$ is given by
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|cccccc}
+             $\omega$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ \\
+             \hline
+             $(X, Y)(\omega)$ & $(0, 0)$ & $(0, 1)$ & $(0, 0)$ & $(1, 2)$ & $(1, 0)$ & $(1, 3)$
+        \end{tabular}
+    \end{table}
+    Note that $X(\Omega) = \{0, 1\}, Y(\Omega) = \{0, 1, 2, 3\}$,
+    and $(X, Y)(\Omega) = \{(0, 0), (0, 1), (1, 0), (1, 2), (1, 3)\}$ which is a strict subset of $\{0, 1\} \times \{0, 1, 2, 3\}$
+    (the outcomes $(0, 3)$ does not appear, for example).
+\end{example}
+
+\begin{definition}[Independence of two random variables]
+    Two random variables $X$ and $Y$ on the same sample space $\Omega$ are independent if
+    \[
+    \P(X \in A, Y \in B) = \P(X \in A)\P(Y \in B)\text{ for all } A \subseteq X(\Omega) \text{ and } B \subseteq Y(\Omega).
+    \]
+    In other words,
+    $X$ and $Y$ are independent (as random variables) if and only if $\{X \in A\}$ and $\{Y \in B\}$ are independent as events for all sets $A$ and $B$.
+\end{definition}
+
+\subsection{Jointly distributed discrete random variables}
+
+\begin{definition}[Joint probability mass function]
+    Let $(X, Y)$ be a bivariate discrete random variable with $\P((X, Y) \in \mathcal{Z}) = 1$ for a finite or countable $\mathcal{Z} \subseteq (X, Y)(\Omega)$.
+    The joint probability mass function $p$ of $X$ and $Y$ is defined by
+    \[
+    p(x, y) := \P(X = x, Y = y)\quad\text{ for all } (x, y) \in \mathcal{Z}.
+    \]
+\end{definition}
+The above is simply stating the probability mass function for a bivariate discrete random variable.
+
+\begin{theorem}
+    Let $X$ and $Y$ be two random variables on the same sample space $\Omega$.
+    Then the bivariate random variable $(X, Y)$ is discrete if and only if $X$ and $Y$ are both discrete.
+    Moreover,
+    if $X$ and $Y$ are both discrete with $\P(X \in \mathcal{X}) = \P(Y \in \mathcal{Y}) = 1$ for finite or countable $\mathcal{X}$ and $\mathcal{Y}$,
+    then their marginal probability mass functions are given in terms of the joint probability mass function by
+    \begin{align*}
+        p_X(x) = \sum_{y \in \mathcal{Y}}p(x, y)\text{ for all } x \in \mathcal{X}, & p_Y(y) = \sum_{x \in \mathcal{X}}p(x, y)\text{ for all } y \in \mathcal{Y}.
+    \end{align*}
+    \begin{proof}
+        First suppose that $X$ and $Y$ are discrete.
+        Then there exist finite or countable sets of values $\mathcal{X}$ and $\mathcal{Y}$ such that $\P(X \in \mathcal{X}) = \P(Y \in \mathcal{Y}) = 1$.
+        Hence $\P(X \in \mathcal{X}, Y \in \mathcal{Y}) = 1$.
+        The bivariate random variable $(X, Y)$ thus has $\P((X, Y) \in \mathcal{X} \times \mathcal{Y}) = 1$.
+        Since $\mathcal{X}$ and $\mathcal{Y}$ are finite or countable,
+        the Cartesian product $\mathcal{X} \times \mathcal{Y}$ is also finite or countable.
+        Hence $(X, Y)$ is discrete.
+        On the other hand,
+        suppose that $(X, Y)$ is discrete.
+        The possible values in $(X, Y)(\Omega)$ are ordered pairs of the form $(x, y)$,
+        and there is a finite or countable set $\mathcal{Z} \subseteq (X, Y)(\Omega)$ such that $\P((X, Y) \in \mathcal{Z}) = 1$.
+        But if we set $\mathcal{X} = \{x : (x, y) \in \mathcal{Z}\}$ we have $\P(X \in \mathcal{X}) = \P((X, Y) \in \mathcal{Z}) = 1$,
+        and $\mathcal{X}$ is finite or countable,
+        so $X$ is discrete.
+        Similarly for $Y$.
+        It remains to notice that,
+        for example, with the same definition of $\mathcal{X}$,
+        \begin{align*}
+            \P(Y = y) &= \P(X \in \mathcal{X}, Y = y) \\
+            &= \P\left(\bigcup_{x \in \mathcal{X}}\{X = x, Y = y\}\right) \\
+            &= \sum_{x \in \mathcal{X}}p(x, y),
+        \end{align*}
+        where we have used A4,
+        the fact that $\mathcal{X}$ is countable,
+        and $\P(X \in \mathcal{X}) = 1$.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}\label{pre_prop_thm_discretevarcountsumeqone}
+    Let $X$ and $Y$ be discrete random variables with $\P((X, Y) \in \mathcal{Z}) = 1$ for a finite or countable $\mathcal{Z}$.
+    Then we have that
+    \[
+    \P((X, Y) \in A) = \sum_{(x, y) \in A}p(x, y)\quad\text{for all } A \subseteq \mathcal{Z}.
+    \]
+    In particular,
+    \[
+    \sum_{(x, y) \in \mathcal{Z}}p(x, y) = 1.
+    \]
+\end{theorem}
+
+\begin{definition}[Conditional probability mass function]
+    Let $X$ and $Y$ be discrete random variables.
+    For $y \in \mathcal{Y}$,
+    the conditional probability mass function of $X$ given $Y = y$ is defined by
+    \[
+    p_{X | Y}(x\,|\,y) := \P(X = x\,|\, Y = y) = \frac{p_{X, y}(x, y)}{p_{Y}(y)}
+    \]
+    for all $x \in \mathcal{X}$ and $y \in \mathcal{Y}$ such that $p_Y(y) > 0$,
+    and similarly,
+    the conditional probability mass function of $Y$ given $X = x$ is
+    \[
+    p_{Y\,|\,X}(y\,|\,x) := \P(Y = y\,|\,X = x) = \frac{p_{X, Y}(x, y)}{p_X(x)}
+    \]
+    for all $y \in \mathcal{Y}$ and $x \in \mathcal{X}$ such that $p_X(x) > 0$.
+\end{definition}
+
+\begin{theorem}[Partition theorem for discrete random variables]
+    Let $X$ and $Y$ be discrete random variables.
+    Then,
+    \[
+    p_X(x) = \sum_{y \in \mathcal{Y}}p_{X\,|\,Y}(x\,|\,y)p_Y(y).
+    \]
+    Moreover,
+    if $X$ is real-valued,
+    then for any functions $g : \mathcal{Y} \rightarrow \R$ and $h : \mathcal{Y} \rightarrow \R$ with $g \leq h$,
+    we can write
+    \begin{align*}
+        \P(g(Y) \leq X \leq h(Y)) &= \sum_{y \in \mathcal{Y}}\P(g(y) \leq X \leq h(y)\,|\, Y = y)\P(Y = y) \\
+        &= \sum_{y \in \mathcal{Y}}\sum_{x \in [g(y), h(y)] \cap \mathcal{X}}p_{X|Y}(x\,|\,y)p_Y(y).
+    \end{align*}
+\end{theorem}
+
+\begin{lemma}[Independence of discrete random variables]
+    Two discrete random variables $X$ and $Y$ on the same sample space $\Omega$ and independent if and only if
+    \[
+    p_{X, Y}(x, y) = p_X(x)p_Y(y)\text{ for all } x \in \mathcal{X}\text{ and } y \in \mathcal{Y}.
+    \]
+    \begin{proof}
+        By definition of independence,
+        we have that
+        \[
+        \P(X = x, Y = y) = \P(X = x)\P(Y = y),
+        \]
+        as required.
+        On the other hand,
+        suppose that $p_{X, Y}(x, y) = p_X(x)p_Y(y)$.
+        Then by \autoref{pre_prop_thm_discretevarcountsumeqone},
+        for any sets $A$ and $B$,
+        \begin{align*}
+            \P(X \in A, Y \in B) &= \P((X, Y) \in A \times B) = \sum_{x \in A}\sum_{y \in B}p_{X, Y}(x, y) \\
+            &= \sum_{x \in A}p_X(x)\sum_{y \in B}p_Y(y) \\
+            &= \P(X \in A)\P(Y \in B),
+        \end{align*}
+        so $X$ and $Y$ are independent.
+    \end{proof}
+\end{lemma}
+
+\subsection{Jointly continuously distributed random variables}
+\begin{definition}[Joint probability density function]
+    Consider two real-valued random variables $X : \Omega \rightarrow \R$ and $Y : \Omega \rightarrow \R$.
+    We say that $X$ and $Y$ are jointly continuously distributed when there is a non-negative piecewise continuous function $f: \R ^ 2 \rightarrow \R$,
+    called the joint probability density function,
+    such that
+    \[
+    \P(X \in [a, b], Y \in [c, d]) = \int_a^b\left(\int_c^d f(x, y)\,dy\right)\,dx
+    \]
+    for all $[a, b] \times [c, d] \subseteq \R ^ 2$.
+\end{definition}
+
+We sometimes write $f_{X, Y}(x, y)$ for the joint probability density of $X$ and $Y$.
+
+A type I region is of the form
+\[
+D = \{a_0 \leq x \leq a_1,\, \phi_1(x) \leq y \leq \phi_2(x)\}
+\]
+for some continuous functions $\phi_1$ and $\phi_2$,
+and a type II region is of the form
+\[
+D = \{\psi_1(y) \leq x \leq \psi_2(y),\, b_0 \leq y \leq b_1\}
+\]
+for some continuous functions $\psi_1$ and $\psi_2$.
+
+\begin{theorem}
+    If $X$ and $Y$ are jointly continuously distributed,
+    then for any $A \subseteq \R ^ 2$ that is a finite union of type I and type II regions:
+    \[
+    \P((X, Y) \in A) = \iint\limits_{A}f(x, y)\,dxdy.
+    \]
+\end{theorem}
+Again as before,
+$f(x, y)$ integrates to one.
+\begin{corollary}
+    Let $X$ and $Y$ be jointly continuously distributed random variables.
+    Then their joint probability density function integrates to one:
+    \[
+    \iint\limits_{\R ^ 2}f(x, y)\,dxdy = 1.
+    \]
+\end{corollary}
+
+\begin{corollary}[Marginal probability density function]
+    Let $X$ and $Y$ be continuously distributed random variables.
+    Then $X$ and $Y$ are
+    (each separately)
+    continuously distributed,
+    with
+    \begin{align*}
+    f_X(x) = \int_{-\infty}^{\infty}f(x, y)\,dy, \text{ for all } x \in \R, &f_Y(y) = \int_{-\infty}^{\infty}f(x, y)\,dx, \text{ for all } y \in \R.
+    \end{align*}
+\end{corollary}
+
+In a multivariate context,
+the probability density functions $f_X(x)$ and $f_Y(y)$ are also called marginal probability density functions.
+
+\begin{definition}[Conditional probability density function]
+    Let $X$ and $Y$ be jointly continuously distributed random variables.
+    The conditional probability density function of $X$ at $Y = y$ is defined by
+    \[
+    f_{X|Y}(x | y) := \frac{f_{X, Y}(x, y)}{f_Y(y)}\qquad\text{for all $x, y \in \R$ such that $f_Y(y) > 0$}.
+    \]
+    Similarly,
+    the conditional probability density function of $Y$ at $X = x$ is
+    \[
+    f_{Y|X}(y | x) := \frac{f_{X, Y}(x, y)}{f_X(x)}\qquad\text{for all $x, y \in \R$ such that $f_X(x) > 0$}.
+    \]
+\end{definition}
+
+\begin{theorem}[Partition theorem for jointly continuous random variables]
+    Let $X$ and $Y$ be jointly continuously distributed random variables.
+    Then,
+    \[
+    f_X(x) = \int_{-\infty}^{+\infty}f_{X|Y}(x | y)f_Y(y)\,dy.
+    \]
+    Moreover,
+    for any piecewise continuous functions $g : \R \rightarrow \R$ and $h : \R \rightarrow \R$ with $g \leq h$,
+    we can write,
+    \[
+    \P(g(Y) \leq X \leq h(Y)) = \int_{-\infty}^{\infty}\left(\int_{g(y)}^{h(y)}f(x | y)\,dx\right)f(y)\,dy.
+    \]
+\end{theorem}
+
+\begin{lemma}[Independence of jointly continuous random variables]
+    Two jointly continuously distributed random variables $X$ and $Y$ are independent if and only if
+    \[
+    f_{X, Y}(x, y) = f_X(x)f_Y(y)\text{ for all $x$ and $y \in \R$}.
+    \]
+\end{lemma}
+
+\subsection{Functions of multiple random variables}
+Suppose $X : \Omega \rightarrow X(\Omega)$ and $Y : \Omega \rightarrow Y(\Omega)$ are
+(discrete or continuous)
+random variables,
+and $g: X(\Omega) \times Y(\Omega) \rightarrow \mathcal{S}$ is some function assigning a value $g(x, y) \in \mathcal{S}$ to each point $(x, y)$.
+Then $g(X, Y)$ is also a random variable,
+namely the outcome to a 'new experiment' obtained by running the 'old experiments' to produce values $x$ for $X$ and $y$ for $Y$,
+and the evaluating $g(x, y)$.
+
+Formally,
+$g(X, Y) := g \circ (X, Y)$,
+or in more specific terms,
+the random variable $g(X, Y) : \Omega \rightarrow \mathcal{S}$ is defined by:
+\[
+g(X, Y)(\omega) := g(X(\omega), Y(\omega))\text{ for all } \omega \in \Omega.
+\]
+
+\newpage
+
+\section{Expectation}
+
+\subsection{Definition and interpretation}
+Let $X : \Omega \rightarrow \R$ be a real-valued random variable for the outcome of $n$ observed trials.
+Let $x_i$ denote the observed value of $X$ in the $i$th trial;
+the sequence of observations $x_1, x_2, \dotsc, x_n$ is called a sample.
+The sample mean is then simply $\frac{1}{n}\sum_{i = 1}^{n}x_i$.
+As $n$ tends to infinity we call the sample mean
+(of $X$)
+the expectation of $X$.
+
+This idea of expectation leads us into a definition for the expectation for real-valued random variables.
+\begin{definition}[Expectation]
+    For any real-valued random variable $X$,
+    the expectation
+    (also called expected value or mean)
+    of $X$,
+    denoted as $\mathbb{E}(X)$,
+    is defined as:
+    \begin{align}
+        \E(X) &:= \sum_{x \in \chi}x p(x)&\text{if $X$ is discrete, and} \\
+        \E(X) &:= \int_{-\infty}^{\infty}x f(x)\,dx&\text{if $X$ is continuously distributed,}
+    \end{align}
+    provided that the sum or integral exists.
+\end{definition}
+
+\begin{example}
+    Suppose that $X$ is discrete with probability mass function
+    \begin{table}[]
+        \centering
+        \begin{tabular}{c|cc}
+             $x$ & $1$ & $2$ \\
+             \hline
+             $p(x)$ & $\frac{1}{2}$ & $\frac{1}{2}$
+        \end{tabular}
+    \end{table}
+    Then $\E(X) = \frac{1}{2} \cdot 1 + \frac{1}{2} \cdot 2 = \frac{3}{2}$
+\end{example}
+
+\begin{example}
+    To find the expectation of a discrete random variable $X$ where $p(x) = \frac{1}{n}$ for $x \in \{1, 2, \dotsc, n\}$,
+    we compute
+    \begin{align*}
+        \E(X) := \sum_{x = 1}^{n}xp(x) \\
+        &= (1 + 2 + \dotsi + n)\frac{1}{n} = \frac{n + 1}{2}.
+    \end{align*}
+\end{example}
+
+\begin{example}
+    If $X \sim U(a, b)$ then
+    \[
+    \E(X) = \int_a^b\frac{x}{b - a}\,dx = \left[\frac{\frac{x ^ 2}{2}}{b - a}\right]_a^b = \frac{a + b}{2}.
+    \]
+\end{example}
+
+\begin{example}
+    If $Z \sum \mathcal{N}(0, 1)$ then
+    \[
+    \E(Z) = \int_{-\infty}^{\infty}z\phi(z)\,dz = 0,
+    \]
+    since the integrand is an odd function
+    ($\phi(z) = \phi(-z)$).
+\end{example}
+
+\subsection{Expectation of functions of random variables}
+
+Let $\chi$ be a discrete random variable with $\P(X \in \chi) = 1$ for a finite or countable set $\chi$,
+and let $g : \chi \rightarrow \R$ be a real-valued function.
+$g(X) := g \circ X$ is a random variable.
+$g(X)$ is a real-valued random variable,
+so we can define its expectation.
+
+To find the expectation of $g(X)$,
+according to the definition we need to find the probability mass function $p_{g(X)}$ first.
+However,
+we can express $\E(g(X))$ directly in terms of $p_X$,
+hence saving us the effort of having to calculate $p_{g(X)}$ from $p_X$.
+
+For any $y \in g(\chi)$,
+\[
+p_{g(X)}(y) = \P(g(X) = y) = \sum_{x \in \chi}\P(g(X) = y\,|\,X = x)\P(X = x) = \sum_{x \in \chi:g(x) = y}p(x),
+\]
+since
+\[
+\P(g(X) = y\,|\,X = x) = \begin{cases}
+    1 &\text{if } y = g(x), \\
+    0 &\text{otherwise}.
+\end{cases}
+\]
+It follows that
+\begin{align*}
+    \E(g(X)) &= \sum_{y \in g(\chi)}yp_{g(X)}(y)
+    = \sum_{y \in g(\chi)}y\left(\sum_{x \in \chi: g(x) = y}p(x)\right)
+    = \sum_{y \in g(\chi)}\left(\sum_{x \in \chi : g(x) = y}yp(x)\right) \\
+    &= \sum_{x \in \chi}\left(\sum_{y \in g(\chi) : y = g(x)}yp(x)\right)
+    = \sum_{x \in \chi}\left(\sum_{y \in g(\chi) : y = g(x)}y\right)p(x)
+    = \sum_{x \in \chi}g(x)p(x),
+\end{align*}
+where we applied the definition of expectation,
+the previous equation,
+distributivity, change of order of summation, and distributivity again.
+A similar result can be proven when $X$ is continuously distributed.
+
+The following result, sometimes known as the Law of the Unconscious Statistician, follows from what we have just shown.
+\begin{theorem}[Expectation of a function of a random variable]\label{pre_prob_thm_lawofunconsciousstatistician}
+    For any discrete random variable $X$ taking values in $\chi$,
+    and any function $g : \chi \rightarrow \R$,
+    \begin{equation}
+        \E(g(X)) = \sum_{x \in \chi}g(x)p(x),
+    \end{equation}
+    provided that the sum exists.
+    Similarly,
+    for any continuous random variable $X$ and any function $g : \R \rightarrow \R$,
+    \begin{equation}
+        \E(g(X)) = \int_{-\infty}^{\infty}g(x)f(x)\,dx,
+    \end{equation}
+    provided that the integral exists.
+\end{theorem}
+
+\begin{example}
+    Suppose that $X$ takes values $0, 1, 2, 3, 4$ each with probability $\frac{1}{5}$.
+    Then
+    \begin{align*}
+        \E((X - 3) ^ 2) &= \sum_{x = 0}^{4}(x - 3) ^ 2p(x) \\
+        &= \frac{1}{5}((-3) ^ 2 + (-2) ^ 2 + (-1) ^ 2 + (0) ^ 2 + (1) ^ 2) \\
+        &= \frac{1}{5}(15) \\
+        &= 3.
+    \end{align*}
+\end{example}
+
+For multiple random variables,
+the Law of the Unconscious Statistician reads as follows:
+\begin{theorem}[Expectation of a function of multiple random variables]
+    For any discrete random variables $X$ and $Y$ taking values in $\mathcal{X}$ and $\mathcal{Y}$,
+    and for any function $g : \mathcal{X} \times \mathcal{Y} \rightarrow \R$,
+    \[
+    \E(g(X, Y)) = \sum_{x \in \mathcal{X}}\sum_{y \in \mathcal{Y}}g(x, y)p(x, y),
+    \]
+    provided that the sum exists.
+    Similarly,
+    for any jointly continuously distributed random variables $X$ and $Y$,
+    and any function $g : \R ^ 2 \rightarrow \R$,
+    \[
+    \E(g(X, Y)) = \iint\limits_{\R ^ 2}g(x, y)f(x, y)\,dxdy,
+    \]
+    provided that the integral exists.
+\end{theorem}
+
+\subsection{Linearity of expectation}
+Remember that summation and integration are linear operators,
+i.e.,
+\[
+\sum_{i}\alpha f(x_i) + \beta g(x_i) = \alpha\sum_{u}f(x_i) + \beta\sum_{i}g(x_i),
+\]
+and
+\[
+\int_A(\alpha f(x) + \beta g(x))\,dx = \alpha\int_Af(x)\,dx + \beta\int_Ag(x)\,dx.
+\]
+Consequently:
+\begin{theorem}[Linearity of expectation I]
+    For any real-valued random variable $X$,
+    and any constants $\alpha$ and $\beta \in \R$,
+    \[
+    \E(\alpha X + \beta) = \alpha\E(X) + \beta.
+    \]
+\end{theorem}
+A similar,
+but deeper,
+result is the following.
+\begin{theorem}[Linearity of expectation II]
+    For any two real-valued random variables $X$ and $Y$ on the same sample space $\Omega$,
+    \[
+    \E(X + Y) = \E(X) + \E(Y).
+    \]
+    More generally,
+    for any real-valued random variables $X_1, X_2, \dotsc, X_n$,
+    \[
+    \E\left(\sum_{i = 1}^{n}X_i\right) = \sum_{i = 1}^{n}\E(X_i).
+    \]
+    \begin{proof}
+        We give the proof in the case where $X$ and $Y$ are discrete.
+        Consider the multiple random variable $(X, Y)$ and the function $g(x, y) = x + y$.
+        By the Law of the Unconscious Statistician
+        (\autoref{pre_prob_thm_lawofunconsciousstatistician})
+        we get
+        \begin{align*}
+            \E(g(X, Y)) &= \sum_{x \in \mathcal{X}}x\sum_{y \in \mathcal{Y}}p(x, y) + \sum_{y \in \mathcal{Y}}y\sum_{x \in \mathcal{X}}p(x, y) \\
+            &= \sum_{x \in \mathcal{X}}xp_X(x) + \sum_{y \in \mathcal{Y}}yp_Y(y) = \E(X) + \E(Y),
+        \end{align*}
+        as claimed.
+        A similar calculation applies in the jointly continuous case,
+        and the extension to more than two random variables follows by induction.
+    \end{proof}
+\end{theorem}
+
+\subsection{Variance and covariance}
+A popular and mathematically convenient way to measure the variability of $X$ i.e. measure how much $X$ varies from $\E(X)$ in the long run goes via the expectation of the random variable $(X - \E(X)) ^ 2$.
+
+\begin{definition}
+    Let $X$ be any real-valued random variable.
+    The variance of $X$ is defined as
+    \[
+    \mathbb{V}\mathrm{ar}(X) := \E((X - \E(X)) ^ 2),
+    \]
+    and the standard deviation of $X$ is defined as
+    \[
+    \mathrm{SD}(X) := \sqrt{\mathbb{V}\mathrm{ar}(X)}.
+    \]
+\end{definition}
+
+
+
+
+
+
+
+
+
 
 
 

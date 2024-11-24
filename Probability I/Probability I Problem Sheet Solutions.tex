@@ -68,4 +68,136 @@
     \end{proof}
 \end{problem}
 
+\begin{problem}[93]
+    Let $X \sim \Bin(n, p)$,
+    and let $Y = n - X$
+    (i.e. if $X$ counts the number of successes in a binomial scenario,
+    then Y counts the number of failures in that same scenario).
+    Show that $Y \sim \Bin(n, 1 - p)$.
+    \begin{proof}
+        \[
+        p_X(x) = \begin{cases}
+            \binom{n}{x}p ^ x (1 - p) ^ {n - x}, & x = 0, 1, \dotsc, n, \\
+            0,&\text{elsewhere}.
+        \end{cases}
+        \]
+        Intuition tells us that $Y \sim \Bin(n, 1 - p)$.
+        Let $p_Y$ denote the pmf for $Y$.
+        Then
+        \begin{align*}
+            p_Y(y) &= \P(Y = y) \\
+            &= \P(n - X = y) \\
+            &= \P(X = n - y) \\
+            &= p_X(n - y) \\
+            &= \binom{n}{n - y}p ^ {n - y}(1 - p) ^ y,\text{ if } n - y \in \{0, 1, \dotsc, n\}
+        \end{align*}
+        Recall the identity that we discussed in chapter two
+        \[
+        \binom{n}{x} = \binom{n}{n - x},
+        \]
+        using this,
+        we get
+        \[
+        p_Y(y) =
+        \begin{cases}
+            \binom{n}{y}(1 - p) ^ y p ^ {n - y},& y \in \{0, 1, \dotsc, n\}, \\
+            0, &\text{elsewhere}
+        \end{cases}
+        \]
+        which shows that $Y \sim \Bin(n, 1 - p)$.
+    \end{proof}
+\end{problem}
+
+\begin{problem}[97]
+    A boxer,
+    at the start of his career,
+    decides that he will retire after his first defeat.
+    In each fight he has
+    probability q of being defeated,
+    with successive fights being assumed independent.
+    Let $X$ be the total number of fights in the boxer’s career.
+    \begin{enumerate}[label = (\alph*)]
+        \item What is the distribution of $X$?
+        \item Show that $\P(X > x) = (1 - q) ^ x$ for $x \in \{0, 1, 2, 3, \dotsc\}$.
+        Interpret this result.
+        \item Find a formula for the probability that $X$ is even
+        (simplify your formula as much as possible).
+        Evaluate this probability when $q = 0.4$.
+    \end{enumerate}
+
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}\phantom{}
+    \begin{enumerate}[label = (\alph*)]
+        \item
+        Let $X := \text{number of fights in boxer's career}$.
+        Find the distribution for $X$.
+        \[
+        \Geo(q).
+        \]
+        \[
+        \P(X = x) = \P(\text{the boxer wins the first $x - 1$ fights and losses the last,
+        that is,
+        $x$-th fight})
+        \]
+        \[
+        \P(X = x) = \begin{cases}
+            (1 - q) ^ {x - 1}q, &x = 1, 2, \dotsc \\
+            0, &\text{elsewhere}
+        \end{cases}.
+        \]
+        Hence $X \sim \Geo(q)$.
+        \item Find $\P(X > x)$
+        \begin{align*}
+            \P(X > x) &= \sum_{t = x + 1}^{\infty}\P(X = t) \\
+            &= \sum_{t = x + 1}^{\infty}q(q - 1) ^ {t - 1} \\
+            &= q\sum_{t = x + 1}^{\infty}(1 - q) ^ {t - 1}.
+        \end{align*}
+        Apply a change of variables,
+        $t - 1 = y$,
+        \begin{align*}
+            &= q \sum_{y = x}^{\infty}(1 - q) ^ y \\
+            &= q(1 - q) ^ x \sum_{m = 0}^{\infty}(1 - q) ^ m \\
+            &= q(1 - q) ^ x \frac{1}{1 - (1 - q)} \\
+            &= (1 - q) ^ x.
+        \end{align*}
+    \end{enumerate}
+    \end{proof}
+\end{problem}
+
+\begin{problem}[100]
+    Let $X \sum \Po(\lambda)$ where $\lambda > 1$.
+    Show that $p(x)$,
+    as a function of $x$,
+    increases monotonically,
+    and then decreases.
+    For what $x \in \Z_+$ is $p(x)$ maximal?
+    \begin{proof}
+        Recall : $X \sim \Po(\lambda)$,
+        \[
+        p(x) = \frac{e ^ {-\lambda}\lambda ^ x}{x!},\quad x \in \{0, 1, \dotsc\}
+        \]
+        \begin{align*}
+            \frac{p(x + 1)}{p(x)} &= \frac{\lambda ^ {x + 1} e ^ {-\lambda}}{(x + 1)!} \frac{x!}{e ^ {-\lambda} \lambda ^ x} \\
+            &= \frac{\lambda}{(x + 1)} \\
+            &> 1 \iff \lambda > (x + 1)
+        \end{align*}
+        or $x < \lambda - 1$ and
+        \[
+        \frac{p(x + 1)}{p(x)} < 1 \iff \frac{\lambda}{(x + 1)} < 1
+        \]
+        that is,
+        $x > (\lambda - 1)$
+        Because $p(x)$ is monotonically increasing
+        \[
+        \frac{p(x + 1)}{p(x)} > 1
+        \]
+        $p(x)$ is increasing when $x < \lambda - 1$,
+        and $p(x)$ is decreasing when $x > \lambda - 1$.
+        This can be rephrased to say that $p(x)$ is increasing up to $x = \lfloor\lambda\rfloor$,
+        and then $p(x)$ is decreasing,
+        with $p(x)$ achieving the maximum value at $x = \lfloor\lambda\rfloor$
+    \end{proof}
+\end{problem}
+
+$\nearrow$: Monotonically increasing
+
 \end{document}

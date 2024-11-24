@@ -2031,6 +2031,276 @@ With this definition one can show that the volume of the $n$-dimensional paralle
 \mathrm{vol}(P) = |\det(\mbf{v}_1, \dotsc, \mbf{v}_n)|.
 \]
 
+\newpage
+
+\section{Spanning sets and linear independence in $\R ^ n$}
+\subsection{Subspaces of $\R ^ n$}
+\begin{definition}[Vector subspace of $\R ^ n$]
+    A (non-empty) subset $U$ of $\R ^ n$ is called a vector subspace (or linear subspace) of $\R ^ n$ if it satisfies the following three conditions:
+    \begin{enumerate}[label = (\roman*)]
+        \item closure under addition:
+        if $\mbf{u}_1$ and $\mbf{u}_2$ are in $U$,
+        then $\mbf{u}_1 + \mbf{u}_2$ is also in $U$;
+        \item closure under scalar multiplication:
+        if $\mbf{u}$ is in $U$ and $\lambda$ is in $\R$,
+        then $\lambda\mbf{u}$ is in $U$;
+        \item existence of an origin:
+        the vector $\mbf{0}$ is in $U$.
+    \end{enumerate}
+\end{definition}
+
+\begin{example}
+    \begin{enumerate}[label = (\roman*)]
+        \item  $U = \{\mbf{0}\}$ is clearly a vector subspace;
+        it is called the trivial vector subspace.
+        \item Equally clearly $\R ^ n$ is a vector subspace of itself.
+        \item Let $L_0$ be a line in $\R ^ n$ through the origin $\mbf{0}$ with direction vector $\mbf{d}$.
+        Then any point on $L_0$ has the form $\mbf{x} = \mbf{0} + \lambda\mbf{d} = \lambda\mbf{d}$.
+        Clearly $L$ satisfies the three conditions above and so is a vector subspace of $\R ^ n$.
+        If the line does not pass through $\mbf{0}$ then it is not a vector subspace
+        (it is called an affine line,
+        which is a special case of an affine subspace).
+        \item Let $\Pi_0$ be the plane in $\R ^ n$ through the origin $\mbf{0}$ with direction vectors $\mbf{d}_1$ and $\mbf{d}_2$ (not collinear).
+        Then we have
+        \[
+        \Pi_0 = \{\lambda_1\mbf{d}_1 + \lambda_2\mbf{d}_2\,:\, \lambda_1, \lambda_2 \in \R\},
+        \]
+        it is clear that $\Pi_0$ satisfies the three conditions above and so is a vector subspace.
+        If the plane does not pass through $\mbf{0}$,
+        then it is not a vector subspace.
+        (It is called an affine plane,
+        which is a special case of an affine subspace).
+    \end{enumerate}
+\end{example}
+
+\begin{proposition}
+    The solution set of an arbitrary $m \times n$ homogeneous linear system $A\mbf{x} = \mbf{0}$ is a vector subspace of $\R ^ n$.
+    \begin{proof}
+        Let $\mbf{u}_1$ and $\mbf{u}_2$ be two solutions to the linear system and $\lambda \in \R$.
+        Then
+        \[
+        A(\mbf{u}_1 + \mbf{u}_2) = A\mbf{u}_1 + A\mbf{u}_2 = \mbf{0} + \mbf{0} = \mbf{0}\quad\text{and}\quad A(\lambda\mbf{u}_1) = \lambda(A\mbf{u}_1) = \lambda\mbf{0} = \mbf{0},
+        \]
+        as claimed.
+        Of course we also have $A\mbf{0} = \mbf{0}$.
+    \end{proof}
+\end{proposition}
+
+Note that the solution set of an inhomogeneous system $A\mbf{x} = \mbf{b}$
+(where $\mbf{b} \neq \mbf{0}$)
+is not a vector subspace since it does not contain the zero vector.
+Instead it forms an affine subspace of $\R ^ n$;
+that is,
+a subset of $\R ^ n$ of the form
+\[
+\mbf{c} + U = \{\mbf{v} \in \R ^ n\,:\,\mbf{v} = \mbf{c} + \mbf{u}\text{ with }\mbf{u} \in U\},
+\]
+where $U$ is a vector subspace.
+
+\subsection{Spanning sets}
+Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be vectors in $\R ^ n$.
+A linear combination of these vectors is a vector $\mbf{u}$ of the form
+\[
+\mbf{u} = \lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k
+\]
+for some (real) scalars $\lambda_1, \dotsc, \lambda_k$.
+
+\begin{definition}[Linear span]
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be $k$ vectors in $\R ^ n$.
+    Their (linear) span is the subset $U$ of $\R ^ n$ consisting of all linear combinations of these vectors.
+    So
+    \[
+    U = \{\lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k\quad\lambda_1, \dotsc, \lambda_k \in \R\}.
+    \]
+    Conversely,
+    we say that such a $U$ is spanned by $\mbf{u}_1, \dotsc, \mbf{u}_k$ and write $U = \mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_k)$.
+    Equivalently,
+    $\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ is called a spanning set of $U$.
+\end{definition}
+
+\begin{proposition}
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_k \in \R ^ n$ be $k$ vectors,
+    and let $A = (\mbf{u}_1, \dotsc, \mbf{u}_k) \in M_{n, k}(\R)$ be the associated matrix of column vectors.
+    Then we have
+    \[
+    \lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k = A\mbf{\lambda},
+    \]
+    where $\mbf{\lambda} = \begin{pmatrix}
+        \lambda_1 \\ \vdots \\ \lambda_k
+    \end{pmatrix} \in \R ^ k$ is the column vector of the $\lambda_j$.
+    Moreover,
+    we have
+    \[
+    \mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_k) = \{\mbf{u} \in \R ^ n\,:\,\text{The system } A\mbf{\lambda} = \mbf{u}\text{ has a solution}\} = \{A\mbf{\lambda}:\mbf{\lambda} \in \R ^ k\}.
+    \]
+\end{proposition}
+
+\begin{lemma}
+    The linear span $U$ of any collection $\mbf{u}_1, \dotsc, \mbf{u}_k$ of vectors is a vector subspace of $\R ^ n$.
+    \begin{proof}
+        \begin{enumerate}[label = (\roman*)]
+            \item If $\mbf{u} = \lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k$ and $\mbf{v} = \mu_1\mbf{u}_1 + \dotsi + \mu_k\mbf{u}_k$ then
+            \[
+            \mbf{u} + \mbf{v} = (\lambda_1 + \mu_1)\mbf{u}_1 + \dotsi + (\lambda_k + \mu_k)\mbf{u}_k \in U.
+            \]
+            \item If $\mbf{u} = \lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k$ and $\lambda \in \R$,
+            then
+            \[
+            \lambda\mbf{u} = (\lambda\lambda_1)\mbf{u}_1 + \dotsi + (\lambda\lambda_k)\mbf{u}_k \in U.
+            \]
+            \item Clearly $\mbf{0} = 0\mbf{u}_1 + \dotsi + 0\mbf{u}_k$ is in $U$.
+        \end{enumerate}
+    \end{proof}
+\end{lemma}
+
+\begin{lemma}
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_k \in \R ^ n$ and assume that one of the vectors,
+    say $\mbf{u}_1$,
+    can be expressed as a linear combination of the others.
+    Then
+    \[
+    \mathrm{span}(\mbf{u}_1, \mbf{u}_2, \dotsc, \mbf{u}_k) = \mathrm{span}(\mbf{u}_2, \dotsc, \mbf{u}_k).
+    \]
+    \begin{proof}
+        For $\supseteq$:
+        This is obvious since
+        \[
+        \lambda_2\mbf{u}_2 + \dotsi + \lambda_k\mbf{u}_k = 0\mbf{u}_1 + \lambda_2\mbf{u}_2 + \dotsi + \lambda_k\mbf{u}_k,
+        \]
+        and so any element in the span of $\mbf{u}_2, \dotsc, \mbf{u}_k$ is also in the span of $\mbf{u}_1, \mbf{u}_2, \dotsc, \mbf{u}_k$.
+        $\subseteq$:
+        As $\mbf{u}_1$ can be written in the span of the others,
+        let us write $\mbf{u}_1 = \mu_2\mbf{u}_2 + \dotsi + \mu_k\mbf{u}_k$ for some $\mu_j$.
+        Then
+        \[
+        \lambda_1\mbf{u}_1 + \lambda_2\mbf{u}_2 + \dotsi + \lambda_k\mbf{u}_k = (\lambda_2 + \lambda_1\mu_2)\mbf{u}_2 \dotsi + (\lambda_k + \lambda_1\mu_k)\mbf{u}_k.
+        \]
+        So an element in the span of $\mbf{u}_1, \mbf{u}_2, \dotsc, \mbf{u}_k$ is also in the span of $\mbf{u}_2, \dotsc, \mbf{u}_k$.
+    \end{proof}
+\end{lemma}
+
+\subsection{Linear independence}
+
+\begin{definition}[Linear independence]
+    The vectors $\mbf{u}_1, \dotsc, \mbf{u}_k$ are said to be linearly independent if the only solution to the equation
+    \[
+    \lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k = \mbf{0}\quad\text{if}\quad\lambda_1 = \lambda_2 = \dotsi = \lambda_k = 0.
+    \]
+\end{definition}
+
+\begin{corollary}
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be $k$ vectors in $\R ^ n$ and let $A = (\mbf{u}_1, \dotsc, \mbf{u}_k) \in M_{n, k}(\R)$ be the associated matrix of column vectors.
+    Then
+    \[
+    \mbf{u}_1, \dotsc, \mbf{u}_k\text{ are linear independent} \iff \text{The system } A\mbf{\lambda} = \mbf{0}\text{ has no non-trivial solution}.
+    \]
+\end{corollary}
+If the vectors $\mbf{u}_1, \dotsc, \mbf{u}_k$ are not linearly independent we say that they are linearly dependent.
+
+\begin{lemma}
+    A pair of (non-zero) vectors $\mbf{u}, \mbf{v}$ in $\R ^ n$ are linearly dependent if and only if there is $\lambda \in \R$ so that $\mbf{v} = \lambda\mbf{u}$.
+    In particular,
+    any two (non-zero) non-collinear vectors are always linear independent.
+    \begin{proof}
+        $\Leftarrow$:
+        If $\mbf{v} = \lambda\mbf{u}$ then we can rewrite this as $1\mbf{v} + (-\lambda)\mbf{u} = \mbf{0}$.
+        So $\mbf{u}$,
+        and $\mbf{v}$ are linearly dependent.
+        $\Rightarrow$:
+        Conversely if they are linearly dependent there are $\lambda_1, \lambda_2$ (not both zero, say $\lambda_2 \neq 0$) so that $\lambda_1\mbf{u} + \lambda_2\mbf{v} = \mbf{0}$.
+        Then
+        $\mbf{v} = \frac{-\lambda_1}{\lambda_2}\mbf{u}$.
+    \end{proof}
+\end{lemma}
+
+\begin{proposition}
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be $k$ linear independent vectors in $\R ^ n$ and let $\mbf{u} \in \R ^ n$ such that
+    \[
+    \mbf{u} \notin \mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_k).
+    \]
+    Then
+    \[
+    \mbf{u}_1, \dotsc, \mbf{u}_k, \mbf{u}\text{ are linear independent}.
+    \]
+    \begin{proof}
+        Consider the equation
+        \[
+        \lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k + \alpha\mbf{u} = \mbf{0}.
+        \]
+        We need to show $\lambda_1 = \dotsi = \lambda_k = \alpha = 0$ is the only solution.
+        We have two cases:
+        \begin{enumerate}[label = \arabic*)]
+            \item $\alpha = 0$.
+            But then we have $\lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k = \mbf{0}$,
+            which has only the trivial solution since the $\mbf{u}_1, \dotsc, \mbf{u}_k$ are linear independent.
+            \item $\alpha \neq 0$.
+            But then we can write $\mbf{u} = -\frac{1}{\alpha}(\lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k)$.
+            But this is impossible since $\mbf{u}$ is not in $\mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_k)$.
+        \end{enumerate}
+    \end{proof}
+\end{proposition}
+
+\newpage
+
+\section{Real vector spaces}
+
+\subsection{Vector spaces and subspaces}
+A (real) vector space is a non-empty set $V$ together with two operations:
+\begin{enumerate}[label = (\roman*)]
+    \item Addition:
+    This is a function
+    \[
+    V \times V \rightarrow V
+    \]
+    (Given any $\mbf{u}$ and $\mbf{v}$ in $V$,
+    we write their sum as $\mbf{u + v}$);
+    \item Scalar multiplication:
+    This is a function
+    \[
+    \R \times V \rightarrow V
+    \]
+    (Given $\mbf{u} \in V$ and $\lambda \in \R$ we write the multiplication of $\mbf{u}$ by $\lambda$ as $\lambda\mbf{u}$).
+\end{enumerate}
+
+These operations must additionally satisfy the axioms of a real vector space:
+
+Axioms for addition:
+\begin{enumerate}[label = (\roman*)]
+    \item Existence of additive identity:
+    there is a vector $\mbf{0}$ in $V$ so that $\mbf{v + 0} = \mbf{v} = \mbf{0 + v}$ for all $\mbf{v}$ in $V$;
+    \item Commutativity:
+    $\mbf{v + w} = \mbf{w + v}$ for all $\mbf{v}$ and $\mbf{w}$ in $V$;
+    \item Existence of additive inverses:
+    for each $\mbf{v}$ in $V$ there is an element $-\mbf{v}$ in $V$ such that $\mbf{v} + (-\mbf{v}) = \mbf{0} = (-\mbf{v}) + \mbf{v}$;
+    \item Associativity:
+    $\mbf{u} + (\mbf{v + w}) = (\mbf{u + v}) + \mbf{w}$ for all $\mbf{u, v, w} \in V$.
+\end{enumerate}
+
+Axioms for scalar multiplication:
+\begin{enumerate}[label = (\roman*)]
+    \item $0\mbf{v} = \mbf{0}$ for all $\mbf{v}$ in $V$;
+    \item $1\mbf{v} = \mbf{v}$ for all $\mbf{v}$ in $V$;
+    \item Associativity:
+    $(\lambda\mu)\mbf{v} = \lambda(\mu\mbf{v})$ for all $\lambda, \mu$ in $\R$ and for all $\mbf{v}$ in $V$;
+    \item Distributivity:
+    For all $\lambda, \mu \in \R$ and for all $\mbf{v, w} \in V$ we have
+    \begin{enumerate}[label = \alph*)]
+        \item $(\lambda + \mu)\mbf{v} = \lambda\mbf{v} + \mu\mbf{v}$;
+        \item $\lambda(\mbf{v + w}) = \lambda\mbf{v} + \lambda\mbf{w}$.
+    \end{enumerate}
+\end{enumerate}
+
+We refer to elements of a vector space as vectors.
+
+
+
+
+
+
+
+
+
+
 
 
 

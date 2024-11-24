@@ -1004,5 +1004,174 @@ We now use polar coordinates to evaluate this double integral
 Hence $I = \sqrt{\frac{\pi}{a}}$,
 which is the required result.
 
+\newpage
+
+\section{First order differential equations}
+
+\subsection{First order separable ODEs}
+
+A differential equation is an equation that relates an unknown function
+(the dependent variable)
+to one or more of its derivatives.
+The order of the differential equation is the order of the highest derivative in the equation.
+If a differential equation only depends on a single unknown variable
+(the independent variable)
+then the differential equation is called an ordinary differential equation
+(ODE).
+
+Differential equations for functions with several independent variables and involving partial derivatives are called partial differential equations
+(PDEs).
+
+We will usually discuss ODEs using $y$ to denote the dependent variable and $x$ for the independent variable,
+so solving the ODE involves finding $y(x)$.
+
+The generic first order ODE may be written in the form
+\begin{equation}
+    \frac{dy}{dx} = f(x, y)
+\end{equation}
+Generically,
+this will have a one-parameter family of solutions i.e. the general solution will contain an arbitrary constant.
+Assigning a particular value to this constant gives a particular solution.
+A particular solution will be singled out by the assignment of an initial value i.e. requiring $y(x_0) = y_0$,
+for given $x_0$ and $y_0$.
+In this case the ODE is called an initial value problem (IVP).
+To solve an IVP,
+first solve the ODE to find the general solution and then determine the value of the constant so that the IVP is also satisfied.
+
+Depending on the form of the function $f(x, y)$ there are various methods for solving certain kinds of ODEs.
+
+The ODE (1) is separable if $f(x, y) = X(x)Y(y)$.
+It can be solved by direct integration as
+\[
+\int\frac{1}{Y(y)}\,dy = \int X(x)\,dx.
+\]
+
+\subsection{First order homogeneous ODEs}
+The ODE (1) is homogeneous if $f(tx, ty) = f(x, y)\,\forall t \in \R$.
+
+In this case the substitution $y = xv$ produces a separable ODE for $v(x)$.
+
+\subsection{First order linear ODEs}
+The ODE (1) is linear if $f(x, y) = -p(x)y + q(x)$,
+in which case we can write the standard form of a linear first order ODE as
+\[
+y' + py = q
+\]
+where $p$ and $Q$ can be any functions of $x$.
+In this case the ODE can be solved in terms of the integrating factor
+\[
+I(x) e ^ {\int p(x)\,dx}.
+\]
+The solution is given by
+\[
+y = \frac{1}{I(x)}\int I(x)q(x)\,dx.
+\]
+\begin{proof}
+    We need to show that $y$ satisfies the ODE $y' + py = q$.
+    The first step is to observe that $I' = e ^ {\int p\,dx}p = Ip$.
+    With $y = \frac{1}{I}\int Iq\,dx$ we have
+    \[
+    y' = -\frac{I'}{I ^ 2}\int Iq\,dx + \frac{1}{I}Iq = -\frac{I'}{I}y + q = -\frac{Ip}{I}y + q = -py + q,
+    \]
+    as required.
+\end{proof}
+
+\subsection{First order exact ODEs}
+An alternative form in which to write a first order ODE is
+\begin{equation}
+    M(x, y)\,dx + N(x, y)\,dy = 0.
+\end{equation}
+Rearranging gives
+\[
+\frac{dy}{dx} = -\frac{M(x, y)}{N(x, y)}
+\]
+
+For any function $g(x, y)$ the total differential $dg$ is defined to be
+\[
+dg = \frac{\partial g}{\partial x}\,dx + \frac{\partial g}{\partial y}\,dy.
+\]
+
+The ODE ($2$) is called exact if there exists a function $g(x, y)$ such that the left side of ($2$) is equal to the total derivative $dg$ i.e.
+\[
+M = \frac{\partial g}{\partial x}\text{ and } N = \frac{\partial g}{\partial y}.
+\]
+In this case the ODE says that $dg = 0$ hence $g$ is constant and this yields the solution of the ODE.
+
+The equality of the mixed partial derivatives $\frac{\partial ^ 2 g}{\partial y \partial x} = \frac{\partial ^ 2 g}{\partial x \partial y}$ requires that an exact equation satisfies $\frac{\partial M}{\partial y} = \frac{\partial N}{\partial x}$.
+
+This results in the following test for exactness
+\[
+\text{The ODE } M(x, y)\,dx + N(x, y)\,dy = 0\text{ is exact if and only if } \frac{\partial M}{\partial y} = \frac{\partial N}{\partial x}.
+\]
+\begin{example}
+    Show that $(3e ^ {3x}y + e ^ x)\,dx + (e ^ {3x} + 1)\,dy = 0$ is an exact equation and hence solve it.
+    In this example $M = 3e ^ {3x}y + e ^ x$ and $N = e ^ {3x} + 1$
+    \[
+    \text{From } M = \frac{\partial g}{\partial x}\text{ we have } \frac{\partial g}{\partial x} = 3e ^ {3x}y + e ^ x\text{ giving } g = e ^ {3x}y + e ^ x + \phi(y)
+    \]
+    where the usual constant of integration is replaced by an arbitrary function of integration $\phi(y)$.
+    To determine this function we use
+    \[
+    \frac{\partial g}{\partial y} = N,\ \frac{\partial g}{\partial y} = e ^ {3x} + 1 = e ^ {3x} + \phi',\text{ so } \phi' = 1,\text{ giving }\phi = y.
+    \]
+    /finally we have that $g = e ^ {3x}y + e ^ x + y = c$.
+\end{example}
+
+Consider an ODE $M\,dx + N\,dy = 0$ that is not exact.
+By multiplying the ODE by a function $I(x, y)$ we can get an equivalent representation of the ODE as $m\,dx + n\,dy = 0$ where $m = MI$ and $n = NI$.
+If this equation is exact then $I$ is called an integrating factor for the original ODE.
+
+\begin{example}
+    Show that $x$ is an integrating factor for $(3xy - y ^ 2)\,dx + x(x - y)\,dy = 0$.
+    $M = 3xy - y ^ 2$ so $\frac{\partial M}{\partial y} = 3x - 2y$,
+    but $N = x ^ 2 - xy$ so $\frac{\partial N}{\partial x} = 2x - y$.
+    Therefore $\frac{\partial M}{\partial y} \neq \frac{\partial N}{\partial x}$ and the ODE is not exact.
+    However,
+    with the integrating factor $I = x$ we get $m = MI = 3x ^ 2y - y ^ 2x$ and $n = NI = x ^ 3 - x ^ 2 y$ so now $\frac{\partial m}{\partial y} = 3x ^ 2 - 2yx = \frac{\partial n}{\partial x}$ which is exact.
+    So we can now solve the exact equation using the above method.
+    $\frac{\partial g}{\partial x} = m = 3x ^ 2y - y ^ 2x$ giving $g = x ^ 3y - \frac{1}{2}y ^ 2x ^ 2 + \phi(y)$.
+    $\frac{\partial g}{\partial y} = n = x ^ 3 - x ^ 2y = x ^ 3 - x ^ 2 y + \phi'$ so $\phi' = 0$ and we can take $\phi = 0$.
+    This gives the final solution $g = c$ i.e. $x ^ 3 y - \frac{1}{2}y ^ 2 x ^ 2 = c$.
+\end{example}
+
+\subsection{Bernoulli equations}
+A Bernoulli equation is a non-linear ODE of the form
+\[
+y' + p(x)y = q(x)y ^ n
+\]
+where $n \neq 0, 1$,
+otherwise the equation is simply linear.
+
+These ODEs can be solved by first performing the substitution $v = y ^ {1 - n}$,
+which converts the equation to a linear ODE for $v(x)$.
+\begin{example}
+    Solve
+    \[
+    y' - \frac{2y}{x} = -x ^ 2y ^ 2.
+    \]
+    This is a Bernoulli equation with $n = 2$ hence put $v = \frac{1}{y}$,
+    which gives $v' = -\frac{y'}{y ^ 2}$.
+    Dividing the ODE by $y ^ 2$ yields
+    \[
+    \frac{y'}{y ^ 2} - \frac{2}{xy} = -x ^ 2
+    \]
+    which in terms of $v$ is
+    \[
+    -v' - \frac{2v}{x} = -x ^ 2
+    \]
+    which is the linear equation
+    \[
+    v' + \frac{2}{x}v = x ^ 2.
+    \]
+    Solving using this using the integrating factor $I = \exp\left(\int\frac{2}{x}\,dx\right) = \exp(2\log x) = x ^ 2$ as
+    \[
+    v = \frac{1}{x ^ 2}\int x ^ 2 x ^ 2\,dx = \frac{1}{x ^ 2}\left(\frac{1}{5}x ^ 5 + \frac{c}{5}\right).
+    \]
+    So finally
+    \[
+    y = \frac{1}{v} = \frac{5x ^ 2}{x ^ 5 + c}.
+    \]
+\end{example}
+
 
 \end{document}

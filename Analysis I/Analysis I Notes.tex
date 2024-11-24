@@ -36,7 +36,7 @@
     \end{enumerate}
 
     The truth tables are as follows 
-    \begin{table}[h!]
+    \begin{table}[H]
         \centering
         \begin{tabular}{|c|c|c|c|c|}
             \hline
@@ -48,7 +48,6 @@
             F & F & F & F & T \\
             \hline
         \end{tabular}
-        \caption{Graph 6}
         \label{tab:Gr6}
     \end{table}
 \end{definition}
@@ -57,7 +56,7 @@
     Let $A$ and $B$ be statements. The statement "if $A$ then $B$" is defined to be false when $A$ is true and $B$ is false, and true in all other cases.
 
     The truth table for this is as follows
-    \begin{table}[h!]
+    \begin{table}[H]
         \centering
         \begin{tabular}{|c|c|c|}
             \hline
@@ -69,7 +68,6 @@
             F & F & T \\
             \hline
         \end{tabular}
-        \caption{Graph 7}
         \label{tab:Gr7}
     \end{table}
 \end{definition}
@@ -83,7 +81,7 @@
     Let $A$ and $B$ be statements. The statement $A$ is equivalent to $B$ for the statement $A \implies B$ and $B \implies A$, or $A \iff B$.
     
     The truth table for this is as follows
-    \begin{table}[h!]
+    \begin{table}[H]
         \centering
         \begin{tabular}{|c|c|c|c|c|}
             \hline
@@ -95,7 +93,6 @@
             F & F & T & T & T \\
             \hline
         \end{tabular}
-        \caption{Graph 8}
         \label{tab:Gr8}
     \end{table}
 \end{definition}
@@ -519,7 +516,7 @@ For (**) to be false, we need $n \in \Z$ such that $n ^ 2$ is even and $n$ is od
 \begin{theorem}
     Let $A$ and $B$ be statements. The statement "If $A$ then $B$" is equivalent to "If not $B$ then not $A$".
     \begin{proof}
-        \begin{table}[h!]
+        \begin{table}[H]
             \centering
             \begin{tabular}{cccccc}
                 $A$ & $B$ & $A \implies B$ & not $B$ & not $A$ & not $B$ $\implies$ not $A$ \\
@@ -1484,6 +1481,7 @@ We define logarithm as the inverse function of $\exp$.
         For $n \in \N\ \exp(n) = e ^ n$,
         which gives an unbounded sequence.
         So there is $n \in \N$ with $e ^ n > a\ n \notin X$.
+        
         Also,
         if $x < n$,
         $e ^ n < e ^ x\ x \notin X$.
@@ -1493,14 +1491,341 @@ We define logarithm as the inverse function of $\exp$.
         There is $n \in \N$ with $e ^ {-n} < a$,
         so $-n \in X$.
         Use $x = \sup X$ from the Completeness axiom.
+        
+        Show that $\exp(x) < a$ or $\exp(x) > a$ is not true.
+        Assume $\exp(x) > a$.
+        Look at $\exp\left(x - \frac{1}{n}\right)$ with $n \in \N$.
+        \[
+        \exp\left(x - \frac{1}{n}\right) = \frac{\exp(x)}{\exp\left(\frac{1}{n}\right)} \geq \frac{\exp(x)}{\frac{1}{1 - \frac{1}{n}}} = \exp(x) \cdot \left(1 - \frac{1}{n}\right)
+        \]
+        \[
+        1 + x \leq e ^ x \leq \frac{1}{1 - x}\text{ on } \frac{1}{n}.
+        \]
+        So $\exp\left(x - \frac{1}{n}\right) \geq \exp x - \frac{\exp x}{n}$\quad(want $> a$).
+        Choose $n$ so large that
+        \[
+        \frac{\exp x}{n} < \underbrace{\exp x}_{> 0} - a
+        \]
+        with such $n$ we have $\exp\left(x - \frac{1}{n}\right) > \exp x - (\exp x - a) = a \implies x - \frac{1}{n}$ is an upper bound for $X$. Contradicting $x$ was the supremum.
+        So $\exp(x) > a$ is not true ($\exp(x) \leq a$).
     \end{proof}
 \end{theorem}
 
+\begin{definition}
+    The logarithm function
+    \[
+    \log : (0, \infty) \rightarrow \R
+    \]
+    defined by
+    $\log x = a$,
+    where $a \in \R$ is such that $\exp(a) = x$.
+\end{definition}
 
+For $a > 0$ and $x \in \R$ define
+\[
+a ^ x = \exp(x \cdot \log a).
+\]
+For $a > 0, a \neq 1$ define $\log_a x = \frac{\log x}{\log a}$
 
+\begin{proposition}
+    Let $a, b > 0$ with $b \neq 1$ and $x, y \in \R$.
+    Then
+    \begin{enumerate}[label = (\alph*)]
+        \item $a ^ {x + y} = a ^ x \cdot a ^ y$
+        \item $(a ^ x) ^ y = a ^ {x \cdot y}$
+        \item $\log_b(xy) = \log_b x + \log_b y$ for $x, y > 0$
+        \item $\log_b(x ^ y) = y \cdot \log_b(x)$ for $x > 0$
+    \end{enumerate}
+\end{proposition}
 
+\begin{lemma}
+    Let $x \in (0, \infty)$.
+    Then 
+    \[
+    \frac{x - 1}{x} \leq \log(x) \leq x - 1.
+    \]
+    \begin{proof}
+        
+    \end{proof}
+\end{lemma}
 
+\begin{example}
+    For $k \in \N$ we have
+    \[
+    \lim_{n \rightarrow \infty}\frac{n ^ k}{e ^ n} = 0.
+    \]
+    \begin{proof}
+        "Exponentials beat powers"
+        \[
+        e ^ n \geq \left(1 + \frac{n}{k + 1}\right) ^ {k + 1} \geq \frac{n ^ {k + 1}}{(k + 1) ^ {k + 1}}
+        \]
+        This is the last term of the binomial theorem.
+        Now
+        \[
+        0 \leq \frac{n ^ k}{e ^ n} \leq \frac{n ^ k(k + 1) ^ {k + 1}}{n ^ {k + 1}} = \frac{(k + 1) ^ {k + 1}}{n} \rightarrow 0.
+        \]
+        
+        "Powers beat logarithms"
+        \[
+        \lim_{n \rightarrow \infty}\frac{\log(n)}{\sqrt[k]{n}} = \lim_{m \rightarrow \infty}\frac{\log(m ^ k)}{m} = \lim_{m \rightarrow \infty}k \cdot \frac{\log m}{m} = \lim_{\ell \rightarrow \infty}k \cdot \frac{\ell}{e ^ \ell} = 0.
+        \]
+        $m = \sqrt[k]{n}$,
+        $\ell = \log m$.
+    \end{proof}
+\end{example}
 
+\subsection{The Bolzano-Weierstrass Theorem}
+\begin{definition}
+    Let $\seq$ be a sequence.
+    A subsequence of $\seq$ is a sequence $(x_{n_j})_{j \in \N}$ with
+    $n_1 < n_2 < n_3 < \dotsi$,
+    $n_j$ is strictly monotonically increasing.
+\end{definition}
+
+\begin{example}
+    Let $x_n = (-1) ^ n\left(1 - \frac{1}{n}\right)$
+    look at subsequence $x_{2n} = 1 - \frac{1}{2n}$,
+    or $x_{2n + 1} = -\left(1 - \frac{1}{2n + 1}\right)$,
+    or $x_{n ^ 2}$
+\end{example}
+
+\begin{proposition}
+    Let $\seq$ be a convergent sequence with $\displaystyle\lim_{n \rightarrow \infty}x_n = x$.
+    If $(x_{n_j})_{j \in \N}$ is a subsequence,
+    then this is also convergent with $\displaystyle\lim_{j \rightarrow \infty}x_{n_j} = x$.
+    \begin{proof}
+        
+    \end{proof}
+\end{proposition}
+
+\begin{lemma}
+    Every real sequence $\seq$ contains a subsequence which is either increasing or decreasing.
+    \begin{proof}
+        Given a sequence $\seq$,
+        call $n_0 \in \N$ a peak index,
+        if $x_{n_0} \geq x_n$ for all $n > n_0$.
+        Assume,
+        our sequence has infinitely many peak indices
+        $n_1 < n_2 < n_3 < \dotsi$,
+        $x_{n_1} \geq x_{n_2} \geq x_{n_3} \geq x_{n_4} \geq \dotsi$ which is the required subsequence.
+        Otherwise only finitely many peak indices.
+        $n_1 < n_2 < \dotsi < n_k$ look at $n_{k + 1}$ it is not a peak index.
+        So there is $n_{k + 2}$ with $x_{n_k + 1} < x_{n_k + 2}$
+        $n_{k + 2}$ is also not a peak index,
+        so there is $n_{k + 3} > n_{k + 2}$,
+        $x_{n_k + 2} < x_{n_k + 3}$.
+        Required subsequence $(x_{n_k + j})_{j \in N}$
+    \end{proof}
+\end{lemma}
+
+\begin{theorem}[Bolzano-Weierstrass]\label{analy_thm_bolzanoweierstrass}
+    Let $\seq$ be a bounded sequence.
+    Then $\seq$ has a convergent subsequence.
+    \begin{proof}
+        Let $(x_{n_j})_{j \in \N}$ be a subsequence which is monotonically increasing or decreasing.
+        This is also bounded.
+        By \autoref{analy_thm_boundmonoincseqconv} $(x_{n_j})_{j \in \N}$ is convergent.
+    \end{proof}
+\end{theorem}
+
+\subsection{Lim sup and Lim inf}
+Given a bounded sequence $\seq$ define two
+(related)
+sequences $\seq[\overline{x}]$ and $\seq[\underline{x}]$ as follows let
+\begin{align*}
+    \overline{x_n} &= \sup\{x_m \in \R\,|\,m \geq n\} \\
+    \underline{x_n} &= \inf\{x_m \in \R\,|\,m \geq n\}
+\end{align*}
+
+\begin{lemma}
+    Let $\seq$ be a bounded sequence.
+    Then $\seq[\overline{x}]$ is monotonically decreasing and bounded,
+    and $\seq[\underline{x}]$ is monotonically increasing and bounded.
+    Furthermore
+    \[
+    \lim_{n \rightarrow \infty}\underline{x_n} \leq \lim_{n \rightarrow \infty}\overline{x_n}.
+    \]
+    \begin{proof}
+        $\seq$ is bounded,
+        so there is $C \in \R$ with $-C \leq x_n \leq C$ for all $n \in \N$.
+        Define $X_n = \{x_m \in \R\,|\, m \geq n\} \subseteq [-C, C]$ bounded,
+        non-empty set.
+        Infimum and supremum exist,
+        and $-C \leq \underline{x_n} \leq \overline{x_n} \leq C$.
+        both sequences are bounded.
+        $X_{n + 1} \subset X_n \implies \overline{x_n}$ is an upper bound for $X_{n + 1} \implies \overline{x_{n + 1}} \leq \overline{x_n}$ for all $n \in \N$.
+        Similarly,
+        $\underline{x_n}$ is a lower bound for $X_{n + 1} \implies \underline{x_n} \leq \underline{x_{n + 1}}$ for all $n \in \N$ which implies $\overline{x_n} - \underline{x_n} \geq 0$.
+        Taking limits gives
+        \[
+        \lim\overline{x_n} - \lim\underline{x_n} \geq 0.
+        \]
+    \end{proof}
+\end{lemma}
+
+\begin{example}
+    (a) let $x_n (-1) ^ n \left(1 + \frac{1}{n}\right)$
+    let $n \in \N$ be even,
+    then
+    \[
+    x_n = 1 + \frac{1}{n}, x_{n + 1} = -1 - \frac{1}{n + 1}, x_{n + 2} = 1 + \frac{1}{n + 2}, \dotsc.
+    \]
+    \[
+    \overline{x_n} = \sup\left\{1 + \frac{1}{n}, -1 - \frac{1}{n + 1}, 1 + \frac{1}{n + 2}, \dotsc\right\} \implies \overline{x_n} = 1 + \frac{1}{n}
+    \]
+    $n$ is odd
+    \[
+    \overline{x_n} = \sup\left\{-1 - \frac{1}{n}, 1 + \frac{1}{n + 1}, -1 - \frac{1}{n + 2}, \dotsc\right\} \implies \overline{x_n} = 1 + \frac{1}{n + 1}
+    \]
+    Note $1 \leq x_n \leq 1 + \frac{1}{n}$ for all $n \in \N$.
+    By \autoref{analy_thm_squeezethm} $\lim_{n \rightarrow \infty}\overline{x_n} = 1$
+    (b) $y_n = (-1) ^ n(1 - \frac{1}{n})$
+    Hence
+    \[
+    \overline{y_n} = \sup\{1 - \frac{1}{n}, -1 + \frac{1}{n + 1}, 1 - \frac{1}{n + 2}, \dotsc\} = 1.
+    \]
+    also for $n$ odd
+\end{example}
+
+\begin{definition}
+    Let $\seq$ be a bounded sequence.
+    The limes superior of $\seq$ is defined as
+    \[
+    \limsup_{n \rightarrow \infty}{x_n} = \lim_{n \rightarrow \infty}\overline{x}_n = \inf_{n \geq 1}\{\sup{\{x_m\,|\, m \geq n\}}\}.
+    \]
+    The lines inferior of $\seq$ is defined as
+    \[
+    \liminf_{n \rightarrow \infty}{x_n} = \lim_{n \rightarrow \infty}{\underline{x}_n} = \sup_{n \geq 1}{\{\inf{\{x_m\,|\, m \geq n\}}\}}.
+    \]
+\end{definition}
+
+\begin{example}
+    \begin{enumerate}[label = (\alph*)]
+        \item $x_n = (-1) ^ n\left(1 + \frac{1}{n}\right)$
+        $1 \leq \overline{x}_n \leq 1 + \frac{1}{n}$ which shows $\limsup_{n \rightarrow \infty}{x_n} = 1$,
+        similarly
+        $-1 - \frac{1}{n} \leq \underline{x}_n \leq -1$ which shows $\liminf_{n \rightarrow \infty}{x_n} = -1$.
+        \item $y_n = (-1) ^ n \left(1 - \frac{1}{n}\right)$
+        $\overline{y}_n = 1$ for all $n \in \N$,
+        $\underline{y}_n = -1$ for all $n \in \N$,
+        hence
+        $\limsup{y_n} = 1$ and $\liminf{y_n} = -1$.
+        
+    \end{enumerate}
+\end{example}
+
+\begin{theorem}
+    Let $\seq$ be a bounded sequence.
+    \begin{enumerate}[label = \alph*)]
+        \item There is a subsequence $(x_{n_j})_{j \in \N}$ with
+        \[
+        \lim_{j \rightarrow \infty}x_{n_j} = \limsup_{n \rightarrow \infty}{x_n}.
+        \]
+        \item There is a subsequence $(x_{n_k})_{k \in \N}$ with
+        \[
+        \lim_{k \rightarrow \infty}x_{n_k} = \liminf_{n \rightarrow \infty}{x_n}.
+        \]
+        \item If $(x_{n_j})_{j \in \N}$ is a convergent subsequence,
+        then
+        \[
+        \liminf_{n \rightarrow \infty}{x_n} \leq \lim_{j \rightarrow \infty}{x_{n_j}} \leq \limsup_{n \rightarrow \infty}{x_n}
+        \]
+    \end{enumerate}
+\end{theorem}
+
+\subsection{Cauchy Sequence}
+\begin{definition}
+    A sequence $\seq$ is called a Cauchy sequence,
+    if for every $\varepsilon > 0$ there exists $n_0 \in \N$ such that
+    \[
+    |x_m - x_n| < \varepsilon\qquad\forall n, m \geq n_0.
+    \]
+\end{definition}
+
+\begin{theorem}\label{analy_thm_cauchyisbounded}
+    Let $\seq$ be a Cauchy sequence.
+    Then $\seq$ is bounded.
+    \begin{proof}
+        
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Let $\seq$ be a convergent sequence.
+    Then $\seq$ is a Cauchy sequence.
+    \begin{proof}
+        
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Let $\seq$ be a Cauchy sequence.
+    Then $\seq$ is a convergent sequence.
+    \begin{proof}
+        By \autoref{analy_thm_cauchyisbounded} $\seq$ is a bounded sequence.
+        By \autoref{analy_thm_bolzanoweierstrass},
+        there is a convergent subsequence $(x_{n_j})_{j \in \N}$.
+        Let $x = \lim_{j \rightarrow \infty}x_{n_j}$.
+        So given $\varepsilon > 0$,
+        there is a $j_0 \in \N$ with
+        \[
+        |x_{n_j} - x| < \frac{\varepsilon}{2}\qquad\forall j \geq j_0.
+        \]
+        Since $\seq$ is a Cauchy sequence,
+        there is an $n_0 \in \N$ with
+        \[
+        |x_n - x_m| < \frac{\varepsilon}{2}\qquad\forall n, m \geq n_0.
+        \]
+        Now
+        \begin{align*}
+            |x_n - x| &= |x_n - x_{n_j} + x_{n_j} - x| \\
+            &\leq |x_n - x_{n_j}| + |x_{n_j} - x|.
+        \end{align*}
+        Need $j \geq j_0$ and $n_j \geq n_0$
+        (just choose $j$ large enough).
+        Then $|x_n - x| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon$ for all $n \geq n_0$.
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    Let $a, c > 0$ and $\seq[u]$ given by $u_1 = c$ and
+    \[
+    u_{n + 1} = \frac{1}{2}\left(u_n + \frac{a}{u_n}\right)\text{ for } n \geq 1.
+    \]
+    Start with
+    \begin{align*}
+        u_{n + 2} - u_{n + 1} &= \frac{1}{2}\left(u_{n + 1} + \frac{a}{u_{n + 1}}\right) - \frac{1}{2}\left(u_{n} + \frac{a}{u_{n}}\right) \\
+        &= \frac{1}{2}\left(u_{n + 1} - u_n + \frac{au_n}{u_{n + 1}u_n} - \frac{au_{n + 1}}{u_{n + 1}u_n}\right) \\
+        &= \frac{1}{2}(u_{n + 1} - u_n)\left(1 - \frac{a}{u_nu_{n + 1}}\right)
+        \intertext{}
+    \end{align*}
+    We want $\left|1 - \frac{a}{u_nu_{n + 1}}\right| < 1$ since then $|u_{n + 2} - u_{n + 1} < \frac{1}{2}|u_{n + 1} - u_n|$
+    \begin{align*}
+        u_nu_{n + 1} &= \frac{u_n}{2}\left(u_n + \frac{a}{u_n}\right) \\
+        &= \frac{u_n ^ 2}{2} + \frac{a}{2} \\
+        &> \frac{a}{2} \\
+        &> 0
+    \end{align*}
+    which implies $0 < \frac{a}{u_nu_{n + 1}} < 2 \implies \left|1 - \frac{a}{u_nu_{n + 1}}\right| < 1$.
+    Inductively
+    \[
+    |u_{n + 2} - u_{n + 1}| < \frac{1}{2 ^ n}\overbrace{|u_2 - u_1|}^{\in \R}
+    \]
+    \[
+    |u_n - u_m|
+    \]
+    with $n, m \geq n_0$.
+    Assume $n > m \geq n_0 \geq 2$
+    \begin{align*}
+        |u_n - u_m| &= |u_n - u_{n - 1} + u_{n - 1} - \dotsc + u_{m + 1} - u_m| \\
+        &\leq |u_n - u_{n - 1}| + |u_{n - 1} - u_{n - 2}| + \dotsc + |u_{m + 1} - u_m| \\
+        &< \underbrace{\left(\frac{1}{2 ^ {n - 2}} + \frac{1}{2 ^ {n - 3}} + \dotsi + \frac{1}{2 ^ {m - 1}}\right)}_{< \frac{1}{2 ^ {m - 2}}}|u_2 - u_1|.
+    \end{align*}
+    But $|u_n - u_m| < \frac{1}{2 ^ {m - 2}}|u_2 - u_1|$,
+    where $|u_2 - u_1|$ is constant.
+    Let $\varepsilon > 0$ choose $n_0$ such that $\frac{1}{2 ^ {n_0 - 2}}\cdot |u_2 - u_1| < \varepsilon$.
+    Hence $\seq[u]$ is a Cauchy sequence.
+\end{example}
 
 
 

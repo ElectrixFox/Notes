@@ -122,7 +122,7 @@ A step function is a piecewise function which is constant on each piece.
 
 \subsection{Operations with functions}
 Given two functions $f, g\  \&\  c \in \R$, we can define the following functions:
-\begin{table}[h!]
+\begin{table}[H]
     \centering
     \begin{tabular}{|c|c|c|}
         \hline
@@ -781,8 +781,8 @@ we take it to be the domain.
 \end{definition}
 
 \begin{definition}
-    $f(x)$ is strictly monotonic increasing in $[a,\,b]$
-    if $f(x_1) < f(x_2)\ \forall x_1, x_2$ such that
+    $f(x)$ is strictly monotonic increasing in $[a, b]$
+    if $f(x_1) < f(x_2)\, \forall x_1, x_2$ such that
     $a \leq x_1 < x_2 \leq b$.
 \end{definition}
 
@@ -1605,6 +1605,646 @@ a practical way to compute the double integral is as an iterated integral
 \end{definition}
 A line must be able to be drawn such that a vertical line can go through it and not go back through it again.
 The lower boundary and upper boundaries are given by the functions $y = \phi_1(x)$ and $y = \phi_2(x)$ respectively.
+
+The region $D_1$ is $y$-simple and has upper and lower boundaries $y = \phi_1(x)$ and $y = \phi_2(x)$ respectively.
+The region $D_0$ is not $y$-simple.
+The double integral of $f(x, y)$ over $D_1$ can be calculated as an iterated integral,
+integrating over $y$ first.
+\[
+\iint\limits_{D_1}f(x, y)\,dxdy = \int_{a_0}^{a_1}\left(\int_{y = \phi_1(x)}^{y = \phi_2(x)}f(x, y)\,dy\right)\,dx
+\]
+\begin{example}
+    Integrate $f(x, y) = 6xy$ over the region $D$ between the curve $y = x$ and $y = x ^ 2$ for $0 \leq x \leq 1$.
+    Since the region is $y$-simple
+    \begin{align*}
+        \iint\limits_{D}6xy\,dxdy &= \int_0^1\left(\int_{y = x ^ 2}^{y = x}6xy\,dy\right)\,dx \\
+        &=\int_0^1\left[3xy^2\right]_{y = x ^ 2}^{y = x}\,dx \\
+        &= \int_0^1\left(3x ^ 3 - 3x ^ 5\right)\,dx \\
+        &= \left[\frac{3}{4}x ^ 4 - \frac{1}{2}x ^ 6\right]_0^1 \\
+        &= \frac{3}{4} - \frac{1}{2} \\
+        &= \frac{1}{4}.
+    \end{align*}
+\end{example}
+
+We have a similar definition for $x$-simple.
+\begin{definition}
+    A region $D$ is $x$-simple if every line parallel to the $x$-axis which intersects $D$ does so in a single line segment or point.
+\end{definition}
+
+The region $D_2$ is $x$-simple
+(but not $y$-simple)
+and has upper and lower boundaries $x = \psi_1(y)$ and $x = \psi_2(y)$ respectively.
+The double integral of $f(x, y)$ over this region can be written as an iterated integral by iterating over $x$ first
+\[
+\iint\limits_Df(x, y)\,dxdy = \int_{b_0}^{b_1}\left(\int_{\psi_1(y)}^{\psi_2(y)}f(x, y)\,dx\right)\,dy.
+\]
+If a region is both $x$-simple and $y$-simple,
+then the double integral can be calculated by integrating over $x$ or $y$ first.
+
+\begin{example}
+    With $D$ the region between the curves $y = x$ and $y = x ^ 2$ for $0 \leq x \leq 1$ as before,
+    use the fact that $D$ is $x$-simple to calculate
+    \[
+    \iint\limits_{D}6xy\,dxdy.
+    \]
+    The boundaries are given as functions of $y$ as $x = y$ and $x = \sqrt{y}$ for $0 \leq y \leq 1$.
+    \begin{align*}
+        \iint\limits_{D}6xy\,dxdy. &= \int_0^1\left(\int_{x = y}^{x = \sqrt{y}}6xy\,dx\right)\,dy \\
+        &= \int_0^1\left[3x ^ 2y\right]_{y}^{\sqrt{y}}\,dy \\
+        &= \int_0^1\left(3y ^ 2 - 3y ^ 3\right)\,dy \\
+        &= \left[y ^ 3 - \frac{3}{4}y ^ 4\right]_0^1 \\
+        &= 1 - \frac{3}{4} \\
+        &= \frac{1}{4}.
+    \end{align*}
+\end{example}
+
+Sometimes a region may be both $x$-simple and $y$-simple,
+but we can only do the integral explicitly in one of the two orders.
+
+\begin{example}
+    Let $D$ be the region between $y = x$ and $y = \sqrt{x}$ for $0 \leq x \leq 1$.
+    Calculate
+    \[
+    \iint\limits_D\frac{e ^ y}{y}\,dxdy.
+    \]
+    Using that $D$ is $y$-simple
+    \[
+    \iint\limits_D\frac{e ^ y}{y}\,dxdy = \int_0^1\left(\int_{x}^{\sqrt{x}}\frac{e ^ y}{y}\,dy\right)\,dx
+    \]
+    But we don't know how to integrate $\frac{e ^ y}{y}$ with respect to $y$.
+    However,
+    using that $D$ is $x$-simple,
+    \begin{align*}
+        \iint\limits_D\frac{e ^ y}{y}\,dxdy &= \int_0^1\left(\int_{y ^ 2}^{y}\frac{e ^ y}{y}\,dx\right)\,dy \\
+        &= \int_0^1\left[\frac{e ^ y}{y}x\right]_{y ^ 2}^{y}\,dy \\
+        &= \int_0^1\left(e ^ y - ye ^ y\right) \\
+        &= \left[e ^ y\right]_0^1 - \left[ye ^ y\right]_0^1 + \int_0^1e ^ y\,dy \\
+        &= (e - 1) - e + (e - 1) \\
+        &= e - 2.
+    \end{align*}
+\end{example}
+
+For a non $x$-simple and $y$-simple region $D$,
+split it into multiple regions e.g. $D_1$ and $D_2$ which are either $x$-simple or $y$-simple or both,
+then sum the double integrals of both regions.
+
+\subsection{Integration using polar coordinates}
+Sometimes,
+such as when the region of integration is rotationally symmetric it may be useful to describe the region in terms of polar coordinates $r$ and $\theta$,
+where
+$x = r\cos\theta$, $y = r\sin\theta$ ($r > 0\ 0 \leq \theta < 2\pi$).
+In order to convert $\iint\limits_Df(x, y)\,dxdy$ into polar coordinates,
+we need to know what to do with the area element $dxdy = dA$.
+This entered our definition of the integral when we divided $D$ into small rectangles with sides $dx$ and $dy$,
+and area $dxdy = dA$.
+
+The area of the small region formed by taking the point with polar coordinates $(r, \theta)$,
+and extending $r$ by $dr$ and $\theta$ by $d\theta$ is $dA \approx rdrd\theta$.
+This approximation improves as the area decreases.
+In the infinitesimal limit which defines the integral,
+we have $dA = rdrd\theta$.
+
+If the region is either $r$-simple or $\theta$-simple,
+we can then compute the double integral as an iterated integral.
+
+\begin{example}
+    Let $D$ be the region between the curves $x ^ 2 + y ^ 2 = 1$,
+    and $x ^ 2 + y ^ 2 = 4$ with $x \geq 0, y \geq 0$.
+    Calculate $\iint\limits_Dxy\,dxdy$.
+
+    In polar coordinates,
+    $D$ is the region $1 \leq r \leq 2$,
+    $0 \leq \theta \leq \frac{\pi}{2}$.
+
+    The area element is $dxdy = rdrd\theta$.
+    The integrand $xy = r ^ 2 \cos(\theta)\sin(\theta)$.
+    \begin{align*}
+        \iint\limits_Dxy\,dxdy &= \iint\limits_Dr ^ 2 \cos(\theta)\sin(\theta)r\,drd\theta \\
+        &= \int_1^2\left(\int_0^{\frac{\pi}{2}}r ^ 3 \cos(\theta)\sin(\theta)\,d\theta\right)\,dr \\
+        &= \int_1^2r ^ 3 \left(\int_0^{\frac{\pi}{2}}\frac{1}{2}\sin(2\theta)\,d\theta\right)\,dr \\
+        &= \int_1^2\frac{r ^ 3}{2}\left[-\frac{1}{2}\cos(2\theta)\right]_0^{\frac{\pi}{2}}\,dr \\
+        &= \int_1^2\frac{r ^ 3}{2}\left(\frac{1}{2} + \frac{1}{2}\right)\,dr \\
+        &= \left[\frac{r ^ 4}{8}\right]_1^2 \\
+        &= 2 - \frac{1}{8} \\
+        &= \frac{15}{8}
+    \end{align*}
+\end{example}
+
+
+\subsection{Change of variables and the Jacobian}
+As well as changing to polar variables,
+$r, \theta$,
+we might want to change variables to new variables $u$ and $v$,
+given in terms of relations $x = g(u, v), y = h(u, v)$.
+We need to consider the integration region $D$ in terms of our new variables,
+as well as the area element $dA = dxdy$.
+
+\begin{definition}
+    The Jacobian of the transformation from $x, y$ to $u, v$ is
+    \[
+    J = \frac{\partial(x, y)}{\partial(u, v)} = \begin{vmatrix}
+        \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\
+        \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v}
+    \end{vmatrix}
+    \]
+\end{definition}
+i.e. the determinant of the matrix of partial derivatives.
+The area element is then given in terms of the Jacobian as
+\[
+dA = dxdy = |J|dudv,
+\]
+where $|J|$ is the absolute value of the Jacobian.
+
+\begin{example}
+    For polar coordinates we have $x = r\cos\theta, y = r\sin\theta$ and the new variables $r$ and $\theta$ play the role of $u$ and $v$ above.
+    \begin{align*}
+    J &= \frac{\partial(x, y)}{\partial(r, \theta)} = \begin{vmatrix}
+        \frac{\partial x}{\partial r} & \frac{\partial x}{\partial \theta} \\
+        \frac{\partial y}{\partial r} & \frac{\partial y}{\partial \theta}
+    \end{vmatrix} \\
+    &=
+    \begin{vmatrix}
+        \cos\theta & -r\sin\theta \\ \sin\theta & r\cos\theta
+    \end{vmatrix} \\
+    &= r\cos ^ 2\theta + r\sin ^ 2\theta \\
+    &= r.
+    \end{align*}
+    So $dA = dxdy = |J|drd\theta = rdrd\theta$ as before.
+\end{example}
+
+\begin{example}
+    Let $D$ be a square in the $xy$-plane with vertices $(0, 0), (1, 1), (2, 0)$ and $(1, -1)$.
+    Calculate $\iint_D(x + y)\,dxdy$ using the change of variables $x = u + v, y = u - v$.
+
+    First we express $D$ in terms of $u$ and $v$.
+    We have
+    \[
+    \frac{x + y}{2} = u,\quad\frac{x - y}{2} = v.
+    \]
+    So the vertices of $D$ map to the $[u, v]$ coordinates
+    \[
+    [0, 0], [1, 0], [1, 0], [0, 1]
+    \]
+    respectively.
+    The edges of $D$ in the $xy$-plane lie on the lines $y = x$, $y = -x$, $y = x - 2$ and $y = -x + 2$.
+    These map to the lines $v = 0$, $u = 0$, $v = 1$ and $u = 1$ respectively.
+    So $D$ is a square in the $uv$-plane,
+    with vertices as above.
+    The Jacobian is
+    \[
+    J = \frac{\partial(x, y)}{\partial(u, v)} = \begin{vmatrix}
+        \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\
+        \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v}
+    \end{vmatrix} = \begin{vmatrix}
+        1 & 1 \\ 1 & -1
+    \end{vmatrix} = -2
+    \]
+    and so $dA = dxdy = |J|dudv = 2dudv$.
+    Finally the integrand is $x + y = 2u$ so
+    \begin{align*}
+        \iint\limits_D(x + y)\,dxdy &= \int_0^1\left(\int_0^12u \cdot 2\,du\right)\,dv \\
+        &= \int_0^1\left(\int_0^14u\,du\right)\,dv \\
+        &= \int_0^1\left[2u ^ 2\right]_0^1\,dv \\
+        &= \int_0^1 2\,dv \\
+        &= \left[2v\right]^1_0 \\
+        &= 2.
+    \end{align*}
+\end{example}
+
+\subsection{The Gaussian Integral}
+The integral $\displaystyle\int_{-\infty}^{\infty}e ^ {-ax ^ a}$ for $a > 0$ is known as the Gaussian integral and is important in a range of contexts.
+
+We can derive this result with a double integral
+
+Let $I = \int_{-\infty}^{\infty}e ^ {-ax ^ 2}\,dx$
+
+then
+\begin{align*}
+I ^ 2 &= \left(\int_{-\infty}^{\infty}e ^ {-ax ^ 2}\,dx\right)\left(\int_{-\infty}^{\infty}e ^ {-ay ^ 2}\,dy\right) \\
+&= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}e ^ {-a(x ^ 2 + y ^ 2)}\,dxdy \\
+&= \iint\limits_{\R ^ 2}e ^ {-a(x ^ 2 + y ^ 2)}\,dxdy
+\end{align*}
+Now switching to polar
+\begin{align*}
+    I ^ 2 &= \iint\limits_{\R ^ 2}e ^ {-ar ^ 2}r\,drd\theta \\
+    &= \int_0^{\infty}\int_{0}^{2\pi}re ^ {-ar ^ 2}\,d\theta dr \\
+    &= 2\pi\int_{0}^{\infty}re ^ {-ar ^ 2}\,dr \\
+    &= 2\pi\left[\frac{-e ^ {-ar ^ 2}}{2a}\right]_{0}^{\infty} \\
+    &= 2\pi\left(0 + \frac{1}{2a}\right) \\
+    &= \frac{\pi}{a}
+\end{align*}
+and therefore $I = \sqrt{\frac{\pi}{a}}$.
+
+\newpage
+
+\section{First Order Differential Equations}
+
+\subsection{First order separable ODEs}
+A differential equation is an equation which relates an unknown function to one or more of its derivatives.
+
+The order of a differential equation is the order of the highest derivative which appears in the equation.
+
+Solving a differential equation is the process of finding a function
+(solution)
+which satisfies the differential equation.
+When the function appearing in the equation only depends on a single variable,
+such as $y(x)$,
+then the differential equation is ordinary,
+or ordinary differential equation
+(ODE).
+
+We say $y(x)$ is a dependent variable in the ODE,
+and the $x$ is the independent variable $x$.
+
+Solving the ODE means finding $y(x)$.
+
+The generic first order ODE can be written in the form
+\begin{equation}
+    \frac{dy}{dx} = f(x, y)\quad\text{or}\quad y'(x) = f(x, y).
+\end{equation}
+Generically,
+this has a one parameter family of solutions,
+i.e. the general solution contains an arbitrary constant.
+Assigning a particular value to this constant gives a particular solution.
+Requiring that the solution satisfies an initial condition $y(x_0) = y_0$ for fixed $x_0$ and $y_0$ will fix a specific solution to the ODE.
+In this case the ODE is called an initial value problem
+(IVP).
+To solve an IVP one should first find the general solution to the ODE,
+and then use the initial condition
+(initial value)
+to find the specific solution which satisfies the IVP.
+
+The method used to solve the ODE depends on the form of $f(x, y)$.
+
+The ODE ($1$) is separable if $f(x, y) = X(x)Y(y)$.
+It can be solved by direct integration.
+\[
+\int\frac{1}{Y(y)}\,dy = \int X(x)\,dx
+\]
+then differentiating both sides with respect to $x$,
+\begin{align*}
+    \frac{d}{dx}\left(\int\frac{1}{Y(y)}\,dy\right) &= \frac{d}{dx}\int X(x)\,dx \\
+    \frac{1}{Y(y)} \cdot \frac{dy}{dx} &= X(x)
+\end{align*}
+so $\frac{dy}{dx} = X(x)Y(y)$.
+
+\begin{example}
+    Solve the IVP $\frac{dy}{dx} = xe ^ {y - x}$ with $y(0) = 0$
+    \[
+    y' = xe ^ y e ^ {-x}
+    \]
+    \[
+    \int e ^ {-y}\,dy = \int xe ^ {-x}\,dx
+    \]
+    \begin{align*}
+    -e ^ {-y} &=  -xe ^ {-x} + \int e ^ {-x}\,dx \\
+    -e ^ {-y} &= -xe ^ {-x} - e ^ {-x} + c \\
+    e ^ {-y} &= e ^ {-x}(1 + x) - c \\
+    y &= -\log(e ^ {-x}(1 + x) - c)
+    \end{align*}
+    is the general solution to the ODE.
+    
+    Now using the initial condition $y(0) = 0$
+    \[
+    y(0) = -\log(1 - c) = 0 \text{ so } c = 0
+    \]
+    and the specific solution to the IVP is
+    \[
+    y(x) = -\log(e ^ {-x}(1 + x)) = x - \log(1 + x).
+    \]
+\end{example}
+
+\begin{example}
+    Solve $y' = \frac{x ^ 2 y - y}{1 + y} = \frac{y}{1 + y}(x ^ 2 - 1)$
+    \begin{align*}
+        \int\frac{1 + y}{y}\,dy &= \int(x ^ 2 - 1)\,dx \\
+        y + \log|y| &= \frac{x ^ 3}{3} - x + c
+    \end{align*}
+    is the general solution to the ODE
+    (in implicit form).
+\end{example}
+
+\subsection{First order homogeneous ODEs}
+The ODE ($1$) is homogeneous if $f(tx, ty) = f(x,  y)\\forall t \in \R$.
+In this case,
+the substitution $y = xv(x)$ gives a separable ODE for $v(x)$.
+
+\begin{example}
+    Solve $y' = \frac{y ^ 2 - x ^ 2}{xy}$
+    with $f(x, y) = \frac{y ^ 2 - x ^ 2}{xy}$, $f(tx, ty) = \frac{t ^ 2y ^ 2 - t ^ 2 x ^ 2}{t ^ 2xy} = f(x, y)$.
+    Let $y(x) = xv(x)$
+    \[
+    y' = v(x) + xv'(x) = \frac{x ^ 2 v ^ 2 - x ^ 2}{x ^ 2 v} = \frac{v ^ 2 - 1}{v} = v - \frac{1}{v}
+    \]
+    \begin{align*}
+        v + xv' &= v - \frac{1}{v} \\
+        v' &= -\frac{1}{xv} \\
+        \int v\,dv &= \int -\frac{1}{x}\,dx \\
+        \frac{v ^ 2}{2} &= -\log|x| + c \\
+        &= -\log|x| + \log|a| \\
+        &= -\log\left|\frac{a}{x}\right| \\
+        v &= \pm\sqrt{2\log\left|\frac{a}{x}\right|}.
+    \end{align*}
+    Since $y(x) = xv(x) = \pm x\sqrt{2\log\left|\frac{a}{x}\right|}$
+\end{example}
+
+\subsection{First order linear ODEs}
+The ODE ($1$) is linear if $f(x, y) = -p(x)y + q(x)$,
+we can then write the ODE in the form
+\[
+y' + p(x)y = q(x).
+\]
+To solve this ODE we need to use the integrating factor $I(x) = e ^ {\int p(x)\,dx} = \exp\left(\int p(x)\,dx\right)$.
+Note that $I'(x) = p(x)e ^ {\int p(x)\,dx} = p(x)I(x)$ which is separable for $I$.
+Then
+\[
+(yI)' = y'I + yI' = y'I + ypI = (y' + yp)I = qI
+\]
+\[
+yI = \int qI\,dx
+\]
+\[
+y(x) = \frac{1}{I(x)}\int q(x)I(x)\,dx\text{ is the general solution to the linear ODE}.
+\]
+\begin{example}
+    Solve the IVP $y' - \frac{2}{x}y = 3x ^ 3$ with $y(-1) = 2$.
+    Here we have $p(x) = -\frac{2}{x}$ and $q(x) = 3x ^ 3$.
+    \[
+    I = \exp\left(\int p(x)\,dx\right) = \exp(-2\log(x)) = x ^ {-2}
+    \]
+    then $y(x) = x ^ 2\int 3x\,dx = x ^ 2 \left(\frac{3}{2}x ^ 2 + c\right) = \frac{3}{2}x ^ 4 + cx ^ 2$ is the general solution.
+    We need $y(-1) = \frac{3}{2} + c = 2$ so $c = \frac{1}{2}$ and the particular solution to the IVP is then
+    \[
+    y(x) = \frac{3}{2}x ^ 4 + \frac{1}{2}x ^ 2 = \frac{1}{2}x ^ 2(3x ^ 2 + 1).
+    \]
+\end{example}
+
+\subsection{First order exact ODEs}
+A first order ODE can also be written in the form
+\begin{equation}
+    M(x, y)\,dx + N(x, y)\,dy = 0
+\end{equation}
+This can be rearranged to
+\[
+N(x, y)\frac{dy}{dx} + M(x, y) = 0
+\]
+or
+\[
+\frac{dy}{dx} = -\frac{M(x, y)}{N(x, y)}
+\]
+in the form of ($1$).
+
+\textit{Note that a given $f(x, y)$ does not correspond to a unique $M$ and $N$,
+as multiplying $M$ and $N$ by the same arbitrary function would correspond to the same $f(x, y)$.}
+
+For a function $g(x, y)$,
+the total differential $dg$ is defined as $dg = \frac{\partial g}{\partial x}\,dx + \frac{\partial g}{\partial y}\,dy$.
+We can think of $dg$ as the small change in $g$ that occurs when moving from the point $(x, y)$ to the point $(x + dx, y + dy)$ for small $dx$ and $dy$.
+
+Then $dg$ being $0$ means that $g$ is constant.
+
+The ODE in the form ($2$) is exact if there is a function $g(x, y)$ such that the left-hand side of ($2$) is the total differential $dg$,
+i.e. such that
+\[
+\frac{\partial g}{\partial x} = M(x, y)\qquad\frac{\partial g}{\partial y} = N(x, y).
+\]
+If so the ODE is equivalent to $dg = 0$,
+in which case $g$ must be constant,
+and $g = c$ gives a solution to the ODE.
+
+The equality of the mixed partial derivatives i.e.
+\[
+\frac{\partial ^ 2 g}{\partial x \partial y} = \frac{\partial ^ 2 g}{\partial y \partial x}
+\]
+requires that for an exact ODE $\frac{\partial N}{\partial x} = \frac{\partial M}{\partial y}$.
+
+We therefore have the following test for exactness.
+The ODE $M(x, y)\,dx + N(x, y)\,dy = 0$ is exact if and only if
+\[
+\frac{\partial N}{\partial x} = \frac{\partial M}{\partial y}.
+\]
+\begin{example}
+    Show that $(3e ^ {3x}y + e ^ x)\,dx + (e ^ {3x} + 1)\,dy = 0$
+    is exact and hence find the general solution.
+    We have $M(x, y) = 3e ^ {3x}y + e ^ x$ and $N(x, y) = e ^ {3x} + 1$.
+    So
+    \[
+    \frac{\partial N}{\partial x} = 3e ^ {3x} = \frac{\partial M}{\partial y},
+    \]
+    so the ODE is exact.
+    From $M = \frac{\partial g}{\partial x}$, $\frac{\partial g}{\partial x} = 3e ^ {3x}y + e ^ x$,
+    so we must have $g(x, y) = e ^ {3x}y + e ^ x + \phi(y)$ where we have some arbitrary function $\phi(y)$ in place of our usual constant of integration.
+    Then $\frac{\partial g}{\partial y} = e ^ {3x} + \phi'(y) = N(x, y) = e ^ {3x} + 1$.
+    So $\phi'(y) = 1$ and hence $\phi(y) = y + c$.
+    The general solution is then
+    \begin{align*}
+        g(x, y) &= e ^ {3x}y + e ^ x + y + c = a \\
+        &= e ^ {3x}y + e ^ x + y + c &\text{(absorbing the $a$ into the $c$)}
+    \end{align*}
+    this gives a solution in implicit form.
+    In this case we can rearrange to find an explicit form
+    \begin{align*}
+        e ^ {3x}y + y &= c - e ^ x \\
+        y(e ^ {3x} + 1) &= c - e ^ x \\
+        y(x) &= \frac{c - e ^ x}{e ^ {3x} + 1}.
+    \end{align*}
+\end{example}
+
+\textbf{Exercise: } By rewriting the ODE from this question in the form of ($1$),
+check that this is indeed a solution.
+
+Consider an ODE $Mdx + Ndy = 0$ which is not exact,
+i.e. with $\frac{\partial M}{\partial y} \neq \frac{\partial N}{\partial x}$.
+Multiplying the ODE by $I(x, y)$ gives an equivalent ODE
+\[
+mdx + ndy = 0,\text{ where}
+\]
+$m = MI$ and $n = NI$.
+If this new ODE is exact,
+i.e.
+\[
+\frac{\partial M}{\partial y} = \frac{\partial n}{\partial x}
+\]
+then $I(x, y)$ is an integrating factor for the original ODE.
+
+\begin{example}
+    Show that $x$ is an integrating factor for
+    \[
+    (3xy - y ^ 2)dx + x(x - y)dy = 0
+    \]
+    and hence find the general solution.
+    $M = 3xy - y ^ 2$, $N = x ^ 2 - xy$,
+    so
+    \[
+    \frac{\partial M}{\partial y} = 3x - 2y\quad \frac{\partial N}{\partial x} = 2x - y
+    \]
+    so not exact,
+    with $I(x, y) = x$ we have $m = MI = 3x ^ 2y - xy ^ 2$, $n = NI = x ^ 3 - x ^ 2y$ and
+    \[
+    \frac{\partial m}{\partial y} = 3x ^ 2 - 2xy = \frac{\partial n}{\partial x}
+    \]
+    so $mdx + ndy = 0$ is exact.
+    We can now solve with our previous method
+    \[
+    m = \frac{\partial g}{\partial x} = 3x ^ 2y - xy ^ 2
+    \]
+    so
+    \[
+    g(x, y) = x ^ 3y - \frac{1}{2}x ^ 2y ^ 2 + \phi(y).
+    \]
+    Then $\frac{\partial g}{\partial y} = x ^ 3 - x ^ 2y + \phi(y)$ and $n = x ^ 3 - x ^ 2y = \frac{\partial g}{\partial y}$,
+    so $\phi'(y) = 0$ and we can take $\phi(y) = 0$.
+    The final solution is then $g = c$,
+    i.e.
+    \[
+    x ^ 3y - \frac{1}{2}x ^ 2y ^ 2 = c.
+    \]
+\end{example}
+
+\subsection{Bernoulli Equations}
+
+A Bernoulli equation is a non-linear ODE of the form
+\[
+y' + p(x)y = q(x)y ^ n\text{ with } n \neq 0, 1.
+\]
+Dividing through by $y ^ n$ gives
+\[
+y ^ {-n}y' + p(x)y ^ {1 - n} = q(x).
+\]
+Using the substitution $v(x) = y ^ {1 - n}(x)$.
+We have $v' = (1 - n)y ^ {-n}y'$ and so we can rewrite the ODE in terms of $v$ as
+\[
+\frac{1}{1 - n}v' + p(x)v = q(x)
+\]
+or
+\[
+v' + (1 - n)p(x)v = (1 - n)q(x)\text{ which is linear for $v$}.
+\]
+
+\begin{example}
+    Solve $y' - \frac{2y}{x} = -x ^ 2y ^ 2$.
+    This is Bernoulli with $n = 2$,
+    so we make the substitution $v = y ^ {1 - n} = y ^ {-1}$.
+    Hence $v' = -y ^ {-2}y'$
+    If we divide our original ODE by $y ^ 2$
+    \[
+    y ^ {-2}y' - \frac{2}{xy} = -x ^ 2.
+    \]
+    Then we can write this in terms of $v$ as
+    \[
+    -v' - 2\frac{v}{x} = -x ^ 2,
+    \]
+    so we have the linear ODE
+    \[
+    v' + 2\frac{v}{x} = x ^ 2.
+    \]
+    The integrating factor is $I(x) = \exp\left(\int\frac{2}{x}\,dx\right) = x ^ 2$ and hence the solution is
+    \begin{align*}
+    v(x) &= \frac{1}{I}\int qI\,dx \\
+    &= x ^ {-2}\int x ^ 4\,dx \\
+    &= x ^ {-2}\left(\frac{1}{5}x ^ 5 + \frac{c}{5}\right) \\
+    &= \frac{x ^ 5 + c}{5x ^ 2}.
+    \end{align*}
+    Hence the solution to the original Bernoulli ODE is
+    \[
+    y(x) = \frac{1}{v} = \frac{5x ^ 2}{x ^ 5 + c}.
+    \]
+\end{example}
+
+\newpage
+
+\section{Second order ODEs}
+
+\subsection{Linear constant coefficient homogeneous ODEs}
+The general form for a second order linear ODE is
+\begin{equation}\tag{$\dagger$}
+    a_2y'' + a_1y' + a_0y = \phi(x)
+\end{equation}
+where $a_2 \neq 0$ and $\phi(x)$ is an arbitrary function,
+and we take $a_2, a_1, a_0$ are constant.
+
+If the constants $a_2, a_1$ and $a_0$ are replaced by function of $x$,
+the ODE is still second order linear,
+but harder to solve.
+
+If the function $\phi(x) = 0$,
+we call the ODE homogeneous
+\begin{equation}\tag{$\ddagger$}
+    a_2y'' + a_1y' + a_0y = 0.
+\end{equation}
+
+We consider the homogeneous case first.
+First,
+note that if $y_1$ and $y_2$ are two solutions to ($\ddagger$),
+then so is the linear combination $y = Ay_1 + By_2$ for constants $A, B$.
+\begin{proof}
+    Let $y = Ay_1 + By_2$,
+    then
+    \[
+    y' = Ay_1' + By_2'
+    \]
+    and
+    \[
+    y'' = Ay_1'' + By_2'',
+    \]
+    and so
+    \begin{align*}
+        a_2y'' + a_1y' + a_0y &= a_2(Ay_1'' + By_2'') + a_1(Ay_1' + By_2') + a_0(Ay_1 + By_2) \\
+        &= A(a_2y_1'' + a_1y_1' + a_0y_1) + B(a_2y_2'' + a_1y_2' + a_0y_2) \\
+        &= A\cdot 0 + B\cdot 0 \\
+        &= 0.
+    \end{align*}
+\end{proof}
+Hence $y$ is a solution to ($\ddagger$).
+Note that the linearity of ($\ddagger$) is crucial.
+
+The general solution to ($\ddagger$) contains two arbitrary constants
+(as the ODE is second order).
+So if $y_1$ and $y_2$ are any two solutions which are independent,
+then the general solution is $y = Ay_1 + By_2$.
+We therefore need to find two independent particular solutions.
+We look for solutions in the form $y = e ^ {\lambda x}$.
+Substituting this into ($\ddagger$) gives
+\[
+a_2\lambda ^ 2e ^ {\lambda x} + a_1\lambda e ^ {\lambda x} + a_0e ^ {\lambda x} = 0
+\]
+and hence
+\begin{equation}\tag{Char}
+    a_2\lambda ^ 2 + a_1\lambda + a_0 = 0
+\end{equation}
+which is known as the characteristic
+(or auxiliary)
+equation.
+There are now three cases,
+depending on the roots of the (char) equation.
+\begin{enumerate}[label = \roman*)]
+    \item Distinct real roots
+
+    If (char) has real roots $\lambda_1 \neq \lambda_2$ then
+    \[
+    y_1 = e ^ {\lambda_1x}\text{ and } y_2 = e ^ {\lambda_2x}
+    \]
+    are the required solutions and the general solution is
+    \[
+    y = Ae ^ {\lambda_1x} + Be ^ {\lambda_2x}.
+    \]
+    \item One repeated real root:
+    
+\end{enumerate}
+
+\begin{example}
+    Solve $y'' - 2y' - 3y = 0$.
+    This ODE has characteristic equation
+    \[
+    \lambda ^ 2 - 2\lambda - 3 = 0 = (\lambda - 3)(\lambda + 1)\quad(\text{char})
+    \]
+    with roots $\lambda = -1$ and $\lambda = 3$.
+    The general solution is therefore
+    \[
+    y = Ae ^ {-x} + Be ^ {3x}.
+    \]
+\end{example}
+
 
 
 
