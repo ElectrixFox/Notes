@@ -865,8 +865,120 @@ in any normal way.
     \end{proof}
 \end{example}
 
+\begin{example}
+    How many solutions are there to the equation
+    \[
+    e_1 + e_2 + \dotsi + e_n = k,
+    \]
+    where each $e_i \in \{0, 1\}$ and $n$ and $k$ are given positive integers?
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        Now in constructing our generating function each $e_i$ is associated with the expression $(x ^ 0 + x ^ 1) = (1 + x)$
+        (from now on we write $x ^ 0$ as $1$).
+        The generating function is then the $n$-fold product
+        \[
+        f(x) = (1 + x)\cdot(1 + x)\dotsi(1 + x) = (1 + x) ^ n.
+        \]
+        If we expand the generating function as a power series we get
+        \[
+        (1 + x) ^ n = \sum_{k = 0}^{n}\binom{n}{k}x ^ k,
+        \]
+        by the binomial theorem.
+        Each term $x ^ k$ corresponds to a choice of $x ^ {e_1}$ from the first bracket,
+        $x ^ {e_2}$ from the second,
+        etc.,
+        in which the total power $x$ is $e_1 + \dotsi + e_n = k$,
+        i.e.,
+        a solution $(e_1, \dotsc, e_n)$ to the equation.
 
+        So the number of solutions is the coefficient of $x ^ k$ in the generating function $(1 + x) ^ n$,
+        which is $\binom{n}{k}$.
+    \end{proof}
+\end{example}
 
+\begin{example}
+    How many solutions are there to the equation
+    \[
+    e_1 + e_2 + \dotsi + e_n = k,
+    \]
+    where each $e_i \in \{0, 1, 2\}$ and $n$ and $k$ are given positive integers?
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        Arguing as in the previous example,
+        we want the coefficient of $x ^ k$ in the expansion of $(1 + x + x ^ 2) ^ n$.
+        
+        In other words,
+        if $a_k$ is the number of solutions required,
+        then
+        \[
+        (1 + x + x ^ 2) ^ n = \sum_{k = 0}^{\infty}a_kx ^ k
+        \]
+        is the generating function of the sequence $(a_k)$.
+    \end{proof}
+\end{example}
+
+\begin{lemma}\phantom{}
+    \begin{enumerate}[label = (\alph*)]
+        \item For $n \geq 0$ an integer
+        \[
+        \sum_{k = 0}^{n}x ^ k = \frac{1 - x ^ {n + 1}}{1 - x}
+        \]
+        is the generating function for the sequence $1, 1, 1, \dotsc, 1, 1, 0, 0, \dotsc$
+        (the first $n + 1$ terms are $1$).
+        \item The generating function for the sequence $1, 1, 1, \dotsc$ is
+        \[
+        \sum_{k = 0}^{\infty}x ^ k = \frac{1}{1 - x}.
+        \]
+        \item The generating function for the sequence $\binom{n + k - 1}{k}$,
+        $k \geq 0$ is
+        \[
+        \sum_{k = 0}^{\infty}\binom{n + k - 1}{k}x ^ k = \frac{1}{(1 - x) ^ n}.
+        \]
+        \item If $f(x) = \sum_{k = 0}^{\infty}a_kx ^ k$ and $g(x) = \sum_{k = 0}^{\infty}b_kx ^ k$ are the generating function of sequences $(a_k)$ and $(b_k)$ respectively,
+        then
+        \[
+        f(x)g(x) = \sum_{k = 0}^{\infty}c_kx ^ k
+        \]
+        is the generating function of the sequence $(c_k)$ where $c_k = \sum_{\ell = 0}^{k}a_{\ell}b_{k - \ell}$.
+    \end{enumerate}
+    \begin{proof}
+        \begin{enumerate}[label = (\alph*)]
+            \item This is the sum of a geometric series.
+            The formula is easy to prove by induction,
+            or directly in the form
+            \[
+            (1 - x)\sum_{k = 0}^{n}x ^ k = \sum_{k = 0}^{n}(x ^ k - x ^ {k + 1}) = 1 - x ^ {n + 1},
+            \]
+            since the sum 'telescopes'.
+            \item The sum to infinity makes analytical sense only for $|x| < 1$,
+            in which case we can take $n \rightarrow \infty$ in (a) to get (b).
+
+            Alternatively,
+            write $S = 1 + x + x ^ 2 + \dotsi$ and note that $S = 1 + xS$,
+            now solve for $S$.
+
+            \item Recall from the extended form of the binomial theorem that
+            \[
+            (1 - x) ^ {-n} = \sum_{k = 0}^{\infty}\binom{n + k - 1}{k}x ^ k,
+            \]
+            as claimed.
+            For example,
+            the case $n = 2$ gives
+            \[
+            (1 - x) ^ {-2} = \sum_{k = 0}^{\infty}(k + 1)x ^ k = 1 + 2x + 3x ^ 2 + \dotsi,
+            \]
+            the generating function for the sequence $1, 2, 3, \dotsc$.
+            \item This is just collecting terms.
+            For example,
+            in
+            \[
+            (1 + 2x + 4x ^ 2 + 8x ^ 3 + \dotsi)(1 + 5x + 7x ^ 2 + 9x ^ 3 + \dotsi)
+            \]
+            the coefficient of $x ^ 2$ is
+            \[
+            1 \cdot 7 + 2 \cdot 5 + 4 \cdot 1 = 21.
+            \]
+        \end{enumerate}
+    \end{proof}
+\end{lemma}
 
 
 
