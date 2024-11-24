@@ -1173,5 +1173,32 @@ which converts the equation to a linear ODE for $v(x)$.
     \]
 \end{example}
 
+\newpage
+
+\section{Second order differential equations}
+
+\subsection{Linear constant coefficient homogeneous ODEs}
+\begin{equation}\tag{$\dagger$}
+    \alpha_2y'' + \alpha_1y' + \alpha_0y = \phi(x)
+\end{equation}
+where $\alpha_2 \neq 0, \alpha_1, \alpha_0$ are constants and $\phi(x)$ is an arbitrary function of $x$.
+
+If $\phi(x) = 0$,
+\begin{equation}\tag{$\dagger\dagger$}
+    \alpha_2y'' + \alpha_1y' + \alpha_0y = 0
+\end{equation}
+is called homogeneous.
+
+If $y_1$ and $y_2$ are any two solutions of the homogeneous ODE $(\dagger\dagger)$ then so is any arbitrary linear combination $y = Ay_1 + By_2$,
+where $A$ and $B$ are constants.
+\begin{proof}
+    $y = Ay_1 + By_2$ so $y' = Ay_1' + By_2'$ and $y'' = Ay_1'' + By_2''$.
+    Hence $\alpha_2y'' + \alpha_1y' + \alpha_0y = \alpha_2(Ay_1'' + By_2'') + \alpha_1(Ay_1' + By_2') + \alpha_0(Ay_1 + By_2) = A(\alpha_2y_1'' + \alpha_1y_1' + \alpha_0y_1) + B(\alpha_2y_2'' + \alpha_1y_2' + \alpha_0y_2) = 0 + 0 = 0$.
+\end{proof}
+
+
+
+
+
 
 \end{document}
