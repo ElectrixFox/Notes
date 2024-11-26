@@ -2,6 +2,7 @@
 \usepackage{preamble}
 
 \declaretheorem[style = avgstyle, name = Counting Principle]{countprinc}
+\declaretheorem[style = avgstyle, name = Property, numberwithin = section]{property}
 
 \title{Probability I \\
     \large Prereading}
@@ -466,7 +467,7 @@ we will provide an example involving two of them.
     \end{enumerate}
 \end{theorem}
 
-\begin{definition}[Independence of multiple events]\label{prob_def_indepomulev}
+\begin{definition}[Independence of multiple events]\label{pre_prob_def_indepomulev}
     A (possible infinite) collection of events $\mathcal{A} \subseteq \mathcal{F}$ are mutually independent if for every finite non-empty $\mathcal{C} \subseteq \mathcal{A}$
     (that is, $\mathcal{B}$ is a finite subcollection of the events in question),
     \[
@@ -697,7 +698,7 @@ Note that $\P_X$ therefore also has properties C1-C10.
 \subsection{Discrete random variables}
 The function $\P_X$ tells us everything we might need to know about the random variable $X$: it is called the distribution of $X$.
 
-\begin{definition}[Discrete random variable and probability mass function]\label{prob_def_drvpmf}
+\begin{definition}[Discrete random variable and probability mass function]\label{pre_prob_def_drvpmf}
     A random variable $X : \Omega \rightarrow X(\Omega)$ is said to be discrete when there is a finite or countable set of values $\mathcal{X} \subseteq X(\Omega)$ such that $\P(X \in \mathcal{X}) = 0$.
     The function $p: \mathcal{X} \rightarrow [0, 1]$ defined by
     \[
@@ -736,7 +737,7 @@ Specifically, it allows us to calculate the probability of every event of the fo
     or (ii) $\Omega$ is finite or countable.
     \begin{proof}
         Clearly, (ii) implies (i),
-        therefore if (i) then the statement holds which can be seen immediately from \autoref{prob_def_drvpmf} as we can take $\mathcal{X} = X(\Omega)$.
+        therefore if (i) then the statement holds which can be seen immediately from \autoref{pre_prob_def_drvpmf} as we can take $\mathcal{X} = X(\Omega)$.
     \end{proof}
 \end{theorem}
 
@@ -756,7 +757,7 @@ The random variable $X$ takes values in $X(\Omega) := \{0, 1, \dotsc, n\}$,
 $X(\omega) = \sum_{i = 1}^{n}\omega_i$, the total numbers of $1$s in the string.
 For each $x \in \{0, 1, \dotsc, n\}$:
 \begin{itemize}
-    \item because trials are independent (see \autoref{prob_def_indepomulev}, every sequence $\omega \in \Omega$ with exactly $x$ successes and $n - x$ failures has probability $\P(\{\omega\}) = p ^ x (1 - p) ^ {n - x}$; and
+    \item because trials are independent (see \autoref{pre_prob_def_indepomulev}, every sequence $\omega \in \Omega$ with exactly $x$ successes and $n - x$ failures has probability $\P(\{\omega\}) = p ^ x (1 - p) ^ {n - x}$; and
     \item there are $\binom{n}{x}$ sequences with exactly $x$ successes.
 \end{itemize}
 By C7, we can sum the probabilities of the outcomes in the event
@@ -1468,7 +1469,7 @@ The following result, sometimes known as the Law of the Unconscious Statistician
 
 For multiple random variables,
 the Law of the Unconscious Statistician reads as follows:
-\begin{theorem}[Expectation of a function of multiple random variables]
+\begin{theorem}[Expectation of a function of multiple random variables]\label{pre_prob_thm_multilawofunconsciousstatistician}
     For any discrete random variables $X$ and $Y$ taking values in $\mathcal{X}$ and $\mathcal{Y}$,
     and for any function $g : \mathcal{X} \times \mathcal{Y} \rightarrow \R$,
     \[
@@ -1546,7 +1547,82 @@ A popular and mathematically convenient way to measure the variability of $X$ i.
     \]
 \end{definition}
 
+From \autoref{pre_prob_thm_lawofunconsciousstatistician} we can see that
+\begin{align*}
+    \Var(X) &= \sum_{x \in \mathcal{X}}(x - \E(X)) ^ 2p(x)&\text{if $X$ is discrete, and} \\
+    \Var(X) &= \int_{-\infty}^{\infty}(x - \E(X)) ^ 2f(x)\,dx&\text{if $X$ is continuously distributed},
+\end{align*}
+provided that the sum or integral exists.
 
+\begin{definition}[Covariance]
+    Let $X$ and $Y$ be two real-valued random variables on the sample space.
+    The covariance of $X$ and $Y$ is defined as
+    \[
+    \mathbb{C}\mathrm{ov}{(X, Y)} := \E((X - \E(X))(Y - \E(Y)).
+    \]
+\end{definition}
+\begin{itemize}
+    \item If $\Cov(X, Y) > 0$ it means that $X - \E(X)$ and $Y - \E(Y)$ tend to have the same sign.
+    That is,
+    if $X > \E(X)$ then it tends to be the case that $Y > \E(Y)$
+    (or, conversely,
+    if $X < \E(X)$ then it tends to be the case that $Y < \E(Y)$ too).
+    In this case we say that $X$ and $Y$ are positively correlated.
+    \item If $\Cov(X, Y) < 0$ we say that $X$ and $Y$ are negatively correlated.
+    Now $X - \E(X)$ and $Y - \E(Y)$ tend to have opposite signs.
+    \item If $\Cov(X, Y) = 0$ we say that $X$ and $Y$ are uncorrelated.
+\end{itemize}
+
+A quantification of the correlation is provided by the correlation coefficient,
+given by
+\[
+\rho(X, Y) := \frac{\Cov(X, Y)}{\sqrt{\Var(X)\Var(Y)}}.
+\]
+It can be proved that
+\[
+-1 \leq \rho(X, Y) \leq 1.
+\]
+From \autoref{pre_prob_thm_multilawofunconsciousstatistician},
+we can immediately derive the following expressions for the covariance:
+\[
+\Cov(X, Y) = \sum_{x \in \mathcal{X}}\sum_{y \in \mathcal{Y}}(x - \E(X))(y - \E(Y))p(x, y),
+\]
+if $X$ and $Y$ are discrete,
+and
+\[
+\Cov(X, Y) = \iint\limits_{\R ^ 2}(x - \E(X))(y - \E(Y))f(x, y)\,dxdy,
+\]
+if $X$ and $Y$ are jointly continuously distributed,
+provided that the double sum or double integral exists.
+
+\begin{property}[Variance as covariance]
+    For any real-valued random variable $X$,
+    \[
+    \Var(X) = \Cov(X, X).
+    \]
+\end{property}
+\begin{property}[Symmetry of covariance]
+    For any real-valued random variables $X$ and $Y$,
+    \[
+    \Cov(X, Y) = \Cov(Y, X).
+    \]
+\end{property}
+
+\begin{corollary}
+    For any real-valued random variable $X$,
+    and any constants $\alpha$ and $\beta \in \R$,
+    \[
+    \Var(\alpha + \beta X) = \beta ^ 2 \Var(X).
+    \]
+    For any real-valued random variables $X, Y$, and $Z$ and any constants $\alpha, \beta, \gamma$, and $\delta \in \R$,
+    \begin{subequations}
+        \begin{align}
+            \Cov(\alpha + \beta X, \gamma + \delta Y) &= \beta\delta\Cov(X, Y) \\
+            \Cov(X + Y, Z) &= \Cov(X, Z) + \Cov(Y, Z) \\
+            \Cov(X, Y + Z) &= \Cov(X, Y) + \Cov(X, Z)
+        \end{align}
+    \end{subequations}
+\end{corollary}
 
 
 

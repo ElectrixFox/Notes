@@ -11,6 +11,20 @@
 
 \newpage
 
+You can write text under braces as follows
+\begin{verbatim}
+    f(x) = \underbrace{2k}_{\text{for $k > 0$}} > 2k - 1.
+\end{verbatim}
+\[
+f(x) = \underbrace{2k}_{\text{for $k > 0$}} > 2k - 1.
+\]
+However this causes there to be big spaces,
+the \verb|\mathclap{}| command can be used to solve this:
+\[
+f(x) = \underbrace{2k}_{\mathclap{\text{for $k > 0$}}} > 2k - 1.
+\]
+By simply changing \verb|_{\text{...}}| to \verb|_{\mathclap{}}|.
+
 \verb|\underset{above}{below}| provides text underneath the the argument as follows
 \[
 \underset{above}{below}

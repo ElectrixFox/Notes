@@ -2,6 +2,8 @@
 \usepackage{preamble}
 
 \newcommand{\seq}[1][x]{(#1_n)_{n \in \N}}
+\newcommand{\dseq}[2][n]{(#2_#1)_{#1 \in \N}}
+\newcommand{\infsum}[1][k = 1]{\sum_{#1}^{\infty}}
 
 \title{Analysis I}
 \author{Luke Phillips}
@@ -1826,6 +1828,206 @@ sequences $\seq[\overline{x}]$ and $\seq[\underline{x}]$ as follows let
     Let $\varepsilon > 0$ choose $n_0$ such that $\frac{1}{2 ^ {n_0 - 2}}\cdot |u_2 - u_1| < \varepsilon$.
     Hence $\seq[u]$ is a Cauchy sequence.
 \end{example}
+
+\newpage
+
+\section{Series}
+
+\subsection{Fundamental notions and properties of series}
+
+\begin{definition}
+    Let $\dseq[k]{a}$ be a sequence of real numbers.
+    Then the sequence of partial sums $\dseq{S}$ is defined as
+    \[
+    S_n = \sum_{k = 1}^{n}a_k.
+    \]
+    If the sequence of partial sums converges,
+    we say the series $\sum_{k = 1}^{\infty}a_k$ is convergent,
+    and then $\sum_{k = 1}^{\infty}a_k = \lim_{n \rightarrow \infty}S_n$.
+    Otherwise,
+    we say $\sum_{k = 1}^{\infty}a_k$ is divergent.
+\end{definition}
+
+\begin{remark}
+    Series can start with a summand different from $a_1$,
+    e.g.
+    $\infsum[k = 0]a_k$ or $\infsum[k = 3]a_k$.
+    Make sure all the terms are defined.
+\end{remark}
+
+\[
+\infsum a_k\text{ converges } \iff \infsum[k = N]a_k\text{ converges } (N \in \N).
+\]
+\begin{example}[Geometric Series]
+    For $k \in \N_0$ let $a_k = q ^ k$ with $q \in \R$.
+    Starts with $a_0 = 1$.
+
+    \[
+    S_n = \sum_{k = 0}^{n}q ^ k = \frac{1 - q ^ {n + 1}}{1 - q}\text{ for } q \neq 1.
+    \]
+    Induction:
+    $n = 0$
+    \[
+    S_0 = 1 = \frac{1 - q}{1 - q}
+    \]
+    Assume true for $n$, $n \geq 0$,
+    \begin{align*}
+        S_{n + 1} &= S_n + q ^ {n + 1} \\
+        &= \frac{1 - q ^ {n + 1}}{1 - q} + \frac{q ^ {n + 1} - q ^ {n + 2}}{1 - q} \\
+        &= \frac{1 - q ^ {n + 2}}{1 - q}.
+    \end{align*}
+    For $|q| < 1$,
+    $S_n$ converges to $\frac{1}{1 - q}$.
+
+    For $|q| > 1$,
+    $q ^ {n + 1}$ is unbounded,
+    and so is $S_n$,
+    $(S_n)$ is divergent.
+
+    $q = -1$,
+    $S_{2n} = 1, S_{2n + 1} = 0$ also divergent.
+    
+    $q = 1$,
+    $S_n = n + 1$ is unbounded,
+    so diverges.
+
+    For $|q| < 1$ we have
+    \[
+    \infsum[k = 0]q ^ k = \frac{1}{1 - q}
+    \]
+    $q = \frac{1}{2}$:
+    \[
+    1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \dotsi = \frac{1}{1 - \frac{1}{2}} = 2.
+    \]
+\end{example}
+
+\begin{example}
+    For $k \in \N$ let
+    \[
+    a_k = \frac{1}{k(k + 1)} = \frac{1}{k} - \frac{1}{k + 1}.
+    \]
+    \begin{align*}
+        S_n &= \sum_{k = 1}^{n}\frac{1}{k(k + 1)} \\
+        &= \sum_{k = 1}^{n}\left(\frac{1}{k} - \frac{1}{k + 1}\right) \\
+        &= 1 - \frac{1}{2} + \frac{1}{2} - \frac{1}{3} + \frac{1}{3} - \frac{1}{4} + \dotsi + \frac{1}{n} - \frac{1}{n + 1} \\
+        &= 1 - \frac{1}{n + 1}
+    \end{align*}
+    So
+    \[
+    \infsum\frac{1}{k(k + 1)} = \lim_{n \rightarrow \infty}1 - \frac{1}{n + 1} = 1.
+    \]
+\end{example}
+
+\begin{lemma}
+    If $\infsum[k = 0]a_k$ is convergent,
+    then
+    \[
+    \lim_{k \rightarrow \infty}a_k = 0.
+    \]
+    \begin{proof}
+        Let $S_n = \sum_{k = 0}^{n}a_k$,
+        then $\lim_{n \rightarrow \infty}S_n = s$ for some $s \in \R$.
+        Write $a_n = S_n - S_{n - 1}$ for $n \geq 1$.
+        By COLT $\lim_{n \rightarrow \infty}a_n = s - s = 0$.
+    \end{proof}
+\end{lemma}
+This is a criterion for divergence of a series,
+it is not a criterion for convergence of a series.
+
+\begin{example}[Harmonic Series]
+    This is the series
+    \[
+    \infsum\frac{1}{k}.
+    \]
+    Note $\frac{1}{k} \rightarrow 0$ as $k \rightarrow \infty$,
+    as we shall see $S_n$ is unbounded.
+    \begin{align*}
+    S_1 &= 1 \\
+    S_2 &= 1 + \frac{1}{2} \\
+    S_4 &= 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{3} + \frac{1}{4} \geq 1 + \frac{1}{2} + \left(\frac{1}{4} + \frac{1}{4}\right) = 1 + 2 \cdot \frac{1}{2} \\
+    S_8 &= 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} + \frac{1}{6} + \frac{1}{7} + \frac{1}{8} \geq 1 + 3 \cdot \frac{1}{2} \\
+    \vdots \\
+    S_{2 ^ n} &\geq 1 + \frac{n}{2} \implies \text{the sequence of partial sums is divergent}.
+    \end{align*}
+    The Harmonic Series is divergent.
+\end{example}
+
+\begin{theorem}[COLT for series]
+    Assume the series $\infsum[k = 0]a_k$ and $\infsum[k = 0]b_k$ are convergent with limit $a$ and $b$
+    (respectively).
+    Then
+    \begin{enumerate}[label = (\alph*)]
+        \item
+        \[
+        \infsum[k = 0](a_k + b_k) \text{ converges to } a + b
+        \]
+        \item
+        \[
+        \infsum[k = 0]c\cdot a_k\text{ converges to } c \cdot a, \text{ where } c \in \R.
+        \]
+    \end{enumerate}
+    \begin{proof}
+        Use COLT for sequences on partial sums.
+    \end{proof}
+\end{theorem}
+
+\subsection{Convergence Criteria}
+\begin{theorem}[Comparison Test]
+    Let $N \in \N$ let $(a_k)_{k \in \N_0}$, $(b_k)_{k \in \N_0}$ sequences with
+    \[
+    0 \leq a_k \leq b_k \text{ for } k \geq N.
+    \]
+    \begin{enumerate}[label = (\alph*)]
+        \item If $\infsum[k = 0]b_k$ is convergent,
+        then $\infsum[k = 0]a_k$ is convergent.
+        \item If $\infsum[k = 0]a_k$ is divergent,
+        then $\infsum[k = 0]b_k$ is divergent.
+    \end{enumerate}
+    \begin{proof}
+        Use $\infsum[k = 0]a_k$ is convergent if and only if $\infsum[k = N]a_k$ is convergent.
+
+        For $n \geq N$ let $s_n = \sum_{k = N}^{n}a_k$ and $t_n = \sum_{k = N}^{n}b_k$.
+        Theses are monotonically increasing.
+
+        If $\infsum[k = 0]b_k$ is convergent so is $(t_n)_{n \geq N}$ to $t$.
+        \[
+        s_n \leq t_n \leq t.
+        \]
+        The sequence $s_n$ is monotonically increasing by $t$,
+        so is convergent by Thm 2.16.
+
+        (b)
+        Since $s_n$ is monotonically increasing,
+        divergence means $(s_n)$ is unbounded,
+        but then $(t_n)$ is also unbounded.
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    \[
+    \infsum[n = 1]\frac{1}{n ^ 2}.
+    \]
+    \begin{align*}
+        \frac{1}{n ^ 2} &= \frac{2}{n ^ 2 + n ^ 2} \\
+        &\leq \frac{2}{n ^ 2 + n} \\
+        &= \frac{2}{n(n + 1)}.
+    \end{align*}
+    \[
+    \infsum[n = 1]\frac{2}{n(n + 1)}\text{ converges to $2$ by COLT and by the example}.
+    \]
+    By comparison test $\infsum[n = 1]\frac{1}{n ^ 2}$ also converges.
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

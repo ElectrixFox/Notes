@@ -14,6 +14,10 @@
 
 \newpage
 
+\tableofcontents
+
+\newpage
+
 \section{Vectors and vector spaces}
 
 \subsection{Vector space $\R ^ n$}
@@ -3342,6 +3346,341 @@ so these three elements are not linearly independent.
     then $a_{ij} = \left(\sum a_{ij}E^{ij}\right)_{ij} = 0_{ij} = 0$,
     for all $i, j$.
 \end{example}
+
+\begin{definition}[Basis]
+    If $\{\mbf{u}_1, \dotsc, \mbf{u}_k\} \subseteq V$ is both linearly independent and spanning
+    ($\langle\mbf{u}_1, \dotsc, \mbf{u}_k\rangle = V$)
+    then we call $\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ a basis.
+\end{definition}
+
+$M_2(\R)$ has a basis:
+\[
+\{E_{11}, E_{12}, E_{21}, E_{22}\} = \left\{\begin{pmatrix}
+    1 & 0 \\ 0 & 0
+\end{pmatrix}, \begin{pmatrix}
+    0 & 1 \\ 0 & 0
+\end{pmatrix},
+\begin{pmatrix}
+    0 & 0 \\ 1 & 0
+\end{pmatrix}, \begin{pmatrix}
+    0 & 0 \\ 0 & 1
+\end{pmatrix}\right\}.
+\]
+There are other bases available e.g.
+\[
+\left\{\begin{pmatrix}
+    1 & 0 \\ 0 & 0
+\end{pmatrix}, \begin{pmatrix}
+    0 & 0 \\ 0 & 1
+\end{pmatrix},
+\begin{pmatrix}
+    0 & 1 \\ 1 & 0
+\end{pmatrix}, \begin{pmatrix}
+    0 & 1 \\ -1 & 0
+\end{pmatrix}\right\},
+\]
+is also a basis for $M_2(\R)$.
+
+Is it spanning?
+
+For any $\begin{pmatrix}
+    a & b \\ c & d
+\end{pmatrix}$ we want to find $\lambda_1, \lambda_2, \lambda_3, \lambda_4$ such that
+\begin{align*}
+\begin{pmatrix}
+    a & b \\ c & d
+\end{pmatrix}
+&=
+\lambda_1\begin{pmatrix}
+    1 & 0 \\ 0 & 0
+\end{pmatrix} + \lambda_2\begin{pmatrix}
+    0 & 0 \\ 0 & 1
+\end{pmatrix} +
+\lambda_3\begin{pmatrix}
+    0 & 1 \\ 1 & 0
+\end{pmatrix} +
+\lambda_4\begin{pmatrix}
+    0 & 1 \\ -1 & 0
+\end{pmatrix} \\
+&= \begin{pmatrix}
+    \lambda_1 & \lambda_3 + \lambda_4 \\ \lambda_3 - \lambda_4 & \lambda_2
+\end{pmatrix}
+\end{align*}
+so can take
+\begin{align*}
+\lambda_1 &= a, &\lambda_2 = d, \\
+\lambda_3 &= \frac{b + c}{2}, &\lambda_4 = \frac{b - c}{2},
+\end{align*}
+so yes it is spanning.
+
+Is it linearly independent
+\[
+\begin{pmatrix}
+    \lambda_1 & \lambda_3 + \lambda_4 \\ \lambda_3 - \lambda_4 & \lambda_2
+\end{pmatrix} = \begin{pmatrix}
+    0 & 0 \\ 0 & 0
+\end{pmatrix}
+\implies \lambda_1 = \lambda_2 = 0
+\]
+and $\lambda_3 + \lambda_4 = \lambda_3 - \lambda_4 = 0 \implies \lambda_3 = 0 = \lambda_4$.
+Yes,
+it is linearly independent.
+
+\begin{lemma}
+    If $\mbf{u}_1, \dotsc, \mbf{u}_r \in V$ then $\mathrm{span}\langle\mbf{u}_1, \dotsc, \mbf{u}_r\rangle \subseteq V$ is a subspace of $V$.
+    \begin{proof}
+    \end{proof}
+\end{lemma}
+
+\begin{lemma}
+    Suppose $\mbf{u}, \mbf{u}_1, \dotsc, \mbf{u}_r \in V$ and $\mbf{u} \in \mathrm{span}\langle\mbf{u}_1, \dotsc, \mbf{u}_r\rangle$ then
+    \[
+    \mathrm{span}\langle\mbf{u}, \mbf{u}_1, \dotsc, \mbf{u}_r\rangle = \mathrm{span}\langle\mbf{u}_1, \dotsc, \mbf{u}_r\rangle.
+    \]
+    \begin{proof}
+    \end{proof}
+\end{lemma}
+
+\begin{lemma}
+    Suppose that $\{\mbf{u}_1, \dotsc, \mbf{u}_r\}$ is not linearly independent.
+    Then there exists some $1 \leq i \leq r$ such that $\mbf{u}_i \in \mathrm{span}\langle\mbf{u}_1, \dotsc, \mbf{u}_{i - 1}, \mbf{u}_{i + 1}, \dotsc, \mbf{u}_r\rangle$.
+    So, in particular,
+    we have
+    \[
+    \mathrm{span}\langle\mbf{u}_1, \dotsc, \mbf{u}_r\rangle = \mathrm{span}\langle\mbf{u}_1, \dotsc, \mbf{u}_{i - 1}, \mbf{u}_{i + 1}, \dotsc, \mbf{u}_r\rangle
+    \]
+    \begin{proof}
+        There exist $\lambda_j \in \R\, 1 \leq j$ not all zero,
+        such that
+        \[
+        \lambda_1\mbf{u}_1 + \dotsi + \lambda_r\mbf{u}_r = \mbf{0}.
+        \]
+        Suppose $\lambda_i \neq 0$ then
+        \[
+        \mbf{u}_i = \frac{-\lambda_1}{\lambda_i}\mbf{i}_1 + \dotsi + \frac{-\lambda_{i - 1}}{\lambda_i}\mbf{u}_{i - 1} + \frac{-\lambda_{i + 1}}{\lambda_i}\mbf{u}_{i + 1} + \dotsi + \frac{-\lambda_r}{\lambda_i}\mbf{u}_r.
+        \]
+        $\in \mathrm{span}\langle\mbf{u}_1, \dotsc, \mbf{u}_{i - 1}, \mbf{u}_{i + 1}, \dotsc, \mbf{u}_r\rangle$.
+        The second part of the statement now follows from the earlier lemma.
+    \end{proof}
+\end{lemma}
+
+So if you have a finite spanning set for $V$,
+you can keep removing elements from it,
+(staying spanning)
+until you arrive at a linearly independent spanning set
+(i.e. a basis).
+
+\begin{lemma}
+    Suppose $\{\mbf{u}_1, \dotsc, \mbf{u}_r\} \subseteq V$ is linearly independent and $\mbf{u} \in V$ satisfies $\mbf{u} \notin \mathrm{span}\langle\mbf{u}_1, \dotsc, \mbf{u}_r\rangle$.
+    Then $\{\mbf{u}_1, \dotsc, \mbf{u}_r, \mbf{u}\}$ is also linear independent.
+    \begin{proof}
+    \end{proof}
+\end{lemma}
+
+\begin{theorem}
+    If $V$ has a finite spanning set then $V$ has a basis.
+    \begin{proof}
+        So if you have a finite spanning set for $V$,
+        you can keep removing elements from it,
+        (staying spanning)
+        until you arrive at a linearly independent spanning set
+        (i.e. a basis).
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}[What is a basis?]
+    Suppose $\mbf{u}_1, \dotsc, \mbf{u}_r \in V$ then the following are equivalent.
+    \begin{enumerate}[label = (\roman*)]
+        \item $\{\mbf{u}_1, \dotsc, \mbf{u}_r\}$ is a basis for $V$.
+        \item $\{\mbf{u}_1, \dotsc, \mbf{u}_r\}$ are a maximal\footnote{Maximal means we cannot add another vector to $\{\mbf{u}_1, \dotsc, \mbf{u}_r\}$ and stay linearly independent.}
+        linearly independent subset of $V$.
+        \item Any vector $\mbf{u} \in V$ can be written uniquely as
+        \[
+        \mbf{u} = \lambda_1\mbf{u}_1 + \dotsi + \lambda_r\mbf{u}_r
+        \]
+        (unique choice of $\lambda_i$'s).
+        \item $\{\mbf{u}_1, \dotsc, \mbf{u}_r\}$ are a minimal spanning set for $V$.
+    \end{enumerate}
+    \begin{proof}
+        (i) $\implies$ (ii).
+        Assume (i).
+        First note that $\{\mbf{u}_1, \dotsc, \mbf{u}_r\}$ is linearly independent.
+        Is it maximal?
+        Suppose $\mbf{u} \in V$ then $\mbf{u} = \lambda_1\mbf{u}_1 + \dotsi + \lambda_r\mbf{u}_r$ for some $\lambda_i \in \R$
+        ($\{\mbf{u}_1, \dotsc, \mbf{u}_r\}$ span).
+        So $\lambda_1\mbf{u}_1 + \dotsi + \lambda_r\mbf{u}_r - \mbf{u} = \mbf{0}$.
+        Hence $\{\mbf{u}_1, \dotsc, \mbf{u}_r\}$ is not linearly independent.
+        Thus maximal.
+
+        (ii) $\implies$ (iii).
+        Assume (ii).
+        Suppose $\exists\mbf{u} \in V$ not expressible in this way,
+        this means $\mbf{u} \notin \mathrm{span}\langle\mbf{u}_1, \dotsc, \mbf{u}_r\rangle$.
+        Hence $\{\mbf{u}_1, \dotsc, \mbf{u}_r\}$ is linearly independent.
+        Thus $\{\mbf{u}_1, \dotsc, \mbf{u}_r\}$ is not maximal.
+        Contradiction.
+        If we have $\mbf{u} = \lambda_1\mbf{u}_1 + \dotsi + \lambda_r\mbf{u}_r$ and $\mbf{u} = \mu_1\mbf{u}_1 + \dotsi + \mu_r\mbf{u}_r$ then
+        \[
+        (\lambda_1 - \mu_1)\mbf{u}_1 + \dotsi + (\lambda_r - \mu_r)\mbf{u}_r = 0.
+        \]
+        Hence $\lambda_i = \mu_i$ for $1 \leq i \leq r$.
+
+        (iii) $\implies$ (iv).
+        Assume (iii).
+        (iii) $\implies \{\mbf{u}_1, \dotsc, \mbf{u}_r\}$ is spanning since all $\mbf{u} \in V$ satisfy $\mbf{u} \in \mathrm{span}\langle\mbf{u}_1, \dotsc, \mbf{u}_r\rangle$.
+        Suppose $\{\mbf{u}_1, \dotsc, \mbf{u}_r\}$ is not minimal.
+        Without loss of generality suppose $\mbf{u}_1 \in \mathrm{span}\langle\mbf{u}_2, \dotsc, \mbf{u}_r\rangle$.
+        Then $\mbf{u}_1 = \lambda_2\mbf{u}_2 + \dotsi + \lambda_r\mbf{u}_r$ for some $\lambda_2, \dotsc, \lambda_r \in \R$.
+        Which are two different expressions for $\mbf{u}_1$.
+        Contradiction.
+
+        (iv) $\implies$ (i).
+        Assume (iv).
+        Then $\{\mbf{v}_1, \dotsc, \mbf{v}_r\}$ is spanning.
+        Is it linearly independent?
+        Suppose not then $\exists\lambda_1, \dotsc, \lambda_r \in \R$ not all zero,
+        such that
+        \[
+        \lambda_1\mbf{v}_1 + \dotsi + \lambda_r\mbf{v}_r = \mbf{0}.
+        \]
+        If $\lambda_i \neq 0$ then
+        \[
+        \mbf{v}_i = \frac{-\lambda_1}{\lambda_i}\mbf{v}_1 + \dotsi + \frac{-\lambda_{i - 1}}{\lambda_i}\mbf{v}_{i - 1} + \frac{-\lambda_{i + 1}}{\lambda_i}\mbf{v}_{i + 1} + \dotsi + \frac{-\lambda_r}{\lambda_i}\mbf{v}_r \in \langle\mbf{v}_1, \dotsc, \mbf{v}_{i - 1}, \mbf{v}_{i + 1}, \dotsc, \mbf{v}_r\rangle
+        \]
+        so
+        \[
+        \langle\mbf{v}_1, \dotsc, \mbf{v}_{i - 1}, \mbf{v}_{i + 1}, \dotsc, \mbf{v}_r\rangle = \langle\mbf{v}_1, \dotsc, \mbf{v}_r\rangle = V
+        \]
+        so $\{\mbf{v}_1, \dotsc, \mbf{v}_r\}$ was not a minimal spanning set.
+        
+    \end{proof}
+\end{theorem}
+
+\begin{definition}
+    We call a vector space finite dimensional if and only if it has a
+    (finite)
+    basis.
+\end{definition}
+
+What should we mean by the dimension of a finite dimensional vector space?
+
+Want:
+\[
+\dim(\R ^ n) = n.
+\]
+
+\begin{theorem}[Steinitz Exchange Theorem]\footnote{SET.}
+    Supposes $V$ is a vector space and $S = \{\mbf{v}_1, \dotsc, \mbf{v}_k\} \subseteq V$ is a spanning set for $V$,
+    and $L = \{\mbf{u}_1, \dotsc, \mbf{u}_{\ell}\} \subseteq V$ is a linearly independent set.
+    Then there exists distinct vectors
+    \[
+    \mbf{v}_{i_1}, \mbf{v}_{i_2}, \dotsc, \mbf{v}_{i_{\ell}} \in S.
+    \]
+    Such that for each $0 \leq j \leq \ell$ we have
+    \[
+    \left(S \setminus \{\mbf{v}_{i_1}, \dotsc, \mbf{v}_{i_j}\}\right) \cup \{\mbf{v}_1, \dotsc, \mbf{u}_j\}
+    \]
+    is a spanning set.
+    \begin{proof}
+        Induction on $j$.
+        Base case $j = 0$ is clear.
+
+        So suppose we have distinct $\mbf{v}_{i_1}, \dotsc, \mbf{v}_{i_J}$ such that
+        $(S \setminus \{\mbf{v}_{i_1}, \dotsc, \mbf{v}_{i_J}\}) \cup \{\mbf{u}_1, \dotsc, \mbf{u}_J\}$ is spanning.
+        Since this is spanning we have
+        \[
+        \mbf{u}_{J + 1} = \sum_{\mbf{w} \in S \setminus \{\mbf{v}_{i_1}, \dotsc, \mbf{v}_{i_J}\}}\lambda_{\mbf{w}}\mbf{w} + \sum_{k = 1}^{J}M_k\mbf{u}_k.
+        \]
+        Not every $\lambda_{\mbf{w}}$ can be zero,
+        since otherwise we would have a linear dependence between the $\{\mbf{u}_1, \dotsc, \mbf{u}_{J + 1}\}$.
+
+        Pick a non-zero $\lambda\mbf{v}_{i_{J + 1}} \neq 0$
+        (to pick $i_{J + 1}$).
+        \[
+        V = \langle S \setminus \{\mbf{v}_{i_1}, \dotsc, \mbf{v}_{i_J}\} \cup \{\mbf{u}_1, \dotsc, \mbf{u}_J\}\rangle = \langle S \setminus\mbf{v}_{i_1}, \dotsc, \mbf{v}_{i_J}\cup \{\mbf{u}_{1}, \dotsc, \mbf{u}_{J + 1}\}\rangle.
+        \]
+        So verified for $J + 1$.
+        $v_{i_{J + 1}} \in \langle S \setminus\mbf{v}_{i_1}, \dotsc, \mbf{v}_{i_J}\cup \{\mbf{u}_{1}, \dotsc, \mbf{u}_{J + 1}\}\rangle$ from the sum.
+    \end{proof}
+\end{theorem}
+
+\begin{corollary}
+    $k \geq \ell$.
+    So any linearly independent set has as many or fewer vectors than a spanning set.
+\end{corollary}
+
+\begin{corollary}
+    In a finite dimensional vector space,
+    every basis has the same cardinality
+    (number of elements).
+    \begin{proof}
+        If $A = \{\mbf{a}_1, \dotsc, \mbf{a}_r\}$,
+        $B = \{\mbf{b}_1, \dotsc, \mbf{b}_s\}$ are two bases for $V$.
+        Then $r \geq s$ since $A$ is spanning and $B$ is linearly independent.
+        Also $s \geq r$ since $B$ is spanning and $A$ is linearly independent.
+        So $r = s$.
+    \end{proof}
+\end{corollary}
+
+\begin{definition}
+    If $V$ is finite dimensional we define its dimension $\mathrm{dim}(V)$ to be the cardinality of any basis of $V$.
+\end{definition}
+
+\begin{example}
+    $\dim(\R ^ n) = n$,
+    $n = \left|\{\mbf{e}_1, \dotsc, \mbf{e}_n\}\right|$.
+
+    $\dim{(\R[x]_n)} = n + 1$,
+    as its basis is $\{1, x, x ^ 2, \dotsc, x ^ n\}$.
+
+    $\dim{(M_{m \times n}(\R))} = mn$.
+
+    Consider $U \subseteq \R[x]_n$
+    \[
+    U := \{p \in \R[x]_n\,|\,p(1) = 0\}.
+    \]
+    This is a subspace
+    (check).
+    Calculus tells us that $p \in U$ if and only if $(x - 1) \mid p$.
+    So $U = \{(x - 1)q\mid q \in \R[x]_{n - 1}\}$.
+    So $U$ has a basis:
+    \[
+    \{(x - 1), (x - 1)x, \dotsc, (x - 1)x ^ {n - 1}\}.
+    \]
+    (Check spanning and linearly independent).
+    So $\dim(U) = u$.
+
+    $\mathrm{Sym}_2(\R) \subseteq M_2(\R)$.
+    Has basis
+    \[
+    \left\{\begin{pmatrix}
+        1 & 0 \\ 0 & 0
+    \end{pmatrix}, \begin{pmatrix}
+        0 & 0 \\ 0 & 1
+    \end{pmatrix}, \begin{pmatrix}
+        0 & 1 \\ 1 & 0
+    \end{pmatrix}\right\}.
+    \]
+    $\dim(\mathrm{Sym}_2(\R)) = 3$.
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

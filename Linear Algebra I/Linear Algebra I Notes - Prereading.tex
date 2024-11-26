@@ -2292,13 +2292,126 @@ Axioms for scalar multiplication:
 
 We refer to elements of a vector space as vectors.
 
+\begin{remark}
+    Instead of $\R$ one can also allow other scalars such that complex numbers $\C$ or the rationals $\Q$.
+    Then,
+    for example,
+    $\C ^ n$ is a vector space over $\C$ and $\Q ^ n$ is a vector space over $\Q$.
+    In fact
+    (almost)
+    everything in these notes holds if we replace $\R$ with $\Q$ or $\C$.
+    In general,
+    one considers vector spaces over a field $F$,
+    where $F$ plays the role of $\R, \C$ or $\Q$.
+    (Very roughly,
+    a field is a set of scalars,
+    where we have nice addition and multiplication,
+    and in particular every non-zero scalar has a multiplicative inverse).
+\end{remark}
 
+\begin{definition}[Vector subspace]
+    A vector subspace of a vector space $V$ is a non-empty subset that is itself a vector space with respect to the same addition and multiplication operations of $V$.
+\end{definition}
 
+\begin{proposition}[Subspace criterion]
+    A non-empty subset $U$ of a vector space $V$ is a vector subspace of $V$ if and only if it satisfies the following three conditions:
+    \begin{enumerate}[label = (\roman*)]
+        \item closure under addition:
+        if $\mbf{u}_1$ and $\mbf{u}_2$ are in $U$,
+        then $\mbf{u}_1 + \mbf{u}_2$ is also in $U$;
+        \item closure under scalar multiplication:
+        if $\mbf{u}$ is in $U$ and $\lambda$ is in $\R$,
+        then $\lambda\mbf{u}$ is in $U$;
+        \item existence of an origin:
+        the vector $\mbf{0}$ is in $U$.
+    \end{enumerate}
+\end{proposition}
 
+\subsection{Linear independence, spanning sets, bases, and dimension}
+The notations for linear combination, linear span, spanning sets, and linear independence for a general vector space $V$ are defined exactly in the same way as for $\R ^ n$.
+\begin{definition}[Basis]
+    A (finite) basis for a vector space $V$ is a finite subset of vectors $\{\mbf{v}_1, \mbf{v}_2, \dotsc, \mbf{v}_k\}$ in $V$ such that
+    \begin{enumerate}[label = (\roman*)]
+        \item the vectors $\mbf{v}_1, \mbf{v}_2, \dotsc, \mbf{v}_k$ are linearly independent,
+        and
+        \item $V = \mathrm{span}(\mbf{v}_1, \mbf{v}_2, \dotsc, \mbf{v}_k)$.
+    \end{enumerate}
+\end{definition}
 
+\textbf{Assorted Lemmas}:
+\begin{lemma}
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be $k$ vectors in a vector space $V$.
+    Then $\mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_k)$ is a vector subspace of $V$.
+\end{lemma}
+\begin{lemma}\label{pre_linalg_lem_lincombeqspanof}
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be vectors in a vector space $V$ and assume that one of the vectors,
+    say $\mbf{u}_1$,
+    can be expressed as a linear combination of the others.
+    Then
+    \[
+    \mathrm{span}(\mbf{u}_1, \mbf{u}_2, \dotsc, \mbf{u}_k) = \mathrm{span}(\mbf{u}_2, \dotsc, \mbf{u}_k).
+    \]
+\end{lemma}
+\begin{lemma}
+    Suppose that the set $\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ is not linearly independent.
+    Then for some $1 \leq i \leq k$,
+    we have that
+    \[
+    \mbf{u}_i \in \mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_{i - 1}, \mbf{u}_{i + 1}, \dotsc, \mbf{u}_k).
+    \]
+    \begin{proof}
+        Since $\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ are not linearly independent there is some linear dependence relation
+        \[
+        \sum_{j = 1}^{k}\lambda_j\mbf{u}_j = \mbf{0}
+        \]
+        with at least one of the $\lambda_j$ non zero.
+        Say that $\lambda_i \neq 0$.
+        Then the linear dependence relation may be rearranged to read
+        \[
+        \mbf{u}_i = \sum_{j = 1}^{i - 1}\frac{\lambda_j}{-\lambda_i}\mbf{u}_j + \sum_{j = i + 1}^{k}\frac{\lambda_j}{-\lambda_i}\mbf{u}_j.
+        \]
+        The equivalence of the spans then follows from \autoref{pre_linalg_lem_lincombeqspanof}.
+    \end{proof}
+\end{lemma}
 
+\begin{lemma}
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be $k$ linearly independent vectors in a vector space $V$ and let $\mbf{u} \in V$ such that
+    \[
+    \mbf{u} \notin \mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_k).
+    \]
+    Then
+    \[
+    \mbf{u}_1, \dotsc, \mbf{u}_k, \mbf{u}\text{ are linearly independent}.
+    \]
+\end{lemma}
 
+\begin{theorem}[Existence of finite basis]
+    Every vector space that is spanned by finitely many vectors has a basis.
+\end{theorem}
 
+\begin{theorem}["What is a basis?"]
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be vectors in a vector space $V$.
+    Then the following statements are
+    (pairwise)
+    equivalent:
+    \begin{enumerate}[label = (\roman*)]
+        \item The vectors $\mbf{u}_1, \dotsc, \mbf{u}_k$ form a basis of $V$.
+        \item The vectors $\mbf{u}_1, \dotsc, \mbf{u}_k$ form a maximal linear independent set in $V$,
+        i.e., one cannot add another vector in $V$ to the $\mbf{u}_i$,
+        and still obtain a linearly independent set.
+        \item Any vector $\mbf{u}$ in $V$ can be written uniquely as
+        \[
+        \mbf{u} = \lambda_1\mbf{u}_1 + \lambda_2\mbf{u}_2 + \dotsi + \lambda_k\mbf{u}_k.
+        \]
+        \item The vectors $\mbf{u}_1, \dotsc, \mbf{u}_j$ form a minimal spanning set of $V$;
+        i.e., one cannot remove any of the $\mbf{u}_i$ and still have a spanning set of $V$.
+    \end{enumerate}
+\end{theorem}
+
+We call a vector space finite dimensional if it has a finite basis.
+
+For example,
+we have seen that $\{1, x, x ^ 2, \dotsc, x ^ n\}$ is a basis for $\R[x]_n$ and is therefore finite dimensional.
 
 
 

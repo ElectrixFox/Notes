@@ -1,7 +1,9 @@
 \ProvidesPackage{preamble}
 
+% General setup
 \usepackage{amsmath, amsfonts, amssymb, amsthm}
 \usepackage[pdfencoding=unicode, psdextra]{hyperref}
+\usepackage{mathtools}
 \usepackage{enumitem}
 \usepackage{thmtools}
 \usepackage{microtype}
@@ -11,22 +13,38 @@
 \usepackage{float}
 \pgfplotsset{compat=1.18}
 
-\setcounter{MaxMatrixCols}{20}
 \DeclareMathOperator{\sech}{sech}
 \DeclareMathOperator{\csch}{csch}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+% Linear Algebra I - setup
+\setcounter{MaxMatrixCols}{20}
 \DeclareMathOperator{\Adj}{Adj}
+
+\newenvironment{amatrix}[1]
+    {
+    \left(\begin{array}{@{}*{#1}{c}|c@{}}
+        }{
+    \end{array}\right)
+    }
+    
+% Probability I - setup
+
+% operators
 \DeclareMathOperator{\Bin}{Bin}
 \DeclareMathOperator{\Geo}{Geo}
 \DeclareMathOperator{\Exp}{Exp}
 \DeclareMathOperator{\Po}{Po}
 
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\R}{\mathbb{R}}
-
+% shortcuts
 \renewcommand{\P}{\mathbb{P}}
 \newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathbb{V}\mathrm{ar}}
+\newcommand{\Cov}{\mathbb{C}\mathrm{ov}}
 
 \declaretheoremstyle[
     notefont = \normalfont\itshape,
@@ -53,9 +71,3 @@
 \declaretheorem{outline}[style=plain, numbered=no]
 \declaretheorem{example}[style=exampstyle, numberwithin=section]
 
-\newenvironment{amatrix}[1]
-    {
-    \left(\begin{array}{@{}*{#1}{c}|c@{}}
-        }{
-    \end{array}\right)
-    }
