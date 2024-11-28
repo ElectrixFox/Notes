@@ -2300,6 +2300,203 @@ Cauchy distribution
 f(x) = \frac{1}{\pi(1 + x ^ 2)}, x \in \R.
 \]
 
+Expectation exists finitely,
+we mean that,
+$\sum_{x}|x|p(x) < \infty \rightarrow$ discrete and for continuous,
+$\int_{-\infty}^{\infty}|x|f(x)\,dx < \infty$
+
+$X(\Omega)$ is countably infinite,
+then $\sum_{\mathcal{X} \in X(\Omega)}|x|p(x) = +\infty$ can be
+$\int|x|f(x)\,dx = +\infty$
+
+\begin{example}
+    Discrete.
+    Let $X$ be a random variable such that
+    \[
+    p(x) = \frac{c}{x ^ 2}, x \in \{1, 2, \dotsc\}
+    \]
+    $\E(X) = \sum_{x = 1}^{\infty}xp(x) = c\sum){x = 1}^{\infty} \frac{x}{x ^ 2} = c\sum_{x = 1}^{\infty} \sim c\log x$.
+
+    Continuous.
+    Cauchy distribution.
+    $X \sim \mathrm{Cauchy}$,
+    that is the pdf of $X$ is given by
+    \[
+    f(x) = \frac{1}{\pi(1 + x ^ 2)}, x \in \R.
+    \]
+    Exercise: $\E(|X|) = +\infty$.
+
+    Let $Z \sim N(0, 1)$, find $\E(Z)$.
+    \begin{align*}
+    \E(Z) &= \int_{-\infty}^{\infty}z\varphi(z)\,dz \\
+    &= \int_{-\infty}^{0}z\varphi(z) + \int_{0}^{\infty}z\varphi(z)\,dz \\
+    &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{0}ze ^ {-\frac{z ^ 2}{2}}\,dz + \frac{1}{\sqrt{2\pi}}\int_{0}^{\infty}ze ^ {-\frac{z ^ 2}{2}}\,dz \\
+    \end{align*}
+    $z \rightarrow -t_1$, $dz = -dt$ $z \rightarrow -\infty$, $t \rightarrow \infty$, $z = 0$, $t = 0$.
+    Then
+    \begin{align*}
+        I_1 &= \frac{1}{\sqrt{2\pi}}\int_{\infty}^{0}(-t)e ^ {-\frac{t ^ 2}{2}}(-dt) \\
+        &= \frac{1}{\sqrt{2\pi}}\int_{\infty}^{0}te ^ {-\frac{t ^ 2}{2}}\,dt \\
+        &= -I_2.
+    \end{align*}
+    Therefore,
+    $\E(Z) = I_1 - I_1 = 0$.
+\end{example}
+
+\subsection{Expectation of functions of random variables}
+Let $Y = g(x)$.
+Let us assume that $X$ is discrete with pmf $p$.
+Then by definition,
+we know that
+\[
+\E(g(X)) = \E(Y) = \sum_{y}y\P(Y = y).
+\]
+\begin{align*}
+    \P(Y = y) &= \P(g(X) = y) \\
+    &= \sum_{x}\P(g(X) = y\mid X = x)\P(X = x) \\
+    &= \sum_{x : g(x) = y}1\P(X = x) \\
+    &= \sum_{x : g(x) = y}p(x)
+\end{align*}
+Note that $\P(g(X) = y\mid X = x) = 1$,
+if $y = g(x)$ and $0$ otherwise.
+
+Putting this in ($1$),
+$\E(g(X)) = \sum_{y}y\left(\sum_{x : g(x) = y}p(x)\right)$.
+Interchange the order of summation.
+\begin{align*}
+    \E(g(X)) &= \sum_{x}\left(\sum_{y : g(\R)}yp(x)\right) \\
+    &= \sum_{x \in \R}\left(\sum_{y : y = g(x)}g(x)\right)p(x) \\
+    &= \sum_{x \in \R}g(x)p(x).
+\end{align*}
+\begin{theorem}[Law of the unconscious statistician]\footnote{LOTUS}
+    \[
+    \E(g(X)) = \sum_{x}g(x)p(x), \text{$X$ is discrete with pmf $p(\cdot)$}.
+    \]
+    \[
+    \E(g(X)) = \int_{-\infty}^{\infty}g(x)f(x)\,dx,\text{ $X$ is continuous with pdf $f(\cdot)$}.
+    \]
+\end{theorem}
+
+\begin{example}
+    Let $X \sim U(-1, 1)$.
+    $\E(X ^ 2)$.
+
+    $f(x) = \begin{cases}
+        \frac{1}{2} & x \in [-1, 1], \\
+        0, &\text{elsewhere}.
+    \end{cases}$
+    \[
+    \E(X ^ 2) = \int_{-\infty}^{\infty}x ^ 2f(x)\,dx = \int_{-1}^{1}\frac{x ^ 2}{2}\,dx = \frac{1}{2}\left[\frac{x ^ 3}{3}\right]_{-1}^{1} = \frac{1}{3}
+    \]
+\end{example}
+\begin{remark}
+    If $\E(X)$ exists finitely,
+    it is not always true that $\E(g(X))$ exists finitely.
+\end{remark}
+
+\begin{example}
+    $X \sim U(-1, 1)$.
+    $\E(X)$ exists.
+
+    Let $g(x) = \frac{1}{x}$.
+    Does $\E(g(X))$ exist finitely?
+
+    Answer is no,
+    (why?) - \textbf{Exercise}.
+    [\textit{Hint: integrating $\frac{1}{x}$ around zero is a problem.}]
+\end{example}
+
+\begin{theorem}[Multiple random variable of LOTUS]
+    $(X, Y) : \Omega \rightarrow \R ^ 2$, $g L \R ^ 2 \rightarrow \R$,
+    then
+    \[
+    \E(g(X, Y)) = \sum_{x}\sum_{y}g(x, y)p(x, y)
+    \]
+    where $(X, Y)$ is jointly discrete with joint pmf $p(\cdot)$.
+    \[
+    \E(g(X, Y)) = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}g(x, y)f(x, y)\,dxdy,
+    \]
+    $(X, Y)$ is jointly continuous with pdf $f(\cdot)$.
+\end{theorem}
+
+\begin{example}
+    Let $(X, Y)$ have joint pdf
+    \[
+    f(x, y) = \begin{cases}
+        1, &\text{ if $(x, y) \in [0, 1] ^ 2$} \\
+        0, &\text{elsewhere}.
+    \end{cases}
+    \]
+    Find $\E(XY)$.
+
+    Remark:
+    $(X, Y)$ is jointly uniformly distributed over the square $[0, 1] \times [0, 1]$.
+    \begin{align*}
+        \E(XY) &= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}xyf(x, y)\,dxdy \\
+        &= \int_{0}^{1}\int){0}^{1}xy\,dxdy \\
+        &= \int_{0}^{1}x\,dx\int_{0}^{1}y\,dy \\
+        &= \left[\frac{x ^ 2}{2}\right]_{0}^{1} \times \left[\frac{y ^ 2}{2}\right]_{0}^{1} \\
+        &= \frac{1}{4}.
+    \end{align*}
+\end{example}
+
+\subsection{Linearity of Expectation}
+Integrals and summations are linear operations.
+\[
+\sum_{i}(\alpha f(xi) + \beta g(xi)) = \alpha\sum f(xi) + \beta\sum g(xi)
+\]
+$\alpha, \beta \in \R$
+\[
+\int(\alpha f(x) + \beta g(x)\,dx = \alpha\int f(x)\,dx + \beta\int g(x)\,dx.
+\]
+Integral of the sum becomes a sum of the integrals.
+
+\begin{theorem}[Linearity]
+    Let $X : \Omega \rightarrow \R$ be a random variable.
+    Then for any $\alpha, \beta \in \R$,
+    \[
+    \E(\alpha X + \beta) = \alpha\E(X) + \beta.
+    \]
+\end{theorem}
+
+\begin{remark}
+    Let $\P(Y = \beta) = 1$,
+    \[
+    \E(Y) = \sum yp(y) = \beta \P(Y = \beta) = \beta
+    \]
+    $\E(\text{constant}) = \text{Constant itself}$.
+\end{remark}
+
+\begin{theorem}[Linearity version II]
+    Let $X, Y : \Omega \rightarrow \R$ be two random variables.
+    Then
+    \[
+    \E(X + Y) = \E(X) + \E(Y).
+    \]
+    Let $X_1, X_2, \dotsc, X_n$ be a collection of random variables,
+    and $\alpha_1, \alpha_2, \dotsc, \alpha_n$ be some real-numbers,
+    then
+    \[
+    \E\left(\sum_{i = 1}^{n}\alpha_iX_i\right) = \sum_{i = 1}^{n}\alpha_i\E(X_i)
+    \]
+    \begin{proof}
+        $g : \R ^ 2 \rightarrow \R$,
+        $g(x, y) := (x + y)$.
+
+        Let us assume that $(X, Y)$ is jointly discrete with pmf $p(\cdot)$.
+        By LOTUS
+        \begin{align*}
+            \E(g(x, y)) &= \sum_{x}\sum_{y}(x + y)p(x, y) \\
+            &= \sum_{x}x\left(\sum_{y}p(x, y)\right) + \sum_{y}y\left(\sum_{x}p(x, y)\right) \\
+            &=\sum_{x}xp_X(x) + \sum_{y}yp_Y(y) \\
+            &= \E(X) + \E(Y).
+        \end{align*}
+    \end{proof}
+\end{theorem}
+
+
+
+
 
 
 

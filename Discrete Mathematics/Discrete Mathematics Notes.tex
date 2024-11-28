@@ -914,6 +914,122 @@ Here is a table of all of the particular solutions
     \end{tabular}
 \end{table}
 
+\newpage
+
+\section{Generating functions}
+Generating functions provide a method to solve counting problems,
+they encode combinatorial information into a continuous analytic form.
+\[
+(1 + x) ^ n = \sum_{k = 0} ^ n\binom{n}{k}x ^ k
+\]
+\begin{definition}
+    Let $a_0, a_1, a_2, \dotsc$ be a sequence of numbers
+    (usually associated with counting problems)
+    The
+    (ordinary)
+    generating function for the sequence $(a_k)$ is the formal sum
+    \[
+    f(x) = \sum_{k = 0}^{\infty}a_kx ^ k.
+    \]
+\end{definition}
+
+\begin{example}
+    $7$ chocolate bars are distributed among $4$ people.
+    Alice gets at most $4$,
+    Brian gets at most $3$,
+    Claire gets at most $2$,
+    and Derek gets at most $1$.
+
+    How many ways of distributing the bars are there?
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        We are counting solutions $(e_1, e_2, e_3, e_4)$ to the equation
+        \[
+        e_1 + e_2 + e_3 + e_4 = 7,
+        \]
+        where $e_1, e_2, e_3, e_4$ are integers satisfying $0 \leq e_1 \leq 4$, $0 \leq e_2 \leq 3$, $0 \leq e_3 \leq 2$.
+        and $0 \leq e_4 \leq 1$.
+        
+        We construct an associated generating function.
+
+        Associate to each variable $e_i$ an expression with the sum of $x ^ p$ over $p$ the possible values of $e_i$.
+
+        E.g. To $e_1$ is associated the term $x ^ 0 + x ^ 1 + x ^ 2 + x ^ 3 + x ^ 4$.
+
+        Create the product of the expressions for each $e_i$:
+        \[
+        f(x) = (x ^ 0 + x ^ 1 + x ^ 2 + x ^ 3 + x ^ 4)(x ^ 0 + x ^ 1 + x ^ 2 + x ^ 3)(x ^ 0 + x ^ 1 + x ^ 2)(x ^ 0 + x ^ 1).
+        \]
+        Then each terms in $f(x)$ represents a possible product $x ^ {e_1} \cdot x ^ {e_2} \cdot x ^ {e_3} \cdot x ^ {e_4}$.
+        
+        But if the sum of the variables equals one holds,
+        we know that
+        \[
+        x ^ {e_1} \cdot x ^ {e_2} \cdot x ^ {e_3} \cdot x ^ {e_4} = x ^ {e_1 + e_2 + e_3 + e_4} = x ^ 7.
+        \]
+        So every solution $(e_1, e_2, e_3, e_4)$ to the sum corresponds uniquely to a way of multiplying out the expressions in the product $f(x)$ to accumulate $x ^ 7$.
+
+        For example,
+        the solution $(e_1, e_2, e_3, e_4) = (4, 0, 2, 1)$ corresponds to
+        \[
+        (x ^ 0 + x ^ 1 + x ^ 2 + x ^ 3 + x ^ 4)(x ^ 0 + x ^ 1 + x ^ 2 + x ^ 3)(x ^ 0 + x ^ 1 + x ^ 2)(x ^ 0 + x ^ 1)
+        \]
+        where $x ^ 4, x ^ 0, x ^ 2, x ^ 1$ are selected from each group of sums respectively,
+        which is one way of getting $x ^ 7$.
+        So the number of solutions is the coefficient of $x ^ 7$ in the series expansion of the generating function $f(x)$.
+
+        The answer is $15$.
+    \end{proof}
+\end{example}
+
+\begin{example}
+    How many solutions are there to the equation
+    \[
+    e_1 + e_2 + \dotsi + e_n = k,
+    \]
+    where each $e_i \in \{0, 1\}$ and $n$ and $k$ are given positive integers?
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        Now in constructing our generating function each $e_i$ is associated with the expression $(x ^ 0 + x ^ 1) = (1 + x)$
+        (from now on we write $x ^ 0$ as $1$).
+        The generating function is then the $n$-fold product
+        \[
+        f(x) = (1 + x)\cdot(1 + x)\dotsi(1 + x) = (1 + x) ^ n.
+        \]
+        If we expand the generating function as a power series we get
+        \[
+        (1 + x) ^ n = \sum_{k = 0}^{n}\binom{n}{k}x ^ k,
+        \]
+        by the binomial theorem.
+        Each term $x ^ k$ corresponds to a choice of $x ^ {e_1}$ from the first bracket,
+        $x ^ {e_2}$ from the second,
+        etc.,
+        in which the total power $x$ is $e_1 + \dotsi + e_n = k$,
+        i.e.,
+        a solution $(e_1, \dotsc, e_n)$ to the equation.
+
+        So the number of solutions is the coefficient of $x ^ k$ in the generating function $(1 + x) ^ n$,
+        which is $\binom{n}{k}$.
+    \end{proof}
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \end{document}
