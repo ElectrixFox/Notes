@@ -2404,10 +2404,119 @@ if the first application of the rule also gives a term in $y_{CF}$.
     \]
 \end{example}
 
+\begin{example}
+    Solve $y'' - y' - 2y = 6e ^ {-x}$.
+    We first find $y_{CF}$,
+    the solution to the associated homogeneous ODE with characteristic equation
+    \[
+    \lambda ^ 2 - \lambda - 2 = 0 = (\lambda + 1)(\lambda - 2).
+    \]
+    This has roots $\lambda = -1$ and $\lambda = 2$,
+    so $y_{CF} = Ae ^ {-x} + Be ^ {2x}$.
+    To find $y_{PI}$,
+    the table suggests we should try a multiple of $a_1e ^ {-x}$,
+    but this appears in $y_{CF}$, so instead we try $y_{PI} = a_1xe ^ {-x}$.
+    Then $y'_{PI} = a_1e ^ {-x} - a_1xe ^ {-x}$, $y''_{PI} = -a_1e ^ {-x} - a_1e ^ {-x} + a_1xe ^ {-x} = a_1xe ^ {-x} - 2a_1e ^ {-x}$.
+    Putting this into the ODE gives
+    \[
+    (a_1xe ^ {-x} - 2a_1e ^ {-x}) - (a_1e ^ {-x} - a_1xe ^ {-x}) - 2(a_1xe ^ {-x}) = -3a_1e^{-x} = 6e ^ {-x}
+    \]
+    so we get a solution when $a_1 = -2$,
+    $y_{PI} = -2xe ^ {-x}$.
+    The general solution is therefore $y(x) = Ae ^ {-x} + Be ^ {2x} - 2xe ^ {-x} = (A - 2x)e ^ {-x} + Be ^ {2x}$.
+\end{example}
 
+\begin{example}
+    Solve $y'' - 2y' + y = e ^ x\cos(x)$.
+    The associated homogeneous ODE has characteristic equation
+    \[
+    \lambda ^ 2 - 2\lambda + 1 = 0 = (\lambda - 1) ^ 2
+    \]
+    with a repeated root $\lambda = 1$.
+    We therefore have $y_{CF} = Ae ^ {x} + Bxe ^ {x}$.
 
+    For $y_{PI}$,
+    try $y_{PI} = a_1e ^ x(b_1\cos(x) + b_2\sin(x)) = e ^ x(c_1\cos(x) + c_2\sin(x))$.
+    
+    
+    \textbf{Check - exercise} $c_1 = -1$ and $c_2 = 0$.
 
+    So $y_{PI} = -e ^ x\cos(x)$ and so the general solution is $y(x) = Ae ^ {x} + Bxe ^ {x} - e ^ {x}\cos(x) = e ^ {x}(A + Bx - \cos(x))$.
+\end{example}
 
+\subsection{Initial and Boundary value problems}
+The two arbitrary constants in the general solution of a second order ODE may be fixed by specifying two extra requirements on the solution and/or the derivative.
+
+An initial value problem (IVP) is when we require $y(x_0) = y_0$ and $y'(x_0) = \delta$ for given constants $x_0, y_0$ and $\delta$.
+In this case the two constants are for the same value of the independent variable.
+
+A boundary value problem (BVP) is when we require $y(x_0) = y_0$ and $y(x_1) = y_1$ for given constants $x_0, x_1, y_0, y_1$.
+In this case the constants are given at two different values of the independent variables.
+
+To solve either an IVP or BVP,
+we first find the general solution to the ODE and then find the value of the constants such that the conditions are satisfied.
+
+\begin{example}
+    Solve the IVP $y'' -y' - 2y = 6e ^ {-x}$,
+    $y(0) = 6$,
+    $y'(0) = 7$.
+
+    In a previous example we showed that the general solution to the ODE is $y(x) = (A - 2x)e ^ {-x} + Be ^ {2x}$.
+
+    Since $y(0) = A + B = 6$ we have $A + B = 6$.
+    Then $y'(x) = -Ae ^ {-x} - 2e ^ {-x} + 2xe ^ {-x} + 2Be ^ {2x}$ and so $y'(0) = -A - 2 + 2B = 7$,
+    therefore $-A + 2B = 9$.
+    
+    Solving simultaneously gives $B = 5$ and $A = 1$,
+    so the solution to the IVP is $y(x) = (1 - 2x)e ^ {-x} + 5e ^ {2x}$
+\end{example}
+
+\subsection{The method of variation of parameters}
+Our method of undetermined coefficients allows us to solve an inhomogeneous ODE,
+but only when the inhomogeneous term $\phi$ takes particular forms.
+
+The following method allows us to solve more general inhomogeneous ODEs.
+\begin{definition}
+    Given two differentiable functions $y_1$ and $y_2$,
+    we define the Wronskian as
+    \[
+    W(y_1, y_2) = \begin{vmatrix}
+        y_1 & y_2 \\ y'_1 & y'_2
+    \end{vmatrix} = y_1y'_2 - y'_1y_2.
+    \]
+\end{definition}
+If $y_1$ and $y_2$ are linearly dependent $y_1(x) = \lambda y_2(x)$ for all $x$.
+Then $y'_1(x) = \lambda y'_2(x)$ and $W(y_1, y_2) = \lambda y_2y'_2 - \lambda y'_2y_2$ which is identically zero,
+i.e. $W(y_1, y_2) = 0\  \forall x$.
+Therefore if $W(y_1, y_2)$ is not identically zero,
+$y_1$ and $y_2$ are linearly independent.
+
+We want to find a particular integral for the inhomogeneous ODE ($\dagger$)
+\[
+a_2y'' + a_1y' + a_0 = \phi(x).
+\]
+We start by considering the two linearly independent solutions $y_1, y_2$ of the associated homogeneous ODE ($\ddagger$)
+\[
+a_2y'' + a_1y' + a_0 = 0
+\]
+i.e. $y_{CF} = Ay_1 + By_2$.
+
+We now replace the constants $A$ and $B$ in $y_{CF}$ by functions $u_1(x)$ and $u_2(x)$ respectively.
+That is,
+we look for solutions to ($\dagger$) of the form
+\[
+y_{PI} = u_1(x)y_1(x) + u_2(x)y_2(x).
+\]
+We wish to find $u_1(x)$ and $u_2(x)$ such that $y_{PI}$ is a solution to ($\dagger$).
+This gives one constraint on $u_1$ and $u_2$ so to find unique functions we should impose a second constraint on $u_1$ and $u_2$.
+We choose
+\begin{equation}\tag{$1$}
+    u'_1y_1 + u'_2y_2 = 0.
+\end{equation}
+Then $y'_{PI} = u'_1y_1 + u_1y'_1 + u'_2y_2 + u_2y'_2 = u_1y'_1 + u_2y'_2$ by ($1$) and $y''_{PI} = u'_1y'_1 + u_1y''_1 + u'_2y'_2 + u_2y''_2$.
+
+Next,
+we need to substitute this into ($\dagger$) in order to identify $u_1(x)$ and $u_2(x)$.
 
 
 
