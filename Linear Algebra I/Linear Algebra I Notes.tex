@@ -3674,8 +3674,186 @@ That this is a good definition follows from the Steinitz exchange theorem.
 SET:
 The spanning set has at least as many elements as any linearly independent set.
 
+\begin{theorem}
+    Suppose that $V$ is a finite dimensional vector space and that $U \subseteq V$ is a subspace of $V$.
+    Then
+    \begin{enumerate}[label = (\roman*)]
+        \item $U$ is also finite dimensional.
+        \item $\dim(U) \leq \dim(V)$.
+        \item $\dim(U) = \dim(V) \iff U = V$.
+    \end{enumerate}
+    \begin{proof}\phantom{}
+        \begin{enumerate}[label = (\roman*)]
+            \item If $U$ were not finite dimensional,
+            then it doesn't contain a finite basis,
+            i.e. it doesn't contain any maximal linearly independent subset.
+            Hence $U$ contains arbitrarily large independent subsets,
+            hence so does $V$.
+            But any linearly independent subset of $V$ has at most $\dim(V)$ elements since $V$ has a spanning set of $\dim(V)$ elements. Contradiction.
+            
+            Therefore $U$ is finite dimensional.
+            \item Suppose $\dim(U) > \dim(V)$ then $U$
+            (and so $V$)
+            contains a basis for $U$ of $\dim(U)$ elements.
+            But this is a linearly independent subset with more elements than a spanning set given by a basis of $V$. Contradiction.
+            \item
+            $\impliedby$ is clear.
+            
+            $\implies$.
+            Let $B \subseteq U$ be a basis for $U$.
+            If $B$ is not a basis for $V$ then it is not a maximal linearly independent subset of $V$.
+            So then we can find a linearly independent subset of $V$ with $|B|+ 1 = \dim(U) + 1 = \dim(V) + 1$ elements.
+            But this has more elements than a basis
+            (and so spanning set)
+            of $V$.
+            Contradicts SET.
+        \end{enumerate}
+    \end{proof}
+\end{theorem}
 
+\begin{theorem}
+    Let $V$ be a vector space $\dim(V) = k$.
+    Let $S = \{\mbf{v}_1, \dotsc, \mbf{v}_{\ell}\} \subseteq V$.
+    Then:
+    \begin{enumerate}[label = (\roman*)]
+        \item If $\ell > k$ then $S$ is not linearly independent.
+        \item If $\ell < k$ then $S$ is not spanning.
+        \item If $\ell = k$ then these statements $a, b, c$ are pairwise equivalent:
+        \begin{enumerate}[label = (\alph*)]
+            \item $S$ is a basis for $V$.
+            \item $S$ is linearly independent.
+            \item $S$ is a spanning set for $V$.
+        \end{enumerate}
+    \end{enumerate}
+    \begin{proof}
+        \begin{enumerate}[label = (\roman*)]
+            \item $V$ contains a basis,
+            hence a spanning set of $k$ elements.
+            Hence this follows from SET.
+            \item $V$ contains a basis hence a linearly independent set of $k$ elements.
+            Hence this follows from SET.
+            \item (a) $\implies$ (b)
+            \footnote{By definition of a basis.}.
+            (a) $\implies$ (c)
+            \footnote{As every basis is a spanning set.}.
 
+            (b) $\implies$ (a).
+            Assume (b).
+            $S$ must be a maximal linearly independent set
+            since linearly independent sets have at most $k = \ell$ elements
+            \footnote{By SET.}.
+            Then $S$ is a basis.
+
+            (c) $\implies$ (a)
+            $S$ must be a minimal spanning set since spanning sets must have at least $k = \ell$ elements
+            \footnote{By SET.}.
+        \end{enumerate}
+    \end{proof}
+\end{theorem}
+
+\underline{$\R ^ n$ and bases}.
+
+$\{\mbf{e}_1, \dotsc, \mbf{e}_n\} \subseteq \R ^ n$ is the standard basis for $\R ^ n$.
+Other bases exist.
+
+e.g. we say that
+\[
+B = \left\{\begin{pmatrix}
+    1 \\ 0
+\end{pmatrix},
+\begin{pmatrix}
+    1 \\ 1
+\end{pmatrix}\right\} \subseteq \R ^ 2
+\]
+is a spanning set for $\R ^ 2$ on an early problem sheet.
+Since $\dim(\R ^ 2) = 2$,
+this $B$ is in fact a basis for $\R ^ 2$.
+
+\begin{theorem}
+    Suppose $\{\mbf{u}_1, \dotsc, \mbf{u}_r\} \subseteq \R ^ n$ then
+    \begin{enumerate}[label = (\roman*)]
+        \item If $r > n$ then $\{\mbf{u}_1, \dotsc, \mbf{u}_r\}$ is not linearly independent.
+        \item If $r < n$ then $\{\mbf{u}_1, \dotsc, \mbf{u}_r\}$ is not spanning.
+        \item Suppose $r = n$.
+        We have that $\{\mbf{u}_1, \dotsc, \mbf{u}_n\}$ is a basis
+        \[
+        \iff
+        \]
+        \[
+        A = \begin{pmatrix}
+            \mbf{u}_1 & \mbf{u}_2 & \dotsi & \mbf{u}_n
+        \end{pmatrix} \in M_n(\R)
+        \]
+        is non-singular
+        (invertible),
+        \[
+        \iff
+        \]
+        $\det(A) \neq 0$.
+    \end{enumerate}
+    \begin{proof}\phantom{}
+        \begin{enumerate}[label = (\roman*)]
+            \item Previous theorem.
+            \item Previous theorem.
+            \item
+            \centering
+            $\{\mbf{u}_1, \dotsc, \mbf{u}_n\}$ is a basis
+            \[
+            \iff
+            \]
+            $\{\mbf{u}_1, \dotsc, \mbf{u}_n\}$ is linearly independent
+            (by the previous theorem)
+            \[
+            \iff
+            \]
+            $\lambda_1\mbf{u}_1 + \dotsi + \lambda_n\mbf{u}_n = \mbf{0} \implies \lambda_1 = \lambda_2 = \dotsi = \lambda_n = 0$
+            \[
+            \iff
+            \]
+            $A\pmb{\lambda} = \mbf{0} \implies \pmb{\lambda} = \mbf{0}$
+            \[
+            \iff
+            \]
+            $A$ is invertible
+            \[
+            \iff
+            \]
+            $\det(A) \neq 0$.
+        \end{enumerate}
+    \end{proof}
+\end{theorem}
+
+\begin{definition}
+    If $A \in M_{n \times k}(\R)$ then
+    \begin{enumerate}[label = (\roman*)]
+        \item The column space of $A$ is the span,
+        inside $\R ^ k$,
+        of the columns of the matrix $A$.
+        i.e.
+        If
+        \[
+        A = \begin{pmatrix}
+            \mbf{u}_1 & \dotsi & \mbf{u}_k
+        \end{pmatrix}
+        \]
+        then $\mathrm{columnspace}(A) = \mathrm{span}\langle\mbf{u}_1, \dotsc, \mbf{u}_k\rangle \subseteq \R ^ n$
+        
+        $\mathrm{columnspace}(A) = \{A\pmb{\lambda}\,|\,\lambda \in \R ^ k\} \subseteq \R ^ n$.
+
+        The $\mathrm{columnrank}$ of $A$ is the dimension of the $\mathrm{columnspace}$.
+
+        \item The $\mathrm{rowspace}$ of $A$ is the span of the rows of $A$ as a subspace of $\R ^ k$.
+        (More honestly,
+        it is the $\mathrm{columnspace}$ of $A ^ t$).
+        The $\mathrm{rowrank}$ of $A$ is the dimension of the $\mathrm{rowspace}$ of $A$.
+        \item The null space or kernel of $A$ is the space of solutions to
+        \[
+        A\mbf{x} = \mbf{0}.
+        \]
+        $\mathrm{nullspace}(A) = \{\mbf{x} \in \R ^ k\,|\, A\mbf{x} = \mbf{0}\}$.
+        The nullity of $A$ is the dimension of the null space.
+    \end{enumerate}
+\end{definition}
 
 
 
