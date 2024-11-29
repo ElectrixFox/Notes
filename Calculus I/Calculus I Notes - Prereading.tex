@@ -248,7 +248,7 @@ There are $3$ types of discontinuity:
     In this case at least one of $L^+$ or $L^-$ does not exist.
 \end{enumerate}
 
-\subsection{Limits as $x \rightarrow \infty$}
+\subsection[Limits as x rightarrow infty]{Limits as $x \rightarrow \infty$}
 
 \begin{definition}
     $f(x)$ has a limit $L$ as $x$ tends to $\infty$ if
@@ -1344,6 +1344,101 @@ Differentiating once more gives
 \[
 y'' = u'_1y'_1 + u'_2y'_2 + u_1y''_1 + u_2y''_2.
 \]
+Putting these expressions into ($\dagger$) yields
+\[
+\alpha_2(u'_1y'_1 + u'_2y'_2 + u_1y''_1 + u_2y''_2) + \alpha_1(u_1y'_1 + u_2y'_2) + \alpha_0(u_1y_1 + u_2y_2) = \phi.
+\]
+Using the fact that both $y_1$ and $y_2$ solve ($\dagger\dagger$) simplifies the above equation to
+\[
+\alpha_2(u'_1y'_1 + u'_2y'_2) = \phi.
+\]
+We now have two equations for the two unknown functions $u'_1, u'_2$ and this gives
+\[
+u'_1 = -\frac{y_2\frac{\phi}{\alpha_2}}{W(y_1, y_2)}\qquad u'_2 = \frac{y_1\frac{\phi}{\alpha_2}}{W(y_1, y_2)}
+\]
+which are solved by direct integration
+\[
+u'_1 = -\int\frac{y_2\frac{\phi}{\alpha_2}}{W(y_1, y_2)}\,dx,\qquad u_2 = \int\frac{y_1\frac{\phi}{\alpha_2}}{W(y_1, y_2)}\,dx.
+\]
+As a simple first example,
+we will apply the method of variation of parameters to find a particular integral that could also be found using the method of undetermined coefficients.
+\begin{example}
+    Solve $y'' - y = e ^ {2x}$.
+
+    We have that $y_{CF} = Ae ^ x + Be ^ {-x}$ hence $y_1 = e ^ x$ and $y_2 = e ^ {-x}$.
+    \[
+    W(y_1, y_2) = \begin{vmatrix}
+        e ^ x & e ^ {-x} \\
+        e ^ x & -e ^ {-x}
+    \end{vmatrix}
+    = -2.
+    \]
+    Using the above formulae
+    \begin{gather*}
+        u_1 = -\int\frac{e ^ {-x}e ^ {2x}}{-2} = \int\frac{1}{2}e ^ x\,dx = \frac{1}{2}e ^ x. \\
+        u_2 = \int\frac{e ^ x e ^ {2x}}{-2}\,dx = \int\frac{-1}{2}e ^ {3x}\,dx = -\frac{1}{6}e ^ {3x}. \\
+        y_{PI} = u_1y_1 + u_2y_2 = \frac{1}{2}e ^ {x}e ^ {x} - \frac{1}{6}e ^ {3x}e ^ {-x} = \frac{1}{3}e ^ {2x}. \\
+        y = y_{CF} + y_{PI} = Ae ^ x + Be ^ {-x} + \frac{1}{3}e ^ {2x}.
+    \end{gather*}
+\end{example}
+Note that if you don't want to remember the formulae you can simply remember that the key step in the method is to remove the $u'_1, u'_2$ terms from $y'$.
+
+\subsection{Systems of first order linear ODEs}
+A system of $n$ coupled first order linear ODEs for $n$ dependent variables can be written as a single $n$th order linear ODE for a dependent variable by eliminating the other dependent variables.
+An associated IVP is obtained if all the values of the dependent variables are specified at a single value of the independent variable.
+\begin{example}
+    Find the solution $y(x), z(x)$ of the pair of first order linear ODEs
+    \[
+    y' = -y + z + x ^ 2,\quad z' = -8y + 5z + 8x ^ 2 - 7x + 1,
+    \]
+    satisfying the initial condition $y(0) = 2, z(0) = 0$.
+
+    We solve by first finding a second order ODE for $y(x)$.
+
+    From the first equation $z = y' + y - x ^ 2$ hence $z' = y'' + y' - 2x$.
+    Substituting these expressions into the second equation gives
+    \[
+    y'' + y' - 2x = -8y + 5(y' + y - x ^ 2) + 8x ^ 2 - 7x + 1
+    \]
+    i.e.
+    the second order ODE $y'' - 4y' + 3y = 3x ^ 2 - 5x + 1$.
+    We can now solve this ODE using the earlier methods.
+    The characteristic equation is
+    \[
+    \lambda ^ 2 - 4\lambda + 3 = 0 = (\lambda - 3)(\lambda - 1),
+    \]
+    with roots $\lambda = 1, 3$.
+    Hence $y_{CF} = Ae ^ x + Be ^ {3x}$.
+    Trying $y = a_0 + a_1x + a_2x ^ 2$ for $y_{PI}$ gives
+    \[
+    y'' - 4y' + 3y = 2a_2 - 4(a_1 + 2a_2x) + 3(a_0 + a_1x + a_2x ^ 2) = 3a_2x ^ 2 + (3a_1 - 8a_2)x + 2a_2 - 4a_1 + 3a_0 = 3x ^ 2 - 5x + 1.
+    \]
+    Comparing coefficients gives the solution $a_2 = 1, a_1 = 1, a_0 = 1$.
+    Giving us the general solution for $y$
+    \[
+    y = Ae ^ x + Be ^ {3x} + x ^ 2 + x + 1.
+    \]
+    Obtaining $z$ is done through using the earlier relation $z = y' + y - x ^ 2 = 2Ae ^ x + 4Be ^ {3x} + 3x + 2$.
+    
+    Now we have a general solution for both $y$ and $z$.
+
+    We can now solve the IVPs
+    \[
+    y(0) = A + B + 1 = 2
+    \]
+    \[
+    z(0) = 2A + 4B + 2 = 0
+    \]
+    which have solutions $A = 3, B = -2$.
+
+    Hence the solution of the IVP is
+    \[
+    y = 3e ^ x - 2e ^ {3x} + x ^ 2 + x + 1,
+    \]
+    \[
+    z = 6e ^ x - 8e ^ {3x} + 3x + 2.
+    \]
+\end{example}
 
 
 

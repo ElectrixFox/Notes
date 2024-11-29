@@ -46,5 +46,14 @@ In order to make a symbol e.g. $\lambda$ bold use the command \verb|\pmb{\lambda
 
 Use \verb|\intertext{}| to add text inside of an align environment.
 
+In order to remove the warning sign created when adding Maths equations in the section use the following setup
+\begin{verbatim}
+    \section[text]{todisplay}.
+\end{verbatim}
+This will allow for the Toc file to find the correct bit of the file to actually render the Maths text.
+Here is an example,
+\begin{verbatim}
+    \section[Limits as x approaches infinity]{Limits as $x \rightarrow \infty$}.
+\end{verbatim}
 
 \end{document}

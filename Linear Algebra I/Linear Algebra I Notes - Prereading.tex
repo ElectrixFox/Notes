@@ -2048,6 +2048,8 @@ With this definition one can show that the volume of the $n$-dimensional paralle
         the vector $\mbf{0}$ is in $U$.
     \end{enumerate}
 \end{definition}
+\textbf{Simply},
+a vector subspace is just a non-empty subset of $\R ^ n$ that satisfies some conditions.
 
 \begin{example}
     \begin{enumerate}[label = (\roman*)]
@@ -2117,6 +2119,9 @@ for some (real) scalars $\lambda_1, \dotsc, \lambda_k$.
     Equivalently,
     $\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ is called a spanning set of $U$.
 \end{definition}
+Another simplification of this is to consider that the span is just a subset of $\R ^ n$ containing all of the combinations of the vectors.
+So for a set of vectors to span a subspace $U$,
+everything in $U$ must be able to be written as a combination of the vectors which span $U$.
 
 \begin{proposition}
     Let $\mbf{u}_1, \dotsc, \mbf{u}_k \in \R ^ n$ be $k$ vectors,
@@ -2178,6 +2183,9 @@ for some (real) scalars $\lambda_1, \dotsc, \lambda_k$.
         So an element in the span of $\mbf{u}_1, \mbf{u}_2, \dotsc, \mbf{u}_k$ is also in the span of $\mbf{u}_2, \dotsc, \mbf{u}_k$.
     \end{proof}
 \end{lemma}
+This lemma tells us that the span of a set of vectors is equal to the span of a smaller set of vectors which doesn't include the vectors which can be made up of the other vectors.
+Effectively,
+I believe this is saying that we can keep reducing the spanning set until we get a smallest spanning set where each of the vectors cannot be written as a combination of the others.
 
 \subsection{Linear independence}
 
@@ -2187,6 +2195,19 @@ for some (real) scalars $\lambda_1, \dotsc, \lambda_k$.
     \lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k = \mbf{0}\quad\text{if}\quad\lambda_1 = \lambda_2 = \dotsi = \lambda_k = 0.
     \]
 \end{definition}
+This definition is saying that you cannot make one vector from the other.
+In other words,
+$\mbf{v}$ cannot be made from $\lambda\mbf{u}$ for some $\lambda \in \R$.
+Here is a more informative example
+\[
+\begin{pmatrix}
+    2 \\ 2 \\ 2
+\end{pmatrix}\text{ is not linearly independent to }
+\begin{pmatrix}
+    1 \\ 1 \\ 1
+\end{pmatrix}.
+\]
+
 
 \begin{corollary}
     Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be $k$ vectors in $\R ^ n$ and let $A = (\mbf{u}_1, \dotsc, \mbf{u}_k) \in M_{n, k}(\R)$ be the associated matrix of column vectors.
@@ -2212,6 +2233,11 @@ If the vectors $\mbf{u}_1, \dotsc, \mbf{u}_k$ are not linearly independent we sa
         $\mbf{v} = \frac{-\lambda_1}{\lambda_2}\mbf{u}$.
     \end{proof}
 \end{lemma}
+
+The following proposition says that for a set of linearly independent vectors,
+if we can choose a vector,
+say $\mbf{u}$,
+such that $\mbf{u}$ is not in the set of their combinations then the vectors that span this are linearly independent to $\mbf{u}$.
 
 \begin{proposition}
     Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be $k$ linear independent vectors in $\R ^ n$ and let $\mbf{u} \in \R ^ n$ such that
@@ -2245,7 +2271,11 @@ If the vectors $\mbf{u}_1, \dotsc, \mbf{u}_k$ are not linearly independent we sa
 \section{Real vector spaces}
 
 \subsection{Vector spaces and subspaces}
-A (real) vector space is a non-empty set $V$ together with two operations:
+A (real) vector space is a non-empty set\footnote{This could be for any type,
+not just vectors or reals,
+I know,
+it's a bit bloody confusing.}
+$V$ together with two operations:
 \begin{enumerate}[label = (\roman*)]
     \item Addition:
     This is a function
@@ -2290,7 +2320,7 @@ Axioms for scalar multiplication:
     \end{enumerate}
 \end{enumerate}
 
-We refer to elements of a vector space as vectors.
+We refer to elements of a vector space as vectors\footnote{Big shock.}.
 
 \begin{remark}
     Instead of $\R$ one can also allow other scalars such that complex numbers $\C$ or the rationals $\Q$.
@@ -2312,6 +2342,8 @@ We refer to elements of a vector space as vectors.
 \begin{definition}[Vector subspace]
     A vector subspace of a vector space $V$ is a non-empty subset that is itself a vector space with respect to the same addition and multiplication operations of $V$.
 \end{definition}
+This is just a subset of a vector space $V$,
+don't forget that this can still be for any type of object not just our typical $\R ^ n$ vectors\footnote{Why would we make it so easy to understand by just thinking about $\R ^ n$.}.
 
 \begin{proposition}[Subspace criterion]
     A non-empty subset $U$ of a vector space $V$ is a vector subspace of $V$ if and only if it satisfies the following three conditions:
