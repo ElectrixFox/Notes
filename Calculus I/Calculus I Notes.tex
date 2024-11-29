@@ -14,6 +14,10 @@
 
 \newpage
 
+\tableofcontents
+
+\newpage
+
 \section{Functions}
 
 \subsection{Functions, domain \& range}
@@ -2517,6 +2521,137 @@ Then $y'_{PI} = u'_1y_1 + u_1y'_1 + u'_2y_2 + u_2y'_2 = u_1y'_1 + u_2y'_2$ by ($
 
 Next,
 we need to substitute this into ($\dagger$) in order to identify $u_1(x)$ and $u_2(x)$.
+
+This gives the following
+(after collecting terms)
+\[
+\alpha_2(u'_1y'_1 + u'_2y'_2 + u_1y''_1 + u_2y''_2) + \alpha_1(u_1y'_1 + u_2y'_2) + \alpha_0(u_1y_1 + u_2y_2) = \phi.
+\]
+Since $y_1$ and $y_2$ are solutions to the homogeneous equation ($\ddagger$),
+the first two terms on the left-hand side vanish,
+giving
+\begin{equation}\tag{$2$}
+    a_2(u'_1y'_1 + u'_2y'_2) = \phi.
+\end{equation}
+We now have two simultaneous equations for $u_1$ and $u_2$,
+namely ($1$) and ($2$),
+which we can solve
+Multiplying ($2$) by $y_1$ and rearranging gives
+\[
+u'_1y'_1y_1 + u'_2y'_2y_1 = \frac{\phi y_1}{a_2}
+\]
+then using $u'_1y_1 = -u'_2y_2$ by ($1$)
+\[
+u'_2(y'_2y_1 - y'_1y_2) = \frac{\phi y_1}{a_2}.
+\]
+$u'_2 = \frac{\phi y_1}{a_2W(y_1, y_2)}$
+and this is similar for $u'_1$
+$u'_1 = -\frac{\phi y_2}{a_2W(y_1, y_2)}$.
+
+We hence find $u_1$ and $u_2$ by integrating.
+\[
+u_1(x) = -\int\frac{\phi(x)y_2(x)}{a_2W(y_1, y_2)}\,dx,\quad u_2(x) = \int\frac{\phi(x)y_1(x)}{a_2W(y_1, y_2)}\,dx.
+\]
+\begin{example}
+    Solve $y'' - y = e ^ {2x}$.
+    We could solve this using the method of undetermined coefficients.
+    Here we use the method of variation of parameters to check it gives the same answer.
+
+    We have the complementary function
+    \[
+    y_{CF} = Ae ^ {x} + Be ^ {-x},
+    \]
+    therefore
+    $y_1 = e ^ x$ and $y_2 = e ^ {-x}$.
+    \[
+    W(y_1, y_2) = \begin{vmatrix}
+        y_1 & y_2 \\
+        y'_1 & y'_2
+    \end{vmatrix} = \begin{vmatrix}
+        e ^ x & e ^ {-x} \\
+        e ^ x & -e ^ {-x}
+    \end{vmatrix} = -1 - 1 = -2.
+    \]
+    So
+    \[
+    u_1(x) = -\int{e ^ {2x}e ^ {-x}}{-2}\,dx = \frac{1}{2}\int e ^ {x}\,dx = \frac{1}{2}e ^ x
+    \]
+    \[
+    u_2(x) = \int{\frac{e ^ {2x}e ^ {x}}{-2}}\,dx = -\frac{1}{2}\int e ^ {3x}\,dx = -\frac{1}{6}e ^ {3x}.
+    \]
+    Therefore
+    \[
+    y_{PI} = u_1y_1 + u_2y_2 = \frac{1}{2}e ^ xe ^ x + -\frac{1}{6}e ^ {3x}e ^ {-x} = \frac{1}{3}e ^ {2x}.
+    \]
+    The general solution to the ODE is then
+    \begin{align*}
+        y(x) &= y_{CF} + y_{PI} \\
+        &= Ae ^ x + Be ^ {-x} + \frac{1}{3}e ^ {2x}.
+    \end{align*}
+\end{example}
+
+\begin{example}
+    Solve $y'' - 2y' + y = \frac{e ^ x}{x ^ 2 + 1}$.
+
+    The characteristic equation is
+    \[
+    \lambda ^ 2 - 2\lambda + 1 = 0
+    \]
+    with repeated root $\lambda = 1$,
+    so $y_{CF} = Ae ^ {x} + Bxe ^ {x}$.
+    So $y_1 = e ^ x$,
+    $y_2 = xe ^ x$
+    \[
+    W(y_1, y_2) = \begin{vmatrix}
+        e ^ x & xe ^ x \\
+        e ^ x & e ^ x + xe ^ x
+    \end{vmatrix} = e ^ {2x} + xe ^ {2x} - xe ^ {2x} = e ^ {2x}
+    \]
+    and so
+    \[
+    u_1 = -\int\frac{e ^ x \cdot xe ^ x}{(x ^ 2 + 1)e ^ {2x}}\,dx = -\int\frac{x}{x ^ 2 + 1}\,dx = -\frac{1}{2}\log(x ^ 2 + 1).
+    \]
+    \[
+    u_2 = \int\frac{e ^ x \cdot e ^ x}{(x ^ 2 + 1)e ^ {2x}}\,dx = \int\frac{1}{x ^ 2 + 1}\,dx = \arctan(x).
+    \]
+    So $y_{PI} = u_1y_1 + u_2y_2 = -\frac{1}{2}e ^ x\log(x ^ 2 + 1) + xe ^ x\arctan(x)$ and so the general solution to the ODE is
+    \begin{align*}
+        y(x) &= y_{CF} + y_{PI} \\
+        &= e ^ x\left(A + Bx - \frac{1}{2}\log(x ^ 2 + 1) + x\arctan(x)\right).
+    \end{align*}
+\end{example}
+
+\subsection{Systems of first order linear ODEs}
+A system of $n$ coupled first order linear ODEs for $n$ dependent variables can be rewritten as a single $n$th order linear ODE for a single dependent variable,
+by eliminating the other dependent variables.
+
+An associated IVP is obtained if all the values of the dependent variables are specified at a single value of the independent variable.
+
+\begin{example}
+    Find the solution $y(x), z(x)$ of the pair of first order linear ODEs
+    \[
+    y' = -y + z + x ^ 2,
+    \]
+    \[
+    z' = -8y + 5z + 8x ^ 2 - 7x + 1,
+    \]
+    satisfying the initial condition $y(0) = 2$,
+    $z(0) = 0$.
+
+    We rewrite the system of two coupled first order ODEs as a second order ODE for $y$.
+
+    From the first equation $z = -\frac{y'}{2} + \frac{y}{2} + x$ and hence $z' = -\frac{y''}{2} + \frac{y'}{2} + 1$ substitute these expressions for $z$ and $z'$ into the second equation gives
+    \[
+    -\frac{y''}{2} + \frac{y'}{2} + 1 = 3y - 4\left(-\frac{y'}{2} + \frac{y}{2} + x\right) + 2x.
+    \]
+\end{example}
+
+
+
+
+
+
+
 
 
 
