@@ -11,6 +11,25 @@
 
 \newpage
 
+\section{Introduction}
+Here I will go over some basics of \LaTeX\ and then move onto some more advanced \LaTeX\ stuff.
+
+\subsection{Code layout}
+In the end \LaTeX\ is a programming language,
+therefore we need to format our code as though it is any other language.
+By format I mean,
+we should use comments for setup and actual \LaTeX\ syntax.
+
+Some of the things that I do in my documents to keep my code clean are:
+I generally insert a new line after every part of punctuation,
+this doesn't matter too much it is more so that all of the code isn't on one line,
+this can become hard to read when there is a lot to say on one line
+\footnote{It also means that I have to use punctuation!}.
+
+\newpage
+
+\section{Random useful stuff}
+
 You can write text under braces as follows
 \begin{verbatim}
     f(x) = \underbrace{2k}_{\text{for $k > 0$}} > 2k - 1.
@@ -55,5 +74,21 @@ Here is an example,
 \begin{verbatim}
     \section[Limits as x approaches infinity]{Limits as $x \rightarrow \infty$}.
 \end{verbatim}
+
+If you want to have a piecewise function such that the right is automatically words,
+you can use the "dcases*" environment as such
+\begin{verbatim}
+    f(n) = \begin{dcases*}
+        1 & if $n$ is even \\
+        0 & if $n$ is odd
+    \end{dcases*}
+\end{verbatim}
+which gets
+\[
+f(n) = \begin{dcases*}
+    1 & if $n$ is even \\
+    0 & if $n$ is odd
+\end{dcases*}
+\]
 
 \end{document}
