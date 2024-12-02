@@ -1758,7 +1758,7 @@ One may also view $\E(\cdot\mid A)$ as expectation with respect to the condition
     \end{proof}
 \end{theorem}
 
-\begin{theorem}[Partition theorem for expectation]
+\begin{theorem}[Partition theorem for expectation]\label{pre_prob_thm_partthmforexp}
     Let $X$ be any real-valued random variable.
     Let $E_1, E_2, \dotsc, E_k$ be any events that form a partition.
     Then,
@@ -1786,12 +1786,121 @@ One may also view $\E(\cdot\mid A)$ as expectation with respect to the condition
     \end{proof}
 \end{theorem}
 
+\begin{definition}[Conditional expectation with respect to a random variable]
+    Let $X$ be a real-valued random variable,
+    and let $Y$ be another random variable.
+    Define the function $g : Y(\Omega) \rightarrow \R$ by $g(y) := \E(X\mid Y = y)$.
+    Then the conditional expectation of $X$ given $Y$ is the random variable denoted by $\E(X\mid Y)$ given by
+    \[
+    \E(X \mid Y) := g(Y).
+    \]
+\end{definition}
 
+\begin{theorem}[Partition theorem for expectation II]
+\footnote{This is sometimes called the law of iterated expectation}
+    For any real=valued random variable $X$ and any random variable $Y$,
+    \[
+    \E(X) = \E(\E(X \mid Y)).
+    \]
+    \begin{proof}
+        We prove the case when $Y$ is discrete.
+        which shows why we call this a partition theorem.
+        In this case $\{Y = y\}, y \in \mathcal{Y}$,
+        forms a partition,
+        and so \autoref{pre_prob_thm_partthmforexp} gives
+        \[
+        \E(X) = \sum_{y \in \mathcal{Y}}\E(X\mid Y = y)\P(Y = y),
+        \]
+        but this last expression is the expectation of the discrete random variable $\E(X\mid Y)$ which takes values $g(y) = \E(X\mid Y = y)$ with probabilities $\P(Y = y)$:
+        \[
+        \E(\E(X \mid Y)) = \E(g(Y)) = \sum_{y \in \mathcal{Y}}g(y)\P(Y = y),
+        \]
+        by the law of the unconscious statistician.
+    \end{proof}
+\end{theorem}
 
+\subsection{Independence: multiplication rule for expectation}
+\begin{theorem}[Independence means multiply]
+    If $X$ and $Y$ are independent real-valued random variables then
+    \[
+    \E(XY) = \E(X)\E(Y).
+    \]
+    Moreover, if $g, h : \R \rightarrow \R$,
+    \[
+    \E(g(X)h(Y)) = \E(g(X))\E(h(Y)).
+    \]
+    More generally,
+    for any mutually independent real-valued random variables $X_1, X_2, \dotsc, X_n$,
+    \[
+    \E\left(\prod_{i = 1}^{n}X_i\right) = \prod_{i = 1}^{n}\E(X_i).
+    \]
+    \begin{proof}
+        We give a proof only in the discrete case.
+        Suppose $X$ and $Y$ are independent discrete random variables with joint probability mass function $p(x, y) = p_X(x)p_Y(y)$.
+        Then by the law of the unconscious statistician,
+        \[
+        \E(g(X)h(Y)) = \sum_{x \in \mathcal{X}}\sum_{y \in \mathcal{Y}}g(x)h(y)p(x, y) = \sum_{x \in \mathcal{X}}g(x)p_X(x)\sum_{y \in \mathcal{Y}}h(y)p_Y(y),
+        \]
+        which is $\E(g(X))\E(h(Y))$.
+    \end{proof}
+\end{theorem}
 
+\begin{corollary}
+    If $X$ and $Y$ are independent random variables,
+    then $\Cov(X, Y) = 0$.
+    \begin{proof}
+        In the independent case,
+        $\Cov(X, Y) = \E(XY) - \E(X)\E(Y) = 0$.
+    \end{proof}
+\end{corollary}
 
+\begin{corollary}
+    Consider random variables $X_1, X_2, \dotsc, X_n$.
+    If these random variables are pairwise independent,
+    then
+    \[
+    \Var\left(\sum_{i = 1}^{n}X_i\right) = \sum_{i = 1}^{n}\Var(X_i).
+    \]
+\end{corollary}
 
+\subsection{Expectation and probability inequalities}
+\begin{theorem}[Monotonicity of expectation]
+    For any random variable $X$,
+    and any $a \in \R$,
+    if $\P(X \geq a) = 1$ then $\E(X) \geq a$.
+\end{theorem}
 
+\begin{corollary}
+    For any random variable $X$,
+    $\Var(X) \geq 0$.
+    \begin{proof}
+        We have $\Var(X) = \E((X - \E(X)) ^ 2)$ and the random variable $(X - \E(X)) ^ 2$ is non-negative.
+    \end{proof}
+\end{corollary}
+
+\begin{corollary}[Markov's inequality]
+    If $X \geq 0$ then,
+    for any $a > 0$,
+    \[
+    \P(X \geq a) \leq \frac{\E(X)}{a}.
+    \]
+    \begin{proof}
+        Note that $X \geq a\ind[\{X \geq a\}]$,
+        and consequently $0 \leq \E(X - a\ind[\{X \geq a\}]) = \E(X) - a\P(X \geq a)$.
+    \end{proof}
+\end{corollary}
+
+\begin{corollary}[Chebyshev's inequality]
+    For any random variable $X$ and any $a > 0$,
+    we have
+    \[
+    \P(|X - \E(X)| \geq a) \leq \frac{\Var(X)}{a ^ 2}.
+    \]
+    \begin{proof}
+        $\P((X - \E(X)) ^ 2 \geq a ^ 2) \leq \frac{\E((X - \E(X)) ^ 2)}{a ^ 2}$ by Markov's inequality applied to $(X - \E(X)) ^ 2$ at $a ^ 2$.
+        Now observe that $\{(X - \E(X)) ^ 2 \geq a ^ 2\} = \{|X - \E(X)| \geq a\}$ and of course $\E((X - \E(X)) ^ 2) = \Var(X)$.
+    \end{proof}
+\end{corollary}
 
 
 

@@ -1,8 +1,10 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage{preamble}
+\usepackage{bbm}
 
 \declaretheorem[style = avgstyle, name = Counting Principle]{countprinc}
 \declaretheorem[style = avgstyle, name = Property, numberwithin = section]{property}
+\newcommand{\ind}[1][A]{\mathbbm{1}_{#1}}
 \counterwithin*{equation}{subsection}
 
 \title{Probability I}
@@ -12,6 +14,10 @@
 \begin{document}
 
 \maketitle
+
+\newpage
+
+\tableofcontents
 
 \newpage
 
@@ -2721,21 +2727,225 @@ By LOTUS,
 
 \subsection{Conditional expectations}
 \[
-\mathbb{1}_A : \Omega \rightarrow \{0, 1\}, \text{ for } A \subseteq \Omega.
+\ind : \Omega \rightarrow \{0, 1\}, \text{ for } A \subseteq \Omega.
 \]
 \[
-\mathbb{1}_A(\omega) = \begin{cases}
+\ind(\omega) = \begin{cases}
     1, & \text{if } \omega \in A, \\
     0, & \text{elsewhere}.
 \end{cases}
 \]
-$\E(\mathbb{1}_A) = 1 \times \P(A) = \P(A)$.
+$\E(\ind) = 1 \times \P(A) = \P(A)$.
 
 \begin{definition}[Conditional expectation of $X$ given $A$]
     \[
-    \E(X\mid A) := \frac{\E(X\mathbb{1}_A)}{\P(A)},\text{ where $\P(A) > 0$}.
+    \E(X\mid A) := \frac{\E(X\ind)}{\P(A)},\text{ where $\P(A) > 0$}.
     \]
 \end{definition}
 $\E(X \mid A)$ should be interpreted as the expectation of $X$ with respect to the probability $\P(\cdot\mid A)$.
+
+\begin{example}
+    $A, B \subseteq \Omega$,
+    \[
+    \ind[A \cap B] = \ind\ind[B].
+    \]
+    \[
+    \ind(\omega) = \begin{dcases*}
+        1, & if $\omega \in A$, \\
+        0, & elsewhere.
+    \end{dcases*}
+    \]
+   \[
+   \ind[A \cap B] = \begin{dcases*}
+       1, & if and only if $\omega \in A$ and $\omega \in B$, \\
+       0, & elsewhere.
+   \end{dcases*}
+   \]
+   $\ind[A \cap B] = 1 \implies \ind = 1, \ind[B] = 1$.
+   If $\omega \notin A$ or $\omega \notin B$,
+   then $\ind[A]\ind[B] = 0$
+   as
+   $\omega \notin A \implies \ind = 0$
+   $\omega \notin B \implies \ind[B] = 0$.
+
+   \[
+   \ind[A \cap B] = \ind\ind[B].
+   \]
+   Let us assume that $\P(B) > 0$.
+   \[
+   \E(\ind\mid B) = \frac{\E(\ind\ind[B]}{\P(B)} = \frac{\P(A \cap B)}{\P(B)} = \P(A \mid B).
+   \]
+\end{example}
+
+\begin{theorem}
+    Let $X$ be a discrete random variable,
+    \[
+    \E(X \mid A) = \sum x\P(X = x\mid A).
+    \]
+    \begin{proof}
+        Define $Y = X\ind$
+        \begin{equation}
+            \E(X\ind) = \E(Y) = \sum_{x}x\P(Y = x)
+        \end{equation}
+        \begin{align*}
+            \sum_{x}x\P(Y = x) &= \P(X\ind = x) \\
+            &= \P(\{X = x\} \cap A) \\
+            &= \P(X = x\mid A)\P(A).
+        \end{align*}
+        Putting in ($1$) we get
+        \begin{align*}
+            E(X\ind) &= \sum_{x}x\P(X = x\mid A)\P(A) \\
+            &= \P(A)\sum_{x}x\P(X = x\mid A)
+        \end{align*}
+        which shows that 
+        \[
+        \frac{\E(X\ind)}{\P(A)} = \sum x\P(X = x\mid A).
+        \]
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    $X, Y$ are two random variables.
+    Let $B \subseteq \R$ and $(X, Y)$ has a joint pmf $p(\cdot, \cdot)$,
+    Let $g : \R \rightarrow \R$
+    \[
+    \E(g(X)\mid Y \in B).
+    \]
+    $B = \{y\}$.
+    \begin{align*}
+        \E(g(X)\mid Y = y) &= \sum_{z}z\P(g(X) = z \mid Y = y) \\
+        &= \frac{\sum_{x}g(x)p(x, y)}{p_Y(y)} \\
+        &= \sum_{x}g(x)p_{X\mid Y}(x \mid y).
+    \end{align*}
+    Similarly,
+    for any set $B$,
+    we can write.
+    \[
+    \E(g(X) \mid Y \in B) = \sum_{x}g(x)\left(\frac{\sum_{y \in B}p(x, y)}{\sum_{y \in B}p_Y(y)}\right).
+    \]
+\end{example}
+
+Continuous case:
+joint,
+pdf,
+we have a similar formula.
+\[
+\E(g(X) \mid Y \in B) = \frac{\int_{\R}g(x)\int_{y \in B}f(x, y)\,dydx}{\int_{y \in B}f(y)\,dy}
+\]
+
+\begin{example}
+    Raffle game,
+    one of the prizes is worth $\pounds 500$,
+    and five of the prizes are worth $\pounds 100$.
+    There are $2000$ raffle tickets.
+    Let $X$ be our winning,
+    and $A$ be the event that we get the top prize.
+    We can choose only one ticket.
+    Find $\E(X \mid A)$.
+
+    \[
+    \P(X = 500\mid A) = 1 = \frac{\P((X = 500) \cap A)}{\P(A)} = \frac{\P(A)}{\P(A)} = 1
+    \]
+    \[
+    \E(X\mid A) = \frac{\E(X\ind)}{\P(A)} = \frac{500\P((X = 500) \cap A)}{\P(A)} = 500.
+    \]
+\end{example}
+
+\begin{theorem}[Partition Theorem]
+    Let $E_1, E_2, \dotsc, E_k$ be a finite partition.
+    Then
+    \begin{equation}
+        \E(X) = \sum_{i = 1}^{k}\E(X \mid E_i)\P(E_i).
+    \end{equation}
+    A countable infinite partition,
+    $E_1, E_2, \dotsc$,
+    then
+    \[
+    \E(X) = \sum_{i = 1}^{\infty}\E(X \mid E_i)\P(E_1).
+    \]
+    \begin{proof}[Proof of $(2)$]
+        $\Omega = \bigcup_{i = 1}^{k}E_i$,
+        where $E_i$'s are disjoint
+        $\ind[\Omega] = \sum_{i = 1}^{k}\ind[E_i]$ only for disjoint sets.
+        \begin{align*}
+            E(X) &= \E(X\ind[\Omega]) \\
+            &= \E\left(X\left(\sum_{i = 1}^{k}\ind[E_i]\right)\right) \\
+            &= \E\left(\sum_{i = 1}^{k}x\ind[E_i]\right) \\
+            &= \sum_{i = 1}^{k}\E(X\ind[E_i]) \\
+            &= \sum_{i = 1}^{k}\E(X \mid E_i)\P(E_i).
+        \end{align*}
+    \end{proof}
+\end{theorem}
+
+\begin{definition}
+    $X, Y : \Omega \rightarrow \R$,
+    let us define $g : Y(\Omega) \rightarrow \R$ by
+    \[
+    g(y) = \E(X\mid Y = y).
+    \]
+    Conditional expectation of $X$ given $Y = y$,
+    is a random variable denoted by $\E(X \mid Y)$ and defined by
+    \[
+    \E(X \mid Y) := g(Y)
+    \]
+    i.e.,
+    $\E(X \mid Y)(\omega) = \E(X \mid Y = Y(\omega))$.
+\end{definition}
+
+Say $Y$ is discrete,
+and $\P(Y = y)$.
+
+$\E(X \mid Y)$ is a random variable which takes the value $\E(X \mid Y = y)$ with probability $\P(Y = y)$.
+
+\begin{theorem}[Partition Theorem]
+    Let $X$ and $Y$ be two random variables.
+    Then
+    \[
+    \E(X) = \E(\E(X \mid Y)).
+    \]
+    \begin{proof}
+        Let us assume that $Y$ is discrete.
+        \[
+        \E(X) = \sum_{y}\E(X \mid Y = y)\P(Y = y),
+        \]
+        (our partition is $\{Y = y\}$)
+        by the previous theorem.
+
+        \begin{align*}
+            \sum_{y}\E(X \mid Y = y)\P(Y = y) &= \sum_{y}g(y)\P(Y = y) \\
+            &= \E(g(Y)) &(\text{By LOTUS}) \\
+            &= \E(\E(X \mid Y)).
+        \end{align*}
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    Toss a coin $3$ times and let $H$ denote the number of heads.
+    Then roll a fair die $H$ times.
+    Let $T := \text{total score}$.
+    Find $\E(T)$.
+
+    Let $X_1, X_2, \dotsc$ denote the score of the $i$th throw of the die.
+    \[
+    T = \sum_{i = 1}^{H}X_i.
+    \]
+    We know that $H \sim \Bin\left(3, \frac{1}{2}\right)$.
+    So $\E(T) = \E(\E(T \mid H))$.
+    Given $\{H = h\}$,
+    observe that
+    \[
+    \E(T \mid H = h) = \E\left(\sum_{i = 1}^{h}X_i\right) = h\E(X_1).
+    \]
+\end{example}
+
+
+
+
+
+
+
+
+
+
 
 \end{document}

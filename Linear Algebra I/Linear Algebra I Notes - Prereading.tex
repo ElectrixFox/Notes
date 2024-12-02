@@ -1261,7 +1261,7 @@ One can do the following:
 \end{example}
 
 \subsection{Inverse matrices and linear systems}
-\begin{lemma}\label{linalg_lem_solsetsam}
+\begin{lemma}\label{pre_linalg_lem_solsetsam}
     Consider an arbitrary $m \times n$ linear system $A\mbf{x} = \mbf{b}$.
     Let $B \in M_{m \times m}(\R)$ be an invertible matrix.
     Then the new system $(BA)\mbf{x} = B\mbf{b}$ has the same solution set as the original system.
@@ -2530,7 +2530,7 @@ The following theorem provides us with a list of useful observations.
         then the $\mbf{v}_1, \dotsc, \mbf{v}_{\ell}$ are linearly dependent.
         \item If $\ell < k$,
         then the $\mbf{v}_1, \dotsc, \mbf{v}_{\ell}$ do not span $V$.
-        \itme If $k = \ell$,
+        \item If $k = \ell$,
         then the following statements are (pairwise) equivalent
         \begin{enumerate}[label = (\alph*)]
             \item The vectors $\mbf{v}_1, \dotsc, \mbf{v}_k$ form a basis of $V$.
@@ -2575,11 +2575,185 @@ The following theorem provides us with a list of useful observations.
 
 \begin{definition}
     Let $A \in M_{n \times k}(\R)$ be a $n \times k$ matrix.
+    \begin{enumerate}[label = (\roman*)]
+        \item The column space of $A$ is the span of the columns of $A$.
+        The column rank of $A$ is the dimension of the column space of $A$.
+
+        The column space is the subspace of all $\mbf{b} \in \R ^ n$ such that $A\mbf{x} = \mbf{b}$ has a solution.
+
+        \item The row space of $A$ is the span of the rows of $A$.
+        The row rank of $A$ is the dimension of the row space of $A$.
+
+        The row space is the subspace of all $c \in \R ^ k$ such that $A ^ t\mbf{y} = \mbf{c}$ has a solution.
+
+        \item The nullspace
+        (or kernal)
+        of $A$ is the solution space to the homogeneous system $A\mbf{x} = \mbf{0}$.
+        The nullity of $A$ is the dimension of the nullspace.
+    \end{enumerate}
 \end{definition}
 
+\begin{lemma}\label{pre_linalg_lem_linindepvecmulmatrisindep}
+    Let $\mbf{v}_1, \dotsc, \mbf{v}_k$ be linear independent vectors in $\R ^ n$ and let $P \in M_n(\R)$ be an invertible matrix.
+    Then the vectors $P\mbf{v}_1, \dotsc,P\mbf{v}_k$ are linear independent.
+    \begin{proof}
+        Consider the equation $\lambda_1(P\mbf{v}_1) + \dotsi + \lambda_k(P\mbf{v}_k) = \mbf{0}$.
+        By linearity of matrix multiplication this is equivalent to the equation $P(\lambda_1\mbf{v}_1 + \dotsi + \lambda_k\mbf{v}_k) = \mbf{0}$,
+        and multiplying with $P ^ {-1}$ gives $\lambda_1\mbf{v}_1 + \dotsi + \lambda_k\mbf{v}_k = P ^ {-1}\mbf{0} = \mbf{0}$.
+        But the $\mbf{v}_i$ are linear independent,
+        so we have $\lambda_1 = \dotsi = \lambda_k = 0$.
+        Thus the vectors $P\mbf{v}_1, \dotsc, P\mbf{v}_k$ are linear independent.
+    \end{proof}
+\end{lemma}
 
+\begin{proposition}\label{pre_linalg_prop_invmatrsameranksandnul}
+    Let $A \in M_{n \times k}(\R)$ and let $P \in M_{n}(\R)$ be an invertible matrix.
+    Then $A$ and $PA$ have the same column rank,
+    row rank,
+    and nullity.
+    In particular,
+    elementary row operations do not change column rank,
+    row rank,
+    and nullity.
+    More precisely,
+    \begin{enumerate}
+        \item $A$ and $PA$ have the same row space.
+        In particular,
+        ERO's do not change the row space.
+        \item $PA$ may have a different column space than $A$,
+        but the dimension stays the same.
+        In particular,
+        ERO's do not change the dimension of the column space.
+        \item $A$ and $PA$ have the same nullsapce.
+        In particular,
+        ERO's do not change the nullspace.
+    \end{enumerate}
 
+    \begin{proof}
+        Since every invertible matrix is a product of elementary matrices,
+        it suffices to consider an elementary matrix $E$.
+        \begin{enumerate}[label = (\roman*)]
+            \item After applying an ERO the new rows are a linear combination of the old ones
+            (think about what each ERO does).
+            This could make the row space smaller
+            (conceivably).
+            but not bigger.
+            However,
+            the process is reversible
+            (instead consider the same argument with $E ^ {-1}$),
+            so it must be that the space didn't change.
+            \item Denote the column space of $A$ by $U$ and let $\mbf{u}_1, \dotsc, \mbf{u}_{\ell}$ be a basis of $U$.
+            But $A\mbf{x} = \mbf{b}$ if and only if $(EA)\mbf{x} = E\mbf{b}$
+            (since applying an ERO does not change the solution set as per \autoref{pre_linalg_lem_solsetsam}).
+            This shows that the column space of $EA$ is equal to $EU := \{E\mbf{u} : \mbf{u} \in U\}$.
 
+            We claim $E\mbf{u}_1, \dotsc, E\mbf{u}_{\ell}$ is a basis of $EU$,
+            and this will show the dimension of the two spaces $U$ and $EU$ is the same.
+            To do this we need to show the vectors form a linearly independent spanning set of $EU$.
+            By \autoref{pre_linalg_lem_linindepvecmulmatrisindep} we know $E\mbf{u}_1, \dotsc, E\mbf{v}_{\ell}$ are linearly independent.
+            For spanning,
+            let $\mbf{v} \in EU$ be given by $\mbf{v} = E\mbf{u}$ for some $\mbf{u} \in U$.
+            We can write $\mbf{u} = \lambda_1\mbf{u}_1 + \dotsi + \lambda_{\ell}\mbf{u}_{\ell}$ for some $\lambda_i \in \R$.
+            But then $\mbf{v} = E\mbf{u} = E(\lambda_1\mbf{u}_1 + \dotsi + \lambda_{\ell}\mbf{u}_{\ell}) = \lambda_1(E\mbf{u}_1) + \dotsi + \lambda_{\ell}(E\mbf{u}_{\ell})$.
+            \item This follows immediately from \autoref{pre_linalg_lem_solsetsam}.
+        \end{enumerate}
+    \end{proof}
+\end{proposition}
+
+\begin{theorem}[Rank Theorem]\label{pre_linalg_thm_ranktheorem}
+    The row rank of a matrix is equal to its column rank.
+\end{theorem}
+
+\begin{definition}[Rank]
+    We define the rank of a matrix $A$ to be its $\text{row rank} = \text{column rank}$.
+    We write $\mathrm{rank}(A) = \mathrm{rk}(A)$.
+\end{definition}
+
+\begin{theorem}[Rank-Nullity Theorem]
+    Let $A \in M_{n \times k}(\R)$ be an $n \times k$ matrix.
+    Then
+    \[
+    \mathrm{rk}(A) + \mathrm{nullity}(A) = k.
+    \]
+    \begin{proof}
+        We prove \autoref{pre_linalg_thm_ranktheorem} and this theorem together.
+        By \autoref{pre_linalg_prop_invmatrsameranksandnul} we can switch to the RREF $A'$ of $A$.
+        After switching some columns if necessary we can assume it looks as follows:
+        \[
+        A' = \left(\hspace{-5pt}\begin{array}{c|c}
+             I_r & C  \\
+             \hline
+             \mbf{0}_{(n - r)\times r} & \mbf{0}_{(n - r) \times (k - r)}
+        \end{array}\hspace{-5pt}\right).
+        \]
+        For some $r \times (k - r)$ matrix $C$.
+        But the first $r$ columns are linear independent
+        (they are simply the first $r$ standard basis vectors of $\R ^ n$),
+        and the other columns are in their span.
+        Thus,
+        $\mathrm{span}(\text{column space of } A') = \mathrm{span}\{\mbf{e}_1, \dotsc, \mbf{e}_r\}$ and
+        \[
+        \text{column rank of } A' = r.
+        \]
+        But also
+        \[
+        \text{row rank of } A' = r,
+        \]
+        since the first $r$ rows are linearly independent in $\R ^ k$
+        (since the $1$'s in the $I_r$ are in different slots),
+        and the other rows are zero.
+        Finally,
+        upon taking $x_{r + 1}, \dotsc, x_k$ as free variables,
+        we see that a general vector in the nullspace of $A'$
+        (that is,
+        a solution $\mbf{x}$ to the system $A'\mbf{x} = \mbf{0}$)
+        is given by
+        \[
+        \mbf{x} = x_{r + 1}\begin{pmatrix}
+            -\mbf{c}_1 \\
+            - - - \\
+            1 \\
+            0 \\
+            \vdots \\
+            0
+        \end{pmatrix}
+        + x_{r + 2}\begin{pmatrix}
+            -\mbf{c}_2 \\
+            - - - \\
+            0 \\
+            1 \\
+            \vdots \\
+            0
+        \end{pmatrix}
+        +
+        \dotsi
+        +
+        x_k\begin{pmatrix}
+            -\mbf{c}_{k - r} \\
+            - - - \\
+            0 \\
+            0 \\
+            \vdots \\
+            1
+        \end{pmatrix},
+        \]
+        where $\mbf{c}_i \in \R ^ r$ denotes the $i$-th column of $C$.
+        The spanning vectors are clearly linear independent and so
+        \[
+        \mathrm{nullity}(A') = k - r.
+        \]
+    \end{proof}
+\end{theorem}
+
+\begin{corollary}
+    For any matrix $A \in M_{n \times k}(\R)$ we have
+    \begin{enumerate}[label = (\roman*)]
+        \item The rank of $A$ is the number of leading $1$'s in the RREF of $A$.
+        \item The nullity of $A$ is the number columns in the RREF of $A$ without a leading $1$;
+        i.e.,
+        the number of free variables in the solution set to $A\mbf{x} = \mbf{0}$.
+    \end{enumerate}
+\end{corollary}
 
 
 

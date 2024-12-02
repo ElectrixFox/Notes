@@ -3855,6 +3855,163 @@ this $B$ is in fact a basis for $\R ^ 2$.
     \end{enumerate}
 \end{definition}
 
+The $\mathrm{colrank}(A)$ is the dimension of the column space,
+$\mathrm{rowrank}(A)$ is the dimension of the row space,
+$\mathrm{null}(A)$ is the nullity of $A$.
+
+\begin{lemma}
+    Suppose $\{\mbf{v}_1, \dotsc, \mbf{v}_r\} \subseteq \R ^ n$ is a linearly independent subset,
+    and let $P \in M_{n}(\R)$ be an invertible matrix.
+    Then $\{P\mbf{v}_1, P\mbf{v}_2, \dotsc, P\mbf{v}_r\} \subseteq \R ^ n$ is also linearly independent.
+    \begin{proof}
+        Suppose
+        \[
+        \lambda_1P\mbf{v}_1 + \dotsi + \lambda_rP\mbf{v}_r = \mbf{0},
+        \]
+        so $P(\lambda_1\mbf{v}_1 + \dotsi + \lambda_r\mbf{v}_r) = \mbf{0}$.
+        Hence $\lambda_1\mbf{v}_1 + \dotsi + \lambda_r\mbf{v}_r = P ^ {-1}(\mbf{0}) = \mbf{0}$.
+        Thus $\lambda_1 = \lambda_2 = \dotsi = \lambda_r = 0$ so we are done.
+    \end{proof}
+\end{lemma}
+
+\begin{proposition}
+    Let $A \in M_{n \times k}(\R)$ and let $P \in M_n(\R)$ be invertible.
+    Then $A$ and $PA$ have the same column rank,
+    row rank,
+    and nullity.
+    In particular:
+    \begin{enumerate}[label = (\roman*)]
+        \item $A$ and $PA$ have the same row space.
+        \item $A$ and $PA$ have the same column space.
+        \item $A$ and $PA$ has the same kernel.
+    \end{enumerate}
+    \begin{proof}
+        Since invertible matrices are products of elementary matrices it suffices to prove this for $P = E$ an elementary matrix.
+        \begin{enumerate}[label = (\roman*)]
+            \item The rows of $EA$ are a linear combination of the rows of $A$,
+            since $EA$ differs from $A$ by an ERO.
+            So we certainly have $\mathrm{rowspace}(EA) \subseteq \mathrm{rowspace}(A)$.
+            But also $A = E ^ {-1}(EA)$ where $E ^ {-1}$ is elementary so
+            \[
+            \mathrm{rowspace}(A) \subseteq \mathrm{rowspace}(EA),
+            \]
+            as well.
+            
+            \item Let's write
+            \[
+            U = \mathrm{colspace}(A) = \{A\mbf{x}\mid \mbf{x} \in \R ^ k\} \subseteq \R ^ n.
+            \]
+            \[
+            \mathrm{colspace}(PA) = \{PA\mbf{x} \mid \mbf{x} \in \R ^ k\} \subseteq \R ^ n.
+            \]
+            So
+            \begin{align*}
+                \mbf{u} \in U &\iff \mbf{u} = A\mbf{x}\text{ for some $\mbf{x} \in \R ^ k$} \\
+                &\iff P\mbf{u} = PA\mbf{x}\text{ for some $\mbf{x} \in \R ^ k$} \\
+                &\iff P\mbf{u} \in \mathrm{colspace}(PA).
+            \end{align*}
+            Hence
+            \[
+            \mathrm{colspace}(PA) = PU := \{P\mbf{u}\,:\,\mbf{u} \in U\}.
+            \]
+            $\dim{(U)} \overset{?}{=} \dim{(PU)}$
+
+            Let $\{\mbf{v}_1, \dotsc, \mbf{v}_r\} \subseteq \R ^ n$ be a basis for $U$.
+            (so $\dim(U) = r$)
+            
+            Claim:
+            $\{P\mbf{v}_1, \dotsc, P\mbf{v}_r\} \subseteq \R ^ n$ is a basis for $PU$.
+            (so $\dim(PU) = r$).
+                
+            Proof (claim)
+
+            $\{P\mbf{v}_1, \dotsc, P\mbf{v}_r\}$ is certainly linearly independent
+            (by last lemma).
+            If $\mbf{v} \in PU$ then $\mbf{v} = P\mbf{u}$ for some $\mbf{u} + \lambda_1\mbf{v}_1 + \dotsi + \lambda_r\mbf{v}_r \in U$ so $\mbf{v} = P(\lambda_1\mbf{v}_1 + \dotsi + \lambda_r\mbf{v}_r) = \lambda_1P\mbf{v}_1 + \dotsi + \lambda_rP\mbf{v}_r$.
+            So spanning.
+
+            \item Suppose $\mbf{u} \in \R ^ k$ then
+            \[
+            A\mbf{u} = \mbf{0} \iff PA\mbf{u} = \mbf{0}
+            \]
+            so $\mathrm{nullspace}(A) = \mathrm{nullspace}(PA)$.
+        \end{enumerate}
+    \end{proof}
+\end{proposition}
+
+\begin{theorem}[Rank Theorem, label = thm:rankthm]
+    \[
+    \mathrm{rowrank}(A) = \mathrm{colrank}(A).
+    \]
+\end{theorem}
+
+\begin{definition}[Rank]
+    We define the rank of a matrix $A \in M_{n \times k}(\R)$ by
+    \[
+    \mathrm{rk}(A) := \mathrm{rowrank}(A) = \mathrm{colrank}(A).
+    \]
+\end{definition}
+
+\begin{theorem}[Rank-Nullity Theorem]
+    If $A \in M_{n \times k}(\R)$ then we have
+    \[
+    \mathrm{rk}(A) + \mathrm{null}(A) = k.
+    \]
+    \begin{proof}
+        Prove rank-nullity later in more generality.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}[continues = thm:rankthm]
+    \begin{proof}
+        By the proposition,
+        we can consider the RREF of $A$,
+        call this $A'$.
+        \[
+        A' = \left(\hspace{-5pt}
+        \begin{array}{c|c}
+            I_r & C \\
+            \hline
+            0
+        \end{array}
+        \hspace{-5pt}\right) \in M_{n \times k}(\R).
+        \]
+        \[
+        \mathrm{colspace}(A) = \mathrm{span}\langle\mbf{e}_1, \dotsc, \mbf{e}_m\rangle \subseteq \R ^ n
+        \]
+        so $\mathrm{colrank}(A') = m$.
+        \[
+        \mathrm{rowspace}(A') = \langle\mbf{r}_1, \dotsc, \mbf{r}_m\rangle \subseteq \R ^ k
+        \]
+        where $\mbf{r}_i$ is the $i$th row of $A'$.
+        But note $\{\mbf{r}_1, \dotsc, \mbf{r}_m\}$ is linearly independent by looking at the coordinates of the leading $1$'s.
+        So $\mathrm{rowrank}(A') = m$.
+    \end{proof}
+\end{theorem}
+
+Can you see what the dimension of the $\mathrm{nullspace}(A')$ is?
+
+\subsection{Sums and intersections of vector spaces}
+\begin{definition}
+    Suppose $V$ is a vector space $U, W \subseteq V$ are subspaces then
+    \[
+    U \cap W := \{\mbf{u} \in V\mid \mbf{u} \in U, \mbf{u} \in W\} \subseteq V.
+    \]
+    And
+    \[
+    U + W := \{\mbf{u} + \mbf{w} \mid \mbf{u} \in U, \mbf{w} \in W\} \subseteq V.
+    \]
+\end{definition}
+
+\textbf{Exercise}: $U \cap W$ and $U + W$ are subspaces of $V$.
+
+\begin{example}
+    Suppose $\mbf{u, v, w} \in \R ^ 3$ are linearly independent.
+    Then $\Pi_1 := \mathrm{span}\langle\mbf{u, v}\rangle$ and $\Pi_2 := \mathrm{span}\langle\mbf{u, v}\rangle$ are planes through the origin.
+    And $L = \Pi_1 \cap \Pi_2 = \mathrm{span}\langle V \rangle$ while $\Pi_1 + \Pi_2 = \mathrm{span}\langle\mbf{u, v, w}\rangle = \R ^ 3$.
+\end{example}
+
+
 
 
 
