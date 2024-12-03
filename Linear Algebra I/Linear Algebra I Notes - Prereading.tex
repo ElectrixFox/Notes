@@ -2406,7 +2406,7 @@ The notations for linear combination, linear span, spanning sets, and linear ind
     \end{proof}
 \end{lemma}
 
-\begin{lemma}
+\begin{lemma}\label{pre_linalg_lem_ifnotinspanofvecspacethenlinindep}
     Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be $k$ linearly independent vectors in a vector space $V$ and let $\mbf{u} \in V$ such that
     \[
     \mbf{u} \notin \mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_k).
@@ -2421,7 +2421,7 @@ The notations for linear combination, linear span, spanning sets, and linear ind
     Every vector space that is spanned by finitely many vectors has a basis.
 \end{theorem}
 
-\begin{theorem}["What is a basis?"]
+\begin{theorem}["What is a basis?"]\label{pre_linalg_thm_whatisabasis}
     Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be vectors in a vector space $V$.
     Then the following statements are
     (pairwise)
@@ -2499,7 +2499,7 @@ This definition is best understood through the following examples.
     \]
 \end{example}
 
-\begin{theorem}
+\begin{theorem}\label{pre_linalg_thm_finitedimensionalvecspacegivesdimresults}
     Let $V$ be a finite dimensional vector space and $U$ a vector subspace of $V$.
     Then
     \begin{enumerate}[label = (\roman*)]
@@ -2754,6 +2754,154 @@ The following theorem provides us with a list of useful observations.
         the number of free variables in the solution set to $A\mbf{x} = \mbf{0}$.
     \end{enumerate}
 \end{corollary}
+
+\subsection{Sums and intersections of vector subspaces}
+Let $V$ be a vector space and let $U, W$ be subspaces.
+Then define
+\begin{align*}
+    U + W &:= \{\mbf{v} \in V\,:\, \mbf{v} = \mbf{u + w}\text{ for some }\mbf{u} \in U, \mbf{w} \in W\}, \\
+    U \cap W &:= \{\mbf{v} \in V\,:\, \mbf{v} \in U\text{ and } \mbf{v} \in W\}.
+\end{align*}
+
+Both $U + W$ and $U \cap W$ are vector subspaces of $V$.
+
+\begin{proposition}\label{pre_linalg_prop_sumofdimsissumofsumandintersection}
+    Let $U$ and $W$ be finite-dimensional vector subspaces of a vector space $V$.
+    Then
+    \[
+    \dim(U) + \dim(W) = \dim(U + W) + \dim(U \cap W).
+    \]
+    \begin{proof}
+        Let $\{\mbf{v}_1, \dotsc, \mbf{v}_r\}$ be a basis for $U \cap W$
+        (we know such a basis exists by \autoref{pre_linalg_thm_finitedimensionalvecspacegivesdimresults}).
+        Using \autoref{pre_linalg_lem_ifnotinspanofvecspacethenlinindep} multiple times,
+        we may repeatedly add vectors in $U$ to this set
+        (keeping it linearly independent)
+        until we span $U$.
+        Do the same for $W$.
+        Then,
+        we have extended the basis $\{\mbf{v}_1, \dotsc, \mbf{v}_r\}$ to bases of $U$ and $W$ given by
+        \[
+        \{\mbf{v}_1, \dotsc, \mbf{v}_r, \mbf{u}_{r + 1}, \dotsc, \mbf{u}_s\},\quad\{\mbf{v}_1, \dotsc, \mbf{v}_r, \mbf{w}_{r + 1}, \dotsc, \mbf{w}_t\}
+        \]
+        respectively.
+        Then we claim that
+        \[
+        B = \{\mbf{v}_1, \dotsc, \mbf{v}_r, \mbf{u}_{r + 1}, \dotsc, \mbf{u}_s, \mbf{w}_{r + 1}, \dotsc, \mbf{w}_t\}
+        \]
+        is a basis for $U + W$.
+        If this claim is true we have
+        \[
+        \dim(U) + \dim(W) = s + t = (s + t - r) + r = \dim(U + W) + \dim(U \cap W).
+        \]
+        In order to prove this claim,
+        observe that $B$ spans $U + W$,
+        all we need to do now is establish linear independence.
+        If $s = 0$ or $t = 0$ it is trivial.
+        Assume $s \geq 1$ and $t \geq 1$.
+        Now consider
+        \[
+        \mbf{0} = \lambda_1\mbf{v}_1 + \dotsi + \lambda_r\mbf{v}_r + \mu_{r + 1}\mbf{u}_{r + 1} + \dotsi + \mu_s\mbf{u}_s + \gamma_{r + 1}\mbf{w}_{r + 1} + \dotsi + \gamma_t\mbf{w}_t.
+        \]
+        Suppose at least one of the $\gamma_j$ is non-zero.
+        This gives
+        \[
+        \lambda_1\mbf{v}_1 + \dotsi + \lambda_r\mbf{v}_r + \mu_{r + 1}\mbf{u}_{r + 1} + \dotsi + \mu_s\mbf{u}_s + = -(\gamma_{r + 1}\mbf{w}_{r + 1} + \dotsi + \gamma_t\mbf{w}_t).
+        \]
+        The left hand side is in $U$ and the right hand side is in $W \setminus (U \cap W)$.
+        But,
+        the intersection of these two sets is empty,
+        so we have a contradiction.
+        Thus $\gamma_{r + 1} = \dotsi = \gamma_t = 0$.
+        Since the vectors
+        \[
+        \{\mbf{v}_1, \dotsc, \mbf{v}_r, \mbf{u}_{r + 1}, \dotsc, \mbf{u}_s\}
+        \]
+        are linearly independent we must also have $\lambda_1 = \dotsi = \lambda_r = \mu_{r + 1} = \dotsi = \mu_s = 0$.
+        Thus the vectors $B$ are linearly independent.
+    \end{proof}
+\end{proposition}
+
+\begin{definition}[Direct Sum]
+    Suppose that $U$ and $W$ are vector subspaces of $V$ with
+    \begin{enumerate}[label = (\roman*)]
+        \item $U + W = V$;
+        \item $U \cap W = \{\mbf{0}\}$.
+    \end{enumerate}
+    Then,
+    we say $V$ is the direct sum of $U$ and $W$ and write $V = U \oplus W$.
+\end{definition}
+
+\begin{proposition}
+    Let $U$ and $W$ be two subspaces of a vector space $V$.
+    Then the following statements are pairwise equivalent:
+    \begin{enumerate}[label = (\roman*)]
+        \item $V = U \oplus W$;
+        \item If $\{\mbf{u}_1, \dotsc, \mbf{u}_s\}$ is a basis for $U$ and $\{\mbf{w}_1, \dotsc, \mbf{w}_t\}$ is a basis for $W$,
+        then $\{\mbf{u}_1, \dotsc, \mbf{u}_s, \mbf{w}_1, \dotsc, \mbf{w}_t\}$ is a basis for $V$;
+        \item $V = U + W$ and $\dim{V} = \dim{U} + \dim{W}$;
+        \item Every $\mbf{v} \in V$ can be written uniquely as $\mbf{v} = \mbf{u} + \mbf{w}$ where $\mbf{u} \in U$ and $\mbf{w} \in W$.
+    \end{enumerate}
+    \begin{proof}
+        $(i) \iff (ii) \iff (iii)$ follows from \autoref{pre_linalg_prop_sumofdimsissumofsumandintersection} and its proof.
+        For $(i) \iff (iv)$ see problem sheet $9$.
+    \end{proof}
+\end{proposition}
+
+\subsection{Coordinates}
+If $B = \{\mbf{v}_1, \dotsc, \mbf{v}_n\}$ is a basis for $V$ and if $\mbf{u}$ is any point of $V$ then
+(by \autoref{pre_linalg_thm_whatisabasis})
+we can uniquely express $\mbf{u}$ as
+\[
+\mbf{u} = x_1\mbf{v}_1 + \dotsi + x_n\mbf{v}_n.
+\]
+We call the real numbers $(x_1, \dotsc, x_n)$ the coordinates of $\mbf{u}$ with respect to this basis.
+
+The coordinates are simply a collection of real numbers,
+if we wished we could write them as a column vector.
+We obtain a map,
+which we call the coordinate map,
+\begin{align*}
+    \Phi = \Phi_B : &V \rightarrow &\R ^ n \\
+    &\mbf{u} \mapsto \Phi(\mbf{u}) &:=\begin{pmatrix}
+        x_1 \\ \vdots \\ x_n
+    \end{pmatrix}.
+\end{align*}
+It is clear that the coordinate map depends on the choice of the basis $B$.
+
+For a column vector $\mbf{x} = \begin{pmatrix}
+    x_1 \\ \vdots \\ x_n
+\end{pmatrix} \in \R ^ n$,
+we have that $(x_1, \dotsc, x_n)$ are the coordinates of $\mbf{x}$ with respect to the standard basis $\{\mbf{e}_1, \dotsc, \mbf{e}_n\}$.
+
+\begin{lemma}
+    Consider a basis $\mbf{v}_1, \mbf{v}_2, \dotsc, \mbf{v}_n$ of $\R ^ n$,
+    and let $P = (\mbf{v}_1, \mbf{v}_2, \dotsc, \mbf{v}_n)$ be the associated matrix of column vectors.
+    Then the coordinates $(x_1, \dotsc, x_n)$ of $\mbf{u}$ with respect to $\mbf{v}_1, \mbf{v}_2, \dotsc, \mbf{v}_n$ are given by
+    \[
+    \begin{pmatrix}
+        x_1 \\ \vdots \\ x_n
+    \end{pmatrix} = P ^ {-1}\mbf{u}.
+    \]
+    Note that if $\{\mbf{v}_1, \mbf{v}_2, \dotsc, \mbf{v}_n\} = \{\mbf{e}_1, \dotsc, \mbf{e}_n\}$ then $P = I_n$.
+\end{lemma}
+
+\newpage
+
+\section{Linear maps}
+
+\subsection{Definition and examples of linear maps}
+
+\begin{definition}[Linear map]
+    Let $V$ and $W$ be two vector spaces,
+    with addition denoted by $+_{V}$ and $+_{W}$ respectively.
+    A linear map $T : V \rightarrow W$ is a function satisfying the following properties
+    \begin{enumerate}[label = (\roman*)]
+        \item for all $\mbf{u}$ and $\mbf{v}$ in $V$ we have $T(\mbf{u} +_{V} \mbf{v}) = T(\mbf{u}) +_{W} T(\mbf{v})$;
+        \item for all $\mbf{v}$ in $V$ and all $\lambda \in \R$ we have $T(\lambda\mbf{v}) = \lambda T(\mbf{v})$.
+    \end{enumerate}
+\end{definition}
+
 
 
 
