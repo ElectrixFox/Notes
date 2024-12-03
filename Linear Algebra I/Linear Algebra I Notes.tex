@@ -113,7 +113,7 @@ The operation is defined as such
 \textbf{Intuition}
 
 Vectors can be thought of a point in $n$-dimensional space
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}
     \draw[->] (0,0) -- (0,2);
@@ -126,7 +126,7 @@ Vectors can be thought of a point in $n$-dimensional space
 \end{figure}
 
 As a direction to a point
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}
     \draw[->] (0,0) -- (0,2);
@@ -142,7 +142,7 @@ As a direction to a point
 \end{figure}
 
 As up to translation
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}
     \draw[->] (0,0) -- (0,2);
@@ -157,7 +157,7 @@ As up to translation
 \end{figure}
 
 Vector addition
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}
     \draw[->] (0,0) -- (0.5,1);
@@ -172,7 +172,7 @@ Vector addition
 \end{figure}
 
 Scalar multiplication
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}
     \draw[->] (2,2) -- (3,3) node[left] {$\mbf{v}$};
@@ -399,7 +399,7 @@ $|\mbf{v}| \geq 0 \text{ and } |\mbf{v}| = 0 \iff \mbf{v = 0}$
 \end{example}
 
 Thinking about a vector $\mbf{v} \in \R ^ 2$ where $\mbf{v \neq 0}$
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}
     \draw[->] (0,0) -- (0,2);
@@ -4010,6 +4010,180 @@ Can you see what the dimension of the $\mathrm{nullspace}(A')$ is?
     Then $\Pi_1 := \mathrm{span}\langle\mbf{u, v}\rangle$ and $\Pi_2 := \mathrm{span}\langle\mbf{u, v}\rangle$ are planes through the origin.
     And $L = \Pi_1 \cap \Pi_2 = \mathrm{span}\langle V \rangle$ while $\Pi_1 + \Pi_2 = \mathrm{span}\langle\mbf{u, v, w}\rangle = \R ^ 3$.
 \end{example}
+
+\begin{proposition}
+    Suppose $U, W \subseteq V$ are finite dimensional subspaces.
+    Then $U \cap W$,
+    $U + W$ are also finite dimensional and
+    \[
+    \dim(U) + \dim(W) = \dim(U \cap W) + \dim(U + W).
+    \]
+    \begin{proof}
+        First note that $U \cap W \subseteq U$ and $U$ is finite dimensional so therefore $U \cap W$ is finite dimensional.
+        Let $\{\mbf{v}_1, \dotsc, \mbf{v}_k\}$ be a basis for $U \cap W$.
+        Extend this to a basis
+        \[
+        \{\mbf{v}_1, \dotsc, \mbf{v}_k, \mbf{u}_1, \dotsc, \mbf{u}_{\ell}\}
+        \]
+        of $U$,
+        and to a basis
+        \[
+        \{\mbf{v}_1, \dotsc, \mbf{v}_k, \mbf{w}_1, \dotsc, \mbf{w}_m\}
+        \]
+        of $W$.
+
+        Claim:
+        \[
+        B = \{\mbf{v}_1, \dotsc, \mbf{v}_k, \mbf{u}_1, \dotsc, \mbf{u}_{\ell}, \mbf{w}_1, \dotsc, \mbf{w}_m\}
+        \]
+        is a basis for $U + W$.
+        So
+        \[
+        \dim(U + W) + \dim(U \cap W) = (k + \ell + m) + k = (k + \ell) + (k + m) = \dim(U) + \dim(W).
+        \]
+        Certainly $B$ spans $U + W$
+        (this shows $U + W$ is finite dimensional).
+        
+        Is $B$ linearly independent?
+        
+        Suppose
+        \[
+        \lambda_1\mbf{v}_1 + \dotsi + \lambda_k\mbf{v}_k + \mu_1\mbf{u}_1 + \dotsi + \mu_{\ell}\mbf{u}_{\ell} + \eta_1\mbf{w}_1 + \dotsi + \eta_m\mbf{w}_m = \mbf{0}.
+        \]
+        So we have
+        \begin{equation}\tag{*}
+            \lambda_1\mbf{v}_1 + \dotsi + \lambda_k\mbf{v}_k + \mu_1\mbf{u}_1 + \dotsi + \mu_{\ell}\mbf{u}_\ell = -(\eta_1\mbf{w}_1 + \dotsi + \eta_m\mbf{w}_m) \in U \cap W
+            \footnote{The left is in $U$ and the right is in $W$.}.
+        \end{equation}
+        So $-(\eta_1\mbf{w}_1 + \dotsi + \eta_m\mbf{w}_m) = \lambda'_1\mbf{v}_1 + \dotsi + \lambda'_k\mbf{v}_k$ for some $\lambda'_i \in \R$.
+        So $\lambda'_1\mbf{v}_1 + \dotsi + \lambda'_k\mbf{v}_k + \eta_1\mbf{w}_1 + \dotsi + \eta_m\mbf{w}_m = \mbf{0}$.
+        Hence $\lambda'_1 = \dotsi = \lambda'_k = \eta_1 = \dotsi = \eta_m = \mbf{0}$.
+        
+        So (*) becomes:
+        \[
+        \lambda_1\mbf{v}_1 + \dotsi + \lambda_k\mbf{v}_k + \mu_1\mbf{u}_1 + \dotsi + \mu_{\ell}\mbf{u}_{\ell} = \mbf{0}.
+        \]
+        Hence $\lambda_1 = \dotsi = \lambda_k = \mu_1 = \dotsi = \mu_{\ell} = 0$.
+    \end{proof}
+\end{proposition}
+
+\begin{example}
+    $V = M_2(\R)$.
+    $U, L \subseteq V$.
+    \[
+    U = \left\{\begin{pmatrix}
+        a & b \\ 0 & d
+    \end{pmatrix}\,:\, a, b, d \in \R\right\}. \text{ Upper triangular.}
+    \]
+    \[
+    L = \left\{\begin{pmatrix}
+        a & 0 \\ c & d
+    \end{pmatrix}\,:\, a, c, d \in \R\right\}. \text{ Lower triangular.}
+    \]
+    \[
+    D = U \cap L = \left\{\begin{pmatrix}
+        a & 0 \\ 0 & d
+    \end{pmatrix}\,:\, a, d \in \R\right\}. \text{ Diagonal.}
+    \]
+    There are each subspaces of $V$.
+
+    Bases:
+    \[
+    \left\{\begin{pmatrix}
+        1 & 0 \\ 0 & 0
+    \end{pmatrix}, \begin{pmatrix}
+        0 & 1 \\ 0 & 0
+    \end{pmatrix}, \begin{pmatrix}
+        0 & 0 \\ 0 & 1
+    \end{pmatrix}\right\},
+    \]
+    \[
+    \left\{\begin{pmatrix}
+        1 & 0 \\ 0 & 0
+    \end{pmatrix}, \begin{pmatrix}
+        0 & 0 \\ 1 & 0
+    \end{pmatrix}, \begin{pmatrix}
+        0 & 0 \\ 0 & 1
+    \end{pmatrix}\right\},
+    \]
+    \[
+    \left\{\begin{pmatrix}
+        1 & 0 \\ 0 & 0
+    \end{pmatrix}, \begin{pmatrix}
+        0 & 0 \\ 0 & 1
+    \end{pmatrix}\right\}.
+    \]
+    $\dim(U) = 3$.
+
+    $\dim(L) = 3$.
+
+    $\dim(U \cap L) = \dim(D) = 2$.
+
+    $\dim(U + L) = 3 + 3 - 2 = 4$.
+
+    So $U + L = M_2(\R)$.
+\end{example}
+
+\begin{definition}[Direct Sum]
+    Suppose $U, W \subseteq V$ are subspaces that satisfy
+    \begin{enumerate}[label = (\roman*)]
+        \item $U + W = V$.
+        \item $U \cap W = 0 = \{\mbf{0}\}$.
+    \end{enumerate}
+    Then we call $V$ the direct sum of $U$ and $W$,
+    and write $V = U \oplus W$.
+\end{definition}
+
+\begin{proposition}
+    If $V$ is finite dimensional and $U, W \subseteq V$ are subspaces,
+    then the following are pairwise equivalent:
+    \begin{enumerate}[label = (\roman*)]
+        \item $V = U \oplus W$.
+        \item If $\{\mbf{u}_1, \dotsc, \mbf{u}_{\ell}\}, \{\mbf{w}_1, \dotsc, \mbf{w}_k\}$ are bases for $U$ and $W$ respectively then $\{\mbf{u}_1, \dotsc, \mbf{u}_{\ell}, \mbf{w}_1, \dotsc, \mbf{w}_k\}$ is a basis for $V$.
+        \item $V = U + W$ and $\dim{V} = \dim{U} + \dim{W}$.
+        \item Every $\mbf{v} \in V$ can be written uniquely as $\mbf{v} = \mbf{u} + \mbf{w}$ for some
+        (unique)
+        choice $\mbf{u} \in U$,
+        $\mbf{w} \in W$.
+    \end{enumerate}
+    \begin{proof}
+        $(i) \iff (ii) \iff (iii)$ follows from the previous proposition.
+        $(i) \iff (iv)$ see problem sheet $9$.
+    \end{proof}
+\end{proposition}
+
+\begin{example}
+    $V = M_n(\R)$
+    
+    $S = \{A \in V \mid A ^ T = A\}$.
+
+    $T = \{A \in V \mid A ^ T = -A\}$.
+
+    $S$ is the $n \times n$ symmetric matrices.
+    $T$ is the $n \times n$ anti-symmetric matrices.
+
+    $S, T \subseteq V$ are subspaces.
+    Also $V = S \oplus T$.
+    \begin{proof}
+        Check definition.
+        (i)
+        If $A \in V$ then $A = \underbrace{\frac{1}{2}(A + A ^ T)}_{\in S} + \underbrace{\frac{1}{2}(A - A ^ T)}_{\in T}$.
+        \[
+        \left(\frac{1}{2}(A + A ^ T)\right) ^ 2 = \frac{1}{2}(A ^ T + A ^ {TT}) = \frac{1}{2}(A ^ T + A).
+        \]
+        \[
+        \left(\frac{1}{2}(A - A ^ T)\right) ^ 2 = \frac{1}{2}(A ^ T - A ^ {TT}) = -\frac{1}{2}(A - A ^ T).
+        \]
+        (ii)
+        Suppose $A \in S \cap T$ then $A = A ^ T = -A$ so $2A = 0$ thus $A = 0$.
+        Hence $S \cap T = 0 = \{0\}$.
+    \end{proof}
+\end{example}
+
+
+
+
+
 
 
 
