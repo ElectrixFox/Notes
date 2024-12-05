@@ -369,6 +369,7 @@ The following are facts about continuity
     \]
 \end{example}
 
+
 \begin{example}
     \[
     \lim_{x \rightarrow 0}\,\frac{1}{x}\ \text{does not exist.}
@@ -462,7 +463,8 @@ We can use this to prove the second limit
     \]
 \end{example}
 
-\subsection{Limits as $x \rightarrow \infty$}
+
+\subsection{Limits as \texorpdfstring{$x \rightarrow \infty$}{x tends to infinity}}
 
 A function has a limit $L$ as $x \rightarrow \infty$ if $f(x)$ can be kept arbitrarily close to $L$ as long as $x$ is sufficiently large.
 
@@ -2786,9 +2788,154 @@ terms of the Taylor series
     \]
 \end{example}
 
+\begin{example}
+    Calculate the Taylor series of $\sin(x)$.
+
+    $f(x) = \sin(x)$,
+    $f(0) = 0$,
+    
+    $f'(x) = \cos(x)$,
+    $f'(0) = 1$,
+
+    $f''(x) = -\sin(x)$,
+    $f''(0) = 0$,
+    
+    $f'''(x) = -\cos(x)$,
+    $f'''(0) = -1$.
+
+    Since $f ^ {(4)}(x) = f(x)$,
+    $f ^ {(k + 4)}(x) = f ^ {(k)}(x)$
+
+    so for $k \in \N$ and so $f ^ {(2k)}(0) = 0$ and
+    $f ^ {(2k + 1)}(0) = (-1) ^ k$
+    and so the Taylor series of $\sin$ is
+    \[
+    \sin(x) = \sum_{k = 0}^{\infty}\frac{(-1) ^ k}{(2k + 1)!}x ^ {2k + 1} = x - \frac{x ^ 3}{3!} + \dotsc
+    \]
+    Note that only odd powers of $x$ appear,
+    which is what we should expect,
+    since $\sin(x)$ is an odd function.
+
+    Similarly,
+    the Taylor series of $\cos(x)$ is
+    \[
+    \cos(x) = \infsum[k = 0]\frac{(-1) ^ {k}}{(2k)!}x ^ {2k} = 1 - \frac{x ^ 2}{2} + \frac{x ^ 4}{4!} + \dotsc
+    \]
+    Which only includes even powers of $x$ since $\cos$ is even.
+\end{example}
+
+We can calculate the Taylor series of $\sinh(x) = f(x)$ by noting that for any non-negative integer $k$
+\[
+f ^ {(k)}(x) = \begin{cases}
+    \sinh(x), & \text{even } k, \\
+    \cosh(x), & \text{odd } k.
+\end{cases}
+\]
+and so $f ^ {(2k)}(0) = 0$ and $f ^ {(2k + 1)}(0) = 1$.
+Therefore
+\[
+\sinh(x) = \infsum[k = 0]\frac{1}{(2k + 1)!}x ^ {2k + 1} = x + \frac{x ^ 3}{3!} + \frac{x ^ 5}{5!} + \dotsc
+\]
+and similarly
+\[
+\cosh(x) = \infsum[k = 0]\frac{1}{(2k)!}x ^ {2k} = 1 + \frac{x ^ 2}{2} + \frac{x ^ 4}{4!} + \dotsc
+\]
+This also follows directly from the Taylor series of $e ^ x$,
+since $\cosh(x)$ is the even part of $e ^ x$ and $\sinh(x)$ is the odd part.
+
+Since $\log(x)$ is not defined at $x = 0$,
+we usually consider the Taylor series about $x = 1$.
+With
+
+$f(x) = \log(x)$,
+$f(1) = 0$,
+
+$f'(x) = \frac{1}{x}$,
+$f'(1) = 1$,
+
+$f''(x) = -\frac{1}{x ^ 2}$,
+$f''(1) = -1$,
+
+$f'''(x) = \frac{2}{x ^ 3}$,
+$f'''(1) = 2$,
 
 
+$f ^ {(4)}(x) = \frac{-3 \cdot 2}{x ^ 4}$,
+$f ^ {(4)}(1) = -6 = -3!$.
 
+We see that for $k > 0$,
+$f ^ {(k)}(x) = (-1) ^ {k - 1}\frac{(k - 1)!}{x ^ k}$,
+so $f ^ {(k)}(1) = (-1) ^ {k - 1}(k - 1)!$.
+The Taylor series of $\log{x}$ about $x = 1$ is therefore
+\[
+\log{x} = \infsum[k = 1]\frac{(-1) ^ {k - 1}(k - 1)!}{k!}(x - 1) ^ k = \infsum[k = 1]\frac{(-1) ^ {k - 1}}{k}(x - 1) ^ k.
+\]
+It is common to change variables with $y = x - 1$ such that
+\[
+\log{(y + 1)} = \infsum[k = 1]\frac{(-1) ^ {k - 1}}{k}y ^ k
+\]
+or renaming $y$ as $x$
+\[
+\log{(x + 1)} = \infsum[k = 1]\frac{(-1) ^ {k - 1}}{k}x ^ k.
+\]
+One can show that in order for this $\lim_{n \rightarrow \infty}R_n(x) = 0$ we must have $-1 < x \leq 1$.
+So this Taylor series for $\log(1 + x)$ is valid only for $-1 < x \leq 1$
+(otherwise it does not converge).
+
+\subsection{Lagrange form for the remainder}
+There is a more convenient expansion for the remainder term in Taylor's theorem.
+The Lagrange form of the remainder is
+\[
+R_n(x) = \frac{f ^ {(n + 1)}(c)}{(n + 1)!}(x - a) ^ {n + 1}
+\]
+for some $c$ in $(a, x)$.
+To prove this we need the following lemma:
+\begin{lemma}
+    Let $h(t)$ be differentiable $(n + 1)$ times on $[a, x]$,
+    with $h ^ {(k)}(a) = 0$ for $0 \leq k \leq n$ and $h(x) = 0$ then $\exists c \in (a, x)$ such that $h ^ {(n + 1)}(c) = 0$.
+    \begin{proof}
+        We use Rolle's theorem
+        (\autoref{calc_thm_rolle}),
+        since $h(a) = h(x) = 0$,
+        $\exists c_1 \in (a, x)$ such that $h'(c_1) = 0$.
+
+        Then since $h'(a) = h'(c_1) = 0$,
+        $\exists c_2 \in (a, c_1)$ such that $h''(c_2) = 0$.
+
+        Applying this argument a total of $n$ times we get
+        \[
+        h ^ {(n)}(a) = h ^ {(n)}(c_n) = 0
+        \]
+        so $\exists c_{n + 1} \in (a, c_n)$ such that $h ^ {(n + 1)}(c_n) = 0$.
+    \end{proof}
+\end{lemma}
+
+\begin{proof}[Proof of Lagrange form of the remainder]
+    We use a similar idea to our proof of the mean value theorem.
+    
+    Consider $h(t) = (f(t) - P_n(t))(x - a) ^ {n + 1} - (f(x) - P_n(x))(t - a) ^ {n + 1}$.
+
+    We have $h(x) = 0$.
+    Since $P_n(t) = f(a) + f'(a)(t - a) + \frac{f''(a)}{2}(t - a) ^ 2 + \dotsi + \frac{f ^ {(n)}(a)}{n!}(t - a) ^ n$.
+    Then $P_n(a) = f(a)$,
+    $P'_n(a) = f'(a)$ and more generally since
+    \[
+    \left.\frac{d ^ k}{(dt) ^ k}(t - a) ^ {n + 1}\right|_{t = a} = 0
+    \]
+    for $0 \leq k \leq n$ and
+    \[
+    \left.\frac{d ^ {n + 1}}{(dt) ^ {n + 1}}(t - a) ^ {n + 1}\right|_{t = a} = (n + 1)!,
+    \]
+    \[
+    P_n ^ {(k)}(a) = f ^{(k)}(a).
+    \]
+    Then $h ^ {(k)}(a) = 0$ for $0 \leq k \leq a$ and hence by the previous lemma $\exists c \in (a, x)$ such that $h ^ {(n + 1)}(c) = 0$.
+    \[
+    P_n ^ {(n + 1)}(t) = 0
+    \]
+    since $P_n(t)$ is degree $n$,
+    and $\frac{d ^ {n + 1}}{(dt) ^ {n + 1}}(t - a) ^ {n + 1} = (n + 1)!$ hence $0 = h ^ {(n + 1)}(c) = f ^ {(n + 1)}(c)(x - a) ^ {n + 1} - (f(x) - P_n(x))(n + 1)!$ and by rearranging $f(x) = P_n(x) + \frac{f ^ {(n + 1)}(c)}{(n + 1)!}(x - a) ^ {n + 1}$.
+\end{proof}
 
 
 
