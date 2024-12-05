@@ -3115,7 +3115,10 @@ $\mathrm{span}\langle\mbf{u}_1, \dotsc, \mbf{u}_k\rangle = \{\text{All linear co
     Hence $\mbf{v}_1, \mbf{v}_2, \mbf{v}_3$ are linearly independent
 \end{example}
 
-\subsection{Real vector spaces}
+\newpage
+
+\section{Real vector spaces}
+\subsection{Subspaces of $\R ^ n$}
 \begin{definition}
     A real vector space is a non-empty set $V$ together with two operations:
     \begin{enumerate}[label = (\roman*)]
@@ -4180,20 +4183,417 @@ Can you see what the dimension of the $\mathrm{nullspace}(A')$ is?
     \end{proof}
 \end{example}
 
+\subsection{Coordinates}
+$B$ is a basis for $V$.
+The following statements are equivalent:
+$B$ is a maximal linearly independent subset,
+$B$ is a minimal spanning set,
+$B = \{\mbf{v}_1, \dotsc, \mbf{v}_n\}$ is a basis if and only if we can write each $\mbf{v} \in V$ uniquely
+(unique $\lambda_1, \dotsc, \lambda_n$)
+as
+\[
+\mbf{v} = \lambda_1\mbf{v}_1 + \dotsi + \lambda_n\mbf{v}_n.
+\]
 
+We call $\lambda_1, \dotsc, \lambda_n$ or
+$
+\begin{pmatrix}
+    \lambda_1 \\ \lambda_2 \\ \vdots \\ \lambda_n
+\end{pmatrix} \in \R ^ n
+$
+the coordinates of $\mbf{v}$ with respect to $B$.
 
+\begin{definition}
+    We define the coordinate map with respect to $B$
+    ($B$ a 
+    (ordered)
+    basis for $V$)
+    \[
+    \Phi_B : V \rightarrow \R ^ n\qquad\text{($n = \dim{V}$)}
+    \]
+    by
+    \[
+    \Phi_B : \mbf{v} \mapsto \begin{pmatrix}
+        \lambda_1 \\ \vdots \\ \lambda_n
+    \end{pmatrix}
+    \]
+    where $\mbf{v} = \lambda_1\mbf{v}_1 + \dotsi + \lambda_n\mbf{v}_n$.
+\end{definition}
 
+\begin{example}
+    The standard basis for $M_2(\R)$ is
+    \[
+    B = \left\{\begin{pmatrix}
+        1 & 0 \\ 0 & 0
+    \end{pmatrix}, \begin{pmatrix}
+        0 & 1 \\ 0 & 0
+    \end{pmatrix}, \begin{pmatrix}
+        0 & 0 \\ 1 & 0
+    \end{pmatrix}, \begin{pmatrix}
+        0 & 0 \\ 0 & 1
+    \end{pmatrix}\right\}
+    \]
+    so
+    \begin{align*}
+        \Phi_B &: M_2(\R) \rightarrow \R ^ 4
+        &: \begin{pmatrix}
+        a & b \\ c & d
+        \end{pmatrix}
+        \mapsto \begin{pmatrix}
+            a \\ b \\ c \\ d
+        \end{pmatrix}.
+    \end{align*}
 
+    If we take the basis
+    \[
+    e = \left\{\begin{pmatrix}
+        1 & 0 \\ 0 & 0
+    \end{pmatrix}, \begin{pmatrix}
+        0 & 0 \\ 1 & 0
+    \end{pmatrix}, \begin{pmatrix}
+        0 & -2 \\ 0 & 0
+    \end{pmatrix}, \begin{pmatrix}
+        0 & 0 \\ 0 & 1
+    \end{pmatrix}\right\}
+    \]
+    then
+    \[
+    \begin{pmatrix}
+        a & b \\ c & d
+    \end{pmatrix}
+    =
+    a\begin{pmatrix}
+        1 & 0 \\ 0 & 0
+    \end{pmatrix}
+    +
+    c\begin{pmatrix}
+        0 & 0 \\ 1 & 0
+    \end{pmatrix}
+    -\frac{1}{2}b\begin{pmatrix}
+        0 & -2 \\ 0 & 0
+    \end{pmatrix}
+    +
+    d\begin{pmatrix}
+        0 & 0 \\ 0 & 1
+    \end{pmatrix}
+    \]
+    so
+    \[
+    \Phi_E \begin{pmatrix}
+        a & b \\ c & d
+    \end{pmatrix} = \begin{pmatrix}
+        a \\ c \\ -\frac{1}{2}b \\ d
+    \end{pmatrix}
+    \]
 
+    We would take
+    \[
+    E = \left\{\begin{pmatrix}
+        1 & 0 \\ 0 & 0
+    \end{pmatrix}, \begin{pmatrix}
+        1 & 1 \\ 0 & 0
+    \end{pmatrix}, \begin{pmatrix}
+        0 & 0 \\ 1 & 0
+    \end{pmatrix}, \begin{pmatrix}
+        0 & 0 \\ 0 & 1
+    \end{pmatrix}\right\}
+    \]
+    \[
+    \begin{pmatrix}
+        a & b \\ c & d
+    \end{pmatrix}
+    =
+    (a - b)\begin{pmatrix}
+        1 & 0 \\ 0 & 0
+    \end{pmatrix}
+    +
+    b\begin{pmatrix}
+        1 & 1 \\ 0 & 0
+    \end{pmatrix}
+    +
+    c\begin{pmatrix}
+        0 & 0 \\ 1 & 0
+    \end{pmatrix}
+    +
+    d\begin{pmatrix}
+        0 & 0 \\ 0 & 1
+    \end{pmatrix}
+    \]
+    \[
+    \Phi_E\begin{pmatrix}
+        a & b \\ c & d
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        a - b \\ b \\ c \\ d
+    \end{pmatrix}
+    \]
+\end{example}
 
+Coordinates for $\R ^ n$
 
+If $B = \{\mbf{e}_1, \dotsc, \mbf{e}_n\}$ is the standard basis for $\R ^ n$ then
+\[
+\Phi_B : \begin{pmatrix}
+    \lambda_1 \\ \vdots \\ \lambda_n
+\end{pmatrix}
+\mapsto
+\begin{pmatrix}
+    \lambda_1 \\ \vdots \\ \lambda_n
+\end{pmatrix}
+\]
+so $\Phi_B = \mathrm{id}_{\R ^ n}\,:\, \R ^ n \rightarrow \R ^ n$.
 
+Suppose $e = \{\mbf{v}_1, \dotsc, \mbf{v}_n\}$ is a basis for $\R ^ n$,
+let's think about $\Phi_e\,:\,\R ^ n \rightarrow \R ^ n$.
 
+Set $P = \begin{pmatrix}
+    \mbf{v}_1 & \mbf{v}_2 & \dotsi & \mbf{v}_n
+\end{pmatrix} \in M_n(\R)$
+is invertible since $e$ is a basis.
 
+Then if
+\begin{align*}
+    \mbf{v} &= \lambda_1\mbf{v}_1 + \lambda_2\mbf{v}_2 + \dotsi + \lambda_n\mbf{v}_n \\
+    &= P\begin{pmatrix}
+        \lambda_1 \\ \vdots \\ \lambda_n
+    \end{pmatrix}
+\end{align*}
+so
+\[
+P\begin{pmatrix}
+    \lambda_1 \\ \vdots \\ \lambda_n
+\end{pmatrix} = \Phi_e(\mbf{v}) = P ^ {-1}\mbf{v}.
+\]
 
+\begin{example}
+    Show that 
+    \[
+    \mbf{v}_1 = \begin{pmatrix}
+        1 \\ 2 \\ 3
+    \end{pmatrix},\quad\mbf{v}_2 = \begin{pmatrix}
+        2 \\ 3 \\ 2
+    \end{pmatrix},\quad\mbf{v}_3 = \begin{pmatrix}
+        3 \\ 2 \\ 1
+    \end{pmatrix}
+    \]
+    is a basis for $\R ^ 3$ and give the coordinates of $\mbf{v} = \begin{pmatrix}
+        3 \\ 4 \\ 5
+    \end{pmatrix}$ with respect to this basis.
 
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{$\triangle$}
+        Form
+        \[
+        P = \begin{pmatrix}
+            1 & 2 & 3 \\
+            2 & 3 & 2 \\
+            3 & 2 & 1
+        \end{pmatrix}
+        \]
+        show $P$ is invertible
+        (i.e. $\det{P} \neq 0$)
+        hence we have a basis.
+        Then find $P ^ {-1}$,
+        \[
+        P ^ {-1} = \dotsi
+        \]
+        Finally,
+        compute
+        \[
+        \begin{pmatrix}
+            \lambda_1 \\ \lambda_2 \\ \lambda_3
+        \end{pmatrix}
+        = P ^ {-1}\begin{pmatrix}
+            3 \\ 4 \\ 5
+        \end{pmatrix} = \dotsi = \frac{1}{2}\begin{pmatrix}
+            1 \\ 0 \\ 3
+        \end{pmatrix}.
+        \]
+        This would imply
+        \[
+        \begin{pmatrix}
+            3 \\ 4 \\ 5
+        \end{pmatrix} = \frac{1}{2}\begin{pmatrix}
+            1 \\ 2 \\ 3
+        \end{pmatrix}
+        + \frac{3}{2}\begin{pmatrix}
+            3 \\ 2 \\ 1
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            \dotsi
+        \end{pmatrix}
+        \]
+    \end{proof}
+\end{example}
 
+\newpage
 
+\section{Linear Maps}
+\begin{definition}[Linear map]
+    Suppose $V$,
+    $W$ are vector spaces.
+    A linear map is a function $T : V \rightarrow W$ satisfying:
+    \begin{enumerate}[label = (\roman*)]
+        \item For all $\mbf{u}, \mbf{v} \in V$ we have
+        \footnote{Also can be called linearity.}
+        \[
+        T(\mbf{u} + \mbf{v}) = T(\mbf{u}) + T(\mbf{v})
+        \]
+        and
+        \item For all $\lambda \in \R$,
+        and $\mbf{u} \in V$ we have
+        \[
+        T(\lambda\mbf{u}) = \lambda T(\mbf{u}).
+        \]
+    \end{enumerate}
+\end{definition}
+"Linear maps preserve the structure of a vector space"
+
+\begin{lemma}
+    If $T\,:\, V \rightarrow W$ is linear then $T(\mbf{0}) = \mbf{0}$
+    \begin{proof}
+        \begin{align*}
+            T(\mbf{0}) &= T(\mbf{0 + 0}) \\
+            &- T(\mbf{0}) + T(\mbf{0}) \\
+            \text{so } \mbf{0} &= T(\mbf{0}).
+        \end{align*}
+    \end{proof}
+\end{lemma}
+
+\begin{example}
+    \begin{enumerate}[label = (\roman*)]
+        \item If $A \in M_{m \times n}(\R)$ then we can define a map
+        \[
+        T_A\,:\,\R ^ n \rightarrow \R ^ m
+        \]
+        by $T_A(\mbf{v}) = A\mbf{v}$.
+        $T_A$ is linear.
+        Check:
+        $\mbf{u, v} \in \R ^ n$,
+        $\lambda \in \R$.
+        \begin{enumerate}[label = (\roman*)]
+            \item 
+            \begin{align*}
+                T_A(\mbf{u + v}) &= A(\mbf{u + v}) \\
+                &= A\mbf{u} + A\mbf{v} \\
+                &= T_A(\mbf{u}) + T_A(\mbf{v}).
+            \end{align*}
+            \item
+            \begin{align*}
+                T_A(\lambda\mbf{u}) &= A(\lambda\mbf{u}) \\
+                &= \lambda A\mbf{u} \\
+                &= \lambda T_A(\mbf{u}).
+            \end{align*}
+        \end{enumerate}
+        \item If $D$ is a basis for $V$
+        ($\dim{V} = n$)
+        then
+        \[
+        \Phi_{B}\,:\, V \rightarrow \R ^ n
+        \]
+        is a linear map.
+        \item
+        \[
+        \frac{d}{dx}\,:\,\R[x]_n \rightarrow \R[x]_{n - 1}
+        \]
+        \[
+        p \mapsto \frac{dp}{dx}
+        \]
+        \[
+        \int_{0}^{x}\,:\,\R[x]_n \rightarrow \R[x]_{n + 1}
+        \]
+        \[
+        p \mapsto \int_{0}^{x}p(t)\,dt.
+        \]
+
+        \[
+        \mathrm{Eval}_a\,:\,\R[x]_n \rightarrow \R
+        \]
+        \[
+        p \mapsto p(a)
+        \]
+        for $a \in \R$.
+        These are all linear maps.
+
+        For example
+        \[
+        \frac{d}{dx}(p + q) = \frac{dp}{dx} + \frac{dq}{dx}.
+        \]
+        \[
+        \frac{d}{dx}(\lambda p) = \lambda\frac{dp}{dx}.
+        \]
+        Therefore $\frac{d}{dx}$ is a linear map.
+
+        Also
+        \begin{align*}
+            \int_{0}^{x}(p + q) &= \int_{0}^{x}p(t) + q(t)\,dt \\
+            &= \int_{0}^{x}p(t)\,dt + \int_{0}^{x}q(t)\,dt \\
+            &= \int_{0}^{x}(p) + \int_{0}^{x}(q).
+        \end{align*}
+        \begin{align*}
+            \int_{0}^{x}(\lambda p) &= \int_{0}^{x}\lambda p(t)\,dt \\
+            &= \lambda\int p(t)\,dt \\
+            &= \lambda\int p(t). \\
+        \end{align*}
+
+        Non-example
+        \[
+        T : \R ^ 3 \rightarrow \R ^ 3
+        \]
+        \[
+        \begin{pmatrix}
+            x \\ y \\ z
+        \end{pmatrix} \mapsto
+        \begin{pmatrix}
+            x + 1 \\ y \\ z
+        \end{pmatrix}.
+        \]
+        This is not a linear map,
+        for example
+        \[
+        T\begin{pmatrix}
+            0 \\ 0 \\ 0
+        \end{pmatrix} = \begin{pmatrix}
+            1 \\ 0 \\ 0
+        \end{pmatrix}
+        \]
+        contradicting the lemma.
+        \[
+        T : \R ^ 3 \rightarrow \R ^ 3
+        \]
+        \[
+        \begin{pmatrix}
+            x \\ y \\ z
+        \end{pmatrix}
+        \mapsto
+        \begin{pmatrix}
+            2x + 2z \\ y \\ x - y - z
+        \end{pmatrix}
+        \]
+        is linear.
+        Since
+        \[
+        T\begin{pmatrix}
+            x \\ y \\ z
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            2 & 0 & 2 \\ 0 & 1 & 0 \\ 1 & -1 & -1
+        \end{pmatrix}
+        \begin{pmatrix}
+            x \\ y \\ z
+        \end{pmatrix}
+        \]
+        so $T = T_A$ for
+        \[
+        A = 
+        \begin{pmatrix}
+            2 & 0 & 2 \\ 0 & 1 & 0 \\ 1 & -1 & -1
+        \end{pmatrix}
+        \]
+    \end{enumerate}
+\end{example}
 
 
 
