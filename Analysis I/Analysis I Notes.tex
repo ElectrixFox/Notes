@@ -2316,13 +2316,178 @@ it is not a criterion for convergence of a series.
         \]
         so this is absolutely convergent.
         Hence $\displaystyle\infsum[k = 1]|a_k|$ is absolutely convergent.
+        
+        \textit{Note:}
+        If $\lim_{k \rightarrow \infty}\frac{|a_{k + 1}|}{|a_k|} = q > 1$
+        look at $\varepsilon = q - 1 > 0$.
+        
+        Then we have $n_0 \in \N$ with
+        \[
+        \left|\left|\frac{a_{k + 1}}{a_k}\right| - q\right| < \varepsilon
+        \]
+        for all $k \geq n_0$
+        so
+        \[
+        -\varepsilon < \left|\frac{a_{k + 1}}{a_k}\right| - q < \varepsilon = q - 1
+        \]
+        so
+        \[
+        \left|\frac{a_{k + 1}}{a_k}\right| > 1
+        \]
+        for all $k \geq n_0$.
+        Proof of (b'):
+        
+        There is $n_0 \in \N$ with $\left|\frac{a_{k + 1}}{a_k}\right| \geq 1$ for all $k \geq n_0$
+        which implies $|a_{k + 1} \geq |a_k| > 0$.
+        In particular,
+        $\dseq[k]{a}$ does not converge to $0$,
+        the series is therefore divergent.
     \end{proof}
 \end{remark}
 
+\begin{theorem}[Root test]
+    For a sequence $\dseq[k]{a}$ set
+    \[
+    a = \limsup_{k \rightarrow \infty}\sqrt[k]{|a_k|}
+    \]
+    \begin{enumerate}[label = (\alph*)]
+        \item If $a < 1$,
+        then $\displaystyle\infsum[k = 1]a_k$ is absolutely convergent.
+        \item If $a > 1$,
+        then $\displaystyle\infsum[k = 1]a_k$ is divergent.
+    \end{enumerate}
+    \begin{proof}
+        Assume $a < 1$.
+        Then for all but finitely many $k$ we have
+        \[
+        \sqrt[k]{|a_k|} \leq q < 1
+        \]
+        use $q = \frac{a + 1}{2}$.
+        So for all $k \geq n_0$ we have $|a_k| \leq q ^ k$.
+        By comparison test with the convergent geometric series
+        \[
+        \infsum[k = 1]q ^ k
+        \]
+        we get absolute convergence.
 
+        Assume $a > 1$,
+        then for all but finitely many $k$,
+        $\sqrt[k]{|a_k|} \geq q > 1$.
+        hence for all $k \geq n_1$ $|a_k| \geq q ^ k$.
+        By the comparison test with the diverging geometric series
+        \[
+        \infsum[k = 1]q ^ k
+        \]
+        we get divergence.
+    \end{proof}
+\end{theorem}
 
+\begin{example}
+    Look at $\infsum\frac{1}{n}$,
+    $\infsum\frac{1}{n ^ 2}$.
+    For ratio test,
+    look at
+    \[
+    \frac{\frac{1}{n + 1}}{\frac{1}{n}} = \frac{n}{n + 1} \rightarrow 1
+    \]
+    can't say anything.
+    \[
+    \sqrt[n]{\frac{1}{n}}
+    \]
+    $\log\sqrt[n]{\frac{1}{n}} = \frac{1}{n}\log\frac{1}{n} = -\frac{\log n}{n} \rightarrow 0$
+    can't say anything
+    \[
+    \frac{\frac{1}{(n + 1) ^ 2}}{\frac{1}{n ^ 2}} = \frac{n ^ 2}{(n + 1) ^ 2} \rightarrow 1
+    \]
+    will fail.
+\end{example}
 
+Ratio and root test will fail to give an answer when $a_n = \frac{f(n)}{g(n)}$ with $f$ and $g$ being polynomials.
 
+\begin{example}
+    \begin{enumerate}[label = (\alph*)]
+        \item 
+        \[
+        a_k = \frac{c ^ k}{k!}
+        \]
+        with $c \in \R\setminus\{0\}$
+        \[
+        \left|\frac{a_{k + 1}}{a_k}\right| = \frac{|c| ^ {k + 1}}{(k + 1)!}\frac{k!}{|c| ^ k} = \frac{|c|}{k + 1} \rightarrow 0 < 1
+        \]
+        \[
+        \infsum[k = 0]\frac{c ^ k}{k!}
+        \]
+        converges absolutely.
+        \item $b_k = k!c ^ k$ $c \neq 0$
+        Ratio test
+        \[
+        \frac{(k + 1)!|c| ^ {k + 1}}{k!|c| ^ k} = (k + 1)|c| \rightarrow \infty
+        \]
+        get divergence.
+        \item 
+        $c_k = kc ^ k$.
+        Ratio test:
+        \[
+        \frac{(k + 1)|c| ^ {k + 1}}{k|c| ^ k} = \frac{k + 1}{k}|c| \rightarrow |c|.
+        \]
+        We get absolute convergence for $|c| < 1$ and divergence for $|c| > 1$.
+        \item $d_k = {(c + 3) ^ k}{k ^ 3 \cdot 5 ^ k}$,
+        $c \neq -3$.
+
+        Ratio test
+        \[
+        \frac{|c + 3| ^ {k + 1}}{(k + 1) ^ 3\cdot 5 ^ {k + 1}} \cdot \frac{k ^ 3 \cdot 5 ^ k}{|c + 3| ^ k} = \frac{|c + 3|}{5}\frac{k ^ 3}{(k + 1) ^ 3} \rightarrow \frac{|c + 3|}{5}.
+        \]
+        We get absolute convergence for $\frac{|c + 3|}{5} < 1 \iff |c + 3| < 5 \iff c \in (-8, 2)$.
+        Divergence for $c < -8$ and $c > 2$.
+        
+        If $c = 2$,
+        \[
+        d_k = \frac{5 ^ k}{k ^ 3 \cdot 5 ^ k} = \frac{1}{k ^ 3}
+        \]
+        we get absolute convergence.
+
+        If $c = -8$,
+        \[
+        d_k = \frac{(-5) ^ k}{k ^ 3 \cdot 5 ^ k} = \frac{(-1) ^ k}{k ^ 3}
+        \]
+        which is also absolutely convergent.
+        \item $e_k = (2 + (-1) ^ k) \cdot c ^ k$,
+        $c \in \R$.
+        \[
+        \frac{|e_{k + 1}|}{|e_k|} = \frac{(2 + (-1) ^ {k + 1})|c| ^ {k + 1}}{(2 + (-1) ^ k)|c| ^ k} = \frac{2 \pm 1}{2 \mp 1}\cdot |c|
+        \]
+        does not converge.
+        \[
+        \limsup\left|\frac{e_{k + 1}}{e_k}\right| = 3\cdot|c|
+        \]
+        for $|c| < \frac{1}{3}$ we get absolute convergence.
+        If $|c| > 3$ the ratio test gives us divergence.
+
+        Root test 
+        \[
+        \sqrt[k]{|e_k|} = \sqrt[k]{|2 + (-1) ^ k| \cdot |c| ^ k} = |c|\underbrace{\sqrt[k]{2 \pm 1}}_{\rightarrow 1}
+        \]
+        \[
+        \limsup_{k \rightarrow \infty}\sqrt[k]{|e_k|} = |c|.
+        \]
+        Get absolute convergence for $|c| < 1$ and divergence for $|c| > 1$.
+
+        If $c = 1$,
+        \[
+        e_k = 2 + (-1) ^ k
+        \]
+        does not converge to $0$.
+        We get divergence.
+
+        If $c = -1$,
+        \[
+        e_k = (-1) ^ k \cdot (2 + (-1) ^ k)
+        \]
+        does not converge to $0$.
+        We get divergence.
+    \end{enumerate}
+\end{example}
 
 
 
