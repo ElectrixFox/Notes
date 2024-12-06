@@ -198,6 +198,79 @@
     \end{proof}
 \end{problem}
 
-$\nearrow$: Monotonically increasing
+\begin{problem}[125]
+    Suppose that $X$ and $Y$ has joint probability density function
+    \[
+    f(x, y) = \begin{cases}
+        6e ^ {-(2x + 3y)} & \text{if } x \geq 0 \text{ and } y \geq 0 \\
+        0 & \text{otherwise}.
+    \end{cases}
+    \]
+    By integrating the joint probability density function,
+    calculate:
+    \begin{enumerate}[label = (\roman*)]
+        \item $\P\left(X < \frac{1}{2}, Y > \frac{1}{2}\right)$, and
+        \item $\P(X > Y)$.
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}[137]
+    Continuing from Exercise $130$,
+    find $\E\left(X ^ 2\right)$ and $\E\left(\frac{1}{X}\right)$.
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        \begin{align*}
+            \E(X ^ 2) &= \int_{-\infty}^{\infty}x ^ 2f(x)\,dx \\
+            &= \int_{0}^{1}x ^ 2f(x)\,dx \\
+            &= 3\int_{0}^{1}x ^ 4\,dx \\
+            &= 3\left[\frac{x ^ 5}{5}\right]_{x = 0}^{1} \\
+            &= \frac{3}{5}.
+        \end{align*}
+        \begin{align*}
+            \E\left(\frac{1}{X}\right) &= \int_{0}^{1}\frac{1}{x}f(x)\,dx \\
+            &= \int_{0}^{1}\frac{3x ^ 2}{x}\,dx \\
+            &= \int_{0}^{1}3x\,dx \\
+            &= \left[\frac{3}{2}x ^ 2\right]_{x = 0}^{1} \\
+            &= \frac{3}{2}. \\
+        \end{align*}
+    \end{proof}
+\end{problem}
+
+\begin{problem}
+    Let $X \sim \Geo(q)$ for $0 < q \leq 1$.
+    Show that $\E(X(X - 1)) = 2\frac{(1 - q)}{q ^ 2}$.
+
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        \[
+        p(x) = (1 - q) ^ xq,\,x = 1, 2, \dotsc.
+        \]
+        $X$ is the number of trials before the first success.
+        \begin{align*}
+            \E(X(X - 1)) &= \infsum[x = 1]x(x - 1)p(x) \\
+            &= \infsum[x = 2]x(x - 1)(1 - q) ^ {x - 1}q \\
+            &= q(q - 1)\infsum[x = 2]x(x - 1)(1 - q) ^ {x - 2}
+        \end{align*}
+        Let us for simplicity of notation write $(1 - q) = r$,
+        then,
+        we have to find
+        \[
+        \infsum[x = 2]x(x - 1)r ^ {x - 2} = \frac{d ^ 2}{dr ^ 2}[(1 - r) ^ {-1}].
+        \]
+        From Taylor's expansion
+        \[
+        (1 - r) ^ {-1} = \infsum[x = 0]r ^ x
+        \]
+        \[
+        \frac{d}{dx}(1 - r) ^ {-1} = \infsum[x = 0]\frac{d}{dx}r ^ x = \infsum[x = 1]xr ^ {x - 1}
+        \]
+        or,
+        \[
+        \frac{d ^ 2}{dx ^ 2} = \infsum[x = 1]\frac{d}{dx}xr ^ {x - 1} = \infsum[x = 2]x(x - 1)r ^ {x - 2}.
+        \]
+    \end{proof}
+\end{problem}
+
+\newpage
+
+$\nearrow$: Monotonically increasing.
 
 \end{document}

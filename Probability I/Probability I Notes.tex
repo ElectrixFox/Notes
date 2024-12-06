@@ -3140,7 +3140,7 @@ then
     \end{proof}
 \end{corollary}
 
-\begin{corollary}[Chebyshev's inequality]
+\begin{corollary}[Chebyshev's inequality]\label{prob_col_chebyshevineq}
     Let $X : \Omega \rightarrow \R$ be a random variable.
     Let $0 < a \in \R$.
     Then
@@ -3169,9 +3169,110 @@ then
     \]
 \end{example}
 
+\newpage
 
+\section{Limit Theorems}
 
+\subsection{Weak law of large numbers}\footnote{WLLN.}
+Recall:
+$X_1, X_2, \dotsc, X_n$
+$\bar{X_n} := \frac{1}{n}\sum_{i = 1}^{n}X_i$
 
+$\bar{X_n}$ converges to $\E(X)$.
+The sample mean converges to the population mean/expectation.
+
+Let $X$ denote the number of heads in $n$ tosses of a coin with probability of success as $p$.
+\[
+X \sim \Bin(n, p)
+\]
+$\E(X) = np$,
+$\Var(X) = np(1 - p)$.
+Define $B_n = \frac{1}{n}X$.
+Therefore,
+\[
+\E(B_n) = \frac{1}{n}\E(X) = p
+\]
+\[
+\Var(B_n) = \frac{1}{n ^ 2}\Var(X) = \frac{p(1 - p)}{n}
+\]
+Apply \autoref{prob_col_chebyshevineq},
+for any $\varepsilon > 0$,
+\[
+\P(|B_n - \E(B_n)| > \varepsilon) = \P(|B_n - p| > \varepsilon) \leq \frac{1}{\varepsilon ^ 2}\Var(B_n) = \frac{p(1 - p)}{\varepsilon ^ 2 \cdot n} \rightarrow 0
+\]
+$B_n$ will be very close to $p$,
+with very high probability.A
+
+Recall
+\[
+X = \sum_{i = 1}^{n}X_i,
+\]
+where $X_i \sim \Bin(p)$.
+\[
+X_i = \begin{dcases*}
+    1, & if the $i$th trial is $H$, \\
+    0, & otherwise,
+\end{dcases*}
+\]
+\[
+B_n = \frac{1}{n}\sum_{i = 1}^{n}X_i
+\]
+$\E(X_i) = p$.
+\begin{theorem}[Weak law of large numbers]
+    Let $X_1, X_2, \dotsc$ be an independent sequence of random variables,
+    with $\E(X_i) = \mu$,
+    and $\Var(X_i) = \sigma ^ 2$,
+    for all $i \geq 1$.
+    Let $\bar{X_n} = \frac{1}{n}\sum_{i = 1}^{n}X_i$.
+    Then for any $\varepsilon > 0$,
+    \[
+    \lim_{n \rightarrow \infty}\P(|\bar{X_n} - \mu| > \varepsilon) = 0.
+    \]
+    [$\bar{X_1}, \bar{X_1}, \dotsc$ in probability to the random variable $Y$,
+    where $\P(Y = \mu) = 1$].
+
+    \begin{proof}
+        \[
+        \E(\bar{X_n}) = \frac{1}{n}\sum_{i = 1}^{n}\E(X_i) = \frac{1}{n}n\mu = \mu.
+        \]
+        \begin{align*}
+            \Var(\bar{X_n}) &= \frac{1}{n ^ 2}\Var\left(\sum_{i = 1}^{n}X_i\right) \\
+            &= \frac{1}{n ^ 2}\left[\sum_{i = 1}^{n}\Var(X_i) + 2 \sum_{i < j}\Cov(X_i, X_j)\right] \\
+            &= \frac{1}{n ^ 2}\sum_{i = 1}^{n}\Var(X_i) \\
+            &= \frac{1}{n ^ 2} \cdot n \sigma ^ 2 \\
+            &= \frac{\sigma ^ 2}{n}.
+        \end{align*}
+        Apply Chebyshev's inequality,
+        to get $\forall \varepsilon > 0$,
+        \[
+        \P(|\bar{X_n} - \E(\bar{X_n})| > \varepsilon) = \P(|\bar{X_n} - \mu| > \varepsilon) \leq \frac{1}{\varepsilon ^ 2}\Var(\bar{X_n}) = \frac{\sigma ^ 2}{\varepsilon ^ 2 n} \rightarrow 0 \text{ as } n \rightarrow \infty.
+        \]
+        \[
+        0 \leq \lim_{n \rightarrow \infty}\P(|X_n - \mu| > \varepsilon) \leq 0.
+        \]
+        Uses sandwich theorem,
+        then we get
+        \[
+        \lim_{n \rightarrow \infty}\P(|X_n - \mu| > \varepsilon) = 0.
+        \]
+        An equivalent statement is the following
+        \[
+        \lim_{n \rightarrow \infty}\P(|\bar{X_n} - \mu| \leq \varepsilon) = 1.
+        \]
+        since
+        \[
+        \P(|X_n - \mu| > \varepsilon) = 1 - \P(|X_n - \mu| \leq \varepsilon).
+        \]
+    \end{proof}
+\end{theorem}
+
+\begin{definition}[Convergence in probability]
+    A sequence of random variables $X_1, X_2, \dotsc$ is said to converge in probability to a random variable $X$,
+    if $\forall \varepsilon > 0$
+    \[
+    \lim_{n \rightarrow \infty}\P(|X_n - X| > \varepsilon) = 0.
+    \]
+\end{definition}
 
 
 
