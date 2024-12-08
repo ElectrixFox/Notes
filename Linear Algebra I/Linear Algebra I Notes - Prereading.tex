@@ -2902,18 +2902,165 @@ we have that $(x_1, \dotsc, x_n)$ are the coordinates of $\mbf{x}$ with respect 
     \end{enumerate}
 \end{definition}
 
+A linear map is sometimes referred to as a linear transformation or a linear mapping.
 
+\begin{example}
+    The map $T$ given by
+    \[
+    T\begin{pmatrix}
+        x \\ y \\ z
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        3x - y + z \\ z \\ 0
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        3 & -1 & 1 \\ 0 & 0 & 1 \\ 0 & 0 & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+        x \\ y \\ z
+    \end{pmatrix}
+    \]
+    is a linear map $\R ^ 3 \rightarrow \R ^ 3$
+\end{example}
 
+\begin{example}
+    The map $T$ given by
+    \[
+    T\begin{pmatrix}
+        x \\ y \\ z
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        x + 1 \\ x \\ y
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        1 & 0 & 0 \\ 1 & 0 & 0 \\ 0 & 1 & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+        x \\ y \\ z
+    \end{pmatrix}
+    +
+    \begin{pmatrix}
+        1 \\ 0 \\ 0
+    \end{pmatrix}
+    \]
+    is not linear,
+    since $T\begin{pmatrix}
+        0 \\ 0 \\ 0
+    \end{pmatrix} = \begin{pmatrix}
+        1 \\ 0 \\ 0
+    \end{pmatrix} \neq \mbf{0}$.
 
+    It is however called an affine map,
+    it is of the form $A\mbf{x} + \mbf{b}$.
+\end{example}
 
+\begin{lemma}
+    Let $\{\mbf{v}_1, \dotsc, \mbf{v}_n\}$ be a basis of a vector space $V$.
+    Then
+    \begin{enumerate}[label = (\roman*)]
+        \item Any linear map $T : V \rightarrow W$ of vector spaces is determined by its values $T(\mbf{v}_1), \dotsc, T(\mbf{v}_n)$ on the basis vectors of $V$.
+        \item Conversely,
+        given arbitrary vectors $\mbf{w}_1, \dotsc, \mbf{w}_n$ in $W$,
+        then there exists a linear map $T : V \rightarrow W$ such that
+        \[
+        T(\mbf{v}_1) = \mbf{w}_1, \dotsc, T(\mbf{v}_n) = \mbf{w}_n.
+        \]
+    \end{enumerate}
+    \begin{proof}
+        
+    \end{proof}
+\end{lemma}
 
+\begin{lemma}
+    A map $T : \R ^ n \rightarrow \R ^ m$ is linear if and only if there is a $m \times n$ matrix $A$ such that
+    \[
+    T(\mbf{x}) = A\mbf{x}.
+    \]
+    Moreover,
+    $A$ is given by
+    \[
+    A = (T(\mbf{e}_1), T(\mbf{e}_2), \dotsi, T(\mbf{e}_n)).
+    \]
+    So the $i$th column is the image of the standard basis vector $\mbf{e}_i$.
+\end{lemma}
 
+We can see that the only linear maps between Euclidean spaces are the matrices.
 
+\subsection{Properties of linear maps}
+\begin{lemma}
+    Let $T : V \rightarrow W$ and $S : W \rightarrow U$ be two linear maps of vector spaces.
+    Then the composition $S \circ T : V \rightarrow U$ is a linear map.
+    In particular,
+    if $T : \R ^ n \rightarrow \R ^ m$ and $S : \R ^ m \rightarrow \R ^ k$ are linear maps given by $T(\mbf{x}) = A\mbf{x}$ and $S(\mbf{y}) = B\mbf{y}$,
+    then the composition $S \circ T : \R ^ n \rightarrow \R ^ k$ is again linear,
+    and moreover we have
+    \[
+    (S \circ T)(\mbf{x}) = (BA)\mbf{x}.
+    \]
+    So the composition of linear maps corresponds to matrix multiplication.
+\end{lemma}
 
+\begin{definition}[Isomorphism]
+    Let $T : V \rightarrow W$ be a bijective linear map of vector spaces
+    (that is,
+    a linear map which is one-to-one and onto).
+    Then we call $T$ an isomorphism and call $V$ and $W$ isomorphic.
+    We write $V \cong W$.
+\end{definition}
 
+\begin{lemma}
+    Let $T : V \rightarrow W$ be an isomorphism of vector spaces.
+    Then the inverse map $T ^ {-1} : W \rightarrow V$ is also a linear map,
+    in fact an isomorphism.
+    For the linear map $T : \R ^ n \rightarrow \R ^ n$ given by the matrix $A \in M_n(\R)$,
+    we have that $T$ is an isomorphism if and only if $A$ is invertible.
+    In that case,
+    we have
+    \[
+    T ^ {-1}(\mbf{y}) = A ^ {-1}\mbf{y}.
+    \]
+\end{lemma}
 
+\begin{lemma}
+    Let $V$ b a vector space of dimension $n$.
+    Then the coordinate map $\Phi : V \rightarrow \R ^ n$ is an isomorphism.
+    In particular,
+    every finite dimensional vector space is isomorphic to the Euclidean space of the same dimension.
+\end{lemma}
 
+\begin{theorem}
+    Let $V$ be a vector space of dimension $n$ and let $W$ be a vector space of dimension $m$.
+    Let $\phi : V \rightarrow \R ^ n$ and $\psi : W \rightarrow \R ^ m$ be two coordinate maps with respect to the choice of some bases $V$ and $W$ respectively.
+    Let $T : V \rightarrow W$ be a linear map.
+    Then there exists a $m \times n$ matrix $A$ so that for all $\mbf{v} \in V$ we have
+    \[
+    \phi(T(\mbf{v})) = A\phi(\mbf{v}).
+    \]
+    We say $T$ is represented by $A$.
+    (The matrix $A$ depends on the choice of the bases made.)
+\end{theorem}
 
+\subsection{Image, kernel, rank and nullity}
+\begin{definition}[Image and kernel]
+    Let $V$ and $W$ be vector spaces and $T : V \rightarrow W$ be a linear map.
+    We define the image of $T$ by
+    \[
+    \mathrm{im}(T) = \{\mbf{w} \in W : \text{there exists $\mbf{v} \in V$ so that } \mbf{w} = T(\mbf{v})\}.
+    \]
+    We define the kernel of $T$ by
+    \[
+    \ker(T) = \{\mbf{v} \in V : T(\mbf{v}) = \mbf{0}\}.
+    \]
+\end{definition}
+
+\begin{lemma}
+    Let $T : V \rightarrow W$ be a linear map of vector spaces.
+    Then $\mathrm{im}(T)$ is a vector subspace of $W$ and $\ker(T)$ is a vector subspace of $V$.
+\end{lemma}
 
 
 
