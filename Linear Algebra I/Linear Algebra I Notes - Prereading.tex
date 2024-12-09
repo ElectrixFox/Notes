@@ -3062,6 +3062,119 @@ We can see that the only linear maps between Euclidean spaces are the matrices.
     Then $\mathrm{im}(T)$ is a vector subspace of $W$ and $\ker(T)$ is a vector subspace of $V$.
 \end{lemma}
 
+\begin{lemma}
+    Let $T : V \rightarrow W$ be a linear map of vector spaces,
+    and let $\{\mbf{v}_1, \dotsc, \mbf{v}_n\}$ be a basis for $V$.
+    Then the image $\mathrm{im}(T)$ is spanned by $T(\mbf{v}_1), \dotsc, T(\mbf{v}_n)$.
+    \begin{proof}
+        Let $\mbf{w} = T(\mbf{u})$ be in the image of $T$.
+        We can write $\mbf{u} = \lambda_1\mbf{V}_1 + \dotsi + \lambda_n\mbf{v}_n$,
+        and then we see immediately
+        \[
+        \mbf{w} = T(\mbf{u}) = T(\lambda_1\mbf{v}_1 + \dotsi + \lambda_n\mbf{v}_n) = \lambda_1T(\mbf{v}_1) + \dotsi + \lambda_nT(\mbf{v}_n).
+        \]
+        So $\mbf{w}$ is in the span of $T(\mbf{v}_1), \dotsc, T(\mbf{v}_n)$.
+    \end{proof}
+\end{lemma}
+
+\begin{proposition}
+    Let $T : V \rightarrow W$ be a linear map of vector spaces.
+    Then the following statements are
+    (pairwise)
+    equivalent:
+    \begin{enumerate}[label = (\roman*)]
+        \item $\ker(T) = \{\mbf{0}\}$;
+        \item $T$ is one-to-one
+        (that is,
+        it is injective);
+        \item If $\mbf{v}_1, \dotsc, \mbf{v}_k$ are linear independent vectors in $V$,
+        then the images $T(\mbf{v}_1), \dotsc, T(\mbf{v}_k)$ are linearly independent in $W$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{corollary}
+    Let $T : V \rightarrow W$ be a linear map of vector spaces with $\ker(T) = \{\mbf{0}\}$.
+    Assume $\dim{V} = n$ with a basis $\{\mbf{v}_1, \dotsc, \mbf{v}_n\}$.
+    Then the images $\{T(\mbf{v}_1), \dotsc, T(\mbf{v}_n)\}$ are a basis for $\mathrm{im}(T)$.
+    In particular,
+    we have $\dim(\mathrm{im}(T)) = \dim(V)$.
+\end{corollary}
+
+\begin{definition}[Rank and nullity of a linear map]
+    Let $V$ and $W$ be vector spaces and $T : V \rightarrow W$ be a linear map.
+    We define the rank of $T$ to be
+    \[
+    \mathrm{rk}(T) = \dim(\mathrm{im}(T)).
+    \]
+    We define the nullity of $T$ to be
+    \[
+    n(T) = \dim(\ker(T)).
+    \]
+\end{definition}
+
+\begin{proposition}
+    Let $T : V \rightarrow W$ be a linear map of finite-dimensional vector spaces and let $\phi : V' \rightarrow V$ and $\psi : W \rightarrow W'$ be two isomorphisms.
+    Then
+    \[
+    \mathrm{rk}(\psi \circ T \circ \phi) = \mathrm{rk}(T)\quad\text{and}\quad n(\psi \circ T \circ \phi) = n(T).
+    \]
+\end{proposition}
+
+\begin{theorem}[Rank-Nullity Theorem for linear maps]
+    Let $V$ and $W$ be two finite-dimensional vector spaces and $T : V \rightarrow W$ be a linear map.
+    Then
+    \[
+    \dim(V) = \mathrm{rk}(T) + n(T).
+    \]
+\end{theorem}
+
+\begin{remark}
+    Alternatively,
+    we could argue directly.
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_r$ be a basis for $\ker(T)$ and let $\mbf{w}_1, \dotsc, \mbf{w}_s$ be a basis for $\mathrm{im}(T)$.
+    By the definition of $\mathrm{im}(T)$ there exist $\mbf{v}_1, \dotsc, \mbf{v}_s$ with $T(\mbf{v}_i) = \mbf{w}_i$ for $1 \leq i \leq s$.
+    Now we claim that $\mbf{u}_1, \dotsc, \mbf{u}_r, \mbf{v}_1, \dotsc, \mbf{v}_s$ is a basis for $V$,
+    which will prove the result.
+\end{remark}
+
+\begin{theorem}
+    For two finite-dimensional vector spaces $V$ and $W$ we have
+    \[
+    V \cong W \iff \dim{V} = \dim{W}.
+    \]
+\end{theorem}
+
+\subsection{Change of basis and of coordinates}
+
+\begin{theorem}
+    Let $T : \R ^ n \rightarrow \R ^ m$ be a linear map.
+    Suppose that with respect to the standard bases $T$ is represented by the matrix $A$.
+    Let $S = \{\mbf{v}_1, \dotsc, \mbf{v}_n\}$ be any basis of $\R ^ n$ and let $P = (\mbf{v}_1, \dotsi, \mbf{v}_n)$.
+    Let $S' = \{\mbf{w}_1, \dotsc, \mbf{w}_m\}$ be any basis of $\R ^ m$ and let $Q = (\mbf{w}_1, \dotsc, \mbf{w}_m)$.
+    Then with respect to the bases $S$ of $\R ^ n$ and $S'$ of $\R ^ m$ the transformation $T$ is represented by the matrix $B = Q ^ {-1}AP$.
+\end{theorem}
+
+\begin{corollary}
+    Suppose that $\{\mbf{v}_1, \dotsc, \mbf{v}_n\}$ and $\{\mbf{v}'_1, \dotsc, \mbf{v}'_n\}$ are any bases of $\R ^ n$.
+    Let $P$ be a matrix so that $\mbf{v}'_j = P\mbf{v}_j$.
+    Suppose that $\{\mbf{w}_1, \dotsc, \mbf{w}_m\}$ and $\{\mbf{w}'_1, \dotsc, \mbf{w}'_m\}$ are any bases of $\R ^ m$.
+    Let $Q$ be a matrix so that $\mbf{w}'_j = Q\mbf{w}_j$.
+
+    Let $T : \R ^ n \rightarrow \R ^ m$ be a linear map.
+    Suppose that with respect to the bases $\{\mbf{v}_1, \dotsc, \mbf{v}_n\}$ and $\{\mbf{w}_1, \dotsc, \mbf{w}_m\}$ the map $T$ is represented by the matrix $A$.
+    Then with respect to the bases $\{\mbf{v}'_1, \dotsc, \mbf{v}'_n\}$ and $\{\mbf{w}'_1, \dotsc, \mbf{w}'_m\}$ the map $T$ is represented by the matrix $B = Q ^ {-1}AP$.
+\end{corollary}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
