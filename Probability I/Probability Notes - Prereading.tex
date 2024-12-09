@@ -1366,7 +1366,7 @@ This idea of expectation leads us into a definition for the expectation for real
 
 \begin{example}
     Suppose that $X$ is discrete with probability mass function
-    \begin{table}[]
+    \begin{table}[H]
         \centering
         \begin{tabular}{c|cc}
              $x$ & $1$ & $2$ \\
@@ -1819,7 +1819,7 @@ One may also view $\E(\cdot\mid A)$ as expectation with respect to the condition
 \end{theorem}
 
 \subsection{Independence: multiplication rule for expectation}
-\begin{theorem}[Independence means multiply]
+\begin{theorem}[Independence means multiply]\label{pre_prob_thm_expindepmeansmult}
     If $X$ and $Y$ are independent real-valued random variables then
     \[
     \E(XY) = \E(X)\E(Y).
@@ -1863,7 +1863,7 @@ One may also view $\E(\cdot\mid A)$ as expectation with respect to the condition
 \end{corollary}
 
 \subsection{Expectation and probability inequalities}
-\begin{theorem}[Monotonicity of expectation]
+\begin{theorem}[Monotonicity of expectation]\label{pre_prob_thm_monotonicityofexpectation}
     For any random variable $X$,
     and any $a \in \R$,
     if $\P(X \geq a) = 1$ then $\E(X) \geq a$.
@@ -1932,20 +1932,192 @@ One may also view $\E(\cdot\mid A)$ as expectation with respect to the condition
     \end{proof}
 \end{theorem}
 
+\begin{example}
+    Measure the heights $H_i$ of $n$ randomly selected people from a very large population,
+    where $\mu, \sigma ^ 2$ are the average and the variance of heights over the whole population.
+    Then $\E(H_i) = \mu$,
+    $\Var(H_i) = \sigma ^ 2$ and so,
+    as long as the collection of heights is not too asymmetric,
+    the chance of the average height $\overline{X}_n$ being more than than a small amount from $\mu$ is very small i.e. almost all large samples have average near $\mu$.
+\end{example}
 
+\subsection{The central limit theorem}
 
+\begin{theorem}[Central limit theorem]
+    Suppose we have a sequence $X_1, X_2, \dotsc$ of independent and identically distributed random variables.
+    Let
+    \[
+    \mu := \E(X_i) \text{ and } \sigma ^ 2 := \Var(X_i),
+    \]
+    with $\sigma > 0$.
+    Let $S_n := \sum_{i = 1}^{n}X_i$,
+    $\overline{X}_n := \frac{S_n}{n}$,
+    and
+    \[
+    Z_n := \frac{S_n - n\mu}{\sigma\sqrt{n}} = \frac{\overline{X}_n - \mu}{\frac{\sigma}{\sqrt{n}}}.
+    \]
+    Then,
+    for any $z \in \R$,
+    \[
+    \lim_{n \rightarrow \infty}F_{Z_n}(z) = \lim_{n \rightarrow \infty}\P(Z_n \leq z) = \Phi(z).
+    \]
+    We say that $Z_n$ converges in distribution to the standard normal distribution.
+\end{theorem}
 
+\begin{example}
+    Potatoes with an average weight of $100$g and standard deviation $40$g are packed into bags to contain at least $2500$g.
+    What is the chance that more than $30$ potatoes will be needed to fill a given bag?
+    
+    
+    Let $N$ be the number needed to exceed $2500$ and $W$ be the total weight of $30$ potatoes,
+    $W = \sum_{i = 1}^{30}X_i$.
+    Then $\E(W) = 30 \cdot 100 = 3000$ and $\Var(W) = 30 \cdot 40 ^ 2 = 48000$,
+    and the central limit theorem says that
+    \[
+    \frac{W - 3000}{\sqrt{48000}} \approx \mathcal{N}(0, 1).
+    \]
+    Also,
+    $\{N > 30\} = \{W < 2500\}$ and so
+    \begin{align*}
+        \P(N > 30) &= \P(W < 2500) \\
+        &= \P\left(\frac{W - 3000}{\sqrt{48000}} < \frac{2500 - 3000}{\sqrt{48000}}\right) \\
+        &\approx \P(Z < -2.282),
+    \end{align*}
+    where $Z \sim \mathcal{N}(0, 1)$.
+    From the tables,
+    this probability is
+    \[
+    \P(Z < -2.282) = \P(Z > 2.282) = 1 - \Phi(2.282) \approx 0.011.
+    \]
+\end{example}
 
+\begin{corollary}[Normal approximation to the binomial distribution]
+    Let $X \sim \Bin(n, p)$ with $0 < p < 1$,
+    $B_n := \frac{X}{n}$,
+    and
+    \[
+    Z_n := \frac{X - np}{\sqrt{np(1 - p}} = \frac{B_n - p}{\sqrt{\frac{p(1 - p)}{n}}}.
+    \]
+    Then
+    \[
+    \lim_{n \rightarrow \infty}F_{Z_n}(z) = \lim_{n \rightarrow \infty}\P(Z_n \leq z) = \Phi(z).
+    \]
+\end{corollary}
+This means that,
+when $X \sim \Bin(n, p)$ with $0 < p < 1$ and large enough $n$,
+then for any $x \in \R$,
+we approximately have that
+\[
+\P(X \leq x) \approx \Phi\left(\frac{x - np}{\sqrt{np(1 - p)}}\right)
+\]
 
+\begin{example}
+    Consider a multiple choice test with $50$ questions,
+    one mark for each correct answer.
+    Independently for each question,
+    a particular student has chance $\frac{1}{2}$ of answering correctly.
+    Find,
+    approximately,
+    the probability of the student scoring at least $30$ marks?
 
+    Let $X = \text{ student's score}$,
+    so $X \sim \Bin\left(50, \frac{1}{2}\right)$.
+    Then $\E(X) = \frac{50}{2} = 25$ and $\Var(X) = \frac{50}{4} = \frac{25}{2}$.
+    The normal approximation says that $X \approx \mathcal{N}\left(25, \frac{25}{2}\right)$,
+    so
+    \begin{align*}
+        \P(X \geq 30) &= 1 - \P(X < 30) \\
+        &\approx 1 - \Phi\left(\frac{30 - 25}{3.54}\right) \\
+        &= 1 - \Phi(1.41) \approx 0.1.
+    \end{align*}
+\end{example}
 
+\subsection{Moment generating functions}
 
+\begin{definition}[Moment generating function]
+    For any real-valued random variable $X$,
+    the function $M_X : \R \rightarrow [0, +\infty]$ given by
+    \[
+    M_X(t) := \E(e ^ {tX})
+    \]
+    is called the moment generating function.
+\end{definition}
 
+Because $e ^ {tX} \geq 0$,
+we have that $M_X(t) \geq 0$
+(\autoref{pre_prob_thm_monotonicityofexpectation}).
+From \autoref{pre_prob_thm_lawofunconsciousstatistician},
+we immediately derive the following expressions for $M_X(t)$:
+\begin{align*}
+    M_X(t) &= \sum_{x \in \mathcal{X}}e ^ {tx}p(x) &\text{if $X$ is discrete, and} \\
+    M_X(t) &= \int_{-\infty}^{\infty}e ^ {tx}f(x)\,dx &\text{if $X$ is continuously distributed}.
+\end{align*}
+The above always exist,
+but can be $\infty$.
 
+\begin{example}
+    If $Y \sim \Po(\lambda)$ then
+    \begin{align*}
+        M_Y(t) &= \infsum[x = 0]e ^ {tx}p(x) \\
+        &= \infsum[x = 0]e ^ {-\lambda}\frac{\lambda ^ x}{x!}e ^ {tx} \\
+        &= \infsum[x = 0]e ^ {-\lambda}\frac{(\lambda e ^ t) ^ x}{x!} \\
+        &= e ^ {\lambda(e ^ t - 1)}.
+    \end{align*}
+\end{example}
 
-
-
-
+Here we will state some properties of moment generating functions.
+\begin{enumerate}[label = M\arabic*]
+    \item (Generates moments.)
+    For every $k \in \N$
+    \[
+    \E(X ^ k) = \frac{d ^ kM_X}{dt ^ k}(0).
+    \]
+    \item (Moment generating function determines distribution.)
+    Consider any two random variables $X$ and $Y$.
+    If there is an $h > 0$ such that
+    \begin{align*}
+        M_X(t) &= M_Y(t) < \infty &\text{for all } t \in (-h, h),
+        \intertext{then}
+        F_X(x) &= F_Y(x) &\text{for all } x \in \R.
+    \end{align*}
+    Conversely,
+    if $F_X(x) = F_Y(x)$ for all $x \in \R$ then $M_X(t) = M_Y(t)$ for all $t \in \R$.
+    \item (Scaling.)
+    For any random variable $X$ and any constants $a, b \in \R$,
+    \[
+    M_{aX + b}(t) = e ^ {bt}M_X(at).
+    \]
+    \itemm (Product.)
+    Suppose that $X_1, \dotsc, X_n$ are independent random variables and let $Y = \sum_{i = 1}^{n}X_i$.
+    Then
+    \[
+    M_Y(t) = \prod_{i = 1}^{n}M_{X_i}(t).
+    \]
+    \item (Convergence.)
+    Suppose that $X_1, X_2, \dotsc$ is an infinite sequence of random variables,
+    and that $X$ is a further random variable.
+    If there is an $h > 0$ such that
+    \begin{align*}
+        \lim_{n \rightarrow \infty}M_{X_n}(t) &= M_X(t) < +\infty & \text{for all } t \in (-h, h),
+        \intertext{then}
+        \lim_{n \rightarrow \infty}F_{X_n}(x) &= F_X(x) & \text{for all $x \in \R$ where $F_X$ is continuous}, 
+    \end{align*}
+    i.e.,
+    $X_n$ converges in distribution to $X$.
+    \begin{proof}
+        The proof of $M1$ is easy.
+        $M1, M2$,
+        and $M5$ use some deeper analysis.
+        For $M4$,
+        we apply \autoref{pre_prob_thm_expindepmeansmult}
+        \begin{align*}
+            M_{S_n}(t) &= \E\left(e ^ {t(X_1 + X_2 + \dotsi + X_n)}\right) \\
+            &= \E(e ^ {tX_1}e ^ {tX_2}\dotsi e ^ {tX_n}) \\
+            &= \E(e ^ {tX_1})\E(e ^ {tX_2}) \dotsi \E(e ^ {tX_n}) \\
+            &= \prod_{i = 1}^{n}M_{X_i}(t).
+        \end{align*}
+    \end{proof}
+\end{enumerate}
 
 
 
