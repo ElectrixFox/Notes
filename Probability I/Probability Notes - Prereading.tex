@@ -4,7 +4,6 @@
 
 \declaretheorem[style = avgstyle, name = Counting Principle]{countprinc}
 \declaretheorem[style = avgstyle, name = Property, numberwithin = section]{property}
-\newcommand{\ind}[1][A]{\mathbbm{1}_{#1}}
 
 \title{Probability I \\
     \large Prereading}
@@ -1901,6 +1900,53 @@ One may also view $\E(\cdot\mid A)$ as expectation with respect to the condition
         Now observe that $\{(X - \E(X)) ^ 2 \geq a ^ 2\} = \{|X - \E(X)| \geq a\}$ and of course $\E((X - \E(X)) ^ 2) = \Var(X)$.
     \end{proof}
 \end{corollary}
+
+\newpage
+
+\section{Limit theorems}
+
+\subsection{The weak law of large numbers}
+\begin{theorem}[Weak law of large numbers]
+    Suppose we have an infinite sequence $X_1, X_2, \dotsc$ of independent random variables with the same mean and variance:
+    \[
+    \E(X_i) = \mu\text{ and }\Var(X_i) = \sigma ^ 2\text{ for all } i.
+    \]
+    Consider the sample average $\overline{X}_n := \frac{1}{n}\sum_{i = 1}^{n}X_i$.
+    Then,
+    for any $\varepsilon > 0$,
+    \[
+    \lim_{n \rightarrow \infty}\P(|\overline{X}_n - \mu| > \varepsilon) = 0.
+    \]
+    \begin{proof}
+        We use Chebyshev's inequality to bound the probability that we are trying to show is small.
+        First note that,
+        by linearity of expectation,
+        $\E(\overline{X}_n) = \frac{1}{n}\sum_{i = 1}\E(X_i) = \mu$ and,
+        by independence,
+        $\Var(\overline{X}_n) = \frac{1}{n ^ 2}\sum_{i = 1}^{n}\Var(X_i) = \frac{\sigma ^ 2}{n}$.
+        So by Chebyshev's inequality,
+        \[
+        \P(|\overline{X}_n - \mu| \geq \varepsilon) \leq \frac{\sigma ^ 2}{n\varepsilon ^ 2},
+        \]
+        which indeed converges to zero as $n$ tends to infinity.
+    \end{proof}
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
