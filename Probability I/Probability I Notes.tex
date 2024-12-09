@@ -3274,6 +3274,170 @@ $\E(X_i) = p$.
     \]
 \end{definition}
 
+\begin{example}
+    Let us collect a sample of size $n$ of heights of individuals.
+    Let $H_i$ denote the height of the $i$th individual.
+
+    Suppose we know that $\E(H_i) = \mu$,
+    and $\Var(H_i) = \sigma ^ 2$.
+    Then if $\overline{X}_n = \frac{1}{n}\sum_{i = 1}^{n}H_i$,
+    then,
+    \[
+    \forall \varepsilon > 0, \P(|\overline{X}_n - \mu| > \varepsilon) \rightarrow 0\text{ as } n \rightarrow \infty,
+    \]
+    that is with high probability $\overline{X}_n$ is very close to $\mu$.
+\end{example}
+
+Comment:
+In the most general case,
+we need not know $\sigma ^ 2$.
+Here in our case,
+we wanted to Chebyshev's inequality and hence we needed $\sigma ^ 2$.
+
+IID:
+A sequence of random variables $X_1, X_2, X_3, \dotsc$ are called independent and identically distributed
+(I.I.D)
+if
+\begin{enumerate}[label = (\roman*)]
+    \item the random variables are independent,
+    \item identically distributed,
+    i.e.,
+    all $X_i$'s have the same distribution,
+    that is,
+    $F_{X_1}(\cdot) = F_{X_2}(\cdot) = F_{X_3}(\cdot) = \dotsi$
+\end{enumerate}
+
+One can assume,
+if the random variables are discrete,
+then they have pmf $p(\cdot)$.
+If the random variables are continuous then they have pdf $f(\cdot)$.
+
+If a sequence of random variables $X_1, X_2, \dotsc$ is IID,
+then $\E(X_1) = \E(X_2) = \dotsi$
+and same variance $\Var(X_1) = \Var(X_2) = \dotsi$.
+
+\begin{proof}
+    \[
+    \E(X_1) = \int_{-\infty}^{\infty}xf(x)\,dx
+    \]
+    \[
+    \E(X_2) = \int_{-\infty}^{\infty}xf(x)\,dx
+    \]
+    When $X_1$ and $X_2$ have the same distribution.
+    Hence $\E(X_1) = \E(X_2)$.
+
+    If $X_1$ and $X_2$ have the same distribution,
+    then let us assume they have the same pdf $f$.
+    \[
+    \E(X_1 ^ 2) = \E(X_2 ^ 2) = \int_{-\infty}^{\infty}x ^ 2f(x)\,dx
+    \]
+    and $\Var(X_1) = \E(X_1 ^ 2) - \E ^ 2(X_1) = \Var(X_2)$.
+\end{proof}
+
+\subsection{The central limit theorem}\footnote{CLT.}
+
+\begin{theorem}[Central limit theorem]
+    Let $X_1, X_2, \dotsc$ be an IID sequence.
+    Let $\mu = \E(X_i)$ and $\sigma ^ 2 = \Var(X_i) > 0$.
+    Define $\overline{X}_n = \frac{1}{n}\sum_{i = 1}^{n}X_i$,
+    and  $S_n = \sum_{i = 1}^{n}X_i$.
+
+    Let
+    \[
+    Z_n := \frac{S_n - n\mu}{\sigma\sqrt{n}} = \frac{\overline{X}_n - \mu}{\frac{\sigma}{\sqrt{n}}}
+    \]
+    $\overline{X}_n = \frac{1}{n}S_n$.
+    Let $F_{Z_n}(\cdot)$ denote the cdf of $Z_n$.
+    Then for any $z \in \R$,
+    \[
+    \lim_{n \rightarrow \infty}F_{Z_n}(z) = \lim_{n \rightarrow \infty}\P(Z_n \leq z) = \phi(z),
+    \]
+    where $\phi(z)$ is the cdf of the standard normal distribution.
+\end{theorem}
+
+We say that,
+$Z_n$ converges in distribution to a standard normal random variable.
+
+\begin{definition}[Convergence in distribution]
+    A sequence of random variables $X_1, X_2, \dotsc$ with cdf $F_{X_1}(\cdot), F_{X_2}(\cdot), \dotsc$ is said to converge to a random variable $X$
+    (with cdf $F_X(\cdot)$)
+    in distribution,
+    if
+    \[
+    \lim_{n \rightarrow \infty}F_{X_n}(x) = F_{X}(x),
+    \]
+    for all $x \in \R$,
+    where $F_X(\cdot)$ is continuous.
+    
+    This is denoted as
+    \[
+    X_n \xrightarrow{d} X.
+    \]
+\end{definition}
+
+Interpretation:
+$Z_n \approx \mathcal{N}(0, 1)$.
+\begin{align*}
+    \E(Z_n) &= \frac{\E(\overline{X}_n) - \mu}{\frac{\sigma}{n}} = \frac{\mu - \mu}{\frac{\sigma}{\sqrt{n}}} = 0. \\
+    \Var(Z_n) &= \frac{1}{\sigma ^ 2 n}\Var(S_n) = \frac{1}{\sigma ^ 2n}\sum_{i = 1}^{n}\Var(X_i) = \frac{1}{\sigma ^ 2 n}\cdot n\sigma ^ 2 = 1.
+\end{align*}
+
+CLT roughly tells us that
+\begin{align*}
+    S_n &\approx \mathcal{N}(n\mu, n \sigma ^ 2) \\
+    \overline{X}_n &\approx \mathcal{N}\left(\mu, \frac{\sigma ^ 2}{n}\right), \\
+    \P(S_n \leq x) &\approx \Phi\left(\frac{x - n\mu}{\sqrt{n}\sigma}\right) \\
+    \P(\overline{X}_n \leq x) &\approx \Phi\left(\frac{x - \mu}{\frac{\sigma}{\sqrt{n}}}\right).
+\end{align*}
+
+\textit{Comment:
+A stronger version of CLT is the Lindeberg-Feller
+(for triangular array)
+CLT and is a topic of advanced study.}
+
+\begin{example}
+    Average weight is $100$g,
+    and the standard deviation is $40$g for a potato.
+    Packed in a bag to contain at least $2500$g.
+    What is the chance that we need more than $30$ potatoes?
+
+    Given $\Phi(2.282) = 0.989$.
+
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        $N := \text{ Number of potatoes needed to exceed $2500$g}$.
+        Let $X_i$ be the weight of the $i$th potato.
+        $W := \text{ Total weight of $30$ potatoes}$.
+        $W := \sum_{i = 1}^{30}X_i$
+        \[
+        \E(W) = 30 \cdot \E(X_I) = 30 \cdot 100 = 3000.
+        \]
+        \[
+        \Var(W) = 30 \cdot \Var(X_i) = 30 \cdot (40) ^ 2 = 48000.
+        \]
+        From CLT,
+        $\frac{W - \E(W)}{\frac{\sigma}{\sqrt{n}}} = \frac{W - 3000}{\sqrt{48000}} \approx Z$,
+        where $Z \sim \mathcal{N}(0, 1)$.
+        \begin{align*}
+            \P(N > 30) &= \P(W < 2500) \\
+            &= \P\left(\frac{W - 3000}{\sqrt{48000}} < \frac{2500 - 3000}{\sqrt{48000}}\right) \\
+            &= \P\left(\frac{W - 3000}{\sqrt{48000}} < -2.282\right) \\
+            &\approx \P(Z < -2.282) \\
+            &= \P(Z > 2.282) \\
+            &= 1 - \Phi(2.282) \\
+            &= 0.011.
+        \end{align*}
+    \end{proof}
+\end{example}
+
+\subsection{Moment generating functions}
+
+
+
+
+
+
+
+
 
 
 
