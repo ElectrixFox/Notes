@@ -2488,6 +2488,154 @@ Ratio and root test will fail to give an answer when $a_n = \frac{f(n)}{g(n)}$ w
     \end{enumerate}
 \end{example}
 
+\subsection{Rearrangements of Series}
+\[
+\infsum\frac{(-1) ^ {k + 1}}{k} = c
+\]
+by the alternating sign test with $c \in \left(\frac{1}{2}, 1\right)$.
+Look at
+\begin{align*}
+    &1 - \frac{1}{2} - \frac{1}{4} + \frac{1}{3} - \frac{1}{6} - \frac{1}{8} + \frac{1}{5} - \frac{1}{10} - \frac{1}{12} + \dotsc \\
+    &= \left(1 - \frac{1}{2}\right) - \frac{1}{4} + \left(\frac{1}{3} - \frac{1}{6}\right) - \frac{1}{8} + \left(\frac{1}{5} - \frac{1}{10}\right) - \frac{1}{12} + \dotsc \\
+    &= \frac{1}{2} - \frac{1}{4} + \frac{1}{6} - \frac{1}{8} + \frac{1}{10} - \frac{1}{12} + \dotsc \\
+    &= \frac{1}{2}\left(1 - \frac{1}{2} - \frac{1}{4} + \frac{1}{3} - \frac{1}{6} - \frac{1}{8} + \frac{1}{5} - \frac{1}{10} - \frac{1}{12} + \dotsc\right) \\
+    &= \frac{c}{2}.
+\end{align*}
+
+\begin{definition}
+    Let $\infsum a_k$ be a series.
+    We say this series is conditionally convergent,
+    if it is convergent,
+    but not absolutely convergent.
+\end{definition}
+
+\begin{example}
+    \[
+    \infsum\frac{(-1) ^ {k + 1}}{k}
+    \]
+    is conditionally convergent,
+    \[
+    \infsum\frac{(-1) ^ {k + 1}}{k ^ 2}
+    \]
+    is not conditionally convergent.
+\end{example}
+
+\begin{theorem}[Riemann Rearrangement Theorem]
+    Let $\infsum a_k$ be a conditionally convergent series,
+    and $L \in \R$.
+    Then there exists a rearrangement
+    \[
+    \sigma : \N \rightarrow \N
+    \]
+    (which is injective and surjective)
+    such that the rearranged sum
+    \[
+    \infsum a_{\sigma(k)}
+    \]
+    converges to $L$.
+    Moreover,
+    there is a rearrangement that is divergent.
+    \begin{proof}
+        Let
+        \[
+        a_k^{+} = \frac{|a_k| + a_k}{2} = \begin{cases}
+            |a_k| & \text{if } a_k \geq 0 \\
+            0 & \text{if } a_k < 0.
+        \end{cases}
+        \]
+        Let
+        \[
+        a_k^{-} = \frac{|a_k| - a_k}{2} = \begin{cases}
+            0 & \text{if } a_k \geq 0 \\
+            |a_k| & \text{if } a_k < 0.
+        \end{cases}
+        \]
+        Both $\infsum a_k^{+}$ and $\infsum a_k^{-}$ are divergent:
+        \[
+        a_k = a_k^{+} - a_k^{-}
+        \]
+        \[
+        |a_k| = a_k^{+} + a_k^{-}.
+        \]
+        So if one of them were convergent,
+        so would be the other
+        (If $\infsum a_k^{+}$ is convergent,
+        $a_k^{-} = a_k^{+} - a_k$ and $\infsum a_k^{-}$ is convergent by COLT).
+        If both are convergent,
+        series is absolutely convergent.
+
+        Now let $b_k$ be the $k$th element of the sequence $\seq[a]$ which is $\geq 0$,
+        and $c_k$ is the $k$th element which is $< 0$.
+        Then $\infsum b_k$ and $\infsum c_k$ are also divergent.
+        Note $\sum_{k = 1}^{n}c_k = -\sum_{k = 1}^{k_n}a_k^{-}$
+        $k_n$ the $n$the element which gives $a_{k_n} < 0$.
+
+        Given $L \in \R$,
+        let $n_0$ be the first index with
+        \[
+        \sum_{k = 1}^{n_0}b_k > L
+        \]
+        (if $L < 0,\ n_0 = 0$ will work).
+
+        Now let $n_1$ be the first index such that
+        \[
+        \sum_{k = 1}^{n_0}b_k + \sum_{k = 1}^{n_1}c_k < L.
+        \]
+        Now pick $n_2 > n_1$ such that
+        \[
+        \sum_{k = 1}^{n}b_k + \sum_{k = 1}^{n_1}c_k + \sum_{k = n_0 + 1}^{n_2}b_k > L.
+        \]
+        Continue.
+        We have $\lim b_k = \lim c_k = 0$.
+        and this allows us to get convergence to $L$ with the right arrangement.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Let $\infsum a_k$ be an absolutely convergent series and $\sigma : \N \rightarrow \N$ be a bijection.
+    Then $\infsum a_{\sigma (k)}$ is also absolutely convergent,
+    and we have
+    \[
+    \infsum a_k = \infsum a_{\sigma(k)}.
+    \]
+    \begin{proof}
+        Look at $s_n = \sum_{k = 1}{n}|a_k|$ monotonically increasing sequence which converges to $a$,
+        and so $s_n \leq a$.
+        For $s'_n = \sum_{k = 1}^{n}|a_{\sigma(k)}| \leq s_m$ where $m = \max\{\sigma(1), \dotsc, \sigma(n)\}$ which implies $s'_n \leq a$ for all $n$,
+        so $\seq[s']$ is a convergent series shows absolute convergence of $\infsum a_{\sigma(k)}$ with limit $a' = \infsum|a_{\sigma(k)}|$.
+        Note that $\infsum|a_k|$ is a rearrangement of $\infsum|a_{\sigma(k)}|$
+        (using $\sigma ^ {-1}$) which implies $a \leq a' \leq a$ which implies $a = a'$.
+
+        Look at $b_k = a_k + |a_k| \geq 0$.
+        Then
+        \[
+        \infsum a_k + |a_k| = \infsum a_{\sigma(k)} + |a_{\sigma(k)}|.
+        \]
+        By COLT
+        \[
+        \infsum a_k + \infsum|a_k| = \infsum a_{\sigma(k)} + \infsum|a_{\sigma(k)}|
+        \]
+        which implies $\infsum[k = 1]a_k = \infsum a_{\sigma(k)}$.
+    \end{proof}
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
