@@ -1,9 +1,6 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage{preamble}
 
-\DeclareMathOperator{\Dom}{Dom}
-\DeclareMathOperator{\Ran}{Ran}
-
 \newcommand{\limas}[3][n]{#2 \rightarrow #3 \text{ as } #1 \rightarrow \infty}
 
 \title{Calculus I \\
@@ -1533,7 +1530,7 @@ Now we can prove the Lagrange form of the remainder.
     Furthermore,
     by the definition of the Taylor polynomial $P_n(t)$ we have that
     \[
-    f ^ {(k)}(a) = P_n^{(k)}(a)\text{ for } 0 \leq k \leqn.
+    f ^ {(k)}(a) = P_n^{(k)}(a)\text{ for } 0 \leq k \leq n.
     \]
     Hence $h ^ {(n)}(a) = 0$ for $0 \leq k \leq n$.
 
@@ -1610,6 +1607,261 @@ We aim to write
 \end{equation}
 where $a_0, a_n, b_n$ are constants labelled by the positive integer $n$,
 and are called the Fourier coefficients of $f(x)$.
+
+If the Fourier coefficients are such that this series converges then it is called the Fourier series of $f(x)$.
+
+Here are some identities which we need to prove
+\begin{lemma}
+    Let $m, n \in \N$,
+    then
+    \begin{enumerate}[label = \roman*)]
+        \item
+        \[
+        \frac{1}{L}\int_{-L}^{L}\cos\left(\frac{n\pi x}{L}\right)\,dx = 0.
+        \]
+        \item
+        \[
+        \frac{1}{L}\int_{-L}^{L}\sin\left(\frac{n\pi x}{L}\right)\,dx = 0.
+        \]
+        \item
+        \[
+        \frac{1}{L}\int_{-L}^{L}\sin\left(\frac{n\pi x}{L}\right)\cos\left(\frac{n\pi x}{L}\right)\,dx = 0.
+        \]
+        \item
+        \[
+        \frac{1}{L}\int_{-L}^{L}\cos\left(\frac{n\pi x}{L}\right)\cos\left(\frac{m\pi x}{L}\right)\,dx = \begin{cases}
+            0 & \text{if } m \neq n \\
+            1 & \text{if } m = n.
+        \end{cases}
+        \]
+        \item
+        \[
+        \frac{1}{L}\int_{-L}^{L}\sin\left(\frac{n\pi x}{L}\right)\sin\left(\frac{m\pi x}{L}\right)\,dx = \begin{cases}
+            0 & \text{if } m \neq n \\
+            1 & \text{if } m = n.
+        \end{cases}
+        \]
+    \end{enumerate}
+    \begin{proof}
+        \begin{enumerate}[label = \roman*)]
+            \item
+        \end{enumerate}
+    \end{proof}
+\end{lemma}
+
+The Kronecker delta $\delta_{mn}$ is defined to be
+\[
+\delta_{mn} = \begin{cases}
+    0 & \text{if } m \neq n \\
+    1 & \text{if } m = n.
+\end{cases}
+\]
+
+We say that the set of functions $\left\{1, \cos{\frac{n\pi x}{L}}, \sin{\frac{n\pi x}{L}}\right\}$ form an orthogonal set on $[-L, L]$ because if $\phi, \psi$ are any two different functions from this set then $\frac{1}{L}\int_{-L}^{L}\phi\psi\,dx = 0$.
+
+We now use the identities which we have proven to derive expressions for the Fourier coefficients in (FS).
+First of all,
+by integrating (FS) we have
+\[
+\frac{1}{L}\int_{-L}^{L}f(x)\,dx = \frac{1}{L}\int_{-L}^{L}\left\{\frac{a_0}{2} + \infsum[n = 1]\left(a_n\cos{\frac{n\pi x}{L}} + b_n\sin{\frac{n\pi x}{L}}\right)\right\}\,dx = a_0
+\]
+using (i) and (ii).
+We have derived an expression for $a_0$
+\[
+a_0 = \frac{1}{L}\int_{-L}^{L}f(x)\,dx.
+\]
+Let $m$ be a positive integer and multiply (FS) by $\cos{\frac{m\pi x}{L}}$ and integrate to give
+\begin{gather*}
+    \frac{1}{L}\int_{-L}^{L}\cos{\frac{m\pi x}{L}}f(x)\,dx = \frac{1}{L}\int_{-L}^{L}\left\{\frac{a_0}{2} + \infsum[n = 1]\left(a_n\cos{\frac{n\pi x}{L}} + b_n\sin{\frac{n\pi x}{L}}\right)\right\}\cos{\frac{m\pi x}{L}}\,dx \\
+    = \infsum[n = 1]a_n\delta_{mn} = a_m,
+\end{gather*}
+where we have used the identities (i),
+(iii),
+(iv).
+Thus we have derived an expression for $a_n$
+\[
+a_n = \frac{1}{L}\int_{-L}^{L}\cos{\frac{n\pi x}{L}}f(x)\,dx.
+\]
+
+Similarly,
+multiply (FS) by $\sin{\frac{m\pi x}{L}}$ and integrate to give
+\begin{gather*}
+    \frac{1}{L}\int_{-L}^{L}\sin{\frac{m\pi x}{L}}f(x)\,dx = \frac{1}{L}\int_{-L}^{L}\left\{\frac{a_0}{2} + \infsum[n = 1]\left(a_n\cos{\frac{n\pi x}{L}} + b_n\sin{\frac{n\pi x}{L}}\right)\right\}\sin{\frac{m\pi x}{L}}\,dx \\
+    = \infsum[n = 1]b_n\delta_{mn} = b_m,
+\end{gather*}
+where we have used the identities (ii),
+(iii),
+(v).
+Thus we have derived an expression for $a_n$
+\[
+b_n = \frac{1}{L}\int_{-L}^{L}\sin{\frac{n\pi x}{L}}f(x)\,dx.
+\]
+
+\begin{example}
+    The function $f(x)$ has period $2$,
+    that is $f(x + 2) = f(x)$,
+    and is given by $f(x) = |x|$ for $-1 < x < 1$.
+    To calculate the Fourier series of this function we apply the earlier formulae with $L = 1$.
+    \[
+    a_0 = \int_{-1}^{1}|x|\,dx = 2\int_{0}^{1}x\,dx = \left[x ^ 2\right]_{0}^{1} = 1.
+    \]
+    For $n > 0$
+    \begin{gather*}
+        a_n = \int_{-1}^{1}|x|\cos(n\pi x)\,dx = 2\int_{0}^{1}x\cos(n\pi x)\,dx \\
+        = 2\left\{\left[\frac{x}{n\pi}\sin(n\pi x)\right] - \int_{0}^{1}\frac{1}{n\pi}\sin(n\pi x)\,dx\right\} = \frac{2}{n ^ 2\pi ^ 2}\left[\cos(n\pi x)\right]_{0}^{1} \\
+        = \frac{2}{n ^ 2\pi ^ 2}(\cos(n\pi) - 1) = \frac{2}{n ^ 2\pi ^ 2}((-1) ^ n - 1).
+    \end{gather*}
+    Furthermore,
+    for $n > 0$
+    \[
+    b_n = \int_{-1}^{1}|x|\sin(n\pi x)\,dx = 0
+    \]
+    because this is the integral of an odd function over a symmetric interval.
+
+    This demonstrates that if $f(x)$ is an even function on the interval $(-L, L)$ then all $b_n = 0$ and the Fourier series only contains cosine terms.
+    This is called a cosine series.
+
+    Putting all this together we have the Fourier series
+    \[
+    f(x) = \frac{1}{2} + \infsum[n = 1]\frac{2}{n ^ 2\pi ^ 2}((-1) ^ n - 1)\cos(n\pi x).
+    \]
+    We can rewrite this since here $a_{2n} = 0$ and $a_{2n - 1} = -\frac{4}{\pi ^ 2(2n - 1) ^ 2}$,
+    so this Fourier series could also be written as
+    \[
+    f(x) = \frac{1}{2} - \frac{4}{\pi ^ 2}\infsum[n = 1]\frac{\cos((2n - 1)\pi x)}{(2n - 1) ^ 2}.
+    \]
+    To see how the Fourier series approaches the function $f(x)$ define the partial sum
+    \[
+    S_m(x) = \frac{a_0}{2} + \sum_{n = 1}^{m}\left(a_n\cos{\frac{n\pi x}{L}} + b_n\sin{\frac{n\pi x}{L}}\right).
+    \]
+\end{example}
+
+\begin{remark}
+    A general point is that if $f(x)$ is an even function on the interval $(-L, L)$ then all $b_n = 0$ and the Fourier series only contains cosine terms,
+    this is also called a cosine series.
+
+    Similarly,
+    if $f(x)$ is an odd function on the interval $(-L, L)$ then all $a_n = 0$ and the Fourier series only contains sine terms,
+    this is also called a sine series.
+\end{remark}
+
+In general,
+we would like to know what happens to the partial sum
+\[
+S_m(x) = \frac{a_0}{2} + \sum_{n = 1}^{m}\left(a_n\cos{\frac{n\pi x}{L}} + b_n\sin{\frac{n\pi x}{L}}\right)
+\]
+for all values of $x$ in the limit as $m \rightarrow \infty$.
+
+\begin{theorem}[Dirichlet's theorem]
+    Let $f(x)$ be a periodic function,
+    with period $2L$,
+    such that on the interval $(-L, L)$ it has a finite number of extreme values,
+    a finite number of jump discontinuities and $|f(x)|$ is integrable on $(-L, L)$.
+    Then its Fourier series converges for all values $x$.
+    Furthermore,
+    it converges to $f(x)$ at all points where $f(x)$ is continuous and if $x = a$ is a jump discontinuity then it converges to $\frac{1}{2}\lim_{x \rightarrow a ^ {-}}f(x) + \frac{1}{2}\lim{x \rightarrow a ^ {+}}f(x)$.
+\end{theorem}
+
+\subsection{Parseval’s theorem}
+
+\begin{theorem}[Parseval’s theorem]
+    If $f(x)$ is a function of period $2L$ with Fourier coefficients $a_n, b_n$ then
+    \[
+    \frac{1}{2L}\int_{-L}^{L}((f(x))) ^ 2\,dx = \frac{1}{4}a_0 ^ 2 + \infsum[n = 1](a_n ^ 2 + b_n ^ 2).
+    \]
+    \begin{proof}
+        \begin{gather*}
+            \frac{1}{L}\int_{-L}^{L}(f(x)) ^ 2\,dx = \\
+            \frac{1}{L}\int_{-L^}{L}\left\{\left[\frac{a_0}{2} + \infsum[n = 1]\left(a_n\cos{\frac{n\pi x}{L}} + b_n\sin{\frac{n\pi x}{L}}\right)\right]\left[\frac{a_0}{2} + \infsum[m = 1]\left(a_m\cos{\frac{m\pi x}{L}} + b_m\sin{\frac{m\pi x}{L}}\right)\right]\right\} \\
+            = \frac{a_0 ^ 2}{2} + \infsum[n = 1]\infsum[m = 1](a_na_m\delta_{mn} + b_nb_m\delta_{mn}) = \frac{a_0 ^ 2}{2} + \infsum[n = 1](a_n ^ 2 + b_n ^ 2).
+        \end{gather*}
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    Calculate $\infsum[n = 1]\frac{1}{n ^ 2}$ by applying Parseval's theorem to the Fourier series of $f(x) = x$ for $-\pi < x < \pi$.
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        From earlier we calculate that the Fourier coefficients are given by $a_n = 0$ and $b_n = \frac{2}{n}(-1) ^ {n + 1}$.
+        Hence by Parseval's theorem
+        \[
+        \frac{1}{2\pi}_{-\pi}^{\pi}x ^ 2\,dx = \frac{1}{2\pi}\left[\frac{x ^ 3}{3}\right]_{-\pi}^{\pi} = \frac{\pi ^ 2}{3} = \frac{1}{2}\infsum[n = 1]\frac{4}{n ^ 2}.
+        \]
+        Thus
+        \[
+        \infsum[n = 1]\frac{1}{n ^ 2} = \frac{\pi ^ 2}{6}.
+        \]
+    \end{proof}
+\end{example}
+Certain infinite sums can also be obtained by evaluating a Fourier series at a particular value of $x$.
+\begin{example}
+    Calculate $\infsum[n = 1]\frac{1}{(2n - 1) ^ 2}$ by evaluating the Fourier series of $f(x) = |x|$ for $-1 < x < 1$,
+    at the value $x = 0$.
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+        From earlier we calculate the Fourier series to be
+        \[
+        f(x) = \frac{1}{2} - \frac{4}{\pi ^ 2}\infsum[n = 1]\frac{\cos((2n - 1)\pi x)}{(2n - 1) ^ 2}.
+        \]
+        As $f(x) = |x|$ satisfies the conditions of Dirichlet's theorem and is continuous at $x = 0$ then,
+        by Dirichlet's theorem,
+        evaluating the Fourier series at $x = 0$ gives $f(0) = 0$.
+        Hence
+        \[
+        0 = \frac{1}{2} - \frac{4}{\pi ^ 2}\infsum[n = 1]\frac{1}{(2n - 1) ^ 2}.\quad\text{Thus } \infsum[n = 1]\frac{1}{(2n - 1) ^ 2} = \frac{\pi ^ 2}{8}.
+        \]
+    \end{proof}
+\end{example}
+
+\subsection{Half range Fourier series}
+A half range Fourier series is a Fourier series defined on an interval $(0, L)$ rather than the interval $(-L, L)$.
+
+Given a function $f(x)$,
+defined on the interval $(0, L)$,
+we obtain its half range sine series by calculating the Fourier sine series of its odd extension
+\[
+f_o(x) = \begin{cases}
+    f(x) & \text{if } 0 < x < L \\
+    -f(-x) & \text{if } -L < x < 0.
+\end{cases}
+\]
+The Fourier coefficients of $f_o(x)$ are $a_n = 0$ and
+\[
+b_n = \frac{1}{L}\int_{-L}^{L}f_o(x)\sin{\frac{n\pi x}{L}}\dx = \frac{2}{L}\int_{0}^{L}f(x)\sin{\frac{n\pi x}{L}}\,dx.
+\]
+This is the half range sine series for $f(x)$ on $(0, L)$ as $f(x) = \infsum[n = 1]b_n\sin{\frac{n\pi x}{L}}$.
+
+Given a function $f(x)$,
+defined on the interval $(0, L)$,
+we obtain its half range cosine series by calculating the Fourier cosine series of its even extension
+\[
+f_e(x) = \begin{cases}
+    f(x) & \text{if } 0 < x < L \\
+    f(-x) & \text{if } -L < x < 0.
+\end{cases}
+\]
+The Fourier coefficients of $f_e(x)$ are $b_n = 0$ and
+\[
+a_n = \frac{1}{L}\int_{-L}^{L}f_e(x)\cos{\frac{n\pi x}{L}}\dx = \frac{2}{L}\int_{0}^{L}f(x)\cos{\frac{n\pi x}{L}}\,dx.
+\]
+This is the half range cosine series for $f(x)$ on $(0, L)$ as $f(x) = \frac{a_0}{2} + \infsum[n = 1]a_n\cos{\frac{n\pi x}{L}}$.
+
+For a given
+(physical)
+problem on an interval $(0, L)$ it is usually the boundary conditions that determine whether an odd extension and a half sine Fourier series or an even extension and a half cosine Fourier series is more appropriate.
+
+\subsection{Fourier series in complex form}
+Fourier series take a simpler form if written in terms of complex variables.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
