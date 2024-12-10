@@ -1277,6 +1277,115 @@ We can apply calculus to find the generating functions of sequences.
     \end{proof}
 \end{theorem}
 
+\newpage
+
+\section{What is a graph?}
+
+\subsection{Basic definitions}
+
+Diagram!!!!!!!
+
+
+
+\begin{definition}[Simple graph]
+    A simple graph $G$ is a pair of sets $G = (V, E)$ where each element of $E$
+    (an edge)
+    is a $2$-element subset of $V$
+    (the set of vertices).
+\end{definition}
+
+The two vertices contained in an edge are the endpoints of the edge.
+
+So an edge going from vertex $u$ to vertex $v$ would have endpoints $u$ and $v$.
+
+We can write an edge from $u$ to $v$
+($\{u, v\}$)
+as $uv$.
+
+We will only be considering finite graphs here,
+i.e.
+graphs where $|V|$ and $|E|$ are finite.
+
+Two vertices are adjacent if there is an edge between them.
+If a vertex is not adjacent to any other vertices then it is an isolated vertex.
+
+An edge is incident to a vertex if that vertex is one of the endpoints of the edge.
+
+\textit{Note: Sometimes we shall consider more general graphs that allow loops
+(edges whose two endpoints are the same vertex)
+or multiple edges
+(multiple copies of the same edge).}
+
+Such graphs are not simple,
+this formally requires us to replace sets with multisets.
+
+The degree of a vertex is the number of times that the vertex appears as an endpoint of an edge.
+For a simple graph,
+this is the same as the number of edges incident to the vertex.
+A loop contributes two towards the degree of a vertex.
+
+$d(v)$ is used to denote the degree of a vertex $v \in V$.
+
+A vertex of degree $1$ is called a leaf.
+
+\subsection{Some standard simple graphs}
+The empty or null graph on $m$ vertices is called $N_m$.
+It has $|V| = m$ and $|E| = 0$.
+
+
+The complete graph on $m$ vertices is called $K_m$.
+Given $|V| = m$,
+we have an edge between every pair of vertices,
+so $|E| = \binom{m}{2}$.
+
+
+The star graph on $m$ vertices is called $S_m$.
+Given $|V| = m$ vertices,
+$m - 1$ are leaves with a single edge to a central hub vertex of degree $m - 1$,
+so $|E| = m - 1$.
+
+
+The wheel graph on $m$ vertices is called $W_m$.
+This can be built on a star graph by listing the leaves in some order $v_1, \dotsc, v_{m - 1}$ and then adding the cycle of $m - 1$ edges $v_1v_2, v_2v_3, v_3v_4, \dotsc, v_{m - 2}v_{m - 1}, v_{m - 1}v_1$.
+So $W_m$ has $|V| = m$ and $|E| = 2(m - 1)$.
+
+
+The $n$-cube has $2 ^ n$ vertices and is denoted $Q_n$.
+If we label the vertices by $n$-digit binary strings,
+then edges join vertices whose binary representations differ in exactly one place.
+So there are indeed $2 ^ n$ vertices and the number of edges is $n2 ^ {n - 1}$
+($n$ possible places in which the strings can differ,
+$2 ^ {n - 1}$ choices for the other places).
+Concisely $|V| = 2 ^ n$ and $|E| = n2 ^ {n - 1}$.
+
+\subsection{Handshaking}
+\begin{lemma}
+    For any graph $G = (V, E)$,
+    we have $\sum_{v \in V}d(v) = 2|E|$.
+    \begin{proof}
+        Both sides count ends on edges.
+        The LHS does so vertex by vertex,
+        the RHS edge by edge.
+    \end{proof}
+\end{lemma}
+
+\begin{corollary}
+    In any graph,
+    the number of odd-degree vertices is even.
+\end{corollary}
+
+\subsection{Graph isomorphism}
+\begin{definition}
+    Two simple graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$ are isomorphic,
+    written $G_1 \cong G_2$,
+    if there exists $\varphi : V_1 \rightarrow V_2$ which is a bijection and preserves adjacency,
+    i.e.,
+    $xy \in E_1$ if and only if $\varphi(x)\varphi(y) \in E_2$.
+\end{definition}
+
+In particular $|V_1| = |V_2|$ and $|E_1| = |E_2|$.
+
+
 
 
 
