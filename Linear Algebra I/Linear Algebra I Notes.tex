@@ -1,5 +1,6 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage{preamble}
+\usepackage{tikz-cd}
 
 \newcommand{\mbf}[1]{\mathbf{#1}}
 \newcommand{\ts}[1]{\textsuperscript{#1}}
@@ -3942,7 +3943,7 @@ $\mathrm{null}(A)$ is the nullity of $A$.
     \end{proof}
 \end{proposition}
 
-\begin{theorem}[Rank Theorem, label = thm:rankthm]
+\begin{theorem}[Rank Theorem, label = thm:rankthm]\label{linalg_thm_rankthm}
     \[
     \mathrm{rowrank}(A) = \mathrm{colrank}(A).
     \]
@@ -4794,6 +4795,246 @@ If $B$ is a basis for $V$ then we have a coordinate map
 \]
 $\dim{V} = n$.
 $\Phi_B$ is an isomorphism.
+
+Suppose $V$ is a finite dimension and $\dim{V} = n$,
+with a basis $B = \{\mbf{v}_1, \dotsc, \mbf{v}_n\}$ then the map
+\[
+\Phi_B : V \rightarrow \R ^ n
+\]
+\[
+\lambda_1\mbf{v}_1 + \dotsi + \lambda_n\mbf{v}_n \mapsto \begin{pmatrix}
+    \lambda_1 \\ \vdots \\ \lambda_n
+\end{pmatrix}
+\]
+is an isomorphism.
+\begin{proof}
+    We have seen that $\Phi_B$ is linear.
+    Is it a bijection?
+
+    $1$-$1$:
+
+    If $\mbf{v} = \lambda_1\mbf{v}_1 + \dotsi + \lambda_n\mbf{v}_n$ and $\mbf{w} = \mu_1\mbf{v}_1 + \dotsi + \mu_n\mbf{v}_n$ then $\Phi_B(\mbf{v}) = \Phi_B(\mbf{w})$
+    \begin{align*}
+        &\implies \begin{pmatrix}
+            \lambda_1 \\ \vdots \\ \lambda_n
+        \end{pmatrix} = \begin{pmatrix}
+            \mu_1 \\ \vdots \\ \mu_n
+        \end{pmatrix} \\
+        &\implies \lambda_i = \mu_i \quad 1 \leq i \leq n \\
+        &\implies \mbf{v} = \mbf{w}.
+    \end{align*}
+
+    Onto:
+
+    If $\begin{pmatrix}
+        \lambda_1 \\ \vdots \\ \lambda_n
+    \end{pmatrix} \in \R ^ n$ then
+    \[
+    \Phi_B(\lambda_1\mbf{v}_1 + \dotsi + \lambda_n\mbf{v}_n) = \begin{pmatrix}
+        \lambda_1 \\ \vdots \\ \lambda_n
+    \end{pmatrix}.
+    \]
+    Hence onto.
+\end{proof}
+
+\begin{definition}
+    Suppose $V, W$ are finite dimension with $\dim{V} = n$,
+    $\dim{W} = m$ and we have bases $B$ for $V$ and $C$ for $W$,
+    and suppose $T : V \rightarrow W$ is linear.
+    Then we define the matrix $A \in M_{m \times n}(\R)$ that represents $T$ with respect to $B$ and $C$ in the following way:
+\end{definition}
+
+\[
+\begin{tikzcd}[row sep = 10ex, column sep = 10ex]
+    V \arrow{r}{T} \arrow[swap]{d}{\Phi_B} & W \arrow{d}{\Phi_C} \\
+    \R ^ n \arrow{r}{A}& \R ^ m
+\end{tikzcd}
+\]
+We want to define
+\[
+A : \R ^ n \rightarrow \R ^ m
+\]
+satisfying
+\[
+\Phi_C \circ T = A \circ \Phi_B : V \rightarrow \R ^ n.
+\]
+So we set
+\[
+A = \Phi_C \circ T \circ (\Phi_B ^ {-1}).
+\]
+\textit{Note: one can "recover" $T$ from $A$:
+\[
+T = \Phi_C ^ {-1} \circ A \circ \Phi_B.
+\]}
+
+\begin{example}
+    What is the matrix representing
+    \[
+    \frac{d}{dx}\,:\,\R[x]_4 \rightarrow \R[x]_3
+    \]
+    with respect to the standard bases?
+
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{$\triangle$}
+        \begin{align*}
+            \Phi_4\,&:\,a_0 + a_1x + a_2x ^ 2 + a_3x ^ 3 + a_4x ^ 4 \\
+            &\mapsto \begin{pmatrix}
+                a_0 \\ a_1 \\ a_2 \\ a_3 \\ a_4
+            \end{pmatrix}
+        \end{align*}
+        \begin{align*}
+            \Phi_3\,&:\,a_0 + a_1x + a_2x ^ 2 + a_3x ^ 3 \\
+            &\mapsto \begin{pmatrix}
+                a_0 \\ a_1 \\ a_2 \\ a_3
+            \end{pmatrix}
+        \end{align*}
+        \begin{align*}
+            \Phi_3 \circ \frac{d}{dx} \circ (\Phi_4 ^ {-1})\begin{pmatrix}
+                a_0 \\ a_1 \\ a_2 \\ a_3 \\ a_4
+            \end{pmatrix} &= \Phi_3 \circ \frac{d}{dx}(a_0 + a_1x + a_2x ^ 2 + a_3x ^ 3 + a_4x ^ 4) \\
+            &= \Phi_3 \circ (a_1 + 2a_2x + 3a_3x ^ 2 + 4a_4x ^ 3) \\
+            &= \begin{pmatrix}
+                a_1 \\ 2a_2 \\ 3a_3 \\ 4a_4
+            \end{pmatrix}.
+        \end{align*}
+        So what is $A \in M_{4 \times 5}(\R)$
+        \[
+        \begin{pmatrix}
+            A\mbf{e}_1 & A\mbf{e}_2 & \dotsi & A\mbf{e}_5
+        \end{pmatrix} =
+        \begin{pmatrix}
+            0 & 1 & 0 & 0 & 0 \\
+            0 & 0 & 2 & 0 & 0 \\
+            0 & 0 & 0 & 3 & 0 \\
+            0 & 0 & 0 & 0 & 4
+        \end{pmatrix}.
+        \]
+    \end{proof}
+\end{example}
+
+\begin{example}
+    What is the matrix representing $f\,:\, M_2(\R) \rightarrow M_2(\R)$ $f\,:\,A \mapsto A ^ T$ with respect to the standard bases?
+    
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{$\triangle$}
+        \begin{align*}
+            A\begin{pmatrix}
+                a \\ b \\ c \\ d
+            \end{pmatrix} &= \Phi \circ f \circ \Phi ^ {-1}\begin{pmatrix}
+                a \\ b \\ c \\ d
+            \end{pmatrix} \\
+            &= \Phi \circ f \begin{pmatrix}
+                a & b \\ c & d
+            \end{pmatrix} \\
+            &= \Phi \begin{pmatrix}
+                a & c \\ b & d
+            \end{pmatrix} \\
+            &= \begin{pmatrix}
+                a \\ c \\ b \\ d
+            \end{pmatrix}.
+        \end{align*}
+        So
+        \[
+        A = \begin{pmatrix}
+            1 & 0 & 0 & 0 \\
+            0 & 0 & 1 & 0 \\
+            0 & 1 & 0 & 0 \\
+            0 & 0 & 0 & 1
+        \end{pmatrix}.
+        \]
+    \end{proof}
+\end{example}
+
+"\textbf{Shortcut}"
+
+$A = \Phi_B \circ T \circ \Phi_C ^ {-1}$ means that
+\[
+A\mbf{e}_i = \Phi_B \circ T \circ \Phi_C ^ {-1}(\mbf{e}_i) = \Phi_B \circ T (\mbf{v}_i)
+\]
+where $\mbf{v}_i$ is the $i$th basis element of $C$.
+So
+\[
+A = \begin{pmatrix}
+    A\mbf{e}_1 & A\mbf{e}_2 & \dotsi & A\mbf{e}_n
+\end{pmatrix} = \begin{pmatrix}
+    \Phi_B T(\mbf{v}_1) & \dotsi & \Phi_B T(\mbf{v}_n)
+\end{pmatrix}.
+\]
+\[
+\begin{tikzcd}[row sep = 10ex, column sep = 10ex]
+    V \arrow{r}{T} \arrow[swap]{d}{} & W \arrow{d}{\Phi_B} \\
+    C \subseteq \R ^ n \arrow{r}{A}& \R ^ m
+\end{tikzcd}
+\]
+
+\subsection{Image, kernel, rank and nullity}
+\begin{definition}
+    If $T\,:\, V \rightarrow W$ is linear we define the image of $T$ by
+    \[
+    \mathrm{im}(T) := \{T(\mbf{v})\,:\,\mbf{v} \in V\} \subseteq W.
+    \]
+    The kernel of $T$ is defined by
+    \[
+    \ker(T) := \{\mbf{v} \in V\,:\,T(\mbf{v}) = \mbf{0}\} \subseteq V.
+    \]
+\end{definition}
+
+\begin{proposition}
+    $\mathrm{im}(T) \subseteq W$ and $\ker(T) \subseteq V$ are subspaces.
+    \begin{proof}
+        Suppose $\mbf{u, w} \in \mathrm{im}(T)$,
+        $\lambda \in \R$.
+        Then $\exists \mbf{x, y} \in V$ such that
+        \[
+        T(\mbf{x}) = \mbf{u},\quad T(\mbf{y}) = \mbf{w}.
+        \]
+        So
+        \begin{align*}
+            \mbf{u} + \mbf{w} &= T(\mbf{x}) + T(\mbf{y}) \\
+            &= T(\mbf{x} + \mbf{y}) \in \im{T}
+        \end{align*}
+        \begin{align*}
+            \lambda\mbf{u} &= \lambda T(\mbf{x}) \\
+            &= T(\lambda\mbf{x}) \in \im{T}.
+        \end{align*}
+        Also $\mbf{0} = T(\mbf{0}) \in \im{T}$.
+
+        Suppose $\mbf{u, v} \in \ker{T}$,
+        $\lambda \in \R$.
+        Then
+        \begin{align*}
+            T(\mbf{u} + \mbdf{v}) &= T(\mbf{u}) + T(\mbf{v}) \\
+            &= \mbf{0} + \mbf{0} \\
+            &= \mbf{0}
+        \end{align*}
+        so $\mbf{u + v} \in \ker{T}$.
+        Also
+        \begin{align*}
+            T(\lambda\mbf{u}) &= \lambda T(\mbf{u}) \\
+            &= \lambda\mbf{0} \\
+            &= \mbf{0}
+        \end{align*}
+        so $\lambda\mbf{u} \in \ker(T)$.
+
+        Also $T(\mbf{0}) = \mbf{0}$ so $\mbf{0} \in \ker{T}$.
+    \end{proof}
+\end{proposition}
+
+\begin{definition}
+    If they are finite dimensional we define
+    \[
+    \mathrm{rk}(T) = \dim(\im(T))
+    \]
+    "rank".
+    \[
+    \mathrm{null}(T) = \dim(\ker(T))
+    \]
+    "nullity".
+\end{definition}
+
+
+
+
+
+
 
 
 
