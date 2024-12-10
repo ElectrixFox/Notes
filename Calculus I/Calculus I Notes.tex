@@ -1,9 +1,6 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage{preamble}
 
-\DeclareMathOperator{\Dom}{Dom}
-\DeclareMathOperator{\Ran}{Ran}
-
 \title{Calculus I}
 \author{Luke Phillips}
 \date{October 2024}
@@ -3099,21 +3096,159 @@ We first need to prove the following identities:
         \end{cases}
         \]
     \end{enumerate}
+    \fbox{
+    \begin{minipage}{\textwidth}
+        \centering
+        It is convenient to introduce the Kronecker delta function
+        \[
+        \delta_{mn} = \begin{cases}
+                0 & \text{if } m \neq n \\
+                1 & \text{if } m = n.
+            \end{cases}
+        \]
+        then for example iv) can be written as
+        \[
+        \frac{1}{L}\int_{-L}^{L}\cos\left(\frac{n\pi x}{L}\right)\cos\left(\frac{m\pi x}{L}\right)\,dx = \delta_{mn}
+        \]
+    \end{minipage}
+    }
+    \begin{proof}\phantom{}
+        \begin{enumerate}[label = \roman*)]
+            \item Is simple
+            \[
+            \frac{1}{L}\int_{-L}^{L}\cos\left(\frac{n\pi x}{L}\right)\,dx = \frac{1}{L}\left[\frac{L}{n\pi}\sin\left(\frac{n\pi x}{L}\right)\right]_{-L}^{L} = 0.
+            \]
+            ii) and iii) are immediate as the integrals of odd functions over symmetric integrals.
+            \item[iv)]
+            Recall $\cos(x \pm y) = \cos(x)\cos(y) \mp \sin(x)\sin(y)$
+            \[
+            \cos(x + y) + \cos(x - y) = 2\cos(x)\cos(y).
+            \]
+            Then,
+            first assume $m \neq n$
+            \begin{align*}
+                \frac{1}{L}\int_{-L}^{L}\cos\left(\frac{m\pi x}{L}\right)\cos\left(\frac{n\pi x}{L}\right)\,dx &= \frac{1}{L}\int_{-L}^{L}\left(\cos\left(\frac{(m + n)\pi x}{L}\right) + \cos\left(\frac{(m - n)\pi x}{L}\right)\right)\,dx \\
+                &= \frac{1}{2L}\left[\frac{L}{(m + n)\pi}\sin\left(\frac{(m + n)\pi x}{L}\right) + \right. \\
+                &\left.\frac{L}{(m - n)\pi}\sin\left(\frac{(m - n)\pi x}{L}\right)\right]_{-L}^{L} \\
+                &= 0.
+            \end{align*}
+            If $m = n$
+            \begin{align*}
+                \frac{1}{L}\int_{-L}^{L}\cos\left(\frac{m\pi x}{L}\right)\,dx &= \frac{1}{L}\int_{-L}^{L}\cos ^ 2\left(\frac{n\pi x}{L}\right)\,dx \\
+                &= \frac{1}{2L}\int_{-L}^{L}\left(1 + \cos\left(\frac{2n\pi x}{L}\right)\right)\,dx \\
+                &= \frac{1}{2L}\left[x + \frac{L}{2n\pi}\sin\left(\frac{2n\pi x}{L}\right)\right]_{-L}^{L} \\
+                &= 1
+            \end{align*}
+            \item [v)] Similar
+            (\textbf{exercise})
+        \end{enumerate}
+    \end{proof}
 \end{lemma}
 
-It is convenient to introduce the Kronecker delta function
+We say the set of functions $\left\{1, \cos\left(\frac{n\pi x}{L}\right), \sin\left(\frac{n\pi x}{L}\right)\right\}$ form an orthogonal
+(orthonormal)
+set on $[-L, L]$,
+because if $\phi, \psi$ are different elements of the set,
+then $\frac{1}{L}\int_{-L}^{L}\phi\psi\,dx = 0$.
+
+We can use these identities to determine the Fourier coefficients in (FS).
+Firstly,
+by integrating (FS)
+\begin{align*}
+    \frac{1}{L}\int_{-L}^{L}f(x)\,dx &= \frac{1}{L}\int_{-L}^{L}\left(\frac{a_0}{2} + \infsum[n = 1]\left[a_n\cos\left(\frac{n\pi x}{L}\right) + b_n\sin\left(\frac{n\pi x}{L}\right)\right]\right)\,dx \\
+    &= \frac{1}{L}\left[\frac{a_0x}{2}\right]_{-L}^{L} = a_0
+\end{align*}
+by identities i) and ii).
+
+Therefore
 \[
-\delta_{mn} = \begin{cases}
-        0 & \text{if } m \neq n \\
-        1 & \text{if } m = n.
-    \end{cases}
+a_0 = \frac{1}{L}\int_{-L}^{L}f(x)\,dx.
 \]
-then for example iv) can be written as
+or $a_0 = \langle 1, f(x) \rangle$ where
 \[
-\frac{1}{L}\int_{-L}^{L}\cos\left(\frac{n\pi x}{L}\right)\cos\left(\frac{m\pi x}{L}\right)\,dx = \delta_{mn}
+\langle f, g \rangle = \frac{1}{L}\int_{-L}^{L}fg\,dx.
 \]
 
+Now,
+letting $m$ be a positive integer,
+multiplying (FS) by $\cos\left(\frac{m\pi x}{L}\right)$ and integrating
+\begin{align*}
+    \frac{1}{L}\int_{-L}^{L}f(x)\cos\left(\frac{m\pi x}{L}\right)\,dx &= \frac{1}{L}\int_{-L}^{L}\left(\frac{a_0}{2} + \infsum[n = 1]\left[a_n\cos\left(\frac{n\pi x}{L}\right) + b_n\sin\left(\frac{n\pi x}{L}\right)\right]\right)\cos\left(\frac{m\pi x}{L}\right)\,dx \\
+    &= \infsum[n = 1]a_n\delta_{mn} = a_m
+\end{align*}
+using i),
+iii) and iv).
+Therefore 
+\[
+a_n = \frac{1}{L}\int_{-L}^{L}f(x)\cos\left(\frac{n\pi x}{L}\right)\,dx
+\]
+or $a_n = \langle a_n, \cos\left(\frac{n\pi x}{L}\right) \rangle$.
 
+\textit{Note: that with $n = 0$ this also gives the correct expression for $a_0$.}
+
+Similarly,
+multiplying (FS) by $\sin\left(\frac{m\pi x}{L}\right)$ and integrating gives
+\begin{align*}
+    \frac{1}{L}\int_{-L}^{L}f(x)\sin\left(\frac{m\pi x}{L}\right)\,dx &= \frac{1}{L}\int_{-L}^{L}\left(\frac{a_0}{2} + \infsum[n = 1]\left[a_n\cos\left(\frac{n\pi x}{L}\right) + b_n\sin\left(\frac{n\pi x}{L}\right)\right]\right)\sin\left(\frac{m\pi x}{L}\right)\,dx \\
+    &= \infsum[n = 1]b_n\delta_{mn} = b_m
+\end{align*}
+using ii),
+iii) and v).
+So
+\[
+b_n = \frac{1}{L}\int_{-L}^{L}f(x)\sin\left(\frac{n\pi x}{L}\right)\,dx
+\]
+
+\subsection{Examples of Fourier Series}
+\begin{example}
+    The function $f(x)$ has period $2$
+    (i.e. $f(x + 2) = f(x)$)
+    and is given by $f(x) = |x|$ for $-1 < x < 1$.
+
+    \begin{solution}
+        
+        To calculate the Fourier series of $f(x)$,
+        we compute the Fourier coefficients using our previous results with $L = 1$.
+        \[
+        a_0 = \int_{-1}^{1}f(x)\,dx = \int_{-1}^{1}|x|\,dx = 2\int_{0}^{1}x\,dx = \left[x ^ 2\right]_{0}^{1} = 1
+        \]
+        for $n > 0$
+        \begin{align*}
+            a_n &= \int_{-1}^{1}f(x)\cos(n\pi x)\,dx \\
+            &= \int_{-1}^{1}|x|\cos(n\pi x)\,dx \\
+            &= 2\int_{0}^{1}x\cos(n\pi x)\,dx \\
+            &= 2\left(\left[\frac{1}{n\pi}\sin(n\pi x)\right]_{0}^{1} - \int_{0}^{1}\frac{1}{n\pi}\sin(n\pi x)\right)\,dx \\
+            &= \frac{2}{n ^ 2\pi ^ 2}\left[\cos(n\pi x)\right]_{0}^{1} \\
+            &= \frac{2}{n ^ 2\pi ^ 2}(\cos(n\pi) - 1) \\
+            &= \frac{2}{n ^ 2\pi ^ 2}((-1) ^ n - 1).
+        \end{align*}
+        \[
+        b_n = \int_{-1}^{1}|x|\sin(n\pi x)\,dx = 0
+        \]
+        since this is the integral of an odd function over a symmetric interval.
+        
+        In general if $f(x)$ is even on $(-L, L)$,
+        then all $b_n = 0$ and the Fourier series contains only cosine terms
+        (plus a constant term).
+        Such a series is called a cosine series.
+        
+        Putting the above together,
+        we have the Fourier
+        (cosine)
+        series for $f(x)$,
+        \begin{align*}
+            f(x) &= \frac{a_0}{2} + \infsum[n = 1]a_n\cos\left(\frac{n\pi x}{L}\right) + b_n\sin\left(\frac{n\pi x}{L}\right) \\
+            &= \frac{1}{2} + \infsum[n = 1]\frac{2((-1) ^ n - 1)}{n ^ 2\pi ^ 2}\cos(n\pi x) \\
+            &= \frac{1}{2} - \frac{4}{\pi ^ 2}\left(\cos(\pi x) + \frac{1}{9}\cos(3\pi x) + \frac{1}{25}\cos(5\pi x) + \dotsc\right).
+        \end{align*}
+        Note that in this example $a_{2n} = 0$,
+        $a_{2n - 1} = \frac{-4}{(2n - 1) ^ 2\pi ^ 2}$.
+        So we can also write the Fourier series as
+        \[
+        f(x) = \frac{1}{2} - \frac{4}{\pi ^ 2}\infsum[n = 1]\frac{\cos((2n - 1)\pi x)}{(2n - 1) ^ 2}.
+        \]
+    \end{solution}
+\end{example}
 
 
 

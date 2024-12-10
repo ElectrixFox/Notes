@@ -83,3 +83,10 @@
 \declaretheorem{outline}[style=plain, numbered=no]
 \declaretheorem{example}[style=exampstyle, numberwithin=section]
 
+\newenvironment{solution}
+    {
+    \begin{proof}[Solution]\renewcommand{\qedsymbol}{$\triangle$}
+    \end{proof}
+    }
+
+% for some reason adding a new environment demands I have a new line after it otherwise it breaks.
