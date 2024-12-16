@@ -1,0 +1,105 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\newcommand{\seq}[1][x]{(#1_n)_{n \in \N}}
+\newcommand{\dseq}[2][n]{(#2_#1)_{#1 \in \N}}
+
+\title{Analysis I \\
+    \large Prereading}
+\author{Luke Phillips}
+\date{December 2024}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\section{Functions, Limits, and Continuity}
+
+\subsection{Open and closed sets}
+Let $a \leq b$.
+Recall that we call
+\[
+(a, b) := \{t \in \R;\,a < t < b\}
+\]
+an open interval inside $\R$.
+We do allow $a = -\infty$ or $b = \infty$.
+Similarly,
+we have the closed
+(or compact)
+interval inside $\R$
+\[
+[a, b] := \{t \in \R;\, a \leq t \leq b\}.
+\]
+We also have half-open intervals:
+$[a, b)$ or $(a, b]$.
+
+We call a subset $X \subseteq \R$ open if for each $c \in X$ there exists an open interval $(c - \delta, c + \delta)$ with $\delta > 0$ which is contained in $X : (c - \delta, c + \delta) \subseteq X$.
+\textit{Note:
+that $\delta$ typically depends on the point $c$ and that $\delta$ isn't certainly unique.}
+
+If you have found one $\delta > 0$ then all positive reals less than $\delta$ will also work.
+\textit{Note:
+This definition of an open interval $(a, b)$ is indeed open:
+Given $c \in (a, b)$ one can take $\delta = \min\{b - c, c - a\}$.}
+
+Finally,
+$c \in X$ is an interior point if there exists an open subset $U$ or an open interval $(a, b)$ containing $c$ which lies completely in $X$.
+
+\hfill
+
+\begin{lemma}\label{pre_analy_lem_limofconvseqinclosedintinint}
+    Let $\seq$ be a convergent sequence in the closed interval $[a, b]$.
+    Then its limit $L$ lies also in $[a, b]$.
+    \begin{proof}
+        Assume $L \notin [a, b]$.
+        Let $\varepsilon = \min\{L - b, a - L\} > 0$.
+        Then by the definition of the limit there exists an $N$ such that $|x_n - L| < \varepsilon$ for all $n \geq N$.
+        But this means in particular $x_n \notin [a, b]$ for $n \geq N$.
+        Contradiction.
+    \end{proof}
+\end{lemma}
+\begin{center}
+\fbox{
+\begin{minipage}{0.9\textwidth}
+The proof is sort of saying
+(by my understanding)
+that if $\varepsilon$ is in the interval of the limit and $L$ is outside of the limit,
+then $x_n$ must not be in $[a, b]$,
+but this contradicts our assumption.
+\end{minipage}
+}
+\end{center}
+\hfill
+
+Of course this does not hold for open intervals $(a, b)$.
+The sequence $(1/n)_{n \in \N}$ lies on $(0, 1]$ but has limit $0$ outside the set.
+However,
+considering $(a, b) \subset [a, b]$ we immediately obtain.
+
+\begin{corollary}
+    Let $\seq$ be a converging sequence in the open interval $(a, b)$.
+    Then its limit $L$ lies in the closed interval $[a, b]$.
+\end{corollary}
+
+$[a, b]$ are the only potential limit points for a sequence in $(a, b)$.
+We generalise now that a given set $X \subseteq \R$ we let $\bar{X}$ be the set of all limits of all convergent sequences in $X$.
+We call $\bar{X}$ the closure of $X$.
+
+In general,
+this can be quite complicated to describe but we will be mainly concerned with situations where $X$ is an interval or finite union of such.
+
+\begin{corollary}[Bolzano-Weierstrass]
+    Let $\seq$ be a sequence in the compact interval $[a, b]$.
+    Then the sequence has a subsequence which converges in $[a, b]$.
+
+    \begin{proof}
+        The sequence $\seq$ is bounded,
+        hence by Bolzano-Weierstrass a converging subsequence.
+        By \autoref{pre_analy_lem_limofconvseqinclosedintinint} its limit must lie in $[a, b]$.
+    \end{proof}
+\end{corollary}
+
+
+\end{document}

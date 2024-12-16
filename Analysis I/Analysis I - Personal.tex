@@ -1,10 +1,40 @@
 \documentclass[10pt, a4paper]{article}
-\usepackage{preamble}
+\usepackage{amsmath, amsfonts, amsthm, amssymb}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{thmtools}
 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
 \newcommand{\limas}[3][n]{#2 \rightarrow #3 \text{ as } #1 \rightarrow \infty}
 \newcommand{\sumfrto}[3][n = 1]{\sum_{#1}^{#2}{#3}} % this is for set start
 \newcommand{\sumto}[2][\infty]{\sumfrto{#1}{#2}}
 \newcommand{\seq}[1][x_n]{\left\langle #1 \right\rangle}
+
+\declaretheoremstyle[
+    notefont = \normalfont\itshape,
+    notebraces={(}{)}
+]{avgstyle}
+\declaretheoremstyle[
+    bodyfont = \normalfont,
+    notefont = \normalfont\itshape,
+    spaceabove = 1em,
+    spacebelow = 1em
+]{defstyle}
+\declaretheoremstyle[
+    bodyfont = \normalfont,
+    notefont = \normalfont,
+    spaceabove = 1em,
+    spacebelow = 1em
+]{exampstyle}
+
+\declaretheorem[style = avgstyle]{theorem}
+\declaretheorem[]{lemma}
+\declaretheorem{proposition, corollary, remark}[style=plain]
+\declaretheorem{definition}[style=defstyle, numbered=unless unique]
+\declaretheorem{outline}[style=plain, numbered=no]
+\declaretheorem{example}[style=exampstyle, numberwithin=section]
 
 \title{Analysis Notes}
 \author{Luke Phillips}
@@ -131,18 +161,6 @@ A sequence $\seq$ is said to be increasing if $x_n \leq x_{n + 1}\quad(n = 1, 2,
         But $|x_n - l| < \epsilon \implies l - \epsilon < x_n < l + \epsilon$. But $x_n \geq a\,(n = 1, 2, \dotsc)$ and so, for any $n > N$, $a \leq x_n < l + \epsilon$. Hence, given any $\epsilon > 0,\, a < l + \epsilon$ which it follows that $a \leq l$.
     \end{proof}
 \end{theorem}
-
-\begin{example}
-    Let $X \subset \R$ and assume that $C \in \R$ is an upper bound for $X$. Show that $C = \sup X$ if and only if there exists a sequence $(x_n)_{n\in\N}$ with $x_n\in X$ for all $n$ and $\lim_{n\rightarrow\infty} x_n = C$.
-    \begin{proof}
-        $C = \sup X$ if $C$ is an upper bound of $X$ (which is assumed). Hence, we need to show that whenever $B \in \R$ is an upper bound of $X$, then $C \leq B$. Using the fact that $\lim_{n\rightarrow\infty} x_n = C$ this implies that given any $\epsilon > 0$ there exists an $N$ such that for all $n > N$,
-        \[
-        |x_n - C| < \epsilon.
-        \]
-        This implies that for all $n > N$, $C - \epsilon < x_n < C + \epsilon$ which since for all $n,\, x_n \in X$, $X \leq C + \epsilon$ we can take $B = C + \epsilon$ then it is trivial to show that our $B$ satisfies the condition for $C$ to be the supremum.
-    \end{proof}
-\end{example}
-
 
 \subsection{Some Converging Sequences}
 \begin{theorem}
@@ -415,10 +433,6 @@ If $\limas[N]{s_N}{s}$, the series is said to converge to the sum $s$, written a
 \[
 s = \sumto{a_n}.
 \]
-Otherwise, we can write the infinite sum of $a_n$ as follows. Denote the partial sum of the series $a_k$ as $s_n$, then the infinite sum is the following,
-\[
-\sumfrto[k = 1]{\infty}{a_k} = \lim_{n \rightarrow \infty}{s_n}.
-\]
 
 \subsection{Series of positive terms}
 The series whose terms are all positive are easy to deal with. This is because the sequence of partial sums of such a series is increasing. Thus, to show that a series of positive terms converges, we only need to show that its sequence of partial sums is bounded above. If the sequence of partial sums is unbounded above, then the series diverges to $+\infty$. \\
@@ -599,7 +613,7 @@ Since the sum of $b_n$ converges its tail converges to $0$ for $n$ larger than $
 \end{outline}
 
 \begin{proposition}[$n$th root test]\label{thm_series_nthrttest}
-    Let $\sumto{a_n}$ be a series which satisfies $\limsup_{n \rightarrow \infty}{|a_n|^{\frac{1}{n}}} = l$.
+    Let $\sumto{a_n}$ be a series which satisfies $\limsup_{n \rightarrow \infty}{|a_n|^{\frac{1}{m}}} = l$.
     If $l > 1$, the series diverges and, if $l < 1$, the series converges.
     \begin{proof}
         If $l < 1$ we take $\epsilon > 0$ so small that $l + \epsilon < 1$ then for sufficiently large $N$.
@@ -1105,28 +1119,8 @@ When the sequence given is easy to prove convergence through manipulation
     Given any $\epsilon > 0$ we have found a value of $N$ (optional, can quote the expression here) such that, for any $n > N$, $|a_n - l| < \epsilon$. Hence $\limas{a_n}{l}$
     \end{proof}
 \end{theorem}
-
-In order to prove that something is convergent you can use the sandwich theorem in order to show that sequences converge (especially alternating sequences). For example
-\begin{example}
-    Calculate $\lim_{n \rightarrow \infty} x_n$ (or show that no limit exists) for 
-    \[
-    x_n = \frac{(-1) ^ n}{\sqrt{n ^ 2 + n}}.
-    \]
-    \begin{proof}
-        For this we can apply the sandwich theorem and previous observations. \\
-        Since 
-        \[
-        \limas{\frac{1}{\sqrt{n}}}{0}
-        \]
-        and
-        \[
-        \left|\frac{(-1) ^ n}{\sqrt{n ^ 2 + n}}\right| \leq \frac{1}{\sqrt{n}}
-        \]
-        then by the sandwich theorem we can state that $x_n$ converges to $0$.
-    \end{proof}
-\end{example}
-
-\subsection{Cauchy Sequences}
+\phantom{}
+\\
 Proving that a sequence converges can also be done by showing that it is a Cauchy sequence then implying the theorem (\autoref{thm_seq_cauchconverge}) which states that every Cauchy sequence converges. \\
 \begin{theorem}
     Prove that $\seq$ is a Cauchy sequence, given that $x_n = f(n)$.
@@ -1149,13 +1143,6 @@ Proving that a sequence converges can also be done by showing that it is a Cauch
         Thus $\seq$ is a Cauchy sequence.
     \end{proof}
 \end{theorem}
-
-\subsection{Series}
-When trying to show that a series converges there are multiple methods which we can use. Showing that the series is bounded above shows that the series converges, if we can determine an expression for the sequence of partial sums in terms of $n$ this allows us to simply take the limit of the expression for the partial sums and then this will be the limit of the sequence (if the series converges).
-
-
-
-\newpage
 
 \subsubsection{Tips}
 When looking at finding an $N$ always entertain the possibility that it can use functions such as $\max$, for example when trying to find an $N$ which satisfies two inequalities you can use $N = \max{\{N_1, N_2\}}$. \\
