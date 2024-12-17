@@ -484,12 +484,127 @@ We can use this to carry over COLT to continuous functions.
     \end{proof}
 \end{example}
 
+\subsection{The Intermediate Value Theorem and the Extreme Value Theorem}
 
+If a function $f : [a, b] \rightarrow \R$ is continuous on a closed interval,
+the Intermediate Value Theorem states that $f$ takes on any value between $f(a)$ and $f(b)$.
+For example,
+if $f(a)$ is negative and $f(b)$ is positive,
+there has to be a point $c \in (a, b)$ with $f(c) = 0$.
+More precisely,
+we have
 
+\begin{theorem}[Intermediate Value Theorem]
+    Let $a, b \in \R$ with $a < b$ and $f : [a, b] \rightarrow \R$ be continuous.
+    If $f(a) < f(b)$ and $d \in [f(a), f(b)]$,
+    then there exists $c \in [a, b]$ with $f(c) = d$.
+    Likewise,
+    if $f(b) < f(a)$ and $d \in [f(b), f(a)]$,
+    then there exists $c \in [a, b]$ with $f(c) = d$.
 
+    \begin{proof}
+        We assume that $f(a) < f(b)$.
+        We can also assume $d < f(b)$
+        (otherwise pick $c = b$)\footnote{As $f(c) = d = f(b)$ but $d < f(b)$.}.
+        Let
+        \[
+        X = \{x \in [a, b]\,|\,f(x) \leq d\}.
+        \]
+        Then $X$ is bounded above by $b$,
+        and $a \in X$.
+        So $c = \sup{X}$ exists.
+        Hence by
+        (some result I cannot remember the name of,
+        plus the completeness axiom)
+        there is a sequence $(x_n)$ in $X$ with $x_n \rightarrow c$.
+        By continuity and \autoref{pre_analy_lem_limofconvseqinclosedintinint} we have $f(x_n) \rightarrow f(c) \leq d < f(b)$;
+        in particular $c < b$.
+        If we had $f(c) < d$,
+        we could find by continuity $\delta > 0$ with $c + \delta < b$ and
+        \[
+        |f(x) - f(c)| < \frac{d - f(c)}{2}(:= \varepsilon)
+        \]
+        for all $x \in [a, b]$ with $|x - c| < \delta$.
+        But then $f(c + \delta / 2) < d$,
+        contradicting that $c$ is the supremum of $X$.
+        Therefore $f(c) = d$.
+    \end{proof}
+\end{theorem}
 
+If $f : X \rightarrow \R$ is a function,
+the range of $f$ is the set
+\[
+f(X) = \{y \in \R\mid y = f(x)\text{ for some } x \in X\}.
+\]
+If $X$ is an interval and $a < b$ both in $X$,
+we can restrict $f$ to $[a, b]$ and get that all values between $f(a)$ and $f(b)$ are taken.
+This means that $f(X)$ is an interval as well.
 
+\textit{Note that if $f(X)$ is not bounded above,
+the upper endpoint of the interval is $\infty$.}
 
+If $f(X)$ is bounded above,
+the upper endpoint of the interval is given by the supremum of $f(X)$.
+This supremum may or may not be in the range,
+but this is okay for an interval.
+The lower endpoint is treated similarly,
+so we get
+
+\begin{corollary}\label{pre_analy_corl_funcofintisint}
+    Let $I$ be an interval,
+    and $f : I \rightarrow \R$ be continuous.
+    Then the image $f(I)$ of $I$ under $f$ is an interval.
+\end{corollary}
+
+\begin{example}
+    Let $f : (0, 2) \rightarrow \R$ be given by
+    \[
+    f(x) = \frac{x - 1}{x(2 - x)}.
+    \]
+    Then the range is the interval $(-\infty, \infty) = \R$.
+\end{example}
+
+If the domain is a closed interval $[a, b]$,
+this cannot happen,
+and the range is also a closed interval.
+
+\begin{theorem}
+    Let $a, b \in \R$ with $a < b$ and $f : [a, b] \rightarrow \R$ be continuous.
+    Then
+    
+    Every continuous function on a compact interval attains its maximum and minimum.
+
+    Formulated differently,
+    the image of $f$ is given by $[c, d]$ for some $c, d \in \R$.
+    In particular,
+    there exist $u, v \in [a, b]$ with $f(u) = c$ and $f(v) = d$.
+    So in conclusion.
+
+    The continuous image of a compact interval is again a compact interval.
+
+    \begin{proof}
+        We first show that $f([a, b])$ cannot be unbounded above.
+        For otherwise there exists a sequence $\seq$ in $[a, b]$ such that $f(x_n) \geq n$.
+        By Bolzano-Weierstrass there is a subsequence $(x_{n_j})$ which is convergent to a $c \in [a, b]$.
+        By continuity we have $f(x_{n_j}) \rightarrow f(c) \in \R$.
+        But this is a contradiction to $f(x_{n_j}) \geq n_j$ for all $j$.
+
+        Therefore $f([a, b])$ is bounded above,
+        and $d = \sup{f([a, b])}$ exists.
+        By
+        (the same result that I cannot remember)
+        there exists a sequence $(y_n)$ in $f([a, b])$ with $\limas{y_n}{d}$.
+        But there also exists a sequence $(x_n)$ in $[a, b]$ with $f(x_n) = y_n$.
+        By Bolzano-Weierstrass there is a convergent subsequence $(x_{n_j})$ with limit $c \in [a, b]$.
+        Then
+        \[
+        f(c) = f(\liminfty[j]x_{n_j}) = \liminfty[j]f(x_{n_j}) = \liminfty[j]y_{n_j} = d.
+        \]
+        So $d \in f([a, b])$.
+        Similarly we get that $c = \inf{f([a, b])} \in f([a, b])$,
+        and by \autoref{pre_analy_corl_funcofintisint} we get $f([a, b]) = [c, d]$.
+    \end{proof}
+\end{theorem}
 
 
 
