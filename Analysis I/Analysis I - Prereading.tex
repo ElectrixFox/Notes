@@ -259,6 +259,256 @@ Similarly we also have,
 
 \subsection{Continuity}
 
+\begin{definition}
+    Let $f : X \rightarrow \R$ be a function and let $c$ be an interior point of $X$.
+    Then $f$ is called continuous at $c \in X$ if
+    \[
+    \lim_{x \rightarrow c}f(x) = f(c).
+    \]
+    That is,
+    if for all $\varepsilon > 0$ there exists a $\delta > 0$ such that
+    \[
+    |f(x) - f(c)| < \varepsilon\quad\text{for all $x \in X$}\quad\text{with } |x - c| < \delta.
+    \]
+    The function $f : X \rightarrow \R$ is called continuous,
+    if it is continuous for all $c \in X$.
+\end{definition}
+
+\begin{remark}\phantom{}
+    \begin{itemize}
+        \item 
+        $f$ must be defined at the point $c$ for it to be continuous at $c$.
+
+        \item
+        Additionally,
+        continuity at a point $c$ is a local property,
+        it only depends on the behaviour of $f$ in a
+        (small)
+        (open)
+        interval around $c$.
+        So the function defined on $X$ is continuous at $c$ if and only if the function $f$ is restricted to an interval around $c$ is continuous at $c$.
+        
+        This can make things simpler if $f$ is restricted to a closed and bounded interval around $c$.
+    
+        \item 
+        We can define left-continuity and right-continuity analogously as for the limit of functions.
+        It is easy to see that $f$ is continuous at $c$ if and only if it is left and right continuous at $c$.
+
+        In this way one can also define continuity for a function $f$ on the closed interval $[a, b]$ at the boundary points $a$ and $b$.
+    \end{itemize}
+\end{remark}
+
+\begin{example}
+    The identity function $f : \R \rightarrow \R$ given by $f(x) = x$ is continuous.
+    \begin{proof}
+        Given $c \in \R$ and $\varepsilon > 0$,
+        we can choose $\delta = \varepsilon$.
+        This completes the proof.
+    \end{proof}
+\end{example}
+
+\begin{example}
+    The function $f : \R \setminus \{0\} \rightarrow \R$ given by $f(x) = 1 / x$ is also continuous.
+
+    This function is not defined at $x = 0$,
+    so it is not a question whether $f$ is continuous at $c = 0$.
+
+    At $c \neq 0$ we have
+    \[
+    \left|\frac{1}{x} - \frac{1}{c}\right| = \left|\frac{c - x}{cx}\right|.
+    \]
+    This needs to be smaller than the given $\varepsilon > 0$.
+    The $c - x$ term is harmless,
+    the $c$ in the denominator is just a constant.
+    Our problem is the $x$ in the denominator which if we are close to zero can become large.
+    We need to restrict ourselves away from $x = 0$.
+    Consider the function in the restricted region $|x| > |c| / 2$.
+    Note $c$ is certainly still an interior point.
+    So now for $|x| > |c| / 2$ have
+    \[
+    \left|\frac{1}{x} - \frac{1}{c}\right| = \left|\frac{c - x}{cx}\right| \leq \frac{2}{c ^ 2}|c - x|\footnotemark.
+    \]
+    \footnotetext{This step is a handful at first,
+    think about the $|x| > |c| / 2$ inequality hard enough then you should be able to understand this ridiculous transition.}
+    This needs to be less than $\varepsilon$.
+    We can pick $\delta = \frac{c ^ 2 \varepsilon}{2}$.
+    Then if $|x - c| < \delta = \frac{c ^ 2 \varepsilon}{2}$
+    (and $|x| > |c| / 2$)
+    we get
+    \[
+    \left|\frac{1}{x} - \frac{1}{c}\right| = \left|\frac{c - x}{cx}\right| \leq \frac{2}{c ^ 2}|c - x| < \frac{2}{c ^ 2}\frac{c ^ 2\varepsilon}{2} = \varepsilon,
+    \]
+    as required.
+    We have shown this works for all $c$ so we have shown that $\frac{1}{x}$ is continuous on all of $\R \setminus \{0\}$\footnote{It may seem weird but since $c$ can get really close to $0$ it technically covers all of our domain,
+    I hate it too.}.
+
+    Alternatively,
+    if you don't like the trick of restricting the function away from the bad point $x = 0$,
+    you could take $\delta = \min\{|c| / 2, c ^ 2\varepsilon / 2\}$,
+    and the same calculation will work.
+    However,
+    I find this quite over the top,
+    if you think about the first method hard enough it seems more intuitive.
+\end{example}
+
+\begin{example}
+    The function $f : [0, \infty) \rightarrow \R$ given by $f(x) = \sqrt{x}$ is continuous.
+    First consider $c = 0$.
+    Given $\varepsilon > 0$,
+    choose $\delta = \varepsilon ^ 2$.
+    Then for $|x| = |x - 0| < \delta = \varepsilon$ we get
+    \[
+    |\sqrt{x} - \sqrt{0}| = |\sqrt{x}| < \sqrt{\delta} = \varepsilon,
+    \]
+    so $f$ is
+    (right)
+    continuous at $c = 0$.
+    At $c \neq 0$,
+    we can write
+    \[
+    |\sqrt{x} - \sqrt{c}| = \frac{|x - c|}{\sqrt{c} + \sqrt{x}} \leq \frac{|x - c|}{\sqrt{c}}.
+    \]
+    So given $\varepsilon > 0$,
+    choose $\delta = \sqrt{c}\varepsilon$.
+\end{example}
+\textit{Note:
+in the above example we have to consider $c = 0$ as a separate case since we cannot use the same argument we used for $c \neq 0$ when $c = 0$ as we would be dividing by $0$!}
+
+\begin{example}
+    Consider the sign function $\mathrm{sgn} : \R \rightarrow \R$ given by
+    \[
+    \mathrm{sgn}(x) = \begin{cases}
+        -1 & x < 0 \\
+        0 & x = 0 \\
+        1 & x > 0.
+    \end{cases}
+    \]
+    Then $\mathrm{sgn}$ is continuous for every $c \neq 0$,
+    but not at $c = 0$.
+\end{example}
+
+\begin{example}
+    Consider $d : \R \rightarrow \R$ given by
+    \[
+    d(x) = \begin{cases}
+        0 & x \in \Q \\
+        1 & x \notin \Q.
+    \end{cases}
+    \]
+    Then $d$ is not continuous at any $c \in \R$.
+\end{example}
+
+From \autoref{pre_analy_prop_funclimcriterion} we obtain the very useful criterion.
+\begin{proposition}\label{pre_analy_prop_contfuncoflimeqlimofcontfunc}
+    Let $X \subset \R$,
+    $c \in X$,
+    and $f : X \rightarrow \R$ a function.
+    Then $f$ is continuous at $c$ if and only if for all sequences $\seq$ in $X$ with $\limas{x_n}{c}$ we have $\limas{f(x_n)}{f(c)}$.
+    That is,
+    \[
+    \liminfty f(x_n) = f\left(\liminfty x_n\right).
+    \]
+\end{proposition}
+
+We can use this to carry over COLT to continuous functions.
+\begin{theorem}\label{pre_analy_thm_coltforcontfuncs}
+    Let $X \subset \R$,
+    $c \in X$ and $f, g : X \rightarrow \R$ be continuous at $c$.
+    Then
+    \begin{enumerate}[label = (\roman*)]
+        \item $h(x) := \alpha \cdot f(x) + \beta \cdot g(x)$ is continuous at $c$ for any $\alpha, \beta \in \R$.
+        \item $h(x) := f(x) \cdot g(x)$ is continuous at $c$.
+        \item $h(x) := f(x) / g(x)$ is continuous at $c$,
+        provided that $g(c) \neq 0$.
+    \end{enumerate}
+    \begin{proof}
+        To show that $h(x)$ is continuous at $c$,
+        let $(x_n)$ be a sequence in $X$ with $\limas{x_n}{c}$.
+        By COLT and \autoref{pre_analy_prop_contfuncoflimeqlimofcontfunc}
+        (applied to the continuous functions $f$ and $g$),
+        $\limas{h(x_n)}{h(c)}$.
+        By \autoref{pre_analy_prop_contfuncoflimeqlimofcontfunc} $h$ is continuous at $c$.
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    Given two polynomials $p, q : \R \rightarrow \R$,
+    the rational function $r : X \rightarrow \R$ given by
+    \[
+    r(x) = \frac{p(x)}{q(x)}
+    \]
+    is continuous,
+    where $X = \{x \in \R\,\mid\,q(x) \neq 0\}$ by COLT for continuous functions.
+\end{example}
+
+\begin{theorem}\label{pre_analy_thm_contfunccompcontfunciscont}
+    Let $X, Y \subset \R$,
+    $c \in X$,
+    $f : X \rightarrow \R$,
+    $g : Y \rightarrow \R$ with $f(X) \subset Y$.
+    If $f$ is continuous at $c \in X$ and $g$ is continuous at $f(c) \in Y$,
+    then $g \circ f$ is continuous at $c \in X$.
+
+    \begin{proof}
+        Let $(x_n)$ be a sequence in $X$ converging to $c$.
+        Then $y_n = f(x_n) \rightarrow f(c)$ by \autoref{pre_analy_prop_contfuncoflimeqlimofcontfunc},
+        since $f$ is continuous at $c$.
+        Then $g(y_n) \rightarrow g(f(c))$ by \autoref{pre_analy_prop_contfuncoflimeqlimofcontfunc},
+        since $g$ is continuous at $f(c)$.
+        This means $\limas{g \circ f(x_n)}{g \circ f(c)}$,
+        and $g \circ f$ is continuous at $c$ by \autoref{pre_analy_prop_contfuncoflimeqlimofcontfunc}.
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    The exponential function $f : \R \rightarrow \R$ given by $f(x) = e ^ x$ is continuous.
+    \begin{proof}
+        First we look at $c = 0$,
+        so $f(0) = e ^ 0 = 1$.
+        Recall the following inequality,
+        for $x < 1$
+        \[
+        1 + x \leq e ^ x \leq \frac{1}{1 - x}.
+        \]
+        Hence by the squeezing theorem $\lim_{x \rightarrow 0}e ^ x = 1 = e ^ 0$.
+        So $e ^ x$ is continuous at $c = 0$.
+
+        Now let $c \neq 0$.
+        Then $e ^ {x - c}$ is continuous at $x = c$ as an application of \autoref{pre_analy_thm_contfunccompcontfunciscont}
+        (with $f(x) = e ^ x$ and $g(x) = x - c$)\footnote{This can be thought of very slightly easier as $\exp{(x - c)}$.}.
+        Using the addition law for the exponential we conclude
+        \[
+        \lim_{x \rightarrow c}e ^ x = e ^ c \lim_{x \rightarrow c}e ^ {x - c} = e ^ ce ^ 0 = e ^ c,
+        \]
+        as claimed.
+    \end{proof}
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
