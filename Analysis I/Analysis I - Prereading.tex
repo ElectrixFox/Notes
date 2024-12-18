@@ -611,8 +611,142 @@ and the range is also a closed interval.
 \end{theorem}
 
 \subsection{Uniform continuity}
+Recall the definition of continuity for a function $f$ on an interval $I$
+\[
+\forall c \in I\, \forall \varepsilon > 0\, \exists\delta > 0\, \forall x \in I\quad (|x - c| < \delta \implies |f(x) - f(c)| < \varepsilon)
+\]
+
+\begin{remark}\phantom{}
+    \begin{itemize}
+        \item Note that $\delta$ not only depends on the initial choice of $\varepsilon > 0$,
+        but also
+        (potentially)
+        on the actual point $c$.
+        \item Recall that if one $\delta > 0$ does the job,
+        then so will any other positive number less than $\delta$.
+        \item Recall that continuity at a point $c$ is a local property,
+        that is,
+        it only depends on the behaviour of $f$ in a
+        (small)
+        neighbourhood of $c$ and not on the entire domain of definition $I$.
+        So if we restrict $f$ to a small(er) interval $J$ containing $c$ as an inner point then the question of continuity at $c$ is unaffected.
+    \end{itemize}
+\end{remark}
+
+\begin{definition}[Uniform Continuity]
+    Let $f$ be a function on an interval $I$.
+    We call $f$ uniformly continuous on $I$  if
+    \[
+    \forall \varepsilon > 0\,\exists \delta > 0\,\forall c, x \in I \quad (|x - c| < \delta \implies |f(x) - f(c)| < \varepsilon).
+    \]
+    The point is that now $\delta$ has to be the same for all $c \in I$,
+    that is,
+    $\delta$ no longer depends on the individual point $c$
+    (but of course still on $\varepsilon$ and naturally the function $f$ itself).
+    In particular,
+    uniform continuity is no longer a local concept but a 'global' one as it depends on the entire interval $I$.
+\end{definition}
+
+\begin{theorem}
+    Let $f$ be a continuous function on a compact interval $[a, b]$.
+    Then $f$ is uniformly continuous on $[a, b]$.
+    \begin{proof}
+        Assume $f$ is not uniformly continuous on $[a, b]$.
+        This means
+        \[
+        \exists\varepsilon > 0\, \forall\delta > 0\, \exists x, y \in [a, b]\text{ with } |x - y| < \delta \text{ but } |f(x) - f(y)| \geq \varepsilon.
+        \]
+        Fix such an $\varepsilon > 0$ and take $\delta = \delta_n = \frac{1}{n}$ for each $n \in \N$.
+        We find $x_n, y_n \in [a, b]$ such that
+        \[
+        |x_n - y_n| < \frac{1}{n}\quad\text{but}\quad|f(x_n) - f(y_n)| \geq \varepsilon.
+        \]
+        The key is,
+        by Bolzano-Weierstrass we can find a subsequence $(x_{n_j})$ of $(x_n)$ which converges to a point $x*$ in $[a, b]$.
+        (Here we use the fact that we are dealing with a compact interval).
+        We claim that also $y_{n_j} \rightarrow x*$.
+        Indeed let $\varepsilon' > 0$.
+        Then there exists an $N$ such that for all $n_j > N$ we have $|x_{n_j} - x*| < \varepsilon'$ and hence for all $n_j > \max\{1 / \varepsilon', N\}$ we have
+        \[
+        |y_{n_j} - x*| = |y_{n_j} - x_{n_j} + x_{n_j} - x*| \leq |y_{n_j} - x_{n_j}| + |x_{n_j} - x*| < \varepsilon' + \frac{1}{n_j} < 2\varepsilon'.
+        \]
+        Thus the $(y_{n_j})$ also converge to $x*$.
+        But now we
+        (finally)
+        use the continuity of $f$ at $x*$.
+        There exists a $\delta > 0$ such that $|f(x*) - f(x)| < \varepsilon / 2$ for all $x \in [a, b]$ with $|x - x*| < \delta$.
+        Now for $n_j$ sufficiently large we have $|x_{n_j} - x*| < \delta$ and also $|y_{n_j} - x*| < \delta$ and then
+        \[
+        |f(x_{n_j} - f(y_{n_j})| \leq |f(x_{n_j}) - f(x*)| + |f(x*) - f(y_{n_j})| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+        \]
+        in contradiction to $1$.
+    \end{proof}
+\end{theorem}
+
+\begin{remark}\phantom{}
+    \begin{itemize}
+        \item We have seen\footnote{In a problem sheet that I cannot be bothered to find.} that a Lipschitz continuous function
+        ($|f(x) - f(y)| \leq M|x - y|$ for all $x, y \in I$)
+        is uniformly continuous.
+
+        Later we will see that differentiable functions with bounded derivative are Lipschitz and hence are uniformly continuous.
+
+        \item The function $f(x) = \sqrt{x}$ is continuous on $[0, 1]$ but not Lipschitz.
+        However,
+        the theorem states that it is uniformly continuous.
+        So Lipschitz continuity is really a stronger concept than uniform continuity.
+
+        \item The function $f(x) = \frac{1}{x}$ is not uniformly continuous on $(0, 1]$.
+        So one really needs a compact interval in the theorem to conclude that continuity implies uniform continuity.
+
+        \item The function $\exp(x) = e ^ x$ is not uniformly continuous on $\R$.
+        However,
+        $\log(x)$ is uniformly continuous on $[1, \infty)$
+        (even though both functions diverge as $x \rightarrow \infty$).
+    \end{itemize}
+\end{remark}
 
 \subsection{Injective continuous functions and their inverses}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \newpage
 
