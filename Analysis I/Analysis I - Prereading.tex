@@ -708,11 +708,115 @@ Recall the definition of continuity for a function $f$ on an interval $I$
 
 \subsection{Injective continuous functions and their inverses}
 
+A function $f : X \rightarrow \R$ is said to be strictly increasing if $f(x) < f(y)$ for all $x, y \in X$ with $x < y$.
+Similarly,
+it is said to be strictly decreasing if $f(x) > f(y)$ for all $x, y \in X$ with $x < y$.
+Also recall that $f$ is called injective
+(or one-to-one)
+if $f(x_1) = f(x_2)$ implies $x_1 = x_2$.
+Of course strictly increasing/decreasing functions on $\R$ are injective.
+The converse does not always hold.
+However,
+\begin{proposition}
+    Let $f : I \rightarrow \R$ be continuous and injective on an interval $I$.
+    Then $f$ is either strictly increasing or strictly decreasing.
+    \begin{proof}
+        If $f$ was neither we would find elements $a, b, c \in I$ with $a < c < b$ but with $f(c)$ bigger
+        (smaller goes the same)
+        than both $f(a)$ and $f(b)$,
+        say for example $f(a) < f(b) < f(c)$.
+        But then $f$ must take the value $f(b)$ in the interval $[a, c]$
+        (which does not contain $b$)
+        again.
+        Thus $f$ would not be one-to-one.
+    \end{proof}
+\end{proposition}
 
+Assume $f : X \rightarrow \R$ is injective.
+Recall we can form its inverse $f ^ {-1} : f(X) \rightarrow \R$ by $f ^ {-1}(x) = y$,
+where $y \in X$ is the unique element with $f(y) = x$.
+In particular,
+the domain of $f ^ {-1}$ is the range of $f$ and the range of $f ^ {-1}$ is the domain $X$ of $f$.
+Note $f(f ^ {-1}(c)) = c$ for all $c \in f(X)$ and $f ^ {-1}(f(d)) = d$ for all $d \in X$.
 
+\begin{example}
+    The logarithm was defined as the inverse function of the exponential function.
+    So with $f(x) = e ^ x$,
+    we get $f ^ {-1}(x) = \log{x}$.
+    Notice that $f ^ {-1}$ is only defined for $x > 0$,
+    since $e ^ x > 0$ for all $x \in \R$.
+\end{example}
 
+\begin{theorem}\label{pre_analy_thm_imgofinvcontinjfunciscont}
+    Let $f : I \rightarrow \R$ be continuous and injective on a non-trivial interval $I$ with image $J := f(I)$.
+    Then $f ^ {-1} : J \rightarrow \R$ is also continuous.
 
+    \begin{proof}
+        Let $d \in J$,
+        say $d = f(c)$ for some $c \in I$.
+        We need to show that given $\varepsilon > 0$ there exists $\delta > 0$ so that $|f ^ {-1}(d) - f ^ {-1}(y)| < \varepsilon$ for all $y \in J$ with $|y - d| < \delta$.
 
+        Assume for simplicity that $f$ is strictly increasing
+        (and hence also $f ^ {-1}$).
+        Assume for the moment that $c$ is an interior point of $I$.
+        Then we can assume $[c - \varepsilon / 2, c + \varepsilon / 2] \subset I$.
+        Then under $f$ this becomes $[f(c - \varepsilon / 2), f(c + \varepsilon / 2)]$ with $f(c - \varepsilon / 2) < d < f(c + \varepsilon / 2)$.
+        Now find $\delta > 0$ such that $(d - \delta, d + \delta) \subset [f(c - \varepsilon / 2), f(c + \varepsilon / 2)]$.
+        Then for every $y \in J$ with $|y - d| < \delta$ we have $f ^ {-1}(y) \in [c - \varepsilon / 2, c + \varepsilon / 2]$.
+        Hence $|f ^ {-1}(y) - f ^ {-1}(d)| = |f ^ {-1}(y) - f ^ {-1}(f(c))| = |g(y) - c| \leq \varepsilon / 2 < \varepsilon$ as desired.
+        If $c$ is an endpoint of $I$
+        (if it exists),
+        say the upper one,
+        then so is $d \in J$,
+        and the argument carries through with $c + \varepsilon / 2$ and $d + \delta$ replaced by $c$ and $d$ respectively.
+        The lower endpoint goes the same.
+    \end{proof}
+\end{theorem}
+
+\begin{example}\phantom{}
+    \begin{itemize}
+        \item The logarithm $\log(x) : \R_{+} \rightarrow \R$ is continuous.
+        \item It is important to note that $f$ is defined on an interval in \autoref{pre_analy_thm_imgofinvcontinjfunciscont} to get the continuity of the inverse function.
+
+        Consider $f : [0, 1] \cup (2, 3] \rightarrow \R$ given by
+        \[
+        f(x) = \begin{cases}
+            2x & \text{for } x \in [0, 1] \\
+            x & \text{for } x \in (2, 3].
+        \end{cases}
+        \]
+        This is easily seen to be continuous and injective
+        (note that $2$ is not in the domain of $f$).
+        The inverse function $f ^ {-1} : [0, 2] \rightarrow \R$ is given by
+        \[
+        f ^ {-1}(x) = \begin{cases}
+            \frac{1}{2}x & \text{for } x \in [0, 2] \\
+            \frac{1}{2}x & \text{for } x \in (2, 3]
+        \end{cases}
+        \]
+        and it is not continuous at $2$,
+        as $f ^ {-1}(2 + 1 / n) \rightarrow 2 \neq f(2)$.
+
+        It is instructive to revisit the proof of the continuous inverse proposition above and to investigate what goes wrong for this function.
+        It is fairly subtle at $d = 2 = f(1)$.
+        Namely,
+        while $c = 1$ is the endpoint of one interval of the domain of $f$,
+        the value $d = 2$ is not for the range.
+    \end{itemize}
+\end{example}
+
+\begin{remark}
+    In general,
+    one want would like to be true is that if the function $f$ is "nice"
+    (has a certain property),
+    then the inverse function $f$ should be equally "nice"
+    (has the same property).
+    Unfortunately,
+    this does not always hold;
+    one usually has to require an extra condition.
+    We have already seen this for continuous functions on the real line to itself
+    (in a mild way).
+\end{remark}
 
 
 
