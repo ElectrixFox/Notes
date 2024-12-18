@@ -818,45 +818,197 @@ Note $f(f ^ {-1}(c)) = c$ for all $c \in f(X)$ and $f ^ {-1}(f(d)) = d$ for all 
     (in a mild way).
 \end{remark}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \newpage
 
 \section{Differentiable Functions}
 
 \subsection{Basics on differentiable functions}
+
+Let us first define differentiability
+\begin{definition}
+    Let $X \subseteq \R$ be open and $f : X \rightarrow \R$ be a function.
+    $f$ is differentiable at $c \in X$ if $\lim_{x \rightarrow c}\frac{f(x) - f(c)}{x - c}$ exists.
+    We denote this limit by $f'(c)$ and call $f'(c)$ the derivative of $f$ at $c$.
+    $f$ is called a differentiable function if $f$ is differentiable at all points $c \in X$.
+\end{definition}
+
+One often encounters the formulation
+\[
+f'(c) = \lim_{h \rightarrow 0}\frac{f(c - h) - f(c)}{h},
+\]
+which is the same
+(set $h = x - c$).
+Sometimes this formulation is more convenient.
+
+\begin{remark}\phantom{}
+    \begin{itemize}
+        \item The expression $\frac{f(x) - f(c)}{x - c}$ has an important geometric interpretation:
+        It is the slope of the straight line passing through the two points $(c, f(c)) \in \R ^ 2$ and $(x, f(x)) \in \R ^ 2$ of the graph of $f$.
+        As $x \rightarrow c$,
+        the second point $(x, f(x))$ approaches the first point $(c, f(c))$,
+        and the limit describes the slope of the tangent of the graph of $f$ at the point $(c, f(c)) \in \R ^ 2$.
+
+        \item Differentiability at $c \in X$ can also be described in the $(\varepsilon, \delta)$-formalism.
+        $f$ is differentiable at $c \in X$ if there exists a number $L \in \R$
+        (the derivative $f'(c)$)
+        such that there exists for every $\varepsilon > 0$ a positive number $\delta > 0$ such that
+        \[
+        \left|\frac{f(c) - f(x)}{c - x} - L\right| < \varepsilon\qquad\forall x \in X \text{ with } |x - c| < \delta.
+        \]
+
+        \item We can also define
+        (one-sided)
+        differentiability for a function defined on a closed interval $[a, b]$ at the endpoints $a$ and $b$ by considering the one-sided limit of the difference quotient.
+
+        We now give another equivalent formulation for differentiability which is not only handy but it also generalises to higher dimensions.
+    \end{itemize}
+\end{remark}
+
+\begin{lemma}[First order Taylor]\label{pre_analy_lem_firstordertaylorindiffdef}
+    Let $f : X \rightarrow \R$ be a function as above.
+    Then $f$ is differentiable at $c \in X$ if and only if the following holds:
+
+    There exists a constant $m \in \R$ an a function $r(x)$ on $X$ such that
+    \[
+    f(x) = f(c) + m(x - c) + r(x)(x - c)
+    \]
+    such that
+    \[
+    r(x)\text{ is continuous at } c \qquad\text{and}\qquad\lim_{x \rightarrow c}r(x) = r(c) = 0.
+    \]
+    In this case $m = f'(c)$.
+\end{lemma}
+Before we get into the juicy proof of this,
+let us have a few remarks.
+\begin{remark}\phantom{}
+    \begin{itemize}
+        \item We can view differentiability as the attempt to approximate $f(x)$ in the neighbourhood of $c$ by a linear function $L(x) = f(c) + m(x - c)$.
+        Then differentiability stipulates that the error $r(x)(x - c)$ is of 'higher order'
+        (not linear)
+        as $\lim_{x \rightarrow c}r(x) = 0$.
+
+        \item From the perspective of the previous,
+        we can view continuity as the 'zero order Taylor'.
+        The function $f$ is continuous at $c$ if $f(x) = f(c) + \tilde{r}(x)$ with $\lim_{x \rightarrow c}\tilde{r}(x) = 0$.
+        We approximate $f$ by the constant function $f(c)$ and the error vanishes in the limit.
+    \end{itemize}
+\end{remark}
+
+\begin{remark}
+    In practice one often considers $f_1(x) = m + r(x)$ which is continuous at $c$ with value $f_1(c) = m$.
+    Thus differentiability at $c$ is equivalent to:
+
+    There exists a function $f_1 : X \rightarrow \R$ such that
+    \[
+    f(x) = f(c) + (x - c)f_1(x)
+    \]
+    and $f_1$ is continuous at $c$.
+    Then $\lim_{x \rightarrow c}f_1(x) = f_1(c) = f'(c)$.
+    (In this formulation one doesn't need to know the value of the derivative in advance).
+\end{remark}
+
+\begin{lemma}[continues = pre_analy_lem_firstordertaylorindiffdef]
+    \begin{proof}
+        Assume $f$ is differentiable at $c$,
+        so the limit $\lim_{x \rightarrow c}\frac{f(x) - f(c)}{x - c}$ exists.
+        Let's denote this limit by $m$ and set
+        \[
+        r(x) = \begin{cases}
+            \frac{f(x) - (f(c) + m(x - c))}{x - c} & \text{if } x \neq c; \\
+            0 & \text{if } x = c.
+        \end{cases}
+        \]
+        Then if $r(x)$ is continuous at $c$ holds,
+        and we only need to check continuity at $c$:
+        But
+        \[
+        \lim_{x \rightarrow c}r(x) = \lim_{x \rightarrow c}\frac{f(x) - (f(c) + m(x - c))}{x - c} = \lim_{x \rightarrow c}\left(\frac{f(x) - f(c)}{x - c} - m\right) = m - m = 0,
+        \]
+        as required.
+
+        Conversely,
+        if $\lim_{x \rightarrow c}r(x) = r(c) = 0$ holds with $r$ continuous at $c$ and $r(c) = 0$,
+        then
+        \[
+        0 = r(c) = \lim_{x \rightarrow c}r(x) = \lim_{x \rightarrow c}\frac{f(x) - (f(c) + m(x - c))}{x - c} = \lim_{x \rightarrow c}\left(\frac{f(x) - f(c)}{x - c} - m\right).
+        \]
+        But this is only possible if $\lim_{x \rightarrow c}\frac{f(x) - f(c)}{x - c}$ exists and is equal to $m$.
+    \end{proof}
+\end{lemma}
+
+\begin{example}\phantom{}
+    \begin{itemize}
+        \item Let us prove differentiability of $f(x) = \frac{1}{x}$ on $(0, \infty)$.
+        Let $c \in (0, \infty)$.
+        Then we have
+        \[
+        \frac{f(x) - f(c)}{x - c} = \frac{c - x}{xc(x - c)} = -\frac{1}{xc},
+        \]
+        which implies that
+        \[
+        \lim_{x \rightarrow c}\frac{f(x) - f(c)}{x - c} = -\lim_{x \rightarrow c}\frac{1}{xc} = -\frac{1}{c ^ 2}.
+        \]
+        This shows that $f'(c) = -\frac{1}{c ^ 2}$.
+        Now for the 'remainder' $r(x)$ we have
+        \[
+        r(x) = \frac{f(x) - f(c)}{x - c} - f'(c) = -\frac{1}{xc} + \frac{1}{c ^ 2} = \frac{x - c}{xc ^ 2},
+        \]
+        which indeed is continuous at $c$ with limit $0$.
+
+        \item Let $f(x)$ be a polynomial.
+        Then $f(x) - f(c)$ is also a polynomial which has a zero at $x = c$.
+        Thus by polynomial division we can write
+        \[
+        f(x) - f(c) = (x - c)f_1(x)
+        \]
+        for some polynomial $f_1(x)$.
+        In particular,
+        $f_1(x)$ is continuous.
+        We therefore have shown that all polynomials are differentiable!
+        (Of course,
+        we haven't shown what the derivative actually is;
+        for $x ^ n$ it is fairly direct to determine $f_1(x)$ and its limit $nc ^ {n - 1}$ as $x \rightarrow c$.).
+    \end{itemize}
+\end{example}
+
+Differentiability is a stronger property than continuity:
+\begin{theorem}
+    Let $X \subset \R$ and $f : X \rightarrow \R$.
+    If $f$ is differentiable at $c \in X$ then $f$ is also continuous at $c$.
+    \begin{proof}
+        We have
+        \[
+        f(x) - f(c) = (x - c) \cdot \frac{f(x) - f(c)}{x - c} \rightarrow 0 \cdot f'(c) = 0\text{ as } x \rightarrow c.
+        \]
+        This shows that $\lim_{x \rightarrow c}f(x) = f(c)$,
+        in other words,
+        $f$ is continuous at $c$.
+    \end{proof}
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Inverse functions}
 
