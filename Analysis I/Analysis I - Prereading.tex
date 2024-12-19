@@ -54,7 +54,7 @@ $c \in X$ is an interior point if there exists an open subset $U$ or an open int
 
 \hfill
 
-\begin{lemma}\label{pre_analy_lem_limofconvseqinclosedintinint}
+\begin{lemma}\label{pre:analy:lem:limofconvseqinclosedintinint}
     Let $\seq$ be a convergent sequence in the closed interval $[a, b]$.
     Then its limit $L$ lies also in $[a, b]$.
     \begin{proof}
@@ -102,7 +102,7 @@ this can be quite complicated to describe but we will be mainly concerned with s
     \begin{proof}
         The sequence $\seq$ is bounded,
         hence by Bolzano-Weierstrass a converging subsequence.
-        By \autoref{pre_analy_lem_limofconvseqinclosedintinint} its limit must lie in $[a, b]$.
+        By \autoref{pre:analy:lem:limofconvseqinclosedintinint} its limit must lie in $[a, b]$.
     \end{proof}
 \end{corollary}
 
@@ -138,7 +138,7 @@ One often also writes $\lim_{x \rightarrow c}f(x) = L$ in the form
 f(x) \rightarrow L\quad\text{as}\quad x \rightarrow c.
 \]
 
-\begin{proposition}\label{pre_analy_prop_funclimcriterion}
+\begin{proposition}\label{pre:analy:prop:funclimcriterion}
     Let $f : X \rightarrow \R$ be a function and assume $X$ contains the open interval $(a, b)$ with the possible exception of a point $c \in (a, b)$.
     
     Then $\lim_{x \rightarrow c}f(x) = L$ if and only if for all sequences $\seq$ in $X \setminus \{c\}$ with $x_n \rightarrow c$ as $n \rightarrow \infty$ we have $\lim_{n \rightarrow \infty}f(x_n) = L$.
@@ -220,7 +220,7 @@ we say
     analogously.
 \end{definition}
 
-We can use the limit criterion \autoref{pre_analy_prop_funclimcriterion} to easily carry over COLT to the limit of functions
+We can use the limit criterion \autoref{pre:analy:prop:funclimcriterion} to easily carry over COLT to the limit of functions
 \begin{theorem}
     Let $f, g : X \rightarrow \R$ be two functions with $\lim_{x \rightarrow c}f(x) = L_1$ and $\lim_{x \rightarrow c}g(x) = L_2$.
     \begin{enumerate}[label = (\roman*)]
@@ -232,10 +232,10 @@ We can use the limit criterion \autoref{pre_analy_prop_funclimcriterion} to easi
     \begin{proof}
         \begin{enumerate}[label = (\roman*)]
         \item
-            We will use the criterion \autoref{pre_analy_prop_funclimcriterion}.
+            We will use the criterion \autoref{pre:analy:prop:funclimcriterion}.
             For this let $(x_n)$ be a sequence in $X$ with $\limas{x_n}{c}$.
     
-            By COLT for sequences and the hypothesis we then have that $\alpha \cdot f(x_n) + \beta \cdot g(x_n)$ converges to $\alpha \cdot L_1 + \beta \cdot L_2$ which then implies the first claim by \autoref{pre_analy_prop_funclimcriterion}.
+            By COLT for sequences and the hypothesis we then have that $\alpha \cdot f(x_n) + \beta \cdot g(x_n)$ converges to $\alpha \cdot L_1 + \beta \cdot L_2$ which then implies the first claim by \autoref{pre:analy:prop:funclimcriterion}.
         
         \textit{The other claims follow in the same way.}
         \item \textbf{Prove!}
@@ -253,11 +253,11 @@ Similarly we also have,
     \lim_{x \rightarrow c}g(x) \text{ exists with } \lim_{x \rightarrow c}g(x) = L.
     \]
     \begin{proof}
-        This follows from \autoref{pre_analy_prop_funclimcriterion} in exactly the same way.
+        This follows from \autoref{pre:analy:prop:funclimcriterion} in exactly the same way.
         So let $(x_n)$ be a sequence in $X$ with $\limas{x_n}{c}$.
         Hence by hypothesis $f(x_n) \leq g(x_n) \leq h(x_n)$ for all $x \in X$ and also $\liminfty f(x_n) = \liminfty h(x_n) = L$.
         Now apply squeezing for sequences to conclude that $\liminfty g(x_n)$ exists and is equal to $L$.
-        This implies the claim by \autoref{pre_analy_prop_funclimcriterion}.
+        This implies the claim by \autoref{pre:analy:prop:funclimcriterion}.
     \end{proof}
 \end{theorem}
 
@@ -402,8 +402,8 @@ in the above example we have to consider $c = 0$ as a separate case since we can
     Then $d$ is not continuous at any $c \in \R$.
 \end{example}
 
-From \autoref{pre_analy_prop_funclimcriterion} we obtain the very useful criterion.
-\begin{proposition}\label{pre_analy_prop_contfuncoflimeqlimofcontfunc}
+From \autoref{pre:analy:prop:funclimcriterion} we obtain the very useful criterion.
+\begin{proposition}\label{pre:analy:prop:contfuncoflimeqlimofcontfunc}
     Let $X \subset \R$,
     $c \in X$,
     and $f : X \rightarrow \R$ a function.
@@ -415,7 +415,7 @@ From \autoref{pre_analy_prop_funclimcriterion} we obtain the very useful criteri
 \end{proposition}
 
 We can use this to carry over COLT to continuous functions.
-\begin{theorem}\label{pre_analy_thm_coltforcontfuncs}
+\begin{theorem}\label{pre:analy:thm:coltforcontfuncs}
     Let $X \subset \R$,
     $c \in X$ and $f, g : X \rightarrow \R$ be continuous at $c$.
     Then
@@ -428,10 +428,10 @@ We can use this to carry over COLT to continuous functions.
     \begin{proof}
         To show that $h(x)$ is continuous at $c$,
         let $(x_n)$ be a sequence in $X$ with $\limas{x_n}{c}$.
-        By COLT and \autoref{pre_analy_prop_contfuncoflimeqlimofcontfunc}
+        By COLT and \autoref{pre:analy:prop:contfuncoflimeqlimofcontfunc}
         (applied to the continuous functions $f$ and $g$),
         $\limas{h(x_n)}{h(c)}$.
-        By \autoref{pre_analy_prop_contfuncoflimeqlimofcontfunc} $h$ is continuous at $c$.
+        By \autoref{pre:analy:prop:contfuncoflimeqlimofcontfunc} $h$ is continuous at $c$.
     \end{proof}
 \end{theorem}
 
@@ -445,7 +445,7 @@ We can use this to carry over COLT to continuous functions.
     where $X = \{x \in \R\,\mid\,q(x) \neq 0\}$ by COLT for continuous functions.
 \end{example}
 
-\begin{theorem}\label{pre_analy_thm_contfunccompcontfunciscont}
+\begin{theorem}\label{pre:analy:thm:contfunccompcontfunciscont}
     Let $X, Y \subset \R$,
     $c \in X$,
     $f : X \rightarrow \R$,
@@ -455,12 +455,12 @@ We can use this to carry over COLT to continuous functions.
 
     \begin{proof}
         Let $(x_n)$ be a sequence in $X$ converging to $c$.
-        Then $y_n = f(x_n) \rightarrow f(c)$ by \autoref{pre_analy_prop_contfuncoflimeqlimofcontfunc},
+        Then $y_n = f(x_n) \rightarrow f(c)$ by \autoref{pre:analy:prop:contfuncoflimeqlimofcontfunc},
         since $f$ is continuous at $c$.
-        Then $g(y_n) \rightarrow g(f(c))$ by \autoref{pre_analy_prop_contfuncoflimeqlimofcontfunc},
+        Then $g(y_n) \rightarrow g(f(c))$ by \autoref{pre:analy:prop:contfuncoflimeqlimofcontfunc},
         since $g$ is continuous at $f(c)$.
         This means $\limas{g \circ f(x_n)}{g \circ f(c)}$,
-        and $g \circ f$ is continuous at $c$ by \autoref{pre_analy_prop_contfuncoflimeqlimofcontfunc}.
+        and $g \circ f$ is continuous at $c$ by \autoref{pre:analy:prop:contfuncoflimeqlimofcontfunc}.
     \end{proof}
 \end{theorem}
 
@@ -478,7 +478,7 @@ We can use this to carry over COLT to continuous functions.
         So $e ^ x$ is continuous at $c = 0$.
 
         Now let $c \neq 0$.
-        Then $e ^ {x - c}$ is continuous at $x = c$ as an application of \autoref{pre_analy_thm_contfunccompcontfunciscont}
+        Then $e ^ {x - c}$ is continuous at $x = c$ as an application of \autoref{pre:analy:thm:contfunccompcontfunciscont}
         (with $f(x) = e ^ x$ and $g(x) = x - c$)\footnote{This can be thought of very slightly easier as $\exp{(x - c)}$.}.
         Using the addition law for the exponential we conclude
         \[
@@ -521,7 +521,7 @@ we have
         (some result I cannot remember the name of,
         plus the completeness axiom)
         there is a sequence $(x_n)$ in $X$ with $x_n \rightarrow c$.
-        By continuity and \autoref{pre_analy_lem_limofconvseqinclosedintinint} we have $f(x_n) \rightarrow f(c) \leq d < f(b)$;
+        By continuity and \autoref{pre:analy:lem:limofconvseqinclosedintinint} we have $f(x_n) \rightarrow f(c) \leq d < f(b)$;
         in particular $c < b$.
         If we had $f(c) < d$,
         we could find by continuity $\delta > 0$ with $c + \delta < b$ and
@@ -554,7 +554,7 @@ but this is okay for an interval.
 The lower endpoint is treated similarly,
 so we get
 
-\begin{corollary}\label{pre_analy_corl_funcofintisint}
+\begin{corollary}\label{pre:analy:corl:funcofintisint}
     Let $I$ be an interval,
     and $f : I \rightarrow \R$ be continuous.
     Then the image $f(I)$ of $I$ under $f$ is an interval.
@@ -606,7 +606,7 @@ and the range is also a closed interval.
         \]
         So $d \in f([a, b])$.
         Similarly we get that $c = \inf{f([a, b])} \in f([a, b])$,
-        and by \autoref{pre_analy_corl_funcofintisint} we get $f([a, b]) = [c, d]$.
+        and by \autoref{pre:analy:corl:funcofintisint} we get $f([a, b]) = [c, d]$.
     \end{proof}
 \end{theorem}
 
@@ -747,7 +747,7 @@ Note $f(f ^ {-1}(c)) = c$ for all $c \in f(X)$ and $f ^ {-1}(f(d)) = d$ for all 
     since $e ^ x > 0$ for all $x \in \R$.
 \end{example}
 
-\begin{theorem}\label{pre_analy_thm_imgofinvcontinjfunciscont}
+\begin{theorem}\label{pre:analy:thm:imgofinvcontinjfunciscont}
     Let $f : I \rightarrow \R$ be continuous and injective on a non-trivial interval $I$ with image $J := f(I)$.
     Then $f ^ {-1} : J \rightarrow \R$ is also continuous.
 
@@ -776,7 +776,7 @@ Note $f(f ^ {-1}(c)) = c$ for all $c \in f(X)$ and $f ^ {-1}(f(d)) = d$ for all 
 \begin{example}\phantom{}
     \begin{itemize}
         \item The logarithm $\log(x) : \R_{+} \rightarrow \R$ is continuous.
-        \item It is important to note that $f$ is defined on an interval in \autoref{pre_analy_thm_imgofinvcontinjfunciscont} to get the continuity of the inverse function.
+        \item It is important to note that $f$ is defined on an interval in \autoref{pre:analy:thm:imgofinvcontinjfunciscont} to get the continuity of the inverse function.
 
         Consider $f : [0, 1] \cup (2, 3] \rightarrow \R$ given by
         \[
@@ -864,7 +864,7 @@ Sometimes this formulation is more convenient.
     \end{itemize}
 \end{remark}
 
-\begin{lemma}[First order Taylor]\label{pre_analy_lem_firstordertaylorindiffdef}
+\begin{lemma}[First order Taylor]\label{pre:analy:lem:firstordertaylorindiffdef}
     Let $f : X \rightarrow \R$ be a function as above.
     Then $f$ is differentiable at $c \in X$ if and only if the following holds:
 
@@ -907,7 +907,7 @@ let us have a few remarks.
     (In this formulation one doesn't need to know the value of the derivative in advance).
 \end{remark}
 
-\begin{lemma}[continues = pre_analy_lem_firstordertaylorindiffdef]
+\begin{lemma}[continues = pre:analy:lem:firstordertaylorindiffdef]
     \begin{proof}
         Assume $f$ is differentiable at $c$,
         so the limit $\lim_{x \rightarrow c}\frac{f(x) - f(c)}{x - c}$ exists.
@@ -972,7 +972,7 @@ let us have a few remarks.
 \end{example}
 
 Differentiability is a stronger property than continuity:
-\begin{theorem}
+\begin{theorem}\label{pre:analy:thm:iffdiffatcthencontatc}
     Let $X \subset \R$ and $f : X \rightarrow \R$.
     If $f$ is differentiable at $c \in X$ then $f$ is also continuous at $c$.
     \begin{proof}
@@ -986,33 +986,392 @@ Differentiability is a stronger property than continuity:
     \end{proof}
 \end{theorem}
 
+\begin{remark}
+    There are continuous functions which are not differentiable.
+    The easiest example is the function $f(x) = |x|$,
+    which is continuous on $\R$ but not differentiable at $c = 0$.
+    However,
+    the construction of a function $f : \R \rightarrow \R$ which is everywhere continuous but nowhere differentiable is a much more difficult task.
+    
+    Historically,
+    there was a belief that every continuous function should be differentiable everywhere except a set of isolated points.
+\end{remark}
+
+\begin{theorem}\label{pre:analy:thm:sumscalarprodcomprulesfordiff}
+    \begin{enumerate}[label = (\alph*)]
+        \item 
+        Let $f, g$ be two functions which are differentiable at $c$ and let $\alpha \in \R$ be a constant.
+        Then $f + g$ and $\alpha f$ are also differentiable at $c$,
+        and we have
+        \begin{align*}
+            (f + g)'(c) &= f'(c) + g'(c) \\
+            (\alpha f)'(c) &= \alpha f'(c)
+        \end{align*}
+        Similarly,
+        their product $fg$ is also differentiable at $c$ with
+        \[
+        (fg)'(c) = f(c)g'(c) + f'(c)g(c).
+        \]
+
+        \item
+        Let $f, g$ be two functions such that $g$ is differentiable at $c$ and $f$ is differentiable at $g(c)$.
+        Then the composition $f \circ g$ is also differentiable at $c$ and we have
+        \[
+        (f \circ g)'(c) = f'(g(c))g'(c).
+        \]
+        
+        \item 
+        Let $f$ be a function which is differentiable at $c$ and we have $f(c) \neq 0$.
+        Then $1 / f$ is also differentiable at $c$ and we have
+        \[
+        \left(\frac{1}{f}\right)'(c) = -\frac{f'(c)}{f ^ 2(c)}.
+        \]
+    \end{enumerate}
+    \begin{proof}
+        We only prove the product of the functions and the composition of functions.
+        This can be proven by the equivalent formulation given in \autoref{pre:analy:lem:firstordertaylorindiffdef} and its subsequence remark.
+        \begin{enumerate}[label = (\alph*)]
+            \item
+            We have $f(x) = f(c) + (x - c)f_1(x)$ and $g(x) = g(c) + (x - c)g_1(x)$.
+            This implies that
+            \[
+            (fg)(x) = (fg)(c) + (x - c)h(x).
+            \]
+            With $h(x) = f(c)g_1(x) + f_1(x)g(c) + (x - c)f_1(x)g_1(x)$.
+            It is easy to see that $h$ is continuous at $c$ and,
+            therefore,
+            $fg$ is differentiable at $c$ with derivative
+            \[
+            (fg)'(c) = \lim_{x \rightarrow c}h(x) = f(c)g_1(c) + f_1(c)g(c) = f(c)g'(c) + f'(c)g(c).
+            \]
+            \item
+            We can write $f(y) = f(g(c)) + (y - g(c))f_1(y)$ and $g(x) = g(c) + (x - c)g_1(x)$ with $f_1$ continuous at $g(c)$ and $g_1$ continuous at $c$.
+            Then we have
+            \begin{multline*}
+                (f \circ g)(x) = f(g(x)) = f(g(c)) + (g(x) - g(c))f_1(g(x)) = \\
+                f(g(c)) + (x - c)g_1(c)f_1(g(x)) = (f \circ g)(c) + (x - c)h(x)
+            \end{multline*}
+            with $h(x) = (f_1 \circ g)(c)g_1(c)$.
+            Since $f_1$ is continuous at $g(c)$ and $g$ is continuous at $c$ by \autoref{pre:analy:thm:iffdiffatcthencontatc},
+            the composition $f_1 \circ g$ is continuous at $c$.
+            Using again the equivalent formulation for differentiability,
+            we conclude that $f \circ g$ is differentiable at $c$ and we have
+            \[
+            (f \circ g)'(c) = \lim_{x \rightarrow c}h(x) = f_1(g(c))g_1(c) = f'(g(c))g'(c).
+            \]
+        \end{enumerate}
+
+        The rest of the proof is an \textbf{exercise}.
+    \end{proof}
+\end{theorem}
+
+\begin{remark}
+    One may be tempted to prove the chain rule easily in the following way:
+    \[
+    \frac{f(g(x)) - f(g(c))}{x - c} = \frac{f(g(x)) - f(g(c))}{x - c} \times \frac{g(x) - g(c)}{x - c}
+    \]
+    and argue that in the limit the first fraction goes to $f'(g(c))$,
+    while the second goes to $g'(c)$.
+
+    In some sense this is how Leibniz' differential calculus would work.
 
 
+    However,
+    this is problematic since one cannot rule out $g(x) - g(c) = 0$,
+    e.g.,
+    if $g$ is constant in a neighbourhood of $c$ or if there is a sequence $x_n$ with $\liminfty x_n = c$ and $g(x_n) - g(c) = 0$.
+    In general,
+    the above approach can be made to work if $g'(c) \neq 0$,
+    but $g'(c) = 0$ becomes a bit painful to consider.
+    The above proof avoids these complications.
+\end{remark}
 
+\begin{example}
+    \begin{itemize}
+        \item The derivative of $f(x) = x$ is clearly $f'(x) = 1$.
+        Then by \autoref{pre:analy:thm:sumscalarprodcomprulesfordiff}(a) we obtain the standard formula for the derivative of polynomials and hence using (c) the one for rational functions.
 
+        \item We now show that the derivative of $e ^ x$ is $e ^ x$ itself.
 
+        We start again at $c = 0$.
 
+        Using the $e ^ x$ inequality lemma
+        (which needs adding in here)
+        again we have for $x < 1$ we have
+        \[
+        x \leq e ^ x - 1 \leq \frac{x}{1 - x}.
+        \]
+        Hence by squeezing $\lim_{x \rightarrow 0}\frac{e ^ x - 1}{x} = 1$.
+        For general $c$ we have
+        \[
+        \frac{e ^ x - e ^ c}{x - c} = e ^ c\frac{e ^ {x - c} - 1}{x - c} \rightarrow e ^ c
+        \]
+        as $x \rightarrow c$ by the same argument
+        ($x - c$ goes to $0$;
+        if you don't like that take any sequence $x_n \rightarrow c$ so that the sequence $x_n - c$ goes to zero and apply the sequence criterion for limit of functions).
 
+        In conclusion:
+        $e ^ x$ is differentiable on all of $\R$ being its own derivative!
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        \item Consider $c ^ x = e ^ {\log(c)x}$ for $c > 0$.
+        Then by the chain rule $(c ^ x)' = \log(c)c ^ x$.
+    \end{itemize}
+\end{example}
 
 \subsection{Inverse functions}
 
+We want for $f$ being differentiable and the one-to-one inverse $f ^ {-1}$ also being differentiable.
+However,
+while this is a natural expectation it does not always have a positive answer.
+We begin with the following warning:
+
+When $f$ is differentiable and invertible with inverse $g$ then this does not necessarily imply that $g$ is differentiable!
+The function $f(x) = x ^ 3$ on $\R$ is continuous and differentiable and strictly monotone increasing and hence has a continuous inverse $g(x) = \sqrt[3]{x}$,
+the third root.
+However $g$ is not differentiable at zero where the horizontal tangent line of $f$ turns into a vertical tangent line of $g$!
+
+However,
+we have
+\begin{proposition}
+    Let $f : I \rightarrow \R$ be continuous on the interval $I$,
+    differentiable at a point $d$.
+    Assume that $f$ is invertible with inverse $f ^Y {-1}$ and that $f'(d) \neq 0$.
+
+    Then $f ^ {-1}$ is differentiable at $c := f(d)$ with
+    \[
+    (f ^ {-1})'(c) = \frac{1}{f'(f ^ {-1}(c))}.
+    \]
+    \begin{proof}
+        Write $g := f ^ {-1}$.
+        We need to show that for any sequence $(y_n)$ with limit $\liminfty y_n = c$ we have $\liminfty \frac{g(y_n) - g(c)}{y_n - c} = \frac{1}{f'(g(c))}$.
+        Now set $x_n = g(y_n)$.
+        Since $g$ is continuous by \autoref{pre:analy:thm:imgofinvcontinjfunciscont} we have $\liminfty x_n = \liminfty g(y_n) = g(\liminfty y_n) = g(c) = d$.
+        Then
+        \[
+        \liminfty\frac{g(y_n) - g(c)}{y_n - c} = \liminfty \frac{x_n - d}{f(x_n) - f(d)} = \liminfty\frac{1}{\frac{f(x_n) - f(d)}{x_n - d}} = \frac{1}{f'(d)}.
+        \]
+    \end{proof}
+\end{proposition}
+
+\begin{remark}
+    If for one reason one already knows or assumes that the inverse $g$ is differentiable one has a very quick argument to obtain the formula for $g'$.
+    Namely,
+    we use the chain rule to differentiate the equation $x = f \circ g(x)$ and obtain
+    \[
+    1 = g'(x)f'(g(x)),
+    \]
+    which then gives $g'(x) = 1 / f'(g(x))$.
+    But of course,
+    for this one needs to know in advance that $g$ is differentiable.
+    There is however still another merit in this calculation:
+    It identifies a necessary condition for the $g$ being differentiable at $x: f'(g(x))$ has to be non-zero.
+\end{remark}
+
+\begin{example}
+    We know $\log(x)$ is the inverse function of $e ^ x$.
+    Using $(e ^ x)' = e ^ x$ we immediately see
+    \[
+    \log'(x) = \frac{1}{e ^ {\log{x}}} = \frac{1}{x}.
+    \]
+    Using this we can now compute the derivative if $f(x) := x ^ \alpha = e ^ {\alpha\log(x)}$ for $\alpha \in \R$ and $x > 0$.
+    Namely,
+    by the chain rule we see
+    \[
+    f'(x) = \frac{\alpha}{x}x ^ \alpha = \alpha x ^ {\alpha - 1},
+    \]
+    as desired!
+\end{example}
+
 \subsection{Mean value theorems}
+
+We have already seen the following fact and its proof in the Calculus course:
+\begin{proposition}\label{pre:analy:prop:fdiffatcthenlocmaxorminatdifffc}
+    If $f$ is differentiable at $c$ and has a local maximum or minimum at $c$ then $f'(c) = 0$.
+
+    \begin{proof}
+        The difference quotient $\frac{f(x) - f(c)}{x - c}$ must have opposite signs for $x > c$ and $x < c$.
+        Hence for the one-sided limits we obtain $\geq 0$ and $\leq 0$ respectively.
+        But the limits must be the same which is only possible with $0$.
+    \end{proof}
+\end{proposition}
+
+We have also already seen Rolle's Theorem and the Mean Value Theorem.
+However,
+for completeness we will restate them.
+\begin{theorem}[Rolle's Theorem]\label{pre:analy:thm:rollesthm}
+    Let $f : [a, b] \rightarrow \R$ be continuous and differentiable on $(a, b)$ and suppose that $f(a) = f(b)$.
+    Then there exists $c \in (a, b)$ such that $f'(c) = 0$.
+    \begin{proof}
+        As a continuous function on a closed interval $f$ attains its minimum and maximum.
+        If one of them is in the interior we are done by the pervious proposition        
+        (\autoref{pre:analy:prop:fdiffatcthenlocmaxorminatdifffc}).
+        Otherwise,
+        minimum and maximum occur at the endpoints.
+        Since $f(a) = f(b)$ this implies $f$ must be constant in which case $f'(x) = 0$ for all $x \in (a, b)$.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}[Mean Value Theorem]\label{pre:analy:thm:meanvaluethm}
+    Let $f : [a, b] \rightarrow \R$ be continuous and differentiable on $(a, b)$.
+    Then there exists $c \in (a, b)$ such that
+    \[
+    f'(c) = \frac{f(b) - f(a)}{b - a}.
+    \]
+    \begin{proof}
+        Set
+        \[
+        g(x) := f(x) - \frac{f(b) - f(a)}{b - a}(x - a).
+        \]
+        Then $g$ is continuous on $[a, b]$ and differentiable on $(a, b)$ with
+        \[
+        g'(x) = f'(x) - \frac{f(b) - f(a)}{b - a}.
+        \]
+        Moreover,
+        $g(a) = f(a)$ and $g(b) = f(a)$.
+        Hence by Rolle there exists a $c \in (a, b)$ such that
+        \[
+        0 = f'(c) - \frac{f(b) - f(a)}{b - a},
+        \]
+        as claimed.
+    \end{proof}
+\end{theorem}
+
+An immediate consequence of the Mean Value Theorem is the following
+\begin{theorem}
+    Let $f : I \rightarrow \R$ be a continuous function on an interval $I$,
+    differentiable in its interior points.
+    Then
+    \begin{enumerate}[label = (\roman*)]
+        \item If $f'(x) = 0$ for all $x$,
+        then $f$ is constant.
+        \item If $f'(x) \leq 0$ ($\leq 0$) for all $x$,
+        then $f$ is monotone increasing
+        (decreasing).
+        \item If $f'(x) > 0$ ($< 0$) for all $x$,
+        then $f$ is strictly monotone increasing
+        (decreasing).
+    \end{enumerate}
+    \begin{proof}
+        Let $c < d$ in $I$ be two arbitrary points.
+        Then by the Mean Value Theorem there exists $\alpha$ in the interval $(c, d)$ such that
+        \[
+        f(d) - f(c) = (d - c)f'(\alpha) \begin{dcases*}
+            = 0 & for case (i); \\
+            \geq 0 & for case (ii); \\
+            > 0 & for case (iii).
+        \end{dcases*}
+        \]
+        Thus
+        \[
+        \begin{dcases*}
+            f(c) = f(d) & for case (i); \\
+            f(c) \leq f(d) & for case (ii); \\
+            f(c) < f(d) & for case (iii).
+        \end{dcases*}
+        \]
+        The claim follows since $c$ and $d$ were arbitrarily chosen.
+    \end{proof}
+\end{theorem}
+
+The requirement on $I$ being an interval is absolutely essential!
+For example $f(x) = 1 /x$ is differentiable on $\R* = (-\infty, 0) \cup (0, \infty)$,
+the union of two intervals.
+Now $f'(x) = -1 / x ^ 2 < 0$ for all $x$,
+but $f(x)$ is certainly not overall decreasing,
+but only on the two individual intervals $(-\infty, 0)$ and $(0, \infty)$.
+
+Th issue is that an interval is connected\footnote{Don't worry about this concept at the moment,
+it is next years problem.}.
+
+Rolle's theorem implies a more general mean value theorem
+(from which the regular Mean Value follows by setting $g(x) = x$).
+
+\begin{theorem}[Cauchy's Generalised Mean Value Theorem]
+    Let $f, g : [a, b] \rightarrow \R$ be continuous and differentiable on $(a, b)$.
+    Assume that $g'(x) \neq 0$ for all $x \in (a, b)$.
+    Then there exists $c \in (a, b)$ such that
+    \[
+    \frac{f'(c)}{g'(c)} = \frac{f(b) - f(a)}{g(b) - g(a)}.
+    \]
+    \begin{center}
+    \fbox{
+    \begin{minipage}{0.9\textwidth}
+    You may wonder why this is not a simple corollary of the Mean Value theorem.
+    But applying \autoref{pre:analy:thm:meanvaluethm} to both functions $f$ and $g$ would lead to
+    \[
+    \frac{f'(c_1)}{g'(c_2)} = \frac{f(b) - f(a)}{g(b) - g(a)}.
+    \]
+    The important point of this theorem is that we can choose $c_1 = c_2$ on the left hand side.
+    \end{minipage}
+    }
+    \end{center}
+    \hfill
+    \begin{proof}
+        Consider the function
+        \[
+        h(x) = (g(b) - g(a))f(x) - (f(b) - f(a))g(x).
+        \]
+        Then we have
+        \[
+        h(a) = g(b)f(a) - f(b)g(a) = h(b).
+        \]
+        $h$ is obviously continuous on $[a, b]$ and differentiable on $(a, b)$,
+        and we can apply Rolle's theorem to $h$.
+        Therefore,
+        there exists $c \in (a, b)$ such that
+        \begin{equation}
+            0 = h'(c) = (g(b) - g(a))f'(c) - (f(b) - f(a))g'(c).
+        \end{equation}
+        Since $g'(x) \neq 0$ for all $x \in (a, b)$,
+        we can conclude from \autoref{pre:analy:thm:meanvaluethm} that $g(b) - g(a) \neq 0$,
+        and we can rewrite ($1$) as
+        \[
+        \frac{f'(c)}{g'(c)} = \frac{f(b) - f(a)}{g(b) - g(a)}.
+        \]
+    \end{proof}
+\end{theorem}
+
+We define higher derivatives in the usual way.
+\textit{Note that for $f''(c)$ as the derivative of $f'(x)$ at $x = c$ we need to assume that $f$ is differentiable in an interval around $c$.}
+
+However,
+we will not be discussing the role of the second derivatives.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{L' H\^opital's rule}
 
