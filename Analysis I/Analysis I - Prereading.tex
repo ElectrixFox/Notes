@@ -4,6 +4,7 @@
 \newcommand{\seq}[1][x]{(#1_n)_{n \in \N}}
 \newcommand{\dseq}[2][n]{(#2_#1)_{#1 \in \N}}
 \newcommand{\limas}[3][n]{#2 \rightarrow #3 \text{ as } #1 \rightarrow \infty}
+\newcommand{\lhopital}[0]{L' H\^opital}
 
 \title{Analysis I \\
     \large Prereading}
@@ -1344,7 +1345,7 @@ We give the following version
 (There exists some with weaker hypotheses,
 e.g. the one in Spivak's Calculus book)
 
-\begin{theorem}[L' H\^opital's Rule]
+\begin{theorem}[L' H\^opital's Rule]\label{pre:analy:thm:lhopitalsrule}
     Let $f$ and $g$ be two differentiable functions in some interval $(a, b)$.
 
     Assume that
@@ -1420,7 +1421,7 @@ like the following:
 In fact,
 the correct limit is $-4$ by continuity.
 \begin{example}
-    \begin{itemize}
+    \begin{enumerate}[label = (\roman*)]
         \item Tautological use.
         Using L' H\^opital's Rule we see
         \[
@@ -1452,41 +1453,135 @@ the correct limit is $-4$ by continuity.
         \]
         with $\lim_{x \rightarrow 0}r(x) = 0$.
         This version of Taylor's theorem which we consider in the next subsection.
-    \end{itemize}
+
+        \item Using \lhopital's Rule twice - in detail.
+
+        The exact reasoning for using \lhopital's Rule twice as above goes as follows:
+        Let $f(x) = \log(1 + x) - x$ and $g(x) = x ^ 2$.
+        Then $f$ and $g$ are differentiable and we have $f(0) = g(0) = 0$,
+        so the first assumption of \autoref{pre:analy:thm:lhopitalsrule} is satisfied.
+        But we still do not know whether $\lim_{x \rightarrow 0}f'(x) / g'(x)$ exists,
+        since $\lim_{x \rightarrow 0}f'(x) = \lim_{x \rightarrow 0}g'(x) = 0$.
+        But the first assumption of \autoref{pre:analy:thm:lhopitalsrule} is still satisfied for the differentiable functions $f'(x) = 1 / (1 + x) - 1$ and $g'(x) = 2x$,
+        since $f'(0) = 0$ and $g'(0) = 0$,
+        and we see that
+        \[
+        \lim_{x \rightarrow 0}\frac{f''(x)}{g''(x)} = \lim_{x \rightarrow 0}\frac{-1 / (1 + x) ^ 2}{2} = -\frac{1}{2}
+        \]
+        exists.
+        Arguing backwards,
+        this shows that $\lim_{x \rightarrow 0}f'(x) / g'(x)$ exists and then also $\lim_{x \rightarrow 0}f(x) / g(x)$ exists etc.
+
+        The point is that one really needs to read the above calculation backwards.
+        
+        \item Powers beat logs
+        \begin{enumerate}[label = (\alph*)]
+            \item 
+            Let $\alpha > 0$.
+            Consider
+            \[
+            \liminfty[x]\frac{\log(x)}{x ^ {\alpha}}.
+            \]
+            This is of the type "$\frac{\infty}{\infty}$".
+            Taking derivatives gives
+            \[
+            \liminfty[x]\frac{1 / x}{\alpha x ^ {\alpha - 1}} = \liminfty[x]\frac{1}{\alpha x ^ \alpha} = 0.
+            \]
+            By \lhopital we conclude
+            \[
+            \liminfty[x]\frac{\log(x)}{x ^ {\alpha}} = 0.
+            \]
+
+            \item
+            Let $\alpha > 0$.
+            Consider
+            \[
+            \lim_{x \rightarrow 0 ^ {+}}\log(x)x ^ {\alpha}.
+            \]
+            This is of the type "$\infty \cdot 0$".
+            We turn this into "$\frac{\infty}{\infty}$" by writing $x ^ {\alpha} = 1 / x ^ {-\alpha}$.
+            \[
+            \lim_{x \rightarrow 0 ^ {+}}\frac{\log(x)}{x ^ {-\alpha}} = \lim_{x \rightarrow 0 ^ {+}}\frac{1 / x}{-\alpha x ^ {-\alpha - 1}} = \lim_{x \rightarrow 0 ^ {+}}\frac{1}{-\alpha x ^ {-\alpha}} = \lim_{x \rightarrow 0 ^ {+}}x ^ {\alpha} = 0.
+            \]
+            We have shown
+            \[
+            \lim_{x \rightarrow 0 ^ {+}}\log(x)x ^ {\alpha} = 0.
+            \]
+            We could have deduced this directly by using ($a$):
+            \[
+            \liminfty[x] = \frac{\log(x)}{x ^ {\alpha}} = \lim_{x \rightarrow 0 ^ {+}}\frac{\log(1 / x)}{(1 / x) ^ {\alpha}} = \lim_{x \rightarrow 0 ^ {+}}\frac{-\log(x)}{x ^ {-\alpha}}.
+            \]
+        \end{enumerate}
+        \item Exponentials beat powers.
+
+        Let $\alpha > 0$.
+        Consider
+        \[
+        \liminfty[x]x ^ {\alpha}e ^ {-x} = \liminfty\frac{x ^ {\alpha}}{e ^ x}.
+        \]
+        We apply \lhopital repeatedly
+        ($n$ times)
+        until $\alpha - n \leq 0$.
+        Then
+        \[
+        \liminfty[x]\frac{x ^ {\alpha}}{e ^ x} = \liminfty[x]\frac{\alpha x ^ {\alpha - 1}}{e ^ x} = \dotsi = \alpha(\alpha - 1)\dotsi(\alpha - n + 1)\liminfty\frac{x ^ {\alpha - n}}{e ^ x} = 0.
+        \]
+        So
+        \[
+        \liminfty[x]x ^ {\alpha}e ^ {-x} = 0.
+        \]
+        Alternatively,
+        we could have substituted $x = \log(y)$ and obtained
+        \[
+        \liminfty[x]x ^ {\alpha}e ^ {-x} = \alpha\liminfty[y]\frac{\log(y)}{y} = 0
+        \]
+        by (iv)(a).
+    \end{enumerate}
 \end{example}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \subsection{Taylor's theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \newpage
 
