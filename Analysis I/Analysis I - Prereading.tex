@@ -1286,7 +1286,7 @@ it is next years problem.}.
 Rolle's theorem implies a more general mean value theorem
 (from which the regular Mean Value follows by setting $g(x) = x$).
 
-\begin{theorem}[Cauchy's Generalised Mean Value Theorem]
+\begin{theorem}[Cauchy's Generalised Mean Value Theorem]\label{pre:analy:thm:genmeanvalthm}
     Let $f, g : [a, b] \rightarrow \R$ be continuous and differentiable on $(a, b)$.
     Assume that $g'(x) \neq 0$ for all $x \in (a, b)$.
     Then there exists $c \in (a, b)$ such that
@@ -1337,43 +1337,154 @@ We define higher derivatives in the usual way.
 However,
 we will not be discussing the role of the second derivatives.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \subsection{L' H\^opital's rule}
+
+An application of \autoref{pre:analy:thm:genmeanvalthm} is L' H\^opital's Rule.
+We give the following version
+(There exists some with weaker hypotheses,
+e.g. the one in Spivak's Calculus book)
+
+\begin{theorem}[L' H\^opital's Rule]
+    Let $f$ and $g$ be two differentiable functions in some interval $(a, b)$.
+
+    Assume that
+    (the one-sided limits)
+    $\lim_{x \rightarrow a ^ {+}}f(x) = 0$ and $\lim_{x \rightarrow a ^ {+}}g(x) = 0$ and $g(x) \neq 0$,
+    $g'(x) \neq 0$ for all $x$.
+
+    Then if $\lim_{x \rightarrow a ^ {+}}f'(x) / g'(x)$ exists,
+    then also $\lim_{x \rightarrow a ^ {+}}f(x) / g(x)$ exists,
+    and we have
+    \[
+    \lim_{x \rightarrow a ^ {+}}\frac{f(x)}{g(x)} = \lim_{x \rightarrow a ^ {+}}\frac{f'(x)}{g'(x)}.
+    \]
+    \begin{proof}
+        We can extend $f$ and $g$ continuously to $x = a$ by setting $f(a) = g(a) = 0$.
+        Let's write $L = \lim_{x \rightarrow a ^ {+}}f'(x) / g'(x)$
+        ($L = \pm\infty$ is actually ok).
+        Let $(x_n)$ be any sequence in $(a, b)$ such that $\liminfty x_n = a$.
+        We need to show
+        \[
+        \liminfty\frac{f(x_n)}{g(x_n)} = L.
+        \]
+        By the generalised mean value theorem for each $n$ we can find $y_n$ with $a < y_n < x_n$ such that
+        \[
+        \frac{f'(y_n)}{g'(y_n)} = \frac{f(x_n) - f(a)}{g(x_n) - g(a)} = \frac{f(x_n)}{g(x_n)}.
+        \]
+        By squeezing we see $\liminfty y_n = a$,
+        and hence
+        \[
+        L = \liminfty\frac{f'(y_n)}{g'(y_n)} = \liminfty\frac{f(x_n)}{g(x_n)},
+        \]
+        as claimed.
+    \end{proof}
+\end{theorem}
+
+\begin{remark}
+    There exists a simple proof for L' H\^opital's Rule in the special case $f(c) = g(c) = 0$ and differentiable at $c$ with $g'(c) \neq 0$.
+    Then
+    \[
+    \lim_{x \rightarrow c}\frac{f(x)}{g(x)} = \lim_{x \rightarrow c}\frac{f(x) - f(c)}{x - c}\frac{x - c}{g(x)} = \lim_{x \rightarrow c}\frac{f(x) - f(c)}{x - c}\lim_{x \rightarrow c}\frac{x - c}{g(x)} = \frac{f'(c)}{g'(c)}.
+    \]
+    \textit{Note how we needed the extra assumptions in order to apply COLT}.
+\end{remark}
+
+\begin{remark}
+    \begin{enumerate}[label = (\roman*)]
+        \item There is of course a version for the other one-sided limit and for regular two-sided limits as well.
+        \item The cases $a = -\infty$ or $b = \infty$ are also ok.
+        This can be done by considering $f(1 / x)$ and $g(1 / x)$.
+        Indeed,
+        assuming $\lim_{x \rightarrow \pm\infty}f'(x) / g'(x)$ exists we compute
+        \[
+        \lim_{x \rightarrow \pm\infty}\frac{f(x)}{g(x)} = \lim_{x \rightarrow 0 ^ {\pm}}\frac{f(1 / x)}{g(1 / x)} = \lim_{x \rightarrow 0 ^ {\pm}}\frac{-\frac{1}{x ^ 2}f'(1 / x)}{-\frac{1}{x ^ 2}g'(1 / x)} = \lim_{x \rightarrow \pm\infty}\frac{f'(x)}{g'(x)}.
+        \]
+        \item Limits of the form "$\frac{\infty}{\infty}$" could in principle be handled by considering $\frac{f(x)}{g(x)} = \frac{1 / g(x)}{1 / f(x)}$,
+        but this only works in special examples.
+        Rather one can upgrade the given proof and obtain
+        \[
+        \lim_{x \rightarrow a ^ {\pm}}\frac{f(x)}{g(x)} = \lim_{x \rightarrow a ^ {\pm}}\frac{f'(x)}{g'(x)}.
+        \]
+        \item Limits of the form "$0 \cdot \infty$" can often be handled by considering $f(x)g(x) = \frac{f(x)}{1 / g(x)}$.
+        \item In applications one sometimes has to apply L' H\^opital's Rule more than once to get a limit of the ratio of higher derivatives.
+    \end{enumerate}
+\end{remark}
+Be careful that all conditions of L' H\^opital's Rule are satisfied,
+in particular the condition that $f, g$ are differentiable and that $f(c) = g(c) = 0$.
+Without checking these conditions,
+L' H\^opital's Rule may lead to absolutely wrong results,
+like the following:
+\[
+\lim_{x \rightarrow 1}\frac{x ^ 2 + x + 2}{x - 2} "=" \lim_{x \rightarrow 1}\frac{2x + 1}{1} = 3.
+\]
+In fact,
+the correct limit is $-4$ by continuity.
+\begin{example}
+    \begin{itemize}
+        \item Tautological use.
+        Using L' H\^opital's Rule we see
+        \[
+        \lim_{x \rightarrow 0}\frac{e ^ {x} - 1}{x} \lim_{x \rightarrow 0}\frac{e ^ x}{1} = e ^ 0 = 1.
+        \]
+        This is a bit of tautology or circular reasoning since this is exactly the calculation to show that $e ^ x$ is differentiable
+        (at $0$)
+        in the first place!
+
+        In general,
+        for $f$ differentiable computing
+        \[
+        \lim_{x \rightarrow c}\frac{f(x) - f(c)}{x -c} = \lim_{x \rightarrow c}\frac{f'(x)}{1} = f'(c).
+        \]
+        appears to be a bit silly.
+        However,
+        if one only knows that $f$ is differentiable in $(c, d)$ but not yet at $c$ itself,
+        then this calculation shows that $f$ is differentiable at $c$
+        (if the limit exists!)
+        
+        \item A special case of Taylor's theorem.
+        Using L' H\^opital's Rule twice we see
+        \[
+        \lim_{x \rightarrow 0}\frac{\log(1 + x) - x}{x ^ 2} = \lim_{x \rightarrow 0}\frac{1 / (1 + x) - 1}{2x} = \lim_{x \rightarrow 0}\frac{-1 / (1 + x) ^ 2}{2} = -\frac{1}{2}.
+        \]
+        We can rewrite this as
+        \[
+        \log(1 + x) = x - \frac{1}{2}x ^ 2 + r(x)x ^ 2
+        \]
+        with $\lim_{x \rightarrow 0}r(x) = 0$.
+        This version of Taylor's theorem which we consider in the next subsection.
+    \end{itemize}
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Taylor's theorem}
 
