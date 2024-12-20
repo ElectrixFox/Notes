@@ -1541,53 +1541,161 @@ the correct limit is $-4$ by continuity.
 
 \subsection{Taylor's theorem}
 
+Above we saw that we can consider the definition of differentiability of a function $f$ at a point as closely related to approximating a function by a linear function.
+It is hence a very natural question to approximate $f$ by higher degree polynomials.
+This is addressed by the following
+\begin{theorem}[Taylor's Theorem]\label{pre:analy:thm:taylorsthm}
+    Let $f : I \rightarrow \R$ be a function which is differentiable $n$ times in the interval $I$.
+    Then there exists a function $r_n(x)$
+    (depending on $c$)
+    such that
+    \begin{equation}
+        f(x) = f(c) + f'(c)(x - c) + \frac{f''(c)}{2}(x - c) ^ 2 + \dotsi + \frac{f ^ {(n)}(c)}{n!}(x - c) ^ n + r_n(x)(x - c) ^ n
+    \end{equation}
+    with $\lim_{x \rightarrow c}r_n(x) = 0$.
+    This is called the Peano form of the remainder
+    (and the direct generalisation of differentiability at $x = c$).
 
+    If in addition $f$ is $n + 1$ times differentiable in $I$ then we write
+    \[
+    f(x) = f(c) + f'(c)(x - c) + \frac{f''(c)}{2}(x - c) ^ 2 + \dotsi + \frac{f ^ {(n)}(c)}{n!}(x - c) ^ n + \frac{f ^ {(n + 1)}(\xi)}{(n + 1)!}(x - c) ^ {n + 1},
+    \]
+    for a number $\xi$ between $x$ and $c$
+    (depending on $x$ and $c$).
+    This is called the Lagrange form of the remainder.
+    \begin{proof}
+        The first form is a direct application of \lhopital's Rule.
+        Namely,
+        consider
+        \[
+        F(x) := f(x) - \left(f(c) + f'(c)(x - c) + \frac{f''(c)}{2}(x - c) ^ 2 + \dotsi + \frac{f ^ {(n)}(c)}{n!}(x - c) ^ n\right).
+        \]
+        Then we directly see $F(0) = F'(c) = F''(c) = \dotsi = F ^ {(n)}(c) = 0$.
+        Then
+        \[
+        r_n(x) = \frac{F(x)}{(x - c) ^ n}.
+        \]
+        We can apply \lhopital's Rule $n$-times and obtain
+        \[
+        \lim_{x \rightarrow c}r_n(x) = \lim_{x \rightarrow c}\frac{F(x)}{(x - c) ^ n} = \lim_{x \rightarrow c}\frac{F'(x)}{n(x - c) ^ {n - 1}} = \dotsi = \lim_{x \rightarrow c}\frac{F ^ {(n)}(x)}{n!} = 0,
+        \]
+        as claimed.
 
+        To obtain the Lagrange remainder we fix $x$ and introduce the auxiliary function for $t$ between $x$ and $c$ by
+        \[
+        F(t) := f(x) - \left(f(t) + f'(t)(x - t) + \frac{f''(t)}{2}(x - t) ^ 2 + \dotsi + \frac{f ^ {(n)}(t)}{n!}(x - t) ^ n\right)
+        \]
+        so that $F(c) = r_n(x)(x - c) ^ n$ for which we need to find a $\xi$ such that it equals $\frac{f ^ {(n + 1)}(\xi)}{(n + 1)!}(x - c) ^ {n + 1}$.
+        By a little calculation we obtain
+        \[
+        F'(t) = -\frac{f ^ {(n + 1)}(t)}{n!}(x - t) ^ {n}.
+        \]
+        Now we apply Cauchy's Generalised Mean Value Theorem
+        (\autoref{pre:analy:thm:genmeanvalthm})
+        for $F$ and
+        \[
+        G(t) = (x - t) ^ {n + 1};\quad G'(t) = -(n + 1)(x - t) ^ n,
+        \]
+        and obtain
+        \begin{align*}
+            \frac{F(c)}{(x - c) ^ {n + 1}} &= \frac{F(c)}{G(c)} \\
+            &= \frac{F(c) - F(x)}{G(c) - G(x)} \\
+            &= \frac{F'(\xi)}{G'(\xi)} \\
+            &= \frac{\frac{f ^ {(n + 1)}(\xi)}{n!}(x - \xi) ^ n}{(n + 1)(x - \xi) ^ n} \\
+            &= \frac{1}{(n + 1)!}f ^ {(n + 1)}(\xi)
+        \end{align*}
+        for some $\xi$ between $x$ and $c$.
+        But this is the claim.
+    \end{proof}
+\end{theorem}
 
+\begin{corollary}
+    The polynomial part $T_{f, c}^{(n)}(x)$ on the right hand side of (2)
+    (the first definition of $f(x)$ in \autoref{pre:analy:thm:taylorsthm}) 
+    is called the $n$-th Taylor polynomial associated to $f$ at $c$.
+\end{corollary}
 
+Assume we have $|f ^ {(n + 1)}(x)| \leq M_{n + 1}$ for some constant $M_{n + 1}$
+(say if $f ^ {(n + 1)}$ is continuous on $I = [a, b]$).
+Then
+\[
+|f(x) - T_{f, c}^{(n)}(x)| \leq \frac{M_{n + 1}}{(n + 1)!}|x - c| ^ {n + 1}.
+\]
+So from this perspective Taylor's theorem describes how well one can approximate a
+(complicated)
+function by an
+(easy)
+polynomial.
 
+\begin{example}
+    The $4$-th Taylor polynomial for $e ^ x$ at $x = 0$ is given by
+    \[
+    1 + x + \frac{1}{2}x ^ 2 + \frac{1}{6}x ^ 3 + \frac{1}{24}x ^ 4.
+    \]
+    This approximates $e ^ x$ between $[-1 / 2, 1 / 2]$ with an error
+    (take $M = 2 > e ^ {1 / 2}$)
+    \[
+    \left|e ^ {x} - \left(1 + x + \frac{1}{2}x ^ 2 + \frac{1}{6}x ^ 3 + \frac{1}{24}x ^ 4\right)\right| \leq \frac{2}{5!}\left(\frac{1}{2}\right) ^ 5 = \frac{1}{1920} < 0.001.
+    \]
+\end{example}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{remark}
+    Taylor's theorem gives a different way of considering \lhopital's Rule in the case $f, g$ are
+    (sufficiently)
+    often differentiable at $x = c$.
+    Let $n$ be the first index such that $f ^ {(n)}(c) \neq 0$ and let $m$ be the first index such that $g ^ {(m)}(c0 \neq 0$
+    \[
+    \lim_{x \rightarrow c}\frac{f(x)}{g(x)} = \begin{cases}
+        0 & \text{if } n > m; \\
+        \frac{f ^ {(n)}(c)}{g ^ {(n)}(c)} & \text{if } n = m; \\
+        \pm\infty & \text{if } n < m.
+    \end{cases}
+    \]
+\end{remark}
 
 \newpage
 
 \section{Power Series}
 
 \subsection{A quick review of infinite series}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Radius of convergence}
 
