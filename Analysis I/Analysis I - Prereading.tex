@@ -922,17 +922,22 @@ let us have a few remarks.
         Then if $r(x)$ is continuous at $c$ holds,
         and we only need to check continuity at $c$:
         But
-        \[
-        \lim_{x \rightarrow c}r(x) = \lim_{x \rightarrow c}\frac{f(x) - (f(c) + m(x - c))}{x - c} = \lim_{x \rightarrow c}\left(\frac{f(x) - f(c)}{x - c} - m\right) = m - m = 0,
-        \]
+        \begin{align*}
+            \lim_{x \rightarrow c}r(x) &= \lim_{x \rightarrow c}\frac{f(x) - (f(c) + m(x - c))}{x - c} \\
+            &= \lim_{x \rightarrow c}\left(\frac{f(x) - f(c)}{x - c} - m\right) \\
+            &= m - m = 0,
+        \end{align*}
         as required.
 
         Conversely,
         if $\lim_{x \rightarrow c}r(x) = r(c) = 0$ holds with $r$ continuous at $c$ and $r(c) = 0$,
         then
-        \[
-        0 = r(c) = \lim_{x \rightarrow c}r(x) = \lim_{x \rightarrow c}\frac{f(x) - (f(c) + m(x - c))}{x - c} = \lim_{x \rightarrow c}\left(\frac{f(x) - f(c)}{x - c} - m\right).
-        \]
+        \begin{align*}
+            0 &= r(c) \\
+            &= \lim_{x \rightarrow c}r(x) \\
+            &= \lim_{x \rightarrow c}\frac{f(x) - (f(c) + m(x - c))}{x - c} \\
+            &= \lim_{x \rightarrow c}\left(\frac{f(x) - f(c)}{x - c} - m\right).
+        \end{align*}
         But this is only possible if $\lim_{x \rightarrow c}\frac{f(x) - f(c)}{x - c}$ exists and is equal to $m$.
     \end{proof}
 \end{lemma}
@@ -1557,9 +1562,10 @@ This is addressed by the following
     (and the direct generalisation of differentiability at $x = c$).
 
     If in addition $f$ is $n + 1$ times differentiable in $I$ then we write
-    \[
-    f(x) = f(c) + f'(c)(x - c) + \frac{f''(c)}{2}(x - c) ^ 2 + \dotsi + \frac{f ^ {(n)}(c)}{n!}(x - c) ^ n + \frac{f ^ {(n + 1)}(\xi)}{(n + 1)!}(x - c) ^ {n + 1},
-    \]
+    \begin{align*}
+        f(x) = f(c) + f'(c)(x - c) + \frac{f''(c)}{2}(x - c) ^ 2 + \dotsi &+ \frac{f ^ {(n)}(c)}{n!}(x - c) ^ n \\
+        &+ \frac{f ^ {(n + 1)}(\xi)}{(n + 1)!}(x - c) ^ {n + 1},
+    \end{align*}
     for a number $\xi$ between $x$ and $c$
     (depending on $x$ and $c$).
     This is called the Lagrange form of the remainder.
