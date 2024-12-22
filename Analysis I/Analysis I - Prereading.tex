@@ -5,6 +5,7 @@
 \newcommand{\dseq}[2][n]{(#2_#1)_{#1 \in \N}}
 \newcommand{\limas}[3][n]{#2 \rightarrow #3 \text{ as } #1 \rightarrow \infty}
 \newcommand{\lhopital}[0]{L' H\^opital}
+\newcommand{\infsumo}[1][k = 0]{\sum_{#1}^{\infty}}
 
 \title{Analysis I \\
     \large Prereading}
@@ -1807,8 +1808,85 @@ as the limit of the sequence of the partial sums $s_n = \sum_{k = 0}^{n}a_k$
 
 \subsection{Radius of convergence}
 
+\begin{definition}
+    A
+    (real)
+    power series is an infinite series of the form $\infsum[k = 0]a_kx ^ k$ with real $a_k$ and $x \in \R$.
+\end{definition}
 
+While a power series always converges for $x = 0$ it might not converge in all of $\R$ or even at any other point.
+We have
+\begin{theorem}[Cauchy-Hadamard]
+    Let $\infsumo a_kx ^ k$ be a power series.
+    Then there exists a constant $R \in [0, \infty]$ such that
+    \begin{enumerate}[label = (\roman*)]
+        \item If $R = 0$,
+        then $\infsumo a_kx ^ k$ converges only for $x = 0$.
+        \item If $R > 0$,
+        then
+        \begin{align*}
+            &\infsumo a_kx ^ k \text{ converges absolutely for $x \in (-R, R)$}; \\
+            &\infsumo a_kx ^ k \text{ diverges for $|x| > R$}.
+        \end{align*}
+    \end{enumerate}
+    In fact,
+    if we set
+    \[
+    \limsup_{k}\sqrt[k]{|a_k|} = c \in [0, \infty],
+    \]
+    then $R$ is explicitly given by
+    \[
+    R = \frac{1}{c} \in [0, \infty].
+    \]
+    We call $R$ the radius of convergence of the power series.
+    \begin{proof}
+        First assume $c = \limsup_{k}\sqrt[k]{|a_k|} \neq 0, \infty$.
+        We apply the root test to $\infsumo a_kx ^ k$.
+        Then $\sqrt[k]{|a_k||x ^ k|} = \sqrt[k]{|a_k|}|x|$.
+        Thus for $x \neq 0$,
+        we see
+        \[
+        \limsup_{k}\sqrt[k]{|a_k|}|x| = c|x| \begin{cases}
+            < 1 & \text{if } |x| < R = \frac{1}{c}; \\
+            > 1 & \text{if } |x| > R = \frac{1}{c}.
+        \end{cases}
+        \]
+        Hence by the root test we see that $\infsumo a_kx ^ k$ converges absolutely if $|x| < R = 1 / c$ and diverges if $|x| > R = 1 / c$.
+        If $c = 0$,
+        then $c|x| = 0 < 1$ for all $x$,
+        and $\infsumo a_kx ^ k$ converges absolutely for all $x$
+        (so $R = \infty$),
+        while if $c = \infty$,
+        then $\infsumo a_kx ^ k$ diverges for any $x \neq 0$
+        (so $R = 0$).
+    \end{proof}
+\end{theorem}
 
+\begin{remark}\phantom{}
+    \begin{itemize}
+        \item In practice,
+        one can usually compute the radius of convergence by using either the ratio or root test.
+        That is,
+        if $\liminfty[k]\frac{|a_{k + 1}|}{|a_k|} = c$,
+        then (for $x \neq 0$),
+        \[
+        \liminfty[k]\frac{|a_{k + 1}|x| ^ {k + 1}}{|a_k||x| ^ k} = \liminfty[k]\frac{|a_{k + 1}|}{|a_k|}|x| = c|x|,
+        \]
+        and the same reasoning as in the proof of the theorem applies and gives $R = \frac{1}{c}$.
+
+        The advantage of formulating and proving the above theorem lies in the fact that the $\limsup$ of a sequence always exists and that the root test allows for a uniform formulation.
+
+        \item The behaviour of $\sum a_kx ^ k$ at the endpoints $x = \pm R$ has to be checked separately.
+        Anything can happen.
+        Do NOT use the ratio/root test to check this
+        (it will be inconclusive),
+        but use one of the other tests.
+    \end{itemize}
+\end{remark}
+
+\begin{remark}
+    The notion ratio of convergence comes from the analogous situation for a complex power series $\infsumo a_kz ^ k$
+\end{remark}
 
 
 
