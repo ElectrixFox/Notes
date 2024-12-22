@@ -1662,48 +1662,210 @@ polynomial.
 \newpage
 
 \section{Power Series}
+A
+(real)
+power series is an expansion of the form $\infsum[k = 0]a_kx ^ k$ with $a_k \in \R$.
+We obtain an infinite series which
+(in the sense of Term $1$)
+might converge or not.
+
+Understanding power series is best done by considering everything as a complex power series $\infsum[k = 0]a_kz ^ k$ with $a_k, z \in \C$.
+However,
+we will leave this to the Complex Analysis II course.
 
 \subsection{A quick review of infinite series}
 
+For $(a_k)_{k \in \Z_{\geq 0}}$ we define the associated
+(infinite)
+series by
+\[
+\infsum[k = 0]a_k = \liminfty[n]\left(\sum_{k = 0}^{n}a_k\right)
+\]
+as the limit of the sequence of the partial sums $s_n = \sum_{k = 0}^{n}a_k$
+(which might or might not exist).
+\begin{example}[Geometric series]
+    For $|q| < 1$ we have
+    \[
+    \infsum[k = 0]q ^ k = \frac{1}{1 - q},
+    \]
+    while the series diverges for $|q| \geq 1$.
+\end{example}
 
+\begin{example}[$p$-series]
+    \[
+    \infsum\frac{1}{k ^ p}\text{ converges} \iff p > 1.
+    \]
+\end{example}
 
+\begin{lemma}
+    If $\infsum[k = 0]a_k$ is convergent,
+    then $\liminfty[k]a_k = 0$.
+    \begin{proof}
+        \textbf{Prove!}
+    \end{proof}
+\end{lemma}
 
+\begin{example}
+    The harmonic series $\infsum\frac{1}{k}$ is divergent but $\limas[k]{\frac{1}{k}}{0}$.
+\end{example}
 
+\begin{theorem}[COLT for series]
+    Assume $\infsum[k = 0]a_k = a$ and $\infsum[k = 0]b_k = b$.
+    Also let $c \in \R$.
+    Then
+    \begin{enumerate}[label = (\roman*)]
+        \item $\infsum[k = 0]{a_k + b_k} = a + b$;
+        \item $\infsum[k = 0]{ca_k} = ca$.
+    \end{enumerate}
+    \begin{proof}
+        \textbf{Prove!}
+    \end{proof}
+\end{theorem}
 
+\begin{theorem}[Comparison Test]
+    Assume $0 \leq a_k \leq b_k$ for all $k$.
+    \begin{enumerate}[label = (\roman*)]
+        \item If $\infsum[k = 0]b_k$ is convergent with limit $b$,
+        then $\infsum[k = 0]a_k$ is also convergent with limit $a \leq b$.
+        \item If $\infsum[k = 0]a_k$ is divergent,
+        then so is $\infsum[k = 0]b_k$.
+    \end{enumerate}
+    \begin{proof}
+        \textbf{Prove!}
+    \end{proof}
+\end{theorem}
 
+\begin{definition}
+    If the series $\infsum[k = 0]|a_k|$ converges,
+    we say that the series $\infsum[k = 0]a_k$ converges absolutely
+    (is absolutely convergent).
+\end{definition}
 
+\begin{theorem}[Absolute Convergence Theorem]
+    Every absolutely convergent series $\infsum[k = 0]a_k$ is also convergent.
+    \begin{proof}
+        \textbf{Prove!}
+    \end{proof}
+\end{theorem}
 
+\begin{theorem}[Alternating Sign Test]
+    Let $\seq$ be a monotone decreasing sequence of positive numbers with $a_k \rightarrow 0$.
+    Then the alternating series $\infsum(-1) ^ {k + 1}a_k$ is convergent,
+    to say $s ^ {*}$.
+    Moreover,
+    $|s ^ {*} - s_n| \leq a_{n + 1}$.
+    \begin{proof}
+        \textbf{Prove!}
+    \end{proof}
+\end{theorem}
 
+\begin{remark}
+    Leibniz famously computed
+    \begin{align*}
+        \infsum\frac{(-1) ^ {k + 1}}{k} &= 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \dotsi = \log{2}, \\
+        \infsum\frac{(-1) ^ {k + 1}}{2k - 1} &= 1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \dotsi = \frac{\pi}{4}.
+    \end{align*}
+    We will revisit these later.
+\end{remark}
 
+\begin{theorem}[Ratio Test]
+    Let $(a_k)$ be a sequence with $a_k \neq 0$ for all but possibly finitely many $k$.
+    \begin{enumerate}[label = (\roman*)]
+        \item If $\liminfty[k]\frac{|a_{k + 1}|}{|a_k|} < 1$,
+        then $\infsum[k = 0]a_k$ converges absolutely.
+        \item If $\liminfty[k]\frac{|a_{k + 1}|}{|a_k|} > 1$,
+        then $\infsum[k = 0]a_k$ is divergent.
+    \end{enumerate}
+    \textit{Note:
+    If the limit of the ratio is $1$ then we get no information.}
+    \begin{proof}
+        \textbf{Prove!}
+    \end{proof}
+\end{theorem}
 
+\begin{theorem}[Root Test]
+    For a sequence $(a_k)$ set $a = \limsup_k|a_k| ^ {1 / k}$.
+    Then
+    \begin{enumerate}[label = (\roman*)]
+        \item If $a < 1$,
+        then $\infsum[k = 0]a_k$ converges absolutely.
+        \item If $a > 1$,
+        then $\infsum[k = 0]a_k$ is divergent.
+    \end{enumerate}
+\end{theorem}
 
+\begin{remark}
+    The statement of course works if $\liminfty[k]|a_k| ^ {1 / k}$ exists
+    (which however may not be the case).
+    The above version has the advantage of a uniform formulation and that it always applies.
+\end{remark}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{theorem}
+    Let $\infsum a_k$ be an absolutely convergent series and be rearranged at will without affecting the convergence or its value.
+\end{theorem}
+\textit{Pretty sure that the above is just a restatement of the Riemann Rearrangement Theorem.}
 
 \subsection{Radius of convergence}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Power series as a function}
 
