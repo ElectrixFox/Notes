@@ -1852,8 +1852,16 @@ There are two basic cases.
     \[
     (\Adj(A))_{ij} = (-1) ^ {i + j}\det(A_{j, i}).
     \]
-    The adjoint is the transpose of the matrix of signed cofactors.
 \end{definition}
+
+\begin{center}
+\fbox{
+\begin{minipage}{0.8\textwidth}
+The adjoint is the transpose of the matrix of signed cofactors.
+\end{minipage}
+}
+\end{center}
+\hfill
 
 \begin{proposition}
     Let $A \in M_n(\R)$ and $\Adj(A)$ be its adjoint.
@@ -2132,7 +2140,7 @@ So for a set of vectors to span a subspace $U$,
 everything in $U$ must be able to be written as a combination of the vectors which span $U$.
 \medskip
 
-\begin{proposition}
+\begin{proposition}\label{pre_linalg_prop_spanissolutionset}
     Let $\mbf{u}_1, \dotsc, \mbf{u}_k \in \R ^ n$ be $k$ vectors,
     and let $A = (\mbf{u}_1, \dotsc, \mbf{u}_k) \in M_{n, k}(\R)$ be the associated matrix of column vectors.
     Then we have
@@ -2148,10 +2156,12 @@ everything in $U$ must be able to be written as a combination of the vectors whi
     \mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_k) = \{\mbf{u} \in \R ^ n\,:\,\text{The system } A\pmb{\lambda} = \mbf{u}\text{ has a solution}\} = \{A\pmb{\lambda}:\pmb{\lambda} \in \R ^ k\}.
     \]
 \end{proposition}
+The above sort of tells us that we can rewrite the span of a collection of vectors in terms of matrices.
 
 \begin{lemma}
     The linear span $U$ of any collection $\mbf{u}_1, \dotsc, \mbf{u}_k$ of vectors is a vector subspace of $\R ^ n$.
     \begin{proof}
+        We check the conditions of a vector space:
         \begin{enumerate}[label = (\roman*)]
             \item If $\mbf{u} = \lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k$ and $\mbf{v} = \mu_1\mbf{u}_1 + \dotsi + \mu_k\mbf{u}_k$ then
             \[
@@ -2192,6 +2202,8 @@ everything in $U$ must be able to be written as a combination of the vectors whi
         So an element in the span of $\mbf{u}_1, \mbf{u}_2, \dotsc, \mbf{u}_k$ is also in the span of $\mbf{u}_2, \dotsc, \mbf{u}_k$.
     \end{proof}
 \end{lemma}
+
+\textbf{Idea:}
 This lemma tells us that the span of a set of vectors is equal to the span of a smaller set of vectors which doesn't include the vectors which can be made up of the other vectors.
 Effectively,
 I believe this is saying that we can keep reducing the spanning set until we get a smallest spanning set where each of the vectors cannot be written as a combination of the others.
@@ -2204,6 +2216,10 @@ I believe this is saying that we can keep reducing the spanning set until we get
     \lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k = \mbf{0}\quad\text{if}\quad\lambda_1 = \lambda_2 = \dotsi = \lambda_k = 0.
     \]
 \end{definition}
+
+\begin{center}
+\fbox{
+\begin{minipage}{0.9\textwidth}
 This definition is saying that you cannot make one vector from the other.
 In other words,
 $\mbf{v}$ cannot be made from $\lambda\mbf{u}$ for some $\lambda \in \R$.
@@ -2216,15 +2232,40 @@ Here is a more informative example
     1 \\ 1 \\ 1
 \end{pmatrix}.
 \]
+\end{minipage}
+}
+\end{center}
+\hfill
 
 
 \begin{corollary}
     Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be $k$ vectors in $\R ^ n$ and let $A = (\mbf{u}_1, \dotsc, \mbf{u}_k) \in M_{n, k}(\R)$ be the associated matrix of column vectors.
     Then
     \[
-    \mbf{u}_1, \dotsc, \mbf{u}_k\text{ are linear independent} \iff \text{The system } A\pmb{\lambda} = \mbf{0}\text{ has no non-trivial solution}.
+    \mbf{u}_1, \dotsc, \mbf{u}_k\text{ are linear independent} \iff \text{The system } A\pmb{\lambda} = \mbf{0}\text{ has no non-trivial\footnotemark solution}.
     \]
+    \footnotetext{Has a solution where $\pmb{\lambda} \neq 0$.}
+    \begin{proof}
+        We can see this from \autoref{pre_linalg_prop_spanissolutionset}.
+        
+        \textit{As this states that $\pmb{\lambda} = \mbf{0}$ which is the same as $\lambda_1 = \lambda_2 = \dotsi = \lambda_k$.}
+    \end{proof}
 \end{corollary}
+\begin{center}
+\fbox{
+\begin{minipage}{0.9\textwidth}
+The above corollary is very important,
+it states that if we cannot solve the matrix equation $A\pmb{\lambda} = \mbf{0}$ for non-trivial solutions then $\mbf{u}_1, \dotsc, \mbf{u}_k$ are linearly independent.
+
+\textit{I.e. we can use G-J to solve the matrix equation $A\pmb{\lambda} = \mbf{0}$ and if we do not get $A$
+(after G-J)
+in a form which shows $\lambda_1 = \dotsi = \lambda_k = 0$ then we can say they are not linearly independent}.
+\end{minipage}
+}
+\end{center}
+\hfill
+
+
 If the vectors $\mbf{u}_1, \dotsc, \mbf{u}_k$ are not linearly independent we say that they are linearly dependent.
 
 \begin{lemma}
@@ -2242,11 +2283,15 @@ If the vectors $\mbf{u}_1, \dotsc, \mbf{u}_k$ are not linearly independent we sa
         $\mbf{v} = \frac{-\lambda_1}{\lambda_2}\mbf{u}$.
     \end{proof}
 \end{lemma}
+The above is simply saying if we can make one vector from another then they are not linearly independent,
+specifically if they are non-collinear then they are always linearly independent.
 
 The following proposition says that for a set of linearly independent vectors,
 if we can choose a vector,
 say $\mbf{u}$,
-such that $\mbf{u}$ is not in the set of their combinations then the vectors that span this are linearly independent to $\mbf{u}$.
+such that $\mbf{u}$ is not in the set of their combinations
+(so we cannot make $\mbf{u}$ from the vectors in the set)
+then the vectors that span this are linearly independent to $\mbf{u}$.
 
 \begin{proposition}
     Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be $k$ linear independent vectors in $\R ^ n$ and let $\mbf{u} \in \R ^ n$ such that
