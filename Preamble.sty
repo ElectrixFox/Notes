@@ -32,6 +32,7 @@
 
 % Linear Algebra I - setup
 \setcounter{MaxMatrixCols}{20}
+\newcommand{\mbf}[1]{\mathbf{#1}}
 \DeclareMathOperator{\Adj}{Adj}
 \DeclareMathOperator{\im}{im}
 
@@ -76,12 +77,12 @@
     spacebelow = 1em
 ]{exampstyle}
 
-\declaretheorem[style = avgstyle, numberwithin=section]{theorem}
-\declaretheorem[numberwithin=section]{lemma}
-\declaretheorem{proposition, corollary, remark}[style=plain, numberwithin=section]
-\declaretheorem{definition}[style=defstyle, numbered=unless unique, numberwithin=section]
+\declaretheorem[style = avgstyle, numberwithin=subsection]{theorem}
+\declaretheorem[numberwithin=subsection, sibling=theorem]{lemma}
+\declaretheorem{proposition, corollary, remark}[style=plain, numberwithin=subsection, sibling=theorem]
+\declaretheorem{definition}[style=defstyle, numbered=unless unique, numberwithin=subsection, sibling=theorem]
 \declaretheorem{outline}[style=plain, numbered=no]
-\declaretheorem{example}[style=exampstyle, numberwithin=section]
+\declaretheorem{example}[style=exampstyle, numberwithin=subsection, sibling=theorem]
 
 \newenvironment{solution}
     {

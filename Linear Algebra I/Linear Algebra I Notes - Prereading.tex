@@ -2,9 +2,6 @@
 \usepackage{preamble}
 \usepackage{systeme}
 
-\setcounter{MaxMatrixCols}{20}
-\newcommand{\mbf}[1]{\mathbf{#1}}
-
 \title{Linear Algebra I \\
     \large Prereading}
 \author{Luke Phillips}
@@ -1011,9 +1008,9 @@ The ERO's are simple operations you can do to a matrix to turn it into another m
 There are three fundamental operations, which are as follows,
 \begin{enumerate}[label = (\alph*)]
     \item $P_{rs}$: switch row $r$ with row $s$;
-    \item $M_{r}(\mbf{\lambda})$: multiple (all the entries in) row $r$ by the number $\lambda \neq 0$;
+    \item $M_{r}(\pmb{\lambda})$: multiple (all the entries in) row $r$ by the number $\lambda \neq 0$;
     \item $A_{rs}$: add (each entry in) row $r$ to (the corresponding entry in) row $s$.
-    \item[(c')] $A_{rs}(\mbf{\lambda})$: add $\lambda$ times (each entry in) row $r$ to (the corresponding entry in) row $s$.
+    \item[(c')] $A_{rs}(\pmb{\lambda})$: add $\lambda$ times (each entry in) row $r$ to (the corresponding entry in) row $s$.
 \end{enumerate}
 
 Note that $A_{rs}(\lambda) = M_r\left(\frac{1}{\lambda}\right) \circ A_{rs} \circ M_r(\lambda)$,
@@ -1370,7 +1367,7 @@ One can do the following:
 
         Next we show that (ii) implies (iii).
         So let's assume (ii).
-        But by \autoref{linalg_lem_solsetsam} we can replace the equation $A\mbf{x} = \mbf{0}$ with the RREF of $A$,
+        But by \autoref{pre_linalg_lem_solsetsam} we can replace the equation $A\mbf{x} = \mbf{0}$ with the RREF of $A$,
         that is, we can consider $I_n\mbf{x} = \mbf{0}$,
         which means $\mbf{x} = \mbf{0}$.
         So (iii) holds.
@@ -1900,7 +1897,7 @@ There are two basic cases.
     \]
 \end{theorem}
 
-\begin{theorem}[Cramer's rule]\label{pre_linalg_thm_cramersrulepre_linalg_thm_cramersrule}
+\begin{theorem}[Cramer's rule]\label{pre_linalg_thm_cramersrule}
     Let $A\mbf{x} = \mbf{b}$ be a linear system with a non-singular matrix $A \in M_n(\R)$.
     The unique solution $\begin{pmatrix}
         x_1 \\ \vdots \\ x_n
@@ -2033,8 +2030,8 @@ With this definition one can show that the volume of the $n$-dimensional paralle
 
 \newpage
 
-\section{Spanning sets and linear independence in $\R ^ n$}
-\subsection{Subspaces of $\R ^ n$}
+\section{Spanning sets and linear independence in \texorpdfstring{$\R ^ n$}{}}
+\subsection{Subspaces of \texorpdfstring{$\R ^ n$}{}}
 \begin{definition}[Vector subspace of $\R ^ n$]
     A (non-empty) subset $U$ of $\R ^ n$ is called a vector subspace (or linear subspace) of $\R ^ n$ if it satisfies the following three conditions:
     \begin{enumerate}[label = (\roman*)]
@@ -2098,6 +2095,15 @@ a subset of $\R ^ n$ of the form
 \mbf{c} + U = \{\mbf{v} \in \R ^ n\,:\,\mbf{v} = \mbf{c} + \mbf{u}\text{ with }\mbf{u} \in U\},
 \]
 where $U$ is a vector subspace.
+\begin{center}
+\fbox{
+\begin{minipage}{0.9\textwidth}
+The above is quite important as it has some relevance to some other definitions we will be making,
+specifically this includes linear independence and span.
+\end{minipage}
+}
+\end{center}
+\hfill
 
 \subsection{Spanning sets}
 Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be vectors in $\R ^ n$.
@@ -2119,24 +2125,27 @@ for some (real) scalars $\lambda_1, \dotsc, \lambda_k$.
     Equivalently,
     $\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ is called a spanning set of $U$.
 \end{definition}
-Another simplification of this is to consider that the span is just a subset of $\R ^ n$ containing all of the combinations of the vectors.
+
+\textbf{Alternatively},
+another simplification of this is to consider that the span is just a subset of $\R ^ n$ containing all of the combinations of the vectors.
 So for a set of vectors to span a subspace $U$,
 everything in $U$ must be able to be written as a combination of the vectors which span $U$.
+\medskip
 
 \begin{proposition}
     Let $\mbf{u}_1, \dotsc, \mbf{u}_k \in \R ^ n$ be $k$ vectors,
     and let $A = (\mbf{u}_1, \dotsc, \mbf{u}_k) \in M_{n, k}(\R)$ be the associated matrix of column vectors.
     Then we have
     \[
-    \lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k = A\mbf{\lambda},
+    \lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k = A\pmb{\lambda},
     \]
-    where $\mbf{\lambda} = \begin{pmatrix}
+    where $\pmb{\lambda} = \begin{pmatrix}
         \lambda_1 \\ \vdots \\ \lambda_k
     \end{pmatrix} \in \R ^ k$ is the column vector of the $\lambda_j$.
     Moreover,
     we have
     \[
-    \mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_k) = \{\mbf{u} \in \R ^ n\,:\,\text{The system } A\mbf{\lambda} = \mbf{u}\text{ has a solution}\} = \{A\mbf{\lambda}:\mbf{\lambda} \in \R ^ k\}.
+    \mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_k) = \{\mbf{u} \in \R ^ n\,:\,\text{The system } A\pmb{\lambda} = \mbf{u}\text{ has a solution}\} = \{A\pmb{\lambda}:\pmb{\lambda} \in \R ^ k\}.
     \]
 \end{proposition}
 
@@ -2213,7 +2222,7 @@ Here is a more informative example
     Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be $k$ vectors in $\R ^ n$ and let $A = (\mbf{u}_1, \dotsc, \mbf{u}_k) \in M_{n, k}(\R)$ be the associated matrix of column vectors.
     Then
     \[
-    \mbf{u}_1, \dotsc, \mbf{u}_k\text{ are linear independent} \iff \text{The system } A\mbf{\lambda} = \mbf{0}\text{ has no non-trivial solution}.
+    \mbf{u}_1, \dotsc, \mbf{u}_k\text{ are linear independent} \iff \text{The system } A\pmb{\lambda} = \mbf{0}\text{ has no non-trivial solution}.
     \]
 \end{corollary}
 If the vectors $\mbf{u}_1, \dotsc, \mbf{u}_k$ are not linearly independent we say that they are linearly dependent.
