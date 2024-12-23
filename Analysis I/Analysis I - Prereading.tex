@@ -1885,67 +1885,241 @@ We have
 \end{remark}
 
 \begin{remark}
-    The notion ratio of convergence comes from the analogous situation for a complex power series $\infsumo a_kz ^ k$
+    The notion ratio of convergence comes from the analogous situation for a complex power series $\infsumo a_kz ^ k$ with $z \in \C$.
+    Then same result holds,
+    that is,
+    the power series converges absolutely for all complex values $z \in \C$ with $|z| < R$ and diverges for all complex values $|z| > R$.
+    Note that the set $\{z \in \C\,|\, |z| < R\}$ describes the interior of a circle of radius $R$ around the origin.
+    This is the reason for the name radius of convergence.
 \end{remark}
 
+Here are some examples
 
+\begin{example}\phantom{}
+    \begin{itemize}
+        \item Every polynomial $\sum_{k = 0}^{n}a_kx ^ k$ is a power series with $a_k = 0$ for $k \geq n + 1$.
+        In this case the radius of convergence is of course $R = \infty$,
+        since the sum is a finite value for every choice of $x \in \R$.
+        (Note $c = 0$).
 
+        \item Recall that the geometric series is given by $\infsumo x ^ k$.
+        Here we have $a_k = 1$ for all $k$.
+        Note that we have for $|x| < 1$ the identity
+        \[
+        \infsumo x ^ k = \frac{1}{1 - x},
+        \]
+        and divergence for $|x| > 1$.
+        So the radius of convergence here is $R = 1$.
+        The power series represents the function $f(x) = 1 / (1 - x)$ for $|x|$ but note that,
+        while the power series diverges for $|x| > 1$,
+        the function $f$ is defined everywhere except for $x = 1$.
 
+        \item Consider $\infsumo k ^ kx ^ k$.
+        In this case we have $a_k = k ^ k$ and $\limas[k]{\sqrt[k]{|a_k|} = k}{\infty}$.
+        Thus $c = \infty$,
+        and the series only converges for $x = 0$,
+        that is,
+        $R = 0$.
 
+        \item Consider $\infsumo\frac{2 ^ k}{k}x ^ k$,
+        so $a_k = 2 ^ k / k$.
+        Then we have
+        \[
+        \left|\frac{a_{k + 1}}{a_k}\right| = \frac{2k}{k + 1} \rightarrow 2,
+        \]
+        so the radius of convergence is $R = \frac{1}{2}$.
+        The root test would have worked fine too.
+        
+        \textit{Note: if we use $x = \pm 1 / 2$ we get $\infsumo\frac{(\pm 1) ^ k}{k}$,
+        hence we have divergence at $x = R$,
+        but
+        (conditional)
+        convergence at $x = -R$.}
 
+        For $\infsumo\frac{2 ^ k}{k}x ^ k$ we also obtain $R = 1 / 2$ but with convergence at both end points,
+        while for $\infsumo 2 ^ kk x ^ k$ we have again $R = 1 / 2$ with divergence at both endpoints.
+        
+        \item Let $a_k = k ^ k / k!$ for $k \geq 0$.
+        Then we have
+        \[
+        \left|\frac{a_{k + 1}}{a_k}\right| = \frac{(k + 1) ^ {k + 1}}{(k + 1)k ^ k} = \left(\frac{k + 1}{k}\right) = \left(1 + \frac{1}{k}\right) ^ k \rightarrow e,
+        \]
+        so the radius of convergence is $R = 1 / e$.
+        
+        It is a challenge to determine convergence at the endpoints.
+    \end{itemize}
+\end{example}
 
+It is worthwhile to record the following
+\begin{corollary}
+    Assume $\infsumo a_kc ^ k$ converges for some $c \neq 0$.
+    Then $\infsumo a_kx ^ k$ converges absolutely for all $|x| < |c|$.
+    \begin{proof}
+        Let $R > 0$ be the radius of convergence.
+        Then $c$ must lie in the
+        (closed)
+        interval $[-R, R]$
+        (we cannot exclude the endpoints as the series might converge there).
+        But then we have absolute convergence in the open interval $(-|c|, |c|) \subseteq (-R, R)$.
+    \end{proof}
+\end{corollary}
 
+\begin{lemma}\label{pre:analy:lem:powseriescalc}
+    Let $\infsumo a_kx ^ k$ be a power series with radius of convergence $R$.
+    Then the
+    \begin{align*}
+        \textbf{formal derivative}\quad&\infsum a_kkx ^ {k - 1} = \frac{1}{x}\infsum a_kk x ^ {k}; \\
+        \textbf{formal anti-derivative}\quad&\infsumo\frac{a_k}{k + 1}x ^ {k + 1} = x\infsumo\frac{a_k}{k + 1}x ^ {k}
+    \end{align*}
+    also have radius of convergence $R$.
+    \begin{proof}
+        Set $c = \limsup_{k}\sqrt[k]{|a_k|}$.
+        But then since $\liminfty[k]\sqrt[k]{k} = 1$ also $\liminfty[k]\sqrt[k]{1 / (k + 1)} = 1$ as well we see directly
+        \[
+        \limsup_{k}\sqrt[k]{|a_k|k} = \limsup_{k}\sqrt[k]{|a_k| / (k + 1)} = c.
+        \]
+        The claim now follows by Cauchy-Hadamard.
+    \end{proof}
+\end{lemma}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{remark}
+    So far the formal derivative is really only formal.
+    We haven't shown that the power series define differentiable functions and that their derivatives are obtained by differentiation term by term.
+\end{remark}
 
 \subsection{Power series as a function}
+
+So far we considered the
+(convergent)
+power series $\infsumo a_kx ^ k$
+(implicitly)
+for fixed $x$.
+In this section,
+we view $\infsumo a_kx ^ k$ as a function $f(x)$ and study its properties.
+For this and in fact,
+as a principle,
+we consider the power series as a limit of a sequence of polynomials,
+\[
+f(x) = \liminfty f_n(x),
+\]
+where
+\[
+f_n(x) := \sum_{k = 0}^{n}a_kx ^ k.
+\]
+This point of view,
+constructing complicated/interesting functions as the limit of "easier" functions is a guiding principle in Analysis.
+
+Let us start with the following proposition.
+\begin{proposition}[Power series are continuous]
+    Let $\infsumo a_kx ^ k$ be a power series with radius of convergence $R > 0$ defining a function $f(x)$ in the interval $(-R, R)$.
+    Then $f$ is continuous on $(-R, R)$.
+
+    In fact,
+    $f$ is locally Lipschitz continuous on $(-R, R)$.
+    More precisely,
+    for all positive constants $r$ with $r < R$ we have that $f(x)$ is Lipschitz continuous on the interval $[-r, r]$.
+    That is,
+    there exists a constant $M = M_r > 0$
+    (depending on $r$)
+    such that
+    \[
+    |f(x) - f(y)| \leq M|x - y|
+    \]
+    for all $x$ and $y$ in $[-r, r]$.
+    \begin{proof}
+        Pick $n$ and define $f_n(x) := \sum_{k = 0}^{n}a_kx ^ k$.
+        Then
+        \begin{align*}
+            |f_n(x) - f_n(y)| &= \left|\sum_{k = 0}^{n}a_k(x ^ k - y ^ k)\right| \\
+            &= \left|\sum_{k = 1}^{n}a_k(x ^ k - y ^ k)\right| \\
+            &= |x - y|\left|\sum_{k = 1}^{n}a_k\left(x ^ {k - 1} + x ^ {k - 2}y + \dotsi + xy ^ {k - 2} + y ^ {k - 1}\right)\right| \\
+            &\leq |x - y|\sum_{k = 1}^{n}|a_k|\left(|x ^ {k - 1}| + |x ^ {k - 2}||y| + \dotsi + |x||y ^ {k - 2}| + |y ^ {k - 1}|\right) \\
+            &\leq |x - y|\sum_{k = 1}^{n}|a_k|kr ^ {k - 1}.
+        \end{align*}
+        But by \autoref{pre:analy:lem:powseriescalc} the limit as $n \rightarrow \infty$ on the right hand side exists,
+        and we obtain
+        \[
+        |f(x) - f(y)| \leq |x - y|\infsum|a_k|kr ^ {k - 1}.
+        \]
+        Thus $f(x)$ is Lipschitz on $[-r, r]$ with Lipschitz constant $M = \infsum|a_k|kr ^ {k - 1}$.
+        This implies that $f$ is locally Lipschitz on $(-R, R)$.
+        Given $c \in (-R, R)$ find $r > 0$ such that $c \in (-r, r) \subset (-R, R)$ and then $f$ is Lipschitz in the open neighbourhood $(-r, r)$ of $c$.
+        In \textbf{Problem Sheet $1$} we have seen that this implies that $f$ is continuous on the entire interval $(-R, R)$.
+    \end{proof}
+\end{proposition}
+
+\begin{remark}
+    For the statement of the lemma we really need to restrict ourselves to the closed subinterval $[-r, r]$ of $(-R, R)$.
+    In general/Typically,
+    the power series will not be Lipschitz on the entire interval $(-R, R)$.
+    
+    For example,
+    assume $R < \infty$.
+    Then if $f(x) = \infsumo a_kx ^ k$ was Lipschitz on $(-R, R)$,
+    then it would be bounded.
+    Indeed,
+    picking $y = 0$,
+    we see
+    \[
+    |f(x) - f(0)| \leq M|x| \leq MR
+    \]
+    so that $|f(x)| \leq |f(0)| + MR = a_0 + MR$.
+    However,
+    a power series is not necessarily bounded on $(-R, R)$.
+    For example,
+    the geometric series $\infsumo x ^ k = \frac{1}{1 - x}$ is unbounded as $x \rightarrow 1 ^ {-1}$.
+\end{remark}
+
+The next result shows that power series are differentiable within the radius of convergence and that we can differentiate power series term by term.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{The exponentials, logarithm, and trigonometric functions}
 

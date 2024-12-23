@@ -14,6 +14,10 @@
 
 \newpage
 
+\tableofcontents
+
+\newpage
+
 \section{Functions}
 
 A function $f$ is a correspondence between two sets $D$ (called the domain) and $C$ (called the codomain), that assigns to each element of $D$ one and only one element of $C$. The notation to indicate the domain and codomain is $f : D \mapsto C$.
@@ -245,7 +249,7 @@ There are $3$ types of discontinuity:
     In this case at least one of $L^+$ or $L^-$ does not exist.
 \end{enumerate}
 
-\subsection[Limits as x rightarrow infty]{Limits as $x \rightarrow \infty$}
+\subsection{Limits as \texorpdfstring{$x \rightarrow \infty$}{}}
 
 \begin{definition}
     $f(x)$ has a limit $L$ as $x$ tends to $\infty$ if
@@ -1772,7 +1776,7 @@ for all values of $x$ in the limit as $m \rightarrow \infty$.
     \begin{proof}
         \begin{gather*}
             \frac{1}{L}\int_{-L}^{L}(f(x)) ^ 2\,dx = \\
-            \frac{1}{L}\int_{-L^}{L}\left\{\left[\frac{a_0}{2} + \infsum[n = 1]\left(a_n\cos{\frac{n\pi x}{L}} + b_n\sin{\frac{n\pi x}{L}}\right)\right]\left[\frac{a_0}{2} + \infsum[m = 1]\left(a_m\cos{\frac{m\pi x}{L}} + b_m\sin{\frac{m\pi x}{L}}\right)\right]\right\} \\
+            \frac{1}{L}\int_{-L}^{L}\left\{\left[\frac{a_0}{2} + \infsum[n = 1]\left(a_n\cos{\frac{n\pi x}{L}} + b_n\sin{\frac{n\pi x}{L}}\right)\right]\left[\frac{a_0}{2} + \infsum[m = 1]\left(a_m\cos{\frac{m\pi x}{L}} + b_m\sin{\frac{m\pi x}{L}}\right)\right]\right\} \\
             = \frac{a_0 ^ 2}{2} + \infsum[n = 1]\infsum[m = 1](a_na_m\delta_{mn} + b_nb_m\delta_{mn}) = \frac{a_0 ^ 2}{2} + \infsum[n = 1](a_n ^ 2 + b_n ^ 2).
         \end{gather*}
     \end{proof}
@@ -1825,7 +1829,7 @@ f_o(x) = \begin{cases}
 \]
 The Fourier coefficients of $f_o(x)$ are $a_n = 0$ and
 \[
-b_n = \frac{1}{L}\int_{-L}^{L}f_o(x)\sin{\frac{n\pi x}{L}}\dx = \frac{2}{L}\int_{0}^{L}f(x)\sin{\frac{n\pi x}{L}}\,dx.
+b_n = \frac{1}{L}\int_{-L}^{L}f_o(x)\sin{\frac{n\pi x}{L}}\,dx = \frac{2}{L}\int_{0}^{L}f(x)\sin{\frac{n\pi x}{L}}\,dx.
 \]
 This is the half range sine series for $f(x)$ on $(0, L)$ as $f(x) = \infsum[n = 1]b_n\sin{\frac{n\pi x}{L}}$.
 
@@ -1840,7 +1844,7 @@ f_e(x) = \begin{cases}
 \]
 The Fourier coefficients of $f_e(x)$ are $b_n = 0$ and
 \[
-a_n = \frac{1}{L}\int_{-L}^{L}f_e(x)\cos{\frac{n\pi x}{L}}\dx = \frac{2}{L}\int_{0}^{L}f(x)\cos{\frac{n\pi x}{L}}\,dx.
+a_n = \frac{1}{L}\int_{-L}^{L}f_e(x)\cos{\frac{n\pi x}{L}}\,dx = \frac{2}{L}\int_{0}^{L}f(x)\cos{\frac{n\pi x}{L}}\,dx.
 \]
 This is the half range cosine series for $f(x)$ on $(0, L)$ as $f(x) = \frac{a_0}{2} + \infsum[n = 1]a_n\cos{\frac{n\pi x}{L}}$.
 
