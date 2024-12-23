@@ -1244,7 +1244,7 @@ for completeness we will restate them.
 \end{theorem}
 
 An immediate consequence of the Mean Value Theorem is the following
-\begin{theorem}
+\begin{theorem}\label{pre:analy:thm:contdiffthenfunchasprops}
     Let $f : I \rightarrow \R$ be a continuous function on an interval $I$,
     differentiable in its interior points.
     Then
@@ -2010,7 +2010,7 @@ This point of view,
 constructing complicated/interesting functions as the limit of "easier" functions is a guiding principle in Analysis.
 
 Let us start with the following proposition.
-\begin{proposition}[Power series are continuous]
+\begin{proposition}[Power series are continuous]\label{pre:analy:prop:powserarecont}
     Let $\infsumo a_kx ^ k$ be a power series with radius of convergence $R > 0$ defining a function $f(x)$ in the interval $(-R, R)$.
     Then $f$ is continuous on $(-R, R)$.
 
@@ -2072,60 +2072,251 @@ Let us start with the following proposition.
 
 The next result shows that power series are differentiable within the radius of convergence and that we can differentiate power series term by term.
 
+\begin{theorem}\label{pre:analy:thm:funcofpowseriesinfdiff}
+    Let $f(x) = \infsumo a_kx ^ k$ be a power series and $R \in (0, \infty]$ be its radius of convergence.
+    Then $f$ is differentiable infinitely many times at all points $x \in (-R, R)$,
+    and we can differentiate term by term:
+    \[
+    f'(x) = \infsum ka_kx ^ {k - 1}.
+    \]
+    Furthermore,
+    we have
+    \[
+    f ^ {(n)}(0) = n! \cdot a_n
+    \]
+    for all $n \geq 0$.
+    \begin{proof}
+        Let $c \in (-R, R)$.
+        In the proof of \autoref{pre:analy:prop:powserarecont} by taking the limit we saw
+        \[
+        f(x) = f(c) + (x - c)\infsum a_k(x ^ {k - 1} + x ^ {k - 2}c + \dotsi + xc ^ {k - 2} + c ^ {k - 1}).
+        \]
+        Set
+        \[
+        f_1(x) = \infsum a_k(x ^ {k - 1} + x ^ {k - 2}c + \dotsi + xc ^ {k - 2} + c ^ {k - 1}).
+        \]
+         Note that $f_1(c) = \infsum a_kkc ^ {k - 1}$.
+         Considering first order Taylor what remains to be shown to obtain differentiability is that $f_1(x)$ is continuous at $x = c$
+         (in fact a continuous function on $(-R, R)$).
+         Then $f'(c) = f_1(c)$.
+         This can be done 'by hand',
+         similarly to the proof of \autoref{pre:analy:prop:powserarecont} but we will refrain from doing so here since it is fairly tedious and since there is a
+         (much)
+         more conceptual approach which we will discuss later.
 
+         Assuming this,
+         we now keep taking derivatives and see that $f$ is infinitely many times differentiable at all points $x \in (-R, R)$ and that we have
+         \begin{align*}
+             f ^ {(n)}(x) &= \infsum[k = n](k - n + 1)(k - n + 2)\dotsi(k - 1)ka_kx ^ {k - n} \\
+             &= \infsumo(k + 1)(k + 2)\dotsi(k + n)a_{k + n}x ^ k.
+         \end{align*}
+         Evaluation at $x = 0$ yields $f ^ {(n)}(0) = n! \cdot a_n$.
+    \end{proof}
+\end{theorem}
 
+Using the previous theorem we now show that power series representing a function within its radius of convergence are unique.
+\begin{theorem}[Identity Theorem for Power Series]
+    Let $\infsumo a_kx ^ k$ and $\infsumo b_kx ^ k$ be two power series with positive radii of convergence $R_a, R_b > 0$,
+    respectively.
+    If both series agree as functions on an interval $(-r, r)$ with $0 < r < \min\{R_a, R_b\}$,
+    then we have $a_k = b_k$ for all $k$.
+    \begin{proof}
+        Let $f(x) = \infsumo a_kx ^ k$ and $g(x) = \infsumo b_kx ^ k$.
+        Since $f = g$ on $(-r, r)$,
+        we have
+        \[
+        k! \cdot a_k = f ^ {(k)}(0) = g ^ {(k)}(0) = k! \cdot b_k,
+        \]
+        i.e.,
+        $a_k = b_k$.
+    \end{proof}
+\end{theorem}
 
+The following we will mention without proof.
+\begin{theorem}[Abel's Limit Theorem]
+    Let $f(x) = \infsumo a_kx ^ k$ be a power series with radius of convergence $R > 0$.
+    Assume that the power series converges at the endpoint $x = R: \infsumo a_kR ^ k$ converges.
+    Then $f$ is
+    (left)
+    continuous at $x = R$,
+    that is,
+    \[
+    \lim_{x \rightarrow R ^ {-}}f(x) = \infsumo a_kR ^ k.
+    \]
+    (The analogous result holds at $x = -R$ if the series converges at that point).
+\end{theorem}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+One can use this to establish Leibniz' formulas for $\log{2}$ and $\arctan(1) = \frac{\pi}{4}$.
+However,
+we will give direct proofs later.
 
 \subsection{The exponentials, logarithm, and trigonometric functions}
+Here we will reintroduce the exponential and trigonometric functions via power series.
+This provides a natural and rigorous approach to these functions.
 
 \subsubsection{The exponential function}
+We of course have already constructed the exponential function $e ^ x$ and have derived its standard properties.
+In particular,
+we have seen $(e ^ x)' = e ^ x$ and also
+\[
+e ^ x = \infsumo\frac{x ^ k}{k!}.
+\]
+We will now ignore this and rather take a different starting point:
+\begin{definition}[Exponential function]
+    We define the exponential function $\exp(x)$ by
+    \[
+    \exp(x) := \infsumo\frac{x ^ k}{k!} = 1 + x + \frac{1}{2}x ^ 2 + \frac{1}{6}x ^ 3 + \frac{1}{24}x ^ 4 + \dotsi
+    \]
+    We have already seen
+    (several times)
+    that this power series converges absolutely for all $x \in \R$.
+\end{definition}
+
+\begin{theorem}
+    \begin{enumerate}[label = (\roman*)]
+        \item $\exp(0) = 1$.
+        \item The exponential function is infinitely often differentiable on $\R$ with
+        \[
+        \exp'(x) = \exp(x).
+        \]
+        \item For all $x, y \in \R$ we have
+        \begin{align*}
+            \exp(x + y) &= \exp(x)\exp(y); \\
+            \exp(-x) &= \frac{1}{\exp(x)}.
+        \end{align*}
+        \item $\exp(x) > 0$ for all $x \in \R$.
+        \item $\exp(x)$ is strictly monotone increasing.
+        \item
+        \[
+        \liminfty[x]\exp(x) = \infty\qquad\text{and}\qquad\lim_{x \rightarrow -\infty}\exp(x) = 0.
+        \]
+    \end{enumerate}
+    \begin{proof}
+        (i) is clear.
+        For (ii) we differentiate term-wise
+        (by \autoref{pre:analy:thm:funcofpowseriesinfdiff})
+        and obtain
+        \[
+        \exp'(x) = \infsum k\frac{x ^ {k - 1}}{k!} = \infsumo(k + 1)\frac{x ^ k}{(k + 1)!} = \infsumo\frac{x ^ k}{k!} = \exp(x).
+        \]
+        For (iii),
+        we consider $f(t) := \exp(x + t)\exp(y - t)$.
+        Note that $f$ is differentiable on $\R$ with $f(0) = \exp(x)\exp(y)$ and $f(y) = \exp(x + y)$.
+        But now
+        \[
+        f'(t) = \exp(x + t)\exp(y - t) - \exp(x + t)\exp(y - t) = 0.
+        \]
+        Thus $f$ is constant by \autoref{pre:analy:thm:contdiffthenfunchasprops}.
+        This proves (ii).
+        (iv) is clear for positive $x$,
+        while for $x < 0$,
+        this follows from (iii).
+        (v) follows from (ii) and (iv) using \autoref{pre:analy:thm:contdiffthenfunchasprops}.
+        For (vi),
+        we note $\exp(x) > 1 + x$ for $x > 0$.
+        This gives $\liminfty[x]\exp(x) = \infty$ and the limit as $x \rightarrow -\infty$ follows from (iii).
+    \end{proof}
+\end{theorem}
+
+\begin{remark}
+    Of course we have $e ^ x$ is equal to $\exp(x)$,
+    either since their power series expansion are the same or by using that they satisfy the same differential equation $f' = f$ with initial condition $f(0) = 1$
+    (see problem sheets).
+\end{remark}
+We proceed with
+\begin{definition}[Euler's number]
+    We define
+    \[
+    e := \exp(1) = \infsumo\frac{1}{k!} = 1 + \frac{1}{2} + \frac{1}{6} + \frac{1}{24} + \dotsi
+    \]
+\end{definition}
+
+\begin{remark}
+    With this definition we then in our setup need to show that $e = \liminfty[k](1 + 1 / k) ^ k$
+    (which was the previous definition we had for Euler's number).
+    But this is harmless
+    (after having introduced the logarithm as the inverse of the exponential as usual).
+    We have
+    \[
+    (1 + 1 / k) ^ k = \exp(k\log(1 + 1 / k)) \rightarrow \exp(1) = e
+    \]
+    by continuity of $\exp$ and $\liminfty[k]k\log(1 + 1 / k) = \liminfty[k]\frac{\log(1 + 1 / k)}{1 / k} = 0$ using \lhopital's Rule.
+\end{remark}
 
 \subsubsection{The logarithm}
+Once we have defined the exponential function and derived its properties then we can introduce the logarithm $\log(x), a ^ x$,
+and $\log_a(x)$ in exactly the same way as we did before.
+For completeness we will give the line of reasoning.
+Since $\exp(x)$ is strictly monotone increasing mapping $(-\infty, \infty)$ to $(0, \infty)$ it has an inverse function which we will denote by the logarithm:
+\[
+\log(x) : (0, \infty) \rightarrow (-\infty, \infty).
+\]
+Thus
+\begin{align*}
+    \exp(\log(x)) &= x&\text{for all } x > 0; \\
+    \log(\exp(x)) &= x&\text{for all } x \in \R.
+\end{align*}
+We have
+\begin{theorem}
+    \begin{enumerate}[label = (\roman*)]
+        \item $\log(1) = 0$.
+        \item The logarithm is differentiable with $\log'(x) = \frac{1}{x}$.
+        \item For all $x, y > 0$ we have
+        \begin{align*}
+            \log(xy) &= \log(x) + \log(y); \\
+            \log\left(\frac{1}{x}\right) &= -\log(x).
+        \end{align*}
+        \item $\log(x)$ is strictly monotone increasing.
+        \item
+        \[
+        \liminfty[x]\log(x) = \infty\qquad\text{and}\qquad\lim_{x \rightarrow 0 ^ {+}}\log(x) = -\infty.
+        \]
+    \end{enumerate}
+    \begin{proof}
+        
+    \end{proof}
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsubsection{The trigonometric functions}
 
