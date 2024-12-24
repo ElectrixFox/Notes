@@ -1139,10 +1139,10 @@ However $g$ is not differentiable at zero where the horizontal tangent line of $
 
 However,
 we have
-\begin{proposition}
+\begin{proposition}\label{pre:analy:prop:contfuncderivofinverse}
     Let $f : I \rightarrow \R$ be continuous on the interval $I$,
     differentiable at a point $d$.
-    Assume that $f$ is invertible with inverse $f ^Y {-1}$ and that $f'(d) \neq 0$.
+    Assume that $f$ is invertible with inverse $f ^ {-1}$ and that $f'(d) \neq 0$.
 
     Then $f ^ {-1}$ is differentiable at $c := f(d)$ with
     \[
@@ -2273,52 +2273,264 @@ We have
         \]
     \end{enumerate}
     \begin{proof}
-        
+        (i),
+        (iv),
+        (v) follow from the analogous properties of the exponential function.
+        For (ii) we apply \autoref{pre:analy:prop:contfuncderivofinverse}
+        (nothing $\exp(x)$ is continuous and differentiable with $\exp'(x) = \exp(x) \neq 0$ for all $x$)
+        and obtain
+        \[
+        \log'(x) = \frac{1}{\exp(\log(x))} = \frac{1}{x}.
+        \]
+        For
+        (iii)
+        we could use the addition law of $\exp$.
+        Here is a different argument:
+        For fixed $y$ consider both sides of $\log(xy) = \log(x) + \log(y)$ as a function of $x$.
+        Not for $x = 1$ both sides take the value $\log(y)$.
+        Now take derivatives:
+        The right hand side gives $1 / x$ while the left hand side using the chain rule also gives $y\frac{1}{xy} = 1 / x$.
+        Hence the functions coincide by \autoref{pre:analy:thm:contdiffthenfunchasprops}.
     \end{proof}
 \end{theorem}
 
+Finally,
+we define for $a > 0$ the function
+\[
+a ^ x := \exp(\log(a)x),
+\]
+From the definition and the properties of the exponential we immediately obtain
+\begin{theorem}\label{pre:analy:thm:thmsonatopowx}
+    \begin{enumerate}[label = (\roman*)]
+        \item $a ^ 0 = 1$,
+        $a ^ 1 = a$,
+        $a ^ {-1} = \frac{1}{a}$.
+        
+        \item $a ^ x$ is differentiable with $(a ^ x)' = \log(a)a ^ x$.
 
+        \item For all $x, y \in \R$ we have
+        \begin{align*}
+            a ^ {x + y} &= a ^ xa ^ y; \\
+            a ^ {-x} &= \frac{1}{a ^ x}.
+        \end{align*}
+        
+        \item $a ^ x > 0$ for all $x \in \R$.
 
+        \item $a ^ x$ is strictly monotone increasing if $a > 1$,
+        constant if $a = 1$,
+        and strictly monotone decreasing $a \in (0, 1)$.
+    \end{enumerate}
+\end{theorem}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+We define $\log_a(x)$ as the inverse function of $a ^ x$
+(if $a \neq 1$).
+From the definition of $a ^ x$ we directly see
+\[
+\log_a(x) = \frac{\log(x)}{\log(a)}.
+\]
+\begin{remark}
+    Recall one defines $n \in \N$
+    (and arbitrary $a$)
+    the $n$-th power $a ^ n$ as $a \dotsi a$.
+    We recover this for $a > 0$ from \autoref{pre:analy:thm:thmsonatopowx}(iii) and (i)
+    ($a ^ 1 = a$).
+    From this we also see $a ^ {-n} = \frac{1}{a ^ n}$ which was like $a ^ 0 = 1$.
+    Note that we cannot define $a ^ x$ for negative $a$.
+\end{remark}
 
 \subsubsection{The trigonometric functions}
+
+Here we will give a rigorous introduction to trigonometric functions using power series.
+We begin with
+\begin{definition}
+    We define the sine and cosine function by
+    \begin{align*}
+        \sin(x) := \infsumo\frac{(-1) ^ k}{(2k + 1)!}x ^ {2k + 1};&\cos(x) := \infsumo\frac{(-1) ^ k}{(2k)!}x ^ {2k}.
+    \end{align*}
+    By the ratio test
+    (or comparison with $\exp(x)$)
+    we see that the radius of convergence is $R = \infty$.
+\end{definition}
+
+\begin{theorem}
+    We have
+    \begin{enumerate}[label = (\roman*)]
+        \item $\sin(0) = 0$ and $\cos(0) = 1$.
+        
+        \item The sine-function is odd;
+        cosine is even.
+        
+        \item Sine and cosine are infinitely often differentiable on $\R$ with
+        \[
+        \sin'(x) = \cos(x)\qquad\text{and}\qquad\cos'(x) = -\sin(x).
+        \]
+
+        \item For all $x, y \in \R$ we have
+        \begin{align*}
+            \sin(x + y) &= \sin(x)\cos(y) + \cos(x)\sin(y); \\
+            \cos(x + y) &= \cos(x)\cos(y) - \sin(x)\sin(y).
+        \end{align*}
+
+        \item For all $x \in \R$ we have
+        \[
+        \sin ^ 2(x) + \cos ^ 2(x) = 1.
+        \]
+        In particular,
+        $|\sin(x)| \leq 1$;
+        $|\cos(x)| \leq 1$ for all $x \in \R$.
+    \end{enumerate}
+    \begin{proof}
+        (i) and (ii) are clear by definition.
+        For (iii) differentiate term-wise
+        (allowed by \autoref{pre:analy:thm:funcofpowseriesinfdiff}).
+        For (iv),
+        fix $x$ and $y$ and consider the function
+        \[
+        f(t) := \sin(x + t)\cos(y - t) + \cos(x + t)\sin(y - t).
+        \]
+        Note $f(0) = \sin(x)\cos(y) + \cos(x)\sin(y)$ and $f(y) = \sin(x + y)$.
+        Now differentiate:
+        \begin{align*}
+            f'(t) = &\cos(x + t)\cos(y - t) + \sin(x + t)\sin(y - t) \\
+            &-\sin(x + t)\sin(y - t) - \cos(x + t)\cos(y - t) = 0.
+        \end{align*}
+        Hence $f$ is constant by \autoref{pre:analy:thm:contdiffthenfunchasprops}.
+        The addition law for cosine follows by differentiating the one for sine
+        (in $x$).
+        (v) holds for $x = 0$.
+        Now differentiate both sides and use again \autoref{pre:analy:thm:contdiffthenfunchasprops}.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}\label{pre:analy:thm:coshasasmallestpossol}
+    The equation $\cos(x) = 0$ has a smallest positive solution.
+    \begin{proof}
+        We consider $\cos(2)$.
+        We have
+        \[
+        \infsumo\frac{(-1) ^ k}{(2k)!}2 ^ {2k} = 1 - 2 + \frac{16}{24} + \infsum[k = 3]\frac{(-1) ^ k}{(2k)!}2 ^ {2k} = -\frac{2}{3} + \infsum[k = 3]\frac{(-1) ^ k}{(2k)!}2 ^ {2k}.
+        \]
+        The 'tail' $\infsum[k = 3]\frac{(-1) ^ k}{(2k)!}2 ^ {2k}$ is an alternating series with decreasing terms:
+        \[
+        \frac{2 ^ {2(k + 1)}}{(2(k + 1))!} = \frac{4}{(2k + 2)(2k + 1)}\frac{2 ^ {2k}}{(2k)!} < \frac{2 ^ {2k}}{(2k)!}.
+        \]
+        By the alternating series test and its proof we see that its value must be a negative number.
+        Since $\cos(0) = 1 > 0$ by the intermediate value theorem the cosine function has a root in the interval $(0, 2)$.
+        Hence the set $X := \{x > 0; \cos(x) = 0\}$ is non-empty and bounded below.
+        Thus $x_0 = \inf{X}$ exists.
+        Now take a sequence $x_n \in X$ with $\cos(x_n) = 0$ and $\liminfty x_n = x_0$.
+        By continuity we conclude $\cos(x_0) = 0$.
+        Thus $x_0$ is the smallest positive root of $\cos(x)$.
+    \end{proof}
+\end{theorem}
+
+This leads to
+\begin{definition}
+    We denote the 'Weltkonstante' given by twice the smallest positive root of cosine by $\pi$,
+    that is,
+    \[
+    \cos\left(\frac{\pi}{2}\right) = 0.
+    \]
+    Note $\cos(x) > 0$ for all $x \in [0, \pi / 2)$.
+\end{definition}
+
+Note that the same argument in the proof of \autoref{pre:analy:thm:coshasasmallestpossol} shows that $\cos(x) < 0$ for $x = 8 / 5$,
+but $\cos(x) > 0$ for all positive $x \leq 3 / 2$
+(break up the sum at $k = 4$).
+This gives a very crude first estimate $3 < \pi < 3.2$.
+
+We continue with
+\begin{theorem}
+    \[
+    \sin\left(\frac{\pi}{2}\right) = 1.
+    \]
+    $\sin(x)$ is strictly monotone increasing on $[0, \pi / 2)$,
+    mapping this interval to $[0, 1]$.
+    \begin{proof}
+        Since $\sin ^ 2(x) + \cos ^ 2(x) = 1$ we have $\sin(\pi / 2) = \pm 1$.
+        But $\sin(x)$ is strictly monotone increasing in $[0, \pi / 2)$ since its derivative $\cos(x)$ is positive in this region,
+        see $\autoref{pre:analy:thm:contdiffthenfunchasprops}$.
+        Thus $\sin(x)$ is positive in $[0, \pi / 2]$ as $\sin(0) = 0$.
+    \end{proof}
+\end{theorem}
+
+This also implies that $\cos(x)$ is strictly monotone decreasing on $[0, \pi / 2)$
+(since its derivative $-\sin(x)$ is negative in this interval,
+again using \autoref{pre:analy:thm:contdiffthenfunchasprops}),
+mapping this interval to $[0, 1]$ as well.
+
+\begin{theorem}
+    \[
+    \sin(x) = \cos\left(x - \frac{\pi}{2}\right)\qquad\text{and}\qquad\cos(x) = \sin\left(x + \frac{\pi}{2}\right).
+    \]
+    \begin{proof}
+        This follows now from using the addition laws.
+    \end{proof}
+\end{theorem}
+
+The addition laws
+(using $\pi = \pi / 2 + \pi / 2$)
+also give
+\[
+\sin(\pi) = 0\qquad\text{and}\qquad\cos(\pi) = -1,
+\]
+and with this using the addition laws again
+\begin{theorem}
+    \[
+    \sin(x + \pi) = -\sin(x)\qquad\text{and}\qquad\cos(x + \pi) = -\cos(x),
+    \]
+    which implies $\sin(2\pi) = 0$ and $\cos(2\pi) = 1$.
+    Which in turn implies
+    \[
+    \sin(x + 2\pi) = \sin(x)\qquad\text{and}\qquad\cos(x + 2\pi) = \cos(x),
+    \]
+\end{theorem}
+From this it is also not hard to see that $2\pi$ is indeed the smallest period of sine and cosine,
+and thus we have derived all
+(basic)
+properties of sine and cosine!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Taylor series}
 
