@@ -5,7 +5,7 @@
 \newcommand{\dseq}[2][n]{(#2_#1)_{#1 \in \N}}
 \newcommand{\limas}[3][n]{#2 \rightarrow #3 \text{ as } #1 \rightarrow \infty}
 \newcommand{\lhopital}[0]{L' H\^opital}
-\newcommand{\infsumo}[1][k = 0]{\sum_{#1}^{\infty}}
+\newcommand{\infsumo}{\infsum[k = 0]}
 
 \title{Analysis I \\
     \large Prereading}
@@ -1616,7 +1616,7 @@ This is addressed by the following
     \end{proof}
 \end{theorem}
 
-\begin{corollary}
+\begin{corollary}\label{pre:analy:cor:polypartoftaylor}
     The polynomial part $T_{f, c}^{(n)}(x)$ on the right hand side of (2)
     (the first definition of $f(x)$ in \autoref{pre:analy:thm:taylorsthm}) 
     is called the $n$-th Taylor polynomial associated to $f$ at $c$.
@@ -2490,49 +2490,233 @@ and thus we have derived all
 (basic)
 properties of sine and cosine!
 
+\begin{remark}
+    As already mentioned the standard geometric approach from an axiomatic point of view lacks the rigorous introduction of geometry.
+    In particular,
+    one would need to introduce and define angle,
+    arclength,
+    area etc.
 
+    Moreover,
+    in the context of Calculus/Analysis the principal problem is to justify $\lim_{x \rightarrow 0}\frac{\sin(x)}{x} = 1$
+    (which admittedly is not too hard).
+    Still it requires a bit of geometry.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    The point is there is the need to base the trigonometric functions on a solid foundation.
+    The approach via convergent power series provides such a foundation,
+    and it works nicely.
+    However,
+    one does pay a price with a loss of geometric intuition,
+    at least initially.
+\end{remark}
 
 \subsection{Taylor series}
+
+We first remark all results in the section radius of convergence and the section power series as a function also holds for power series of the form
+\[
+f(x) := \infsumo a_k(x - c) ^ k
+\]
+for some $c \in \R$.
+The radius of convergence $R$ is unaffected by the shift from $x$ to $x - c$,
+and the interval of convergence is now symmetric around $c$.
+Furthermore,
+$f(x)$ is again differentiable infinitely often,
+and for the coefficients $a_k$ we have
+\[
+a_k = \frac{f ^ {(k)}(c)}{k!}.
+\]
+We now turn this around to make the following definition
+
+\begin{definition}[Taylor Series]
+    Let $f(x)$ be a smooth function on an
+    (open)
+    interval $I$,
+    that is,
+    $f$ can be differentiated infinitely often.
+    We define its Taylor series at $c \in I$ by
+    \[
+    T_{f, c}(x) = \infsum\frac{f ^ {(k)}(c)}{k!}(x - c) ^ k.
+    \]
+    If $c = 0$ one also calls the Taylor series the Maclaurin series of $f$.
+    Note we have
+    \[
+    T_{f, c}(x) = \liminfty T_{f, c} ^ {(n)}(x)
+    \]
+    where
+    \[
+    T_{f, c}^{(n)}(x) = \sum_{k = 0}^{n}\frac{f ^ {(k)}(c)}{k!}(x - c) ^ k = f(c) + f'(c)(x - c) + \dotsi + \frac{f ^ {(n)}(c)}{n!}(x - c) ^ n
+    \]
+    is the $n$-th Taylor polynomial of $f$ at $c$.
+\end{definition}
+
+Given a Taylor series for $f$,
+we can use the Ratio test or the Root test to calculate its radius of convergence $R$.
+
+We will begin the discussion with the following statement which follows directly from the property of power series and is the motivating fact for the definition of Taylor series:
+\begin{proposition}
+    A function given as a power series centred at $c$ is equal to its Taylor series at $c$.
+    \begin{proof}
+        The coefficients $a_k$ of $\infsumo a_k(x - c) ^ k$ satisfy $a_k = \frac{f ^ {(k)}(c)}{k!}$.
+
+        It is natural to except/hope that the Taylor series represents the function $f$.
+        However,
+        this is not always the case!
+        The Taylor series of $f$ may not agree with the original function $f$.
+    \end{proof}
+\end{proposition}
+
+\begin{enumerate}[label = (\roman*)]
+    \item Let $f : \R \rightarrow \R$ be defined as
+    \[
+    f(x) = \begin{cases}
+        e ^ {-1 / x ^ 2} & \text{if }x \neq 0, \\
+        0 & \text{if }x = 0,
+    \end{cases}
+    \]
+    In this case,
+    you checked in one of the written assignments that $f$ is infinitely many times differentiable and $f ^ {(k)}(0) = 0$ for all $k \geq 0$.
+    Thus the Taylor series of $f$ at $0$ is $\infsumo 0 \cdot x ^ k$,
+    i.e.,
+    the zero function and,
+    therefore,
+    has radius of convergence $R = \infty$.
+    But the Taylor series of $f$ agrees with $f$ only at the origin $x = 0$.
+
+    \item Another example of this kind is the 'take-off function'
+    \[
+    f(x) = \begin{cases}
+        e ^ {-1 / x} & \text{if }x > 0, \\
+        0 & \text{if }x \leq 0,
+    \end{cases}
+    \]
+    which might strike you as even more odd.
+    Again the Taylor series at $c = 0$ vanishes identically
+    (which can be checked using the same method as in (i)).
+
+    \item Finally,
+    the 'bump function'
+    \[
+    f(x) = \begin{cases}
+        e ^ {-1 / (1 - x ^ 2)} & \text{if } |x| < 1, \\
+        0 & \text{if } |x| \geq 1.
+    \end{cases}
+    \]
+    Here the Taylor series at $c = \pm 1$ vanish identically.
+\end{enumerate}
+
+\begin{remark}
+    You might wonder:
+    is this 'bad' news?
+    In fact,
+    the existence of such functions in real analysis allows for some very interesting constructions.
+\end{remark}
+
+In the above examples Taylor series were "nice",
+but they don't need to be:
+
+\begin{example}
+    There exist smooth functions whose Taylor series at $c$ only converge at $x = c$.
+    In fact,
+    one can show that given any sequence $a_k$ of real numbers there exists a smooth function $f$ such that $f ^ {(k)}(0) = a_kk!$ so that the Taylor series of $f$ is equal to $\infsumo a_kx ^ k$.
+    For $a_k = k!$ we have seen that the radius of convergence is $0$.
+\end{example}
+
+The next example shows a different phenomenon:
+\begin{example}
+    Let
+    \[
+    f(x) = \frac{1}{1 + x ^ 2}.
+    \]
+    Then $f$ is smooth on all of $\R$.
+    Now using the geometric series we have
+    \[
+    \frac{1}{1 + x ^ 2} = \frac{1}{1 - (-x ^ 2)} = \infsumo(-1) ^ kx ^ {2k}.
+    \]
+    This is a power series,
+    hence $\infsumo(-1) ^ k x ^ {2k}$ is also the Taylor series of $f$.
+    However,
+    $\infsumo(-1) ^ kx ^ {2k}$ only converges for $|x| < 1$ so the Taylor series only represents $f$ in $(-1, 1)$.
+
+    A similar example is the geometric series $\infsumo x ^ k$ which is the Taylor series for $\frac{1}{1 - x}$ but only converges for $|x| < 1$ while of course $\frac{1}{1 - x}$ is defined for all $x \neq 1$.
+
+    This will be clarified/explained in Complex Analysis.
+\end{example}
+
+So when does the Taylor series represent the function?
+This can be viewed as a question about the behaviour of the remainder term in the Taylor's theorem we have previously mentioned,
+see \autoref{pre:analy:thm:taylorsthm} and \autoref{pre:analy:cor:polypartoftaylor}.
+Namely we have using the Lagrange remainder
+\[
+f(x) - T_{f, c} ^ {(n)}(x) = \frac{f ^ {(n + 1)}(\xi)}{(n + 1)!}(x - c) ^ {n + 1}
+\]
+for some $\xi$ between $c$ and $x$.
+So the question when and for which $x$ the right hand side vanishes as $n \rightarrow \infty$.
+
+We will not give a general criterion,
+but rather continue by discussing several examples.
+\begin{example}
+    \begin{enumerate}[label = (\roman*)]
+        \item A polynomial $f(x) = a_nx ^ n + \dotsc + a_1x + a_0$ is its own Taylor series since $f ^ {(k)}(0) = k! \cdot a_k$ for all $k$. But we can do this at any point $c$ and obtain
+        \[
+        f(x) = f(c) + f'(c)(x - c) + \dotsi + \frac{f ^ {(n)}(c)}{n!}(x - c) ^ n,
+        \]
+        since all higher derivatives
+        (and thus the Lagrange remainder)
+        vanish.
+
+        \item For $f(x) = \sin(x), \cos(x), e ^ x$,
+        the Taylor series at any point $c$ converges in all of $\R$ and is equal to $f$.
+        Indeed,
+        since $|\sin(x)| \leq 1$ and $|\cos(x)| \leq 1$ and all derivatives of $\sin(x)$ and $\cos(x)$ are given by $\pm\sin(x)$ and $\pm\cos(x)$ we have and $|x - c| \leq r$
+        \[
+        \left|\frac{f ^ {(n + 1)}(\xi)}{(n + 1)!}(x - c) ^ {n + 1}\right| \leq \frac{r ^ {n + 1}}{(n + 1)!} \rightarrow 0
+        \]
+        as $n \rightarrow \infty$ since $r ^ n / n! \rightarrow 0$ for any $r \in \R$.
+        For $e ^ x$ the argument is similar:
+        \[
+        \left|\frac{f ^ {(n + 1)}(\xi)}{(n + 1)!}(x - c) ^ {n + 1}\right| \leq e ^ {c + r}\frac{r ^ {n + 1}}{(n + 1)!} \rightarrow 0.
+        \]
+    \end{enumerate}
+\end{example}
+This actually holds in general:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Complex power series}
 
