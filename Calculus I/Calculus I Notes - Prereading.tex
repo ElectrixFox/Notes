@@ -1500,6 +1500,29 @@ f(x) = \sum_{k = 0}^{\infty}\frac{f ^ {(k)}(a)}{k!}(x - a) ^ k.
 \textit{Note: The $n$th order Taylor polynomial is obtained by taking just the first $(n + 1)$ terms of the Taylor series
 (counting terms even if they are zero)}.
 
+Here is an example from the problem sheets of using the remainder to find an upper bound of a Taylor polynomial
+\begin{example}
+    Calculate the first order Taylor polynomial of $f(x) = e ^ {\sin ^ 2{x}}$ about $x = 0$ and use this result to show that $e ^ {\sin ^ 2{x}} \leq 1 + \frac{3}{2}ex ^ 2$.
+
+    \begin{solution}
+        Firstly,
+        $f(x) = e ^ {\sin ^ 2{x}}$,
+        therefore we can find $f(0), f'(0)$ and $f''(x)$.
+        $f(0) = 1$,
+        $f'(x) = e ^ {\sin ^ 2{x}}2x$ thus $f'(0) = 0$ and $f''(x) = e ^ {\sin ^ 2{x}}(2\cos(2x) + \sin ^ 2(2x))$.
+
+        $f(x) = 1 + R_1(x)$ but
+        \begin{align*}
+            |f''(x)| &= \underbrace{e ^ {\sin ^ 2{x}}}_{\leq e}\underbrace{(2\cos(2x) + \sin ^ 2(2x))}_{\leq 3} \\
+            &\leq 3e.
+        \end{align*}
+        Hence
+        \[
+        f(x) = 1 + R_1(x) \leq 1 + \frac{3}{2}ex ^ 2 + R_2(x) \leq 1 + \frac{3}{2}ex ^ 2.
+        \]
+    \end{solution}
+\end{example}
+
 \subsection{Lagrange form for the remainder}
 There is a more convenient expression for the remainder term in Taylor's theorem.
 The Lagrange form for the remainder is
@@ -1574,7 +1597,8 @@ Then $|R_n(x)| \leq \frac{M|x - a| ^ {n + 1}}{(n + 1)!}$ provides a bound on the
 
 \begin{definition}
     Let $n$ be a positive integer.
-    We say that $f(x) = o(x ^ n)\text{ (as $x \rightarrow \infty$) if } \lim_{x \rightarrow 0}\frac{f(x)}{x ^ n} = 0$.
+    
+    We say that $f(x) = o(x ^ n)$ (as $x \rightarrow \infty$) if $\lim_{x \rightarrow 0}\frac{f(x)}{x ^ n} = 0$.
 \end{definition}
 
 In particular,
