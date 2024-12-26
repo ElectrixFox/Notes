@@ -14,6 +14,10 @@
 
 \newpage
 
+\tableofcontents
+
+\newpage
+
 \section{Basic logic and sets}
 
 \subsection{Logic}
@@ -2619,6 +2623,20 @@ Look at
     \end{proof}
 \end{theorem}
 
+\begin{theorem}[Cauchy Product Theorem]
+    Let $\infsum[k = 0]a_k$ and $\infsum[k = 0]b_k$ be two absolutely convergent series with limits $a, b \in \R$,
+    respectively.
+    For $n \geq 0$,
+    let
+    \[
+    c_n = \sum_{k = 0}^{n}a_kb_{n - k}.
+    \]
+    Then the series $\infsum[k = 0]c_k$ is called the Cauchy Product of $\sum a_k$ and $\sum b_k$.
+    The series $\sum c_k$ is also absolutely convergent and we have
+    \[
+    \infsum[k = 0]c_k = a \cdot b.
+    \]
+\end{theorem}
 
 
 
