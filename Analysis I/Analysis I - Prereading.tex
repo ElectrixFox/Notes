@@ -2846,45 +2846,328 @@ When we consider $\infsumo a_kz ^ k$ respectively $\infsumo a_k(z - c) ^ k$ for 
     This makes complex analysis much more rigid
     (and actually more beautiful)
     than real analysis.
+
+    \item
+    The complex exponential,
+    sine,
+    and cosine functions carry over as before with the same derivatives and addition laws.
+    However,
+    some of the properties are different.
+    \begin{enumerate}[label = (\alph*)]
+        \item We have
+        \[
+        \exp(ix) = e ^ {ix} = \cos(x) + i\sin(x),
+        \]
+        which can be directly seen by considering the defining power series.
+        As a consequence one obtains the de Moivre laws.
+
+        \item We have
+        \[
+        \cos(ix) = \cosh(x)\qquad\text{and}\qquad\sin(ix) = i\sinh(x),
+        \]
+        where $\cosh(x)$ and $\sinh(x)$ are the hyperbolic trigonometric functions.
+
+        In particular,
+        the complex sine and cosine are unbounded.
+
+        \item For $z = x + iy$,
+        we have
+        \[
+        \exp(z) = \exp(x + iy) = e ^ xe ^ {iy} = e ^ x(\cos(y) = i\sin(y)),
+        \]
+        and from this one sees that $\exp(z)$ takes all non-zero complex values,
+        including negative ones.
+    \end{enumerate}
 \end{enumerate}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \newpage
 
 \section{Sequences of functions, uniform convergence, and limit theorems}
 
+In this section,
+we will consider sequences $(f_n)$ of functions and will discuss different notions of convergence for these sequences to a limit function $f$.
+
+Here are some motivations why one considers sequences of functions and their convergence properties:
+\begin{itemize}
+    \item \textbf{Construction of functions}
+
+    We have already seen that many interesting functions $f(x)$ cannot be obtained in an 'elementary' way,
+    but rather arise by a limit process;
+    for example,
+    $\liminfty\left(1 + \frac{x}{n}\right) ^ n$.
+    Particularly attractive are infinite series of functions $\infsumo g_k(x)$,
+    viewed as the limit of partial sums $f_n(x) := \sum_{k = 0}^{n}g_k(x)$.
+    For example,
+    $\infsumo a_kx ^ k$ are of this type.
+
+    \item \textbf{Representations of functions}
+
+    Given a function $f$ one can also seek to represent it by an infinite series of
+    (simpler)
+    functions,
+    e.g.,
+    its Taylor series or for periodic functions its Fourier series.
+
+    \item \textbf{Approximation of (complicated) functions by (easier) functions}
+
+    In the next section we will use step functions to approximate continuous functions on a compact interval uniformly to arbitrary precision and use this then in the following chapter to extend the notion of integration for step functions
+    (signed area of rectangles)
+    to the one for continuous functions
+    (signed area under the graph).
+
+    \item \textbf{Preservation of properties}
+
+    One fundamental question in this process is under which circumstances the limit function $f$ inherits the properties of the functions $f_n$,
+    say continuity or differentiability.
+\end{itemize}
+
 \subsection{Notions of convergence of functions: pointwise and uniform}
+The simplest notion of convergence is this one
+
+\begin{definition}[Pointwise convergence]
+    Let $(f_n)$ be a sequence of functions on an interval $I$.
+    We say that this sequence has a pointwise limit if for all $x \in I$,
+    the limit $\liminfty f_n(x)$ exists
+    (as a regular sequence of real numbers).
+    In that case,
+    the limit function $f : I \rightarrow \R$ is defined as
+    \[
+    f(x) = \liminfty f_n(x).
+    \]
+    Note that "$f_n \rightarrow f$ pointwise" can be expressed as follows with the help of quantifiers and the $(\varepsilon, \delta)$-formalism:
+    \[
+    \forall x \in I\ \forall \varepsilon > 0\ \exists N \in \N\ \forall n \geq N:\ |f_n(x) -f(x)| < \varepsilon.
+    \]
+    Note how '$N$' not only depends on $\varepsilon$ but also on the individual point $x \in I$.
+\end{definition}
+
+\begin{example}
+    Power series in their interval of convergence $(-R, R)$
+    (for $R > 0$)
+    converge pointwise:
+    For each fixed $x$ we apply root/ratio test to obtain convergence.
+\end{example}
+
+\begin{example}
+    Let $f_n : [0, 1] \rightarrow \R$ be defined as $f_n(x) = x ^ n$.
+    Then for fixed non-negative $x < 1$,
+    we have
+    \[
+    \liminfty f_n(x) = \liminfty x ^ n = 0. 
+    \]
+    Moreover,
+    \[
+    \liminfty f_n(1) = \liminfty 1 = 1.
+    \]
+    So the pointwise limit of $(f_n)$ is the function $f : [0, 1] \rightarrow \R$
+    \[
+    f(x) = \begin{cases}
+        0, & \text{if } x \in [0, 1), \\
+        1, & \text{if } x = 1.
+    \end{cases}
+    \]
+    Note that the limit function $f : [a, b] \rightarrow \R$ is discontinuous at $x = 1$,
+    even though ll the $f_n$ are continuous.
+\end{example}
+
+There is a stronger notion of convergence of functions $f_n$,
+uniform convergence:
+\begin{definition}[Uniform convergence]
+    Let $(f_n)$ be a sequence of functions on $I$.
+    We say that $f_n$ converges uniformly to $f$ if,
+    for every $\varepsilon > 0$ we can find $N \in \N$ such that for all $n \geq N$ and all $x \in I$,
+    we have
+    \[
+    |f(x) - f_n(x)| < \varepsilon.
+    \]
+    If $f_n$ converges uniformly to $f$,
+    we write "$f_n \rightarrow f$ uniformly".
+
+    Note that "$f_n \rightarrow f$ uniformly" is expressed as follows:
+    \[
+    \forall \varepsilon > 0\ \exists N \in \N\ \forall n \geq N\ \forall x \in I:\ |f_n(x) - f(x)| < \varepsilon,
+    \]
+    we highlight that in contrast to the definition of pointwise convergence 'N' does not depend on the individual $x \in I$,
+    but works for all $x$ at the same time.
+\end{definition}
+
+In terms of the graph of $f$ and the ones for $(f_n)$,
+uniform convergence means that for every $\varepsilon > 0$,
+there exists $N \in \N$ such that the graph of $f_n$ stays within the graphs of $f - \varepsilon$ and $f + \varepsilon$,
+for all $n \geq N$.
+We write $\|f - f_n\| < \varepsilon$.
+
+Clearly uniform convergence is a stronger property than pointwise convergence:
+
+\begin{proposition}
+    Assume $(f_n)$ converges uniformly to $f$,
+    then $(f_n)$ converges also pointwise to $f$.
+    \begin{proof}
+        This follows clearly from the fact that $N$ doesn't depend on $x$ for uniform convergence whereas it does for uniform pointwise convergence. 
+    \end{proof}
+\end{proposition}
+
+\begin{example}
+    \begin{enumerate}[label = (\roman*)]
+        \item Let $f_n(x) = x ^ 2 + \frac{\sin{nx}}{n}$ on $I = \R$.
+        Then $f_n \rightarrow f$ with $f(x) = x ^ 2$ uniformly since,
+        for every $\varepsilon > 0$ there exists $N \in \N$ with $1 / N < \varepsilon$ and we have for all $n \geq N$ and $x \in \R$:
+        \[
+        |f_n(x) - f(x)| = \frac{|\sin{nx}|}{n} \leq \frac{1}{N} < \varepsilon.
+        \]
+
+        \item The sequence $f_n(x) = x ^ n$ on $[0, 1)$,
+        see above,
+        does not converge uniformly to its limit function $f = 0$.
+        Assume it did,
+        then for $\varepsilon = 1 / 4$,
+        there would exist an $N$ such that $|f_n(x) - f(x)| = x ^ n < \varepsilon$ for all $0 < x < 1$ and all $n \geq N$.
+        But now pick $x = x_n = \sqrt[n]{1 / 2} = \frac{1}{2 ^ {1 / n}} < 1$.
+        Then
+        \[
+        |f_n(x_n) - f(x_n)| = f_n(x_n) = (x_n) ^ n = \left(\frac{1}{2 ^ {1 / n}}\right) ^ n = \frac{1}{2} > \frac{1}{4} = \varepsilon.
+        \]
+        So such an $N$ cannot exist.
+
+        However,
+        $f_n$ converges uniformly to $0$ on every compact subinterval $[0, r]$ with $r < 1$.
+        Indeed,
+        let $\varepsilon > 0$ and find $N$ such that $r ^ n < \varepsilon$ for all $n \geq N$
+        (which exists since $r ^ n \rightarrow 0$).
+        Then for all $x \in [0, r]$ and $n \geq N$
+        \[
+        |f_n(x)| = x ^ n \leq r ^ n < \varepsilon.
+        \]
+        This might look a bit confusing to you - because it is!
+        The point is that in the counterexample for uniform convergence on the entire interval $[0, 1)$
+        (or $[0, 1]$),
+        the elements $x_n = \sqrt[n]{1 / 2}$ get closer and closer to $1$,
+        so at some point would be larger than $r$.
+
+        In terms of the graphs of $f_n$,
+        the $\varepsilon$-strip around the graph of the limit function $f = 0$ is just the horizontal line $y = \varepsilon$,
+        and the graph of $f_n$ leave that strip at some point
+        (since $\lim_{x \rightarrow 1}x ^ n = 1$).
+        However,
+        if one restricts to $[0, r]$,
+        the there exists an $N$ such that the graphs of $f_n$ for all $n \geq N$ leave the $\varepsilon$-strip to the right of $r$ and thus lie completely inside the strip for all $x \in [0, r]$.
+    \end{enumerate}
+\end{example}
+
+This kind of 'funny' occurrence of the 'auxiliary' number $r$ might remind you of something similar for power series.
+We will come back to this below.
+Rather we give another example.
+
+\begin{example}
+    The geometric series $\infsumo x ^ k = \liminfty\sum_{k = 0}^{n}x ^ k$ converges pointwise for $|x| < 1$ to $f(x) := \frac{1}{1 - x}$ but not uniformly.
+    Set $f_n(x) = \sum_{k = 0}^{n}x ^ k$.
+    Then
+    \[
+    |f(x) - f_n(x)| = \left|\infsum[k = n + 1]x ^ k\right| = \frac{|x| ^ {n + 1}}{|1 - x|}.
+    \]
+    For uniform convergence we need this to be less than $\varepsilon$ for all $n$ sufficiently large and all $x$.
+    But for $x_n = \sqrt[n + 1]{1 / 2} \in (-1, 1)$ we have
+    \[
+    |f(x_n) - f_n(x_n)| = \frac{1 / 2}{1 - \sqrt[n + 1]{1 / 2}},
+    \]
+    which is unbounded.
+    However the convergence is uniform on the compact subinterval $[-r, r]$ for any $0 < r < 1$.
+    Indeed,
+    pick $\varepsilon > 0$.
+    Then for any $x \in [-r, r]$ we have
+    \[
+    |f(x) - f_n(x)| = \left|\infsum[k = n + 1]x ^ k\right| \leq \infsum[k = n + 1]|x| ^ k \leq \infsum[k = n + 1]r ^ k = \frac{r ^ {n + 1}}{1 - r} < \varepsilon
+    \]
+    for all $n$ sufficiently large
+    (since $\liminfty\frac{r ^ {n + 1}}{1 - r} = 0$).
+    Note that the estimate is independent of the individual $x \in [-r, r]$.
+\end{example}
+
+Of course the geometric series is a special case of a power series.
+We will see that power series with radius of
+(pointwise)
+convergence $R > 0$ will always converge uniformly in $[-r, r]$ for all $0 < r < R$
+(but not necessarily uniform on the entire interval $(-R, R)$).
+
+This phenomena turns out to be a central one for Analysis.
+
+\begin{definition}[Uniform convergence in compact subsets]
+    Let $f_n(x)$ be a sequence of functions on an
+    (arbitrary)
+    interval $I$ converging pointwise to a limit function $f(x)$.
+    We say $f_n$ converges uniformly in compact subintervals
+    (or compact subsets)
+    if $f_n$ converges uniformly to $f$ on all compact subintervals $[a, b]$ of $I$.
+\end{definition}
+
+We finally give an easy criterion for
+(non)-uniform convergence which we
+(implicitly)
+already used above.
+
+\begin{lemma}[(Non)-uniform convergence criterion]
+    Let $f_n$ be a sequence on the interval $I$ converging pointwise to $f$.
+    \begin{enumerate}[label = (\roman*)]
+        \item If there exists a sequence $(a_n)$ of positive numbers with $\liminfty a_n = 0$ such that
+        \[
+        |f(x) - f_n(x)| \leq a_n\qquad\text{for all } x \in I
+        \]
+        then $f_n \rightarrow f$ uniformly.
+        (Note that the $a_n$ cannot depend on the individual $x \in I$ - but will
+        (typically)
+        depend on the data defining $I$.)
+
+        \item If there exists $\varepsilon > 0$ and a sequence $x_n \in I$ such that for all $n$ sufficiently large
+        \[
+        |f(x_n) - f_n(x_n)| \geq \varepsilon
+        \]
+        then $f_n$ does not converge uniformly to $f$.
+        This is in particular what happens when the sequence of numbers $|f(x_n) - f_n(x_n)|$ converges to a number differently from zero or is unbounded.
+    \end{enumerate}
+    \begin{proof}
+        \begin{enumerate}[label = (\roman*)]
+            \item Take $\varepsilon > 0$.
+            Since $a_n \rightarrow 0$,
+            we can find an $N \in \N$ such that $a_n < \varepsilon$ for all $n \geq N$.
+            Thus
+            \[
+            |f(x) - f_n(x)| \leq a_n < \varepsilon\qquad\text{for all } x \in I\text{ and } n \geq N.
+            \]
+
+            \item Take that $\varepsilon > 0$.
+            For uniform convergence we would need an $N$ such that $|f(x) - f_n(x)| < \varepsilon$ for all $x \in I$ and all $n \geq N$.
+            But this is impossible since for every $n$ we have $|f(x_n) - f_n(x_n)| \geq \varepsilon$.
+        \end{enumerate}
+    \end{proof}
+\end{lemma}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Uniform convergence preserves continuity}
 
