@@ -3438,7 +3438,7 @@ This indeed works!
     \end{proof}
 \end{theorem}
 
-\begin{example}[Weierstrass function]
+\begin{example}[Weierstrass function]\label{pre:analy:examp:weierstrassfunc}
     Consider the function
     \[
     f(x) = \infsumo\frac{1}{2 ^ k}\cos(15 ^ k\pi x).
@@ -3473,7 +3473,22 @@ This indeed works!
 
 \subsection{Complex case}
 
+Everything in this chapter holds in the complex case,
+that is for sequences $f_n(z)$ respectively infinite series $\infsumo f_k(z)$ of complex-valued functions on $\C$.
+The interval $I$ is replaced by a 'domain',
+an open and connected subset of $\C$.
 
+With one exception,
+\autoref{pre:analy:thm:convserofseqdifffuncs} becomes much cleaner:
+It turns out that the uniform limit of complex differentiable functions is again differentiable,
+and the derivative is the limit of the derivatives.
+The counterexample given by \autoref{pre:analy:examp:weierstrassfunc} does not apply since for complex entries the sequence resp. series actually doesn't converge
+(uniformly)
+since the complex trigonometric functions are not bounded:
+Consider $ix$ with $x \in \R$.
+Then $\sin(inx) / n = i\sinh(nx) / n$ is unbounded for $x \neq 0$,
+so $\sin(inx) / n$ does not even converge
+(pointwise).
 
 
 
