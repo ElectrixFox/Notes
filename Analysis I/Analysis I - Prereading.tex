@@ -1326,12 +1326,12 @@ Rolle's theorem implies a more general mean value theorem
         and we can apply Rolle's theorem to $h$.
         Therefore,
         there exists $c \in (a, b)$ such that
-        \begin{equation}
+        \begin{equation}\label{pre:analy:eq:1}
             0 = h'(c) = (g(b) - g(a))f'(c) - (f(b) - f(a))g'(c).
         \end{equation}
         Since $g'(x) \neq 0$ for all $x \in (a, b)$,
         we can conclude from \autoref{pre:analy:thm:meanvaluethm} that $g(b) - g(a) \neq 0$,
-        and we can rewrite ($1$) as
+        and we can rewrite \eqref{pre:analy:eq:1} as
         \[
         \frac{f'(c)}{g'(c)} = \frac{f(b) - f(a)}{g(b) - g(a)}.
         \]
@@ -1555,7 +1555,7 @@ This is addressed by the following
     Then there exists a function $r_n(x)$
     (depending on $c$)
     such that
-    \begin{equation}
+    \begin{equation}\label{pre:analy:eq:2}
         f(x) = f(c) + f'(c)(x - c) + \frac{f''(c)}{2}(x - c) ^ 2 + \dotsi + \frac{f ^ {(n)}(c)}{n!}(x - c) ^ n + r_n(x)(x - c) ^ n
     \end{equation}
     with $\lim_{x \rightarrow c}r_n(x) = 0$.
@@ -1617,7 +1617,7 @@ This is addressed by the following
 \end{theorem}
 
 \begin{corollary}\label{pre:analy:cor:polypartoftaylor}
-    The polynomial part $T_{f, c}^{(n)}(x)$ on the right hand side of (2)
+    The polynomial part $T_{f, c}^{(n)}(x)$ on the right hand side of \eqref{pre:analy:eq:2}
     (the first definition of $f(x)$ in \autoref{pre:analy:thm:taylorsthm}) 
     is called the $n$-th Taylor polynomial associated to $f$ at $c$.
 \end{corollary}
@@ -3140,38 +3140,186 @@ already used above.
     \end{proof}
 \end{lemma}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \subsection{Uniform convergence preserves continuity}
 
+In this section we discuss the behaviour and properties of uniform convergence with respect to continuity,
+integration,
+and differentiability.
+
+\begin{theorem}\label{pre:analy:thm:uniflimofseqofcontfuncsiscont}
+    Let $f_n$ be a sequence of continuous functions on an interval $I$ such that $f_n \rightarrow f$ uniformly.
+    Then the limit function $f$ is also continuous.
+    \begin{proof}
+        Let $c \in I$ and $\varepsilon > 0$ be given.
+        Since $f_n \rightarrow f$ uniformly,
+        we can find $N \in \N$ such that for all $n \geq N$:
+        \begin{equation}\label{pre:analy:eq:3}
+            |f(x) - f_n(x)| < \varepsilon\qquad\text{for all } x \in I.
+        \end{equation}
+        Now we use continuity of the function $f_N$:
+        Since $f_N$ is continuous at $c \in I$,
+        we find $\delta > 0$ such that for all $x \in I$ with $|x - c| < \delta$ we have
+        \begin{equation}\label{pre:analy:eq:4}
+            |f_N(x) - f_N(c)| < \varepsilon.
+        \end{equation}
+        Combining \eqref{pre:analy:eq:3} and \eqref{pre:analy:eq:4} with the triangle inequality implies that we have for all $x \in I$ with $|x - c| < \delta$:
+        \begin{align*}
+            |f(x) - f(c)| &\leq |f(x) - f_N(x)| + |f_N(x) - f_N(c)| + |f_N(c) - f(c)| \\
+            &< \varepsilon + \varepsilon + \varepsilon = 3\varepsilon,
+        \end{align*}
+        which shows that $f$ is continuous at $c$.
+        Since $c \in I$ was arbitrary,
+        $f$ is continuous on $I$.
+    \end{proof}
+\end{theorem}
+
+\begin{remark}
+    \autoref{pre:analy:thm:uniflimofseqofcontfuncsiscont} implies
+    (again)
+    that the pointwise convergence of $x ^ n = f_n$ in $[0, 1]$ cannot be a uniform convergence,
+    since the limit function is discontinuous at $x = 1$.
+\end{remark}
+
+\begin{remark}
+    The same proof can be slightly modified to show that uniform convergence preserves one-sided continuity.
+\end{remark}
+
+But continuity is a local property.
+We obtain the stronger result.
+
+\begin{theorem}
+    Let $f_n$ be a sequence of continuous functions on an interval $I$ such that $f_n$ converges to $f$ uniformly in all compact subsets of $I$.
+    Then the limit function $f$ is also continuous.
+
+    \begin{proof}
+        Let $c \in I$ be arbitrary.
+        Then find a compact interval $[a, b]$ containing $c$.
+        Then by \autoref{pre:analy:thm:uniflimofseqofcontfuncsiscont} the limit function $f$ is then continuous on $[a, b]$,
+        in particular at $c$.
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    We say that $f_n(x) = x ^ n$ converges pointwise to $f = 0$ on $[0, 1)$ but not uniformly on $[0, 1)$.
+    However,
+    we have uniform convergence on intervals of the form $[0, r]$ for all $r < 1$.
+    Since every compact interval $[a, b]$ of $[0, 1)$ is contained in one of those
+    (namely,
+    $[a, b] \subseteq [0, b]$)
+    we have uniform convergence on compact subsets and hence we can see that the limit function is continuous
+    (which in the given case is of course trivial as the limit function is $0$).
+\end{example}
+
+We now discuss the relationship between uniform convergence and differentiation.
+This is a bit more subtle.
+
+\begin{theorem}\label{pre:analy:thm:contdifffuncsconvas}
+    Let $(f_n)$ be a sequence of continuously differentiable functions on an interval $I$.
+    Assume that
+    \begin{enumerate}[label = (\roman*)]
+        \item the sequence $f_n$ converges pointwise to a limit function $f$;
+        \item the sequence $f_n'$ converges uniformly in $I$.
+    \end{enumerate}
+    Then $f$ is continuously differentiable on $I$,
+    and we have
+    \[
+    f'(x) = \liminfty f_n'(x).
+    \]
+    Since differentiability is also a local property we can weaken condition (ii) to
+    \begin{enumerate}[label = (\roman*)]
+        \item[(ii)] the sequence $f_n'$ converges uniformly in compact subsets of $I$,
+    \end{enumerate}
+    with the same conclusion.
+\end{theorem}
+
+We will not give a proof here but rather revisit the issue in the next subsection when we discuss infinite series of functions.
+
+\begin{example}
+    We again consider $f_n(x) = x ^ n$ on $[0, 1]$.
+    The derivative is given by $f_n'(x) = nx ^ {n - 1}$ which also converges pointwise to $0$ and uniformly on intervals of the form $[0, r]$ for all $r < 1$.
+    Thus we have uniform convergence on compact subsets for $f_n'$ and hence we can see that the limit function is differentiable with derivative $0$.
+\end{example}
+
+\begin{remark}
+    \autoref{pre:analy:thm:contdifffuncsconvas} looks a little cumbersome and unsatisfying
+    (we would rather have a statement like 'uniform limit of differentiable functions is differentiable' etc)
+    and it is,
+    see the next example.
+
+    However,
+    the complications go away in complex analysis where a much simpler statement holds.
+\end{remark}
+
+\begin{example}
+    Let
+    \[
+    f_n(x) = \frac{\sim(nx)}{n}.
+    \]
+    Then since $|f_n(x)| \leq 1 / n$ we see that $f_n \rightarrow f = 0$ uniformly on $\R$.
+    However,
+    we cannot interchange the limit and differentiation!
+    Indeed,
+    $f'(x) = 0$ but
+    \[
+    f_n'(x) = \cos(nx),
+    \]
+    which does not converge pointwise unless $x \in 2\pi\Z$.
+    So \autoref{pre:analy:thm:contdifffuncsconvas} does not apply.
+\end{example}
+
 \subsection{Uniform convergence for series of functions: Weierstrass M-Test}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Complex case}
 
