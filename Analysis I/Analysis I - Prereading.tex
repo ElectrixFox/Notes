@@ -3187,7 +3187,7 @@ and differentiability.
 But continuity is a local property.
 We obtain the stronger result.
 
-\begin{theorem}
+\begin{theorem}\label{pre:analy:thm:limofseqcontunifconviscont}
     Let $f_n$ be a sequence of continuous functions on an interval $I$ such that $f_n$ converges to $f$ uniformly in all compact subsets of $I$.
     Then the limit function $f$ is also continuous.
 
@@ -3276,58 +3276,248 @@ We first develop a very powerful and highly usable test which ensures uniform
 (and absolute)
 convergence for a series of functions $\infsumo f_k(x)$.
 
+\begin{theorem}[Weierstrass M-Test]\label{pre:analy:thm:weierstrassmtest}
+    Let $I \subset \R$ be an interval and $(f_k)$ be a sequence of functions $f_k : I \rightarrow \R$.
+    Let $M_k$ be a sequence of real numbers
+    (not depending on $x \in I$!)
+    satisfying
+    \begin{enumerate}[label = (\roman*)]
+        \item $|f_k(x)| \leq M_k$ for all $x \in I$;
+        \item $\displaystyle\infsumo M_k$ is convergent.
+    \end{enumerate}
+    Then $\infsumo f_k(x)$ converges uniformly
+    (and absolutely)
+    to a limit function $f(x)$.
 
+    \begin{proof}
+        For each $x \in I$,
+        the series $\sum f_k(x)$ converges pointwise
+        (and absolutely)
+        by comparison with the series $\sum M_k$.
+        Hence we can define the function $f(x)$ on $I$ by
+        \[
+        f(x) := \infsumo f_k(x).
+        \]
+        Now we need to show $\sum_{k = 0}^{n}f_k(x) =: F_n(x) \rightarrow f$ uniformly in $I$.
+        Let $\varepsilon > 0$.
+        Since $\sum M_k$ is convergent,
+        i.e.,
+        $\limas{\sum_{k = 0}^{n}M_k}{L}$ for some $L$,
+        we can find an $N \in \N$ such that
+        \[
+        \infsum[k = n + 1]M_k = \left|L - \sum_{k = 0}^{n}M_k\right| < \varepsilon
+        \]
+        for all $n \geq N$.
+        But this implies for all $x \in I$ and all $n \geq N$ that
+        \begin{align*}
+            |f(x) - F_n(x)| &= \left|f(x) - \sum_{k = 0}^{n}f_k(x)\right| \\
+            &= \left|\infsum[k = n + 1]f_k(x)\right| \\
+            &\leq \infsum[k = n + 1]|f_k(x)| \\
+            &\leq \infsum[k = N + 1]M_k \\
+            &< \varepsilon.
+        \end{align*}
 
+        The shows that $F_n$ converges uniformly to $f$ in $I$.
+    \end{proof}
+\end{theorem}
 
+Combining the Weierstrass M-Test
+(\autoref{pre:analy:thm:weierstrassmtest})
+with the
+(local version of the)
+limit theorem \autoref{pre:analy:thm:limofseqcontunifconviscont} provides a powerful tool to establish continuity of infinite series of functions!
+But in fact,
+we can also use it to finally prove the differentiability of power series!
 
+\begin{theorem}
+    Let $f(x) = \infsumo a_kx ^ k$ be a real power series with radius of convergence $R > 0$.
+    \begin{enumerate}[label = (\roman*)]
+        \item Then the power series $\infsumo a_kx ^ k$ converges uniformly in compact subsets of $(-R, R)$
+        (and hence we give another proof that $f(x)$ is a continuous function in $(-R, R)$).
 
+        \item Further $f$ is
+        (infinitely often)
+        differentiable on $(-R, R)$ with
+        \[
+        f'(x) = \infsumo(k + 1)a_{k + 1}x ^ k.
+        \]
+    \end{enumerate}
+    \begin{proof}
+        (i).
+        Let $[a, b]$ be a compact interval in $(-R, R)$.
+        So we can find $0 < r < R$ such that $[a, b] \subseteq [-r, r] \subset (-R, R)$.
+        We apply the M-test for $f_k(x) = a_kx ^ k$ for the interval $I = [-r, r]$.
+        Take $M_k = |a_k|r ^ k$.
+        Then $|f_k(x)| \leq M_k$ for all $x \in I$ and $\infsumo|a_k|r ^ k$ converges since power series converge absolutely within their interval of convergence.
+        So $\infsumo a_kx ^ k$ converges uniformly in $[-r, r]$,
+        in particular in $[a, b]$.
 
+        For (ii).
+        In the proof of \autoref{pre:analy:prop:powserarecont} by taking the limit we saw
+        \[
+        f(x) = f(c) + (x - c)\infsum a_k(x ^ {k - 1} + x ^ {k - 2}c + \dotsi + xc ^ {k - 2} + c ^ {k - 1}).
+        \]
+        Set
+        \[
+        g_1(x) = \infsum a_k(x ^ {k - 1} + x ^ {k - 2}c + \dotsi + xc ^ {k - 2} + c ^ {k - 1}).
+        \]
+        Note that $g_1(c) = \infsum a_kkc ^ {k - 1}$.
+        Considering first order Taylor what remains to be shown to obtain differentiability that $g_1(x)$ is continuous at $x = c$
+        (in fact a continuous function on $(-R, R)$).
+        Then $f'(c) = g_1(c)$.
+        We proceed as above.
+        Namely,
+        we apply the M-test for $f_k(x) = a_k(x ^ {k - 1} + x ^ {k - 2}c + \dotsi + xc ^ {k - 2} + c ^ {k - 1})$ for the interval $I = [-r, r]$ containing $c$ as the inner point $(|c| < r < R)$.
+        Take $M_k = |a_k|rr ^ {k - 1}$.
+        Then
+        \begin{align*}
+            |f_k(x)| &\leq |a_k|\left(|x| ^ {k - 1} + |x| ^ {k - 2}|c| + \dotsi + |x||c| ^ {k - 2} + |c| ^ {k - 1}\right) \\
+            &\leq |a_k|(r ^ {k - 1} + r ^ {k - 2}r + \dotsi + rr ^ {k - 2} + r ^ {k - 1}) \\
+            &= |a_k|kr ^ {k - 1} = M_k
+        \end{align*}
+        for all $x \in I$.
+        But now $\infsum|a_k|r ^ {k - 1}$ converges since the formal derivative $\infsumo(k + 1)a_{k + 1}x ^ k$ converges absolutely within their interval of convergence.
+        Hence $g_1(x)$ is continuous and therefore $f(x)$ is differentiable at $c$ with $f'(c) = \infsum a_kkc ^ {k - 1}$ as desired.
+    \end{proof}
+\end{theorem}
 
+The above proof suggests a possible route to give a criterion/general way to establish differentiability of $\infsumo f_k(x)$ via its characterisation by first order Taylor.
+This indeed works!
 
+\begin{theorem}\label{pre:analy:thm:convserofseqdifffuncs}
+    Let $I \subset \R$ be an interval and $(f_k)$ be a sequence of differentiable functions $f_k : I \rightarrow \R$.
+    Assume
+    \begin{enumerate}[label = (\roman*)]
+        \item $\displaystyle\infsumo f_k(x)$ converges pointwise in $I$ to a function $f(x)$;
+        \item $\displaystyle\infsumo f_k'(x)$ converges uniformly in all compact subsets of $I$.
+    \end{enumerate}
+    Then $f(x) = \infsumo f_k(x)$ is a differentiable function on $I$ with
+    \[
+    f'(x) = \infsumo f_k'(x).
+    \]
+    \begin{proof}
+        We only give a proof under the additional assumption that $\infsumo f_k'(x)$ satisfies the Weierstrass M-test locally,
+        that is for all compact intervals $[a, b] \subseteq I$ there exists constants $M_k$ such that $|f_k'(x)| \leq M_k$ with $\infsumo M_k < \infty$.
+        In practice this is not a significant restriction since the Weierstrass M-test is the typical way for establishing uniform convergence of an infinite series functions anyway!
 
+        Let $c \in I$ and let $[a, b] \subseteq I$ be a compact interval containing $c$ as an interior point.
+        We set
+        \[
+        g_k(x) = \begin{cases}
+            \frac{f_k(x) - f_k(c)}{x - c} & \text{if } x \neq c; \\
+            f_k'(c) & \text{if } x = c.
+        \end{cases}
+        \]
+        Then by first order Taylor we have
+        \[
+        f_k(x) = f_k(c) + (x - c)g_k(x)
+        \]
+        with $g_k(x)$ being continuous at $x = c$ with $g_k(c) = f_k'(c)$.
+        We consider
+        \[
+        g(c) := \infsumo g_k(x).
+        \]
+        We will show that $g(x)$ converges absolutely in $[a, b]$ to a continuous function;
+        in particular $g(c) = \infsumo f_k'(c)$.
+        Since
+        \[
+        f(x) = f(c) - (x - c)g(x),
+        \]
+        differentiability of $f$ at $c$ with $f'(c) = \infsumo f_k'(c)$ follows from first order Taylor.
+        By the Mean Value Theorem we have for $x \neq c$
+        \[
+        g_k(x) = \frac{f_k(x) - f_k(c)}{x - c} = f_k'(\xi_k)
+        \]
+        for some $\xi_k$ between $x$ and $c$ and hence for all $x \in [a, b]$,
+        \[
+        |g_k(x)| = |f_k'(\xi_k)| \leq M_k.
+        \]
+        (For $x = c$ the estimate also holds).
+        Hence by the Weierstrass M-test $g(x)$ converges absolutely in $[a, b]$ to a continuous function,
+        and this completes the proof of the theorem!
+    \end{proof}
+\end{theorem}
 
+\begin{example}[Weierstrass function]
+    Consider the function
+    \[
+    f(x) = \infsumo\frac{1}{2 ^ k}\cos(15 ^ k\pi x).
+    \]
+    Then
+    \[
+    \left|\frac{1}{2 ^ k}\cos(15 ^ k\pi x)\right| \leq \frac{1}{2 ^ k}
+    \]
+    and since $\infsumo\frac{1}{2 ^ k} = 2$ we conclude by the Weierstrass M-test that $\infsumo\frac{1}{2 ^ k}\cos(15 ^ k\pi x)$ is uniformly convergent on all of $\R$ to a function $f(x)$.
+    But furthermore,
+    since $\frac{1}{2 ^ k}\cos(15 ^ k\pi x)$ is continuous we see that $f(x)$ is continuous by \autoref{pre:analy:thm:uniflimofseqofcontfuncsiscont}.
+    The
+    (formal)
+    derivative is given by $\infsumo\frac{15 ^ k\pi}{2 ^ k}\sin(15 ^ k\pi x)$ which obviously does not converge so that \autoref{pre:analy:thm:convserofseqdifffuncs} does not apply.
+    This by itself does not show that $f(x)$ couldn't be differentiable,
+    see the example of $f_n(x) = \sin(nx) / n$ earlier.
+    However,
+    Weierstrass showed in 1872 that $f(x)$ is not differentiable at any point.
+\end{example}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{remark}
+    \autoref{pre:analy:thm:convserofseqdifffuncs} can also be used to give a proof for \autoref{pre:analy:thm:contdifffuncsconvas},
+    the relationship between uniform convergence of a sequence of functions and differentiability.
+    Namely,
+    given a sequence $f_n(x)$ of functions converging
+    (pointwise)
+    to a function $f(x)$,
+    define a new sequence by $g_1(x) = f_1(x)$ and $g_k(x) = f_k(x) - f_{k - 1}(x)$ for $n \geq 2$.
+    Then $\sum_{k = 1}^{n}g_k(x) = f_n(x)$ and hence one can apply \autoref{pre:analy:thm:convserofseqdifffuncs} on series to the sequence $f_n(x)$ to obtain \autoref{pre:analy:thm:contdifffuncsconvas}.
+    (It is a bit artificial).
+\end{remark}
 
 \subsection{Complex case}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \newpage
 
