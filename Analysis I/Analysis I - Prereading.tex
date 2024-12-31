@@ -649,7 +649,7 @@ Recall the definition of continuity for a function $f$ on an interval $I$
     uniform continuity is no longer a local concept but a 'global' one as it depends on the entire interval $I$.
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}\label{pre:analy:thm:contoncompactthenunicontonint}
     Let $f$ be a continuous function on a compact interval $[a, b]$.
     Then $f$ is uniformly continuous on $[a, b]$.
     \begin{proof}
@@ -3494,13 +3494,139 @@ so $\sin(inx) / n$ does not even converge
 
 \section{Fonctions réglées (Regulated functions)}
 
+Roughly speaking,
+these are functions on a compact interval $I$ which can be uniformly approximated to arbitrary precision by step functions which are functions constant on each subinterval of a partition of $I$.
+Among other things we will see that continuous functions are regulated.
+
+We have two main motivations
+\begin{itemize}
+    \item In the next section we will define integrals for regulated functions.
+    \item We will use this to learn more about important concepts and ideas of analysis,
+    in particular about uniform convergence and the principle of constructing interesting functions as limits of easier functions.
+
+    In a sense we have already seen this when we constructed power series as limits of polynomials.
+\end{itemize}
+
 \subsection{Definition of regulated functions}
+We will begin by introducing a selection of remarkably simple yet useful functions.
+\begin{definition}[Step functions]
+    A function $f$ on a compact interval $[a, b]$ is called a step function if there exists a partition
+    \[
+    a = x_0 < x_1 < \dotsi < x_{N - 1} < x_N = b
+    \]
+    of $[a, b]$ such that $f$ is constant on each open subinterval $(x_k, x_{k + 1})$ $(k = 0, \dotsc, N - 1)$.
 
+    Note that the values at the division points $x_k$ can be arbitrary.
 
+    Also note that the partition is not unique.
+    $f$ would also be a step function for any finer partition $a = y_0 < y_1 < \dotsi < y_{M - 1} < y_M = b$ which contains the $x_k$.
+    In particular the function value for two adjacent intervals could be the same!
+\end{definition}
 
+The following properties are immediate
+\begin{proposition}
+    Let $f$ and $g$ be two step functions on $[a, b]$.
+    Let $c \in \R$.
+    Then
+    \begin{enumerate}[label = (\roman*)]
+        \item $cf(x)$ and $f(x) + g(x)$ are step functions.
+        
+        In particular,
+        the set of regulated functions forms an $\R$-vector space!
 
+        \item The product $f(x)g(x)$ is a step function.
 
+        \item The absolute value $|f(x)|$ is a step function.
 
+        In particular,
+        $\max\{f, g\} = \frac{1}{2}(f + g + |f - g|)$ and $\min\{f, g\} = \frac{1}{2}(f + g - |f - g|)$ are step functions.
+    \end{enumerate}
+\end{proposition}
+
+\begin{definition}[Regulated function]
+    Let $f(x)$ be a function on a compact interval $[a, b]$.
+    We call $f(x)$ a regulated function if there exists a sequence of step functions $f_n(x)$ which converges uniformly to $f(x)$.
+
+    That is,
+    for all $\varepsilon > 0$ there exists an $N \in \N$ such that
+    \[
+    |f_n(x) - f(x)| < \varepsilon\qquad\text{for all } x \in [a, b]\text{ and all } n \geq N.
+    \]
+\end{definition}
+
+\begin{remark}
+    The sequence of step functions converging
+    (uniformly)
+    to the function is by no means unique.
+\end{remark}
+
+\begin{lemma}[Sequence-free criterion for being regulated]\label{pre:analy:lem:seqfreecritforbereg}
+    Let $f(x)$ be a function on a compact interval $[a, b]$.
+    Then $f$ is regulated if and only if for all $\varepsilon > 0$ there exists a step function $g(x)$ on $[a, b]$ such that
+    \[
+    |f(x) - g(x)| < \varepsilon\qquad\text{for all } x \in [a, b].
+    \]
+    \begin{proof}
+        One direction is clear by the definition of a regulated function.
+        Now assume for all $\varepsilon > 0$ there exists a step function $g(x)$ such that $|f(x) - g(x)| < \varepsilon$ for all $x \in [a, b]$.
+        In particular,
+        for $\varepsilon = 1 / n$ we can find a step function $f_n(x)$ such that $|f(x) - f_n(x)| < 1 / n$ for all $x \in [a, b]$.
+        This is the required sequence of step functions.
+        Indeed,
+        given $\varepsilon > 0$ find $N$ such that $1 / N < \varepsilon$.
+        Then for all $n \geq N$ we have $|f(x) - f_n(x)| < 1 / n \leq 1 / N < \varepsilon$,
+        as desired.
+    \end{proof}
+\end{lemma}
+
+An important class of regulated functions are continuous functions!
+
+\begin{theorem}[Continuous functions are regulated]
+    Let $f$ be a continuous function on a compact interval $[a, b]$.
+    Then $f$ is regulated.
+    \begin{proof}
+        Since $f$ is continuous on $[a, b]$,
+        it is uniformly continuous by \autoref{pre:analy:thm:contoncompactthenunicontonint},
+        that is,
+        \[
+        \forall\varepsilon > 0\,\exists\delta > 0\,\forall x, y \in I\quad(|x - y| < \delta \implies |f(x) - f(y)| < \varepsilon).
+        \]
+        So take $\varepsilon > 0$ and find a $\delta > 0$ such that $|f(x) - f(y)| < \varepsilon$ for all $X, y$ with $|x - y| < \delta$.
+        Now let
+        \[
+        a = x_0 < x_1 < \dotsi < x_{N - 1} < x_N = b
+        \]
+        be any partition of $[a, b]$ such that $x_{k + 1} - x_k < \delta$.
+        We let $x_k ^ {*}$ be any point in $[x_k, x_{k + 1})$,
+        for example $x_k ^ {*} = \frac{x_k + x_{k + 1}}{2}$,
+        the midpoint.
+        We then define a step function $g(x)$ on $[a, b]$ by
+        \[
+        g(x) = f(x_k ^ {*})\quad\text{for } x \in [x_k, x_{k + 1}).
+        \]
+        We set $g(b) = g(x_{N - 1} ^ {*})$.
+        Thus the function $g$ is constant on the subintervals $[x_k, x_{k + 1})$ with
+        (potential)
+        discontinuities at $x_1, \dotsc, x_{N - 1}$.
+        We claim
+        \begin{equation}\label{pre:analy:eq:5}
+            |f(x) - g(x)| < \varepsilon\quad\text{for all } x \in [a, b].
+        \end{equation}
+        Indeed,
+        let $x \in [a, b]$.
+        Then
+        (if $x < b$)
+        we can find a $k$ such that $x \in [x_k, x_{k + 1})$,
+        hence $|x - x_k ^ {*}| < \delta$.
+        Thus by uniform continuity we obtain
+        \[
+        |f(x) - g(x)| = |f(x) - f(x_k ^ {*})| < \varepsilon.
+        \]
+        If $x = b$,
+        the same works.
+        Then \eqref{pre:analy:eq:5} shows that $f$ is regulated by \autoref{pre:analy:lem:seqfreecritforbereg}.
+    \end{proof}
+\end{theorem}
 
 
 
