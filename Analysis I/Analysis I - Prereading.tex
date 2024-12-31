@@ -3628,46 +3628,111 @@ An important class of regulated functions are continuous functions!
     \end{proof}
 \end{theorem}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \subsection{Examples}
+Now we will discuss regulated functions via important examples.
+
+\textbf{How to explicitly construct a sequence of step functions in case of Lipschitz}
+
+Assume $f : [a, b] \rightarrow \R$ is Lipschitz continuous with Lipschitz constant $M$:
+$|f(x) - f(y)| \leq M|x - y|$ for all $x, y \in [a, b]$.
+(Say,
+if $f$ is continuously differentiable,
+can take $M = \max\{|f'(x)|\}$).
+Recall that in that case given $\varepsilon > 0$ one can take $\delta = \varepsilon / M$ to establish uniform continuity.
+
+In that case it is particularly simple to construct the required sequence of step functions $f_n$ converging uniformly to $f$.
+
+Namely,
+given $n$,
+consider the equi-distant partition $a = x_0 < x_1 < \dotsi < x_{n - 1} < x_n = b$ given by $x_k = a + (b - a)\frac{k}{n}$ with $k = 0, \dotsc, n$.
+Note that each subinterval $[x_k, x_{k + 1}]$ has length $x_{k + 1} - x_k = (b - a) / n$.
+Then let $x_k ^ {*}$ be any point in $[x_k, x_{k + 1}]$ define the step function $f_n$ on $[a, b]$ by
+\[
+f_n(x) = \begin{cases}
+    f(x_k ^ {*}) &\text{if } x \in [x_k, x_{k + 1}) \\
+    f(x_{n - 1} ^ {*}) &\text{if } x = b
+\end{cases}
+\]
+($f_n(b) = f(b)$ would also be perfectly fine).
+Then given $\varepsilon > 0$,
+\[
+|f_n(x) - f(x)| < \varepsilon\qquad\text{for all } x \in [a, b]\text{ and $n$ sufficiently large.}
+\]
+Indeed,
+if $x \in [x_k, x_{k + 1})$ then $x - x_k < x_{k + 1} - x_k = (b - a) / n$ and hence
+\[
+|f(x) - f_n(x)| = |f(x) - f(x_k ^ {*})| \leq M|x - x_k ^ {*}| < M\frac{b - a}{n}.
+\]
+Similarly,
+for $x = b$ we have $|f(b) - f_n(b)| = |f(b) - f(x_{n - 1})| \leq M|b - x_{n - 1}| = M(b - a) / n$.
+Then $|f_n(x) - f(x)| < \varepsilon$ for $n > (b - a) / \varepsilon$ as desired.
+
+
+\textbf{Not only continuous functions are regulated}
+\begin{itemize}
+    \item  Step functions themselves are obviously regulated
+    (approximate $f$ by the constant sequence of functions $f_n = f$).
+    Famous step functions are the following:
+    The so-called Heaviside function:
+    \[
+    H(x) = u(x) = \begin{cases}
+        0 & \text{if } x < 0; \\
+        1 & \text{if } x \geq 0.
+    \end{cases}
+    \]
+    Another example is the
+    (Dirac)
+    Delta function
+    \[
+    \delta(x) = \begin{cases}
+        0 & \text{if } x \neq 0; \\
+        1 & \text{if } x = 0.
+    \end{cases}
+    \]
+    
+    \item A piecewise continuous function is a function $f$ with only finitely many discontinuities
+    (or which are discrete if one allows for unbounded intervals)
+    such that at the points of discontinuity the left-hand and the right-hand limit exist
+    (as finite numbers).
+    Then $f$ is regulated.
+    This can be seen directly by approximating the function on each interval of continuity.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Further properties of regulated functions}
 
