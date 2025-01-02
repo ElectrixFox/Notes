@@ -3509,7 +3509,7 @@ We have two main motivations
 
 \subsection{Definition of regulated functions}
 We will begin by introducing a selection of remarkably simple yet useful functions.
-\begin{definition}[Step functions]
+\begin{definition}[Step functions]\label{pre:analy:def:stepfuncs}
     A function $f$ on a compact interval $[a, b]$ is called a step function if there exists a partition
     \[
     a = x_0 < x_1 < \dotsi < x_{N - 1} < x_N = b
@@ -3976,20 +3976,160 @@ We will be mainly concerned with (i) and
 (largely)
 ignore (ii).
 
-\subsection{Regulated integral: definition}
+\subsection{Regulated integral: Definition}
 In this section we will introduce the integral for regulated functions.
 We proceed in stages:
 First we define the integral for step functions,
 then the one for regulated functions as the limit of the one for step functions.
 This is a very standard procedure in Analysis.
 
+\begin{definition}[Integral of step functions]
+    Let $f$ be a step function on $[a, b]$ associated to a partition $a = x_0 < x_1 < \dotsi < x_{N - 1} < x_N = b$ and let $x_k ^ {*}$ be any point in the subinterval
+    ($x_k. x_{k + 1}$
+    (on which $f$ is constant)).
+    We then define the integral $I(f)$ of $f$
+    (over $[a, b]$)
+    by
+    \[
+    I(f) = I(f; a, b) = \sum_{k = 0}^{N - 1}f(x_k ^ {*})(x_{k + 1} - x_k).
+    \]
+    Now recall that the choice of the underlying partition for $f$ is not unique,
+    see \autoref{pre:analy:def:stepfuncs},
+    but $I(f)$ is independent of this.
+    More precisely,
+    let $a = y_0 < y_1 < \dotsi < y_{M -1} < y_M = b$ be a finer partition,
+    that is,
+    $\{x_k\}$ is a subset of the $\{y_k\}$.
+    Then it is easy to visualise/see that we also have
+    \[
+    I(f) = \sum_{k = 0}^{M - 1}f(y_k ^ {*})(y_{k + 1} - y_k),
+    \]
+    where $y_k ^ {*}$ is any point in the interval $(y_{k + 1}, y_k)$.
+\end{definition}
 
+\textit{Note how this definition coincides with our intuitive notion of the integral as a signed area,
+in this case of rectangles.}
 
+\begin{definition}[Integral of regulated functions]
+    Let $f$ be a regulated function on $[a, b]$,
+    say $f$ is the uniform limit of the sequence of step functions $f_n$.
+    We then define the integral of $f$ by
+    \[
+    I(f) = \liminfty I(f_n).
+    \]
+\end{definition}
+There are two things to check for this definition to make sense:
+\begin{enumerate}[label = (\roman*)]
+    \item The sequence of $I(f_n)$ of the integrals of the step functions converges.
+    \item The limit $\liminfty I(f_n)$ is independent of the choice of the $f_n$.
+\end{enumerate}
 
+Before we do this,
+a small comment which relates to the definition of the Riemann integral.
+Namely,
+given $f_n \rightarrow f$ uniformly,
+we have
+\[
+I(f_n) = \sum_{k = 0}^{N - 1}f_n(x_k ^ {*})(x_{k + 1} - x_k),
+\]
+and we call this sum the/a Riemann sum associate to $f$ relative to the partition $\{x_k\}$ and $f_n$.
+In fact,
+often or usually in our constructions we have that the constant value of $f_n$ on the subinterval $(x_k, x_{k + 1})$ is given by a value $f(x'_k)$ of $f$ on some number $x'_k \in [x_k, x_{k + 1}]$.
+In that case,
+we obtain
+\[
+\sum_{k = 0}^{N - 1}f(x'_k)(x_{k + 1} - x_k),
+\]
+what usually denotes a Riemann sum.
 
+We now consider (1):
+\begin{lemma}
+    Let $f$ be a regulated function on $[a, b]$,
+    say $f$ is the uniform limit of the sequence of step functions $f_n$.
+    Then the sequence $I(f_n)$ of the step function integrals converges.
 
+    \begin{proof}
+        We will show that the sequence $I(f_n)$ of real numbers is a Cauchy sequence,
+        hence converges.
+        Let $\varepsilon > 0$ and take $N$ such that $|f(x) - f_n(x)| < \varepsilon$ for all $x \in [a, b]$ and all $n \geq N$.
+        Let $n, m \geq N$.
+        Let $\{x_k; k = 0, \dotsc, M\}$ be a common refinement of the partitions underlying both $f_n$ and $f_m$
+        (the union would do).
+        Then
+        \begin{align*}
+            |I(f_n) - I(f_m)| &= \left|\sum_{k = 0}^{M - 1}f_n(x_k ^ {*})(x_{k + 1} - x_k) - \sum_{k = 0}^{M - 1}f_m(x_k ^ {*})(x_{k + 1} - x_k)\right| \\
+            &\leq \sum_{k = 0}^{M - 1}|f_n(x_k ^ {*}) - f_m(x_k ^ {*})||(x_{k + 1} - x_k)| \\
+            &= \sum_{k = 0}^{M - 1}|f_n(x_k ^ {*}) - f(x_k ^ {*}) + f(x_k ^ {*}) - f_m(x_k ^ {*})|(x_{k + 1} - x_k) \\
+            &\leq \sum_{k = 0}^{M - 1}(|f_n(x_k ^ {*}) - f(x_k ^ {*})| + |f(x_k ^ {*}) - f_m(x_k ^ {*})|)(x_{k + 1} - x_k) \\
+            &\leq \sum_{k = 0}^{M - 1}2\varepsilon(x_{k + 1} - x_k) \\
+            &= 2(b - a)\varepsilon.
+        \end{align*}
+        Hence the $I(f_n)$ indeed form a Cauchy sequence.
+    \end{proof}
+\end{lemma}
 
+Now we consider (2):
+\begin{lemma}
+    Let $f$ be a regulated function on $[a, b]$,
+    say $f$ is the uniform limit of the sequence of step functions $f_n$.
+    Then the limit $\displaystyle\liminfty I(f_n)$ is independent of the choice of the $f_n$.
 
+    \begin{proof}
+        So let $f_n$ and $g_n$ be two different sequences of step functions converging uniformly to $f$.
+        We need to show $\liminfty I(f_n) - I(g_n) = 0$.
+        We proceed in exactly the same way as above.
+        Let $\varepsilon > 0$ and take $N$ such that $|f(x) - f_n(x)| < \varepsilon$ and also $|f(x) - g_n(x)| < \varepsilon$ for all $x \in [a, b]$ and all $n \geq N$.
+        Let $\{x_k; k = 0, \dotsc, M\}$ be a common refinement of the partitions underlying both $f_n$ and $g_n$.
+        Then
+        \begin{align*}
+            |I(f_n) - I(g_n)| &= \left|\sum_{k = 0}^{M - 1}f_n(x_k ^ {*})(x_{k + 1} - x_k) - \sum_{k = 0}^{M - 1}g_n(x_k ^ {*})(x_{k + 1} - x_k)\right| \\
+            &\leq \sum_{k = 0}^{M - 1}|f_n(x_k ^ {*}) - g_n(x_k ^ {*})|(x_{k + 1} - x_k) \\
+            &= \sum_{k = 0}^{M - 1}|f_n(x_k ^ {*}) - f(x_k ^ {*}) + f(x_k ^ {*}) - g_n(x_k ^ {*})|(x_{k + 1} - x_k) \\
+            &\leq \sum_{k = 0}^{M - 1}(|f_n(x_k ^ {*}) - f(x_k ^ {*})| + |f(x_k ^ {*}) - g_n(x_k ^ {*})|)(x_{k + 1} - x_k) \\
+            &\leq \sum_{k = 0}^{M - 1}2\varepsilon(x_{k + 1} - x_k) \\
+            &= 2(b - a)\varepsilon.
+        \end{align*}
+        This gives the lemma.
+    \end{proof}
+\end{lemma}
+
+\begin{remark}
+    Of course we usually write
+    \[
+    I(f) = \int_{a}^{b}f(x)\,dx.
+    \]
+    Note that the variable '$x$' doesn't matter:
+    $\int_{a}^{b}f(x)\,dx = \int_{a}^{b}f(t)\,dt = \int_{a}^{b}f(u)\,du$.
+    It is a 'dummy' variable and hence $\int_{a}^{b}f$ might be better notation.
+    The traditional notation goes back to Leibniz which while a bit superfluous is truly a strike of genius and very useful
+    (like $\frac{df}{dx}$ for the derivative).
+\end{remark}
+
+\begin{example}
+    Let's compute $\int_{a}^{b}x\,dx$,
+    that is,
+    $f(x) = x$.
+    As the sequence of step functions we take the partition $x_k = a + \frac{k}{n}(b - a)$ which divides the interval $[a, b]$ into $n$ subintervals of length $(b - a) / n$ each.
+    Take $x_k ^ {*} = x_k$ and set $f_n(x) = f(x_k ^ {*}) = x_k$ for $x \in [x_k, x_{k + 1})$.
+    Also set $f_n(b) = f(x_{n - 1})$.
+    Hence $|f(x) - f_n(x)| = |x - x_k ^ {*}| \leq (b - a) / n$,
+    and the sequence of the $f_n$ indeed converges uniformly to $f$.
+    Then
+    \begin{align*}
+        \int_{a}^{b}f_n(x)\,dx &= \sum_{k = 0}^{n - 1}\frac{b - a}{n}f(x_k ^ {*}) \\
+        &= \frac{b - a}{n}\sum_{k = 0}^{n - 1}\left(a + \frac{k}{n}(b - a)\right) \\
+        &= (b - a)a + (b - a) ^ 2 \frac{1}{n ^ 2}\sum_{k = 0}^{n - 1}k \\
+        &= (b - a)a + (b - a) ^ 2\frac{n(n - 1)}{2n ^ 2} \\
+        &\rightarrow (b - a)a + \frac{1}{2}(b - a) ^ 2 \\
+        &= \frac{1}{2}(b ^ 2 - a ^ 2) \text{ as } n \rightarrow \infty.
+    \end{align*}
+\end{example}
+
+We have shown
+\[
+\int_{a}^{b}x\,dx = \frac{1}{2}(b ^ 2 - a ^ 2),
+\]
+which should come as a relief!
 
 
 
@@ -4031,7 +4171,7 @@ This is a very standard procedure in Analysis.
 
 \subsection{Comparison with the Riemann integral}
 
-\subsection{Regulated integral: basic properties}
+\subsection{Regulated integral: Basic properties}
 
 \subsection{Fundamental theorem of calculus}
 
