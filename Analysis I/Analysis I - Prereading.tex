@@ -3775,7 +3775,7 @@ But for sufficiently large $n$ we have $|a - a_k| < \varepsilon$ for all $k \geq
 \textbf{Monotone functions are regulated}
 
 We give another class of regulated functions:
-\begin{proposition}
+\begin{proposition}\label{pre:analy:prop:iffmonotonethenfreg}
     Let $f$ be a monotone function on $[a, b]$.
     Then $f$ is regulated.
     \begin{proof}
@@ -3807,53 +3807,227 @@ We give another class of regulated functions:
     \end{proof}
 \end{proposition}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \subsection{Further properties of regulated functions}
+
+\begin{lemma}\label{pre:analy:lem:regfuncisuniversallybounded}
+    Let $f$ be a regulated function on $[a, b]$.
+    Then $f$ and any sequence $f_n$ of step functions converging uniformly to $f$ are universally bounded.
+    That is,
+    there exists a constant $C$ such that $|f(x)| \leq C$ and $|f_n(x)| \leq C$ for all $x \in [a, b]$.
+    \begin{proof}
+        Let $(f_n(x))$ be a sequence of step functions which converge uniformly to $f(x)$.
+        Take $\varepsilon = 1$.
+        Then $|f(x) - f_n(x)| < 1$ for all $x \in [a, b]$ and all $n \geq N$.
+        But $f_N(x)$ is certainly bounded since it takes only finitely many values,
+        say by $M$,
+        Using the triangle inequality we conclude $|f(x)| \leq |f_N(x)| + 1 \leq M + 1$.
+        Since $|f_n(x) - f(x)| < 1$ this shows that the $f_n$ for $n \geq N$ are also bounded,
+        namely $|f_n(x)| \leq |f_n(x) - f(x)| + |f(x)| < 1 + M + 1 = M + 2$.
+        Now bound the finitely many step functions $f_1, \dotsc, f_{N - 1}$,
+        say by $M'$.
+        Then $C = \max\{M + 2, M'\}$ does it.
+    \end{proof}
+\end{lemma}
+
+\begin{proposition}[Regulated COLT]
+    Let $f$ and $g$ be two regulated functions on $[a, b]$,
+    say $f, g$ respectively are the uniform limit of the step functions $f_n, g_n$ respectively.
+    Let $c \in \R$.
+    Then
+    \begin{enumerate}[label = (\roman*)]
+        \item
+        \[
+        cf(x)\text{ and } f(x) + g(x)\text{ are regulated}.
+        \]
+        In fact,
+        $cf(x)$ is the uniform limit of $cf_n(x)$ and $f(x) + g(x)$ is the one of $f_n(x) + g_n(x)$.
+        
+        In particular,
+        the set of regulated functions forms an $\R$-vector space!
+        
+        \item
+        \[
+        \text{The product } f(x)g(x)\text{ is regulated}.
+        \]
+        In fact,
+        $f(x)g(x)$ is the uniform limit of $f_n(x)g_n(x)$.
+
+        \item 
+        \[
+        \text{The absolute value } |f(x)|\text{ is regulated}.
+        \]
+        In fact,
+        $|f(x)|$ is the uniform limit of $|f_n(x)|$.
+        In particular,
+        $\max\{f, g\} = \frac{1}{2}(f + g + |f - g|)$ and $\min\{f, g\} = \frac{1}{2}(f + g - |f - g|)$ are regulated.
+    \end{enumerate}
+    \begin{proof}
+        First note that the statements are all true for 'regulated functions' replaced by 'step functions'.
+        So let $f_n(x)$ and $g_n(x)$ be sequences of step functions which converge uniformly to $f(x)$ and $g(x)$.
+        So given $\varepsilon > 0$ we have an $N$ such that
+        \[
+        |f(x) - f_n(x)| < \varepsilon\quad\text{and}\quad|g(x) - g_n(x)| < \varepsilon\qquad\text{for all } x \in [a, b] \text{ and all } n \geq N.
+        \]
+        Now the proofs are the same as for the corresponding results for COLT for sequences.
+        Indeed,
+        for all $x \in [a, b]$ and all $n \geq N$ we have
+        \begin{align*}
+            |cf(x) - cf_n(x)| &< c\varepsilon; \\
+            |(f(x) + g(x)) - (f_n(x) + g_n(x))| &\leq |f(x) - f_n(x)| + |g(x) - g_n(x)| < 2\varepsilon; \\
+            ||f(x)| - |f_n(x)|| &\leq |f(x) - f_n(x)| < \varepsilon.
+        \end{align*}
+        This proves (i) and (iii).
+        For (ii),
+        we first note all functions involved $f, f_n, g, g_n$ are all bounded by a universal constant $C$ by \autoref{pre:analy:lem:regfuncisuniversallybounded}.
+        Then for all $x \in [a, b]$ and all $n \geq N$ we have
+        \begin{align*}
+            |f(x)g(x) - f_n(x)g_n(x)| &= |f(x)g(x) - f_n(x)g(x) + f_n(x)g(x) - f_n(x)g_n(x)| \\
+            &\leq |g(x)||f(x) - f_n(x)| + |f_n(x)||g(x) - g_n(x)| \\
+            &\leq 2C\varepsilon.
+        \end{align*}
+        This gives (ii).
+    \end{proof}
+\end{proposition}
+
+\begin{remark}
+    Given $f$ how does one find a sequence of step functions which converges uniformly to $f$?
+
+    In general this is
+    (of course)
+    hard business,
+    but we have seen two constructions which are quite/fairly explicit.
+    \begin{enumerate}[label = (\arabic*):]
+        \item The case when $f$ is Lipschitz continuous on $[a, b]$.
+        \item The construction in the proof of \autoref{pre:analy:prop:iffmonotonethenfreg} for $f$ monotone.
+    \end{enumerate}
+\end{remark}
+
+In all examples for regulated functions we discussed the one-sided limits $\lim_{x \rightarrow c ^ {\pm}}f(x)$ still existed at all points $c \in [a, b]$:
+For
+(piecewise)
+continuous functions this is true by definition.
+For the one constructed with infinitely many discontinuities it is obvious,
+as it consists of patches of constant functions,
+while we have seen in the problem sheets that monotone functions on a compact interval also have this property.
+On the other hand,
+for the non-examples the one-sided limits do not  always exist
+
+This is no accident.
+In fact,
+this characterises regulated functions.
+We state without proof the following characterisation of regulated functions but will not make
+(serious)
+use of it:
+
+\begin{theorem}
+    Let $f$ be a function on $[a, b]$.
+    Then $f$ is regulated if and only if for all points $c \in [a, b]$ the left-sided and the right-sided limits $\lim_{x \rightarrow c ^ {-}}f(x)$ respectively $\lim_{x \rightarrow c ^ {+}}f(x)$ exist
+    (but don't have to coincide).
+\end{theorem}
+
+One can also show that the points of discontinuity of a regulated function are at most countable,
+that is,
+if there are infinitely many then there exists a sequence $(x_n)$ such all discontinuities are located at the $x_n$.
+Viewed differently,
+the fourth example in the example section is typical
+(except the function doesn't need to be constant in the intervals of continuity).
 
 \newpage
 
 \section{Integration}
+We know the integral $\int_{a}^{b}f(x)\,dx$ as describing the signed area between the graph of $f$ and the $x$-axis on the interval $[a, b]$.
+In fact,
+the integral can be defined in different ways which all lead to the result if $f$ is "sufficiently nice",
+e.g.,
+if $f$ is continuous.
+The best known definitions of integrals are the Riemann integral and the Lebesgue integral.
+Whilst the Lebesgue integral is a more general concept,
+it needs a lot more time to be introduced properly.
+You have seen
+(some version of)
+the Riemann integral before.
+
+We will not follow either direction but follow a different approach.
+This integral we will follow is called the regulated integral which is defined
+(as the name suggests)
+for regulated functions.
+It is somewhat more restrictive than the Riemann integral but
+(much)
+simpler to handle.
+
+In general,
+integration theories
+(on $\R$)
+tackle two interrelated questions:
+\begin{enumerate}[label = (\roman*)]
+    \item Define the integral $\int_{a}^{b}f(x)\,dx$ to a large
+    (and 'well-behaved')
+    space of functions.
+    It should also have 'good' properties,
+    in particular for a limit $f(x) = \liminfty f_n(x)$ of functions.
+
+    \item Give a meaning to the notion of 'length' $\ell(A)$ for as large as possible class of subsets of $\R$ extending the notion of length of an interval.
+    In terms of integrals this would be $\ell(A) = \int_A 1\,dx$,
+    integrating the constant function $1$ over $A$.
+    This very naturally leads to 'measure theory' which is central to probability and statistics.
+\end{enumerate}
+
+We will be mainly concerned with (i) and
+(largely)
+ignore (ii).
 
 \subsection{Regulated integral: definition}
+In this section we will introduce the integral for regulated functions.
+We proceed in stages:
+First we define the integral for step functions,
+then the one for regulated functions as the limit of the one for step functions.
+This is a very standard procedure in Analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Comparison with the Riemann integral}
 
