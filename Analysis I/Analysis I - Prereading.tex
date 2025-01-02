@@ -3698,6 +3698,119 @@ Then $|f_n(x) - f(x)| < \varepsilon$ for $n > (b - a) / \varepsilon$ as desired.
     This can be seen directly by approximating the function on each interval of continuity.
 \end{itemize}
 
+\textbf{Not all functions are regulated}
+\begin{itemize}
+    \item Let $d(x)$ be the Dirichlet function on $[0, 1]$:
+    \[
+    d(x) = \begin{cases}
+        0 & \text{if } x \in \Q; \\
+        1 & \text{else}.
+    \end{cases}
+    \]
+    Then $d(x)$ is not regulated.
+    Indeed,
+    let $g(x)$ be any step function with value $C$ on a non-trivial interval $(a, b)$ inside $[0, 1]$.
+    But this interval contains
+    (infinitely many)
+    rational and irrational numbers.
+    Hence $g(x) - d(x)$ takes on any open interval exactly the values $C$ and $C - 1$.
+    Thus
+    \[
+    \max_{x \in (a, b)}\{|d(x) - g(x)|\} = \max\{|C|, |1 - C|\} \geq 1 / 2.
+    \]
+    Hence $g(x)$ violates \autoref{pre:analy:lem:seqfreecritforbereg} and no sequence of step functions can converge uniformly to $d(x)$.
+
+    \item Let
+    \[
+    f(x) = \begin{cases}
+        \sin(1 / x) & \text{if } x \in (0, 1]; \\
+        1 & \text{if } x = 0.
+    \end{cases}
+    \]
+    In a similar way as (i) $f(x)$ is not regulated
+    (and no other value of $f$ at $x = 0$ will fix this).
+    see problem sheets.
+\end{itemize}
+
+\textbf{Regulated functions can have infinitely many discontinuities}
+
+Step functions have only finitely many
+(potential)
+discontinuities
+(at the division points $x_k$).
+That's not necessarily the case for regulated functions.
+
+Let $(a_k)$ be a convergent sequence with limit $a$
+(e.g.,
+$a_k = 1 / k$ and $a = 0$).
+Define a function on $[0, 1]$ by
+\[
+f(x) = a_k\qquad\text{if } x \in \left(\frac{1}{k + 1}, \frac{1}{k}\right]
+\]
+ad $f(0) = a$.
+Note that $f$ has infinitely many
+(potential)
+discontinuities at $x = 1 / k$,
+$k \geq 2$.
+Hence it is not a step function in the above sense.
+However,
+$f$ is a regulated function:
+Define $f_n(x)$ by
+\[
+f_n(x) = \begin{cases}
+    f(x) &\text{if } x > 1 / n \\
+    a &\text{if } x \leq 1 / n.
+\end{cases}
+\]
+Then
+\[
+|f_n(x) - f(x)| = \begin{cases}
+    0 &\text{if } x > 1 / n \\
+    |a - a_k| &\text{if } x \in \left(\frac{1}{k + 1}, \frac{1}{k}\right]\text{ and } k \geq n.
+\end{cases}
+\]
+But for sufficiently large $n$ we have $|a - a_k| < \varepsilon$ for all $k \geq n$.
+
+
+\textbf{Monotone functions are regulated}
+
+We give another class of regulated functions:
+\begin{proposition}
+    Let $f$ be a monotone function on $[a, b]$.
+    Then $f$ is regulated.
+    \begin{proof}
+        Assume $f$ is increasing
+        (the decreasing case works in the same way).
+        Then $M := f(b)$ is the maximum and $m := f(a)$ is the minimum of $f$.
+        Set $\Delta = M - m$.
+        For $n \in \N$ we define division points $x_k$ by
+        \[
+        x_k := \sup\{x \in [a, b];\, f(x) < m + k\Delta / n\}.
+        \]
+        Since $f$ is monotone increasing we see directly that in the interval $[x_k, x_{k + 1})$ we have $f(x) \in [m + k\Delta / n, m + (k + 1)\Delta / n)$,
+        a interval of length $\Delta / n$.
+        So all values of $f$ in $[x_k, x_{k + 1})$ differ by at most $\Delta / n$.
+        Then let $m_k \in [m + k\Delta / n, m + (k + 1)\Delta / n)$ be any number,
+        say $m_k = f(x_{k} ^ {*})$ for some arbitrary point $x_{k} ^ {*}$ in $[x_k, x_{k + 1})$,
+        and define $f_n$ by
+        \[
+        f_n(x) = m_k\qquad\text{if } x \in [x_k, x_{k + 1}).
+        \]
+        and $f(b) = m_{n - 1}$.
+        Then for $x \in [x_k, x_{k + 1})$ we have
+        \[
+        |f(x) - f_n(x)| = |f(x) - m_k| < \Delta / n,
+        \]
+        and the same at $x = b$.
+        Then for $n > 1 / \varepsilon\Delta$ we have $|f(x) - f_n(x)| < \varepsilon$ for all $x \in [a, b]$,
+        as needed.
+    \end{proof}
+\end{proposition}
+
+
+
+
+
 
 
 
