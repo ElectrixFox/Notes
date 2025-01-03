@@ -4131,47 +4131,157 @@ We have shown
 \]
 which should come as a relief!
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \subsection{Comparison with the Riemann integral}
+We now sketch briefly the more traditional Riemann integral which for regulated functions coincides with the integral we introduced.
+
+The starting point for the Riemann integral is also a partition $\mathcal{P} = \{x_0 = a, \dotsc, x_N = b\}$ of the interval $[a, b]$.
+One chooses points $x_k ^ {*} \in [x_k, x_{k + 1}]$ and defines the associated Riemann sum by
+\[
+\sum_{k = 0}^{N - 1}f(x_k ^ {*})(x_{k + 1} - x_k).
+\]
+Then roughly speaking one calls $f$ Riemann integrable if the limit of all Riemann sums exists as the mesh of the partition
+(the length of the largest sub-interval)
+goes to zero.
+More precisely,
+$f$ is called Riemann integrable if there exists a number $s$
+(the integral of $f$)
+such that for all $\varepsilon > 0$ there exists $\delta > 0$ such that for all Riemann sums associated to a partition with mesh less than $\delta$ we have
+\[
+\left|s - \sum_{k = 0}^{N - 1}f(x_k ^ {*})(x_{k + 1} - x_k)\right| < \varepsilon.
+\]
+This is fairly difficult to practically impossible to deal with,
+and typically in textbooks one considers the following concept which turns out to be equivalent to Riemann's original definition.
+Going back to Darboux.
+Starting from a partition $\mathcal{P}$ as above one sets $m_k = \inf_{x \in [x_k, x_{k + 1}]}\{f(x)\}$ and $M_k = \sup_{x \in [x_k, x_{k + 1}]}\{f(x)\}$
+(Here one needs to assume $f$ is bounded)
+and defines lower and upper Riemann sums by
+\[
+L(f, \mathcal{P}) = \sum_{k = 0}^{N - 1}m_k(x_{k + 1} - x_k)\quad\text{and}\quad U(f, \mathcal{P}) = \sum_{k = 0}^{N - 1}M_k(x_{k + 1} - x_k).
+\]
+One then defines the upper and lower Riemann integrals by
+\[
+U_f = \inf_{\mathcal{P}}U(f, \mathcal{P})\quad\text{and}\quad L_f = \sup_{\mathcal{P}}L(f, \mathcal{P}),
+\]
+and calls $f$ Riemann-integrable
+(Darboux-integrable)
+if $U_f = L_f$.
+
+\textit{Note how one can view the integral of a step function derived from $f$ as a special kind of Riemann sum.}
+
+\textbf{Advantages of the Riemann integral}
+\begin{itemize}
+    \item The Riemann integrable might be more intuitive for the purpose of defining the integral of $f$ as the signed area.
+    
+    \item The Riemann integral is a
+    (slightly)
+    more general concept:
+    Every regulated function is Riemann integrable but not vice-versa.
+    That is,
+    there are functions which cannot be approximated well by step functions but its area under the graph can be approximated well by rectangles.
+    For example,
+    \[
+    f(x) = \begin{cases}
+        \sin(1 / x) &\text{if } x \in (0, 1]; \\
+        1 &\text{if } x = 0
+    \end{cases}
+    \]
+    is not regulated
+    (see above),
+    but one can show that the Riemann integral exists.
+\end{itemize}
+
+\textbf{Disadvantages of the Riemann integral}
+\begin{itemize}
+    \item The definition of Riemann integrable functions is somewhat tautological:
+    These are the functions for which the construction works.
+    
+    \item As a result Riemann integrable functions are harder to work with
+    (as a concept).
+    Its properties are harder to establish,
+    in particular,
+    in regard to limit theorems for sequences of functions.
+
+    \item Regulated functions and their integrals are more conceptual,
+    in particular in view of concepts like uniform convergence etc.
+
+    \item The definition of the integral for regulated functions already directs towards the far reaching Lebesgue integral where one uses so-called simple functions to define the integral of 'Lebesgue integrable functions'.
+\end{itemize}
 
 \subsection{Regulated integral: Basic properties}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Fundamental theorem of calculus}
 
