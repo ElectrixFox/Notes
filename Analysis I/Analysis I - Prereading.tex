@@ -2257,7 +2257,7 @@ Thus
     \log(\exp(x)) &= x&\text{for all } x \in \R.
 \end{align*}
 We have
-\begin{theorem}
+\begin{theorem}\label{pre:analy:thm:propoflogarithmspowseries}
     \begin{enumerate}[label = (\roman*)]
         \item $\log(1) = 0$.
         \item The logarithm is differentiable with $\log'(x) = \frac{1}{x}$.
@@ -4358,79 +4358,321 @@ The following is a very useful sharpening of \autoref{pre:analy:thm:coltforinteg
     \end{proof}
 \end{proposition}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{example}
+    The condition '$f$ continuous' in the proposition is necessary.
+    Consider the Dirac Delta function $\delta(x)$ viewed as the step function on $[-1, 1]$
+    \[
+    \delta(x) = \begin{cases}
+        0 &\text{if } x \neq 0, \\
+        1 &\text{if } x = 0.
+    \end{cases}
+    \]
+    (Yes,
+    this is a step function:
+    $x_0 = -1, x_1 = 0, x_2 = 1$,
+    the function is constant on $(x_0, x_1) = (-1, 0)$ and $(x_1, x_2) = (0, 1)$).
+    Obviously $\delta(x) \geq 0$ with $\delta(0) = 1$ but $\int_{-1}^{1}\delta(x)\,dx = \delta(x_0 ^ {*})(x_1 - x_0) + \delta(x_1 ^ {*})(x_2 - x_1) = 0 \cdot 1 + 0 \cdot 1 = 0$.
+\end{example}
+
+\begin{remark}
+    Let $f : [a, b] \rightarrow \R$ be a regulated function.
+    It is useful to introduce the integral $\int_{b}^{a}f(x)\,dx$ by setting
+    \[
+    \int_{b}^{a}f(x)\,dx = -\int_{a}^{b}f(x)\,dx.
+    \]
+    Then it is straightforward to check that \autoref{pre:analy:thm:coltforintegrals}(iii) extends to arbitrary $a, b, c \in \R$.
+\end{remark}
 
 \subsection{Fundamental theorem of calculus}
 
+In this section we consider the function
+\[
+F(x) := \int_{a}^{x}f(t)\,dt
+\]
+for a regulated function $f(x)$ on the interval $[a, b]$.
+We start with the following,
+perhaps surprising,
+but easy.
+\begin{theorem}\label{pre:analy:thm:definintislipschitzcontonint}
+    Let $f$ be a regulated function on $[a, b]$.
+    Then the function $F(x) = \int_{a}^{x}f(t)\,dt$ is Lipschitz continuous on $[a, b]$ with Lipschitz constant $M := \sup_{x \in [a, b]}\{|f(x)|\}$,
+    so in particular,
+    $F(x)$ is continuous.
+    \begin{proof}
+        So let $x, y \in [a, b]$,
+        say $x > y$.
+        Then
+        \begin{align*}
+            |F(x) - F(y)| &= \left|\int_{a}^{x}f(t)\,dt - \int_{a}^{y}f(t)\,dt\right| \\
+            &= \left|\int_{y}^{x}f(t)\,dt\right| \leq \int_{y}^{x}|f(t)|\,dt \leq \int_{y}^{x}M\,dt = M|x - y|.
+        \end{align*}
+    \end{proof}
+\end{theorem}
+
+What is surprising here is that $f$ was assumed only to be regulated,
+so with potentially many discontinuities,
+but its integral is continuous,
+in fact even stronger,
+Lipschitz.
+
+However,
+for differentiability of $F$ we do have to assume a bit more.
+We
+(finally)
+state
+\begin{theorem}[Fundamental Theorem of Calculus]\footnote{FTOC.}
+    Let $f$ be a continuous function on $[a, b]$.
+    Then $F(x) := \int_{a}^{x}f(t)\,dt$ is a differentiable function on $[a, b]$
+    (one-sided at $a$ and $b$),
+    and we have $F'(x) = f(x)$ for all $x \in [a, b]$.
+    \begin{proof}
+        Let $c \in [a, b]$.
+        We need to show $\lim_{x \rightarrow c}\frac{F(x) - F(c)}{x - c} = f(c)$.
+        For $x \neq c$ we have by the mean value theorem for integrals
+        \[
+        \frac{F(x) - F(c)}{x - c} = \frac{\int_{a}^{x}f(t)\,dt - \int_{a}^{c}f(t)\,dt}{x - c} = \frac{\int_{c}^{x}f(t)\,dt}{x - c} = \frac{f(\xi_x)(x - c)}{x - c} = f(\xi_x)
+        \]
+        for some $\xi_x$ between $x$ and $c$.
+        But now as $x \rightarrow c$ we also have $\xi_x \rightarrow c$ and hence by continuity of $f$ we conclude $\lim_{x \rightarrow c}f(\xi_x) = f(c)$.
+        Note how we used the continuity of $f$ in a neighbourhood of $c$ to prove the result.
+
+        We now give a more involved proof which however shows something stronger:
+        If $f$ is regulated and continuous at the single point $x = c$ then $F(x) = \int_{a}^{x}f(t)\,dt$ is differentiable at $x = c$ with $F'(c) = f(c)$.
+
+        We again want to show $\lim_{x \rightarrow c}\frac{F(x) - F(c)}{x - c} = f(c)$.
+        So fix $\varepsilon > 0$.
+        We need to find $\delta > 0$ such that
+        \[
+        \left|\frac{F(x) - F(c)}{x - c} - f(c)\right| < \varepsilon\qquad\text{for all } x \in [a, b] \setminus \{c\}\text{ with } |x - c| < \delta.
+        \]
+        We multiply through with $(x - c)$.
+        Then
+        \begin{align*}
+            F(x) - F(c) - f(c)(x - c) &= \int_{a}^{x}f(t)\,dt - \int_{a}^{c}f(t)\,dt - f(c)(x - c) \\
+            &= \int_{c}^{x}f(t)\,dt - \int_{c}^{x}f(c)\,dt \\
+            &= \int_{c}^{x}(f(t) - f(c))\,dt.
+        \end{align*}
+        But now since $f$ is continuous at $c$ we find $\delta > 0$ such that $|f(t) - f(c)| < \varepsilon$ for all $t \in [a, b]$ with $|t - c| < \delta$.
+        Thus for all $x$ with $|x - c| < \delta$ we have
+        \begin{align*}
+            |F(x) - F(c) - f(c)(x - c)| &\leq \left|\int_{c}^{x}f(t) - f(c)\,dt\right| \\
+            &\leq\left|\int_{c}^{x}|f(t) - f(c)|\,dt\right| \\
+            &\leq\left|\int_{c}^{x}\varepsilon\,dt\right| \\
+            &= |x - c|\varepsilon.
+        \end{align*}
+        (Here we kept the modulus outside the integral to account for the case that $x$ might be smaller than $c$).
+        Diving both sides by $|x - c|$ then gives the claim.
+    \end{proof}
+\end{theorem}
+
+Another formulation of the Fundamental Theorem of Calculus reads as follows:
+If $g$ is continuous on $[a, b]$ and $g = f'$ for some function $f : [a, b] \rightarrow \R$,
+then
+\[
+f(x) = f(a) + \int_{a}^{x}g(t)\,dt.
+\]
+Recall that $F(x)$ is called an anti-derivative of $f(x)$.
+We have shown that for continuous functions on an interval the anti-derivative exists!
+Furthermore,
+it is unique up to an additive constant
+(as an application of the mean value theorem),
+and we have
+\[
+\int_{a}^{b}f(x)\,dx = F(x)\mid_{a}^{b} = F(b) - F(a).
+\]
+
+\begin{remark}
+    You might wonder what can be said about differentiability of $F$ when $f$ is only regulated.
+    In that case one uses \autoref{pre:analy:thm:definintislipschitzcontonint} to show that for $F(x)$ at each point $c$ the left and right sided derivative $\lim_{x \rightarrow c ^ {\pm}}\frac{F(x) - F(c)}{x - c}$ exists and is equal to $f(c ^ {\pm}) := \lim_{x \rightarrow c ^ {\pm}}f(x)$
+    (which might or might not coincide).
+    The second proof given above extends;
+    one only has to replace $f(c)$ with $f(c ^ {\pm})$ and assume $x > c$ respectively $x < c$.
+\end{remark}
+
+For completeness we record the basic integration techniques \textit{Substitution} and \textit{Integration by Parts}.
+
+\begin{proposition}[Substitution Rule]
+    Let $f$ be a continuous function on an interval $I$ and let $g : [a, b] \rightarrow I$ continuously differentiable.
+    Then
+    \[
+    \int_{a}^{b}f(g(x))g'(x)\,dx = \int_{g(a)}^{g(b)}f(t)\,dt.
+    \]
+    \begin{proof}
+        Let $F$ be an anti-derivative of $f$ on $I$
+        (which exists by the fundamental theorem of calculus).
+        Then by the chain rule $F(g(x))$ is an anti-derivative of $f(g(x))g'(x)$ on $[a, b]$.
+        Hence the left hand side is equal to $F(g(b)) - F(g(a))$ which is also the right hand side since the image of $g$ contains the interval $[g(a), g(b)]$
+        (or $[g(b), g(a)]$ if $g(b) < g(a)$)
+        by the intermediate value theorem.
+    \end{proof}
+\end{proposition}
+
+\begin{proposition}[Integration by Parts]
+    Let $f$ and $g$ be two continuous functions on $[a, b]$ with $g$ being continuously differentiable.
+    Let $F$ be an anti-derivative of $f$ on $[a, b]$.
+    Then
+    \[
+    \int_{a}^{b}f(x)g(x)\,dx = F(x)g(x)\mid_{a}^{b} - \int_{a}^{b}F(x)g'(x)\,dx.
+    \]
+    \begin{proof}
+        By the product rule of differentiation we note that $F(x)g(x)$ is an anti-derivative of $f(x)g(x) + F(x)g'(x)$.
+        The claim follows by the fundamental theorem of calculus and linearity of the integral.
+    \end{proof}
+\end{proposition}
+
+We leave at that and will not discuss other techniques like \textit{partial fractions} etc.
+
 \subsection{Functions via integrals}
+
+It is very attractive to construct functions as integrals
+\[
+F(x) := \int_{a}^{x}f(t)\,dt,
+\]
+in particular when there is no 'explicit' or 'elementary' anti-derivative of $f(x)$.
+We give one example by discussing in detail
+\[
+L(x) := \int_{1}^{x}\frac{1}{t}\,dt\qquad(x > 0).
+\]
+Of course $L(x) = \log(x)$ but we will ignore this for the moment but rather derive all the properties of the logarithm and its inverse,
+the exponential,
+from this.
+This approach to the logarithm and exponential has the advantage that we don't need to use any power series.
+Analogous to \autoref{pre:analy:thm:propoflogarithmspowseries} we have
+\begin{theorem}\phantom{}
+    \begin{enumerate}[label = (\roman*)]
+        \item $L(1) = 0$.
+        \item The logarithm is differentiable with $L'(x) = \frac{1}{x}$.
+        \item For all $x, y > 0$ we have
+        \begin{align*}
+            L(xy) &= L(x) + L(y); \\
+            L\left(\frac{1}{x}\right) &= -L(x).
+        \end{align*}
+        \item $L(x)$ is strictly monotone increasing.
+        \item
+        \[
+        \liminfty[x]L(x) = \infty\qquad\text{and}\qquad\lim_{x \rightarrow 0 ^ {+}}L(x) = -\infty.
+        \]
+    \end{enumerate}
+    \begin{proof}
+        (i),
+        (ii),
+        and (iv) are clear.
+        For (iii) we could use the argument given in \autoref{pre:analy:thm:propoflogarithmspowseries}
+        (fix $y$ and take derivatives with respect to $x$),
+        but we can also use the substitution rule and obtain
+        \begin{align*}
+            L(xy) &= \int_{1}^{xy}\frac{1}{t}\,dt \\
+            &= \int_{1 / x}^{y}\frac{1}{t'}\,dt' \\
+            &= \int_{1}^{y}\frac{1}{t'}\,dt' + \int_{1 / x}^{1}\frac{1}{t'}\,dt' \\
+            &= \int_{1}^{y}\frac{1}{t'}\,dt' + \int_{1}^{x}\frac{1}{u}\,du \\
+            &= L(y) + L(x).
+        \end{align*}
+        ($t' = t / x$; $u = xt'$).
+        Then consider $y = 1 / x$ to see $L(1 / x) = -L(x)$.
+        For (v) note that the inequality holds for $x = 0$.
+        But then taking derivatives gives $1 / (1 + x) \leq 1$ which is true.
+        For (vi) note $\log(2) = \int_{1}^{2}\frac{1}{t}\,dt \geq \int_{1}^{2}\frac{1}{2}\,dt = 1 / 2$.
+        Hence by (iii) we conclude $\log(2 ^ n) = n\log(2) > n / 2$.
+        For (vii) we need to show that given $C$ there exists an $N$ such that $\log(x) \geq C$ for all $x \geq N$.
+        For this find by (vi) an $n$ such that $\log(2 ^ n) \geq C$.
+        Then since the logarithm is increasing we have $\log(x) \geq \log(2 ^ n) \geq C$ for all $x \geq 2 ^ n$.
+        The second claim now follows from $L\left(\frac{1}{x}\right) = -L(x)$.
+    \end{proof}
+\end{theorem}
+
+Of course we have $L(x) = \log(x)$,
+where $\log(x)$ is defined as the inverse function of $\exp(x)$ as we have in previous sections.
+Indeed,
+their value at $x = 1$ coincide and so do their derivatives.
+In any case,
+since $L(1) = 0$ and $\liminfty L(x) = \infty$ and using the intermediate value theorem we can now make the following
+\begin{definition}[Euler's constant again]
+    We denote the unique number $x > 0$ such that
+    \[
+    L(x) = 1
+    \]
+    by $e$.
+\end{definition}
+
+We can then define the inverse function $E(x)$ of $L(x)$
+(which is of course equal to $\exp(x) = e ^ x$)
+and derive all the properties from the ones of the logarithm.
+For example,
+$E(x)$ as the inverse of a differentiable function on an interval with non-zero derivative is differentiable with
+\[
+E'(x) = \frac{1}{L'(E(x))} = \frac{1}{1 / E(x)} = E(x).
+\]
+We will not carry this out further.
+\begin{remark}
+    In a similar way we can consider
+    \[
+    x \mapsto \int_{0}^{x}\frac{1}{\sqrt{1 - t ^ 2}}\,dt,\qquad x \mapsto \int_{0}^{x}\frac{1}{1 + t ^ 2}\,dt,
+    \]
+    derive their properties and then introduce $\sin(x)$ and $\tan(x)$ as their inverse functions etc.
+
+    In the problem sheets we see that this works out nicely except for one crucial aspect:
+    One doesn't see the periodicity of the trigonometric functions directly.
+    For this one would need to consider $F(x)$ as a function of a complex variable $x$
+    (at least implicitly).
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Uniform convergence and integration}
 
