@@ -4616,67 +4616,143 @@ We will not carry this out further.
     (at least implicitly).
 \end{remark}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \subsection{Uniform convergence and integration}
 
+\begin{theorem}
+    Let $I = [a, b]$ and $(f_n)$ be a sequence of regulated functions on $I$ with $f_n \rightarrow f$ uniformly.
+    Then:
+    \begin{enumerate}[label = (\roman*)]
+        \item The limit function $f$ is regulated and
+        
+        \item
+        \[
+        \int_{a}^{b}f(x)\,dx = \liminfty\int_{a}^{b}f_n(x)\,dx.
+        \]
+    \end{enumerate}
+    \begin{proof}
+        Starting with (i).
+        Let $\varepsilon > 0$.
+        Since $f_n \rightarrow f$ uniformly,
+        we can find $N$ such that for all $n \geq N$ and all $x \in I$ we have
+        \[
+        |f(x) - f_n(x)| < \varepsilon.
+        \]
+        Furthermore,
+        for each regulated function $f_n$ there exists a step function $g_n$ such that $|f_n(x) - g_n(x)| < \varepsilon$ for all $x \in [a, b]$,
+        see \autoref{pre:analy:lem:seqfreecritforbereg}.
+        We claim that $g_n \rightarrow f$ uniformly.
+        Indeed,
+        for all $x \in I$ and $n \geq N$,
+        \[
+        |f(x) - g_n(x)| \leq |f(x) - f_n(x)| + |f_n(x) - g_n(x)| < \varepsilon + \varepsilon = 2\varepsilon.
+        \]
+        This gives (i).
+
+        For (ii) we have for $n \geq N$
+        \begin{align*}
+            \left|\int_{a}^{b}f(x)\,dx - \int_{a}^{b}f_n(x)\,dx\right| &= \left|\int_{a}^{b}f(x) - f_n(x)\,dx\right| \\
+            &\leq \int_{a}^{b}|f(x) - f_n(x)|\,dx \\
+            &< \int_{a}^{b}\varepsilon\,dx \\
+            &= (b - a)\varepsilon.
+        \end{align*}
+    \end{proof}
+\end{theorem}
+
+\begin{remark}
+    If $f_n$ is a sequence of step functions converging uniformly to $f$,
+    then the above theorem is the definition of the integral of a regulated function.
+\end{remark}
+
+\begin{remark}
+    The pointwise limit of a sequence of regulated functions need not be regulated.
+    Set
+    \[
+    f_n(x) = \begin{cases}
+        1 &\text{if } x \in \left[0, \frac{1}{(2n + 1 / 2)\pi}\right); \\
+        \sin(1 / x) &\text{if } x \in \left[\frac{1}{(2n + 1 / 2)\pi}, 1\right].
+    \end{cases}
+    \]
+    Then all $f_n$ are continuous,
+    in particular regulated,
+    but we have seen that the limit function is not.
+\end{remark}
+
+\begin{example}[The Weierstrass function integrated]
+    Earlier we considered $f(x) = \infsumo\frac{1}{2 ^ k}\cos(15 ^ k\pi x)$ and used the Weierstrass $M$-test to show that $f(x)$ converges uniformly to a continuous function
+    (and indicated that it is not differentiable at any point).
+
+    But we can integrate $f(x)$!
+    By uniform convergence we obtain
+    \begin{align*}
+        \int_{0}^{1 / 2}f(x)\,dx &= \infsumo\int_{0}^{1 / 2}\frac{1}{2 ^ k}\cos(15 ^ k\pi x)\,dx \\
+        &= \infsumo\frac{1}{30 ^ k}\sin(15 ^ k\pi / 2) \\
+        &= \frac{1}{\pi}\infsumo\frac{(-1) ^ k}{30 ^ k} \\
+        &= \frac{1}{\pi}\frac{1}{1 + 1 / 30} \\
+        &= \frac{30}{31\pi}.
+    \end{align*}
+    Here we used $\sin(15 ^ k\pi / 2) = (-1) ^ k$ which arises from a little fact from elementary number theory that we can write $15 ^ k = 4\ell + (-1) ^ k$ for some $\ell \in \N$.
+    Of course,
+    in general we cannot expect to get such a simple answer from the integral of a complicated function.
+\end{example}
+
 \subsection{Pointwise convergence and integration}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Improper integrals}
 
