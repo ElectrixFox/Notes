@@ -3829,7 +3829,7 @@ We give another class of regulated functions:
     \end{proof}
 \end{lemma}
 
-\begin{proposition}[Regulated COLT]
+\begin{proposition}[Regulated COLT]\label{pre:analy:prop:regulatedcolt}
     Let $f$ and $g$ be two regulated functions on $[a, b]$,
     say $f, g$ respectively are the uniform limit of the step functions $f_n, g_n$ respectively.
     Let $c \in \R$.
@@ -4208,10 +4208,155 @@ if $U_f = L_f$.
 \end{itemize}
 
 \subsection{Regulated integral: Basic properties}
+We now show how one can establish from our point of view some of the basic properties of the integral.
 
+\begin{theorem}[Properties of the regulated integral - 'COLT for integrals']\label{pre:analy:thm:coltforintegrals}
+    Let $f$ and $g$ be regulated functions on $[a, b]$.
+    Then
+    \begin{enumerate}[label = (\roman*)]
+        \item\textbf{Linearity}:
+        For $c \in \R$,
+        \begin{align*}
+            \int_{a}^{b}cf(x)\,dx &= c\int_{a}^{b}f(x)\,dx; \\
+            \int_{a}^{b}f(x) + g(x)\,dx &= \int_{a}^{b}f(x)\,dx + \int_{a}^{b}g(x)\,dx. \\
+        \end{align*}
 
+        \item\textbf{Monotonicity}:
+        If $f(x) \leq g(x)$ for all $x \in [a, b]$ then
+        \[
+        \int_{a}^{b}f(x)\,dx \leq \int_{a}^{b}g(x)\,dx.
+        \]
+        In particular,
+        if $f(x) \geq 0$ for all $x \in [a, b]$,
+        then also
+        \[
+        \int_{a}^{b}f(x)\,dx \geq 0.
+        \]
+        Furthermore,
+        set $m = \inf_{x \in [a, b]}\{f(x)\}$ and $M = \sup_{x \in [a, b]}\{f(x)\}$.
+        Then
+        \[
+        m(b - a) \leq \int_{a}^{b}f(x)\,dx \leq M(b - a).
+        \]
+        Finally,
+        \[
+        \left|\int_{a}^{b}f(x)\,dx\right| \leq \int_{a}^{b}|f(x)|\,dx.
+        \]
 
+        \item\textbf{Additivity}:
+        For any $c \in (a, b)$,
+        $f$ is also regulated on $[a, c]$ and on $[c, b]$,
+        and we have
+        \[
+        \int_{a}^{b}f(x)\,dx = \int_{a}^{c}f(x)\,dx +  \int_{c}^{b}f(x)\,dx.
+        \]
+    \end{enumerate}
+\end{theorem}
 
+\begin{remark}
+    Note that in \autoref{pre:analy:prop:regulatedcolt} we have already shown that $f$ and $g$ are regulated then $cf$,
+    $f + g$ and $|f|$ are also regulated and hence their integrals exist.
+    This is one of the advantages of the approach to integrals via regulated functions.
+    For the Riemann integral the analogous statements are more tedious to prove since one always needs to establish the Riemann-integrability of the function involved as well.
+\end{remark}
+
+\begin{proof}
+    The strategy for all of this is the same:
+    We first note that the statements are all true for $f$ and $g$ step functions.
+    To see this one uses a common refinement of the underlying partitions for $f$ and $g$
+    (and for (iii) those which include $c$).
+
+    Now let $f$ and $g$ be arbitrary regulated functions.
+    We let $f_n(x)$ and $g_n(x)$ be sequences of step functions which converge uniformly to $f(x)$ and $g(x)$.
+    So given $\varepsilon > 0$ we have an $N$ such that
+    \[
+    |f(x) - f_n(x)| < \varepsilon\quad\text{and}\quad|g(x) - g_n(x)| < \varepsilon\qquad\text{for all } x \in [a, b]\text{ and all } n \geq N.
+    \]
+    Again we can use a common refinement of the underlying partitions for $f_n$ and $g_n$ for their integrals.
+
+    For (i) we note that $cf_n(x)$ and $f_n(x) + g_n(x)$ are step functions and converge uniformly to $cf(x)$ and $f(x) + g(x)$ respectively,
+    see \autoref{pre:analy:prop:regulatedcolt}.
+    Then
+    \begin{align*}
+        I(cf) &= \liminfty I(cf_n) = \liminfty cI(f_n) = c\liminfty I(f_n) = cI(f); \\
+        I(f + g) &= \liminfty I(f_n + g_n) = \liminfty I(f_n) + I(g_n) = \liminfty I(f_n) + \liminfty I(g_n) \\
+        &= I(f) + I(g).
+    \end{align*}
+    For (iii),
+    we first note that $f_n$ are step functions on both $[a, c]$ and $[c, b]$ and converge uniformly to $f$ on both subintervals.
+    Thus $f$ is indeed regulated on $[a, c]$ and $[c, b]$.
+    Furthermore,
+    \[
+    I(f_n; a, b) = I(f_n; a, c) + I(f_n; c, b) \rightarrow I(f; a, c) + I(f; c, b).
+    \]
+    For (ii) we use linearity to reduce to the case $f(x) \geq 0$.
+    ($I(f) \geq I(g) \iff I(f - g) = I(f) - I(g) \geq 0$).
+    In that case we have $f_n(x) > -\varepsilon$ for all $x \in [a, b]$ and $n \geq N$.
+    Hence
+    \[
+    I(f_n) = \sum_{k = 0}^{M - 1}f_n(x_k ^ {*})(x_{k + 1} - x_k) > -\varepsilon\sum_{k = 0}^{M - 1}(x_{k + 1} - x_k) = -(b - a)\varepsilon.
+    \]
+    But this means that we can make $I(f_n)$ bigger than any negative number.
+    Hence in the limit we must have $I(f) = \liminfty I(f_n) \geq 0$ as claimed.
+    The other claims follow from that.
+    Indeed,
+    we have $m \leq f(x) \leq M$ and hence $m(b - a) = I(m) \leq I(f) \leq I(M) = M(b - a)$.
+    Finally,
+    $|f(x)| \geq \pm f(x)$ and hence $I(|f|) \geq I(\pm f) = \pm I(f)$.
+    Thus $I(|f|) \geq |I(f)|$.
+\end{proof}
+
+\begin{theorem}[Mean Value Theorem for integrals]
+    Let $f$ be a continuous function on $[a, b]$.
+    Then there exists $c \in [a, b]$ such that
+    \[
+    \int_{a}^{b}f(x)\,dx = f(c)(b - a).
+    \]
+    \begin{proof}
+        This follows directly from \autoref{pre:analy:thm:coltforintegrals}(ii) and the intermediate value theorem:
+        There must exist a constant $C$ such that $\int_{a}^{b}f(x)\,dx = C(b - a)$ with $\min_{x \in [a, b]}\{f(x)\} \leq C \leq \max_{x \in [a, b]}\{f(x)\}$.
+        But since $f$ is continuous there exists a $c \in (a, b)$ such that $f(c) = C$.
+    \end{proof}
+\end{theorem}
+
+\textit{Note that we can view the mean value theorem for integrals as a way of expressing the area under the graph by the area of a rectangle.
+Furthermore we can view $f(c)$ as the 'mean value' of $f$ in $[a, b]$.}
+
+\begin{example}
+    The condition '$f$ continuous' in the theorem is necessary.
+    Consider the step function $f : [0, 1] \rightarrow \R$ given by
+    \[
+    f(x) = \begin{cases}
+        0 & \text{if } x \in [0, 1 / 2], \\
+        1 & \text{if } x \in (1 / 2, 1].
+    \end{cases}
+    \]
+    Note $f$ as a step function is not continuous.
+    Then we have $\int_{0}^{1}f(x)\,dx = 1 / 2$ but $f$ only takes the values $0$ and $1$.
+\end{example}
+
+The following is a very useful sharpening of \autoref{pre:analy:thm:coltforintegrals}(ii) for continuous functions.
+
+\begin{proposition}
+    Let $f(x)$ be a continuous function on $[a, b]$ such that $f(x) \geq 0$ for all $x \in [a, b]$ and $f(c) > 0$ for some $c \in [a, b]$.
+    Then
+    \[
+    \int_{a}^{b}f(x)\,dx > 0.
+    \]
+    \begin{proof}
+        By continuity there exists a non-trivial interval $[\alpha, \beta]$ containing $c$
+        (possibly as an endpoint)
+        such that $f(x) \geq C / 2$ where $C = f(c) > 0$.
+        (Indeed,
+        pick $\varepsilon = C / 2$ and find $\delta > 0$ such that $|f(x) - C| < C / 2$ for all $x \in [a, b]$ with $|x - c| < \delta$.
+        Then $\alpha = \max\{c - \delta, a\}$ and $\beta = \min\{c + \delta, b\}$ does it).
+        Then
+        \[
+        \int_{a}^{b}f(x)\,dx = \int_{a}^{\alpha}f(x)\,dx + \int_{\alpha}^{\beta}f(x)\,dx + \int_{\beta}^{b}f(x)\,dx \geq 0 + \frac{C}{2}(\beta - \alpha) + 0 > 0,
+        \]
+        as claimed.
+    \end{proof}
+\end{proposition}
 
 
 
