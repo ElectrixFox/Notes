@@ -868,6 +868,82 @@ we need to tweak the process.
 If the root is repeated say $k$ times,
 then the expression $d_1\alpha ^ n + \dotsi + d_k\alpha_k ^ n$ in the general solution is replaced by $(e_1 + e_2n + \dotsi + e_kn ^ {k - 1})\alpha ^ n$ for constants $e_1, \dotsc, e_k$.
 
+Here I would like to add another example showing how to do this in the complex case,
+it is quite a bit more fiddly but at its core is the same method.
+\begin{example}
+    Solve the recurrence relation:
+    \[
+    a_n = a_{n - 1} - a_{n - 2},
+    \]
+    where $a_0 = 1, a_1 = 0$.
+    \begin{solution}
+        Forming the usual characteristic equation
+        \[
+        x ^ 2 - x + 1 = 0
+        \]
+        with roots
+        \[
+        \alpha_1 = \frac{1 + \sqrt{3}i}{2}, \alpha_2 = \frac{1 - \sqrt{3}i}{2}.
+        \]
+        Now we have
+        \[
+        a_n = d_1(\alpha_1) ^ n + d_2(\alpha_2) ^ n,
+        \]
+        therefore we get
+        (when applying the conditions)
+        \begin{align*}
+            a_0 = 1 &= d_1 + d_2 \\
+            a_1 = 0 &= d_1\alpha_1 + d_2\alpha_2.
+        \end{align*}
+        Rewriting the roots to
+        \begin{align*}
+            \alpha_1 &= \frac{1 + \sqrt{3}i}{2} = e ^ {\frac{i\pi}{3}} \\
+            \alpha_2 &= \frac{1 - \sqrt{3}i}{2} = e ^ {-\frac{i\pi}{3}},
+        \end{align*}
+        this gets us
+        \[
+        a_n = d_1\left(e ^ {\frac{i\pi}{3}}\right) ^ n + d_2\left(e ^ {-\frac{i\pi}{3}}\right) ^ n.
+        \]
+        Applying our initial conditions,
+        \begin{align*}
+            a_1 &= 0 \\
+            &\iff \\
+            d_1\alpha_1 + d_2\alpha_2 &= 0 \\
+            &\iff \\
+            d_1e ^ {\frac{i\pi}{3}} + d_2e ^ {-\frac{i\pi}{3}} &= 0 \\
+            &\iff \\
+            d_1e ^ {\frac{i\pi}{3}} &= -d_2e ^ {-\frac{i\pi}{3}} \\
+            &\iff \\
+            d_1e ^ {\frac{2i\pi}{3}} &= -d_2 \\
+            \intertext{Using $d_1 + d_2 = 1 \iff d_2 = 1 - d_1$}
+            &\iff \\
+            d_1e ^ {\frac{2i\pi}{3}} &= d_1 - 1 \\
+            &\iff \\
+            d_1\left(1 - e ^ {\frac{2i\pi}{3}}\right) &= 1 \\
+            &\iff \\
+            d_1 &= \frac{1}{1 - e ^ {\frac{2i\pi}{3}}} \\
+            &\iff \\
+            d_1 &= \frac{1 - e ^ {-\frac{2i\pi}{3}}}{3}.
+        \end{align*}
+        We can now use this to see that
+        \[
+        d_1 = \frac{1 - \frac{1}{2} + \frac{\sqrt{3}}{2}}{3} = \frac{3 + \sqrt{3}i}{6} = \frac{1}{\sqrt{3}}e ^ {\frac{i\pi}{6}},
+        \]
+        and
+        \[
+        d_2 = \frac{3 - \sqrt{3}i}{6} = \frac{1}{\sqrt{3}}e ^ {-\frac{i\pi}{6}}.
+        \]
+        Finally we have the following
+        \begin{align*}
+            a_n &= d_1\alpha_1 ^ n + d_2\alpha_2 ^ n \\
+            &= \frac{1}{\sqrt{3}}e ^ {\frac{i\pi}{6}}e ^ {\frac{i\pi}{3}} + \frac{1}{\sqrt{3}}e ^ {-\frac{i\pi}{6}}e ^ {-\frac{i\pi}{3}} \\
+            &= \frac{2}{\sqrt{3}}\left(\frac{e ^ {\frac{i\pi}{6}(2n + 1)} + e ^ {-\frac{i\pi}{6}(2n + 1)}}{2}\right) \\
+            &= \frac{2}{\sqrt{3}}\cos\left(\frac{\pi}{6}(2n + 1)\right)
+        \end{align*}
+        solving the relation.
+    \end{solution}
+\end{example}
+
 \subsection{Solving inhomogeneous linear recurrence relations}
 Now assume we have the following.
 \begin{itemize}

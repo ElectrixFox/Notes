@@ -4739,9 +4739,83 @@ We start with a 'negative' one:
 
 On the other hand here is a 'positive' example:
 
+\begin{example}
+    Let $f_n(x) = x ^ n$ which we have seen to converge pointwise but not uniformly on $[0, 1]$ to a limit function
+    ($f(x) = 0$ for $x < 1$ and $f(1) = 1$).
+    Then
+    \[
+    \int_{0}^{1}f_n(x)\,dx = \int_{0}^{1}x ^ n\,dx = \frac{1}{n + 1} \rightarrow 0,
+    \]
+    which of course agrees with the integral of the limit function.
+    So in this case integration and pointwise convergence do interchange!
+\end{example}
 
+So what is the difference in these examples?
+In the first example,
+the maximum values $2 ^ {n - 3}$ of the $f_n$ are unbounded whereas in the second they are all bounded by $1$.
+We define the norm of a bounded function $f$ on an interval $I$ by
+\[
+\|f\| = \sup_{x \in I}\{|f(x)|\}.
+\]
+We state without proof
+\begin{theorem}[Theorem of Arzelá (-Osgood): Bounded Convergence]
+    Let $f_n$ be a sequence of regulated
+    (continuous if you prefer)
+    functions on $[a, b]$ converging pointwise to a limit function $f$.
+    Assume
+    \begin{enumerate}[label = (\roman*)]
+        \item The limit function of $f$ is regulated
+        (continuous);
 
+        \item There exists an $M$ such that $\|f_n\| \leq M$ for all $n$.
+    \end{enumerate}
+    Then
+    \[
+    \liminfty\int_{a}^{b}f_n(x)\,dx = \int_{a}^{b}\liminfty f_n(x)\,dx = \int_{a}^{b}f(x)\,dx.
+    \]
+\end{theorem}
 
+\begin{remark}
+    The proof is beyond the scope of this course
+    (but only just).
+    It is also
+    (probably)
+    better understood in the context of the much more general Lebesgue integral.
+    One decisive feature of the Lebesgue integral is that in
+    (the analogue)
+    of the bounded convergence theorem above one doesn't have to assume that the pointwise limit of the sequence of universally bounded Lebesgue integrable functions is Lebesgue integrable.
+    Rather it is automatic.
+    The Lebesgue integral hence overcomes one of the principle deficiencies of the Riemann/regulated integral.
+\end{remark}
+
+We give an example where the limit of the integrals exists but the
+(pointwise)
+limit function is not regulated/Riemann integrable.
+
+\begin{example}
+    For $n \in \N$ set
+    \[
+    d_n(x) = \begin{dcases*}
+        1 & if $x = p / 1$ rational with $|q| \leq n$ \\
+        0 & else.
+    \end{dcases*}
+    \]
+    Then $d_n(x)$ is a step function on $[0, 1]$
+    (there are only finitely many rational numbers on $[0, 1]$ with bounded denominator)
+    with
+    \[
+    \int_{0}^{1}d_n(x)\,dx = 0
+    \]
+    for all $n$
+    (in the subintervals between the partition points the $d_n$'s vanish).
+    In particular,
+    the limit $\liminfty\int_{0}1d_n(x)\,dx$ exists.
+    But the limit functions $d(x)$ is the Dirichlet function which is not regulated
+    (and also not Riemann integrable).
+    Thus the integral $\int_{0}^{1}d(x)\,dx$ is not defined in the theory we developed.
+
+    It turns out the Dirichlet function is Lebesgue integrable with integral $0$ which is an example that Bounded Convergence holds in the Lebesgue theory without having to assume that the pointwise limit is integrable.
+\end{example}
 
 
 
