@@ -4618,7 +4618,7 @@ We will not carry this out further.
 
 \subsection{Uniform convergence and integration}
 
-\begin{theorem}
+\begin{theorem}\label{pre:analy:thm:seqofreghasprops}
     Let $I = [a, b]$ and $(f_n)$ be a sequence of regulated functions on $I$ with $f_n \rightarrow f$ uniformly.
     Then:
     \begin{enumerate}[label = (\roman*)]
@@ -4696,9 +4696,48 @@ We will not carry this out further.
 \end{example}
 
 \subsection{Pointwise convergence and integration}
+We have seen that pointwise convergence does not necessarily preserve continuity and that uniform convergence is a better setting to establish limit theorems.
+However,
+pointwise convergence is too attractive and simple of a concept to not investigate its properties further.
 
+In this section we discuss how pointwise convergence relates to integration.
+We first give two illustrative examples.
+We start with a 'negative' one:
+\begin{example}
+    Let $f_n$ be the sequence of continuous functions on $[0, 2]$ defined by
+    \[
+    f_n(x) = \begin{cases}
+        4 ^ {n - 2}x, &\text{if } 0 \leq x \leq 1 / 2 ^ {n - 1}, \\
+        2 ^ {n - 3} - 4 ^ {n - 2}(x - 1 / 2 ^ {n - 1}), &\text{if } 1 / 2 ^ {n - 1} < x \leq 1 / 2 ^ {n - 2}, \\
+        0, &\text{if } 1 / 2 ^ {n - 2} < x \leq 2,
+    \end{cases}
+    \]
+    whose graphs are isosceles triangles of smaller and smaller base of length $1 / 2 ^ {n - 2}$ and larger and larger height $2 ^ {n - 3}$.
 
+    The functions $f_1, f_2, f_3, \dotsc$ converging to pointwise zero.
 
+    Then for all $n$,
+    we have
+    \[
+    \int_{0}^{2}f_n(x)\,dx = \frac{1}{2} \times \frac{1}{2 ^ {n - 2}} \times 2 ^ {n - 3} = \frac{1}{4}.
+    \]
+    However,
+    $f_n$ converges pointwise to the zero function $f = 0$,
+    since the width of the base shrinks to zero.
+    More precisely,
+    given $x \in (0, 2]$ we can find $N \in \N$ such that $1 / 2 ^ {N - 2} < x$ and therefore $f_n(x) = 0$ for all $n \geq N$ and for $x = 0$ we have $f_n(0) = 0$ for all $n$.
+    So
+    \[
+    0 = \int_{0}^{2}f(x)\,dx \neq \liminfty\int_{0}^{2}f_n(x),dx = 1 / 4.
+    \]
+    But \autoref{pre:analy:thm:seqofreghasprops} does not apply since the convergence $f_n \rightarrow f$ is not uniform:
+    If it was,
+    we would have $|f_n(x) - f(x)| = f_n(x) < \varepsilon$ for all $x$ and all sufficiently large $n$.
+    But this is clearly not true:
+    Each $f_n$ has the maximal value $2 ^ {n - 3}$ taken at $x_n = 1 / 2 ^ {n - 1}$.
+\end{example}
+
+On the other hand here is a 'positive' example:
 
 
 
