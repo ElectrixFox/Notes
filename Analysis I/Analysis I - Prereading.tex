@@ -4817,57 +4817,90 @@ limit function is not regulated/Riemann integrable.
     It turns out the Dirichlet function is Lebesgue integrable with integral $0$ which is an example that Bounded Convergence holds in the Lebesgue theory without having to assume that the pointwise limit is integrable.
 \end{example}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \subsection{Improper integrals}
+We extend the definition of the integral of a continuous function $f$ to the case that the underlying interval is either unbounded
+($f$ is defined on $(-\infty, a]$ or $[a, \infty)$)
+or that the interval is bounded but $f$ may be unbounded.
+In this case we speak of an improper integral of $f$ and give a definition via a limit procedure.
+Here is the precise definition.
+
+\begin{definition}
+    Let $f$ be a continuous function on an interval $I = [a, b)$ with $a < b$
+    (bounded domain)
+    or $b = \infty$
+    (unbounded domain).
+    We define the improper integral $\int_{a}^{b}f(x)\,dx$ by
+    \[
+    \int_{a}^{b}f(x)\,dx = \lim_{c \rightarrow b ^ {-}}\int_{a}^{c}f(x)\,dx
+    \]
+    and call the integral convergent respectively divergent depending on whether the limit exists.
+
+    The improper integrals over the bounded intervals $(a, b]$ and $(a, b)$ with $a < b$ and the unbounded intervals $(-\infty, b]$ and $\R$ are defined similarly.
+    However,
+    do note that for $(a, b)$ the improper integral is really the sum of two improper integrals
+    ($\int_{a}^{c}f(x)\,dx + \int_{c}^{b}f(x)\,dx$)
+    and hence involves two independent limits.
+\end{definition}
+
+\begin{remark}
+    Assume $f$ is continuous on the compact interval $[a, b]$.
+    Then we have both ordinary regulated integral of $f$ on $[a, b]$ and the improper integral on $[a, b)$.
+    $F(x) = \int_{a}^{x}f(t)\,dt$ is in particular continuous,
+    and we see that the two notions coincide:
+    \[
+    \lim_{x \rightarrow b ^ {-}}\int_{a}^{x}f(t)\,dt = \int_{a}^{b}f(t)\,dt.
+    \]
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
