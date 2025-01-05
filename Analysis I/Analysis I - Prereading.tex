@@ -4998,36 +4998,133 @@ The proof of this is straightforward and will be omitted
     Since this improper integral is absolutely convergent
     ($\int_{1}^{\infty}x ^ {-2}\,dx$ converges),
     it must also be convergent.
+
+    \item We define the function sine integral by
+    \[
+    \mathrm{Si}(x) := \int_{0}^{x}\frac{\sin{t}}{t}\,dt,
+    \]
+    which occurs
+    (not only)
+    in harmonic analysis/theorem of Fourier series.
+    Note that since $\lim_{t \rightarrow 0}\frac{\sin{t}}{t} = 1$ the integrand defines a continuous and hence integrable function on $\R$.
+
+    We will show that the improper integral $\displaystyle\liminfty[x]\mathrm{Si}(x) = \int_{0}^{\infty}\frac{\sin{t}}{t}\,dt$,
+    also called the Dirichlet integral,
+    is conditionally convergent.
+    It is enough to consider $\int_{\pi}^{\infty}\frac{\sin{t}}{t}\,dt$.
+    We first show convergence:
+    Integration by Parts leads to
+    \[
+    \int_{\pi}^{x}\frac{\sin{t}}{t}\,dt = -\left[\frac{\cos{t}}{t}\right]_{\pi}^{x} - \int_{\pi}^{x}\frac{\cos{t}}{t ^ 2}\,dt = -\frac{1}{\pi} - \frac{\cos{x}}{x} - \int_{1}^{x}\frac{\cos{t}}{t ^ 2}\,dt.
+    \]
+    (For this step we need to change the lower integration limit away from $0$.)
+    Since $\liminfty[x]\frac{\cos{x}}{x} = 0$
+    (squeezing!)
+    and by part (b) we obtain convergence.
+    One actually has
+    \[
+    \int_{0}^{\infty}\frac{\sin{t}}{t}\,dt = \frac{\pi}{2}.
+    \]
+    However,
+    $\displaystyle\int_{\pi}^{\infty}\left|\frac{\sin{t}}{t}\right|\,dt$ is divergent.
+    For this,
+    we first compute
+    \[
+    \int_{k\pi}^{(k + 1)\pi}\left|\frac{\sin{t}}{t}\right|\,dt > \frac{1}{(k + 1)\pi}\int_{k\pi}^{(k + 1)\pi}|\sin(t)|\,dt = \frac{2}{(k + 1)\pi}.
+    \]
+    But then
+    \[
+    \int_{\pi}^{(n + 1)\pi}\left|\frac{\sin{t}}{t}\right|\,dt = \sum_{k = 1}^{n}\int_{k\pi}^{(k + 1)\pi}\left|\frac{\sin{t}}{t}\right|\,dt > \sum_{k = 1}^{n}\frac{2}{(k + 1)\pi},
+    \]
+    which clearly diverges when $n \rightarrow \infty$.
+    So the improper integral is not absolutely convergent.
 \end{enumerate}
 
+Sometimes,
+it is a useful in the proof of convergence of an improper integral $\int_{a}^{b}f(x)\,dx$ to split up the interval,
+i.e.,
+to choose $c \in (a, b)$ and to prove separately that $\int_{a}^{c}f(x)\,dx$ and $\int_{c}^{b}f(x)\,dx$ are convergent.
 
+\begin{example}
+    Consider $\int_{0}^{\infty}f(x)\,dx$ with $f(x) = \log(x) / (1 + x ^ 3)$.
+    On $(0, 1]$,
+    we have $0 \leq |f(x)| \leq -\log(x)$ and the integral $\int_{0}^{1}f(x)\,dx$ is absolutely convergent,
+    by comparison with the convergent improper integral $\int_{0}^{1}\log(x)\,dx$.
 
+    Next,
+    we look at $\int_{1}^{\infty}f(x)\,dx$.
+    Since $\limas[x]{\log(x) / x}{0}$,
+    we can find $C > 0$ such that $0 \leq \log{x} / x \leq C$ for all $x \in [1, \infty)$,
+    i.e.,
+    $0 \leq \log{x} \leq Cx$.
+    This implies that
+    \[
+    |f(x)| \leq \frac{Cx}{1 + x ^ 3} \leq \frac{C}{x ^ 2}
+    \]
+    for all $x \in [1, \infty)$.
+    Then the integral $\int_{1}^{\infty}f(x)\,dx$ is also absolutely convergent,
+    by comparison with the convergent improper integral $\int_{1}^{\infty}\frac{1}{x ^ 2}\,dx$.
 
+    Combining both facts shows that the improper integral $\displaystyle\int_{0}^{\infty}\frac{\log(x)}{1 + x ^ 3}\,dx$ is convergent.
+\end{example}
 
+We finally give an application to infinite series,
+namely another convergence test which in certain cases can be very useful.
 
+\begin{theorem}[Integral Test]
+    Let $f : [N, \infty) \rightarrow [0, \infty)$ be monotone decreasing function.
+    Set $a_k = f(k)$.
+    Then
+    \[
+    \infsum{k = N}f(k)\text{ converges} \iff \int_{N}^{\infty}f(x)\,dx\text{ converges}.
+    \]
+    In fact,
+    we have
+    \begin{equation}\label{pre:analy:eq:6}
+        \infsum[k = N + 1]a_k \leq \int_{N}^{\infty}f(x)\,dx \leq \infsum[k = N]a_k \leq a_N + \int_{N}^{\infty}f(x)\,dx.
+    \end{equation}
+    \begin{proof}
+        Let $b_k = \int_{k}^{k + 1}f(x)\,dx$.
+        Then have
+        \[
+        0 \leq a_{k + 1} \leq b_k \leq a_k
+        \]
+        by monotonicity of the integral using that $f$ is monotone decreasing.
+        Note $\int_{N}^{\infty}f(x)\,dx = \infsum[k = n]b_k$.
+        Then applying the comparison test for infinite series with both inequalities in \eqref{pre:analy:eq:6} proves the theorem,
+        and we have
+        \[
+        \infsum[k = N + 1]a_k = \infsum[k = N]a_{k + 1} \leq \int_{N}^{\infty}f(x)\,dx \leq \infsum[k = N]a_k.
+        \]
+    \end{proof}
+\end{theorem}
 
+This has one very important direct application.
 
+\begin{corollary}
+    Let $\alpha \in \R$.
+    Then
+    \[
+    \infsum\frac{1}{k ^ {\alpha}}\text{ converges} \iff \alpha > 1.
+    \]
+    
+    \begin{proof}
+        For $\alpha = 1$ this is the divergent harmonic series.
+        So assume $\alpha \neq 1$ and let $f(x) = \frac{1}{x ^ {\alpha}}$ for $x \geq 1$.
+        Then $f$ is monotone decreasing and positive.
+        Moreover,
+        \[
+        F_k = \int_{1}^{k}x ^ {-\alpha}\,dx = \left.\frac{x ^ {1 - \alpha}}{1 - \alpha}\right|_{1}^{k} = -\frac{1}{\alpha - 1}\left(\frac{1}{k ^ {\alpha - 1}} - 1\right)\begin{cases}
+            \rightarrow\frac{1}{\alpha - 1} &\text{if } \alpha > 1 \\
+            \text{diverges} &\text{if } \alpha < 1.
+        \end{cases}
+        \]
+        This shows that by the integral test the series $\infsum 1 / k ^ {\alpha}$ is convergent if $\alpha > 1$ and divergent else.
+    \end{proof}
+\end{corollary}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{remark}
+    Note since $\log(x)$ is an anti-derivative of $1 / x$ we can also apply the integral test to give another proof of the divergence of the harmonic series: $\liminfty[x]\log(x) = \infty$.
+\end{remark}
 
 \end{document}
