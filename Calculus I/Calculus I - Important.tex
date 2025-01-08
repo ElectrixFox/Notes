@@ -1,0 +1,149 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\newcommand{\limas}[3][n]{#2 \rightarrow #3 \text{ as } #1 \rightarrow \infty}
+
+\title{Calculus I \\
+    \large Important Results}
+\author{Luke Phillips}
+\date{January 2025}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Functions}
+
+\begin{definition}[Even function]
+    A function $f$ is even if $\forall \pm x \in \Dom{f}$
+    \[
+    f(x) = f(-x).
+    \]
+\end{definition}
+
+\begin{definition}[Odd function]
+    A function $f$ is odd if $\forall \pm x \in \Dom{f}$
+    \[
+    f(x) = -f(-x).
+    \]
+\end{definition}
+
+\textbf{Horizontal line test}
+
+If no horizontal line intersects the graph of $f$ more than once then $f$ is injective,
+otherwise it is not.
+
+\newpage
+
+\section{Limits and continuity}
+
+\begin{definition}[Continuity at a point]
+    A function $f(x)$ is continuous at the point $x = a$ if the following properties all hold:
+    \begin{enumerate}[label = (\roman*)]
+        \item $f(a)$ exists.
+        
+        \item $\lim_{x \rightarrow a}f(x)$ exists.
+        
+        \item $\lim_{x \rightarrow a}f(x) = f(a)$.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[Continuity]
+    A function $f(x)$ is continuous if it is continuous at every point in its domain.
+\end{definition}
+
+\begin{proposition}[Two trigonometric limits]
+    \[
+    \lim_{x \rightarrow 0}\frac{\sin{x}}{x} = 1\qquad\text{and}\qquad\lim_{x \rightarrow 0}\frac{1 - \cos{x}}{x} = 0.
+    \]
+\end{proposition}
+
+For a function $f(x)$ with $L = \lim_{x \rightarrow a}f(x)$,
+we have the following discontinuities:
+
+\begin{definition}[Removable discontinuity]
+    $L$ exists but $f(a) \neq L$.
+    The discontinuity can be removed to make the continuous function
+    \[
+    g(x) = \begin{cases}
+        f(x) & \text{if } x \neq a \\
+        L & \text{if } x = a.
+    \end{cases}
+    \]
+\end{definition}
+
+\begin{definition}[Jump discontinuity]
+    Both $L ^ {+}$ and $L ^ {-}$ exist but $L ^ {+} \neq L ^ {-}$.
+\end{definition}
+
+\begin{definition}[Infinite discontinuity]
+    In this case at least one of $L ^ {+}$ or $L ^ {-}$ does not exist.
+\end{definition}
+
+\begin{theorem}[Intermediate Value Theorem]
+    If $f(x)$ is continuous on $[a, b]$ and $u$ is any number between $f(a)$ and $f(b)$ then $\exists c \in (a, b)$ such that $f(c) = u$.
+\end{theorem}
+
+\newpage
+
+\section{Differentiation}
+
+\begin{definition}[The derivative]
+    Given a function $f(x)$.
+    $f(x)$ is differentiable at $x = a$ if
+    \[
+    f'(a) = \lim_{h \rightarrow 0}\frac{f(a + h) - f(a)}{h}
+    \]
+    exists.
+\end{definition}
+
+\begin{proposition}[The Leibniz rule]
+    \[
+    D ^ n(fg) = \sum_{k = 0}^{n}\binom{n}{k}(D ^ kf)(D ^ {n - k}g).
+    \]
+\end{proposition}
+
+\begin{theorem}[Chain rule theorem]
+    If $g(x)$ is differentiable at $x$ and $f(x)$ is differentiable at $g(x)$ then the composition $(f \circ g)(x)$ is differentiable at $x$ with
+    \[
+    (f \circ g)'(x) = f'(g(x))g'(x).
+    \]
+    Using the Leibniz notation we have
+    \[
+    \frac{d}{dx}f(g(x)) = \frac{df}{dg}\frac{dg}{dx}.
+    \]
+\end{theorem}
+
+\begin{theorem}[L'H\^opital's rule]
+    Let $f(x)$ and $g(x)$ be differentiable on $I = (a - h, a) \cup (a, a + h)$ for some $h > 0$,
+    with $\lim_{x \rightarrow a}f(x) = \lim_{x \rightarrow a}g(x) = 0$.
+
+    If $\lim_{x \rightarrow a}\frac{f'(x)}{g(x)}$ exists and $g'(x) \neq 0\ \forall x \in I$ then
+    \[
+    \lim_{x \rightarrow a}\frac{f(x)}{g(x)} = \lim_{x \rightarrow a}\frac{f'(x)}{g'(x)}.
+    \]
+\end{theorem}
+
+For a function $f(x)$ defined in some interval $I$.
+\begin{definition}[Global maximum]
+    If there exists a constant $k_1$such that $f(x) \leq k_1\ \forall x \in I$ we say that $f(x)$ is bounded above in $I$ and we call $k_1$ an upper bound of $f(x)$ in $I$.
+
+    If there exists a point $x_1$ in $I$ such that $f(x_1) = k_1$ we say that the upper bound of $k_1$ is attained and we call $k_1$ the global maximum value of $f(x)$ in $I$.
+    
+\end{definition}
+
+
+
+
+
+
+
+
+
+\end{document}

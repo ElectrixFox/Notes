@@ -2870,6 +2870,33 @@ $\mathrm{span}\langle\mbf{u}_1, \dotsc, \mbf{u}_k\rangle = \{A\pmb{\lambda}\,|\,
         $\Pi = \mathrm{span}\langle\mbf{a, b}\rangle$.
     \end{enumerate}
 \end{example}
+\begin{center}
+\fbox{
+\begin{minipage}{0.8\textwidth}
+The following example is an application of the above example.
+This shows that if we have a collection of vectors $\mbf{u}_1, \dotsc, \mbf{u}_k$ inside $\R ^ n$,
+we can form a matrix $A = (\mbf{u}_1\ \dotsi\ \mbf{u}_k)$ such that the solution to $A\pmb{\lambda} = \mbf{b}$,
+where $\mbf{b} \in \mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_k)$,
+tells us if the vectors span $\R ^ n$.
+
+We can do this since
+\begin{align*}
+    \mbf{b} &= \lambda_1\mbf{u}_1 + \lambda_2\mbf{u}_2 + \dotsi + \lambda_k\mbf{u}_k \\
+    &=
+    \begin{pmatrix}
+        \mbf{u}_1 & \dotsi & \mbf{u}_k
+    \end{pmatrix}
+    \begin{pmatrix}
+        \lambda_1 \\
+        \vdots \\
+        \lambda_k
+    \end{pmatrix}
+\end{align*}
+which translates to $A\pmb{\lambda} = \mbf{b}$.
+\end{minipage}
+}
+\end{center}
+\hfill
 
 \begin{example}
     What is the span inside $\R ^ 3$ of
