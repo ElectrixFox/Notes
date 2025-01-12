@@ -459,6 +459,749 @@
     \]
 \end{theorem}
 
+\begin{definition}[The adjoint]
+    Given a square matrix $A$,
+    we define the adjoint matrix $\Adj(A)$ by
+    \[
+    (\Adj(A))_{ij} = (-1) ^ {i + j}\det(A_{j, i}).
+    \]
+\end{definition}
+
+\begin{remark}
+    The adjoint is the transpose of the matrix of signed cofactors.
+\end{remark}
+
+\begin{theorem}[Inverse by adjoint matrix]
+    Let $A \in M_n(\R)$ be non-singular.
+    Then the inverse $A ^ {-1}$ is given by
+    \[
+    A ^ {-1} = \frac{1}{\det A}\Adj(A).
+    \]
+\end{theorem}
+
+\begin{theorem}[Cramer's rule]
+    Let $A\mbf{x} = \mbf{b}$ be a linear system with a non-singular matrix $A \in M_n(\R)$.
+    The unique solution $\begin{pmatrix}
+        x_1 \\ \vdots \\ x_n
+    \end{pmatrix}$ is given by
+    \[
+    x_i = \frac{\det(\mbf{a}_1, \dotsc, \mbf{a}_{i - 1}, \mbf{b}, \mbf{a}_{i + 1}, \dotsc, \mbf{a}_n)}{\det A}.
+    \]
+    Here $\mbf{a}_\ell$ denotes (for a change) the $\ell$-th column vector of $A$.
+\end{theorem}
+
+\begin{theorem}[Area of parallelogram]
+    For $\mbf{v, w} \in \R ^ 2$ two vectors in the plane,
+    form the parallelogram $P$ with vertices $\mbf{0, v, w}$ and $\mbf{v + w}$.
+    Then
+    \[
+    \mathrm{area}(P) = |\det(\mbf{v, w})|.
+    \]
+\end{theorem}
+
+\begin{proposition}[Area of triangle]
+    The triangle with vertices $\mbf{a, b}$ and $\mbf{c}$ has area
+    \[
+    \frac{1}{2}|\det(\mbf{b - a, c - a})|.
+    \]
+\end{proposition}
+
+\begin{proposition}[Volume of parallelepiped]
+    The volume of the parallelepiped $P$ in $\R ^ 3$ spanned by the vectors $\mbf{u, v, w}$ is given by
+    \[
+    \mathrm{vol}(P) = |\det(\mbf{u, v, w})|.
+    \]
+\end{proposition}
+
+\begin{remark}
+    The volume of the $n$-dimensional parallelepiped $P$ spanned by the vectors $\mbf{v}_1, \dotsc, \mbf{v}_n$ is given by
+    \[
+    \mathrm{vol}(P) = |\det(\mbf{v}_1, \dotsc, \mbf{v}_n)|.
+    \]
+\end{remark}
+
+\newpage
+
+\section{Spanning sets and linear independence in \texorpdfstring{$\R ^ n$}{}}
+
+\begin{definition}[Vector subspace of $\R ^ n$]
+    A (non-empty) subset $U$ of $\R ^ n$ is called a vector subspace (or linear subspace) of $\R ^ n$ if it satisfies the following three conditions:
+    \begin{enumerate}[label = (\roman*)]
+        \item closure under addition:
+        if $\mbf{u}_1$ and $\mbf{u}_2$ are in $U$,
+        then $\mbf{u}_1 + \mbf{u}_2$ is also in $U$;
+        \item closure under scalar multiplication:
+        if $\mbf{u}$ is in $U$ and $\lambda$ is in $\R$,
+        then $\lambda\mbf{u}$ is in $U$;
+        \item existence of an origin:
+        the vector $\mbf{0}$ is in $U$.
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    The solution set of an arbitrary $m \times n$ homogeneous linear system $A\mbf{x} = \mbf{0}$ is a vector subspace of $\R ^ n$.
+\end{proposition}
+
+\begin{definition}[Linear combination]
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be vectors in $\R ^ n$.
+    A linear combination of these vectors is a vector $\mbf{u}$ of the form
+    \[
+    \mbf{u} = \lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k
+    \]
+    for some (real) scalars $\lambda_1, \dotsc, \lambda_k$. 
+\end{definition}
+
+\begin{definition}[Linear span]
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be $k$ vectors in $\R ^ n$.
+    Their (linear) span is the subset $U$ of $\R ^ n$ consisting of all linear combinations of these vectors.
+    So
+    \[
+    U = \{\lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k\quad\lambda_1, \dotsc, \lambda_k \in \R\}.
+    \]
+    Conversely,
+    we say that such a $U$ is spanned by $\mbf{u}_1, \dotsc, \mbf{u}_k$ and write $U = \mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_k)$.
+    Equivalently,
+    $\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ is called a spanning set of $U$.
+\end{definition}
+
+\begin{proposition}
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_k \in \R ^ n$ be $k$ vectors,
+    and let $A = (\mbf{u}_1, \dotsc, \mbf{u}_k) \in M_{n, k}(\R)$ be the associated matrix of column vectors.
+    Then we have
+    \[
+    \lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k = A\pmb{\lambda},
+    \]
+    where $\pmb{\lambda} = \begin{pmatrix}
+        \lambda_1 \\ \vdots \\ \lambda_k
+    \end{pmatrix} \in \R ^ k$ is the column vector of the $\lambda_j$.
+    Moreover,
+    we have
+    {
+    \small
+    \[
+    span(\mbf{u}_1, \dotsc, \mbf{u}_k) = \{\mbf{u} \in \R ^ n\,:\,\text{The system } A\pmb{\lambda} = \mbf{u}\text{ has a solution}\} = \{A\pmb{\lambda}:\pmb{\lambda} \in \R ^ k\}.
+    \]
+    }
+\end{proposition}
+
+\begin{lemma}
+    The linear span $U$ of any collection $\mbf{u}_1, \dotsc, \mbf{u}_k$ of vectors is a vector subspace of $\R ^ n$.
+\end{lemma}
+
+\begin{lemma}
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_k \in \R ^ n$ and assume that one of the vectors,
+    say $\mbf{u}_1$,
+    can be expressed as a linear combination of the others.
+    Then
+    \[
+    \mathrm{span}(\mbf{u}_1, \mbf{u}_2, \dotsc, \mbf{u}_k) = \mathrm{span}(\mbf{u}_2, \dotsc, \mbf{u}_k).
+    \]
+\end{lemma}
+
+\begin{definition}[Linear independence]
+    The vectors $\mbf{u}_1, \dotsc, \mbf{u}_k$ are said to be linearly independent if the only solution to the equation
+    \[
+    \lambda_1\mbf{u}_1 + \dotsi + \lambda_k\mbf{u}_k = \mbf{0}\quad\text{if}\quad\lambda_1 = \lambda_2 = \dotsi = \lambda_k = 0.
+    \]
+\end{definition}
+
+\begin{corollary}
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be $k$ vectors in $\R ^ n$ and let $A = (\mbf{u}_1, \dotsc, \mbf{u}_k) \in M_{n, k}(\R)$ be the associated matrix of column vectors.
+    Then
+    {
+    \small
+    \[
+    \mbf{u}_1, \dotsc, \mbf{u}_k\text{ are linear independent} \iff \text{The system } A\pmb{\lambda} = \mbf{0}\text{ has no non-trivial solution}.
+    \]
+    }
+\end{corollary}
+
+\begin{lemma}
+    A pair of (non-zero) vectors $\mbf{u}, \mbf{v}$ in $\R ^ n$ are linearly dependent if and only if there is $\lambda \in \R$ so that $\mbf{v} = \lambda\mbf{u}$.
+    In particular,
+    any two (non-zero) non-collinear vectors are always linear independent.
+\end{lemma}
+
+\begin{proposition}
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be $k$ linear independent vectors in $\R ^ n$ and let $\mbf{u} \in \R ^ n$ such that
+    \[
+    \mbf{u} \notin \mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_k).
+    \]
+    Then
+    \[
+    \mbf{u}_1, \dotsc, \mbf{u}_k, \mbf{u}\text{ are linear independent}.
+    \]
+\end{proposition}
+
+\newpage
+
+\section{Real vector spaces}
+
+\begin{definition}[A (real) vector space]
+    A (real) vector space is a non-empty set $V$ together with two operations:
+    \begin{enumerate}[label = (\roman*)]
+        \item Addition:
+        This is a function
+        \[
+        V \times V \rightarrow V
+        \]
+        (Given any $\mbf{u}$ and $\mbf{v}$ in $V$,
+        we write their sum as $\mbf{u + v}$);
+        \item Scalar multiplication:
+        This is a function
+        \[
+        \R \times V \rightarrow V
+        \]
+        (Given $\mbf{u} \in V$ and $\lambda \in \R$ we write the multiplication of $\mbf{u}$ by $\lambda$ as $\lambda\mbf{u}$).
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}[Axioms of addition and scalar multiplication for a real vector space]\phantom{}
+
+    \textbf{Axioms for addition:}
+    \begin{enumerate}[label = (\roman*)]
+        \item Existence of additive identity:
+        there is a vector $\mbf{0}$ in $V$ so that $\mbf{v + 0} = \mbf{v} = \mbf{0 + v}$ for all $\mbf{v}$ in $V$;
+        \item Commutativity:
+        $\mbf{v + w} = \mbf{w + v}$ for all $\mbf{v}$ and $\mbf{w}$ in $V$;
+        \item Existence of additive inverses:
+        for each $\mbf{v}$ in $V$ there is an element $-\mbf{v}$ in $V$ such that $\mbf{v} + (-\mbf{v}) = \mbf{0} = (-\mbf{v}) + \mbf{v}$;
+        \item Associativity:
+        $\mbf{u} + (\mbf{v + w}) = (\mbf{u + v}) + \mbf{w}$ for all $\mbf{u, v, w} \in V$.
+    \end{enumerate}
+
+    \textbf{Axioms for scalar multiplication:}
+    \begin{enumerate}[label = (\roman*)]
+        \item $0\mbf{v} = \mbf{0}$ for all $\mbf{v}$ in $V$;
+        \item $1\mbf{v} = \mbf{v}$ for all $\mbf{v}$ in $V$;
+        \item Associativity:
+        $(\lambda\mu)\mbf{v} = \lambda(\mu\mbf{v})$ for all $\lambda, \mu$ in $\R$ and for all $\mbf{v}$ in $V$;
+        \item Distributivity:
+        For all $\lambda, \mu \in \R$ and for all $\mbf{v, w} \in V$ we have
+        \begin{enumerate}[label = \alph*)]
+            \item $(\lambda + \mu)\mbf{v} = \lambda\mbf{v} + \mu\mbf{v}$;
+            \item $\lambda(\mbf{v + w}) = \lambda\mbf{v} + \lambda\mbf{w}$.
+        \end{enumerate}
+    \end{enumerate}
+\end{proposition}
+
+\begin{definition}[Vector subspace]
+    A vector subspace of a vector space $V$ is a non-empty subset that is itself a vector space with respect to the same addition and multiplication operations of $V$.
+\end{definition}
+
+\begin{proposition}[Subspace criterion]
+    A non-empty subset $U$ of a vector space $V$ is a vector subspace of $V$ if and only if it satisfies the following three conditions:
+    \begin{enumerate}[label = (\roman*)]
+        \item closure under addition:
+        if $\mbf{u}_1$ and $\mbf{u}_2$ are in $U$,
+        then $\mbf{u}_1 + \mbf{u}_2$ is also in $U$;
+        \item closure under scalar multiplication:
+        if $\mbf{u}$ is in $U$ and $\lambda$ is in $\R$,
+        then $\lambda\mbf{u}$ is in $U$;
+        \item existence of an origin:
+        the vector $\mbf{0}$ is in $U$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{definition}[Basis]
+    A (finite) basis for a vector space $V$ is a finite subset of vectors $\{\mbf{v}_1, \mbf{v}_2, \dotsc, \mbf{v}_k\}$ in $V$ such that
+    \begin{enumerate}[label = (\roman*)]
+        \item the vectors $\mbf{v}_1, \mbf{v}_2, \dotsc, \mbf{v}_k$ are linearly independent,
+        and
+        \item $V = \mathrm{span}(\mbf{v}_1, \mbf{v}_2, \dotsc, \mbf{v}_k)$.
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be $k$ vectors in a vector space $V$.
+    Then $\mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_k)$ is a vector subspace of $V$.
+\end{lemma}
+
+\begin{lemma}
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be vectors in a vector space $V$ and assume that one of the vectors,
+    say $\mbf{u}_1$,
+    can be expressed as a linear combination of the others.
+    Then
+    \[
+    \mathrm{span}(\mbf{u}_1, \mbf{u}_2, \dotsc, \mbf{u}_k) = \mathrm{span}(\mbf{u}_2, \dotsc, \mbf{u}_k).
+    \]
+\end{lemma}
+
+\begin{lemma}
+    Suppose that the set $\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ is not linearly independent.
+    Then for some $1 \leq i \leq k$,
+    we have that
+    \[
+    \mbf{u}_i \in \mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_{i - 1}, \mbf{u}_{i + 1}, \dotsc, \mbf{u}_k).
+    \]
+    Then in particular
+    \[
+    \mathrm{span}(\mbf{u}_1, \mbf{u}_2, \dotsc, \mbf{u}_k) = \mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_{i - 1}, \mbf{u}_{i + 1}, \dotsc, \mbf{u}_k).
+    \]
+\end{lemma}
+
+\begin{lemma}
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be $k$ linearly independent vectors in a vector space $V$ and let $\mbf{u} \in V$ such that
+    \[
+    \mbf{u} \notin \mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_k).
+    \]
+    Then
+    \[
+    \mbf{u}_1, \dotsc, \mbf{u}_k, \mbf{u}\text{ are linearly independent}.
+    \]
+\end{lemma}
+
+\begin{theorem}[Existence of finite basis]
+    Every vector space that is spanned by finitely many vectors has a basis.
+\end{theorem}
+
+\begin{theorem}["What is a basis?"]
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be vectors in a vector space $V$.
+    Then the following statements are
+    (pairwise)
+    equivalent:
+    \begin{enumerate}[label = (\roman*)]
+        \item The vectors $\mbf{u}_1, \dotsc, \mbf{u}_k$ form a basis of $V$.
+        \item The vectors $\mbf{u}_1, \dotsc, \mbf{u}_k$ form a maximal linear independent set in $V$,
+        i.e., one cannot add another vector in $V$ to the $\mbf{u}_i$,
+        and still obtain a linearly independent set.
+        \item Any vector $\mbf{u}$ in $V$ can be written uniquely as
+        \[
+        \mbf{u} = \lambda_1\mbf{u}_1 + \lambda_2\mbf{u}_2 + \dotsi + \lambda_k\mbf{u}_k.
+        \]
+        \item The vectors $\mbf{u}_1, \dotsc, \mbf{u}_j$ form a minimal spanning set of $V$;
+        i.e., one cannot remove any of the $\mbf{u}_i$ and still have a spanning set of $V$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Steinitz Exchange Theorem]
+    Let $S = \{\mbf{v}_1, \dotsc, \mbf{v}_k\}$ be a spanning set of a vector space $V = \mathrm{span}(S)$.
+    Let $\{\mbf{u}_1, \dotsc, \mbf{u}_{\ell}\} \subseteq V$ be a linearly independent set.
+
+    Then there exist $\ell$ distinct vectors $\mbf{v}_{i_1}, \mbf{v}_{i_2}, \dotsc, \mbf{v}_{i_{\ell}} \in S$ such that for all $j$ with $0 \leq j \leq \ell$ we have
+    \[
+    (S \setminus \{\mbf{v}_{i_1}, \dotsc, \mbf{v}_{i_{\ell}}\}) \cup \{\mbf{u}_1, \dotsc, \mbf{u}_j\}
+    \]
+    is a spanning set for $V$.
+\end{theorem}
+
+\begin{corollary}
+    In the situation above $k \geq \ell$.
+    In other words,
+    a spanning set for a vector space is always at least as big as any linearly independent set within the vector space.
+\end{corollary}
+
+\begin{corollary}
+    Let $V$ be a finite-dimensional vector space.
+    Then every basis for $V$ has the same number of elements.
+\end{corollary}
+
+\begin{definition}[Dimension]
+    Let $V$ be a vector space that is generated by finitely many vectors.
+    The dimension,
+    $\dim{(V)}$,
+    of $V$ is defined to be the cardinality of any basis for $V$.
+\end{definition}
+
+\begin{theorem}
+    Let $V$ be a finite dimensional vector space and $U$ a vector subspace of $V$.
+    Then
+    \begin{enumerate}[label = (\roman*)]
+        \item $U$ is also finite-dimensional;
+        \item $\dim{(U)} \leq \dim{(V)}$;
+        \item $\dim{(U)} = \dim{(V)} \iff U = V$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+    Let $V$ be a vector space of dimension $k$ and let $\mbf{v}_1, \dotsc, \mbf{v}_{\ell}$ be $\ell$ vectors in $V$.
+    Then
+    \begin{enumerate}[label = (\roman*)]
+        \item If $\ell > k$,
+        then the $\mbf{v}_1, \dotsc, \mbf{v}_{\ell}$ are linearly dependent.
+        \item If $\ell < k$,
+        then the $\mbf{v}_1, \dotsc, \mbf{v}_{\ell}$ do not span $V$.
+        \item If $k = \ell$,
+        then the following statements are (pairwise) equivalent
+        \begin{enumerate}[label = (\alph*)]
+            \item The vectors $\mbf{v}_1, \dotsc, \mbf{v}_k$ form a basis of $V$.
+            \item The vectors $\mbf{v}_1, \dotsc, \mbf{v}_k$ are linear independent.
+            \item The vectors $\mbf{v}_1, \dotsc, \mbf{v}_k$ span $V$.
+        \end{enumerate}
+    \end{enumerate}
+\end{theorem}
+
+\begin{definition}[Standard basis of $\R ^ n$]
+    \[
+    \mbf{e}_1 = \begin{pmatrix}
+        1 \\ 0 \\ \vdots \\ 0
+    \end{pmatrix},
+    \quad
+    \mbf{e}_2 = \begin{pmatrix}
+        0 \\ 1 \\ \vdots \\ 0
+    \end{pmatrix},
+    \quad
+    \dotsc,
+    \quad
+    \mbf{e}_n = \begin{pmatrix}
+        0 \\ 0 \\ \vdots \\ n
+    \end{pmatrix}.
+    \]
+\end{definition}
+
+\begin{theorem}
+    Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be $k$ vectors in $\R ^ n$.
+    Then
+    \begin{enumerate}[label = (\roman*)]
+        \item If $k > n$,
+        then the $\mbf{u}_1, \dotsc, \mbf{u}_k$ are linearly dependent.
+        \item If $k < n$,
+        then the $\mbf{u}_1, \dotsc, \mbf{u}_k$ do not span $\R ^ n$.
+        \item If $k = n$,
+        then
+        \begin{align*}
+            \mbf{u}_1, \dotsc, \mbf{u}_n\text{ form a basis of } \R ^ n &\iff\text{The matrix $(\mbf{u}_1, \dotsc, \mbf{u}_n)$ is non singular} \\
+            &\iff \det(\mbf{u}_1, \dotsc, \mbf{u}_n) \neq 0.
+        \end{align*}
+        So,
+        the vectors $\mbf{u}_1, \dotsc, \mbf{u}_k$ form a basis for $\R ^ n$ if and only if $k = n$ and the square matrix $(\mbf{u}_1, \dotsc, \mbf{u}_k)$ is non-singular.
+    \end{enumerate}
+\end{theorem}
+
+\begin{definition}
+    Let $A \in M_{n \times k}(\R)$ be a $n \times k$ matrix.
+    \begin{enumerate}[label = (\roman*)]
+        \item The column space of $A$ is the span of the columns of $A$.
+        The column rank of $A$ is the dimension of the column space of $A$.
+
+        The column space is the subspace of all $\mbf{b} \in \R ^ n$ such that $A\mbf{x} = \mbf{b}$ has a solution.
+
+        \item The row space of $A$ is the span of the rows of $A$.
+        The row rank of $A$ is the dimension of the row space of $A$.
+
+        The row space is the subspace of all $c \in \R ^ k$ such that $A ^ t\mbf{y} = \mbf{c}$ has a solution.
+
+        \item The nullspace
+        (or kernal)
+        of $A$ is the solution space to the homogeneous system $A\mbf{x} = \mbf{0}$.
+        The nullity of $A$ is the dimension of the nullspace.
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}\label{pre_linalg_lem_linindepvecmulmatrisindep}
+    Let $\mbf{v}_1, \dotsc, \mbf{v}_k$ be linear independent vectors in $\R ^ n$ and let $P \in M_n(\R)$ be an invertible matrix.
+    Then the vectors $P\mbf{v}_1, \dotsc,P\mbf{v}_k$ are linear independent.
+\end{lemma}
+
+\begin{proposition}\label{pre_linalg_prop_invmatrsameranksandnul}
+    Let $A \in M_{n \times k}(\R)$ and let $P \in M_{n}(\R)$ be an invertible matrix.
+    Then $A$ and $PA$ have the same column rank,
+    row rank,
+    and nullity.
+    In particular,
+    elementary row operations do not change column rank,
+    row rank,
+    and nullity.
+    More precisely,
+    \begin{enumerate}
+        \item $A$ and $PA$ have the same row space.
+        In particular,
+        ERO's do not change the row space.
+        \item $PA$ may have a different column space than $A$,
+        but the dimension stays the same.
+        In particular,
+        ERO's do not change the dimension of the column space.
+        \item $A$ and $PA$ have the same nullsapce.
+        In particular,
+        ERO's do not change the nullspace.
+    \end{enumerate}
+\end{proposition}
+
+\begin{theorem}[Rank Theorem]
+    The row rank of a matrix is equal to its column rank.
+\end{theorem}
+
+\begin{definition}[Rank]
+    We define the rank of a matrix $A$ to be its $\text{row rank} = \text{column rank}$.
+    We write $\mathrm{rank}(A) = \mathrm{rk}(A)$.
+\end{definition}
+
+\begin{theorem}[Rank-Nullity Theorem]
+    Let $A \in M_{n \times k}(\R)$ be an $n \times k$ matrix.
+    Then
+    \[
+    \mathrm{rk}(A) + \mathrm{nullity}(A) = k.
+    \]
+\end{theorem}
+
+\begin{corollary}
+    For any matrix $A \in M_{n \times k}(\R)$ we have
+    \begin{enumerate}[label = (\roman*)]
+        \item The rank of $A$ is the number of leading $1$'s in the RREF of $A$.
+        \item The nullity of $A$ is the number columns in the RREF of $A$ without a leading $1$;
+        i.e.,
+        the number of free variables in the solution set to $A\mbf{x} = \mbf{0}$.
+    \end{enumerate}
+\end{corollary}
+
+\begin{definition}
+    Let $V$ be a vector space and let $U, W$ be subspaces.
+    Then define
+    \begin{align*}
+        U + W &:= \{\mbf{v} \in V\,:\, \mbf{v} = \mbf{u + w}\text{ for some }\mbf{u} \in U, \mbf{w} \in W\}, \\
+        U \cap W &:= \{\mbf{v} \in V\,:\, \mbf{v} \in U\text{ and } \mbf{v} \in W\}.
+    \end{align*}
+    Both $U + W$ and $U \cap W$ are vector subspaces of $V$.
+\end{definition}
+
+\begin{proposition}
+    Let $U$ and $W$ be finite-dimensional vector subspaces of a vector space $V$.
+    Then
+    \[
+    \dim(U) + \dim(W) = \dim(U + W) + \dim(U \cap W).
+    \]
+\end{proposition}
+
+\begin{definition}[Direct Sum]
+    Suppose that $U$ and $W$ are vector subspaces of $V$ with
+    \begin{enumerate}[label = (\roman*)]
+        \item $U + W = V$;
+        \item $U \cap W = \{\mbf{0}\}$.
+    \end{enumerate}
+    Then,
+    we say $V$ is the direct sum of $U$ and $W$ and write $V = U \oplus W$.
+\end{definition}
+
+\begin{proposition}
+    Let $U$ and $W$ be two subspaces of a vector space $V$.
+    Then the following statements are pairwise equivalent:
+    \begin{enumerate}[label = (\roman*)]
+        \item $V = U \oplus W$;
+        \item If $\{\mbf{u}_1, \dotsc, \mbf{u}_s\}$ is a basis for $U$ and $\{\mbf{w}_1, \dotsc, \mbf{w}_t\}$ is a basis for $W$,
+        then $\{\mbf{u}_1, \dotsc, \mbf{u}_s, \mbf{w}_1, \dotsc, \mbf{w}_t\}$ is a basis for $V$;
+        \item $V = U + W$ and $\dim{V} = \dim{U} + \dim{W}$;
+        \item Every $\mbf{v} \in V$ can be written uniquely as $\mbf{v} = \mbf{u} + \mbf{w}$ where $\mbf{u} \in U$ and $\mbf{w} \in W$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{lemma}
+    Consider a basis $\mbf{v}_1, \mbf{v}_2, \dotsc, \mbf{v}_n$ of $\R ^ n$,
+    and let $P = (\mbf{v}_1, \mbf{v}_2, \dotsc, \mbf{v}_n)$ be the associated matrix of column vectors.
+    Then the coordinates $(x_1, \dotsc, x_n)$ of $\mbf{u}$ with respect to $\mbf{v}_1, \mbf{v}_2, \dotsc, \mbf{v}_n$ are given by
+    \[
+    \begin{pmatrix}
+        x_1 \\ \vdots \\ x_n
+    \end{pmatrix} = P ^ {-1}\mbf{u}.
+    \]
+    Note that if $\{\mbf{v}_1, \mbf{v}_2, \dotsc, \mbf{v}_n\} = \{\mbf{e}_1, \dotsc, \mbf{e}_n\}$ then $P = I_n$.
+\end{lemma}
+
+\newpage
+
+\section{Linear maps}
+
+\begin{definition}[Linear map]
+    Let $V$ and $W$ be two vector spaces,
+    with addition denoted by $+_{V}$ and $+_{W}$ respectively.
+    A linear map $T : V \rightarrow W$ is a function satisfying the following properties
+    \begin{enumerate}[label = (\roman*)]
+        \item for all $\mbf{u}$ and $\mbf{v}$ in $V$ we have $T(\mbf{u} +_{V} \mbf{v}) = T(\mbf{u}) +_{W} T(\mbf{v})$;
+        \item for all $\mbf{v}$ in $V$ and all $\lambda \in \R$ we have $T(\lambda\mbf{v}) = \lambda T(\mbf{v})$.
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}
+    Let $\{\mbf{v}_1, \dotsc, \mbf{v}_n\}$ be a basis of a vector space $V$.
+    Then
+    \begin{enumerate}[label = (\roman*)]
+        \item Any linear map $T : V \rightarrow W$ of vector spaces is determined by its values $T(\mbf{v}_1), \dotsc, T(\mbf{v}_n)$ on the basis vectors of $V$.
+        \item Conversely,
+        given arbitrary vectors $\mbf{w}_1, \dotsc, \mbf{w}_n$ in $W$,
+        then there exists a linear map $T : V \rightarrow W$ such that
+        \[
+        T(\mbf{v}_1) = \mbf{w}_1, \dotsc, T(\mbf{v}_n) = \mbf{w}_n.
+        \]
+    \end{enumerate}
+\end{lemma}
+
+\begin{lemma}
+    A map $T : \R ^ n \rightarrow \R ^ m$ is linear if and only if there is a $m \times n$ matrix $A$ such that
+    \[
+    T(\mbf{x}) = A\mbf{x}.
+    \]
+    Moreover,
+    $A$ is given by
+    \[
+    A = (T(\mbf{e}_1), T(\mbf{e}_2), \dotsi, T(\mbf{e}_n)).
+    \]
+    So the $i$th column is the image of the standard basis vector $\mbf{e}_i$.
+\end{lemma}
+
+\begin{lemma}
+    Let $T : V \rightarrow W$ and $S : W \rightarrow U$ be two linear maps of vector spaces.
+    Then the composition $S \circ T : V \rightarrow U$ is a linear map.
+    In particular,
+    if $T : \R ^ n \rightarrow \R ^ m$ and $S : \R ^ m \rightarrow \R ^ k$ are linear maps given by $T(\mbf{x}) = A\mbf{x}$ and $S(\mbf{y}) = B\mbf{y}$,
+    then the composition $S \circ T : \R ^ n \rightarrow \R ^ k$ is again linear,
+    and moreover we have
+    \[
+    (S \circ T)(\mbf{x}) = (BA)\mbf{x}.
+    \]
+    So the composition of linear maps corresponds to matrix multiplication.
+\end{lemma}
+
+\begin{definition}[Isomorphism]
+    Let $T : V \rightarrow W$ be a bijective linear map of vector spaces
+    (that is,
+    a linear map which is one-to-one and onto).
+    Then we call $T$ an isomorphism and call $V$ and $W$ isomorphic.
+    We write $V \cong W$.
+\end{definition}
+
+\begin{lemma}
+    Let $T : V \rightarrow W$ be an isomorphism of vector spaces.
+    Then the inverse map $T ^ {-1} : W \rightarrow V$ is also a linear map,
+    in fact an isomorphism.
+    For the linear map $T : \R ^ n \rightarrow \R ^ n$ given by the matrix $A \in M_n(\R)$,
+    we have that $T$ is an isomorphism if and only if $A$ is invertible.
+    In that case,
+    we have
+    \[
+    T ^ {-1}(\mbf{y}) = A ^ {-1}\mbf{y}.
+    \]
+\end{lemma}
+
+\begin{lemma}
+    Let $V$ b a vector space of dimension $n$.
+    Then the coordinate map $\Phi : V \rightarrow \R ^ n$ is an isomorphism.
+    In particular,
+    every finite dimensional vector space is isomorphic to the Euclidean space of the same dimension.
+\end{lemma}
+
+\begin{theorem}
+    Let $V$ be a vector space of dimension $n$ and let $W$ be a vector space of dimension $m$.
+    Let $\phi : V \rightarrow \R ^ n$ and $\psi : W \rightarrow \R ^ m$ be two coordinate maps with respect to the choice of some bases $V$ and $W$ respectively.
+    Let $T : V \rightarrow W$ be a linear map.
+    Then there exists a $m \times n$ matrix $A$ so that for all $\mbf{v} \in V$ we have
+    \[
+    \phi(T(\mbf{v})) = A\phi(\mbf{v}).
+    \]
+    We say $T$ is represented by $A$.
+    (The matrix $A$ depends on the choice of the bases made.)
+\end{theorem}
+
+\begin{definition}[Image and kernel]
+    Let $V$ and $W$ be vector spaces and $T : V \rightarrow W$ be a linear map.
+    We define the image of $T$ by
+    \[
+    \mathrm{im}(T) = \{\mbf{w} \in W : \text{there exists $\mbf{v} \in V$ so that } \mbf{w} = T(\mbf{v})\}.
+    \]
+    We define the kernel of $T$ by
+    \[
+    \ker(T) = \{\mbf{v} \in V : T(\mbf{v}) = \mbf{0}\}.
+    \]
+\end{definition}
+
+\begin{lemma}
+    Let $T : V \rightarrow W$ be a linear map of vector spaces.
+    Then $\mathrm{im}(T)$ is a vector subspace of $W$ and $\ker(T)$ is a vector subspace of $V$.
+\end{lemma}
+
+\begin{lemma}
+    Let $T : V \rightarrow W$ be a linear map of vector spaces,
+    and let $\{\mbf{v}_1, \dotsc, \mbf{v}_n\}$ be a basis for $V$.
+    Then the image $\mathrm{im}(T)$ is spanned by $T(\mbf{v}_1), \dotsc, T(\mbf{v}_n)$.
+\end{lemma}
+
+\begin{proposition}
+    Let $T : V \rightarrow W$ be a linear map of vector spaces.
+    Then the following statements are
+    (pairwise)
+    equivalent:
+    \begin{enumerate}[label = (\roman*)]
+        \item $\ker(T) = \{\mbf{0}\}$;
+        \item $T$ is one-to-one
+        (that is,
+        it is injective);
+        \item If $\mbf{v}_1, \dotsc, \mbf{v}_k$ are linear independent vectors in $V$,
+        then the images $T(\mbf{v}_1), \dotsc, T(\mbf{v}_k)$ are linearly independent in $W$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{corollary}
+    Let $T : V \rightarrow W$ be a linear map of vector spaces with $\ker(T) = \{\mbf{0}\}$.
+    Assume $\dim{V} = n$ with a basis $\{\mbf{v}_1, \dotsc, \mbf{v}_n\}$.
+    Then the images $\{T(\mbf{v}_1), \dotsc, T(\mbf{v}_n)\}$ are a basis for $\mathrm{im}(T)$.
+    In particular,
+    we have $\dim(\mathrm{im}(T)) = \dim(V)$.
+\end{corollary}
+
+\begin{definition}[Rank and nullity of a linear map]
+    Let $V$ and $W$ be vector spaces and $T : V \rightarrow W$ be a linear map.
+    We define the rank of $T$ to be
+    \[
+    \mathrm{rk}(T) = \dim(\mathrm{im}(T)).
+    \]
+    We define the nullity of $T$ to be
+    \[
+    n(T) = \dim(\ker(T)).
+    \]
+\end{definition}
+
+\begin{proposition}
+    Let $T : V \rightarrow W$ be a linear map of finite-dimensional vector spaces and let $\phi : V' \rightarrow V$ and $\psi : W \rightarrow W'$ be two isomorphisms.
+    Then
+    \[
+    \mathrm{rk}(\psi \circ T \circ \phi) = \mathrm{rk}(T)\quad\text{and}\quad n(\psi \circ T \circ \phi) = n(T).
+    \]
+\end{proposition}
+
+\begin{theorem}[Rank-Nullity Theorem for linear maps]
+    Let $V$ and $W$ be two finite-dimensional vector spaces and $T : V \rightarrow W$ be a linear map.
+    Then
+    \[
+    \dim(V) = \mathrm{rk}(T) + n(T).
+    \]
+\end{theorem}
+
+\begin{theorem}
+    For two finite-dimensional vector spaces $V$ and $W$ we have
+    \[
+    V \cong W \iff \dim{V} = \dim{W}.
+    \]
+\end{theorem}
+
+\begin{theorem}
+    Let $T : \R ^ n \rightarrow \R ^ m$ be a linear map.
+    Suppose that with respect to the standard bases $T$ is represented by the matrix $A$.
+    Let $S = \{\mbf{v}_1, \dotsc, \mbf{v}_n\}$ be any basis of $\R ^ n$ and let $P = (\mbf{v}_1, \dotsi, \mbf{v}_n)$.
+    Let $S' = \{\mbf{w}_1, \dotsc, \mbf{w}_m\}$ be any basis of $\R ^ m$ and let $Q = (\mbf{w}_1, \dotsc, \mbf{w}_m)$.
+    Then with respect to the bases $S$ of $\R ^ n$ and $S'$ of $\R ^ m$ the transformation $T$ is represented by the matrix $B = Q ^ {-1}AP$.
+\end{theorem}
+
+\begin{corollary}
+    Suppose that $\{\mbf{v}_1, \dotsc, \mbf{v}_n\}$ and $\{\mbf{v}'_1, \dotsc, \mbf{v}'_n\}$ are any bases of $\R ^ n$.
+    Let $P$ be a matrix so that $\mbf{v}'_j = P\mbf{v}_j$.
+    Suppose that $\{\mbf{w}_1, \dotsc, \mbf{w}_m\}$ and $\{\mbf{w}'_1, \dotsc, \mbf{w}'_m\}$ are any bases of $\R ^ m$.
+    Let $Q$ be a matrix so that $\mbf{w}'_j = Q\mbf{w}_j$.
+
+    Let $T : \R ^ n \rightarrow \R ^ m$ be a linear map.
+    Suppose that with respect to the bases $\{\mbf{v}_1, \dotsc, \mbf{v}_n\}$ and $\{\mbf{w}_1, \dotsc, \mbf{w}_m\}$ the map $T$ is represented by the matrix $A$.
+    Then with respect to the bases $\{\mbf{v}'_1, \dotsc, \mbf{v}'_n\}$ and $\{\mbf{w}'_1, \dotsc, \mbf{w}'_m\}$ the map $T$ is represented by the matrix $B = Q ^ {-1}AP$.
+\end{corollary}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
