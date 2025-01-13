@@ -1,0 +1,135 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\title{Dynamics I}
+\author{Luke Phillips}
+\date{January 2025}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Particle on a line}
+
+\subsection{The Basics}
+
+\begin{definition}[Position]
+    The position $x(t)$ where $t$ is time.
+\end{definition}
+
+\begin{definition}[Velocity]
+    The velocity $\dot{x}(t)$ where $t$ is time.
+\end{definition}
+
+\textit{Note that $\dot{x}$ means $\frac{dx}{dt}$.}
+
+\begin{definition}[Acceleration]
+    The acceleration $a(t) = \dot{v}(t) = \ddot{x}(t)$.
+\end{definition}
+
+\begin{definition}[Speed]
+    The speed is $|v(t)|$,
+    the magnitude of the velocity.
+\end{definition}
+
+\begin{definition}[Mass]
+    A particle has mass $m > 0$.
+\end{definition}
+
+\begin{definition}[Momentum]
+    A particle's momentum,
+    $p$ is given by
+    \[
+    p = mv = m\dot{x}.
+    \]
+\end{definition}
+
+\begin{definition}[Equation of motion]
+    In an applied force $F$,
+    then the equation of motion is $\dot{p} = F$.
+\end{definition}
+
+\begin{remark}\phantom{}
+    \begin{enumerate}[label = (\roman*)]
+        \item Could have $m$ depending on time
+        (e.g. rocket).
+
+        Unless otherwise stated,
+        we take $m$ to be a \textbf{constant}.
+
+        Then the EoM\footnote{Equation of motion} is $m\dot{v} = m\ddot{x} = F$.
+
+        \item In general,
+        $F = F(t, x, \dot{x})$ and $m\ddot{x} = F(t, x, \dot{x})$ is a second order differential equation which cannot be solved
+        (explicitly).
+    \end{enumerate}
+\end{remark}
+
+We focus on special cases which can be solved.
+
+The simplest example is $F$ is constant.
+For example,
+vertical motion under gravity close to the surface of a planet:
+then the magnitude of $F$ is $|F| = mg$
+(the weight)
+where the constant $g$ depends on the planet.
+
+\begin{example}
+    An object is shot up vertically from the ground with some initial speed $u$.
+    What maximum height $H$ does it reach?
+    \begin{solution}
+        Could use $x$ upwards or $x$ downwards,
+        both work,
+        choose a convenient one.
+        Here having $x$ upwards seems more natural.
+        Then $m\ddot{x} = -mg$ with $x = 0$ at the ground.
+        Then
+        \begin{align*}
+            \ddot{x} = -g &\xrightarrow{\int\,dt} \dot{x} = -gt + u \\
+            \intertext{where $u$ is the constant of integration.} \\
+            &\xrightarrow{\int\,dt} x(t) = -\frac{1}{2}gt ^ 2 + ut + 0.
+        \end{align*}
+        Max $\dot{x} = 0 \implies t = u / g$.
+        So $H = x\left(\frac{u}{g}\right) = -\frac{1}{2}g\left(\frac{u}{g}\right) ^ 2 + u\left(\frac{u}{g}\right) = \frac{u ^ 2}{2g}$.
+    \end{solution}
+\end{example}
+
+\subsection{Case \texorpdfstring{$F = F(t)$}{}}
+The same method works,
+do $\int\,dt$ twice.
+
+\begin{example}
+    A particle of mass $m = 1$ is at rest at $x = 0$.
+    A force $F = e ^ {-t}$ is switched on at time $t = 0$.
+    Find $x(t)$ for $t > 0$.
+
+    \textit{Note:
+    expect $\dot{x} > 0$ and $x > 0$ for $t > 0$
+    (since $F > 0$).}
+
+    \begin{solution}
+        \[
+        \ddot{x} = e ^ {-t} \xrightarrow{\int\,dt} \dot{x} = -e ^ {-t} + 1 \xrightarrow{\int\,dt} x = e ^ {-t} + t - 1.
+        \]
+    \end{solution}
+\end{example}
+
+\subsection{Case $F = F(\dot{x})$}
+
+\begin{remark}
+    Here $m\ddot{x} = F(\dot{x})$ second-order non linear differential equation.
+\end{remark}
+
+
+
+
+
+
+
+\end{document}
