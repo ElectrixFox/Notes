@@ -5060,8 +5060,196 @@ A = \begin{pmatrix}
 
 \section{Eigenvalues, Eigenvectors, and Diagonalisation}
 
+\subsection{Eigenvalues and Eigenvectors}
+Let $T : \R ^ n \rightarrow \R ^ n$ be a linear mapping to represent it using an $n \times n$ matrix $M$,
+we must make a choice of basis for $\R ^ n$.
 
+Usually we start with the standard basis $\mbf{e}_1, \dotsc, \mbf{e}_n$.
+In a different basis,
+$M$ will change.
 
+\begin{lemma}
+    Suppose $\mbf{x} \in \R ^ n$ is given with respect to the standard basis as
+    \[
+    \mbf{x} = \begin{pmatrix}
+        x_1 \\ x_2 \\ \vdots \\ x_n
+    \end{pmatrix}
+    = x_1\mbf{e}_1 + x_2\mbf{e}_2 + \dotsi + x_n\mbf{e}_n
+    \]
+    and $M$ is the matrix representing a linear transformation $T$ in this basis:
+    \[
+    T(\mbf{x}) = M\begin{pmatrix}
+        x_1 \\ \vdots \\ x_n
+    \end{pmatrix}.
+    \]
+    If $\{\mbf{v}_1, \dotsc, \mbf{v}_n\}$ is a different basis we have
+    \[
+    \mbf{x} = \tilde{x}_1\mbf{v}_1 + \tilde{x}_2\mbf{v}_2 + \dotsi + \tilde{x}_n\mbf{v}_n \quad
+    (\tilde{x}_1, \tilde{x}_2, \dotsc \in \R)
+    \]
+    with
+    \[
+    \begin{pmatrix}
+        x_1 \\ \vdots \\ x_n
+    \end{pmatrix}
+    =
+    P\begin{pmatrix}
+        \tilde{x}_1 \\ \vdots \\ \tilde{x}_n
+    \end{pmatrix}
+    \]
+    and $P$ an $n \times n$ invertible "change of basis" matrix.
+    Then the matrix $N$ representing the same linear map in the new basis is $N = P ^ {-1}MP$.
+
+    \begin{center}
+    \fbox{
+    \begin{minipage}{0.8\textwidth}
+    \textbf{Key question}:
+    is there a basis in which the matrix representation of $T$ looks as simple as possible?
+    
+    "Best" case:
+    a diagonal matrix
+
+    Further question:
+    is this possible? 
+    [almost always]
+    
+    If so how?
+    [see later]
+
+    \end{minipage}
+    }
+    \end{center}
+    \hfill
+\end{lemma}
+
+Why bother?
+\begin{example}[Predator-prey model (discrete time)]\phantom{}
+
+    Let $x_n := \text{ number of owls at the end of year $n$}$
+    (predator),
+    $y_n := \text{ number of mice at the end of year $n$}$
+    (prey).
+    
+    \begin{align*}
+        x_{n + 1} &= 0.6x_n + 0.5y_n \\
+        y_{n + 1} &= -0.1x_n + 1.2y_n
+    \end{align*}
+    \[
+    \begin{pmatrix}
+        x_{n + 1} \\ y_{n + 1}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        0.6 & 0.5 \\
+        -0.1 & 1.2
+    \end{pmatrix}
+    \begin{pmatrix}
+        x_n \\ y_n
+    \end{pmatrix}
+    \]
+    \[
+    \mbf{v}_{n + 1} = M\mbf{v}_n.
+    \]
+
+    Given a starting population $\mbf{v}_0$,
+    what's the population after $n$ years?
+    \[
+    \mbf{v}_1 = M\mbf{v}_0, \quad\mbf{v}_2 = M\mbf{v}_1 = M ^ 2\mbf{v}_0\dotsc \mbf{v}_n = M ^ n\mbf{v}_0.
+    \]
+    $M ^ n$ is non-trivial.
+    But,
+    if $M = \begin{pmatrix}
+        a & 0 \\ 0 & b
+    \end{pmatrix}$,
+    then $M ^ n = \begin{pmatrix}
+        a ^ n & 0 \\ 0 & b ^ n
+    \end{pmatrix}$ easy.
+\end{example}
+
+\begin{example}
+    Want to solve a system of linear ODEs
+    \begin{align*}
+        \dot{x}(t) &= -x(t) = 4y(t) \\
+        \dot{y}(t) &= -2x(t) + 5y(t)
+    \end{align*}
+    \[
+    \frac{d}{dt}\begin{pmatrix}
+        x \\ y
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        -1 & 4 \\ -2 & 5
+    \end{pmatrix}
+    \begin{pmatrix}
+        x \\ y
+    \end{pmatrix},
+    \]
+    i.e.
+    $\dot{\mbf{v}} = A\mbf{v}$
+    \[
+    \mbf{v} = \begin{pmatrix}
+        x \\ y
+    \end{pmatrix}
+    \]
+    \[
+    A = \begin{pmatrix}
+        -1 & 4 \\ -2 & 5
+    \end{pmatrix}.
+    \]
+
+    If $A$ were diagonal,
+    say $A = \begin{pmatrix}
+        -2 & 0 \\ 0 & 3
+    \end{pmatrix}$
+    the system is
+    \begin{align*}
+        \dot{x} &= -2x \\
+        \dot{y} &= 3y
+    \end{align*}
+    decoupled.
+    Hence the solution is
+    \begin{align*}
+        x(t) &= x_0e ^ {-2t} \\
+        y(t) &= y_0e ^ {3t}.
+    \end{align*}
+\end{example}
+
+If $A$ is diagonal,
+$A = \begin{pmatrix}
+    a_1 & 0 & 0 & 0 \\
+    0 & a_2 & 0 & 0 \\
+    0 & 0 & \ddots & 0 \\
+    0 & 0 & 0 & a_n
+\end{pmatrix}$
+then
+\[
+A\begin{pmatrix}
+    1 \\ 0 \\ 0 \\ \vdots \\ 0
+\end{pmatrix} = \begin{pmatrix}
+    a_1 \\ 0 \\ 0 \\ \vdots \\ 0
+\end{pmatrix} = a_1\begin{pmatrix}
+    1 \\ 0 \\ 0 \\ \vdots \\ 0
+\end{pmatrix}
+\]
+\[
+A\begin{pmatrix}
+    0 \\ 1 \\ 0 \\ \vdots \\ 0
+\end{pmatrix} = a_2\begin{pmatrix}
+    0 \\ 1 \\ 0 \\ \vdots \\ 0
+\end{pmatrix}
+\]
+
+\begin{definition}[Eigenvector]
+    A non-zero vector $\mbf{v}$ is an eigenvector of $A$ with eigenvalue $A \in \C$ if $A\mbf{v} = \lambda\mbf{v}$.
+\end{definition}
+
+\textit{Note:
+if $\mbf{v}$ is an eigenvector,
+so is $c\cdot \mbf{v},\ \forall c \neq 0$,
+with the same eigenvalue.}
+
+\textit{Note:
+$\mbf{0}$ always solves $A \cdot \mbf{0} = \lambda\mbf{0},\ \forall \lambda \in \C$ not an eigenvector.}
 
 
 
