@@ -138,12 +138,148 @@ For a function $f(x)$ defined in some interval $I$.
     
 \end{definition}
 
+\begin{definition}[The Jacobian]
+    The Jacobian of the transformation from the variables $x, y$ to $u, v$ is
+    \[
+    J = \frac{\partial(x, y)}{\partial(u, v)} = \begin{vmatrix}
+        \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\
+        \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v}
+    \end{vmatrix}.
+    \]
+\end{definition}
+
+To obtain the area element $dxdy$ in terms of the new variables we first compute the Jacobian $J$ and then use the result that
+\[
+dxdy = |J|dudv.
+\]
+
+\begin{definition}[Gaussian integral]
+    \[
+    \int_{-\infty}^{\infty}e ^ {-ax ^ 2}\,dx = \sqrt{\frac{\pi}{a}}
+    \]
+    where $a$ is a positive constant.
+\end{definition}
+
+\[
+M(x, y)\,dx + N(x, y)\,dy = 0.
+\]
+Rearranging gives
+\[
+\frac{dy}{dx} = -\frac{M(x, y)}{N(x, y)}.
+\]
+For any function $g(x, y)$ the total differential $dg$ is defined to be
+\[
+dg = \frac{\partial g}{\partial x}\,dx + \frac{\partial g}{\partial y}\,dy.
+\]
+i.e.
+\[
+M = \frac{\partial g}{\partial x}\quad\text{and}\quad N = \frac{\partial g}{\partial y}.
+\]
+
+\textbf{Test for exactness}
+
+The ODE $M(x, y)\,dx + N(x, y)\,dy = 0$ is exact if and only if
+\[
+\frac{\partial M}{\partial y} = \frac{\partial N}{\partial x}.
+\]
+
+A \textbf{Bernoulli equation} is a non-linear ODE of the form
+\[
+y' + p(x)y = q(x)y ^ n.
+\]
+To solve a Bernoulli equation use the substitution $v = y ^ {1 - n}$,
+this converts the equation to a linear ODE for $v(x)$.
+
+\begin{definition}[The Wronskian]
+    Given two differentiable functions,
+    $y_1(x), y_2(x)$,
+    we define the Wronskian to be
+    \[
+    W(y_1, y_2) = \begin{vmatrix}
+        y_1 & y_2 \\ y'_1 & y'_2
+    \end{vmatrix}
+    = y_1y'_2 - y_2y'_1.
+    \]
+\end{definition}
+
+Solving the ODE
+\[
+\alpha_2y'' + \alpha_2y' + \alpha_0y = \phi
+\]
+\[
+y = y_{CF} + y_{PI}
+\]
+with $y_{CF} = Ay_1 + By_2$.
+
+Finding the particular solution found using the following
+\[
+y_{PI} = u_1y_1 + u_2y_2
+\]
+where
+\[
+u_1 = -\int\frac{y_2 \phi / \alpha_2}{W(y_1, y_2)}\,dx\quad\text{and}\quad
+u_2 = \int\frac{y_1 \phi / \alpha_2}{W(y_1, y_2)}\,dx.
+\]
 
 
+\begin{definition}[Lagrange form for the remainder]
+    \[
+    R_n(x) = \frac{f ^ {(n + 1)}(c)}{(n + 1)!}(x - a) ^ {n + 1},\quad\text{for some $c \in (a, x)$}.
+    \]
+\end{definition}
 
+\begin{definition}
+    Let $n$ be a positive integer.
+    We say that $f(x) = o(x ^ n)$ (as $x \rightarrow 0$)
+    if
+    \[
+    \lim_{x \rightarrow 0}\frac{f(x)}{x ^ n} = 0.
+    \]
+\end{definition}
 
+\begin{definition}[Fourier definition of a function]
+    \[
+    f(x) = \frac{a_0}{2} + \infsum\left(a_n\cos\frac{n\pi x}{L} + b_n\sin\frac{n\pi x}{L}\right).
+    \]
+    with
+    \[
+    a_0 = \frac{1}{L}\int_{-L}^{L}f(x)\,dx.
+    \]
+    \[
+    a_n = \frac{1}{L}\int_{-L}^{L}f(x)\cos\frac{n\pi x}{L}\,dx.
+    \]
+    \[
+    b_n = \frac{1}{L}\int_{-L}^{L}f(x)\sin\frac{n\pi x}{L}\,dx.
+    \]
+\end{definition}
 
+\begin{theorem}[Dirichlet's theorem]
+    Let $f(x)$ be a periodic function,
+    with period $2L$,
+    such that on the interval $(-L, L)$ it has a finite number of extreme values,
+    a finite number of jump discontinuities and $|f(x)|$ is integrable on $(-L, L)$.
+    Then its Fourier series converges for all values $x$.
+    Furthermore,
+    it converges to $f(x)$ at all points where $f(x)$ is continuous and if $x = a$ is a jump discontinuity then it converges to $\frac{1}{2}\lim_{x \rightarrow a ^ {-}}f(x) + \frac{1}{2}\lim{x \rightarrow a ^ {+}}f(x)$.
+\end{theorem}
 
+\begin{theorem}[Parseval’s theorem]
+    If $f(x)$ is a function of period $2L$ with Fourier coefficients $a_n, b_n$ then
+    \[
+    \frac{1}{2L}\int_{-L}^{L}((f(x))) ^ 2\,dx = \frac{1}{4}a_0 ^ 2 + \frac{1}{2}\infsum[n = 1](a_n ^ 2 + b_n ^ 2).
+    \]
+\end{theorem}
+
+\begin{proposition}[Complex extension of Fourier series]
+    A Fourier series can be written in complex form with
+    \[
+    c_n = \frac{1}{2L}\int_{-L}^{L}f(x)e ^ {\frac{-in\pi x}{L}}\,dx,
+    \]
+    with the Fourier series
+    \[
+    f(x) = \infsum[n = -\infty]c_ne ^ {\frac{in\pi x}{L}}.
+    \]
+\end{proposition}
 
 
 \end{document}
