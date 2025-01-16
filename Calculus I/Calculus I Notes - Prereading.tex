@@ -1879,9 +1879,53 @@ problem on an interval $(0, L)$ it is usually the boundary conditions that deter
 \subsection{Fourier series in complex form}
 Fourier series take a simpler form if written in terms of complex variables.
 
+\newpage
 
+\section{Calculus of functions of two and more variables}
 
+\subsection{Plotting functions}
 
+We are used to plotting functions of one variable $y = f(x)$ as a
+(one-dimensional)
+curve $C$ in the two-dimensional plane.
+
+It is also possible to define functions 'implicitly' via equations such as $x ^ 2 + y ^ 2 = 1$.
+
+We can plot a function of two variables $z = f(x, y)$ as a two dimensional surface $S$ embedded in three dimensions.
+
+It is similarly possible to define functions of two variables $z = z(x, y)$ implicitly and plot them through an equation such as $x ^ 2 + y ^ 2 + z ^ 2 = 1$.
+
+More generally we can extend this to a function of $n$ variables,
+$x_{n + 1} = f(x_1, x_2, \dotsc, x_n)$ as defining an $n$-dimensional surface embedded in $\R ^ {n + 1}$ parametrically
+\[
+(x_1, x_2, \dotsc, x_n, x_{n + 1}) = (x_1, x_2, \dotsc, x_n, f(x_1, \dotsc, x_n)).
+\]
+
+\subsection{Continuity and differentiability for functions of one and more variables}
+Let us begin with the definition of continuity for a function of one variable $f(x)$ where $f : D \rightarrow \R$ and $D \subseteq \R$.
+The function $f(x)$ is defined to be continuous at $x_0 \in D$ if
+
+\textbf{In words:}
+We can ensure the change in the function $\delta f = f(x) - f(x_0)$ is as small as we like by taking $x$ close enough to $x_0$.
+
+\textbf{Mathematically:}
+For all $\varepsilon > 0$ there exists $\delta > 0$ such that if $x \in D$ and $|x - x_0| < \delta$ then this implies that $|\delta f| = |f(x) - f(x_0)| < \varepsilon$.
+
+We can extend this to define what it means for a function of two variables $f(x, y) = f(\mbf{x})$,
+where $f : D \rightarrow \R$ and $D \subseteq \R ^ 2$,
+to be continuous at the point $\mbf{x}_0 = (x_0, y_0)$.
+(We use the vector notation $\mbf{x} = (x, y)$ as short-hand notation from now on).
+A function $f(x, y)$ is continuous at the point $\mbf{x}_0 = (x_0, y_0)$ if
+
+\textbf{In words:}
+We can ensure the change in the function $\delta f = f(\mbf{x}) - f(\mbf{x}_0)$ is as small as we like by taking $x$ close enough to $x_0$.
+The distance between $(x, y)$ and $(x_0, y_0)$ is
+\[
+|\mbf{x} - \mbf{x}_0| = \sqrt{(x - x_0) ^ 2 + (y - y_0) ^ 2}.
+\]
+
+\textbf{Mathematically:}
+For all $\varepsilon > 0$ there exists $\delta > 0$ such that if $\mbf{x} \in D$ and $|\mbf{x} - \mbf{x}_0| < \delta$ then this implies that $|\delta f| = |f(\mbf{x}) - f(\mbf{x}_0)| < \varepsilon$.
 
 
 
