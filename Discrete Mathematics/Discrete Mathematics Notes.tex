@@ -1359,107 +1359,176 @@ We can apply calculus to find the generating functions of sequences.
 
 \subsection{Basic definitions}
 
-Diagram!!!!!!!
-
-
-
-\begin{definition}[Simple graph]
-    A simple graph $G$ is a pair of sets $G = (V, E)$ where each element of $E$
-    (an edge)
-    is a $2$-element subset of $V$
-    (the set of vertices).
+Given the vertex set $V$ let $\mbf{V} := \{\{a, b\} : a, b \in V, a \neq b\}$ be the set of subsets of $V$ with two elements
+\begin{definition}[Finite undirected graph]
+    A finite undirected graph $G$ is an ordered triple $(V, E, \phi)$ where $V, E$ are finite sets,
+    and $\phi : E \rightarrow \mbf{V}$
 \end{definition}
 
+The set $V$ is called the vertex set,
+the set $E$ is called the edge set and the map $\phi$ is called the incidence function.
+An edge $e$ is incident to a vertex $v \in V$ if $v \in \phi(e)$.
 The two vertices contained in an edge are the endpoints of the edge.
 
-So an edge going from vertex $u$ to vertex $v$ would have endpoints $u$ and $v$.
+When the map $\phi$ is injective,
+we call the graph simple.
 
-We can write an edge from $u$ to $v$
-($\{u, v\}$)
-as $uv$.
+A simple graph does not allow for multiple edges between the same pair of vertices.
 
-We will only be considering finite graphs here,
-i.e.
-graphs where $|V|$ and $|E|$ are finite.
+We can represent simple graphs in a more simple form,
+they can be represented by the pair $(V, E)$ with $E \subset \mbf{V}$ and the incidence function can be replaced by the adjacency relation.
+Two vertices $u, v \in V$ are said to be adjacent in the same graph $G = (V, E)$ if $\{u, v\} \in E$.
+For convenience,
+we can write an edge such as $\{a, b\}$ as $ab$
+(or $ba$).
+A vertex which is adjacent to no other vertex is isolated.
 
-Two vertices are adjacent if there is an edge between them.
-If a vertex is not adjacent to any other vertices then it is an isolated vertex.
+\begin{remark}
+    One can represent the graph $G = (V, E, \phi)$,
+    with $V = \{v_1, \dotsc, v_n\}$ and $E = \{e_1, \dotsc, e_m\}$ using the incidence matrix $(B(i, j), i \leq n, j \leq m)$ defined by
+    \[
+    B(i, j) = \begin{cases}
+        1 & \text{if } v_i \in \phi(e_j), \\
+        0 &\text{else}.
+    \end{cases}
+    \]
+    Similarly,
+    we may represent simple graphs $G = (V, E)$,
+    with $V = \{v_1, \dotsc, v_n\}$ $E \subset \mbf{V}$,
+    using the adjacency matrix $(A(i, j), i, j \leq n)$ defined by
+    \[
+    A(i, k) := \begin{cases}
+        1 &\text{if } v_iv_j \in E, \\
+        0 &\text{else}.
+    \end{cases}
+    \]
+\end{remark}
 
-An edge is incident to a vertex if that vertex is one of the endpoints of the edge.
+\textit{Note:
+the matrix $A$ is always a square matrix,
+while $B$ need not be square}.
 
-\textit{Note: Sometimes we shall consider more general graphs that allow loops
-(edges whose two endpoints are the same vertex)
-or multiple edges
-(multiple copies of the same edge).}
+\begin{remark}
+    It is possible to extend from graphs considered here to graphs that also allow loops,
+    i.e. edges whose two endpoints are the same vertex.
+    We can also consider graphs whose edges are directed,
+    that is,
+    with a defined start-point and end-point.
+    To account for these features requires us to modify our formal definitions a little.
+\end{remark}
 
-Such graphs are not simple,
-this formally requires us to replace sets with multisets.
+\begin{definition}[Degree]
+    Given a Graph $G = (V, E, \phi)$,
+    the degree of a vertex $v \in V$,
+    denoted $d_G(v)$,
+    simply $d(v)$ when there is no ambiguity on the graph $G$,
+    that is the number of times that the vertex is an endpoint of an edge.
+    Formally,
+    \[
+    d_G(v) := \sum_{e \in E}\mbf{1}\{v \in \phi(e)\} = \sum_{e \in E}B(v, e).
+    \]
+\end{definition}
 
-The degree of a vertex is the number of times that the vertex appears as an endpoint of an edge.
-For a simple graph,
-this is the same as the number of edges incident to the vertex.
-A loop contributes two towards the degree of a vertex.
-
-$d(v)$ is used to denote the degree of a vertex $v \in V$.
-
-A vertex of degree $1$ is called a leaf.
+\begin{definition}[Leaf]
+    A vertex of degree $1$ is called a leaf.
+\end{definition}
 
 \subsection{Some standard simple graphs}
-The empty or null graph on $m$ vertices is called $N_m$.
-It has $|V| = m$ and $|E| = 0$.
+\begin{definition}[Null graph]
+    The empty or null graph on $m$ vertices is called $N_m$.
+    It has $|V| = m$ but $|E| = 0$.
+\end{definition}
 
+\begin{definition}[Complete graph]
+    The complete graph on $n$ vertices is called $K_n$.
+    Given $|V| = n$,
+    we include an edge between every pair of vertices,
+    so $|E| = \binom{n}{2}$.
+\end{definition}
 
-The complete graph on $m$ vertices is called $K_m$.
-Given $|V| = m$,
-we have an edge between every pair of vertices,
-so $|E| = \binom{m}{2}$.
+\begin{definition}[Cycle graph]
+    The cycle graph on $n$ vertices is called $C_n$.
+    Given $|V| = n$,
+    the graph is constructed by listing the vertices in some order as $v_1, \dotsc, v_n$ and then adding the cycle of $n$ edges $v_1v_2, v_2v_3, \dotsc, v_{n - 1}v_n, v_nv_1$.
+    So $C_n$ has $n$ vertices and $n$ edges,
+    and every vertex has degree $2$.
+\end{definition}
 
+\begin{definition}[Star graph]
+    The star graph on $n$ vertices is called $S_n$.
+    Of the $|V| = n$ vertices,
+    $n - 1$ are leaves with a single edge to a central hub vertex of degree $n - 1$,
+    so there are $|E| = n - 1$ edges in total.
+\end{definition}
 
-The star graph on $m$ vertices is called $S_m$.
-Given $|V| = m$ vertices,
-$m - 1$ are leaves with a single edge to a central hub vertex of degree $m - 1$,
-so $|E| = m - 1$.
+\begin{definition}[Wheel graph]
+    The wheel graph on $n$ vertices is called $W_n$.
+    It can be constructed from a star graph $S_n$ by adding a cycle of $n - 1$ edges around the leaves of $S_n$.
+    $W_n$ has $|V| = n$ and $|E| = 2(n - 1)$.
+\end{definition}
 
-
-The wheel graph on $m$ vertices is called $W_m$.
-This can be built on a star graph by listing the leaves in some order $v_1, \dotsc, v_{m - 1}$ and then adding the cycle of $m - 1$ edges $v_1v_2, v_2v_3, v_3v_4, \dotsc, v_{m - 2}v_{m - 1}, v_{m - 1}v_1$.
-So $W_m$ has $|V| = m$ and $|E| = 2(m - 1)$.
-
-
-The $n$-cube has $2 ^ n$ vertices and is denoted $Q_n$.
-If we label the vertices by $n$-digit binary strings,
-then edges join vertices whose binary representations differ in exactly one place.
-So there are indeed $2 ^ n$ vertices and the number of edges is $n2 ^ {n - 1}$
-($n$ possible places in which the strings can differ,
-$2 ^ {n - 1}$ choices for the other places).
-Concisely $|V| = 2 ^ n$ and $|E| = n2 ^ {n - 1}$.
+\begin{definition}[$n$-cube graph]
+    The $n$-cube graph $Q_n$ has $|V| = 2 ^ n$ and $|E| = n2 ^ {n - 1}$.
+\end{definition}
 
 \subsection{Handshaking}
-\begin{lemma}
-    For any graph $G = (V, E)$,
+
+\begin{lemma}[Handshaking lemma]
+    For any graph $G = (V, E, \phi)$,
     we have $\sum_{v \in V}d(v) = 2|E|$.
+
     \begin{proof}
-        Both sides count ends on edges.
-        The LHS does so vertex by vertex,
-        the RHS edge by edge.
+        Each edge contributes $2$ to the sum of degrees.
+        one to each vertex it is incident to.
     \end{proof}
 \end{lemma}
 
 \begin{corollary}
     In any graph,
     the number of odd-degree vertices is even.
+
+    \begin{proof}
+        Let $|V| = n$ and $|E| = m$,
+        and let the number of vertices of odd degree be $k$.
+        We have that the sum of degrees $\sum_{v \in V}d(v) = 2m$ is even,
+        and furthermore the sum of the degrees of the $n - k$ vertices of even numbers,
+        and thus is even.
+        Therefore the sum of the degrees of the remaining $k$ vertices of odd degree must also be even.
+        There must be an even number of terms for the sum
+        (of odd numbers)
+        to be even,
+        and hence there must be an even number of vertices of odd degree.
+    \end{proof}
 \end{corollary}
 
 \subsection{Graph isomorphism}
+
 \begin{definition}
     Two simple graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$ are isomorphic,
-    written $G_1 \cong G_2$,
+    written $G_1 \simeq G_2$,
     if there exists $\varphi : V_1 \rightarrow V_2$ which is a bijection and preserves adjacency,
     i.e.,
-    $xy \in E_1$ if and only if $\varphi(x)\varphi(y) \in E_2$.
+    $uv \in E_1$ if and only if $\varphi(u)\varphi(v) \in E_2$.
 \end{definition}
 
-In particular $|V_1| = |V_2|$ and $|E_1| = |E_2|$.
+In particular,
+we must certainly have $|V_1| = |V_2|$ and $|E_1| = |E_2|$ we must also be able to relabel vertices of $V_1$ to have the same labels as $V_2$ in such a way that the relabelled $E_1$ matches $E_2$.
+
+\subsection{Complements}
+
+\begin{definition}
+    Let $G = (V, E)$ be a simple graph.
+    Then the complement of $G$ is $\overline{G} = (V, F)$,
+    where $F = \{uv \in \mbf{V} : uv \notin E\}$.
+
+    So $\overline{G}$ has all the other edges.
+\end{definition}
+
+\subsection{Subgraphs}
+
+\begin{definition}
+    Given a graph $G = (V, E)$
+\end{definition}
 
 
 
