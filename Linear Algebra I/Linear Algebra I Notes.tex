@@ -5251,6 +5251,159 @@ with the same eigenvalue.}
 \textit{Note:
 $\mbf{0}$ always solves $A \cdot \mbf{0} = \lambda\mbf{0},\ \forall \lambda \in \C$ not an eigenvector.}
 
+Rewriting $A\mbf{v} = \lambda\mbf{v}$ as $A\mbf{v} - \lambda\mbf{v} = \mbf{0}$
+i.e.
+\[
+\mbf{0} = (A - \lambda I)\mbf{v}.
+\]
+Since $\mbf{v} \neq \mbf{0}$,
+this means that
+$B = A - \lambda I$ is not invertible
+(otherwise,
+if $B ^ {-1}$ existed,
+$B\mbf{v} = \mbf{0} \implies B ^ {-1}B\mbf{v} = B ^ {-1}\mbf{0} = \mbf{0} \iff \mbf{v} = \mbf{0}$,
+contradiction).
+
+This means that $\det(A - \lambda I) = 0$,
+this is the characteristic equation.
+\begin{example}
+    Let $A = \begin{pmatrix}
+        a & b \\ c & d
+    \end{pmatrix}$
+    \[
+    A - tI = \begin{pmatrix}
+        a - t & b \\ c & d - t
+    \end{pmatrix}
+    \]
+    \begin{align*}
+        \det(A - tI) &= \det\begin{pmatrix}
+            a - t & b \\ c & d - t
+        \end{pmatrix} \\
+        &= (a - t)(d - t) - bc \\
+        &= t ^ 2 - (a + d)t + ad - bc.
+    \end{align*}
+\end{example}
+
+\begin{definition}[Characteristic polynomial]
+    \[
+    p_A(t) = \det(A - tI)
+    \]
+    is called the characteristic polynomial of $A$.
+\end{definition}
+
+\begin{remark}
+    If $A$ is $N \times N$,
+    it's characteristic polynomial is of degree $N$.
+\end{remark}
+
+\begin{remark}
+    $\lambda$ is an eigenvalue of $A$ if and only if $\lambda$ is a root of $p_A(t)$.
+
+    Check the other way:
+    if $t_{*} \in \C$ is a root of $p_A(t)$ implies $\det(A - t_{*}I) = 0$ which implies $A - t_{*}I$ is not invertible.
+    So there is at least one $\mbf{v} \neq 0$ such that $(A - t_{*}I)\mbf{v} \neq \mbf{0}$ which implies $A\mbf{v} = t_{*}\mbf{v}$ which implies $t_{*}$ is an eigenvalue of $A$.
+\end{remark}
+
+\textbf{Multiplicity of an eigenvalue}
+
+Any degree $N$ polynomial $p(t)$ can be written as
+\[
+p(t) = a(t - \lambda_1) ^ {k_1}(t - \lambda_2) ^ {k_2} \dotsi (t - \lambda_p) ^ {k_p}
+\]
+where $a \neq 0$ and $\lambda_1, \dotsc, \lambda_p$ are the distinct roots of $p(t)$.
+$\lambda_i \in \C$,
+$\lambda_i \neq \lambda_j$ if $i \neq j$
+$k_i \in \N$,
+$1 \leq i \leq N$,
+$\sum_{i = 1}^{p}k_i = N$.
+Clearly $p(\lambda_i) = 0$.
+Use this fact on $p_A(t)$,
+the characteristic polynomial of $A$,
+$p_A(t) = \det(A - tI)$.
+\[
+p(t) = a(t - \lambda_1) ^ {k_1}(t - \lambda_2) ^ {k_2} \dotsi (t - \lambda_p) ^ {k_p}.
+\]
+\begin{definition}[Algebraic Multiplicity of Eigenvalues]
+    The algebraic multiplicity of the eigenvalue $\lambda_i$ is $k_i$.
+\end{definition}
+
+\begin{remark}
+    Suppose we have an eigenvalue $\lambda$ with algebraic multiplicity $k_{\lambda}$.
+    Then $p_A(t) = (t - \lambda) ^ {k_\lambda}Q(t)$,
+    with $Q(\lambda) \neq 0$ and degree of $Q = N - k_{\lambda}$.
+\end{remark}
+
+\begin{proposition}
+    There are $p_{\lambda}$ linearly independent eigenvectors of $A$ with eigenvalue $\lambda$ where $1 \leq p_{\lambda} \leq k_{\lambda}$.
+    
+    $p_{\lambda}$ is called the geometric multiplicity of $\lambda$.
+\end{proposition}
+
+\begin{definition}[Eigenspace]
+    The eigenspace $V_{\lambda}$ corresponding to an eigenvalue $\lambda$ is the vector subspace spanned by these eigenvectors.
+    \[
+    V_{\lambda} = \ker(A - \lambda I)\qquad\text{(remember $\ker{B} = \left\{\mbf{v} \in B\mmid B\mbf{v} = \mbf{0}\right\}$)},
+    \]
+    and $p_{\lambda} = \dim(V_{\lambda})$.
+\end{definition}
+
+\begin{example}
+    \begin{enumerate}[label = (\roman*)]
+        \item
+        \[
+        A = \begin{pmatrix}
+            6 & 0 & 0 \\
+            0 & 6 & 0 \\
+            0 & 0 & 3
+        \end{pmatrix}
+        \]
+        \begin{align*}
+            p_A(t) &= \det\begin{pmatrix}
+                6 - t & 0 & 0 \\
+                0 & 6 - t & 0 \\
+                0 & 0 & 3 - t
+            \end{pmatrix} \\
+            &= (6 - t)(6 - t)(3 - t) \\
+            &= (6 - t) ^ 2(3 - t),
+        \end{align*}
+        and so the eigenvalues are $\lambda_1 = 6, \lambda_2 = 3$,
+        the algebraic multiplicities are $k_1 = 2, k_2 = 1$.
+        
+        To find the eigenvectors:
+        fix $\lambda_1 = 6$ and consider
+        \[
+        (A - 6I)\begin{pmatrix}
+            a \\ b \\ c
+        \end{pmatrix} = \begin{pmatrix}
+            0 \\ 0 \\ 0
+        \end{pmatrix} \implies \begin{pmatrix}
+            0 & 0 & 0 \\
+            0 & 0 & 0 \\
+            0 & 0 & -3
+        \end{pmatrix}\begin{pmatrix}
+            a \\ b \\ c
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            0 \\ 0 \\ 0
+        \end{pmatrix}.
+        \]
+    \end{enumerate}
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
