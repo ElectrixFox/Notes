@@ -1,9 +1,6 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage{preamble}
 
-\newcommand{\seq}[1][x]{(#1_n)_{n \in \N}}
-\newcommand{\dseq}[2][n]{(#2_#1)_{#1 \in \N}}
-
 \title{Analysis I}
 \author{Luke Phillips}
 \date{October 2024}
@@ -1623,7 +1620,7 @@ For $a > 0, a \neq 1$ define $\log_a x = \frac{\log x}{\log a}$
     \end{proof}
 \end{lemma}
 
-\begin{theorem}[Bolzano-Weierstrass]\label{analy_thm_bolzanoweierstrass}
+\begin{theorem}[Bolzano-Weierstrass]\label{analy:thm:bolzanoweierstrass}
     Let $\seq$ be a bounded sequence.
     Then $\seq$ has a convergent subsequence.
     \begin{proof}
@@ -1768,7 +1765,7 @@ sequences $\seq[\overline{x}]$ and $\seq[\underline{x}]$ as follows let
     Then $\seq$ is a convergent sequence.
     \begin{proof}
         By \autoref{analy_thm_cauchyisbounded} $\seq$ is a bounded sequence.
-        By \autoref{analy_thm_bolzanoweierstrass},
+        By \autoref{analy:thm:bolzanoweierstrass},
         there is a convergent subsequence $(x_{n_j})_{j \in \N}$.
         Let $x = \lim_{j \rightarrow \infty}x_{n_j}$.
         So given $\varepsilon > 0$,
@@ -2638,13 +2635,131 @@ Look at
     \]
 \end{theorem}
 
+\newpage
 
+\section{Functions, Limits, and Continuity}
 
+\subsection{Basics}
 
+\begin{definition}[Open interval]
+    \[
+    x \in (a, b) \iff a < x < b
+    \]
+    \textit{$a = -\infty, b = \infty$ is fine}.
+\end{definition}
 
+\begin{definition}[Open set]
+    Given $X \subseteq \R$. For all $c \in X$ there exists an open interval in $X$ containing $c$.
+    
+    That is,
+    there exists $\delta > 0$,
+    such that
+    \[
+    (c - \delta, c + \delta) \subseteq X.
+    \]
+\end{definition}
 
+\begin{definition}[Interior point]
+    An interior point $c \in X$ if there exists $(c - \delta, c + \delta) \subset X$.
+\end{definition}
 
+\begin{definition}[Closed interval]
+    \[
+    x \in [a, b] \iff a \leq x \leq b
+    \]
+    ($a, b \in \R$).
+\end{definition}
 
+\begin{lemma}\label{analy:lem:limitliesinab}
+    $(x_n) \in [a, b]$ converging with $\liminfty x_n = L$.
+    Then $L \in [a, b]$.
+    \begin{proof}
+        Assume $L \notin [a, b]$;
+        take $\varepsilon = \min\{|L - b|, |L - a|\}$.
+        Say $L > b$.
+        For all $x_n$ we have
+        \begin{align*}
+            |x_n - L| &= |x_n - b + b - L| \\
+            &= (b - x_n) + (L - b) \\
+            &> \varepsilon.
+        \end{align*}
+        Contradiction to $\liminfty x_n = L$.
+    \end{proof}
+\end{lemma}
+
+\begin{remark}
+    The previous is false for open intervals.
+    For example,
+    \[
+    x_n = \frac{1}{n} > 0\qquad(a, b) = (0, 2).
+    \]
+    But $\liminfty x_n = 0 \notin (0, 2)$.
+\end{remark}
+
+\begin{theorem}[Bolzano-Weierstrass]
+    $(x_n) \in [a, b]$,
+    with $a, b \in \R$,
+    has a converging subsequence converging in $[a, b]$.
+    \begin{proof}
+        $(x_n)$ are bounded which by \autoref{analy:thm:bolzanoweierstrass} has a convergent subsequence and by \autoref{analy:lem:limitliesinab}.
+    \end{proof}
+\end{theorem}
+
+\begin{definition}[Compact interval]
+    Call $[a, b]$
+    ($a, b \in \R$)
+    a compact interval if the interval is bounded and closed.
+\end{definition}
+
+\subsection{Limits of functions}
+
+\begin{definition}
+    Let $f : (a, b) \rightarrow \R$ be a function.
+    Let $c \in (a, b)$ and $f$ is possibly not defined at $c$.
+    We say
+    \[
+    \lim_{x \rightarrow c}f(x) = L
+    \]
+    if for all $\varepsilon > 0$ there exists a $\delta > 0$ such that
+    \[
+    |f(x) - L| < \varepsilon
+    \]
+    for all $x \neq c$ with
+    \[
+    |x - c| < \delta.
+    \]
+    We also write $f(x) \rightarrow L$ as $x \rightarrow c$.
+\end{definition}
+
+\begin{remark}
+    \begin{enumerate}[label = (\roman*)]
+        \item $\delta$ is not unique,
+        any smaller positive number will work.
+
+        \item The property does not depend on the interval $(a, b)$,
+        $\lim_{x \rightarrow c}f(x)$ is a local property,
+        only depending on any small open interval around $c$,
+        $(c - \delta, c + \delta)$.
+
+        \item $\delta$ will depend on $c$.
+
+        \item $L$ might or might not be equal to $f(c)$ if $f$ is defined at $c$.
+    \end{enumerate}
+\end{remark}
+
+One sided limits
+
+Limit from the right:
+$\lim_{x \rightarrow c ^ {+}}f(x)$ same but all $x > c$.
+
+Limit from the left:
+$\lim_{x \rightarrow c ^ {-}}f(x)$ same but all $x < c$.
+
+$\liminfty[x] f(x) = L$:
+for all $\varepsilon > 0$ there exists a $k \in \R$ such that
+\[
+|f(x) - L| < \varepsilon\qquad\text{for all } x > k.
+\]
 
 
 
