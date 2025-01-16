@@ -1,0 +1,154 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\title{Statistics I \\
+    \large Prereading}
+\author{Luke Phillips}
+\date{January 2025}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Introduction to Statistics}
+
+\subsection{Foundations of Statistics and Interpretation of Probability}
+
+\subsubsection{Probability: Revision}
+
+\begin{definition}[Axioms of Probability]
+    For a sample space $\Omega$,
+    with collection $\mathcal{F}$ of events,
+    the probability $\P(A)$ satisfies the axioms:
+    \begin{enumerate}[label = A\arabic*]
+        \item $\P(A) \geq 0$,
+        for every $A \in \mathcal{F}$.
+
+        \item $\P(\Omega) = 1$.
+
+        \item For $A$ and $B$ disjoint then:
+        \[
+        \P(A \cup B) = \P(A) + \P(B)
+        \]
+    \end{enumerate}
+\end{definition}
+
+The axioms lead to some of the following consequences
+\begin{proposition}
+    \begin{enumerate}[label = (\roman*)]
+        \item $0 \leq \P(A) \leq 1$.
+        
+        \item $\P(A ^ c) = 1 - \P(A)$.
+        
+        \item $\P(\emptyset) = 0$.
+    \end{enumerate}
+\end{proposition}
+
+\subsubsection{Interpretations of Probability}
+\textbf{Classical}
+
+This is based on an assumption underlying equally likely events.
+
+\textbf{Frequentist}
+
+An event $A$ has probability $\P(A)$ given by:
+\[
+\P(A) = \liminfty\frac{n_A}{n},
+\]
+where $n_A$ is the number of times event $A$ occurred in $n$ repetitions of the experiment.
+
+\textbf{Subjective}
+
+Probabilities are viewed as subjective about the likelihood of an event $A$ occurring.
+This can be defined in a precise way and Probability Axioms are actually derived as requirements of coherence.
+
+\subsubsection{A Summary of Useful Probability Results}
+\underline{Combining Events}
+
+The event $A, B$ or both occur is $A \cup B$.
+The event $A$ and $B$ occur is $A \cap B$.
+These are related by the following rule
+\[
+\P(A \cup B) = \P(A) + \P(B) - \P(A \cap B).
+\]
+Events are disjoint if they cannot occur at the same time.
+
+Addition law for disjoint events:
+If $A$ and $B$ are disjoint events
+\[
+\P(A \cup B) = \P(A) + \P(B).
+\]
+
+\underline{Conditional Probability and Independence}
+
+For any two events $A, B$,
+the notation $\P(A | B)$ means the conditional probability that $A$ occurs,
+assuming that the event $B$ has already occurred.
+
+Conditional probability is obtained directly or by using the conditional probability rule:
+\[
+\P(A | B) = \frac{\P(A | B)}{\P(B)},
+\]
+for $\P(B) > 0$.
+
+Rearranging we get the general multiplication rule
+\[
+\P(A | B) = \P(A | B)\P(B).
+\]
+
+Two events are independent when the occurrence of one has no bearing on the occurrence of the other.
+If $A, B$ are independent then
+\[
+\P(A | B) = \P(A).
+\]
+
+\underline{Partitions}
+
+Suppose $E_1, \dotsc, E_n$ are mutually disjoint events,
+and suppose exactly one must happen.
+Such a collection of events is called a
+(sure)
+partition.
+
+We can write any other event $A$ in combination with this event:
+in general,
+\[
+\P(A) = \P(A \cap E_1) + \P(A \cap E_2) + \dotsc + \P(A \cap E_n),
+\]
+which simplifies to
+\[
+\P(A) = \P(A | E_1)\P(E_1) + \dotsc + \P(A | E_n)\P(E_n)
+\]
+using the multiplication rule.
+
+\underline{Bayes Theorem}
+
+For any two events $A, B$,
+the multiplication rule gives the formula
+\[
+\P(A \cap B) = \P(A | B)\P(B).
+\]
+Another equivalent formula is obviously
+\[
+\P(A \cap B) = \P(B | A)\P(A).
+\]
+
+Equating these we get the formula known as Bayes theorem:
+\[
+\P(A | B) = \frac{\P(B | A)\P(A)}{\P(B)}.
+\]
+Often the probability in the denominator must be calculated using the simplifying method shown in the last section;
+i.e. via a partition.
+
+
+
+
+
+
+\end{document}
