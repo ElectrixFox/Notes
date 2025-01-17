@@ -217,6 +217,123 @@ use $\frac{dx}{dt} = v(x)$ again first order separable.
     \end{solution}
 \end{example}
 
+\subsection{More Examples}
+
+\begin{example}
+    $F(t, v) = -v + e ^ {-t}$
+    (with $v(0) = 0$)
+    \begin{solution}
+        This is linear,
+        so solve with an integrating factor and apply the initial conditions to get
+        \[
+        v(t) = te ^ {-t}.
+        \]
+    \end{solution}
+\end{example}
+
+\begin{example}
+    A rocket of mass $m(t)$ burns fuel at a constant rate $\dot{m} = -c$
+    (with $c > 0$).
+    Thus produces a constant force $F = kc$.
+    Start with $x(0) = 0$ and $\dot{x}(0) = 0$,
+    and initial mass $m_0$.
+    Find $\dot{x}(t)$,
+    hence $x(t)$.
+    \begin{solution}
+        Here the equation of motion $\frac{d}{dt}(mv) = F$ where $v = \dot{x}$.
+        Do $\int\,dt$ giving $mv = kct + 0$
+        (with $0$ being the constant of integration).
+        Also $\dot{m} = -c \implies m(t) = -ct + m_0$.
+        Thus $v(t) = \frac{kct}{m_0 - ct}$ for $0 \leq t < \frac{m_0}{c}$.
+
+        Finally,
+        $x(t) = \int v(t)\,dt$.
+    \end{solution}
+\end{example}
+
+Two methods for $F = F(\dot{x})$.
+
+\textbf{Method $1$}
+is $m\frac{dv}{dt} = F(v)$,
+get $v(t)$,
+then $\int\,dt$ gives $x(t)$.
+
+\textbf{Method $2$}
+is $mv\frac{dv}{dx} = F(v)$ which is separable,
+get $v(x)$,
+then $\frac{dx}{dt} = v(x)$.
+
+\begin{example}
+    A unit mass
+    (meaning $m = 1$)
+    experiences a frictional force of magnitude $v + v ^ 2$
+    ($v > 0$ is velocity).
+    Find the general solution for $x(t)$.
+
+    \begin{solution}
+        Here method $2$ says
+        \begin{align*}
+            v\frac{dv}{dx} = -(v + v ^ 2) &\implies \frac{dv}{dx} = -(1 + v) \\
+            &\implies \int\frac{1}{1 + v}\,dv = -\int\,dx \\
+            &\implies \log(1 + v) = -x + C \\
+            &\implies v(x) = e ^ {c - x} - 1.
+        \end{align*}
+
+        Then
+        \begin{align*}
+            \frac{dx}{dt} = v = e ^ {c - x} - 1 &\implies \int\frac{1}{e ^ {c - x} - 1}\,dx = \int\,dt = t + b \\
+            &\implies \int\frac{e ^ x}{e ^ c - e ^ x}\,dx = -\log(e ^ c - e ^ x) = t + b \\
+            &\implies -\log(e ^ c - e ^ x) = t + b \\
+            &\implies e ^ c - e ^ x = e ^ {-b - b} \\
+            &\implies x = \log(e ^ c - e ^ {-b - t}).
+        \end{align*}
+    \end{solution}
+\end{example}
+
+\begin{example}
+    A unit mass is acted on by a force $F = \frac{1}{1 + x ^ 2}$,
+    "starts" at $x = -\infty$ with $\dot{x} = u_0 > 0$.
+    What is $\dot{x}$ as $x \rightarrow \infty$?
+
+    \textit{[Note:
+    $F > 0$ so we expect an answer $> u_0$.]}
+    \begin{solution}
+        We really want $v(x)$.
+        The equation is
+        \begin{align*}
+            v\frac{dv}{dx} = \frac{1}{1 + x ^ 2} &\implies \int_{u_0}^{u_1} v\,dv = \int_{-\infty}^{\infty}\frac{1}{1 + x ^ 2}\,dx \\
+            &\implies \frac{1}{2}u_1 ^ 2 - \frac{1}{2}u_0 ^ 2 = \left[\arctan{x}\right]_{-\infty}^{\infty} = \frac{\pi}{2} - \left(-\frac{\pi}{2}\right) = \pi \\
+            &\implies u_1 ^ 2 = u_0 ^ 2 + 2\pi \\
+            &\implies u_1 = \sqrt{u_0 ^ 2 + 2\pi}\qquad(> u_0\text{ as expected}).
+        \end{align*}
+    \end{solution}
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
