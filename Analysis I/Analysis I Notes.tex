@@ -2,6 +2,8 @@
 \usepackage{preamble}
 
 \newcommand{\limas}[3][n]{#2 \rightarrow #3 \text{ as } #1 \rightarrow \infty}
+\newcommand{\seq}[1][x]{(#1_n)_{n \in \N}}
+\newcommand{\dseq}[2][n]{(#2_#1)_{#1 \in \N}}
 
 \title{Analysis I}
 \author{Luke Phillips}
@@ -2751,17 +2753,230 @@ Look at
 
 One sided limits
 
-Limit from the right:
-$\lim_{x \rightarrow c ^ {+}}f(x)$ same but all $x > c$.
+\begin{definition}[Limit from the right]
+    \[
+    \lim_{x \rightarrow c ^ {+}}f(x) \text{ same but all } x > c.
+    \]
+\end{definition}
 
-Limit from the left:
-$\lim_{x \rightarrow c ^ {-}}f(x)$ same but all $x < c$.
 
-$\liminfty[x] f(x) = L$:
-for all $\varepsilon > 0$ there exists a $k \in \R$ such that
-\[
-|f(x) - L| < \varepsilon\qquad\text{for all } x > k.
-\]
+\begin{definition}[Limit from the left]
+    \[
+    \lim_{x \rightarrow c ^ {-}}f(x) \text{ same but all } x < c.
+    \]
+\end{definition}
+
+\begin{definition}[Infinite limit]
+    $\liminfty[x] f(x) = L$:
+    for all $\varepsilon > 0$ there exists a $k \in \R$ such that
+    \[
+    |f(x) - L| < \varepsilon\qquad\text{for all } x > k.
+    \]
+\end{definition}
+
+\begin{proposition}
+    \[
+    \lim_{x \rightarrow c}f(x) = L
+    \]
+    \[
+    \iff
+    \]
+    for all sequences $(x_n)$ with $\liminfty x_n = c$ have $\liminfty f(x_n) = L$.
+    \begin{proof}
+        "$\implies$".
+        Assume $\lim_{x \rightarrow c}f(x) = L$.
+        Take $(x_n) \in (a, b)$ $(x_n \neq c)$ with $\liminfty x_n = c$.
+        Take $\varepsilon > 0$.
+        Need an $N$ such that
+        \[
+        |f(x_n) - L| < \varepsilon
+        \]
+        for all $n \geq N$.
+        We know there exists a $\delta > 0$ such that
+        \begin{equation}\label{analy:eq:1}
+            |f(x) - L| < \varepsilon
+        \end{equation}
+        for all $|x - c| < \delta$ $(x \neq c)$.
+        Since $\liminfty x_n = c$ there exists an $N$ such that $|x_n - c| < \delta$ for all $n \geq N$.
+        By \eqref{analy:eq:1} $|f(x_n) - L| < \varepsilon$ for all $n \geq N$.
+
+        "$\impliedby$".
+        By contrapositive.
+        Assume $\lim_{x \rightarrow c}f(x) \neq L$
+        (or does not exist).
+        Need to find a sequence $x_n$ where $\liminfty x_n = c$ but $\liminfty f(x_n) \neq L$
+        (or does not exist).
+        Hence there exists a $\varepsilon > 0$ such that for all $\delta > 0$ such that there exists an $x$ with $|x - c| < \delta$ but $|f(x) - L| \geq \varepsilon$.
+        Take the "bad" $\varepsilon > 0$.
+        Take $\delta = 1 / n$,
+        get an $x = x_n$ with $|x_n - c| < \delta = \frac{1}{n}$ but $|f(x_n) - L| \geq \varepsilon$.
+        \[
+        \liminfty x_n = c
+        \]
+        but
+        \[
+        \liminfty f(x_n) \neq L.
+        \]
+        This completes the proof by the contrapositive.
+    \end{proof}
+\end{proposition}
+
+\begin{proposition}[COLT]
+    We have $\lim_{x \rightarrow c}f(x) = L_1$,
+    $\lim_{x \rightarrow c}g(x) = L_2$.
+    Then
+    \begin{enumerate}[label = (\roman*)]
+        \item
+        \[
+        \lim_{x \rightarrow c}(af(x) + bg(x)) = aL_1 + bL_2.
+        \]
+
+        \item
+        \[
+        \lim_{x \rightarrow c}(f(x)g(x)) = L_1L_2.
+        \]
+
+        \item If $L_2 \neq 0$
+        \[
+        \lim_{x \rightarrow c}\left(\frac{f(x)}{g(x)}\right) = \frac{L_1}{L_2}
+        \]
+    \end{enumerate}
+
+    \begin{proof}
+        Using the previous proposition,
+        and apply COLT for sequences.
+        \begin{enumerate}[label = (\roman*)]
+            \item \phantom{}
+            
+            \item Take $x_n \rightarrow c$
+            \[
+            \liminfty\left[f(x_n)g(x_n)\right]
+            \]
+            
+            by COLT for sequences
+            \[
+            \liminfty\left[f(x_n)g(x_n)\right] = \lim_{x \rightarrow c}f(x_n)\cdot\liminfty g(x_n) = L_1L_2.
+            \]
+            
+            \item \phantom{}
+        \end{enumerate}
+    \end{proof}
+\end{proposition}
+
+\begin{proposition}[Squeezing]
+    Assume $f(x) \leq g(x) \leq h(x)$.
+    For all $x$ in a neighbourhood\footnote{Close to $c$.} of $c$ with
+    \[
+    \lim_{x \rightarrow c}f(x) = \lim_{x \rightarrow c}h(x) = L.
+    \]
+    Then
+    \[
+    \lim_{x \rightarrow c}g(x) = L.
+    \]
+\end{proposition}
+
+\subsection{Continuous functions}
+
+\begin{definition}[Co]
+    $f : X \rightarrow \R$,
+    $X = (a, b)$
+    $c \in (a, b)$.
+    Call $f(x)$ continuous at $x = c$ if
+    \[
+    \lim_{x \rightarrow c}f(x) = f(c).
+    \]
+    For all $\varepsilon > 0$,
+    there exists $\delta > 0$ such that
+    \[
+    |f(x) - f(c)| < \varepsilon
+    \]
+    for all $x$ with
+    \[
+    |x - c| < \delta.
+    \]
+\end{definition}
+
+\begin{remark}\phantom{}
+    \begin{enumerate}[label = (\roman*)]
+        \item Continuity is a local property,
+        only depending on the behaviour of $f(x)$ in a potentially small neighbourhood of $c$.
+        Can restrict $f(x)$ to such a neighbourhood if necessary.
+
+        \item Can define left and right continuity as well as before
+        \[
+        \lim_{x \rightarrow c ^ {\pm}}f(x) = f(c).
+        \]
+        \textit{Notion:
+        get continuity on $[a, b]$}.
+    \end{enumerate}
+\end{remark}
+
+We can get the following proposition from the previous
+\begin{proposition}
+    $f(x)$ is continuous at $x = c$ if and only if
+    \[
+    \liminfty f(x_n) = f\left(\liminfty x_n\right).
+    \]
+\end{proposition}
+
+\begin{theorem}[Continuous COLT]
+    $f, g$ are continuous at $x = c$.
+    \begin{enumerate}[label = (\roman*)]
+        \item
+        \[
+        af(x) + bg(x) \text{ is continuous at } c.
+        \]
+
+        \item
+        \[
+        f(x)g(x) \text{ is continuous at } c.
+        \]
+
+        \item If $g(c) \neq 0$
+        \[
+        \frac{f(x)}{g(x)} \text{ is continuous at } c.
+        \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{example}
+    \begin{enumerate}[label = (\roman*)]
+        \item $f(x) = L$ constant is continuous.
+
+        \item $f(x) = x$ is continuous on $\R$.
+
+        \item Using COLT $p(x)$ any polynomial is continuous on $\R$.
+    \end{enumerate}
+    \begin{solution}
+        \begin{enumerate}[label = (\roman*)]
+            \item $|f(x) - f(c)| = |L - L| < \varepsilon$ for all $x$,
+            so any $\delta > 0$ will work.
+
+            \item Given $\varepsilon > 0$,
+            can take $\delta = \varepsilon$.
+            Indeed,
+            if $|x - c| < \delta = \varepsilon$ then $|f(x) - f(c)| = |x - c| < \varepsilon$ as required.
+
+            \item Comes from products and sums.
+            $\frac{p(x)}{q(x)}$ is continuous in the domain for $q(x) \neq 0$.
+        \end{enumerate}
+    \end{solution}
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
