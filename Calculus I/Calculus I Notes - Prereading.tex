@@ -1927,13 +1927,88 @@ The distance between $(x, y)$ and $(x_0, y_0)$ is
 \textbf{Mathematically:}
 For all $\varepsilon > 0$ there exists $\delta > 0$ such that if $\mbf{x} \in D$ and $|\mbf{x} - \mbf{x}_0| < \delta$ then this implies that $|\delta f| = |f(\mbf{x}) - f(\mbf{x}_0)| < \varepsilon$.
 
+\begin{example}
+    Show that the function $f(x, y) = x ^ 2 + y ^ 2$ is continuous at the origin $\mbf{x}_0 = (0, 0)$.
+    \begin{solution}
+        Note that
+        \[
+        |\delta f| = |f(\mbf{x}) - f(\mbf{x}_0)| = |x ^ 2 + y ^ 2 - 0 ^ 2 - 0 ^ 2| = |\mbf{x}| ^ 2.
+        \]
+        Therefore,
+        if
+        \begin{align*}
+            |\mbf{x} - \mbf{x}_0| &= |\mbf{x}| < \delta \\
+            \implies |\delta f| &= |f(\mbf{x}) - f(\mbf{x}_0)| = |\mbf{x}| ^ 2 < \delta ^ 2
+        \end{align*}
+        so if we choose $\delta = \sqrt{\varepsilon}$ then we can ensure that $|\delta f| < \delta ^ 2 = \varepsilon$ for any $\varepsilon > 0$.
+    \end{solution}
+\end{example}
+
+The function $f(x)$ is defined to be differentiable at $x_0 \in D$ if
+
+\textbf{In words:}
+All points close to $x_0$ belong to $D$ and the function looks like a line if  zoom in close enough.
+
+\textbf{Mathematically:}
+The function $f(x)$ is defined to be differentiable at $x_0 \in D$ if there exists a $\delta > 0$ such that $|x - x_0| < \delta \implies x \in D$,
+and
+\[
+f(x) = f(x_0) + M(x - x_0) + R(x)
+\]
+where
+\[
+\lim_{x \rightarrow x_0}\frac{R(x)}{x - x_0} = 0.
+\]
+$R(x)$ is the amount that $f(x)$ deviates from the straight line $f(x) = f(x_0) + M(x - x_0)$.
 
 
+Extending this definition of differentiability to functions of two variables.
+A function $f(x, y)$,
+where $f : D \rightarrow \R$ and $D \subseteq \R ^ 2$,
+is defined to be differentiable at $\mbf{x}_0 = (x_0, y_0)$ if
 
+\textbf{In words:}
+all points close to $\mbf{x}_0$ are in $D$ and the function $f(x, y)$ looks like a plane when we 'zoom in close enough'.
 
+\textbf{Mathematically:}
+The function $f(x, y)$ is defined to be differentiable at $\mbf{x}_0 = (x_0, y_0) \in D$ if there exists a $\delta > 0$ such that $|\mbf{x} - \mbf{x}_0| < \delta \implies \mbf{x} \in D$,
+and
+\[
+f(x, y) = f(x_0, y_0) + M(x - x_0) + N(y - y_0) + R(x, y)
+\]
+where
+\[
+\lim_{\mbf{x} \rightarrow \mbf{x}_0}\frac{R(x, y)}{|\mbf{x} - \mbf{x}_0|} = 0.
+\]
+$R(x, y)$ measures how much $f(x, y)$ deviates from the plane $f(x, y) = f(x_0, y_0) + M(x - x_0) + N(y - y_0)$.
 
+\begin{example}
+    Show that $f(x, y) = x ^ 2 + y ^ 2$ is differentiable at $(x_0, y_0) = (1, 1)$.
+    \begin{solution}
+        To do this we need to see how the function behaves near the point $(1, 1)$.
+        \begin{align*}
+            f(x, y) &= x ^ 2 + y ^ 2 \\
+            &= (x - 1) ^ 2 + (y - 1) ^ 2 + 2x - 1 + 2y - 1 \\
+            &= 2 + 2(x - 1) + 2(y - 1) + (x - 1) ^ 2 + (y - 1) ^ 2. \\
+        \intertext{Comparing this expression with} \\
+            f(x, y) &= f(x_0, y_0) + M(x - x_0) + N(y - y_0) + R(x, y) \\
+            &= f(1, 1) + M(x - 1) + N(y - 1) + R(x, y) \\
+            &= 2 + M(x - 1) + N(y - 1) + R(x, y)
+        \end{align*}
+        one sees that taking $M = 2, N = 2$,
+        we can take
+        \[
+        R(x, y) = (x - 1) ^ 2 + (y - 1) ^ 2 = |(x, y) - (1, 1)| ^ 2 = |\mbf{x} - \mbf{x}_0| ^ 2.
+        \]
+        So
+        \[
+        \lim_{\mbf{x} \rightarrow \mbf{x}_0}\frac{R(x, y)}{|\mbf{x} - \mbf{x}_0|} = \lim_{\mbf{x} \rightarrow \mbf{x}_0}\frac{|\mbf{x} - \mbf{x}_0| ^ 2}{|\mbf{x} - \mbf{x}_0|} = 0
+        \]
+        satisfying the condition for differentiability.
+    \end{solution}
+\end{example}
 
-
+\subsection{Partial Derivatives}
 
 
 

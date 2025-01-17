@@ -17,4 +17,370 @@
 
 \section{Particle on a line}
 
+\subsection{The Basics}
+
+\begin{definition}[Position]
+    The position $x(t)$ where $t$ is time.
+\end{definition}
+
+\begin{definition}[Velocity]
+    The velocity $\dot{x}(t)$ where $t$ is time.
+\end{definition}
+
+\textit{Note that $\dot{x}$ means $\frac{dx}{dt}$.}
+
+\begin{definition}[Acceleration]
+    The acceleration $a(t) = \dot{v}(t) = \ddot{x}(t)$.
+\end{definition}
+
+\begin{definition}[Speed]
+    The speed is $|v(t)|$,
+    the magnitude of the velocity.
+\end{definition}
+
+\begin{definition}[Mass]
+    A particle has mass $m > 0$.
+\end{definition}
+
+\begin{definition}[Momentum]
+    A particle's momentum,
+    $p$ is given by
+    \[
+    p = mv = m\dot{x}.
+    \]
+\end{definition}
+
+\begin{definition}[Equation of motion]
+    In an applied force $F$,
+    then the equation of motion is $\dot{p} = F$.
+\end{definition}
+
+\begin{remark}\phantom{}
+    \begin{enumerate}[label = (\roman*)]
+        \item Could have $m$ depending on time
+        (e.g. rocket).
+
+        Unless otherwise stated,
+        we take $m$ to be a \textbf{constant}.
+
+        Then the EoM\footnote{Equation of motion} is $m\dot{v} = m\ddot{x} = F$.
+
+        \item In general,
+        $F = F(t, x, \dot{x})$ and $m\ddot{x} = F(t, x, \dot{x})$ is a second order differential equation which cannot be solved
+        (explicitly).
+    \end{enumerate}
+\end{remark}
+
+We focus on special cases which can be solved.
+
+The simplest example is $F$ is constant.
+For example,
+vertical motion under gravity close to the surface of a planet:
+then the magnitude of $F$ is $|F| = mg$
+(the weight)
+where the constant $g$ depends on the planet.
+
+\begin{example}
+    An object is shot up vertically from the ground with some initial speed $u$.
+    What maximum height $H$ does it reach?
+    \begin{solution}
+        Could use $x$ upwards or $x$ downwards,
+        both work,
+        choose a convenient one.
+        Here having $x$ upwards seems more natural.
+        Then $m\ddot{x} = -mg$ with $x = 0$ at the ground.
+        Then
+        \begin{align*}
+            \ddot{x} = -g &\xrightarrow{\int\,dt} \dot{x} = -gt + u \\
+            \intertext{where $u$ is the constant of integration.} \\
+            &\xrightarrow{\int\,dt} x(t) = -\frac{1}{2}gt ^ 2 + ut + 0.
+        \end{align*}
+        Max $\dot{x} = 0 \implies t = u / g$.
+        So $H = x\left(\frac{u}{g}\right) = -\frac{1}{2}g\left(\frac{u}{g}\right) ^ 2 + u\left(\frac{u}{g}\right) = \frac{u ^ 2}{2g}$.
+    \end{solution}
+\end{example}
+
+\subsection{Case \texorpdfstring{$F = F(t)$}{} and \texorpdfstring{$F = F(\dot{x})$}{}}
+The same method works,
+do $\int\,dt$ twice.
+
+\begin{example}
+    A particle of mass $m = 1$ is at rest at $x = 0$.
+    A force $F = e ^ {-t}$ is switched on at time $t = 0$.
+    Find $x(t)$ for $t > 0$.
+
+    \textit{Note:
+    expect $\dot{x} > 0$ and $x > 0$ for $t > 0$
+    (since $F > 0$).}
+
+    \begin{solution}
+        \[
+        \ddot{x} = e ^ {-t} \xrightarrow{\int\,dt} \dot{x} = -e ^ {-t} + 1 \xrightarrow{\int\,dt} x = e ^ {-t} + t - 1.
+        \]
+    \end{solution}
+\end{example}
+
+\begin{remark}
+    Here $m\ddot{x} = F(\dot{x})$ second-order non linear differential equation.
+\end{remark}
+
+\begin{example}
+    A particle of mass $m$ is slowed by a frictional force of magnitude $be ^ {av}$
+    ($a$ and $b$ are constant).
+    Initial speed $u$.
+    What time $T$ does the particle travel for before coming to rest?
+    
+    \begin{solution}
+        The particle either moves to the right or the left,
+        the force moves in the opposite direction.
+
+        Choosing the first situation.
+        So
+        \begin{align*}
+            m\frac{dv}{dt} = -be ^ {av} &\implies \int e ^ {av}\,dv = -\frac{b}{m}\int\,dt \\
+            \intertext{could use a constant of integration,
+            fixed by $v(0) = u$.} \\
+            \int e ^ {av}\,dv = -\frac{b}{m}\int\,dt &\implies \int_{u}^{0} e ^ {av}\,dv = -\frac{b}{m}\int_{0}^{T}\,dt \\
+            &\implies \left[-\frac{1}{a}e ^ {-av}\right]_{u}^{0} = -\frac{bT}{m} \\
+            &\implies T = \frac{m}{ab}\left(1 - e ^ {-au}\right).
+        \end{align*}
+    \end{solution}
+\end{example}
+
+\begin{example}
+    A mass $M$ falls downwards under gravity,
+    a resistive force $bw$,
+    where $w$ is its speed.
+    Initially $w(0) = 0$,
+    find $w(t)$.
+    What is the "least upper bound" of this $w$,
+    the terminal speed.
+
+    \begin{solution}
+        We could use the $x$ axis pointing up or down.
+        Use $x$ as downwards since the motion is downwards.
+
+        Then
+        \[
+        m\dot{v} = mg - bv
+        \]
+        where $v$ is the velocity,
+        here the velocity $v = w$.
+        So
+        \[
+        m\dot{w} = mg - bw \implies \frac{dw}{dt} = g - \frac{b}{m}w \implies \int\frac{1}{g - \frac{b}{m}w}\,dw = \int\,dt
+        \]
+        which results in $w(t) = \frac{mg}{b}\left(1 - e ^ {-\frac{bt}{m}}\right)$,
+        the terminal speed is
+        \[
+        \liminfty[t]\frac{mg}{b}\left(1 - e ^ {-\frac{bt}{m}}\right) = \frac{mg}{b}.
+        \]
+    \end{solution}
+\end{example}
+
+\subsection{Case \texorpdfstring{$F = F(x)$}{}}
+Here $m\ddot{x} = F(x)$.
+If $F(x) = bx + c$
+($b$ and $c$ are constant),
+then $m\ddot{x} - bx = c$ linear,
+the solution is the complementary function $+$ the particular integral.
+This doesn't work for $F(x)$ non-linear.
+For that think of $v = v(x)$.
+Then
+\[
+m\frac{dv}{dt} = m\frac{d}{dt}v(x(t)) = m\frac{dv}{dx}\cdot\frac{dx}{dt} = m\frac{dv}{dx}v = F(x).
+\]
+This is a first order separable ODE,
+solve to get $v(x)$.
+Integrating gives
+\[
+\frac{1}{2}mv ^ 2 = \int F(x)\,dx,
+\]
+and hence you get $v(x)$.
+To get $x(t)$,
+use $\frac{dx}{dt} = v(x)$ again first order separable.
+
+\begin{example}
+    A mass with $m = 2$ moves in a force with $F = 3x ^ 2$,
+    initial conditions $x = 1$ and $v = 1$ at $t = 0$.
+    What time $T$ does it take to reach $x = 9$?
+
+    \begin{solution}
+        \begin{align*}
+            2v\frac{dv}{dx} = 3x ^ 2 &\implies \int 2v\,dv = \int 3x ^ 2\,dx \\
+            &\implies v ^ 2 = x ^ 3 + c &\text{($c = 0$ from initial conditions)} \\
+            &\implies v ^ 2 = x ^ 3 \\
+            &\implies v = x ^ {\frac{3}{2}} &\text{(positive since $x = v = 1$ at $t = 0$)}
+        \end{align*}
+        Now
+        \begin{align*}
+            \frac{dx}{dt} = x ^ {\frac{3}{2}} &\implies \int_{1}^{9} x ^ {-\frac{3}{2}}\,dx = \int_{0}^{T}\,dt \\
+            &\implies T = \left[-2x ^ {-\frac{1}{2}}\right]_{2}^{9} = -2\left(\frac{1}{3} - 1\right) = \frac{4}{3}.
+        \end{align*}
+    \end{solution}
+\end{example}
+
+\begin{remark}
+    For problems with $F = F(v)$ we can use $F(v) = m\frac{dv}{dt}$ as we saw before.
+    Sometimes it may be more convenient to use $F(v) = mv\frac{dv}{dx}$,
+    in situations where we want $v(x)$ rather than $v(t)$.
+\end{remark}
+
+\subsection{Two more general examples}
+
+\begin{example}['Mixed' example]
+    A unit mass moves along a line,
+    acted on by a force $F(v, t) = -v + e ^ {-t}$ where $v$ is its velocity.
+    Given that $v(0) = 0$,
+    find $v(t)$.
+    \begin{solution}
+        The equation of motion is
+        \[
+        \dot{v} = -v + e ^ {-t},
+        \]
+        which is a linear ODE for $v(t)$.
+        Solving it via an integrating factor $e ^ t$ gives
+        \[
+        v(t) = te ^ {-t}.
+        \]
+    \end{solution}
+\end{example}
+
+\begin{example}[Rocket: non-constant mass]
+    A rocket of mass $m(t)$ burns fuel at a constant rate $\dot{m} = -c$,
+    where $c > 0$.
+    This produces a constant thrust $F = k|\dot{m}| = kc$.
+    The rocket starts at rest at $x = 0$,
+    with initial mass $m_0$.
+    Find its subsequent position $x(t)$.
+    \begin{solution}
+        The constant force gives $mv = kct$.
+        Now $m(t) = m_0 - ct$,
+        so
+        \[
+        v(t) = \frac{kct}{m_0 - ct} = -k + \frac{km_0}{m_0 - ct}
+        \]
+        for $0 \leq t < \frac{m_0}{c}$.
+        Integrating this gives
+        \[
+        x(t) = -kt + \frac{km_0}{c}\log\left(\frac{m_0}{m_0 - ct}\right)
+        \]
+        for $0 \leq t < \frac{m_0}{c}$.
+        Note that for small $t$ we have
+        \[
+        v(t) \approx \frac{kct}{m_0};
+        \]
+        whereas when $t \rightarrow \frac{m_0}{c}$ we get $v \rightarrow \infty$ and $x \rightarrow \infty$.
+    \end{solution}
+\end{example}
+
+\subsection{Energy}
+
+\begin{definition}
+    Consider the case $F = F(x)$,
+    and write $V(x) = -\int F(x)\,dx$.
+    Then
+    \[
+    \frac{d}{dx}\left(\frac{1}{2}mv ^ 2\right) = mv\frac{dv}{dx} = ma = F = -\frac{dV}{dx},
+    \]
+    and so
+    \[
+    E = \frac{1}{2}mv ^ 2 + V(x)
+    \]
+    is constant in time,
+    since the chain rule gives
+    \[
+    \frac{dE}{dt} = \frac{dE}{dx}\dot{x} = 0.
+    \]
+    This quantity $E$ is the energy of the particle,
+    we say that it is conserved.
+    The term $K = \frac{1}{2}mv ^ 2$ is the kinetic energy,
+    $V(x)$ is the potential energy;
+    neither of these is conserved in general.
+\end{definition}
+
+\begin{remark}
+    \begin{enumerate}[label = (\roman*)]
+        \item A force of the form $F(x)$ is said to be conservative,
+        since it conserves energy.
+
+        \item The potential $V$,
+        and hence the energy $E$,
+        are only defined up to an arbitrary constant.
+
+        \item The simplest example is where $F$ is constant,
+        so $V$ is linear in $x$.
+
+        \item Using conservation of energy can give us a good picture of the particle's motion,
+        even when we cannot get $x(t)$ explicitly.
+
+        \item A point $x$ where $F(x) = 0$,
+        or equivalently $V'(x) = 0$,
+        is called an equilibrium position.
+    \end{enumerate}
+\end{remark}
+
+\begin{example}
+    A unit-mass particle moves along the $x$-axis,
+    subject to a force $F = -2x ^ 3$.
+    Derive an expression for its energy $E$,
+    such that $E = 0$ if the particle is stationary at $x = 0$.
+    Then compute $E$ if its speed is $v = 1$ at $x = 1$.
+    \begin{solution}
+        Writing $V(x) = -\int F(x)\,dx$.
+        \[
+        V(x) = -\int -2x ^ 3\,dx = \frac{1}{2}x ^ 4 + C.
+        \]
+        Now we have
+        \begin{align*}
+            E &= \frac{1}{2}mv ^ 2 + V(x) \\
+            &= \frac{1}{2}v ^ 2 + \frac{1}{2}x ^ 4 + C \\
+            \intertext{But $E = 0, v = 0, x = 0$ so $0 = 0 + 0 + C$ hence $C = 0$} \\
+            &= \frac{1}{2}\left(v ^ 2 + x ^ 4\right).
+        \end{align*}
+        Finally,
+        we can see that $E$ with $v = 1$ and $x = 1$ is
+        \[
+        E = \frac{1}{2}\left(v ^ 2 + x ^ 4\right) = \frac{1}{2}(1 + 1) = 1.
+        \]
+    \end{solution}
+\end{example}
+
+\subsection{Motion in a potential}
+Consider a particle moving along the $x$-axis,
+in a potential $V(x)$.
+Except in simple cases,
+we won't know exactly what the trajectory $x(t)$ is.
+But we can say something about what it looks like,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}

@@ -17,7 +17,7 @@
 
 \newpage
 
-\section{The vector space \(\R ^ n\)}
+\section{The vector space \texorpdfstring{$\R ^ n$}{}}
 \begin{definition}[$n$-dimensional real space]
     The space $\R ^ n$ ($n$-dimensional real space) is the collection of all (column) vectors of the form
     \[
@@ -166,7 +166,7 @@ Sometimes the entries of a vector are referred to as the Cartesian coordinates o
 
 Addition can be thought of as an operation that inputs a pair of vectors, each from $\R ^ n$, and outputs a single vector in $\R ^ n$. In other words, addition is a function $\R ^ n \times \R ^ n \mapsto \R ^ n$. Similarly, scalar multiplication is a function $\R \times \R ^ n \mapsto \R ^ n$. The domains of each of these functions are called Cartesian products.
 
-\subsection{The scalar product in $\R ^ n$}
+\subsection{The scalar product in \texorpdfstring{$\R ^ n$}{}}
 
 \begin{definition}[Scalar product]
     The scalar (or dot) product is a function
@@ -338,7 +338,7 @@ Note that using this lemma we can obtain an expression for the angle between two
     \end{proof}
 \end{theorem}
 
-\begin{definition}[Angle between two vectors]\label{def_linalg_vec_angbetvecs}
+\begin{definition}[Angle between two vectors]\label{def:linalg:vec:angbetvecs}
     Suppose that $\mbf{v}$ and $\mbf{w}$ are vectors in $\R ^ n$ of length $r > 0$ and $s > 0$ respectively. Then we define the angle $\theta \in [0, \pi]$ between them by
     \[
     \cos(\theta) = \frac{\mbf{v \cdot w}}{rs}.
@@ -351,14 +351,14 @@ We say that the vectors $\mbf{v}$ and $\mbf{w}$ are orthogonal (or perpendicular
     The non-trivial vectors $\mbf{v}$ and $\mbf{w}$ in $\R ^ n$ are orthogonal if and only if we have $\mbf{v \cdot w} = 0$.
 
     \begin{proof}
-        By \autoref{def_linalg_vec_angbetvecs} we have that\footnote{Since $\cos\theta$ can only be $0$ when $\theta = \frac{\pi}{2}$ then they have to be orthogonal and the converse is true too.}
+        By \autoref{def:linalg:vec:angbetvecs} we have that\footnote{Since $\cos\theta$ can only be $0$ when $\theta = \frac{\pi}{2}$ then they have to be orthogonal and the converse is true too.}
         \[
         \mbf{v \cdot w} = 0 \iff \cos\theta = 0 \iff \theta = \frac{\pi}{2}.
         \]
     \end{proof}
 \end{corollary}
 
-\subsection{The vector product in $\R ^ 3$}
+\subsection{The vector product in \texorpdfstring{$\R ^ 3$}{}}
 \begin{definition}[Vector product in $\R ^ 3$]
     The vector (or cross) product is a function
     \[
@@ -448,7 +448,7 @@ We say that the vectors $\mbf{v}$ and $\mbf{w}$ are orthogonal (or perpendicular
     \end{proof}
 \end{lemma}
 
-\subsection{Planes and Lines in $\R ^ 3$}
+\subsection{Planes and Lines in \texorpdfstring{$\R ^ 3$}{}}
 \subsubsection{Planes}
 
 \textbf{Parametric Form}
@@ -755,7 +755,7 @@ For example, if $A = \begin{pmatrix}
     If no such inverse $B$ exists for a matrix $A$, we say $A$ is non-invertible (or singular).
 \end{definition}
 
-\begin{proposition}[Properties of the inverse and transpose, label = prop:propofinvandtransp]\label{pre_linalg_prop_propofinvandtransp}
+\begin{proposition}[Properties of the inverse and transpose]\label{pre:linalg:prop:propofinvandtransp}
     \begin{enumerate}[label = (\roman*)]
         \item A matrix has at most one inverse.
         \item Assume $A$ and $B$ are invertible $n \times n$ matrices. Then the product $AB$ is invertible and
@@ -904,7 +904,7 @@ We call a linear system homogenous if $\mbf{b} = \mbf{0}$,
 and inhomogeneous if $\mbf{b} \neq \mbf{0}$.
 Note that a homogeneous system always has at least one solution: $\mbf{x} =\mbf{0}$.
 
-\begin{lemma}\label{linalg_lem_invprop}\phantom{}
+\begin{lemma}\label{linalg:lem:invprop}\phantom{}
     \begin{enumerate}[label = (\roman*)]
         \item Let $A \in M_{n,\,n}(\R)$ be a square matrix and let $\mbf{v} \in \R ^ n$ be a non-zero vector such that $A\mbf{v} = \mbf{0}$. Then $A$ is singular.
         \item Let $A \in M_{n,\,n}(\R)$ be an invertible square matrix. Then the inhomogeneous system $A\mbf{x} = \mbf{b}$ has a single unique solution. In particular, the only solution to the homogeneous system $A\mbf{x} = \mbf{0}$ is $\mbf{x} = \mbf{0}$.
@@ -1193,7 +1193,7 @@ Two such systems are said to be equivalent if they have the same solution set.
 We say an augmented matrix is in row reduced echelon form if the associated coefficient matrix is in row reduced echelon form.
 Applying the elementary row operations to the augmented matrix $(A | \mbf{b})$ allows us to pass to equivalent systems and eventually to a system for which it is easy to spot the solutions.
 This is justified by
-\begin{theorem}[label = thm:lintoech]\label{linalg_thm_lintoech}
+\begin{theorem}\label{pre:linalg:thm:lintoech}
     Applying ERO's to the augmented matrix of a linear system simply changes the system to an equivalent one; that is, the solution set remains unchanged.
 \end{theorem}
 
@@ -1258,7 +1258,7 @@ One can do the following:
 \end{example}
 
 \subsection{Inverse matrices and linear systems}
-\begin{lemma}\label{pre_linalg_lem_solsetsam}
+\begin{lemma}\label{pre:linalg:lem:solsetsam}
     Consider an arbitrary $m \times n$ linear system $A\mbf{x} = \mbf{b}$.
     Let $B \in M_{m \times m}(\R)$ be an invertible matrix.
     Then the new system $(BA)\mbf{x} = B\mbf{b}$ has the same solution set as the original system.
@@ -1274,7 +1274,7 @@ One can do the following:
     \end{proof}
 \end{lemma}
 
-\begin{theorem}[continues = thm:lintoech]
+\begin{theorem}[continues = pre:linalg:thm:lintoech]
     \begin{proof}
         Suppose we want to perform elementary row operations on a matrix with $m$ rows.
         Then we can do this using the following $m \times m$ matrices.
@@ -1343,7 +1343,7 @@ One can do the following:
 \end{remark}
 
 \subsection{The fundamental theorem of invertible matrices}
-\begin{lemma}\label{linalg_lem_sqmatrrefcond}
+\begin{lemma}\label{linalg:lem:sqmatrrefcond}
     Let $A \in M_{n \times n}(\R)$ be a square matrix.
     Then the following are (pairwise) equivalent,
     that is they are either all true or all false.
@@ -1367,7 +1367,7 @@ One can do the following:
 
         Next we show that (ii) implies (iii).
         So let's assume (ii).
-        But by \autoref{pre_linalg_lem_solsetsam} we can replace the equation $A\mbf{x} = \mbf{0}$ with the RREF of $A$,
+        But by \autoref{pre:linalg:lem:solsetsam} we can replace the equation $A\mbf{x} = \mbf{0}$ with the RREF of $A$,
         that is, we can consider $I_n\mbf{x} = \mbf{0}$,
         which means $\mbf{x} = \mbf{0}$.
         So (iii) holds.
@@ -1391,12 +1391,12 @@ One can do the following:
     \end{proof}
 \end{lemma}
 
-\begin{theorem}[Fundamental Theorem of Invertible Matrices]\label{linalg_thm_fundthmofinvertmatr}
-    A square matrix $A \in M_{n \times n}(\R)$ is invertible if and only if any one of the conditions (i), (ii), (iii) of \autoref{linalg_lem_sqmatrrefcond} holds.
+\begin{theorem}[Fundamental Theorem of Invertible Matrices]\label{linalg:thm:fundthmofinvertmatr}
+    A square matrix $A \in M_{n \times n}(\R)$ is invertible if and only if any one of the conditions (i), (ii), (iii) of \autoref{linalg:lem:sqmatrrefcond} holds.
     \begin{proof}
         Suppose $A$ is invertible.
-        Then by \autoref{linalg_lem_invprop}(ii) the only solution of $A\mbf{x} = \mbf{0}$ is $\mbf{x} = \mbf{0}$,
-        which is \autoref{linalg_lem_sqmatrrefcond}(iii).
+        Then by \autoref{linalg:lem:invprop}(ii) the only solution of $A\mbf{x} = \mbf{0}$ is $\mbf{x} = \mbf{0}$,
+        which is \autoref{linalg:lem:sqmatrrefcond}(iii).
 
         Now assume that any one of (i), (ii), and (iii) hold.
         By (ii), there exist elementary matrices $E_1, E_2, \dotsc, E_\ell$ such that
@@ -1416,7 +1416,7 @@ One can do the following:
     \end{proof}
 \end{theorem}
 This proof immediately gives us
-\begin{corollary}\label{pre_linalg_col_invisprodofele}
+\begin{corollary}\label{pre:linalg:col:invisprodofele}
     Any invertible square matrix is the product of elementary matrices (and vice versa).
     \begin{proof}
         Simply notice that $E_1 ^ {-1}E_2 ^ {-1} \dotsi E_i ^ {-1}$ is an inverse of $A ^ {-1} = E_1E_2 \dotsi E_i$.
@@ -1435,11 +1435,11 @@ This proof immediately gives us
     that is if $BA = I_n$, then also $AB = I_n$
 \end{remark}
 
-\begin{proposition}[continues = prop:propofinvandtransp]
+\begin{proposition}[continues = pre:linalg:prop:propofinvandtransp]
     \begin{proof}[Proof of (v)]
         Suppose that $BA = I_n$ and consider $A\mbf{x} = \mbf{0}$.
         Left multiplication by $B$ shows that the only solution is $\mbf{x} = \mbf{0}$.
-        Hence $A$ is invertible by \autoref{linalg_thm_fundthmofinvertmatr}.
+        Hence $A$ is invertible by \autoref{linalg:thm:fundthmofinvertmatr}.
         In particular, $A$ has an inverse $A ^ {-1}$ and we have
         \[
         AB = ABAA ^ {-1} = A(BA)A ^ {-1} = AA ^ {-1} = I_n.
@@ -1480,7 +1480,7 @@ So we can think of this as a function
 \det : M_{n \times n}(\R) \rightarrow \R.
 \]
 
-\subsection{Small values of $n$}
+\subsection{Small values of \texorpdfstring{$n$}{}}
 We look at particular cases of the function
 \[
 \det : M_{n\times n}(\R) \rightarrow \R.
@@ -1531,7 +1531,7 @@ in terms of the signed cofactors:
 \]
 
 An important observation is that we could have defined it via expansion by any given row.
-\begin{lemma}\label{pre_linalg_lem_detanyrow}
+\begin{lemma}\label{pre:linalg:lem:detanyrow}
     If $A$ is an $n \times n$ matrix then for any $1 \leq i \leq n$ we have
     \[
     \det(A) = \sum_{k = 1}^{n}(-1) ^ {i + k}a_{ik}\det(A_i, k).
@@ -1614,7 +1614,7 @@ we write in terms of the row vector $\mbf{a}_r$ of an $n \times n$ matrix $A = (
             we immediately see $\det(I_{n + 1}) = 1\cdot\det(I_n) = 1 \cdot 1 = 1$,
             as desired.
             \item This is straightforward,
-            by expansion along the $r$th row (by \autoref{pre_linalg_lem_detanyrow}):
+            by expansion along the $r$th row (by \autoref{pre:linalg:lem:detanyrow}):
             \[
             \det(M_r(\lambda)A) = \sum_{k = 1}^{n}(-1) ^ {r + k}(\lambda a_{rk})\det(A_r, k) = \lambda\sum_{k = 1}^{n}(-1) ^ {r + k}a_{rk}\det(A_{r, k}) = \lambda\det A.
             \]
@@ -1688,7 +1688,7 @@ We could define the function
 \det : M_{n \times n}(\R) \rightarrow \R
 \]
 as the unique function that satisfies these four properties.
-\begin{theorem}\label{pre_linalg_thm_uniquedet}
+\begin{theorem}\label{pre:linalg:thm:uniquedet}
     Let $f: M_n(\R) \rightarrow \R$ be a function that satisfies properties (i)-(iv).
     Then
     \[
@@ -1746,13 +1746,13 @@ There are two basic cases.
 \end{proposition}
 
 \subsection{Several Big Theorems}
-\begin{theorem}\label{pre_linalg_thm_invifdetnonzero}
+\begin{theorem}\label{pre:linalg:thm:invifdetnonzero}
     The $n \times n$ matrix $A$ has an inverse if and only if $\det(A) \neq 0$.
     \begin{proof}
         By definition we already know this for the cases $n = 1$,
         $n = 2$ and $n = 3$.
         For $n > 3$ we apply G-J to the matrix $A$ to get to the RREF $A'$.
-        As in the proof of \autoref{pre_linalg_thm_uniquedet},
+        As in the proof of \autoref{pre:linalg:thm:uniquedet},
         during this process $\det$ changes in a clear way using properties (ii), (iv), and (vii).
         We get
         \[
@@ -1766,7 +1766,7 @@ There are two basic cases.
     \end{proof}
 \end{theorem}
 
-\begin{theorem}\label{pre_linalg_thm_detsplits}
+\begin{theorem}\label{pre:linalg:thm:detsplits}
     Let $A$ and $B$ be $n \times n$ matrices.
     Then
     \[
@@ -1808,13 +1808,13 @@ There are two basic cases.
     \]
     \begin{proof}
         Firstly,
-        \autoref{pre_linalg_prop_propofinvandtransp}(iv) implies that either both $A$ and $A ^ t$ are invertible,
+        \autoref{pre:linalg:prop:propofinvandtransp}(iv) implies that either both $A$ and $A ^ t$ are invertible,
         or neither are.
-        In the case $\det A = 0$ we have by \autoref{pre_linalg_thm_invifdetnonzero} that $A$ is singular,
+        In the case $\det A = 0$ we have by \autoref{pre:linalg:thm:invifdetnonzero} that $A$ is singular,
         and so $A ^ t$ is also singular.
-        Applying \autoref{pre_linalg_thm_invifdetnonzero} a second time shows that $\det(A ^ t) = 0$.
+        Applying \autoref{pre:linalg:thm:invifdetnonzero} a second time shows that $\det(A ^ t) = 0$.
         If $\det A \neq 0$ then $A$ is invertible.
-        But then \autoref{pre_linalg_col_invisprodofele} tells us we may write it as a product of EROs,
+        But then \autoref{pre:linalg:col:invisprodofele} tells us we may write it as a product of EROs,
         say $A = E_1E_2\dotsi E_\ell$.
         By combining determinant properties (ii),
         (iv) and (vii) it is easy to check that $\det(P_{rs}) = -1$,
@@ -1825,7 +1825,7 @@ There are two basic cases.
         \]
         it follows that $\det(E ^ t) = \det(E)$ for every elementary matrix $E$.
         Thus,
-        by \autoref{pre_linalg_prop_propofinvandtransp}(iii) and \autoref{pre_linalg_thm_detsplits} we have
+        by \autoref{pre:linalg:prop:propofinvandtransp}(iii) and \autoref{pre:linalg:thm:detsplits} we have
         \begin{align*}
             \det(A ^ t) &= \det((E_1\dotsi E_\ell) ^ t) &= \det(E_\ell ^ t \dotsi E_1 ^ t) &= \det(E_\ell ^ t)\dotsi\det(E_1 ^ t) \\
             &= \det(E_\ell)\dotsi\det(E_1) &= \det(E_1)\dotsi\det(E_\ell) &= \det(E_1 \dotsi E_\ell) &= \det A.
@@ -1841,7 +1841,7 @@ There are two basic cases.
     \]
     \begin{proof}
         Simply notice that $1 = \det(I_n) = \det(A ^ {-1}A) = \det(A ^ {-1})\det(A)$,
-        and similarly for the transpose (using \autoref{pre_linalg_prop_propofinvandtransp}(iv)).
+        and similarly for the transpose (using \autoref{pre:linalg:prop:propofinvandtransp}(iv)).
     \end{proof}
 \end{corollary}
 
@@ -1897,7 +1897,7 @@ The adjoint is the transpose of the matrix of signed cofactors.
     \end{proof}
 \end{proposition}
 
-\begin{theorem}[Inverse by adjoint matrix]\label{pre_linalg_thm_invbyadjmatr}
+\begin{theorem}[Inverse by adjoint matrix]\label{pre:linalg:thm:invbyadjmatr}
     Let $A \in M_n(\R)$ be non-singular.
     Then the inverse $A ^ {-1}$ is given by
     \[
@@ -1905,7 +1905,7 @@ The adjoint is the transpose of the matrix of signed cofactors.
     \]
 \end{theorem}
 
-\begin{theorem}[Cramer's rule]\label{pre_linalg_thm_cramersrule}
+\begin{theorem}[Cramer's rule]\label{pre:linalg:thm:cramersrule}
     Let $A\mbf{x} = \mbf{b}$ be a linear system with a non-singular matrix $A \in M_n(\R)$.
     The unique solution $\begin{pmatrix}
         x_1 \\ \vdots \\ x_n
@@ -1917,7 +1917,7 @@ The adjoint is the transpose of the matrix of signed cofactors.
 \end{theorem}
 
 \begin{remark}
-    For practical computations \autoref{pre_linalg_thm_invbyadjmatr} and \autoref{pre_linalg_thm_cramersrule} are rather useless.
+    For practical computations \autoref{pre:linalg:thm:invbyadjmatr} and \autoref{pre:linalg:thm:cramersrule} are rather useless.
     But for theoretical considerations this is very useful.
     For example,
     since the determinant is a polynomial in the entries of the matrix $A$,
@@ -2597,7 +2597,7 @@ The following theorem provides us with a list of useful observations.
     \end{proof}
 \end{theorem}
 
-\subsection{Bases and dimension in $\R ^ n$}
+\subsection{Bases and dimension in \texorpdfstring{$\R ^ n$}{}}
 \begin{remark}
     Let $U$ be a vector subspace of $\R ^ n$.
     Then,
@@ -2698,7 +2698,7 @@ The following theorem provides us with a list of useful observations.
             so it must be that the space didn't change.
             \item Denote the column space of $A$ by $U$ and let $\mbf{u}_1, \dotsc, \mbf{u}_{\ell}$ be a basis of $U$.
             But $A\mbf{x} = \mbf{b}$ if and only if $(EA)\mbf{x} = E\mbf{b}$
-            (since applying an ERO does not change the solution set as per \autoref{pre_linalg_lem_solsetsam}).
+            (since applying an ERO does not change the solution set as per \autoref{pre:linalg:lem:solsetsam}).
             This shows that the column space of $EA$ is equal to $EU := \{E\mbf{u} : \mbf{u} \in U\}$.
 
             We claim $E\mbf{u}_1, \dotsc, E\mbf{u}_{\ell}$ is a basis of $EU$,
@@ -2709,7 +2709,7 @@ The following theorem provides us with a list of useful observations.
             let $\mbf{v} \in EU$ be given by $\mbf{v} = E\mbf{u}$ for some $\mbf{u} \in U$.
             We can write $\mbf{u} = \lambda_1\mbf{u}_1 + \dotsi + \lambda_{\ell}\mbf{u}_{\ell}$ for some $\lambda_i \in \R$.
             But then $\mbf{v} = E\mbf{u} = E(\lambda_1\mbf{u}_1 + \dotsi + \lambda_{\ell}\mbf{u}_{\ell}) = \lambda_1(E\mbf{u}_1) + \dotsi + \lambda_{\ell}(E\mbf{u}_{\ell})$.
-            \item This follows immediately from \autoref{pre_linalg_lem_solsetsam}.
+            \item This follows immediately from \autoref{pre:linalg:lem:solsetsam}.
         \end{enumerate}
     \end{proof}
 \end{proposition}
@@ -3235,6 +3235,88 @@ We can see that the only linear maps between Euclidean spaces are the matrices.
     A\mbf{v} = \lambda\mbf{v}.
     \]
 \end{definition}
+From this we can see
+\[
+\mbf{0} = A\mbf{v} - \lambda\mbf{v} = (A - \lambda I)\mbf{v}.
+\]
+By the fundamental lemma of invertible matrices we have the existence for such a $\mbf{v}$ for a given $\lambda$ is equivalent to the matrix $A - \lambda I$ being non-invertible.
+Hence the set of eigenvalues $\lambda$ is the set of solutions to
+\[
+\det(A - \lambda I) = 0.
+\]
+
+We define $p_A(t) = \det(A - tI)$ to be the characteristic polynomial of $A$.
+
+\begin{example}
+    If $A$ is a diagonal matrix,
+    then the eigenvalues of $A$ are precisely the entries on the diagonal.
+    For example,
+    \[
+    A = \begin{pmatrix}
+        -2 & 0 & 0 \\
+        0 & 3 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
+    \]
+    has characteristic polynomial $p_A(t) = -(t + 2)(t - 3)(t - 1)$,
+    so the eigenvalues are $\lambda = -2, 3, 1$.
+\end{example}
+
+\textbf{Multiple eigenvalues}.
+If we have a polynomial $p(t)$ with degree $N$,
+the following decomposition holds:
+\[
+p(t) = c(t - \lambda_1) ^ {k_1} \cdot (t - \lambda_2) ^ {k_2} \cdot \dotsc \cdot (t - \lambda_p) ^ {k_p},
+\]
+with $c \in \C$ is non-zero.
+The roots,
+$\lambda \in \C$,
+are all distinct,
+i.e. $\lambda_i \neq \lambda_j$ for all $i \neq j$.
+
+\begin{definition}
+    The algebraic multiplicity of the root $\lambda_i$ is given by $k_i \in \N$,
+    with $k_i \neq 0$,
+    and $\sum_{i = 1}^{p}k_i = N$.
+\end{definition}
+
+\begin{remark}
+    If an eigenvalue $\lambda$ has multiplicity $k \neq 0 \in \N$ it means that the characteristic polynomial takes the form
+    \[
+    p_A(t) = (t - \lambda) ^ kQ(t),
+    \]
+    where the polynomial $Q(t)$ has degree $N - k$ and it is non-vanishing on $\lambda$,
+    i.e. $Q(\lambda) \neq 0$.
+\end{remark}
+
+\begin{proposition}
+    There are $p$ linearly independent eigenvectors corresponding to $\lambda$,
+    where $1 \leq p \leq k$.
+\end{proposition}
+
+\begin{definition}
+    The eigenspace $V_{\lambda}$ is the $p$-dimensional vector space spanned by these eigenvectors.
+    Since the eigenspace $V_{\lambda}$ is generated by all the eigenvectors associated with the eigenvalue $\lambda$ we can also write it as
+    \[
+    V_{\lambda} = \ker(A - \lambda I),
+    \]
+    where the kernel,
+    $\ker$,
+    or a linear operator $B$ is a subspace of the full vector space $V$ given by
+    \[
+    \ker{B} = \left\{\mbf{v} \in V\mmid B\mbf{v} = 0\right\}.
+    \]
+\end{definition}
+
+\begin{definition}
+    We call $p = \dim{V_{\lambda}}$ the geometric multiplicity of $\lambda$.
+\end{definition}
+
+
+
+
+
+
 
 
 
