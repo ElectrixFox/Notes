@@ -3254,9 +3254,85 @@ b_n = \frac{1}{L}\int_{-L}^{L}f(x)\sin\left(\frac{n\pi x}{L}\right)\,dx
 
 \section{Many-Variable Calculus}
 
-\subsection{Introduction}
+\subsection{Plotting functions}
+We are used to plotting functions of one variable $y = f(x)$ as a
+(one-dimensional)
+curve $C$ in the two-dimensional plane.
 
+It is also possible to define functions 'implicitly' via equations such as $x ^ 2 + y ^ 2 = 1$.
 
+We can plot a function of two variables $z = f(x, y)$ as a two dimensional surface $S$ embedded in three dimensions.
+
+It is similarly possible to define functions of two variables $z = z(x, y)$ implicitly and plot them through an equation such as $x ^ 2 + y ^ 2 + z ^ 2 = 1$.
+
+More generally we can extend this to a function of $n$ variables,
+$x_{n + 1} = f(x_1, x_2, \dotsc, x_n)$ as defining an $n$-dimensional surface embedded in $\R ^ {n + 1}$ parametrically
+\[
+(x_1, x_2, \dotsc, x_n, x_{n + 1}) = (x_1, x_2, \dotsc, x_n, f(x_1, \dotsc, x_n)).
+\]
+
+\subsection{Continuity and Differentiability of functions of one and more variables}
+
+\subsubsection{Continuity for \texorpdfstring{$f(x)$}{}}
+A function $f(x)$ $f : D \rightarrow \R$,
+$D \subseteq \R$ is continuous at $x_0 \in D$ if and only if
+
+\textbf{In words:}
+We can make a change in $f$,
+$\delta f = |f(x) - f(x_0)|$ as small as we like by choosing $x$ close to $x_0$.
+
+\textbf{Mathematically:}
+\begin{definition}[Continuity]
+    $f(x)$ is continuous at $x = x_0$ if $\forall \varepsilon > 0\,\exists \delta > 0$ such that if $x \in D$ and $|x - x_0| < \delta \implies \delta f = |f(x) - f(x_0)| < \varepsilon$
+\end{definition}
+
+\subsubsection{Continuity for \texorpdfstring{$f(x, y)$}{}}
+Let $f(x, y)$ $f: D \rightarrow\R$ $D \subseteq \R ^ 2$.
+$f(x, y)$ is continuous at $(x_0, y_0) = \mbf{x}_0$ if and only if
+
+\textbf{In words:}
+As before We can make a change in $f$,
+$\delta f = |f(\mbf{x}) - f(\mbf{x}_0)|$ as small as we like by choosing $\mbf{x}$ close to $\mbf{x}_0$.
+
+The subtlety is what is closes?
+We take $|\mbf{x} - \mbf{x}_0| = |(x, y) - (x_0, y_0) = \sqrt{(x - x_0) ^ 2 + (y - y_0) ^ 2}$.
+
+\begin{definition}[Continuity for functions of multiple variables]
+    The function $f(x, y)$ $f : D \rightarrow \R$ $D \subseteq \R ^ 2$ is continuous at $\mbf{x}_0 = (x_0, y_0)$ if and only if $\forall \varepsilon > 0\,\exists \delta > 0$ such that if $\mbf{x} \in D$ and $|\mbf{x} - \mbf{x}_0| < \delta \implies \delta f = |f(\mbf{x}) - f(\mbf{x}_0)| < \varepsilon$.
+\end{definition}
+
+\begin{example}
+    Show that $f(x, y) = x ^ 2 + y ^ 2$ is continuous at $\mbf{x}_0 = (0, 0)$.
+    \begin{solution}
+        \[
+        \delta f = |f(\mbf{x}) - f(\mbf{x}_0)| = |x ^ 2 + y ^ 2 - 0| = |\mbf{x} ^ 2| = |\mbf{x} - \mbf{x}_0| ^ 2.
+        \]
+        If we choose $|\mbf{x} - \mbf{x}_0| < \delta \implies |f(\mbf{x}) - f(\mbf{x}_0)| < \delta ^ 2 < \varepsilon$.
+        Choose $\delta ^ 2 < \varepsilon$.
+    \end{solution}
+\end{example}
+
+\subsubsection{Differentiability for functions of one variable}
+A function $f(x)$ $f : D \rightarrow \R$ $D \subseteq \R$ is differentiable at $x = x_0$ if.
+
+\textbf{In words:}
+All points close to $x_0$ are in $D$.
+When we "zoom" into the function near $x = x_0$ it looks like a
+(non-vertical)
+straight line.
+
+\begin{definition}[Differentiability]
+    The function $f(x)$ $f : D \rightarrow \R$ $D \subseteq \R$ is differentiable at $x_0 \in D$ if and only if
+    \begin{enumerate}[label = \arabic*)]
+        \item $\exists \delta > 0\,:\,|x - x_0| < \delta \implies x \in D$.
+        \item The function can be written as
+        \[
+        f(x) = f(x_0) + M(x - x_0) + R(x)
+        \]
+        where $M$ is a constant and $\lim_{x \rightarrow x_0}\frac{R(x)}{|x - x_0|} = 0$.
+    \end{enumerate}
+
+\end{definition}
 
 
 
