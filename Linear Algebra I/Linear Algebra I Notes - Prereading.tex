@@ -3312,6 +3312,63 @@ i.e. $\lambda_i \neq \lambda_j$ for all $i \neq j$.
     We call $p = \dim{V_{\lambda}}$ the geometric multiplicity of $\lambda$.
 \end{definition}
 
+\subsection{The Cayley-Hamilton theorem}
+\begin{theorem}[Cayley-Hamilton]
+    Let $B$ be a square matrix with characteristic polynomial $p_B(t)$.
+    Then $p_B(B) = 0$,
+    as a matrix equation.
+    \begin{proof}[Partial proof]
+        Let us show this first for $2 \times 2$ matrices by direct calculation.
+        Let
+        \[
+        B = \begin{pmatrix}
+            a & b \\ c & d
+        \end{pmatrix}.
+        \]
+        Then $p_B(t) = t ^ 2 - (a + d)t + (ad - bc)$,
+        and
+        \[
+        p_B(B) = \begin{pmatrix}
+            a & b \\ c & d
+        \end{pmatrix}\begin{pmatrix}
+            a & b \\ c & d
+        \end{pmatrix} - (a + d)\begin{pmatrix}
+            a & b \\ c & d
+        \end{pmatrix} + (ad - bc)\begin{pmatrix}
+            1 & 0 \\ 0 & 1
+        \end{pmatrix} = \begin{pmatrix}
+            0 & 0 \\
+            0 & 0
+        \end{pmatrix}.
+        \]
+    \end{proof}
+\end{theorem}
+
+\subsection{The similarity relation}
+\begin{definition}
+    An equivalence relation,
+    $\sim$,
+    on a set $X$,
+    is a binary relation with the following properties:
+    \begin{enumerate}[label = (\roman*)]
+        \item $a \sim a$
+        (reflexivity).
+        
+        \item $a \sim b \implies b \sim a$
+        (symmetry).
+
+        \item If $a \sim b$ and $b \sim c \implies a \sim c$
+        (transitivity).
+    \end{enumerate}
+    $\forall a, b, c \in X$.
+\end{definition}
+
+
+
+
+
+
+
 
 
 
