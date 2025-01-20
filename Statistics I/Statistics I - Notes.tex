@@ -61,6 +61,151 @@ The subjective interpretation of probability is linked to frequentist Bayesian s
     Everyone wants to know your prediction.
 \end{example}
 
+\newpage
+
+\section{Disease Testing using Bayesian Methods}
+
+\subsection{Testing for Covid-19}
+
+Remember motivating example $1$.
+\begin{enumerate}[label = (\roman*)]
+    \item 
+    We have data from a limited sample of $620$ patients given the new test is the 'gold standard'
+    (i.e. perfect).
+
+    Events
+    \begin{align*}
+        D ^ {+} &= \text{person has disease}. \\
+        D ^ {-} &= \text{person doesn't have disease}. \\
+        T ^ {+} &= \text{person tests positive}. \\
+        T ^ {-} &= \text{person tests negative}.
+    \end{align*}
+    \begin{table}[H]
+        \begin{tabular}{c|c|c|c}
+             & Yes $D ^ {+}$ & No $D ^ {-}$ & Total \\
+             \hline
+             Test result positive $T ^ {+}$ & $209$ & $6$ & $215$ \\
+             Test result negative $T ^ {-}$ & $11$ & $394$ & $405$ \\
+             \hline
+             Total & $220$ & $400$ & $620$
+        \end{tabular}
+    \end{table}
+
+    Probability distribution
+    \begin{align*}
+        \P_t &= \text{probability distribution for test group of $620$ people}. \\
+        \P &= \text{probability distribution of general UK population}.
+    \end{align*}
+
+    Probabilities of interest
+    \begin{align*}
+        \P_t\left(T ^ {+} \mmid D ^ {+}\right) &= \text{sensitivity of the test} \\
+        \P_t\left(T ^ {-} \mmid D ^ {-}\right) &= \text{specificity of the test} \\
+        \P_t\left(T ^ {+} \mmid D ^ {-}\right) &= \text{probability of a false positive} \\
+        \P_t\left(T ^ {-} \mmid D ^ {+}\right) &= \text{probability of a false negative}
+    \end{align*}
+
+    Sensitivity:
+    \begin{align*}
+        \P_t\left(T ^ {+} \mmid D ^ {+}\right) &= \frac{\P_t(T ^ {+} \cap D ^ {+})}{\P_t(D ^ {+})} \\
+        &= \frac{\frac{209}{620}}{\frac{270}{620}} \\
+        &= \frac{209}{270} \\
+        &= 0.95.
+    \end{align*}
+
+    Specificity:
+    \begin{align*}
+        \P_t\left(T ^ {-} \mmid D ^ {-}\right) &= \frac{\P_t(T ^ {-} \cap D ^ {-})}{\P_t(D ^ {-}} \\
+        &= \frac{\frac{396}{620}}{\frac{400}{620}} \\
+        &= \frac{396}{400} \\
+        &= 0.8985.
+    \end{align*}
+
+    False positive:
+    \begin{align*}
+        \P_t\left(T ^ {+} \mmid D ^ {-}\right) &= 1 - \P_t\left(T ^ {-} \mmid D ^ {-}\right) \\
+        &= 1 - 0.8985 \\
+        &= 0.015.
+    \end{align*}
+
+    False negative:
+    \begin{align*}
+        \P_t\left(T ^ {-} \mmid D ^ {+}\right) &= 1 - \P_t\left(T ^ {+} \mmid D ^ {+}\right) \\
+        &= 1 - 0.95 \\
+        &= 0.05.
+    \end{align*}
+
+    Question:
+
+    We care about the whole U.K. population.
+    How does it relate to our test set?
+
+    Assumption
+
+    The sensitivity and specificity are a property of the test only.
+
+    Hence
+    \begin{align*}
+        \P\left(T ^ {+} \mmid D ^ {+}\right) &= \P_t\left(T ^ {+} \mmid D ^ {+}\right). \\
+        \P\left(T ^ {-} \mmid D ^ {-}\right) &= \P_t\left(T ^ {-} \mmid D ^ {-}\right). \\
+        \P\left(T ^ {+} \mmid D ^ {-}\right) &= \P_t\left(T ^ {+} \mmid D ^ {-}\right). \\
+        \P\left(T ^ {-} \mmid D ^ {+}\right) &= \P_t\left(T ^ {-} \mmid D ^ {+}\right).
+    \end{align*}
+    This is not true for other probabilities such as $\P(D ^ {+}) \neq \P_t(D ^ {+})$.
+\end{enumerate}
+
+\subsection{Bayesian Inference: from prior to posterior}
+\begin{definition}
+    Prior,
+    likelihood,
+    posterior.
+    \[
+    \P(D ^ {+}) = \text{prior probability of having Covid-19.\footnotemark}
+    \]
+    \footnotetext{Prevalence in the relevant population.}
+    \[
+    \P\left(T ^ {+} \mmid D ^ {+}\right), \P\left(T ^ {+} \mmid D ^ {-}\right) = \text{likelihood of positive test given disease states.}
+    \]
+    \[
+    \P\left(D ^ {+} \mmid T ^ {+}\right) = \text{posterior probability of having Covid-19 given a positive test.}
+    \]
+    The posterior is critical and found using Bayes Theorem:
+    \begin{align*}
+        \P\left(D ^ {+} \mmid T ^ {+}\right) &= \frac{\P\left(T ^ {+} \mmid D ^ {+}\right)\P\left(D ^ {+}\right)}{\P\left(T ^ {+}\right)} \quad\text{(by Bayes theorem)} \\
+        &= \frac{\P\left(T ^ {+} \mmid D ^ {+}\right)\P\left(D ^ {+}\right)}{\P\left(T ^ {+} \mmid D ^ {+}\right)\P\left(D ^ {+}\right) + \P\left(T ^ {+} \mmid D ^ {-}\right)\P\left(D ^ {-}\right)} \quad\text{(by partition)}\\
+        &= \frac{\P_t\left(T ^ {+} \mmid D ^ {+}\right)\P\left(D ^ {+}\right)}{\P_t\left(T ^ {+} \mmid D ^ {+}\right)\P\left(D ^ {+}\right) + \P_t\left(T ^ {+} \mmid D ^ {-}\right)\P\left(D ^ {-}\right)} \quad\text{(by assumptions)} \\
+    \end{align*}
+    Covid-19 Example:
+    August $2020$ U.K.
+
+    In August $2020$ U.K. it was thought that $0.00025$ of the U.K. population had Covid-19.
+    \[
+    \P(D ^ {+}) = 0.00025
+    \]
+    and
+    \[
+    \P(D ^ {-}) = 1 - \P(D ^ {+})
+    \]
+    \begin{align*}
+        \P\left(D ^ {+} \mmid T ^ {+}\right) &= \frac{\P\left(T ^ {+} \mmid D ^ {+}\right)\P\left(D ^ {+}\right)}{\P\left(T ^ {+}\right)} \\
+        &= \frac{\P\left(T ^ {+} \mmid D ^ {+}\right)\P\left(D ^ {+}\right)}{\P\left(T ^ {+} \mmid D ^ {+}\right)\P\left(D ^ {+}\right) + \P\left(T ^ {+} \mmid D ^ {-}\right)\P\left(D ^ {-}\right)} \\
+        &= \frac{0.95 \times 0.00025}{0.95 \times 0.00025 + 0.015 \times (1 - 0.00025)} \\
+        &= \frac{0.0002375}{0.0002375 + 0.01499625} \\
+        &= 0.0156.
+    \end{align*}
+\end{definition}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
