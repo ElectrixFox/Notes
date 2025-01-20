@@ -309,7 +309,98 @@ then $\frac{dx}{dt} = v(x)$.
     \end{solution}
 \end{example}
 
+Define $V(x) = -\int F(x)\,dx$.
+Then
+\[
+\frac{d}{dx}\left(\frac{1}{2}mv ^ 2\right) = m\frac{dv}{dx}v = F = -\frac{d}{dx}V
+\]
+so $\frac{d}{dx}\left(\frac{1}{2}mv ^ 2 + V\right) = 0 \implies \frac{1}{2}mv ^ 2 + V(x) = E$.
+This constant $E$ is the
+(total)
+energy,
+while $\frac{1}{2}mv ^ 2$ is kinetic energy and $V(x)$ is potential energy.
+Also note $\frac{d}{dt}E = \frac{dE}{dx}\frac{dx}{dt} = 0$,
+therefore $E$ is constant in time.
+\begin{remark}
+    \begin{enumerate}[label = (\roman*)]
+        \item We say that $E$ is conserved,
+        and the force is conservative.
 
+        \item Can add a constant
+        (of integration)
+        to $V$,
+        and hence to $E$.
+
+        \item Example:
+        gravity close to the surface of a planet,
+        take $x$ upwards,
+        then force is
+        \[
+        F = -mg \implies V(x) = mgx\quad(+\text{optional constant}).
+        \]
+        
+        \item In cases where one cannot solve for $x(t)$,
+        energy arguments can still tell us something.
+        See next example.
+    \end{enumerate}
+\end{remark}
+
+\begin{example}
+    Take $m = 2$ and $V(x) = x ^ 6$.
+    So
+    \[
+    E = \frac{1}{2}mv ^ 2 + V(x) = \dot{x} ^ 2 + x ^ 6.
+    \]
+    Try to find $x(t)$ by
+    \[
+    \frac{dx}{dt} = \sqrt{E - x ^ 6} \implies \int\frac{1}{\sqrt{E - x ^ 6}}\,dx = \int\,dt.
+    \]
+    Note $V(x) \leq E$ restricting $x$ to say initial conditions $x(0) = 0, \dot{x}(0) = 1$.
+    So $E = 1 ^ 6 + 0 ^ 6 = 1$ at $t = 0$,
+    therefore for all $t$.
+    Thus $-1 \leq x(t) \leq 1$.
+    Think of a bowl,
+    gravity acting downwards,
+    particle rolls in it
+    (just an analogy).
+
+    Now $x$ increases to $1$,
+    turns around and decreases,
+    passes $x = 0$ and "rolls up" the other side,
+    reaches $x = -1$,
+    turns round,
+    etc.
+    Motion is periodic.
+
+    Can we compute the period $P$
+    (time to complete one cycle)?
+    No,
+    however
+    \[
+    \int\frac{1}{\sqrt{1 - x ^ 6}}\,dx,
+    \]
+    can't do that.
+\end{example}
+
+\begin{definition}
+    An equilibrium point is where force is $0$,
+    i.e. $\frac{dV}{dx} = 0$.
+\end{definition}
+
+In the above example,
+one equilibrium point at $x = 0$.
+(Particle at rest at such a point will stay there.)
+
+\subsection{Motion in a potential}
+
+\begin{example}
+    Particle of mass $m = 3$ in a potential $V(x) = \frac{1}{4}x ^ 4 - \frac{1}{3}x ^ 3 - x ^ 2$.
+    Describe the motion.
+
+    Draw a graph of $V$.
+    Compute $\frac{dV}{dx} = x ^ 3 - x ^ 2 - 2x = x(x ^ 2 - x - 2) = x(x - 2)(x + 1)$.
+    So there are three equilibrium points $x = 0, 2, -1$.
+\end{example}
 
 
 
