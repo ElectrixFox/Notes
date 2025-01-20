@@ -3262,6 +3262,12 @@ We define $p_A(t) = \det(A - tI)$ to be the characteristic polynomial of $A$.
     so the eigenvalues are $\lambda = -2, 3, 1$.
 \end{example}
 
+To find the corresponding \textbf{eigenvectors},
+we solve
+\[
+(A - \lambda I)\mbf{v} = \mbf{0}.
+\]
+
 \textbf{Multiple eigenvalues}.
 If we have a polynomial $p(t)$ with degree $N$,
 the following decomposition holds:
@@ -3342,6 +3348,85 @@ i.e. $\lambda_i \neq \lambda_j$ for all $i \neq j$.
         \end{pmatrix}.
         \]
     \end{proof}
+    \begin{proof}
+        The matrix $B$ defines a linear transformation $T$.
+        Let us change basis to a flag basis for $T$,
+        i.e.
+        an ordered basis $\{\mbf{v}_1, \dotsc, \mbf{v}_N\}$ such that $B$ in this basis becomes upper triangular
+        \[
+        A = P ^ {-1}BP = \begin{pmatrix}
+            a_{11} & a_{12} & \dotsi & a_{1N} \\
+            0 & a_{22} & \dotsi & a_{2N} \\
+            \vdots & \ddots & \ddots & \vdots \\
+            0 & \dotsi & 0 & a_{NN}
+        \end{pmatrix}
+        \]
+        where $P$ is the change of basis matrix.
+        We use the result that for any linear transformation $T$ we can always find such a change of basis.
+
+        The characteristic polynomial does not change under changes of basis
+        (see the proposition below),
+        so the characteristic polynomial of the matrix in the new basis,
+        which takes the form
+        \[
+        p_A(t) = (a_{11} - t)(a_{22} - t) \dotsi (a_{NN} - t),
+        \]
+        is the same as the original characteristic polynomial $p_B(t)$.
+        Also,
+        \begin{align*}
+            p_A(A) &= (a_{11} - A)(a_{22} - A) \dotsi (a_{NN} - A) \\
+            &= (P ^ {-1}a_{11}P - P ^ {-1}BP)(P ^ {-1}a_{22}P - P ^ {-1}BP) \dotsi (P ^ {-1}a_{NN}P - P ^ {-1}BP) \\
+            &= P ^ {-1}(a_{11} - B)(a_{22} - B) \dotsi (a_{NN} - B)P \\
+            &= P ^ {-1}p_B(B)P
+        \end{align*}
+        so $p_A(A)$ will vanish if and only if $p_B(B)$ vanishes.
+        We will now show that $p_A(A) = 0$.
+        To prove this matrix equation we will show for all $1 \leq i \leq N$ that $\forall \mbf{v} \in V_i := \mathrm{span}(\mbf{v}_1, \dotsc, \mbf{v}_i)$ we have $p_i(A)\mbf{v} = 0$,
+        with
+        \[
+        p_i(A) = (A - a_{11}I)(A - a_{22}I) \dotsi (A - a_{ii}I).
+        \]
+        The case $i = N$ is the statement we are after,
+        since in this case $p_N(A) = p_A(A)$ and $V_N$ is the full vector space.
+        We do this using induction on $i$.
+        For $i = 1$ we have that $V_1 = \mathrm{span}(\mbf{v}_1)$ and $p_1 = (A - a_{11}I)$.
+        Clearly,
+        from the upper triangular form of $A$,
+        \[
+        A\mbf{v}_1 = a_{11}\mbf{v}_1
+        \]
+        so for $i = 1$ indeed $p_1\mbf{v} = 0$ for all $\mbf{v} \in V_1$.
+        Let us assume that the inductive hypothesis is valid up to $i - 1$,
+        we will show that it also holds for $i$.
+        To prove it we note that $\forall \mbf{v} \in V_i$,
+        we can write
+        \[
+        \mbf{v} = \alpha\mbf{v}_i + \mbf{w},
+        \]
+        with $\alpha \in \C$ and $\mbf{w} \in V_{i - 1}$.
+        By linearity
+        (and noting that $p_i = p_{i - 1}(A - a_{ii}I) = (A - a_{ii})p_{i - 1}$)
+        \[
+        p_i\mbf{v} = \alpha p_{i - 1}(A - a_{ii}I)\mbf{v}_i + (A - a_{ii})p_{i - 1}\mbf{w}
+        \]
+        but $p_{i - 1}\mbf{w} = 0$ by the inductive hypothesis,
+        so
+        \[
+        p_i\mbf{v} = \alpha p_{i - 1}(A - a_{ii}I)\mbf{v}_i.
+        \]
+        Now,
+        because of the upper triangular form,
+        if we apply $A$ to $\mbf{v}_i$ we obtain
+        \[
+        A\mbf{v}_i = a_{ii}\mbf{v}_i
+        \]
+        with $\mbf{w}_{i - 1} \in V_{i - 1}$.
+        Therefore
+        \[
+        p_{i - 1}(A - a_{ii}I)\mbf{v}_i = p_{i - 1}\mbf{w}_{i - 1} = 0
+        \]
+        concluding our theorem.
+    \end{proof}
 \end{theorem}
 
 \subsection{The similarity relation}
@@ -3363,7 +3448,122 @@ i.e. $\lambda_i \neq \lambda_j$ for all $i \neq j$.
     $\forall a, b, c \in X$.
 \end{definition}
 
+\begin{definition}
+    We say that two square matrices $A$ and $B$
+    (of the same size)
+    are similar,
+    written $A \sim B$,
+    if there exists an invertible matrix $M$ such that $A = MBM ^ {-1}$.
+\end{definition}
 
+\begin{proposition}
+    Similarity is an equivalence relation.
+\end{proposition}
+
+The set of all $n \times n$ matrices gets partitioned into equivalence classes
+\[
+\left[A\right] = \left\{B \mmid B \sim A, \text{ equivalently } B = MAM ^ {-1}\text{ for some } M \in \mathrm{GL}(n, \R)\right\}.
+\]
+We have that $\mathrm{GL}(n, \R)$ denotes the set of invertible $n \times n$ matrices with real coefficients,
+i.e.
+\[
+\mathrm{GL}(n, \R) = \{M \in M_n(\R)\text{ s.t. } \det{M} \neq 0\}.
+\]
+This set is usually called General Linear group.
+Changes of basis matrices are elements of the general linear group.
+
+\begin{proposition}
+    Similar matrices have the same eigenvalues.
+\end{proposition}
+
+\begin{definition}
+    A square matrix $A$ is said to be diagonalisable if $A$ is similar to a diagonal matrix.
+\end{definition}
+
+\begin{proposition}
+    The $n \times n$ matrix $A$ is diagonalisable if and only if it has $n$ linearly independent eigenvectors.
+\end{proposition}
+
+\begin{example}
+    If possible,
+    diagonalise the matrix
+    \[
+    A = \begin{pmatrix}
+        -1 & 4 \\ -2 & 5
+    \end{pmatrix}.
+    \]
+    \begin{solution}
+        $p(t) = t ^ 2 - 4t + 3 = (t - 1)(t - 3)$,
+        so we get eigenvalues $\lambda_1 = 1, \lambda_2 = 3$.
+
+        Now we need to get a similar matrix,
+        this will have the same eigenvalues.
+        Thus
+
+        $\lambda = 1$
+        \[
+        \begin{pmatrix}
+            0 \\ 0
+        \end{pmatrix}
+        = \mbf{0} = (A - \lambda I)\mbf{v} = (A - I)\mbf{v} = \begin{pmatrix}
+            -2 & 4 \\ -2 & 4
+        \end{pmatrix}\begin{pmatrix}
+            v_1 \\ v_2
+        \end{pmatrix}
+        \]
+        solving this gives the condition $-2v_1 + 4v_2 = 0$,
+        taking $v_2 = 1$ gives us $v_1 = 2$,
+        so
+        \[
+        \mbf{v}_1 = \begin{pmatrix}
+            2 \\ 1
+        \end{pmatrix}.
+        \]
+        
+        $\lambda = 3$
+        \[
+        \begin{pmatrix}
+            0 \\ 0
+        \end{pmatrix}
+        = \mbf{0} = (A - \lambda I)\mbf{v} = (A - 3I)\mbf{v} = \begin{pmatrix}
+            -4 & 4 \\ -2 & 2
+        \end{pmatrix}\begin{pmatrix}
+            v_1 \\ v_2
+        \end{pmatrix}
+        \]
+        which gives $v_1 = v_2$,
+        taking $v_2 = 1$ gives $v_1 = 1$,
+        hence
+        \[
+        \mbf{v}_2 = \begin{pmatrix}
+            1 \\ 1
+        \end{pmatrix}
+        \]
+
+        We can set
+        \[
+        M = \begin{pmatrix}
+            2 & 1 \\ 1 & 1
+        \end{pmatrix},\quad
+        M ^ {-1} =\begin{pmatrix}
+            1 & -1 \\ -1 & 2
+        \end{pmatrix},
+        \]
+        then
+        \[
+        M ^ {-1}AM = \begin{pmatrix}
+            1 & 0 \\ 0 & 3
+        \end{pmatrix}.
+        \]
+    \end{solution}
+\end{example}
+
+\begin{remark}
+    We can actually check our answer without computing $M ^ {-1}$,
+    we just have to check that $AM = MD$,
+    with $D$ being the diagonal matrix of eigenvalues
+    (in the right order).
+\end{remark}
 
 
 
