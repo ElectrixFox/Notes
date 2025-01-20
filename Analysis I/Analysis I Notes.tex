@@ -2963,6 +2963,131 @@ We can get the following proposition from the previous
     \end{solution}
 \end{example}
 
+\begin{example}
+    $f(x) = \frac{1}{x}$ with $x \neq 0$
+    Pick $\varepsilon > c$,
+    we need $\delta > c$
+    \[
+    |f(x) - f(c)| = \left|\frac{1}{x} - \frac{1}{c}\right| = \frac{|c - x|}{|xc|}.
+    \]
+    Pick $\delta = \frac{c ^ 2}{2}\varepsilon$.
+    Continuity is a "local" property so restrict $f(x)$ to the neighbourhood of $c$,
+    so $x \in \left[\frac{c}{2}, \frac{3c}{2}\right]$.
+    Then $|f(x) - f(c)| = \frac{|c - x|}{|xc|} \leq \frac{|c - x|}{\left|\frac{c}{2}\right||c|} = \frac{2}{c ^ 2}|c - x| < \frac{2}{c ^ 2} \cdot \delta = \frac{2}{c ^ 2} \cdot \frac{c ^ 2}{2} \cdot \varepsilon = \varepsilon$.
+\end{example}
+
+\begin{example}
+    $f(x) = \sqrt{x}$
+
+    $c = 0$:
+    Take $\varepsilon > 0$.
+    \[
+    |f(x) - f(c)| = |\sqrt{x} - \sqrt{0}| = \sqrt{x} < \varepsilon
+    \]
+    wherever $|x - 0| = |x| < \delta$.
+    Pick $\delta = \varepsilon ^ 2$
+    \begin{align*}
+        \sqrt{x} < \sqrt{\delta} &= \sqrt{\varepsilon ^ 2} \\
+        &= \varepsilon.
+    \end{align*}
+
+    General $c > 0$:
+    \begin{align*}
+        |f(x) - f(c)| &= \frac{|\sqrt{x} - \sqrt{c}|}{|\sqrt{x} + \sqrt{c}|}|\sqrt{x} + \sqrt{c}| \\
+        &= \frac{|x - c|}{|\sqrt{x} + \sqrt{c}|} \\
+        &\leq \frac{|x - c|}{\sqrt{c}} \\
+        \intertext{pick $\delta = \varepsilon\sqrt{c}$} \\
+        &< \frac{\delta}{c} \\
+        &= \frac{\sqrt{c}}{\sqrt{c}} \cdot \varepsilon \\
+        &= \varepsilon.
+    \end{align*}
+\end{example}
+
+\begin{example}
+    \[
+    \mathrm{sgn}(x) = \begin{cases}
+        1 & \text{if } x > 0, \\
+        0 & x = 0, \\
+        -1 & x < 0.
+    \end{cases}
+    \]
+    Not continuous at $c = 0$.
+    Pick $\varepsilon = \frac{1}{2}$
+    (anything less than $1$ would do).
+
+    Pick any $\delta > 0$,
+    then $x = \frac{\delta}{2}$ so that $|x - 0| = \frac{\delta}{2} < \delta$.
+    But
+    \begin{align*}
+        |f(x) - f(c)| &= f\left|\frac{\delta}{2} - f(0)\right| \\
+        &= |1 - 0| \\
+        &= 1 \\
+        &> \frac{1}{2} \\
+        &= \varepsilon.
+    \end{align*}
+\end{example}
+
+\begin{example}
+    \[
+    d(x) := \begin{cases}
+        1 & \text{if } x \in \Q \\
+        0 & \text{if } x \notin \Q.
+    \end{cases}
+    \]
+    but continuous at at any point $c \in \R$.
+\end{example}
+
+Composition of functions
+
+$f : X \rightarrow Y \subseteq \R$,
+$g : Y \rightarrow \R$.
+So $g \circ f(x)$ is defined on $X$.
+For example $\sqrt{x ^ 2 + x + 1}$.
+
+\begin{proposition}
+    Assume $f$ is continuous at $c \in X$ and $g$ is continuous at $f(c) \in Y$.
+    Then $g \circ f(x)$ is continuous at $x = c$.
+    \begin{proof}
+        Use the sequence criterion:
+        take $x_n \in X$ with $\liminfty x_n = c$.
+        Need $\liminfty g \circ f(x_n) = g(f(c))$.
+        
+        Set $y_n = f(x_n)$ since $f$ is continuous at $c$ we have that $\liminfty f(x_n) = \liminfty y_n = f(c)$,
+        this sequence,
+        $f(x_n)$,
+        is in $Y$.
+        Since $g$ is continuous at $f(c)$ we have $\liminfty g(y_n) = \liminfty g(f(c)) = \liminfty g(f(x_n))$.
+    \end{proof}
+\end{proposition}
+
+\begin{example}
+    $f(x) = e ^ x$ first $c = 0$ then by a previous result
+    \[
+    1 + x \leq e ^ x \leq \frac{1}{1 - x}
+    \]
+    for all $x \in (-\infty, 1)$,
+    this is a local property.
+    \[
+    \lim_{x \rightarrow 0}\left[1 + x \leq e ^ x \leq \frac{1}{1 - x}\right] \iff 1 \leq \lim_{x \rightarrow 0}e ^ x \leq 1
+    \]
+    by squeezing $\lim_{x \rightarrow 0}e ^ x = 1 = e ^ 0$.
+    Therefore is continuous at $c = 0$.
+
+    Need to show
+    \[
+    e ^ x \rightarrow e ^ c
+    \]
+    as $x \rightarrow x$.
+
+    \begin{align*}
+        e ^ x &= e ^ c \cdot e ^ {x - c} \\
+        \intertext{$x = c$} \\
+        &= e ^ c \cdot e ^ 0 \\
+        &= e ^ c \cdot 1 \\
+        &= e ^ c.
+    \end{align*}
+\end{example}
+
 
 
 
