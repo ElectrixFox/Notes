@@ -353,6 +353,37 @@ Except in simple cases,
 we won't know exactly what the trajectory $x(t)$ is.
 But we can say something about what it looks like,
 
+\begin{example}
+    A double-well potential.
+    A particle of mass $3$ moves in a potential
+    \[
+    V(x) = \frac{x ^ 4}{4} - \frac{x ^ 3}{3} - x ^ 2.
+    \]
+    At what points can the particle remain at rest
+    (be in equilibrium)?
+    If the particle starts at $x = 1$ with speed $u$,
+    how large does $u$ have to be for it to reach $x = -1$?
+    \begin{solution}
+        We can see that the equilibrium points are at $V'(x) = 0$.
+        Now
+        \[
+        0 = V'(x) = x(x - 2)(x + 1)
+        \]
+        so there are three equilibria,
+        at $x = -1, 0, 2$.
+        The potential $V(x)$ is a 'double well',
+        with local maximum at $x = 0$,
+        and local minima at $x = -1$ and $x = 2$.
+        To get from $x = 1$ to $x = -1$,
+        the particle needs enough initial kinetic energy to get over the 'hill' at $x = 0$.
+        In other words,
+        we need
+        \[
+        \frac{3}{2}u ^ 2 + V(1) > V(0),
+        \]
+        using $V(1) = -\frac{13}{12}$ and $V(0) = 0$ then gives $u > \sqrt{\frac{13}{18}}$.
+    \end{solution}
+\end{example}
 
 
 
