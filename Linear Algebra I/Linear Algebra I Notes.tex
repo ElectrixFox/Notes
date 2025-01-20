@@ -5347,7 +5347,7 @@ p(t) = a(t - \lambda_1) ^ {k_1}(t - \lambda_2) ^ {k_2} \dotsi (t - \lambda_p) ^ 
     and $p_{\lambda} = \dim(V_{\lambda})$.
 \end{definition}
 
-\begin{example}
+\begin{example}\phantom{}
     \begin{enumerate}[label = (\roman*)]
         \item
         \[
@@ -5388,12 +5388,163 @@ p(t) = a(t - \lambda_1) ^ {k_1}(t - \lambda_2) ^ {k_2} \dotsi (t - \lambda_p) ^ 
             0 \\ 0 \\ 0
         \end{pmatrix}.
         \]
+        \item
+        \[
+        B = \begin{pmatrix}
+            6 & 1 & 0 \\
+            0 & 6 & 0 \\
+            0 & 0 & 3
+        \end{pmatrix}
+        \]
+        \[
+        \det{(B - tI)} = p_B(t) = (6 - t) ^ 2(3 - t).
+        \]
+        So $A$ and $B$ have the same $\lambda_i$,
+        and same algebraic multiplicities $k_i$
+
+        $\lambda = 6$
+        \[
+        (B - 6I)\begin{pmatrix}
+            a \\ b \\ c
+        \end{pmatrix} = \begin{pmatrix}
+            0 & 1 & 0 \\
+            0 & 0 & 0 \\
+            0 & 0 & 3
+        \end{pmatrix}\begin{pmatrix}
+            a \\ b \\ c
+        \end{pmatrix}
+        = \begin{pmatrix}
+            b \\ 0 \\ -3c
+        \end{pmatrix}
+        = \begin{pmatrix}
+            0 \\ 0 \\ 0
+        \end{pmatrix}
+        \]
+        so now $c$ and $b$ are $0$
+        \[
+        \implies V_{\lambda = 6} = \ker(B - 6I) = \mathrm{span}\left\{\begin{pmatrix}
+            1 \\ 0 \\ 0
+        \end{pmatrix}\right\}
+        \]
+        $p_1 = \dim{V_{\lambda = 6}} = 1 < k_1 = 2$.
     \end{enumerate}
 \end{example}
+So $p_A(t)$ tells you the $\lambda$'s and the $k$'s,
+but not necessarily the $p$'s.
+(if any $k > 1$).
 
+\subsection{The Cayley-Hamilton theorem}
+\begin{theorem}[Cayley-Hamilton theorem]
+    Let $A$ be $N \times N$ with characteristic polynomial $p_A(t)$.
+    Then $p_A(A) = 0$
+    (as a matrix equation).
+\end{theorem}
 
+\subsection{The similarity relation}
+We've seen that different matrices can have the same eigenvalues,
+for example
+\[
+A = \begin{pmatrix}
+    1 & 0 & 0 \\
+    0 & 2 & 0 \\
+    0 & 0 & 3
+\end{pmatrix},
+\,
+B = \begin{pmatrix}
+    1 & -2 & 5 \\
+    0 & 2 & 7 \\
+    0 & 0 & 3
+\end{pmatrix}.
+\]
+But are they different transformations,
+or do they just differ by a change of basis?
 
+We shall view $A$ and $B$ as the same transform if and only if $B = P ^ {-1}AP$ for some invertible $P$.
 
+\begin{definition}
+    An equivalence relation,
+    $\sim$,
+    on a set $X$ is a binary relation with properties:
+    $\forall a, b, c \in X$
+    \begin{enumerate}[label = (\roman*)]
+        \item $a \sim a$
+        (reflexivity).
+
+        \item $a \sim b \implies b \sim a$
+        (symmetry).
+
+        \item If $a \sim b$ and $b \sim c$ then $a \sim c$
+        (transitivity).
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    We say that two $n \times n$ matrices $A$ and $B$ are similar,
+    written $A \sim B$,
+    if there exists an invertible matrix $M$ such that $A = M ^ {-1}BM$.
+\end{definition}
+So they represent the same linear transformation $T$ in different bases.
+
+\begin{proposition}
+    Similarity is an equivalence relation.
+    \begin{proof}
+        \begin{enumerate}[label = (\roman*)]
+            \item Reflexive:
+            $A \sim A$
+            (just take $M = I$).
+
+            \item Symmetric:
+            $A \sim B \implies B \sim A$.
+            $A \sim B$ means $A = M ^ {-1}BM$ which implies $B = MAM ^ {-1} = N ^ {-1}AN$ if $N = M ^ {-1}$ which is good since $M$ is invertible.
+            So $B \sim A$.
+
+            \item Transitivity:
+            $A \sim B$ and $B \sim C$ implies $A \sim C$.
+            $A = M ^ {-1}BM$
+            and
+            $B = N ^ {-1}CN$.
+            We get
+            \[
+            A = M ^{-1}N ^ {-1}CNM = (NM) ^ {-1}C(NM)
+            \]
+            so $A \sim C$.
+        \end{enumerate}
+    \end{proof}
+\end{proposition}
+
+So the set of $n \times n$ matrices can be partitioned into equivalence classes:
+i.e.
+\[
+[A] = \{B \text{ $n\times n$ matrices such that $B \sim A$}\}.
+\]
+$[A]$ contains all matrices representing a given linear transformation,
+in all possible bases.
+Elements of $[A]$ are 'morally' the same.
+
+In particular,
+\begin{proposition}
+    Similar matrices have the same eigenvalues.
+    \begin{proof}
+        \[
+        A \sim B \implies A = M ^ {-1}BM.
+        \]
+        So
+        \begin{align*}
+            p_A(t) &= \det(A - tI) \\
+            &= \det(M ^ {-1}BM - tI) \\
+            &= \det(M ^ {-1}BM - tM ^ {-1}M) \\
+            &= \det(M ^ {-1}(B - tI)M) \\
+            &= (\det{M ^ {-1}})(\det(B - tI))(\det{M}) \\
+            &= \det(B - tI).
+        \end{align*}
+    \end{proof}
+\end{proposition}
+So $A \sim B \implies p_A(t) = p_B(t)$ which implies they have the same eigenvalues.
+
+\begin{definition}
+    $A$ is said to be diagonalisable if $A \sim D$ with $D$ a diagonal matrix,
+    i.e. $M ^ {-1}AM = D$ for some $M$.
+\end{definition}
 
 
 
