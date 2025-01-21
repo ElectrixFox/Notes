@@ -3476,6 +3476,8 @@ Changes of basis matrices are elements of the general linear group.
     Similar matrices have the same eigenvalues.
 \end{proposition}
 
+\subsection{Diagonalisation by change of basis}
+
 \begin{definition}
     A square matrix $A$ is said to be diagonalisable if $A$ is similar to a diagonal matrix.
 \end{definition}
@@ -3565,9 +3567,113 @@ Changes of basis matrices are elements of the general linear group.
     (in the right order).
 \end{remark}
 
+\begin{example}
+    Solve the system of ODEs
+    \begin{align*}
+        \dot{x} &= -x + 4y, \\
+        \dot{y} &= -2x + 5y,
+    \end{align*}
+    where $x = x(t)$,
+    $y = y(t)$ and $\dot{x} = \frac{dx(t)}{dt}$,
+    similarly $\dot{y} = \frac{dy(t)}{dt}$.
+    \begin{solution}
+        If we diagonalise the system this is the same thing as changing basis.
+        If $\mbf{v}(t)$ denotes the column vector with entries $(x(t), y(t))$,
+        put $\mbf{w}(t) = M ^ {-1}\mbf{v}(t)$.
+        Then $\mbf{w}(t)$ satisfies the system $\dot{\mbf{w}}(t) = D\mbf{w}(t)$,
+        where $D = \mathrm{diag}(1, 3)$.
 
+        The solution is $w_1(t) = c_1e ^ t$,
+        $w_2(t) = c_2e ^ {3t}$,
+        with $c_1$ and $c_2$ constant;
+        and then using $\mbf{v}(t) = M\mbf{w}(t)$ gives
+        \begin{align*}
+            x(t) &= 2c_1e ^ t + c_2e ^ {3t}, \\
+            y(t) &= c_1e ^ t + c_"e ^ {3t}.
+        \end{align*}
+    \end{solution}
+\end{example}
 
+\begin{proposition}
+    Eigenvectors that correspond to distinct eigenvalues of $A$ are linearly independent.
+    In particular,
+    if all eigenvalues of $A$ are distinct,
+    then $A$ is diagonalisable.
+\end{proposition}
 
+\begin{example}
+    Let us try to diagonalise
+    \[
+    A = \begin{pmatrix}
+        -2 & - 1 \\ 5 & 2
+    \end{pmatrix}.
+    \]
+    \begin{solution}
+        $p(t) = t ^ 2 + 1$,
+        so the eigenvalues are $\lambda_1 = i, \lambda_2 = -i$.
+        Then we get
+        
+        \textit{Using the fact that $A$ is similar to a diagonal matrix and that similar matrices have the same eigenvalues,
+        so $A \sim B$ with $B = MAM ^ {-1}$ is equivalent to $M ^ {-1}BM = A$}.
+        \[
+        M = \begin{pmatrix}
+            -2 + i & -2 - i \\ 5 & 5
+        \end{pmatrix},
+        \qquad
+        M ^ {-1} = \frac{1}{10}\begin{pmatrix}
+            -5i & 1 - 2i \\ 5i & 1 + 2i
+        \end{pmatrix},
+        \]
+        and
+        \[
+        M ^ {-1}AM = \begin{pmatrix}
+            i & 0 \\ 0 & -i
+        \end{pmatrix}.
+        \]
+    \end{solution}
+\end{example}
+
+\begin{example}
+    If
+    \[
+    A = \begin{pmatrix}
+        -1 & 4 \\ -2 & 5
+    \end{pmatrix},
+    \]
+    derive a formula for $A ^ n$.
+    \begin{solution}
+        Note that $A = MDM ^ {-1}$,
+        $D$ is the diagonal matrix,
+        so after we get that $p_A(t) = (t - 3)(t - 1)$ and $\lambda_1 = 1, \lambda_2 = 3$,
+        we can see that
+        \[
+        D = \begin{pmatrix}
+            1 & 0 \\
+            0 & 3
+        \end{pmatrix},
+        \]
+        Finding the eigenvectors using the usual method we get
+        \[
+        M = \begin{pmatrix}
+            2 & 1 \\
+            1 & 1
+        \end{pmatrix}, \qquad M ^ {-1} = \begin{pmatrix}
+            1 & -1 \\
+            -1 & 2
+        \end{pmatrix}.
+        \]
+        From here we can see that
+        \begin{align*}
+            A = MDM ^ {-1} \iff A ^ n &= (MDM ^ {-1})(MDM ^ {-1}) \dotsi (MDM ^ {-1}) \\
+            &= (M)D(M ^ {-1}M)D(M ^ {-1}M)\dotsi (M ^ {-1}M)D(M ^ {-1}) \\
+            &= MD ^ {n}M ^ {-1} \\
+            &= \begin{pmatrix}
+                2 - 3 ^ n & 2 \cdot 3 ^ n - 2 \\
+                1 - 3 ^ n & 2 \cdot 3 ^ n - 1
+            \end{pmatrix}.
+        \end{align*}
+    \end{solution}
+\end{example}
 
 
 
