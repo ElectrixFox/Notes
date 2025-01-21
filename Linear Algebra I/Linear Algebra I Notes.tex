@@ -5545,8 +5545,115 @@ So $A \sim B \implies p_A(t) = p_B(t)$ which implies they have the same eigenval
     $A$ is said to be diagonalisable if $A \sim D$ with $D$ a diagonal matrix,
     i.e. $M ^ {-1}AM = D$ for some $M$.
 \end{definition}
+ 
+Question:
+given $A$,
+is it diagonalisable?
 
+More generally,
+given $A$ and $B$,
+is $A \sim B$?
 
+The converse of $A \sim B \implies p_A(t) = p_B(t)$ is not necessarily true.
+\begin{example}
+    Say $A = I$
+    (in $\R ^ 2$)
+
+    then $[I] = \{I\}$
+    since $M ^ {-1}IM = I$ for all $M$.
+    Now consider $B = \begin{pmatrix}
+        1 & 1 \\ 0 & 1
+    \end{pmatrix} \neq I$ so $B \notin [I]$ i.e. $B \nsim I$
+    but $p_A(t) = (1 - t) ^ 2 = p_B(t)$.
+\end{example}
+
+\textbf{Facts}
+\begin{proposition}
+    \begin{enumerate}[label = (\alph*)]
+        \item For $A$ and $B$ to be similar,
+        they must have the same eigenvalues
+    
+        \item If $A$ and $B$ have the same eigenvalues and the same
+        (algebraic/geometric)
+        multiplicities and both are diagonalisable,
+        then $A \sim B$.
+        \begin{align*}
+            A &= M ^ {-1}D_1M \\
+            B &= N ^ {-1}D_2N
+        \end{align*}
+        with $D_1, D_2$ diagonalisable.
+        But since the eigenvalues agree,
+        $D_1 \sim D_2$.
+    
+        So $A \sim D_1 \sim D_2 \sim B$,
+        and hence $A \sim B$ by transitivity.
+    
+        \item If $A$ is diagonalisable and $B$ is not,
+        then $A \nsim B$.
+        (From transitivity).
+    
+        \item Not all square matrices are diagonalisable.
+    
+        \item If the eigenvalues of $A$ are all distinct,
+        then $A$ is diagonalisable.
+    
+        \item If $A$ is symmetric,
+        $A = A ^ t$,
+        then $A$ is diagonalisable.
+    \end{enumerate}
+\end{proposition}
+
+Key idea:
+find a "smart" basis,
+i.e. a basis of eigenvectors.
+
+\begin{proposition}
+    $A$,
+    $N \times N$,
+    diagonalisable if and only if $A$ has $N$ linearly independent eigenvectors.
+    
+    I.e. the eigenvectors of $A$ form a basis of $\R ^ N$.
+    \begin{proof}
+        "$\impliedby$".
+        Suppose $\{\lambda_1, \dotsc, \lambda_N\}$ are the eigenvalues
+        (not necessarily distinct)
+        and $\{\mbf{v}_1, \dotsc, \mbf{v}_N\}$ are a set of linearly independent eigenvectors for $A$.
+
+        Consider $M = [\mbf{v}_1, \dotsc, \mbf{v}_N]$ an $N \times N$ matrix with the eigenvectors as its columns.
+        Let $D = \begin{pmatrix}
+            \lambda_1 & 0 & \dotsi & 0 \\
+            0 & \lambda_2 & \dotsi & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \dotsi & \lambda_N
+        \end{pmatrix}$
+        We know $A\mbf{v} = \lambda_1\mbf{v}_1, A\mbf{v}_2 = \lambda_2\mbf{v}_2$ etc.
+        Compute
+        \begin{align*}
+            AM &= [A\mbf{v}_1, A\mbf{v}_2, \dotsc, A\mbf{v}_N] \\
+            &= [\lambda_1\mbf{v}_1, \lambda_2\mbf{v}_2, \dotsc, \lambda_N\mbf{v}_N] \\
+            &= [\mbf{v}_1, \mbf{v}_2, \dotsc, \mbf{v}_N]\begin{pmatrix}
+                \lambda_1 & 0 & \dotsi & 0 \\
+                0 & \lambda_2 & \dotsi & 0 \\
+                \vdots & \vdots & \ddots & \vdots \\
+                0 & 0 & \dotsi & \lambda_N
+            \end{pmatrix} \\
+            &= MD \implies M ^ {-1}AM = D
+        \end{align*}
+        so $A \sim D$,
+        so $A$ is diagonalisable.
+        
+        \textit{Note:
+        $M ^ {-1}$ exists since $\det(M) \neq 0$ if $\mbf{v}_1, \dotsc, \mbf{v}_N$ are linearly independent.}
+
+        "$\implies$".
+        Suppose $M ^ {-1}AM = D \implies AM = MD$.
+        Think of $M$ column by column as $M = [\mbf{v}_1, \dotsc, \mbf{v}_N]$,
+        first column of $AM = A\mbf{v}_1$ which is equal to the first column of $MD = \lambda_1\mbf{v}_1$,
+        etc.
+        (They are linearly independent by the previous note.)
+        So these eigenvectors do form a basis.
+    \end{proof}
+\end{proposition}
 
 
 
