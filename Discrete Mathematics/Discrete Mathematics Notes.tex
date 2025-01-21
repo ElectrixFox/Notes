@@ -1527,20 +1527,201 @@ we must certainly have $|V_1| = |V_2|$ and $|E_1| = |E_2|$ we must also be able 
 \subsection{Subgraphs}
 
 \begin{definition}
-    Given a graph $G = (V, E)$
+    Given a graph $G = (V, E)$ and a graph $G_1 = (V_1, E_1)$ such that $V_1 \subset V$ and $E_1 \subset E$,
+    then $G_1$ is a subgraph of $G$.
 \end{definition}
 
+\newpage
 
+\section{Eulerian graphs}
 
+\subsection{Travelling in graphs}
+\begin{definition}[Walk]
+    Given a graph $G = (V, E, \phi)$,
+    a walk in $G$ is a sequence of vertices $w_0, w_2, \dotsc, w_k$ from $V$ together with edges $e_1, e_2, \dotsc, d_k$ in $E$ such that $\phi(e_i) = \{w_i, w_{i + 1}\}$ for all $1 \leq i \leq k$.
+    The length of a walk is the number of edges it contains,
+    i.e. it is $k$.
+    We may sometimes write such a walk as $\gamma = w_0e_1w_1e_2\dotsc w_{k - 1}e_kw_k$.
+    If $w_1 = w_k$ we say that the walk is closed.
+\end{definition}
 
+\begin{remark}
+    For a simple graph $G = (V, E)$,
+    a walk in $G$ can be determined only by the sequence of vertices.
+    The condition $\phi(e_i) = \{w_i, w_{i + 1}\}$ is unambiguous as there is only one edge,
+    $e_i = \{w_i, w_{i + 1}\}$ in $E$ that satisfies it.
+    In those cases,
+    we may write $\gamma = (w_0, w_1, \dotsc, w_k)$.
+    Note that the length of such walk is $k$.
+\end{remark}
 
+We have not required our vertices or edges to be distinct,
+that is,
+a walk may revisit certain vertices or even travel along the same edge as before.
 
+\begin{definition}[Trail]
+    A trail is a walk with no edge repeated
+    (vertices may be repeated).
+\end{definition}
 
+A \textbf{circuit} is a closed trail
+(i.e.
+a trail where $w_0 = w_k$;
+we also require $k \geq 1$).
 
+\begin{definition}[Trail]
+    A path in $G = (V, E, \phi)$ is a trail $w_0e_1w_1e_2\dotsc w_{k - 1}e_kw_k$ such that the vertices $w_0, w_2, \dotsc, w_{k - 1}$ are distinct.
+\end{definition}
+A cycle is a closed path,
+i.e. a path where $w_0 = w_k$ with $k \geq 1$.
 
+\begin{definition}[Hamilton cycle]
+    A Hamilton cycle in a graph $G$ is a cycle  which visits every vertex of $G$,
+    i.e. it is a cycle $(w_0, w_1, \dotsc, w_k)$ where $\{w_0, w_1, \dotsc, w_k\} = V$.
+\end{definition}
 
+A graph which contains a Hamilton cycle is called Hamiltonian.
 
+We say that $\gamma$ is a walk in $G$ from $u$ to $w$ when $\gamma = w_0e_1w_1e_2\dotsc w_{k - 1}e_kw_k$ is a walk in $G$ such that $w_0 = u$ and $w_k = w$.
 
+\begin{lemma}
+    Given vertices $u \neq v$ in a graph $G$,
+    if there is a walk from $u$ to $v$ in $G$ then there is a path in $G$ from $u$ to $v$.
+    \begin{proof}
+        Let $\gamma$ be a walk in $G$ consisting of the vertices $(w_i)_{0 \leq i \leq k}$,
+        $w_0 = u, w_k = v$ and edges $(e_i)_{1 \leq i \leq k}$.
+        If $w_0, \dotsc, w_{k - 1}$ are all distinct,
+        then $\gamma$ us a path.
+        If not,
+        let $w_j$ be the first occurrence in $\gamma$ of a vertex which appears more than once,
+        and let $w_{j'}$ be the latest occurrence of that vertex in $\gamma$,
+        i.e. let $j'$ be the greatest index for which $w_{j'} = w_j$.
+        Let $\gamma'$ be the walk formed from $\gamma$ by removing the vertices $w_{j + 1}, \dotsc, w_{j'}$ and the edges $e_j, \dotsc, e_{j' - 1}$.
+        Then $w_j$ appears only once in $\gamma'$ and so the number of repeated vertices in $\gamma'$ is strictly smaller than in $\gamma$.
+        Repeat this process with remaining vertices in $\gamma'$ which appear more than once,
+        until we have a path.
+    \end{proof}
+\end{lemma}
+
+We could have done this formally by induction on the number of repeated pairs.
+We can prove similarly that if $G$ has a circuit then it has a cycle.
+
+\begin{lemma}\label{disc:lem:deggeqtwothencycle}
+    If every vertex in a
+    (finite)
+    graph $G = (V, E, \phi)$ has degree strictly larger than $1$,
+    then $G$ contains a cycle.
+    \begin{proof}
+        Let $|V| = n$.
+        Starting from any vertex $u$ in $G$,
+        then as $d(u) > 1$ there is some edge $e$ such that $u \in \phi(e) = \{u, v\}$.
+        Let $u = w_0, v = w_1$.
+        We construct a cycle in $G$ as follows.
+        At $w_1$
+        (generally,
+        at a 'new' vertex $w_i$),
+        then as $d(w_1) > 1$,
+        there must be some edge $e_2 \neq e$
+        (in general,
+        some unused edge $e_i$)
+        incident to $w_1$.
+        There are two possibilities:
+        \begin{enumerate}[label = (\arabic*)]
+            \item There is an edge from $w_i$ to some already visited $w_k$ with $0 \leq k< 1$.
+
+            \item We do not have ($1$),
+            and there is some edge $e_i$ with $\phi(e_i) = \{w_i, w_{i + 1}\}$ where $w_{i + 1}$ is an unvisited "new" vertex,
+            i.e. $w_{i + 1} \notin \{w_0, \dotsc, w_i\}$.
+        \end{enumerate}
+        At some point $i \leq n$ we must have situation ($2$) occurring,
+        we cannot keep finding "new" vertices.
+        Then the path $\gamma = w_ke_kw_{k + 1}\dotsc w_ie_iw_k$ is a cycle in $G$ as required.
+    \end{proof}
+\end{lemma}
+
+\subsection{Connectedness}
+
+\begin{definition}
+    A graph $G$ is connected if,
+    given any two vertices $u, v$ of $G$,
+    there is a path in $G$ from $u$ to $v$.
+\end{definition}
+
+\begin{definition}
+    A connected component of $G = (V, E)$ is a subgraph $G_1 = (V_1, E_1)$ such that
+    \begin{enumerate}[label = (\arabic*)]
+        \item $G_1$ is connected.
+
+        \item For every edge $e = uv \in E$ where $u, v \in V_1$,
+        then $e \in E_1$.
+
+        \item For any $u \in V_1$ and $w \in V \setminus V_1$ there is no path in $G$ from $u$ to $v$.
+    \end{enumerate}
+\end{definition}
+
+A connected component of $G$ is a connected subgraph of $G$ that is not part of any larger connected subgraph of $G$,
+in other words,
+it is a maximally connected subgraph of $G$.
+
+Then,
+two vertices of $G$ lie in the same connected component if and only if there is a path in $G$ between them.
+If $G$ is not connected then it has two or more connected components.
+
+\subsection{The Bridges of K\"onigsberg}
+Seven bridges crossed the river,
+and it was said that residents spend their Sunday walks trying to solve the following problem
+\begin{center}
+    "Can one arrange a course in such a way as to pass over each bridge one and not more than once?"
+\end{center}
+Using Graph theory this can be solved.
+
+Representing land by vertices and bridges by edges.
+It was showed it could not be done,
+one enters each vertex as often as one leaves it.
+So in order to walk over each bridge just once,
+returning to the start,
+each vertex must have even degree.
+This problem motivates the following definition.
+
+\begin{definition}
+    An Euler circuit in a graph $G$ is a circuit in $G$ which  uses each edge of $G$ exactly once.
+\end{definition}
+
+A graph with an Euler circuit is called Eulerian.
+
+\subsection{Euler's theorem}
+\begin{theorem}
+    Let $G = (V, E, \phi)$ be a finite connected graph with $|V| > 1$.
+    Then $G$ has an Euler circuit if and only if all vertices of $G$ has even degree.
+\end{theorem}
+
+\begin{lemma}
+    If a graph $G = (V, E, \phi)$ is finite and connected,
+    with $|V| > 1$ and all vertices of even degree,
+    then $G$ is a finite union of edge-disjoint cycles
+    (where two cycles $C_1, C_2$ in $G$ having edges $(e_j)$,
+    $(f_k)$ respectively are edge-disjoint if no $e_j$ is equal to any $f_k$);
+    that is,
+    there are cycles $C_1, C_2, \dotsc, C_n$ such that the union of the vertices of these cycles is equal to $V$ and the union of edges is equal to $E$.
+    
+    \begin{proof}
+        Since $G$ is connected,
+        it has no isolated vertices.
+        So all vertices have degree $\geq 2$.
+        So by \autoref{disc:lem:deggeqtwothencycle},
+        there is a cycle $C_1$ in $G$.
+        We form a new graph $G$ by removing all edges in $C_1$.
+        The vertices in $C_1$ have their degree decreased by $2$ in this new graph and the degrees of all other vertices are unchanged.
+        We next discard any vertices which are now isolated in this new graph.
+        We are left with a graph in which all vertices have even degree $\geq 2$,
+        so by \autoref{disc:lem:deggeqtwothencycle} we can find another cycle $C_2$,
+        and repeat this process.
+        Since $G$ is finite,
+        eventually the degrees of all vertices will have decreased to $0$.
+        Thus every edge and vertex of $G$ belongs to some cycle,
+        and therefore we have decomposed $G$ into disjoint cycles as required.
+    \end{proof}
+\end{lemma}
 
 
 \end{document}
