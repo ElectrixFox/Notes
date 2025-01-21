@@ -3331,13 +3331,118 @@ straight line.
         \]
         where $M$ is a constant and $\lim_{x \rightarrow x_0}\frac{R(x)}{|x - x_0|} = 0$.
     \end{enumerate}
-
 \end{definition}
 
+$\delta f = f(x) - f(x_0) = M(x - x_0) + R(x)$
+\begin{align*}
+    \lim_{x \rightarrow x_0}\frac{f(x) - f(x_0)}{x - x_0} &= M + \lim_{x \rightarrow x_0}\frac{R(x)}{x - x_0} \\
+    \intertext{If $f(x)$ differentiable at $x = x_0$} \\
+    &= M + 0 = M.
+\end{align*}
+$x = x_0 + \delta x$,
+this implies $M = \lim_{\delta x \rightarrow 0}\frac{f(x_0 + \delta x) - f(x_0)}{\delta x} = \frac{df}{dx}(x_0)$.
+Substitute $M = \frac{df}{dx}(x_0)$
+\[
+f(x) = \underbrace{f(x_0) + \frac{df}{dx}(x_0)(x - x_0)}_{\text{$2$ terms of Taylor series}} + R(x)
+\]
 
+\subsubsection{Differentiability of functions of two variables \texorpdfstring{$f(x, y)$}{}}
+\textbf{In words}:
 
+A function $f(x, y)$ is differentiable at $(x_0, y_0) = \mbf{x}_0$ if when we zoom in it looks like its tangent plane.
+\[
+z = f(x_0, y_0) + M(x - x_0) + N(y - y_0)
+\]
 
+\begin{definition}
+    The function $f(x, y) : D \rightarrow \R$
+    $D \subseteq \R ^ 2$ is differentiable at $\mbf{x}_0 = (x_0, y_0)$ if and only if
+    \begin{enumerate}[label = (\roman*)]
+        \item $\exists \delta > 0$ if $|\mbf{x} - \mbf{x}_0| < \delta$ then $\mbf{x} \in D$
+        
+        \item $\underbrace{f(x, y) = f(x_0, y_0) + M(x - x_0) + N(y - y_0)}_{\text{tangent plane}} + R(x, y)$.
+        Where $M, N$ are constant and $\lim_{\mbf{x} \rightarrow \mbf{x}_0}\frac{R(x, y)}{|\mbf{x} - \mbf{x}_0|} \rightarrow 0$.
+    \end{enumerate}
+\end{definition}
 
+\begin{example}
+    Show that $f(x, y) = x ^ 2 + y ^ 2$ is differentiable at $\mbf{x}_0 = (x_0, y_0) = (1, 1)$.
+    \begin{solution}
+        \begin{align*}
+            f(x, y) &= ((x - 1) + 1) ^ 2 + ((y - 1) + 1) ^ 2 \\
+            &= (x - 1) ^ 2 + 2(x - 1) + 1 + (y - 1) ^ 2 + 2(y - 1) + 1 \\
+            &= 2 + 2(x - 1) + 2(y - 1) + (x - 1) ^ 2 + (y - 1) ^ 2 \\
+            &= f(1, 1) + M(x - 1) + N(y - 1) + R(x)
+        \end{align*}
+        With $2 = f(x, y)$,
+        $2 = M = N$,
+        $(x - 1) ^ 2 + (y - 1) ^ 2 = R(n)$.
+        \[
+        R(x, y) = (x - 1) ^ 2 + (y - 1) ^ 2 = \left|(x, y) - (1, 1)\right| ^ 2 = \left|\mbf{X} -  \mbf{x}_0\right| ^ 2
+        \]
+        \[
+        \lim_{\mbf{x} \rightarrow \mbf{x}_0}\frac{R(x, y)}{|\mbf{x} - \mbf{x}_0|} = 
+        \lim_{\mbf{x} \rightarrow \mbf{x}_0}\frac{|\mbf{x} - \mbf{x}_0| ^ 2}{|\mbf{x} - \mbf{x}_0|} = |\mbf{x} - \mbf{x}_0| = 0.
+        \]
+    \end{solution}
+\end{example}
+
+\subsection{Partial Derivatives}
+In $1$D the derivative $\frac{df}{dx}(x_0)$ is the gradient of the function at $x = x_0$.
+\[
+f(x) = f(x_0) + \frac{df}{dx}(x_0)(x - x_0) + R(x)
+\]
+\[
+\delta f = f(x) - f(x_0) = \frac{df}{dx}(x_0)(x - x_0) + R(x)
+\]
+\[
+x = x_0 + \delta x
+\]
+$\delta f = \frac{\delta f}{\delta x}(x_0)\delta x + R(x)$
+if differentiable $R(x) \rightarrow 0$ faster than $\delta x$
+\[
+\delta f \approx \frac{df}{dx}\delta x.
+\]
+
+In $2$D
+\[
+\delta f = f(x, y) - f(x_0, y_0) = M(x - x_0) + N(y - y_0) + R(x, y)
+\]
+if differentiable at $(x_0, y_0)$.
+$x = x_0 + \delta x$,
+$y = y_0 + \delta y$.
+\[
+\delta f = M\delta x + N\delta y + R(x, y)
+\]
+$R(x, y) \rightarrow 0$ faster than $\delta x, \delta y$ as $\delta x, \delta y \rightarrow 0$.
+\[
+\delta f \approx M\delta x + N\delta y.
+\]
+In two or more dimensions the slope we experience depends on which direction we move in.
+Suppose we move parallel to the $x$-axis $\mbf{x} = (x_0 + \delta x, y_0)$
+$\delta y = 0$
+\begin{align*}
+    \delta f &= f(x_0 + \delta x, y_0) - f(x_0, y_0) \\
+    &= M\delta x + N\delta y + R(x_0 + \delta x, y_0) \\
+    &= M\delta x + R(x_0 + \delta x, y_0).
+\end{align*}
+\[
+\lim_{\delta x \rightarrow 0}\frac{f(x_0 + \delta x, y_0) - f(x_0, y_0)}{\delta x} = M + \lim_{\delta x \rightarrow 0}R(x_0 + \delta x, y_0) = \frac{R(x, y)}{|\mbf{x} - \mbf{x}_0|} = 0
+\]
+since differentiable.
+\begin{definition}[Partial derivative]
+    \[
+    \frac{\partial f}{\partial x}(x_0, y_0) = \lim_{\delta x \rightarrow 0}\frac{f(x_0 + \delta x, y_0) - f(x_0, y_0)}{\delta x} = f_x(x_0, y_0) = \partial_xf(x_0, y_0).
+    \]
+\end{definition}
+This limit coincides with the ordinary derivative of $F(x) = f(x, y_0)$ rules still apply
+\[
+\frac{\partial}{\partial x}(fg) = \frac{\partial f}{\partial x}g + f\frac{\partial g}{\partial x}.
+\]
+Similarly we can define
+\[
+\frac{\partial y}{\partial y}(x_0, y_0) = \lim_{\delta y \rightarrow 0}\frac{f(x_0, y_0 + \delta y) - f(x_0, y_0)}{\delta y} = f_y = \delta_yf.
+\]
 
 
 
