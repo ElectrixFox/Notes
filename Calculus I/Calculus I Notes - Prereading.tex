@@ -2032,6 +2032,39 @@ Similarly we can define the partial derivative of $f$ with respect to $y$ at $(x
 \[
 \frac{\partial f}{\partial y}(x_0, y_0) = f_y = N = \lim_{\partial y \rightarrow 0}\frac{f(x_0, y_0 + \delta y) - f(x_0, y_0)}{\delta y}.
 \]
+\begin{center}
+\fbox{
+\begin{minipage}{0.9\textwidth}
+    In effect the partial derivatives for $f(x, y)$
+    (functions of multiple variables)
+    work exactly as they do for functions of one variable.
+\end{minipage}
+}
+\end{center}
+\hfill
+
+\subsection{Higher Derivatives}
+As before we have a lot of similarity between partial derivatives of functions of one variable and ones of multiple variables.
+
+Very often partial derivatives of a function are themselves differentiable functions,
+so we can differentiate them again to yield higher derivatives of the original function.
+
+$f(x, y)$ has partial derivative $\frac{\partial f}{\partial x}$ and $\frac{\partial f}{\partial y}$ which are themselves differentiable we can write
+\begin{align*}
+    \frac{\partial}{\partial x}\left(\frac{\partial f}{\partial x}\right) &= \frac{\partial ^ 2 f}{\partial x ^ 2} = f_{xx}, \\
+    \frac{\partial}{\partial y}\left(\frac{\partial f}{\partial x}\right) &= \frac{\partial ^ 2 f}{\partial y \partial x} = (f_x)_y = f_{xy}, \\
+    \frac{\partial}{\partial y}\left(\frac{\partial f}{\partial y}\right) &= \frac{\partial ^ 2 f}{\partial y ^ 2} = f_{yy}, \\
+    \frac{\partial}{\partial x}\left(\frac{\partial f}{\partial y}\right) &= \frac{\partial ^ 2 f}{\partial x \partial y} = (f_y)_x = f_{yx}.
+\end{align*}
+The Schwarz-Clairault Theorem tells us that if all the second derivatives exist and are continuous then the order of differentiation is not important,
+that is $f_{xy} = f_{yx}$.
+More generally if $f = f(x_1, x_2, \dotsc, x_n)$ is a function of $n$-variables then
+\[
+\frac{\partial ^ 2f}{\partial x_i\partial x_j} = \frac{\partial ^ 2f}{\partial x_j\partial x_i}.
+\]
+
+\subsection{The Chain Rule}
+
 
 
 
