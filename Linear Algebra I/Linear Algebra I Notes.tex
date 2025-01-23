@@ -3969,7 +3969,7 @@ $\mathrm{null}(A)$ is the nullity of $A$.
     \end{proof}
 \end{proposition}
 
-\begin{theorem}[Rank Theorem, label = thm:rankthm]\label{linalg_thm_rankthm}
+\begin{theorem}[Rank Theorem]\label{linalg:thm:rankthm}
     \[
     \mathrm{rowrank}(A) = \mathrm{colrank}(A).
     \]
@@ -3992,7 +3992,7 @@ $\mathrm{null}(A)$ is the nullity of $A$.
     \end{proof}
 \end{theorem}
 
-\begin{theorem}[continues = thm:rankthm]
+\begin{theorem}[continues = linalg:thm:rankthm]
     \begin{proof}
         By the proposition,
         we can consider the RREF of $A$,
@@ -5655,8 +5655,283 @@ i.e. a basis of eigenvectors.
     \end{proof}
 \end{proposition}
 
+\textbf{Applications}
+\begin{example}
+    If possible,
+    diagonalise
+    \[
+    A = \begin{pmatrix}
+        -1 & 4 \\ -2 & 5
+    \end{pmatrix}.
+    \]
+    \begin{solution}
+        \begin{align*}
+            p_A(t) &= \det\begin{pmatrix}
+                -1 - t & 4 \\ -2 & 5 - t
+            \end{pmatrix} \\
+            &= (-1 - t)(5 - t) - 8 \\
+            &= t ^ 2 - 4t + 3 \\
+            &= (t - 1)(t - 3)
+        \end{align*}
+        so the eigenvalues are $\lambda_1 = 1, \lambda_2 = 3$,
+        algebraic multiplicities are $k_1 = 1, k_2 = 1$.
+        Since the geometric multiplicities,
+        $p_i$,
+        satisfy $1 \leq p_i \leq k_i$,
+        we have $p_1 = 1 = p_2$ too.
 
+        \begin{center}
+        \fbox{
+        \begin{minipage}{0.8\textwidth}
+        \textbf{Aside}:
+        
+        We will see that eigenvectors with distinct eigenvalues are linearly independent.
+        \[
+        \dim{V_{\lambda_1}} = \dim\ker(A - \lambda_1I) = 1
+        \]
+        \[
+        \dim{V_{\lambda_2}} = 1
+        \]
+        $\dim{V_{\lambda_1}} + \dim{V_{\lambda_2}} = \dim{\R ^ 2}$
+        which $\R ^ 2$ can be rewritten as
+        \[
+        \R ^ 2 = V_{\lambda_1} \oplus V_{\lambda_2}.
+        \]
+    
+        \end{minipage}
+        }
+        \end{center}
+        \hfill
 
+        To find the eigenvectors
+        $\lambda = 1$
+        \[
+        (A - I)\mbf{v}_1 = \mbf{0}
+        \]
+        \[
+        \begin{pmatrix}
+            -2 & 4 \\
+            -2 & 4
+        \end{pmatrix}\begin{pmatrix}
+            a \\ b
+        \end{pmatrix} = \begin{pmatrix}
+            0 \\ 0
+        \end{pmatrix} \implies -2a + 4b = 0 \iff a = 2b\ (\neq 0).
+        \]
+        So pick $\mbf{v}_1 = \begin{pmatrix}
+            2 \\ 1
+        \end{pmatrix}$,
+        this is not the only choice.
+        \[
+        V_{\lambda_1} = \ker(A - \lambda_1I) = \mathrm{span}\left\{\begin{pmatrix}
+            2 \\ 1
+        \end{pmatrix}\right\}.
+        \]
+        
+        $\lambda = 3$
+        \[
+        (A - 3I)\mbf{v}_2 = \mbf{0}
+        \]
+        \[
+        \begin{pmatrix}
+            -4 & 4 \\
+            -2 & 2
+        \end{pmatrix}\begin{pmatrix}
+            a \\ b
+        \end{pmatrix} = \begin{pmatrix}
+            0 \\ 0
+        \end{pmatrix} \implies -4a + 4b = 0, -2a + 2b = 0 \iff a = b\ (\neq 0).
+        \]
+        So pick $\mbf{v}_2 = \begin{pmatrix}
+            1 \\ 1
+        \end{pmatrix}$,
+        this is not the only choice.
+        \[
+        V_{\lambda_2} = \ker(A - \lambda_2I) = \mathrm{span}\left\{\begin{pmatrix}
+            1 \\ 1
+        \end{pmatrix}\right\}.
+        \]
+        
+        $\mbf{v}_1$ and $\mbf{v}_2$ are linearly independent.
+
+        Set $M = [\mbf{v}_1, \mbf{v}_2] = \begin{pmatrix}
+            2 & 1 \\ 1 & 1
+        \end{pmatrix}$.
+        Then $M ^ {-1} = \begin{pmatrix}
+            1 & -1 \\ -1 & 2
+        \end{pmatrix}$ and check $M ^ {-1}AM = \begin{pmatrix}
+            1 & 0 \\ 0 & 3
+        \end{pmatrix}$.
+    \end{solution}
+\end{example}
+
+\begin{example}
+    Solve the system of ODEs
+    \begin{align}
+        \dot{x} &= -x + 4y \\
+        \dot{y} &= -2x + 5y
+    \end{align}
+    \[
+    \begin{pmatrix}
+        \dot{x} \\ \dot{y}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        -1 & 4 \\
+        -2 & 5
+    \end{pmatrix}
+    \begin{pmatrix}
+        x \\ y
+    \end{pmatrix}
+    = A\begin{pmatrix}
+        x \\ y
+    \end{pmatrix}
+    \]
+    same $A$ as in example $1$.
+    \[
+    \begin{pmatrix}
+        w_1 \\ w_2
+    \end{pmatrix} = M ^ {-1}\begin{pmatrix}
+        x \\ y
+    \end{pmatrix},
+    \]
+    so $\begin{pmatrix}
+        x \\ y
+    \end{pmatrix} = M\begin{pmatrix}
+        w_1 \\ w_2
+    \end{pmatrix}$.
+    $\left(
+    \mbf{x} = x\begin{pmatrix}
+        1 \\ 0
+    \end{pmatrix} + y\begin{pmatrix}
+        0 \\ 1
+    \end{pmatrix}
+    =
+    w_1\mbf{v}_1 + w_2\mbf{v}_2.
+    \right)$.
+
+    Then
+    \[
+    \begin{pmatrix}
+        \dot{w}_1 \\ \dot{w}_2
+    \end{pmatrix}
+    = M ^ {-1}
+    \begin{pmatrix}
+        \dot{x} \\ \dot{y}
+    \end{pmatrix}
+    = M ^ {-1}A\begin{pmatrix}
+        x \\ y
+    \end{pmatrix}
+    = M ^ {-1}AMM ^ {-1}\begin{pmatrix}
+        x \\ y
+    \end{pmatrix} = D\begin{pmatrix}
+        w_1 \\ w_2
+    \end{pmatrix}.
+    \]
+    We have
+    \[
+    \begin{pmatrix}
+        \dot{w}_1 \\ \dot{w}_2
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        1 & 0 \\ 0 & 3
+    \end{pmatrix}
+    \begin{pmatrix}
+        w_1 \\ w_2
+    \end{pmatrix}
+    \implies
+    \]
+    \begin{align*}
+        \dot{w}_1 &= w_1 \\
+        \dot{w}_2 &= w_2
+    \end{align*}
+    \[
+    \implies
+    \]
+    \begin{align*}
+        {w}_1(t) &= c_1e ^ t \\
+        {w}_2(t) &= c_2e ^ {3t}
+    \end{align*}
+    $c_1, c_2 \in \R$.
+    Back to $x, y$:
+    \[
+    \begin{pmatrix}
+        x \\ y
+    \end{pmatrix} = M\begin{pmatrix}
+        w_1 \\ w_2
+    \end{pmatrix}
+    = [\mbf{v}_1, \mbf{v}_2]\begin{pmatrix}
+        w_1 \\ w_2
+    \end{pmatrix}
+    = \mbf{v}_1w_1 + \mbf{v}_2w_2
+    \]
+    \begin{align*}
+        x(t) &= 2c_1e ^ t + c_2e ^ {3t} \\
+        y(t) &= c_1e ^ t + c_2e ^ {3t}.
+    \end{align*}
+\end{example}
+
+\begin{remark}
+    If $\ddot{x} + a\dot{x} + bx = 0$,
+    set $y = \dot{x}$.
+    \[
+    \dot{y} + ay + bx = 0
+    \]
+    which can be changed into
+    \begin{align*}
+        \dot{x} &= y \\
+        \dot{y} &= -ay - bx.
+    \end{align*}
+\end{remark}
+
+\begin{example}
+    If possible diagonalise $A = \begin{pmatrix}
+        1 & 2 \\ 0 & 1
+    \end{pmatrix}$.
+    \begin{solution}
+        $p_A(t) = (1 - t) ^ 2$.
+        $k_1 = 2$
+        (and $1 \leq p_1 \leq 2$)
+        \[
+        (A - I)\mbf{v} = \begin{pmatrix}
+            0 & 2 \\ 0 & 0
+        \end{pmatrix}\begin{pmatrix}
+            a \\ b
+        \end{pmatrix}
+        = \begin{pmatrix}
+            2b \\ 0
+        \end{pmatrix} = \begin{pmatrix}
+            0 \\ 0
+        \end{pmatrix}
+        \]
+        so $b - 0$,
+        and $V_{\lambda = 1} = \mathrm{span}\left\{\begin{pmatrix}
+            1 \\ 0
+        \end{pmatrix}\right\} < \dim{\R ^ 2}$.
+        So $p_1 = 1$,
+        and $A$ cannot be diagonalised.
+    \end{solution}
+
+    Aside:
+    \[
+    \begin{pmatrix}
+        \dot{x} \\ \dot{y}
+    \end{pmatrix} = \begin{pmatrix}
+        1 & 2 \\ 0 & 1
+    \end{pmatrix}\begin{pmatrix}
+        x \\ y
+    \end{pmatrix} = \begin{pmatrix}
+        x + 2y \\ y
+    \end{pmatrix}
+    \implies
+    \]
+    \begin{align*}
+        \dot{x} &= x + 2y \\
+        \dot{y} = y
+    \end{align*}
+    which is now solvable.
+\end{example}
 
 
 
