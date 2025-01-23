@@ -3088,7 +3088,111 @@ For example $\sqrt{x ^ 2 + x + 1}$.
     \end{align*}
 \end{example}
 
+\subsection{Great Theorems}
+\begin{theorem}[Intermediate Value Theorem]
+    $f : [a, b] \rightarrow \R$ continuous.
+    with $f(a) < f(b)$
+    (say).
+    Pick $d \in [f(a), f(b)]$;
+    $f(a) \leq d \leq f(b)$.
+    Then there exists a $c \in [a, b]$
+    (not necessarily unique)
+    such that $f(c) = d$.
+    \begin{proof}
+        Pick $d$,
+        assume $d < f(b)$
+        (otherwise can pick $c = b$).
+        
+        Define the set
+        \[
+        X := \{x \in [a, b]; f(x) \leq d\}.
+        \]
+        $X \neq \emptyset$,
+        since $a \in X$ and bounded as a subset of $[a, b]$.
+        Hence has a supremum,
+        $c$.
+        (By term $1$)
+        exists a sequence $x_n \in X$ such that $\liminfty x_n = c$.
+        $x_n \in X \subseteq [a, b]$ hence $c = \liminfty x_n \in [a, b]$.
+        By continuity $\liminfty f(x_n) = f\left(\liminfty x_n\right) = f(c)$.
 
+        Claim:
+        $f(c) = d$.
+
+        Assume not,
+        i.e. $f(c) < d$\footnote{Since $f(c) = \liminfty f(x_n) \in X$ hence $\liminfty f(x_n) \leq d$}.
+        Then by problem sheet $1$
+        (this term)
+        Q7,
+        there exists a
+        (small)
+        neighbourhood $(c - \delta, c + \delta) \in (a, b)$ such that $f(x) < d$ for all $x \in (c - \delta, c + \delta)$.
+
+        In particular, $f(c + \delta / 2) < d$ so $c + \delta / 2 \in X$
+        but $c < c + \delta / 2$ but $c = \sup{X}$ contradiction!
+
+        So $f(c) =  d$.
+    \end{proof}
+\end{theorem}
+
+\begin{corollary}
+    $f : I \rightarrow \R$ continuous on an interval $I$.
+    Then the image $f(I)$ is also an interval.
+    
+    \begin{proof}
+        An interval $J$ is a set such that whenever $x < y \in J$,
+        then all numbers in between are also in $J$.
+        Now apply Intermediate Value Theorem.
+
+        \textit{Use $x = f(a), y = f(b)$ and apply IVT.}
+    \end{proof}
+\end{corollary}
+
+\begin{example}
+    \[
+    f(x) = \frac{x - 25}{x(x - 39)}
+    \]
+    on $(0, 39)$ is continuous,
+    $\lim_{x \rightarrow 0 ^ {+}}f(x) = \infty$,
+    $\lim_{x \rightarrow 0 ^ {-}}f(x) = -\infty$
+    By corollary
+    \[
+    f((0, 39)) = (-\infty, \infty) = \R.
+    \]
+\end{example}
+
+\begin{theorem}
+    $f : [a, b] \rightarrow \R$ is continuous.
+    Then $f$ takes minimum and maximum on $[a, b]$.
+    
+    \begin{proof}
+        Only do maximum.
+
+        Step $1$.
+        
+        $f$ is bounded above,
+        on $[a, b]$.
+
+        Say it did,
+        then given $n \in \N$,
+        exists $x_n \in [a, b]$ such that $f(x_n) > n$ by Bolzano-Weierstrass there exists a convergent subsequence $x_{n_i}$ with limit $c \in [a, b]$,
+        here we use closed interval.
+        So $f(n_i) \rightarrow f(c) \in \R$ with $f(n_i) > n_i$,
+        at some point $n_i > c$.
+
+        Hence $\sup\{f(a, b)\}$ exists in $\R$,
+        $M = \sup\{f(a, b)\}$.
+        (By term $1$)
+        there exists a sequence $y_n \in f([a, b])$ such that $\liminfty y_n = M$,
+        but $y_n = f(x_n)$ by continuity $\liminfty f(x_n) = M$.
+
+        $x_n$ might not converge but by Bolzano-Weierstrass will have a converging subsequence in $[a, b]$ so $\lim x_{n_i} = c \in [a, b]$.
+
+        Then $f(c) = f(\lim x_{n_i}) = \lim f(x_{n_i}) = \lim y_{n_i} = M$.
+
+        Together with the Intermediate Value theorem we get the image of a continuous function on a compact interval is again a compact interval.
+    \end{proof}
+\end{theorem}
 
 
 
