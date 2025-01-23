@@ -61,6 +61,134 @@ The subjective interpretation of probability is linked to frequentist Bayesian s
     Everyone wants to know your prediction.
 \end{example}
 
+\subsection{Foundations of Statistics and Interpretation of Probability}
+
+\subsubsection{Probability: Revision}
+
+\begin{definition}[Axioms of Probability]
+    For a sample space $\Omega$,
+    with collection $\mathcal{F}$ of events,
+    the probability $\P(A)$ satisfies the axioms:
+    \begin{enumerate}[label = A\arabic*]
+        \item $\P(A) \geq 0$,
+        for every $A \in \mathcal{F}$.
+
+        \item $\P(\Omega) = 1$.
+
+        \item For $A$ and $B$ disjoint then:
+        \[
+        \P(A \cup B) = \P(A) + \P(B)
+        \]
+    \end{enumerate}
+\end{definition}
+
+The axioms lead to some of the following consequences
+\begin{proposition}
+    \begin{enumerate}[label = (\roman*)]
+        \item $0 \leq \P(A) \leq 1$.
+        
+        \item $\P(A ^ c) = 1 - \P(A)$.
+        
+        \item $\P(\emptyset) = 0$.
+    \end{enumerate}
+\end{proposition}
+
+\subsubsection{Interpretations of Probability}
+\textbf{Classical}
+
+This is based on an assumption underlying equally likely events.
+
+\textbf{Frequentist}
+
+An event $A$ has probability $\P(A)$ given by:
+\[
+\P(A) = \liminfty\frac{n_A}{n},
+\]
+where $n_A$ is the number of times event $A$ occurred in $n$ repetitions of the experiment.
+
+\textbf{Subjective}
+
+Probabilities are viewed as subjective about the likelihood of an event $A$ occurring.
+This can be defined in a precise way and Probability Axioms are actually derived as requirements of coherence.
+
+\subsubsection{A Summary of Useful Probability Results}
+\underline{Combining Events}
+
+The event $A, B$ or both occur is $A \cup B$.
+The event $A$ and $B$ occur is $A \cap B$.
+These are related by the following rule
+\[
+\P(A \cup B) = \P(A) + \P(B) - \P(A \cap B).
+\]
+Events are disjoint if they cannot occur at the same time.
+
+Addition law for disjoint events:
+If $A$ and $B$ are disjoint events
+\[
+\P(A \cup B) = \P(A) + \P(B).
+\]
+
+\underline{Conditional Probability and Independence}
+
+For any two events $A, B$,
+the notation $\P(A | B)$ means the conditional probability that $A$ occurs,
+assuming that the event $B$ has already occurred.
+
+Conditional probability is obtained directly or by using the conditional probability rule:
+\[
+\P(A | B) = \frac{\P(A | B)}{\P(B)},
+\]
+for $\P(B) > 0$.
+
+Rearranging we get the general multiplication rule
+\[
+\P(A | B) = \P(A | B)\P(B).
+\]
+
+Two events are independent when the occurrence of one has no bearing on the occurrence of the other.
+If $A, B$ are independent then
+\[
+\P(A | B) = \P(A).
+\]
+
+\underline{Partitions}
+
+Suppose $E_1, \dotsc, E_n$ are mutually disjoint events,
+and suppose exactly one must happen.
+Such a collection of events is called a
+(sure)
+partition.
+
+We can write any other event $A$ in combination with this event:
+in general,
+\[
+\P(A) = \P(A \cap E_1) + \P(A \cap E_2) + \dotsc + \P(A \cap E_n),
+\]
+which simplifies to
+\[
+\P(A) = \P(A | E_1)\P(E_1) + \dotsc + \P(A | E_n)\P(E_n)
+\]
+using the multiplication rule.
+
+\underline{Bayes Theorem}
+
+For any two events $A, B$,
+the multiplication rule gives the formula
+\[
+\P(A \cap B) = \P(A | B)\P(B).
+\]
+Another equivalent formula is obviously
+\[
+\P(A \cap B) = \P(B | A)\P(A).
+\]
+
+Equating these we get the formula known as Bayes theorem:
+\[
+\P(A | B) = \frac{\P(B | A)\P(A)}{\P(B)}.
+\]
+Often the probability in the denominator must be calculated using the simplifying method shown in the last section;
+i.e. via a partition.
+
 \newpage
 
 \section{Disease Testing using Bayesian Methods}
@@ -195,8 +323,137 @@ Remember motivating example $1$.
     \end{align*}
 \end{definition}
 
+Why is the posterior probability $\P\left(D ^ {+} \mmid T ^ {+}\right)$ still so low?
 
+Because our prior probability $\P(D ^ {+}) = 0.00025$ was so low,
+that although the evidence from $T ^ {+}$ increases our probability,
+it still ends up as relatively small.
 
+Another way to see this is if we examine the denominator of Bayes Theorem which gives us the probability of a positive test result $T ^ {+}$.
+We can see that a positive test comes from either you had the disease or you did not,
+hence
+\begin{align*}
+    \P(T ^ {+}) &= \P\left(T ^ {+} \mmid D ^ {+}\right)\P(D ^ {+}) + \P\left(T ^ {+} \mmid D ^ {-}\right)\P(D ^ {-}) \\
+    &= 0.0002375 + 0.01499625.
+\end{align*}
+We can see that the contribution from having the disease is much smaller than the contribution of having a false positive.
+
+\textbf{Covid-19 Test Example:}
+Applying Bayes Theorem
+(London January $2021$ case)
+
+If the above discussion is correct,
+we should see a different result for our second question:
+\begin{center}
+    \textit{If instead you were selected at random from the London population in January $2021$
+    (and you test positive),
+    what is the probability
+    (that you have Covid-19)
+    then?}
+\end{center}
+
+It was thought,
+in early January $2021$ that $0.03$ of the London population had Covid-19.
+
+We can similarly apply Bayes theorem but now using the much larger prior probability of $\P(D ^ {+}) = 0.03$,
+this yields:
+\begin{align*}
+    \P\left(D ^ {+} \mmid T ^ {+}\right) &= \frac{\P\left(T ^ {+} \mmid D ^ {+}\right)\P(D ^ {+})}{\P(T ^ {+})} \\
+    &= \frac{0.95 \cdot 0.03}{\P(T ^ {+})} \\
+    &= \frac{0.95 \cdot 0.03}{\P\left(T ^ {+} \mmid D ^ {+}\right)\P(D ^ {+}) + \P\left(T ^ {+} \mmid D ^ {-}\right)\P(D ^ {-})} \\
+    &= \frac{0.95 \cdot 0.03}{0.95 \cdot 0.03 + 0.015 \cdot (1 - 0.03)} \\
+    &= \frac{0.0285}{0.0285 + 0.01455} \\
+    &= 0.662.
+\end{align*}
+So given a positive result,
+you now have a $66.2\%$ chance of having Covid-19,
+this is much higher.
+
+Note that the route of having the disease contributes a lot more to the denominator of Bayes theorem than the route of not having the disease.
+
+\subsection{More Advanced Bayesian Calculations}
+
+\subsubsection{Performing Further Tests}
+Consider the August $2020$ UK example above.
+If you had tested positive you still only had a $1.56\%$ chance of having Covid-19.
+
+Naturally,
+you would take the test again.
+You do this and receive a second positive test,
+what is your probability now?
+
+We denote two positive tests as $T ^ {++}$,
+but now we have to consider the nature of the test further.
+
+A possible assumption is that the test results are conditionally independent given disease status,
+implying that
+\[
+\P\left(T ^ {++} \mmid D ^ {+}\right) = \P\left(T ^ {+} \mmid D ^ {+}\right) ^ 2\qquad\text{and}\qquad\P\left(T ^ {++} \mmid D ^ {-}\right) = \P\left(T ^ {+} \mmid D ^ {-}\right) ^ 2.
+\]
+This might be reasonable if the test fails independently each time,
+i.e. due to reasons entirely unrelated to the specific attributes of the patient.
+
+The other extreme is that the test fails precisely due to the specifics of the patient,
+and will fail the same way again and again,
+leading to $\P\left(T ^ {++} \mmid D ^ {+}\right) = \P\left(T ^ {+}\mmid D ^ {+}\right)$ etc.
+
+\begin{example}[Covid-19 Test Example: Two Positive Test Results]
+    We are again in August $2020$ UK and assume the same prior as before:
+    $\P(D ^ {+}) = 0.00025$.
+
+    But now we want the probability of Covid-19 given two positive test results $T ^ {++}$:
+    \begin{align*}
+        \P\left(D ^ {+} \mmid T ^ {++}\right) &= \frac{\P\left(T ^ {++} \mmid D ^ {+}\right)\P(D ^ {+})}{\P(T ^ {++})} \\
+        &= \frac{\P\left(T ^ {+} \mmid D ^ {+}\right) ^ 2 \cdot 0.0025}{\P\left(T ^ {++} \mmid D ^ {+}\right)\P(D ^ {+}) + \P\left(T ^ {++} \mmid D ^ {-}\right)\P(D ^ {-})} \\
+        &= \frac{\P\left(T ^ {+} \mmid D ^ {+}\right) ^ 2 \cdot 0.0025}{\P\left(T ^ {+} \mmid D ^ {+}\right) ^ 2\P(D ^ {+}) + \P\left(T ^ {+} \mmid D ^ {-}\right) ^ 2\P(D ^ {-})} \\
+        &= \frac{0.95 ^ 2 \cdot 0.0025}{0.95 ^ 2 \cdot 0.00025 + (0.015) ^ 2 \cdot (1 - 0.00025)} \\
+        &= 0.501.
+    \end{align*}
+    Under the conditional independence assumption,
+    your posterior probability after two tests is now $50.1\%$:
+    much higher than the $1.56\%$ from a single positive test.
+\end{example}
+
+\subsubsection{A Model for Sequential Learning}
+
+Sequential learning occurs when we do two tests in a row.
+Receiving one positive result,
+then a second we had:
+\begin{align*}
+    \P(D ^ {+}) &\rightarrow \P\left(D ^ {+} \mmid T ^ {+}\right) &\rightarrow \P\left(D ^ {+} \mmid T ^ {++}\right) \\
+    0.00025 &\rightarrow 0.0156 &\rightarrow 0.501
+\end{align*}
+that is,
+as more information comes in,
+we update our beliefs about the probability of $D ^ {+}$ again and again.
+
+When we calculated the two test result we actually went straight from
+\begin{align*}
+    \P(D ^ {+}) &\rightarrow \P\left(D ^ {+} \mmid T ^ {++}\right) \\
+    0.00025 &\rightarrow 0.501.
+\end{align*}
+Bayes theorem is consistent in the sense that we can update sequentially by one $T ^ {+}$ then by another $T ^ {+}$,
+or all at once
+(i.e. by $T ^ {++}$)
+and we are guaranteed to obtain the same result.
+
+\begin{example}
+    Label the first positive test as $T_1 ^ {+}$
+    (occurring on day $1$)
+    and the second test as $T_2 ^ {+}$
+    (occurring on day $2$).
+    If,
+    after seeing a single positive result $T_1 ^ {+}$ we updated to get posterior $\P\left(D ^ {+} \mmid T_1 ^ {+}\right)$ and trivially also $\P\left(D ^ {-} \mmid T_1 ^ {+}\right)$,
+    then we could treat these posteriors as our priors for day $2$.
+    Hence on day $2$ we could update using the second positive test $T_2 ^ {+}$ using Bayes theorem
+    (with $T ^ {++} = \{T_1 ^ {+}, T_2 ^ {+}\}$):
+    \begin{align*}
+        \P\left(D ^ {+} \mmid T ^ {++}\right) = \P\left(D ^ {+} \mmid T_1 ^ {+}, T_2 ^ {+}\right) &= \frac{\P\left(T_2 ^ {+} \mmid D ^ {+}, T_1 ^ {+}\right)\P\left(D ^ {+} \mmid T_1 ^ {+}\right)}{\P\left(D ^ {+} \mmid T_2 ^ {+}\right)} \\
+        &= \frac{\P\left(T_2 ^ {+} \mmid D ^ {+}, T_1 ^ {+}\right)\P\left(D ^ {+} \mmid T_1 ^ {+}\right)}{\P\left(T_2 ^ {+} \mmid D ^ {+}, T_1 ^ {+}\right)\P\left(D ^ {+} \mmid T_1 ^ {+}\right) + \P\left(T_2 ^ {+} \mmid D ^ {-}, T_1 ^ {+}\right)\P\left(D ^ {-} \mmid T_1 ^ {+}\right)} \\
+        &= \frac{\P\left(T_2 ^ {+} \mmid D ^ {+}, T_1 ^ {+}\right)\P\left(D ^ {+} \mmid T_1 ^ {+}\right)}{\P\left(T_2 ^ {+} \mmid D ^ {+}\right)\P\left(D ^ {+} \mmid T_1 ^ {+}\right) + \P\left(T_2 ^ {+} \mmid D ^ {-}\right)\P\left(D ^ {-} \mmid T_1 ^ {+}\right)}
+    \end{align*}
+    where we have used the conditional independence assumption to simplify terms such as $\P\left(T_2 ^ {+} \mmid D ^ {+}, T_1 ^ {+}\right) = \P\left(T_2 ^ {+} \mmid D ^ {+}\right)$.
+\end{example}
 
 
 
