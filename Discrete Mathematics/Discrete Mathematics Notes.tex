@@ -1695,7 +1695,7 @@ A graph with an Euler circuit is called Eulerian.
     Then $G$ has an Euler circuit if and only if all vertices of $G$ has even degree.
 \end{theorem}
 
-\begin{lemma}
+\begin{lemma}\label{disc:lem:unionofdisjointcycles}
     If a graph $G = (V, E, \phi)$ is finite and connected,
     with $|V| > 1$ and all vertices of even degree,
     then $G$ is a finite union of edge-disjoint cycles
@@ -1722,6 +1722,67 @@ A graph with an Euler circuit is called Eulerian.
         and therefore we have decomposed $G$ into disjoint cycles as required.
     \end{proof}
 \end{lemma}
+
+\begin{proof}
+    Let $G$ be finite,
+    connected,
+    with all degrees even.
+    Then by \autoref{disc:lem:unionofdisjointcycles} the graph $G$ is a finite union of $n$ edge-disjoint cycles.
+    We shall show,
+    by induction on $n$,
+    that these can be combined into a single Euler circuit
+
+    Base case:
+    If $n = 1$,
+    the one cycle is the Euler circuit.
+
+    Induction Hypotheses:
+    If $G$ is made up of $\leq n - 1$ edge-disjoint cycles,
+    it has an Euler circuit.
+
+    Induction Step:
+    Now consider a $G$ made up of $n$ edge-disjoint cycles,
+    \[
+    G = C_1 \cup C_2 \cup \dotsc \cup C_{n - 1} \cup C_n,
+    \]
+    and let
+    \[
+    H = C_1 \cup C_2 \cup \dotsc \cup C_{n - 1}.
+    \]
+    AS in the proof of \autoref{disc:lem:unionofdisjointcycles},
+    $H$ has all degrees even.
+    It may not be connected,
+    so consider its connected components,
+    $H_1, H_2, \dotsc, H_k$.
+    Since each cycle $C_i$
+    (for $1 \leq i \leq n - 1$)
+    lies within only one connected components,
+    that is,
+    $1 \leq k \leq n - 1$.
+    Furthermore,
+    since the union $C_1 \cup C_2 \cup \dotsc \cup C_{n - 1}$ makes up the whole of $H$,
+    each $H_j$ must be made up by $\leq n - 1$ edge-disjoint cycles
+    (i.e.,
+    $H_j$ is made up by those $C_i$ which lie within it).
+    So by the induction hypothesis,
+    each connected component $H_j$ has an Euler circuit $E_j$.
+
+    But since $G$ was connected,
+    $C_n$ must visit each $H_j$.
+    So we can make an Euler circuit for $G$ like this:
+    follow $C_n$,
+    but when we first visit each $H_j$,
+    follow $S_j$ all the way round before continuing.
+\end{proof}
+
+\newpage
+
+\section{Planar graphs}
+
+\subsection{The three utilities problem}
+
+
+
 
 
 \end{document}
