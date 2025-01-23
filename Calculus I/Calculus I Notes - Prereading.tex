@@ -2064,13 +2064,133 @@ More generally if $f = f(x_1, x_2, \dotsc, x_n)$ is a function of $n$-variables 
 \]
 
 \subsection{The Chain Rule}
+For a function of one variable $f(x)$ differentiability implies that
+\[
+\delta f = f(x_0 + \delta x) - f(x_0) = \delta x\frac{df}{dx}(x_0) + R(\delta x)
+\]
+where $R(x)$ is a function which goes to zero faster than $\delta x$ as $\delta x \rightarrow 0$.
 
+When $\delta x$ is small we have that $\delta f \approx \delta x\frac{df}{dx}(x_0)$,
+there is an approximately linear relation between the change in $x$,
+$\delta x$,
+and the resultant change in the function $\delta f$.
+In the limit that $\delta x \rightarrow 0$,
+this linear relation becomes exact,
+and is written
+\[
+df = \frac{df}{dx}\,dx.
+\]
+The one dimensional chain rule is easy to derive.
+Suppose that $y = y(x)$ and $x = x(t)$.
+We can think of $y$ being a function of $t$ since $y = y(x(t))$.
+We have that
+\begin{align*}
+    dy &= \frac{dy}{dt}\,dt \\
+    dy &= \frac{dy}{dx}\,dx \\
+    dx &= \frac{dx}{dt}\,dt.
+\end{align*}
+Substituting the third of these equations into the second equation we have
+\[
+dy = \frac{dy}{dx}\,dx = \frac{dy}{dx}\left(\frac{dx}{dt}\,dt\right) = \frac{dy}{dx}\frac{dx}{dt}\,dt
+\]
+and comparing with the first equation above we see that
+\[
+\frac{dy}{dt} = \frac{dy}{dx}\frac{dx}{dt}.
+\]
 
+Let us now look at functions of more than one variable,
+say $f(x, y)$.
+So far we have defined the partial derivative $f_x$ and $f_y$,
+these tell us something about how the function varies as we move parallel to the $x$ and $y$ axes respectively.
+The chain rule helps us work out the gradient of the function $f(x, y)$ along the curve $C$ in the $(x, y)$ plane.
 
+For a differentiable function of two variables we have seen that
+\[
+\delta f = f(x_0 + \delta x, y_0 + \delta y) - f(x_0, y_0) = \frac{\partial f}{\partial x}(x_0, y_0)\delta x + \frac{\partial f}{\partial y}(x_0, y_0)\delta y + R(x_0 + \delta x, y_0 + \delta y)
+\]
+so that for small $(\delta x, \delta y)$ we have that
+\[
+\delta f \approx \frac{\partial f}{\partial x}\delta x + \frac{\partial f}{\partial y}\delta y.
+\]
+Showing there is a linear relation between the change in $\delta f$ and the changes in $\delta x$ and $\delta y$.
+Taking the limit as $\delta x \rightarrow 0$ we can write the exact linear relation between differentials as
+\[
+df = \frac{\partial f}{\partial x}\,dx + \frac{\partial f}{\partial y}\,dy.
+\]
 
+\textbf{Situation $1$:}
+Derivative of $f$ along a curve given parametrically $(x(t), y(t))$ can be calculated using
+\[
+\frac{df}{dt} = \frac{\partial f}{\partial x}\frac{dx}{dt} + \frac{\partial f}{\partial y}\frac{dy}{dt}.
+\]
+Shown in the following example
 
+\begin{example}
+    A particle moves on the circle $(x, y) = (\cos(t), \sin(t))$.
+    If its height is given by $H(x, y) = x ^ 2 + y ^ 4$,
+    calculate the rate of change of height $\frac{dH}{dt}$.
 
+    \begin{solution}
+        By the chain rule we have that
+        \begin{align*}
+            \frac{dH}{dt} &= \frac{\partial H}{\partial x}\frac{dx}{dt} + \frac{\partial H}{\partial y}\frac{dy}{dt} \\
+            &= 2x(-\sin(t)) + 4y ^ 3(\cos(t)) \\
+            &= -2\cos(t)\sin(t) + 4\sin ^ 3(t)\cos(t).
+        \end{align*}
+        \textit{Note:
+        this can be simplified to $-\frac{1}{2}\sin(4t)$.}
+    \end{solution}
+\end{example}
 
+\textbf{Situation $2$:}
+Derivative along a curve given in the form $y = y(x)$ can be calculated using the following
+\[
+\frac{df}{dx} = \frac{\partial f}{\partial x} + \frac{\partial f}{\partial y}\frac{dy}{dx}.
+\]
+The left hand side is sometimes referred to as the total derivative of $f$ with respect to $x$.
+
+\begin{example}
+    An ellipse $C$ is given by the equation $f(x, y) \equiv x ^ 2 + y ^ 2 + xy = 7$.
+    Calculate the gradient of $C$ at the point $(1, 2)$.
+
+    \begin{solution}
+        \textit{Note that along the curve $C$,
+        $f$ is constant,
+        so}
+        \[
+        0 = \frac{df}{dx} = \frac{\partial f}{\partial x} + \frac{\partial f}{\partial y}\frac{dy}{dx} \iff \frac{dy}{dx} = -\frac{\frac{\partial f}{\partial x}}{\frac{\partial f}{\partial y}}.
+        \]
+        Hence
+        \begin{align*}
+            \frac{dy}{dx} &= -\frac{\frac{\partial f}{\partial x}}{\frac{\partial f}{\partial y}} \\
+            &= -\frac{2x + y}{2y + x} \\
+            &\implies \\
+            \intertext{at $(1, 2)$} \\
+            \frac{dy}{dx} &= -\frac{2 + 2}{4 + 1} \\
+            &= -\frac{4}{5}.
+        \end{align*}
+    \end{solution}
+\end{example}
+
+\subsection{Directional Derivatives}
+The directional derivative tells us specifically what is the gradient of the function $f(x, y)$ in the direction of a unit vector $\mbf{\hat{n}}$.
+
+This can be thought of as a special case of the Chain Rule where we take the curve $C$ to be a straight line through $(x_0, y_0)$ pointing in the direction of the unit vector $\mbf{\hat{n}}$.
+If in components $\mbf{\hat{n}} = (n_1, n_2)$ the curve is given parametrically as $(x_0 + n_1t, y_0 + n_2t)$.
+Along this curve the chain rules gives
+\begin{align*}
+    \frac{df}{dt} &= \frac{dx}{dt}\frac{\partial f}{\partial x} + \frac{dy}{dt}\frac{\partial f}{\partial y} \\
+    &= n_1\frac{\partial f}{\partial x} + n_2\frac{\partial f}{\partial y} \\
+    &= (n_1, n_2) \cdot \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\right) \\
+    &= \mbf{\hat{n}} \cdot \nabla f
+\end{align*}
+where we have defined the gradient of $f$ to be the vector $\nabla f = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\right)$.
+The directional derivative of the function $f$ in the direction of the unit vector $\mbf{\hat{n}}$ is defined to be $\mbf{\hat{n}} \cdot \nabla f$.
+More generally in $n$ dimensions,
+we define the gradient of $f(x_1, x_2, \dotsc, x_n)$ to be
+\[
+\nabla f = \left(\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \dotsc, \frac{\partial f}{\partial x_n}\right).
+\]
 
 
 
