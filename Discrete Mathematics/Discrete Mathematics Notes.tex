@@ -1780,6 +1780,128 @@ A graph with an Euler circuit is called Eulerian.
 \section{Planar graphs}
 
 \subsection{The three utilities problem}
+Can we connect gas,
+water,
+and electricity to $3$ houses without the pipes or wires crossing?
+
+\begin{definition}
+    Given a graph $G = (V, E)$ where there exist subsets $V_1, V_2 \subset V$ such that $V_1 \cup V_2 = V$;
+    $V_1 \cap V_2 = \emptyset$,
+    and every edge of $G$ is of the form $uv$ where $u \in V_1$ and $v \in V_2$
+    (i.e. every edge has one end in $V_1$,
+    one in $V_2$),
+    then $G$ is bipartite.
+\end{definition}
+
+If a bipartite graph $G$ is simple,
+and if for the partition $V_1, V_2$ as above we have $u \in V_1$,
+$v \in V_2 \implies uv \in E$,
+then $G$ is a complete bipartite graph.
+Where $|V_1| = m$ and $|V_2| = n$ then $G$ is denoted $K_{m, n}$.
+The graph $K_{m, n}$ has $m \times n$ edges.
+
+We say that a map $h : X \rightarrow Y$ is a homeomorphism onto its image if $h$ is a continuous bijection such that $h ^ {-1} : h(X) \rightarrow X$ is also continuous.
+
+\begin{definition}
+    A drawing of a graph $G$ in the plane is a representation of $G$ on $\R ^ 2$ in which vertices are associated with points of $\R ^ 2$ and edges are associated with homeomorphic images of $[0, 1]$.
+    More concretely,
+    given a graph $G = (V, E, \phi)$,
+    with $|V| = n$ and $|E| = m$,
+    a drawing of $G$ is the union of the injective map $\mathcal{D}_V : V \rightarrow \R ^ 2$,
+    which gives the images of the vertices in the plane,
+    and the map $\mathcal{D}_{\phi} : \{1, \dotsc, m\} \times [0, 1] \rightarrow \R ^ 2$,
+    which is such that for each $j \in \{1, \dotsc, m\}$,
+    $\mathcal{D}_{E, j} : [0, 1] \rightarrow \R ^ 2$ defined by $\mathcal{D}_{\phi, j}(x) = \mathcal{D}_{\phi}(j, x)$ is a homeomorphism onto its image such that if $\phi(e_j) = \{u, v\}$ then $\{\mathcal{D}_V(u), \mathcal{D}_V(v)\} = \{\mathcal{D}_{\phi, j}(0), \mathcal{D}_{\phi, j}(1)\}$.
+    Given a drawing of a graph $G$,
+    $\mathcal{D}_G = (\mathcal{D}_V(u), \mathcal{D}_V(v))$,
+    the image of the drawing,
+    denoted by $D_G$,
+    is the union of the images of the maps $\mathcal{D}_V$ and $\mathcal{D}_E$.
+\end{definition}
+
+Given a drawing of a graph $G$ we say the edges $e_i$ and $e_j$ cross if $\mathcal{D}_{E, i}(x) = \mathcal{D}_{E, j}(y)$ for some $x, y \in (0, 1)$,
+i.e.
+if the maps $\mathcal{D}_{E, i}$ and $\mathcal{D}_{E, j}$ intersect at the interior.
+
+\begin{definition}[Planar graph]
+    A graph $G$ is planar if it can be drawn in the plane with no edges crossing.
+    The image of such a drawing $D_G \subset \R ^ 2$ is a planar representation of $G$.
+\end{definition}
+
+\subsection{Faces and boundaries}
+\begin{definition}
+    A planar representation of a graph $G$,
+    $\mathcal{D}_G$,
+    defines $F$ the set of faces,
+    whose elements are the connected regions of $\R ^ 2 \setminus D_G$.
+    The boundary of a face $f$,
+    denoted by $B(f)$,
+    is the set of edges around it,
+    that is,
+    the edges from $G$ whose images in the corresponding drawing $\mathcal{D}_G$ make up the set $\mathrm{cl}(f) - \mathrm{int}(f)$,
+    with $\mathrm{cl}(f)$ the closure of $f$ and $\mathrm{int}(f)$ the interior of $f$.
+\end{definition}
+
+\begin{definition}
+    The length of $B(f)$,
+    denoted by $b(f)$,
+    is the smallest length of all closed walks in $G$ that cover $B(f)$,
+    or the smallest sum of lengths of closed walks in $G$ that cover $B(f)$ if the graph is disconnected and the face lies between connected components.
+\end{definition}
+
+\begin{theorem}[The Jordan Curve Theorem]
+    A simple closed curve in the plane divides it into two regions;
+    one bounded,
+    one unbounded.
+\end{theorem}
+
+Using the Jordan Curve Theorem we can show that images of any edge in the plane have two sides.
+Given the image of an edge and a point outside it,
+one can define a simple closed curve that goes through the edge and the given point.
+The bounded region in on one side,
+the unbounded region is on the other side.
+
+\begin{lemma}[Planar hand-shaking]
+    For any planar representation of a graph $G = (V, E)$,
+    we have
+    \[
+    \sum_{f \in F}b(f) = 2|E|.
+    \]
+    \begin{proof}
+        Each edge contributes $2$ to the sum of boundary lengths,
+        one for each side of the edge.
+    \end{proof}
+\end{lemma}
+
+\begin{definition}[Bridge]
+    Given a graph $G = (V, E, \phi)$,
+    we say that an edge $e \in E$ is a bridge in $G$,
+    or simply a bridge,
+    if $G \setminus \{e\}$ has more connected components than $G$.
+\end{definition}
+
+\begin{lemma}
+    Given any edge $e$ of a graph $G$,
+    then $e$ is a bridge if and only if $e$ is not part of a cycle in $G$.
+    \begin{proof}
+        \textbf{Insert Proof}.
+    \end{proof}
+\end{lemma}
+
+\begin{corollary}
+    In a planar representation of a finite graph,
+    an edge $e$ has both sides on the same face if and only if $e$ is a bridge.
+    \begin{proof}
+        \textbf{Insert Proof}.
+    \end{proof}
+\end{corollary}
+
+
+
+
+
+
+
 
 
 
