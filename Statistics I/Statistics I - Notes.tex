@@ -1,6 +1,8 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage{preamble}
 
+\newcommand{\cP}[2]{\P\left(#1 \mmid #2\right)}
+
 \title{Statistics I}
 \author{Luke Phillips}
 \date{January 2025}
@@ -455,7 +457,41 @@ and we are guaranteed to obtain the same result.
     where we have used the conditional independence assumption to simplify terms such as $\P\left(T_2 ^ {+} \mmid D ^ {+}, T_1 ^ {+}\right) = \P\left(T_2 ^ {+} \mmid D ^ {+}\right)$.
 \end{example}
 
+\subsubsection{Sensitivity of the Posterior \texorpdfstring{$\P\left(D ^ {+} \mmid T ^ {+}\right)$}{} to the Sensitivity and Specificity}
 
+We can perform a simple sensitivity analysis by examining the derivative of the posterior with respect to the sensitivity and the specificity,
+keeping all other things constant when performing the derivative.
+\[
+\text{Sensitivity:}\quad\frac{d\P\left(D ^ {+} \mmid T ^ {+}\right)}{d\P\left(T ^ {+} \mmid D ^ {+}\right)}\qquad\text{Specificity:}\quad\frac{d\P\left(D ^ {+} \mmid T ^ {+}\right)}{d\P\left(T ^ {-} \mmid D ^ {-}\right)}
+\]
+For example,
+denoting the specificity as $x = \P\left(T ^ {-} \mmid D ^ {-}\right)$,
+then we have
+\begin{align*}
+    \P\left(D ^ {+} \mmid T ^ {+}\right) &= \frac{\cP{T ^ {+}}{D ^ {+}}\P(D ^ {+})}{\cP{T ^ {+}}{D ^ {+}}\P(D ^ {+}) + (1 - x)\P(D ^ {-})} \\
+    \frac{d\P\left(D ^ {+} \mmid T ^ {+}\right)}{d\P\left(T ^ {-} \mmid D ^ {-}\right)} = \frac{d}{dx}\cP{D ^ {+}}{T ^ {+}} &= \frac{\cP{T ^ {+}}{D ^ {+}}\P(D ^ {+})\P(D ^ {-})}{[\cP{T ^ {+}}{D ^ {+}}\P(D ^ {+}) + (1 - x)\P(D ^ {-})] ^ 2}.
+\end{align*}
+
+\subsubsection{Odds and the Likelihood Ratio}
+\begin{definition}[Prior and posterior odds and the likelihood ratio]
+    Prior odds in favour of $A = \frac{\P(A)}{\P(A ^ c)}$.
+
+    Posterior odds in favour of $A$ given $B = \frac{\cP{A}{B}}{\cP{A ^ c}{B}}$.
+
+    Likelihood ratio for $B$ given $A = \frac{\cP{B}{A}}{\cP{B}{A ^ c}}$.
+
+    It is simple to show that
+    \[
+    \text{posterior odds} = \text{prior odds} \times \text{likelihood ratio}.
+    \]
+\end{definition}
+
+The likelihood ratio can be interpreted as a factor which determines whether the posterior odds are smaller
+(likelihood ratio $< 1$)
+or larger
+(likelihood ratio $> 1$)
+than the prior odds,
+and by how much.
 
 
 

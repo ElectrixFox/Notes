@@ -2,6 +2,7 @@
 \usepackage{preamble}
 
 \newcommand{\limas}[3][n]{#2 \rightarrow #3 \text{ as } #1 \rightarrow \infty}
+\newcommand{\pd}[2][]{\frac{\partial #1}{\partial #2}}
 
 \title{Calculus I \\
     \large Prereading}
@@ -2191,7 +2192,67 @@ we define the gradient of $f(x_1, x_2, \dotsc, x_n)$ to be
 \[
 \nabla f = \left(\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \dotsc, \frac{\partial f}{\partial x_n}\right).
 \]
+Note that the directional derivative of $f$ in the direction $\mbf{\hat{n}}$ by the definition of the dot product is equal to
+\[
+\mbf{\hat{n}}\cdot \nabla f = |\mbf{\hat{n}}||\nabla f|\cos(\theta) = |\nabla f|\cos(\theta),
+\]
+where $\theta$ is the angle between the vectors $\mbf{\hat{n}}$ and $\nabla f$.
+When $\mbf{\hat{n}}$ and $\nabla f$ point in the same direction the directional derivative is a maximum.
 
+\begin{example}
+    Find the equation of the tangent plane to the surface $f(x, y, z) \equiv x ^ 2 + y ^ 2 + 2z ^ 2 = 4$ at the point $(1, 1, 1)$.
+    \begin{solution}
+        We have the derivative $\nabla f$ as
+        \[
+        \nabla f = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z}\right) = (2x, 2y, 4z).
+        \]
+        Since we know that this is the equation of the tangent plane we have
+        \[
+        2x + 2y + 4z = k,
+        \]
+        where $k$ is a constant to be found.
+        However,
+        we know that $(1, 1, 1)$ lies on the tangent plane,
+        hence
+        \[
+        2 + 2 + 4 = k = 8.
+        \]
+        Finally,
+        we have
+        \[
+        2x + 2y + 4z = 8 \iff x + y + 2z = 4
+        \]
+        as the equation of the tangent plane.
+    \end{solution}
+\end{example}
+
+\subsection{Changing Coordinates}
+
+Consider a change of variables from $(x, y)$ to $(u, v)$.
+We expect to be able to map between these two sets of coordinates,
+that is write $u = u(x, y)$ and $v = v(x, y)$ and vice-versa $x = x(u, v)$ and $y = y(u, v)$ and that all these functions are differentiable.
+The differential $df$ can be expressed either in terms of $(x, y)$ or $(u, v)$ as
+\begin{align*}
+    df &= \pd[f]{x}\,dx + \pd[f]{y}\,dy \\
+    df &= \pd[f]{u}\,du + \pd[f]{v}\,dv
+\end{align*}
+these two equations can be related such that
+\begin{align*}
+    du &= \pd[u]{x}\,dx + \pd[u]{y}\,dy \\
+    dv &= \pd[v]{x}\,dx + \pd[v]{y}\,dy.
+\end{align*}
+Substituting these expressions in above we see that
+\begin{align*}
+    df &= \pd[f]{u}\,du + \pd[f]{v}\,dv \\
+    &= \pd[f]{u}\left(\pd[u]{x}\,dx + \pd[u]{y}\,dy\right) + \pd[f]{v}\left(\pd[v]{x}\,dx + \pd[v]{y}\right) \\
+    &= \left(\pd[f]{u}\pd[u]{x} + \pd[f]{v}\pd[v]{x}\right)\,dx + \left(\pd[f]{u}\pd[u]{y} + \pd[f]{v}\pd[v]{y}\right)\,dy.
+\end{align*}
+Comparing this with $df = \pd[f]{x}\,dx + \od[f]{y}\,dy$ we have that
+\begin{align*}
+    \pd[f]{x} &= \pd[f]{u}\pd[u]{x} + \pd[f]{v}\pd[v]{x} \\
+    \pd[f]{y} &= \pd[f]{u}\pd[u]{y} + \pd[f]{v}\pd[v]{y}.
+\end{align*}
+This shows how one can replace partial derivative in $x$ with a linear combination of partial derivatives in $u$ and $v$.
 
 
 
