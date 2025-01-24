@@ -1,6 +1,8 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage{preamble}
 
+\newcommand{\pd}[2][]{\frac{\partial #1}{\partial #2}}
+
 \title{Calculus I}
 \author{Luke Phillips}
 \date{October 2024}
@@ -3590,12 +3592,145 @@ Compare with the first equation
 \frac{df}{dt} = \frac{\partial f}{\partial x}\frac{dx}{dt} + \frac{\partial f}{\partial y}\frac{dy}{dt}.
 \]
 
+\begin{example}
+    $H(x, y) = e ^ {-x ^ 2 - y ^ 2}$,
+    $(x(t), y(t)) = (t, t ^ 2)$.
+    What is $\frac{dH}{dt}$ at $t = 1$?
+    \begin{solution}
+        \textbf{Method 1 (direct substitution)}
+        \begin{align*}
+            H &= e ^ {-t ^ 2 - (t ^ 2) ^ 2} = e ^ {-t ^ 2 - t ^ 4} \\
+            \frac{dH}{dt} &= (-2t - 4t ^ 3)e ^ {-t ^ 2 - t ^ 4} = -6e ^ {-2}.
+        \end{align*}
 
+        \textbf{Method 2 (Chain rule)}
+        \begin{align*}
+            \frac{dH}{dt} &= \frac{\partial H}{\partial x}\frac{dx}{dt} + \frac{\partial H}{\partial y}\frac{dy}{dt} \\
+            &= (-2xe ^ {-x ^ 2 - y ^ 2}) + (-2ye ^ {-x ^ 2 - y ^ 2})2t \\
+            \intertext{At $t = 1$} \\
+            \frac{dH}{dt} &= (-2e ^ {-2}) + (-2e ^ {-2}) \cdot 2\\
+            &= -6e ^ {-2}.
+        \end{align*}
+    \end{solution}
+\end{example}
 
+\textbf{Situation $2$:}
+Change in function $f(x, y)$ when we move along a curve $y = y(x)$.
 
+$\frac{df}{dx}$ is the total derivative.
+$f$ can be thought of as a function of $f \times f(x, y(x))$ .
+\begin{equation}\label{calc:eq:4}
+    df = \frac{df}{dx}\,dx
+\end{equation}
+$f$ can also be thought of a function of $x$ and $y$.
+\[
+df = \pd[f]{x}\,dx + \pd[f]{y}\,dy.
+\]
+\[
+dy = \frac{dy}{dx}\,dx.
+\]
+Substituting our expression for $dy$ into the previous equation we get
+\begin{align*}
+    df &= \pd[f]{x}\,dx + \pd[f]{y}\left(\frac{dy}{dx}\,dx\right) \\
+    &= \left(\pd[f]{x} + \pd[f]{y}\frac{dy}{dx}\right)\,dx
+\end{align*}
+Comparing with \eqref{calc:eq:4}
+\[
+\frac{df}{dx} = \pd[f]{x} + \pd[f]{y}\frac{dy}{dx}.
+\]
+\begin{example}
+    An ellipse,
+    $C$,
+    is given by the equation $f \equiv x ^ 2 + y ^ 2 + xy = 7$.
+    Find the gradient $\frac{dy}{dx}$ of $C$ at the point $(1, 2)$.
 
+    \begin{solution}
+        $\frac{df}{dx} = 0$ along $C$ since $f = 7$ is constant
+        \[
+        0 = \frac{df}{dx} = \pd[f]{x} + \pd[f]{y}\frac{dy}{dx} \\
+        \]
+        \begin{align*}
+            \frac{dy}{dx} &= -\frac{-\pd[f]{x}}{\pd[f]{y}} \\
+            &= -\frac{2x + y}{2y + x}
+        \end{align*}
+        when at $(1, 2)$ the gradient is
+        \[
+        -\frac{4}{5}.
+        \]
+    \end{solution}
+\end{example}
 
+\subsection{Directional Derivatives}
+Directional derivative tells me the slope of $f$ when I move in the direction of the unit vector $\mbf{\hat{n}} = (n_1, n_2)$ in the $x$-$y$ plane.
+This is the same as the derivative with respect to $t$ along the curve $(x(t), y(t)) = (x_0 + n_1t, y_0 + n_2t)$.
 
+From situation $1$
+\[
+\frac{df}{dt} = \pd[f]{x}\frac{dx}{dt} + \pd[f]{y}\frac{dy}{dt} = \pd[f]{x}n_1 + \pd[f]{y}n_2 = \left(\pd[f]{x}, \pd[f]{y}\right)\cdot (n_1, n_2) = \nabla f \cdot \mbf{\hat{n}}.
+\]
+\[
+\nabla f = \left(\pd[f]{x}, \pd[f]{y}\right)
+\]
+is called the gradient of $f$.
+If $f$ is a function of $n$ variables $f(x_1, x_2, \dotsc, x_n)$
+\[
+\nabla f = \left(\pd[f]{x_1}, \pd[f]{x_2}, \dotsc, \pd[f]{x_n}\right).
+\]
+If we want the slope in the direction of $\mbf{v}$ where $\mbf{v}$ is not a unit vector
+\[
+\nabla f \cdot \frac{\mbf{v}}{|\mbf{v}|}.
+\]
+
+\begin{example}
+    Calculate the slope of the function $f(x, y) = e ^ {-x ^ 2 - y ^ 2}$ at the point $(1, 0)$ in the direction $(1, 1)$.
+
+    \begin{solution}
+        First work out the directional derivative
+        \[
+        \nabla f = \left(\pd[f]{x}, \pd[f]{y}\right) = \left(-2xe ^ {-x ^ 2 - y ^ 2}, -2ye ^ {-x ^ 2 - y ^ 2}\right)
+        \]
+        so $\nabla f$ at the point $(1, 0)$ is $(-2e ^ {-1}, 0)$.
+        \begin{align*}
+            \nabla f \cdot \frac{\mbf{v}}{|\mbf{v}|} &= \frac{(-2e ^ {-1}, 0) \cdot (1, 1)}{\sqrt{1 ^ 2 + 1 ^ 2}} \\
+            &= -\sqrt{2}e ^ {-1}.
+        \end{align*}
+    \end{solution}
+\end{example}
+
+We can write
+\[
+\nabla f \cdot \mbf{\hat{n}} = |\nabla f||\mbf{\hat{n}}|\cos(\theta) = |\nabla f|\cos(\theta).
+\]
+$-|\nabla f| \leq \nabla f \cdot n \leq |\nabla f|$,
+the directional derivative is a maximum when $\nabla f$ and $\mbf{\hat{n}}$ point in the same direction,
+i.e. $\nabla f$ points in the direction you move in $(x, y)$ plane to experience maximum slope.
+
+If $\mbf{hat{n}}$ is tangent to level set $f = c$ then $\nabla f \cdot \mbf{\hat{n}} = 0$
+(as slope vanishes on level set)
+therefore $\nabla f$ is normal to level set $f = c$.
+
+\begin{example}
+    Find the tangent plane to the $2$D surface $f(x, y, z) \equiv x ^ 4 + y ^ 2x ^ 2 + yz + z ^ 2 = 13$ at the point $(1, 2, 2)$.
+    \begin{solution}
+        $\nabla f$ is normal to surface $f = 13$ at $(1, 2, 2)$.
+        \[
+        \nabla f = \left(\pd[f]{x}, \pd[f]{y}, \pd[f]{z}\right) = \left(4x ^ 3 + 2xy ^ 2, 2yx ^ 2 + z, y + 2z\right)
+        \]
+        at the point $(1, 2, 2)$ $\nabla f = (12, 6, 6)$.
+        $\nabla f$ is also normal to the tangent plane
+        \[
+        12x + 6y + 6z = c.
+        \]
+        $(x, y, z) = (1, 2, 2)$ lies on the tangent plane
+        \[
+        12 + 12 + 12 = c = 36
+        \]
+        hence
+        \[
+        12x + 6y + 6z = 36 \iff 2x + y + z = 6.
+        \]
+    \end{solution}
+\end{example}
 
 
 
