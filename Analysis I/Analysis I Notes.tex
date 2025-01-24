@@ -2211,7 +2211,7 @@ it is not a criterion for convergence of a series.
         Note $\frac{1}{k} < \frac{1}{\sqrt{k}}$ for $k \geq 2$.
         Odd $k$ are positive and even $k$ are negative.
         
-        Series is $\infsum[k = 1](-1) ^ {k + 1}\underbrace{\left|\frac{1}{k} + \frac{(-1) ^ {k + 1}}{\sqrt{k}}\right|}_{:= b_k}$.
+        Series is $\infsum[k = 1](-1) ^ {k + 1}\underbrace{\left|\frac{1}{k} + \frac{(-1) ^ {k + 1}}{\sqrt{k}}\right|}_{\coloneqq b_k}$.
         $b_k \leq \frac{1}{k} + \frac{1}{\sqrt{k}} \rightarrow 0$.
         Note sequence is not monotonically decreasing.
         Can't use the alternating sign test here.
@@ -3029,7 +3029,7 @@ We can get the following proposition from the previous
 
 \begin{example}
     \[
-    d(x) := \begin{cases}
+    d(x) \coloneqq \begin{cases}
         1 & \text{if } x \in \Q \\
         0 & \text{if } x \notin \Q.
     \end{cases}
@@ -3105,7 +3105,7 @@ For example $\sqrt{x ^ 2 + x + 1}$.
         
         Define the set
         \[
-        X := \{x \in [a, b]; f(x) \leq d\}.
+        X \coloneqq \{x \in [a, b]; f(x) \leq d\}.
         \]
         $X \neq \emptyset$,
         since $a \in X$ and bounded as a subset of $[a, b]$.
@@ -3193,6 +3193,128 @@ For example $\sqrt{x ^ 2 + x + 1}$.
         Together with the Intermediate Value theorem we get the image of a continuous function on a compact interval is again a compact interval.
     \end{proof}
 \end{theorem}
+
+\begin{definition}
+    Continuity on a set $X$,
+    for all $c \in X$ and for all $\varepsilon > 0$,
+    there exists $\delta > 0$ for all $x \in X$ with
+    \[
+    |x - c| < \delta \implies |f(x) - f(c)| < \varepsilon.
+    \]
+\end{definition}
+
+\begin{definition}[Uniform continuity]
+    $f : X \rightarrow \R$ is uniform continuous if for all $\varepsilon > 0$ there exists $\delta > 0$ such that for all $x, y \in X$ with
+    \[
+    |x - y| < \delta \implies |f(x) - f(y)| < \varepsilon.
+    \]
+    \textit{In other words}
+    \[
+    \forall \varepsilon > 0, \exists \delta > 0 \text{ s.t. } \forall x, y \in X, |x - y| < \delta \implies |f(x) - f(y)| < \varepsilon.
+    \]
+\end{definition}
+
+\begin{theorem}
+    $f : [a, b] \rightarrow \R$ continuous on a compact interval.
+    Then $f$ is uniformly continuous.
+    \begin{proof}
+        Assume not.
+        There exists $\varepsilon > 0$ such that for all $\delta > 0$ there exists $x, y \in X$ with
+        \[
+        |x - y| < \delta
+        \]
+        but
+        \[
+        |f(x) - f(y)| \geq \varepsilon.
+        \]
+        Take such a "bad" $\varepsilon > 0$.
+        So for $\delta = \delta_n = \frac{1}{n}$,
+        has $x_n, y_n \in [a, b]$ with $|x_n - y_n| < \delta$ but $|f(x_n) - f(y_n)| \geq \delta$.
+        By Bolzano-Weierstrass for a converging subsequence $(x_{n_i})$ of the $(x_n)$
+        (since $x_n \in [a, b]$)
+        say $\lim x_{n_i} = x ^ {*} \in [a, b]$.
+
+        Claim:
+        also $\lim y_{n_i} = x ^ {*}$.
+        Indeed,
+        \begin{align*}
+            |x ^ {*} - y_{n_i}| &= |x ^ {*} - x_{n_i} + x_{n_i} - y_{n_i}| \\
+            &\leq |x ^ {*} - x_{n_i}| + |x ^ {*} - y_{n_i}| \\
+            &\rightarrow 0 + 0 = 0
+        \end{align*}
+        Squeezing gives the claim.
+
+        Claim:
+        \[
+        \lim f(x_{n_i}) - f(y_{n_i}) = 0.
+        \]
+        Indeed
+        \begin{align*}
+            |f(x_{n_i}) - f(y_{n_i})| &= |f(x_{n_i}) - f(x ^ {*}) + f(x ^ {*}) - f(y_{n_i})| \\
+            &\leq |f(x_{n_i}) - f(x ^ {*})| + |f(x ^ {*}) - f(y_{n_i})| \\
+            &\rightarrow 0 + 0 = 0
+        \end{align*}
+        by continuity of $f$ and $x_{n_i}, y_{n_i} \rightarrow x ^ {*}$.
+
+        So for $n_i$ sufficiently large
+        \[
+        |f(x_{n_i}) - f(y_{n_i})| < \varepsilon
+        \]
+        contradiction!
+    \end{proof}
+\end{theorem}
+
+\begin{remark}
+    \begin{enumerate}[label = (\roman*)]
+        \item Proof is non-constructive,
+        no indication for finding the $\delta$ in general,
+        hard to impossible.
+
+        \item Statement useful/crucial for defining integration of continuous functions.
+
+        \item In particularly nice class of functions are Lipschitz-continuous which satisfy $|f(x) - f(y)| \leq M|x - y|$ for all $x, y \in X$,
+        where $M$ is the Lipschitz constant.
+        These are uniform continuous.
+
+        \item "Many" functions are Lipschitz continuous on compact intervals,
+        but not all.
+        For example $f(x) = \sqrt{x}$ is not Lipschitz on the interval $[0, 1]$.
+
+        \item $f(x) = \frac{1}{x}$ on $(0, 1)$ is not uniformly continuous.
+
+        \item $f(x) = e ^ x$ is not uniformly continuous on $[0, \infty)$.
+
+        \item $f(x) = \log(x)$ is uniformly continuous on $[1, \infty)$.
+    \end{enumerate}
+\end{remark}
+
+\subsection{Inverse functions}
+Assume $f : X \rightarrow \R$ is injective so the inverse function $f ^ {-1} : f(x) \rightarrow \R$ exists,
+$f(x) = Y$.
+
+Principle question:
+
+if $f$ is "nice"
+(e.g. continuous)
+is the inverse also nice?
+
+\begin{theorem}
+    Let $f : I \rightarrow \R$ be a continuous function on an interval $I$,
+    and injective
+    (1-1)
+    so $f(I) = J$ is also an interval and the inverse function $f ^ {-1} : J \rightarrow I$ is also continuous.
+
+    \begin{proof}
+        One of the key steps:
+        if $f$ is continuous and 1-1.
+        Then $f$ is either strictly monotonically increasing or decreasing.
+    \end{proof}
+\end{theorem}
+
+
+
+
+
 
 
 
