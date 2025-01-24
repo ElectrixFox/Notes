@@ -385,6 +385,87 @@ But we can say something about what it looks like,
     \end{solution}
 \end{example}
 
+\subsection{Forcing and resonance}
+Say our car is travelling on a corrugated road surface.
+This is modelled by adding a forcing term on the right-hand side,
+such as $C\sin(pt)$.
+Let us first look at a simple example with no damping,
+namely
+\[
+m\ddot{x} + kx = m\sin(pt).
+\]
+The general solution is,
+\[
+x(t) = A\cos(\omega t) + B\sin(\omega t) + \frac{\sin(pt)}{\omega ^ 2 - p ^ 2},
+\]
+provided $|p| \neq \omega$.
+We have a mixture of two oscillations with angular frequencies $\omega$ and $p$.
+Note $x(t)$ is bounded.
+If $p = \omega$,
+the solution is
+\[
+x(t) = A\cos(\omega t) + B\sin(\omega t) - \frac{t\cos(\omega t)}{2\omega},
+\]
+This is resonance:
+the applied force is synchronised with the natural oscillation of the mass-spring system.
+The steady-state response is a periodic particular integral $x_{PI}$,
+of the form $x(t) = A\cos(pt) + B\sin(pt)$.
+Defining $\phi$ by $\tan(\phi) = \frac{2bp}{\omega ^ 2 - p ^ 2}$,
+$x_{PI}$ can be written in the form $x_{PI}(t) = C\sin(pt - \phi)$.
+The phase difference $\phi$ between forcing and response is due to a lag between when the car feels an upward force from the uneven road,
+and when it actually moves up.
+\begin{example}
+    The behaviour $x(t)$ of a forced damped system is described by the equation $\ddot{x} + 4\dot{x} + x - \sin(t) = 0$.
+    Find the steady-state response $x_S(t)$ of this system,
+    and compute the phase difference between it and the external force.
+    \begin{solution}
+        The steady-state response is the periodic particular integral of the differential equation,
+        and this is
+        \begin{align*}
+            x_S(t) = -\frac{1}{4}.
+        \end{align*}
+        Hence from
+        \[
+        \tan(\phi) = \frac{2bp}{\omega ^ 2 - p ^ 2}
+        \]
+        we get
+        \[
+        \tan(\phi) = \frac{2b}{1 ^ 2 - 1 ^ 2} \implies \phi = \frac{\pi}{2}.
+        \]
+        The phase difference between this and $\sin(t)$ is $\frac{\pi}{2}$
+    \end{solution}
+\end{example}
+
+\subsection{Small Oscillations}
+Motion near stable equilibria.
+A conservative force $F(x) = -V'(x)$ has an equilibrium at $x = x_0$ if $F(x_0) = 0$.
+A particle can sit at $x = x_0$,
+at rest.
+The equilibrium is stable if $x_0$ gives a local minimum of $V$,
+so $V''(x_0) > 0$.
+If,
+on the other hand,
+$V''(x_0) \leq 0$,
+then the equilibrium is unstable.
+
+\textbf{Simplest case}.
+The simplest case is $V(x) = \frac{1}{2}kx ^ 2$,
+with $k > 0$
+(the simple harmonic oscillator).
+There is a stable equilibrium at $x = 0$.
+Then $m\ddot{x} = -kx$,
+and the system oscillates with angular frequency $\omega = \sqrt{\frac{V''(0)}{m}} = \sqrt{\frac{k}{m}}$.
+The period if $\frac{2\pi}{\omega} = 2\pi\sqrt{\frac{m}{k}}$.
+
+\textbf{General potential}.
+Suppose that $V(x)$ has a local minimum at $x_0$.
+Write $x(t) = x_0 + \epsilon(t)$.
+Thus we get approximate simple harmonic motion,
+with angular frequency approximately $\omega = \sqrt{\frac{V''(x_0)}{m}}$ and period $\frac{2\pi}{\omega}$.
+Note that $\epsilon$ remains small,
+so this makes sense.
+In effect,
+we are approximating the graph of $V(x)$ by a parabola near $x_0$.
 
 
 
