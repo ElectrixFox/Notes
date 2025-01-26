@@ -467,12 +467,134 @@ so this makes sense.
 In effect,
 we are approximating the graph of $V(x)$ by a parabola near $x_0$.
 
+\subsection{Momentum and Collisions}
+\textbf{Conservation of momentum}.
+If there are no external forces,
+and $N$ particles with momenta $p_1, p_2, \dotsc, p_N$,
+then the total momentum
+\[
+p = p_1 + p_2 + \dotsi + p_{N}
+\]
+is conserved,
+and does not change when the particles collide.
 
+A collision which conserves energy is said to be elastic,
+one which doesn't is inelastic.
 
+\begin{example}
+     A particle of mass $2m$ and speed $v$ collides head-on with a particle of mass m at rest.
+     The two then continue to move in the same direction,
+     with the heavier particle moving at speed $\frac{v}{2}$.
+     What is the speed $u$ of the lighter particle,
+     and what fraction of the initial energy is lost in the collision?
 
+     \begin{solution}
+         By conservation of momentum:
+         \[
+         2mv = 2m\frac{v}{2} + mu \iff u = v.
+         \]
+         Now,
+         the initial energy was $E_0 = \frac{1}{2}(2m)v ^ 2 = mv ^ 2$,
+         the final energy is $E_1 = \frac{1}{2}(2m)\left(\frac{v}{2}\right) ^ 2 + \frac{1}{2}(m)v ^ 2 = \frac{3}{4}mv ^ 2$.
+         Hence the fraction of the initial energy lost in the collision is
+         \[
+         \frac{E_0 - E_1}{E_0} = \frac{mv ^ 2 - \frac{3}{4}mv ^ 2}{mv ^ 2} = 1 - \frac{3}{4} = \frac{1}{4}.
+         \]
+     \end{solution}
+\end{example}
 
+\section{Dynamics in Space}
 
+\subsection{Velocity and relative motion}
+A particle is an object with mass $m$,
+located at a point in $3$D space.
+Its position is described by a position vector $\mbf{r}$
+(relative to some origin $\mbf{O}$).
+We can use Cartesian coordinates $(x, y, z)$ by letting $\mbf{e}_1, \mbf{e}_2, \mbf{e}_3$ be the standard unit vectors,
+and writing $\mbf{r} = x\mbf{e}_1 + y\mbf{e}_2 + z\mbf{e}_3$.
+This system of axes is an example of a frame of reference.
+For motion in a plane,
+use $\mbf{r} = x\mbf{e}_1 + y\mbf{e}_2$.
 
+The trajectory of a particle is given by $\mbf{r}(t) = x(t)\mbf{e}_1 + y(t)\mbf{e}_2 + z(t)\mbf{e}_3$.
+Its velocity is $\mbf{v} = \dot{\mbf{r}}$,
+where as usual the dot denotes the derivative with respect to time $t$.
+If $\mbf{r} = x\mbf{e}_1 + y\mbf{e}_2 + z\mbf{e}_3$,
+then $\mbf{v} = \dot{x}\mbf{e}_1 + \dot{y}\mbf{e}_2 + \dot{z}\mbf{e}_3$.
+The speed of the particle $v = |\mbf{v}|$ is a real number with $v \geq 0$.
+The acceleration is $\mbf{a} = \dot{\mbf{v}} = \ddot{\mbf{r}}$.
+
+\begin{example}
+    If $\mbf{r} = t\mbf{e}_1 + \mbf{e}_2 + t ^ 2\mbf{e}_3$ what is $\mbf{v}, \mbf{a}$ and $v$?
+
+    \begin{solution}
+        \begin{align*}
+            \mbf{v} &= \dot{\mbf{r}} = \mbf{e}_1 + 2t\mbf{e}_3 \\
+            \mbf{a} &= \dot{\mbf{v}} = 2\mbf{e}_3 \\
+            v &= \sqrt{1 ^ 2 + (2t) ^ 2} = \sqrt{1 + 4t ^ 2}.
+        \end{align*}
+    \end{solution}
+\end{example}
+
+The momentum of a particle with mass $m$ and velocity $\mbf{v}$ is the vector $\mbf{p} = m\mbf{v}$.
+If an external force $\mbf{F}$ acts on the particle,
+then its equation of motion is $\dot{\mbf{p}} = \mbf{F}$.
+If $m$ is constant,
+this is equivalent to $m\ddot{\mbf{r}} = \mbf{F}$.
+
+If particles $A$ and $B$ are located at $\mbf{r}_A$ and $\mbf{r}_B$ respectively,
+then the position of $B$ relative to $A$ is $\mbf{r}_B - \mbf{r}_A$.
+If they are moving with velocities $\mbf{v}_A$ and $\mbf{v}_B$ respectively,
+then the velocity of $B$ relative to $A$ is $\mbf{v}_B - \mbf{v}_A$.
+
+\begin{example}
+    Two particles have positions $\mbf{r}_A = 2t\mbf{e}_1 + \mbf{e}_2 + t ^ 2\mbf{e}_3$ and $\mbf{r}_B = -t\mbf{e}_1$ respectively,
+    what is their relative position and velocity?
+    
+    \begin{solution}
+        The relative position is
+        \[
+        \mbf{r}_B - \mbf{r}_A = -t\mbf{e}_1 - 2t\mbf{e}_1 - \mbf{e}_2 - t ^ 2\mbf{e}_3 = -3t\mbf{e}_1 - \mbf{e}_2 - t ^ 2\mbf{e}_3.
+        \]
+        The relative velocity is
+        \begin{align*}
+            \mbf{v}_B - \mbf{v}_A &= \dot{\mbf{r}_B} - \dot{\mbf{r}_A} \\
+            &= (-\mbf{e}_1) - (2\mbf{e}_1 + 2t\mbf{e}_3) \\
+            &= -\mbf{e}_1 - 2\mbf{e}_1 - 2t\mbf{e}_3 \\
+            &= -3\mbf{e}_1 - 2t\mbf{e}_3.
+        \end{align*}
+    \end{solution}
+\end{example}
+
+\begin{example}
+    Bob is going north
+    (direction $\mbf{e}_2$)
+    with speed $10$,
+    and feels a headwind of speed $25$.
+    What is the wind velocity relative to the ground?
+    If Bob now goes east
+    (direction $\mbf{e}_1$)
+    at speed $15$,
+    what wind does he feel?
+
+    \begin{solution}
+        \[
+        \mbf{v}_w - \mbf{v}_B = -25\mbf{e}_2 \iff \mbf{v}_w = -15\mbf{e}_2,
+        \]
+        so the wind velocity relative to the ground is $-15\mbf{e}_2$.
+
+        Now we have that $\mbf{v}_B = 15\mbf{e}_1$,
+        so
+        \[
+        \mbf{v}_w - \mbf{v}_B = -15\mbf{e}_2 - 15\mbf{e}_1
+        \]
+        hence he feels a speed of
+        \[
+        |\mbf{v}_w - \mbf{v}_B| = |-15\mbf{e}_2 - 15\mbf{e}_1| = \sqrt{15 ^ 2 + 15 ^ 2} = 15\sqrt{2}
+        \]
+        in the direction $-\frac{(\mbf{e}_1 + \mbf{e}_2)}{\sqrt{2}}$.
+    \end{solution}
+\end{example}
 
 
 
