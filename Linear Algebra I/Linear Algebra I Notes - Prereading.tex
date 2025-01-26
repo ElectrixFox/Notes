@@ -3675,12 +3675,122 @@ Changes of basis matrices are elements of the general linear group.
     \end{solution}
 \end{example}
 
+\newpage
 
+\section{Inner-product spaces}
 
+\subsection{Real bilinear forms and inner products}
+The dot product is linear in both "entries"
+(we will say bilinear),
+i.e.
+\begin{align*}
+    (\alpha\mbf{v}_1 + \beta\mbf{v}_2) \cdot \mbf{w} &= \alpha\mbf{v}_1 \cdot \mbf{w} + \beta\mbf{v}_2 \cdot \mbf{w} \\
+    \mbf{v} \cdot (\alpha\mbf{w}_1 + \beta\mbf{w}_2) &= \alpha\mbf{v}\cdot\mbf{w}_1 + \beta\mbf{v}\cdot \mbf{w}_2.
+\end{align*}
 
+\begin{definition}
+    A bilinear form $B$ on a real vector space $V$ is a mapping $B : V \times V \rightarrow \R$ assigning to each pair of vectors $\mbf{u}, \mbf{v} \in V$ a real number $B(\mbf{u}, \mbf{v})$ satisfying the following for all $\mbf{u}, \mbf{v}, \mbf{w} \in V$ and all $\lambda \in \R$:
+    \begin{enumerate}[label = (\roman*)]
+        \item $B(\mbf{u} + \mbf{v}, \mbf{w}) = B(\mbf{u}, \mbf{w}) + B(\mbf{v}, \mbf{w})$,
+        
+        \item $B(\mbf{w}, \mbf{u} + \mbf{v}) = B(\mbf{w}, \mbf{u}) + B(\mbf{w}, \mbf{v})$,
+        
+        \item $B(\lambda\mbf{u}, \mbf{v}) = B(\mbf{u}, \lambda\mbf{v}) = \lambda B(\mbf{u}, \mbf{v})$.
+    \end{enumerate}
+\end{definition}
 
+\begin{definition}
+    An inner product on a real vector space $V$ is a map $(\cdot,\cdot) : V \times V \mapsto \R$ which assigns to each pair of vectors $\mbf{u}, \mbf{v} \in V$ a real number $(\mbf{u}, \mbf{v})$,
+    satisfying the following:
+    for all $\mbf{u}, \mbf{v}, \mbf{w} \in V$ and all $\lambda \in \R$
+    \begin{enumerate}[label = (\roman*)]
+        \item $(\mbf{u} + \mbf{v}, \mbf{w}) = (\mbf{u}, \mbf{w}) + (\mbf{v}, \mbf{w})$,
+        
+        \item $(\lambda\mbf{u}, \mbf{v}) = \lambda (\mbf{u}, \mbf{v})$;
 
+        \item $(\mbf{u}, \mbf{v}) = (\mbf{v}, \mbf{u})$
+        (symmetry);
 
+        \item $(\mbf{v}, \mbf{v}) \geq 0$ with $(\mbf{v}, \mbf{v}) = 0 \iff \mbf{v} = 0$
+        (positivity).
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    A real inner-product space is a real vector space equipped with an inner product.
+\end{definition}
+
+\begin{example}
+    $V = \R ^ n$ with the standard Euclidean inner product
+    (dot product)
+    \[
+    (\mbf{u}, \mbf{v}) = \mbf{u} \cdot \mbf{v} = u_1v_1 + \dotsi + u_nv_n.
+    \]
+\end{example}
+
+\begin{example}
+    On $V = \R ^ 2$,
+    is the expression $(\mbf{x}, \mbf{y}) = x_1y_1 + x_1y_2 + x_2y_2$ an inner product?
+
+    \begin{solution}
+        No as $\mbf{x} = (1, 1)$ and $\mbf{y} = (1, 0)$,
+        then $(\mbf{x}, \mbf{y}) = 1$,
+        and $(\mbf{y}, \mbf{x}) = 2$.
+        Hence this does not satisfy symmetry.
+    \end{solution}
+\end{example}
+
+\begin{example}
+    On $V = \R ^ 2$,
+    is the expression $(\mbf{x}, \mbf{y}) = x_1y_1 + x_1y_2 + x_2y_1 + x_2y_2$ an inner product?
+
+    \begin{solution}
+        Both symmetry and bilinearity hold,
+        however positivity does not.
+        Look at $(\mbf{x}, \mbf{x}) = (x_1 + x_2) ^ 2$,
+        so we can just have $x_1 = -x_2$ or vice versa,
+        for example $\mbf{x} = (2, -2)$,
+        $(\mbf{x}, \mbf{x}) = (2 - 2) ^ 2 = 0$ but $\mbf{x} \neq 0$.
+    \end{solution}
+\end{example}
+
+\begin{definition}
+    We refer to the matrix $A_{ij} \coloneqq B(\mbf{v}_j, \mbf{v}_i)$ as the matrix form of $B$ in the basis $\{\mbf{v}_i\}$.
+\end{definition}
+
+\begin{definition}
+    We say that an $n \times n$ matrix $B$ is symmetric if
+    \[
+    B ^ t = B,
+    \]
+    and anti-symmetric
+    (or skew-symmetric)
+    if
+    \[
+    B ^ t = -B.
+    \]
+\end{definition}
+
+\begin{definition}
+    Every matrix $B$ can be decomposed into its symmetric part $B_{+}$ and anti-symmetric part $B_{-}$ simply via
+    \[
+    B = \frac{B + B ^ {t}}{2} + \frac{B - B ^ {t}}{2} = B_{+} + B_{-},
+    \]
+    where $B_{+} \coloneqq \frac{B + B ^ {t}}{2}$ and $B_{-} \coloneqq \frac{B - B ^ {t}}{2}$.
+    Clearly $B_{+}$ is a symmetric matrix and $B_{-}$ is an anti-symmetric matrix.
+\end{definition}
+
+\begin{definition}
+    A symmetric $n \times n$ matrix $B$ is positive-definite if
+    \[
+    \mbf{v} ^ tB\mbf{v} > 0
+    \]
+    for all non-zero vectors $\mbf{v} \in \R ^ n$.
+\end{definition}
+
+\begin{proposition}
+    A symmetric matrix $B$ is positive-definite if and only if its eigenvalues are all positive.
+\end{proposition}
 
 
 
