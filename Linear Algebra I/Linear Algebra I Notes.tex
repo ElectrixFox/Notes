@@ -5933,12 +5933,115 @@ i.e. a basis of eigenvectors.
     which is now solvable.
 \end{example}
 
+\textbf{Procedure}
 
+$A$ is an $N \times N$ matrix.
+Fix the eigenvalues using the characteristic polynomial:
+\[
+p_A(t) = a(t - \lambda_1) ^ {k_1}(t - \lambda_2) ^ {k_2} \dotsi (t - \lambda_p) ^ {k_p}
+\]
+$a \neq 0$,
+$\lambda_i \neq \lambda_j \forall i \neq j$,
+$k_i$'s are the algebraic multiplicities of the eigenvalues.
+\[
+\sum_{i = 1}^{p}k_i = N,\  k_i \geq 1
+\]
+Work eigenspace by eigenspace:
+pick $\lambda \in \{\lambda_1, \dotsc, \lambda_p\}$ find
+\[
+V_{\lambda} = \ker(A - \lambda I) = \{\mbf{v} \text{ s.t. } (A - \lambda I)\mbf{x} = \mbf{0}\}.
+\]
+$\dim{V_{\lambda}}$ is the geometric multiplicity of $\lambda$ which is $p_{\lambda}$.
 
+Fact:
+\[
+1 \leq p_i \leq k_i.
+\]
+Crucial fact:
+\begin{proposition}
+    Eigenvectors corresponding to different eigenvalues are linearly independent.
 
+    \begin{proof}[Proof for two eigenvectors]
+        Suppose $\lambda_1 \neq \lambda_2$ and $A\mbf{v}_1 = \lambda_1\mbf{v}_1, A\mbf{v}_2 = \lambda_2\mbf{v}_2$
+        (and $\mbf{v}_1 \neq \mbf{0}, \mbf{v}_2 \neq \mbf{0}$).
 
+        Suppose they were linearly dependent.
+        Then $\mbf{0} = c_1\mbf{v}_1 + c_2\mbf{v}_2$,
+        $c_1, c_2 \in \C$,
+        i.e.
+        \[
+        \mbf{v}_2 = \alpha\mbf{v}_1
+        \]
+        for some $\alpha$
+        (non-zero).
+        Then $A\mbf{v}_2 = \lambda_2\mbf{v}_2$
+        and
+        \begin{align*}
+            A\alpha\mbf{v}_1 &= \alpha A\mbf{v}_1 \\
+            &= \alpha\lambda\mbf{v}_1 \\
+            &= \lambda\alpha\mbf{v}_1 \\
+            &=  \lambda_1\mbf{v}_2 \\
+            &= \lambda_2\mbf{v}_2 \\
+            &= \lambda_1\mbf{v}_2
+        \end{align*}
+        i.e. $(\lambda_1 - \lambda_2)\mbf{v}_1 = 0$,
+        but this is impossible since $\lambda_1 \neq \lambda_2$ and $\mbf{v}_2 \neq \mbf{0}$ by the hypothesis.
+    \end{proof}
+\end{proposition}
 
+\textbf{Consequence}
+if $A$ has $N$ distinct eigenvalues it is diagonalisable
+(since we then have $N$ linearly independent eigenvectors,
+by the previous theorem).
 
+More generally,
+\begin{align*}
+    1 \leq &\dim{V_{\lambda_1}} \leq k_1 \\
+    1 \leq &\dim{V_{\lambda_2}} \leq k_2 \\
+    &\vdots
+    1 \leq &\dim{V_{\lambda_p}} \leq k_p
+\end{align*}
+then the number of linearly independent eigenvectors is $\dim{V_{\lambda_1}} + \dim{V_{\lambda_2}} + \dotsi + \dim{V_{\lambda_p}}$.
+Furthermore
+\[
+p \leq \dim{V_{\lambda_1}} + \dim{V_{\lambda_2}} + \dotsi + \dim{V_{\lambda_p}} \leq \sum_{i = 1}^{N}k_i = N.
+\]
+For $A$ to be diagonalisable,
+we need $N$ linearly independent eigenvectors,
+only possible if $\dim{V_{\lambda_i}} = p_i = k_i$ for all $i = 1, \dotsc, p$.
+
+\begin{proposition}
+    $A$ is diagonalisable if and only if for each $i = 1, \dotsc, p$,
+    $\dim{V_{\lambda_i}} = k_i$.
+
+    i.e.
+    geometric multiplicity is equal to algebraic multiplicity.
+\end{proposition}
+
+In this case,
+$V = \R ^ N = V_{\lambda_1} \oplus V_{\lambda_2} \oplus \dotsi \oplus V_{\lambda_p}$.
+
+\textit{Note:
+the place where problems may arise is when any $k_i > 1$.
+If $k_i > 1$,
+$1 \leq \dim{V_{\lambda_i}} \leq k_i$,
+and if after substituting $(A - \lambda_i I)\mbf{v} = \mbf{0}$
+(by G-J)
+and $\dim{V_{\lambda_i}} < k_i$,
+then $A$ is not diagonalisable.}
+
+\textit{Note:
+even if $A$ is a real matrix,
+the eigenvalues might be complex.}
+\begin{example}
+    If $A = \begin{pmatrix}
+        0 & 1 \\ -1 & 0
+    \end{pmatrix}$ then $p_A(t) = \det\begin{pmatrix}
+        -t & 1 \\ -1 & -t
+    \end{pmatrix} = t ^ 2 + 1$
+    hence $\lambda_1 = i, \lambda_2 = -i$.
+    We need to work on $\C ^ 2$ to diagonalise this matrix.
+\end{example}
 
 
 
