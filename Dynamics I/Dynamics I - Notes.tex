@@ -470,10 +470,54 @@ Any initial $x$ dies out exponentially fast.
 This is called over damping.
 No oscillation at all.
 
+\subsection{Small oscillations}
+If $V'(x_0) = 0$ then $x_0$ is an equilibrium point,
+where $F(x_0) = 0$.
+It is a stable equilibrium if it is a local minimum,
+i.e. $V''(x_0) > 0$.
+Otherwise unstable,
+$V''(x_0) < 0$.
+Then the period of small oscillations about a stable equilibrium is the period of the best fitting simple harmonic oscillator.
+Computing $P$.
+Let $x_0$ be a local minimum of $V(x)$.
+Write $x(t) = x_0 + \epsilon(t)$ where $\epsilon(t)$ is a small function.
+Substitute into equation of motion
+\[
+m\ddot{x} = F(x) = -V'(x) \implies m\ddot{\epsilon} = F(x_0 + \epsilon) = \underbrace{F(x_0)}_{=0} + \epsilon F'(x_0) + \dotsc
+\]
+\[
+\implies m\ddot{\epsilon} \approx \epsilon F'(x_0) = -V''(x_0)\epsilon.
+\]
+This is the equation for simple harmonic motion,
+where $V''(x_0)$ is the "spring constant" $k$.
+So the period of small oscillations is $P = 2\pi\sqrt{\frac{m}{V''(x)}}$.
+Makes sense for local minimum where $V''(x_0) > 0$.
 
+\begin{example}
+    $m = 3$,
+    $V(x) = \frac{1}{4}x ^ 4 - \frac{1}{3}x ^ 3 - x ^ 2$.
+    Then $V'(x) = x(x + 1)(x - 2)$,
+    $x = 0$ is unstable,
+    $x = -1, 2$ are stable.
+    Look for period $P$ about $x = -1$.
+    $V''(x) = \frac{d}{dx}\left[x(x + 1)(x - 2)\right]$,
+    so $V''(-1) = \left. x(x - 2)\right|_{x = -1} = 3$,
+    hence $P = 2\pi\sqrt{\frac{m}{V''(x_0)}} = 2\pi\sqrt{\frac{3}{3}} = 2\pi$.
+\end{example}
 
+\subsection{Conservation of Momentum}
+Here the external force is $0$.
 
-
+Fact:
+the total momentum is conserved by collisions.
+Total momentum is the sum of the momenta of each particle.
+The total momentum after the collision is equal to the total momentum before the collision.
+The total energy
+(which is all kinetic energy)
+may be conserved
+(then the collision was elastic)
+or not conserved
+(the collision was inelastic).
 
 
 
