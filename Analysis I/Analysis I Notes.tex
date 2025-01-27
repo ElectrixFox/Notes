@@ -3311,11 +3311,179 @@ is the inverse also nice?
     \end{proof}
 \end{theorem}
 
+\newpage
 
+\section{Differentiability}
 
+\begin{definition}
+    $f : X \rightarrow \R$
+    ($X$ open).
+    We say that $f$ is differentiable at a point $c \in X$ if
+    \[
+    \lim_{x \rightarrow c}\frac{f(x) - f(c)}{x - c}
+    \]
+    exists.
+    If so,
+    we write $f'(c)$ for the limit.
+\end{definition}
 
+\begin{lemma}[First order Taylor]\label{analy:lem:firstordertaylor}
+    $f : X \rightarrow \R$,
+    $f$ is differentiable at $c$ if and only if there exists a constant $n \in \R$ and a function $r(x)$ on $X$ such that
+    \begin{equation}\label{analy:eq:2}
+        f(x) = f(c) + m(x - c) + r(x)(x - c)
+    \end{equation}
+    with $r(x)$ is continuous at $c$ and $\lim_{x \rightarrow c} r(x) = r(c) = 0$.
+    In that case $m = f'(c)$.
+\end{lemma}
 
+Continuity,
+in that context is Taylor of order $0$
+\[
+f(x) = f(c) + \tilde{r}(x)
+\]
+with $\lim_{x \rightarrow c}\tilde{r}(x) = \tilde{r}(0) = 0$.
 
+We can write \eqref{analy:eq:2} as
+\[
+f(x) = f(c) + \overbrace{f_1(x)}^{= m + r(x)}(x - c)
+\]
+with $f_1(x)$ continuous at $c$ and
+\[
+\lim_{x \rightarrow c}f(x) = m(= f'(c))
+\]
+
+\begin{lemma}[continues = analy:lem:firstordertaylor]
+    \begin{proof}
+        "$\implies$":
+        Set $m = f'(c)$ and
+        \[
+        r(x) \coloneqq \begin{cases}
+            \frac{f(x) - f(c) - m(x - c)}{x - c} & x \neq c, \\
+            0 & x = c.
+        \end{cases}
+        \]
+        \eqref{analy:eq:2} holds by construction.
+        Need to show
+        \[
+        \lim_{x \rightarrow c}r(x) = 0 = r(c),
+        \]
+        \begin{align*}
+            \lim_{x \rightarrow c}\left(\frac{f(x) - f(c)}{x - c} - m\right) &= \lim_{x \rightarrow c}\left(\frac{f(x) - f(c)}{x - c} - f'(c)\right) = 0.
+        \end{align*}
+
+        "$\impliedby$":
+        \begin{align*}
+            0 &= r(c) \\
+            &= \lim_{x \rightarrow c}r(x) \\
+            &= \lim_{x \rightarrow c}\frac{f(x) - f(c) - m(x - c)}{x - c} \\
+            &= \lim_{x \rightarrow c}\left(\frac{f(x) - f(c)}{x - c} - m\right).
+        \end{align*}
+        Only way this is possible if $\lim_{x \rightarrow c}\frac{f(x) - f(c)}{x - c}$ exists and is equal to $m$.
+        \[
+        \]
+    \end{proof}
+\end{lemma}
+
+\begin{example}
+    \begin{enumerate}[label = (\roman*)]
+        \item 
+        \[
+        f(x) = \frac{1}{x ^ 2},\qquad x \neq 0.
+        \]
+        at $c \neq 0$
+        \begin{align*}
+            \lim_{x \rightarrow c}\frac{f(x) - f(c)}{x - c} &= \lim_{x \rightarrow c}\frac{\frac{1}{x ^ 2} - \frac{1}{c ^ 2}}{x - c} \\
+            &= \lim_{x \rightarrow c}\frac{c ^ 2 - x ^ 2}{x ^ 2c ^ 2(x - c)} \\
+            &= \lim_{x \rightarrow c}\frac{(c - x)(c + x)}{x ^ 2c ^ 2(x - c)} \\
+            &= \lim_{x \rightarrow c}\frac{-(c + x)}{x ^ 2c ^ 2} \\
+            &= \frac{-2c}{c ^ 4} \\
+            &= -\frac{2}{c ^ 3}.
+        \end{align*}
+
+        \item $f(x)$ a polynomial.
+        By polynomial division can write
+        \[
+        f(x) - f(c) = (x - c)f_1(x)
+        \]
+        with $f_1(x)$ a polynomial,
+        hence continuous at $x = c$.
+    \end{enumerate}
+\end{example}
+
+\begin{proposition}
+    $f : X \rightarrow \R$ as before.
+    Then if $f$ is differentiable at $x = c$,
+    then $f(x)$ is also continuous at $x = c$.
+
+    \begin{proof}
+        Assume $f$ is differentiable at $x = c$.
+        Then $f(x) - f(c) = (x - c) \frac{f(x) - f(c)}{x - c} \xrightarrow[x \rightarrow c]{} 0 \cdot f'(c) = 0$.
+        So $\lim_{x \rightarrow c}f(x) = f(c)$,
+        that is exactly continuity.
+    \end{proof}
+\end{proposition}
+The converse is false.
+\begin{example}
+    \[
+    f(x) = |x|.
+    \]
+
+    \begin{solution}
+        \[
+        \frac{f(x) - f(0)}{x - 0} = \frac{|x|}{x} = \mathrm{sgn}(x) = \begin{cases}
+            -1 & x < 0, \\
+            1 & x > 0
+        \end{cases}
+        \]
+        and $\lim_{x \rightarrow 0}\frac{f(x) - f(0)}{x - 0}$ does not exist.
+        So $|x|$ is continuous at $x = 0$ but not differentiable.
+    \end{solution}
+\end{example}
+
+\[
+f(x) \coloneqq \infsum[k = 0]\frac{1}{2 ^ k}\cos\left(15 ^ k\pi x\right),
+\]
+is continuous for all $x$ on $\R$,
+but not differentiable at any point.
+
+\begin{theorem}
+    $f, g$ are differentiable at $x = c$.
+    Then $f(x) + g(x)$ and $\alpha f(x)$ are differentiable at $x = c$.
+    With
+    \[
+    (f + g)'(c) = f'(c) + g'(c)
+    \]
+    and
+    \[
+    (\alpha f)'(c) = \alpha f'(c).
+    \]
+    Also the product $f(x)g(x)$ with
+    \[
+    (f(x)g(x))'(c) = f'(c)g(c) + f(c)g'(c).
+    \]
+    
+    \begin{proof}
+        For the product.
+        Write
+        \[
+        f(x) = f(c) + (x - c)f_1(x)
+        \]
+        \[
+        g(x) = g(c) + (x - c)g_1(x)
+        \]
+        with $f_1, g_1$ continuous at $x = c$ and $\lim_{x \rightarrow c}f_1(x) = f'(c)$ and $\lim_{x \rightarrow c}g_1(x) = g'(c)$.
+        Then
+        \begin{align*}
+            f(x)g(x) &= (f(c) + (x - c)f_1(x))(g(c) + (x - c)g_1(x)) \\
+            &= f(c)g(c) + (x - c)(f_1(x)g(c) + f(c)g_1(x) + (x - c)f_1(x)g_1(x)) \\
+            \intertext{with $x = c$}
+            &= f'(c)g'(c) + f(c)g'(c) + 0.
+        \end{align*}
+        \[
+        \]
+    \end{proof}
+\end{theorem}
 
 
 
