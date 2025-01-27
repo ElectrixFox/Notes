@@ -493,14 +493,106 @@ or larger
 than the prior odds,
 and by how much.
 
+\newpage
 
+\section{US Presidential Election Polling via Frequentist Methods}
 
+\subsection{Random Variables,
+Expectation and Variance:
+Revision and Notation}
 
+\subsubsection{Discrete Random Variables}
+A discrete random variable $X$ is a variable which can take a finite set of different numerical values $x_1, x_2, \dotsc, \in \mathcal{X}$.
 
+The probability mass function is
+\[
+f(x) = \P(X = x),\qquad\forall x \in \mathcal{X}.
+\]
 
+Given
+\[
+f\left(x \mmid \lambda\right) = \P(X = x) = \begin{cases}
+    \frac{e ^ {-\lambda}\lambda ^ x}{x!} & \text{for } x = 0, 1, 2, \dotsc \\
+    0 & \text{otherwise}.
+\end{cases}
+\]
+We write $f\left(x \mmid \lambda\right)$ for the $f$ of $x$ given $\lambda$.
 
+\subsubsection{Expectation and Variance of a Discrete Random Variable}
+The expected value of a discrete random variable $X$ is defined as
+\[
+\E(X) = \sum_{x \in \mathcal{X}}x\P(X = x) = \sum_{x \in \mathcal{X}}xf(x)
+\]
+that is,
+we take a weighted average of $X$.
 
+The expected value of any function $h(X)$ of $X$ is defined to be
+\[
+\E(h(X)) = \sum_{x \in \mathcal{X}}h(x)\P(X = x) = \sum_{x \in X}h(x)f(x).
+\]
 
+The variance of $X$ is defined to be
+\begin{align*}
+    \Var(X) &= \E((X - \E(X)) ^ 2) \\
+    &= \E(X ^ 2) - \E(X) ^ 2.
+\end{align*}
+This measures the theoretical average of the distance of the values of the random variable $X$ from its central value as measured by the expected value.
+$\Var(X)$ measures the spread of values of a random variable.
+
+The standard deviation of a random variable is just the square root of the variance
+\[
+\mathrm{SD}(X) = \sqrt{\Var(X)}.
+\]
+
+\subsubsection{Continuous Random Variables}
+The probability density function $f$ of a continuous random variable $X$ describes the probability density of each value,
+defined as follows
+\begin{align*}
+    \P(x \leq X \leq x + dx) &= f(x)\,dx \\
+    \P(a \leq X \leq b) &= \int_{a}^{b}f(x)\,dx.
+\end{align*}
+
+\subsubsection{Expectation and Variance of a Continuous Random Variable}
+The expectation,
+variance and standard deviation of a continuous random variable $X$ with probability density function $f(x)$ are:
+\begin{align*}
+    \E(X) &= \int xf(x)\,dx \\
+    \Var(X) &= \E((X - \E(X)) ^ 2) \\
+    &= \E(X ^ 2) - (\E(X)) ^ 2 &\left(\text{with } \E(X ^ 2) = \int x ^ 2f(x)\,dx\right) \\
+    \mathrm{SD}(X) = \sqrt{\Var(X)}
+\end{align*}
+where integration is over the full range of values of $X$.
+
+\subsubsection{Properties of Expectations and Variances}
+\textbf{Change in scale and location}
+
+For any random variable $X$ and any two real numbers $a, b$.
+\begin{align*}
+    \E(aX + b) &= a\E(X) + b \\
+    \Var(aX + b) &= a ^ 2\Var(X) \\
+    \mathrm{SD}(aX + b) &= a\mathrm{SD}(X).
+\end{align*}
+
+\textbf{Sums and differences}
+
+For any two random variables $X, Y$ and any two real numbers $a, b$.
+\begin{align*}
+    \E(aX + bY) &= a\E(X) + b\E(Y). \\
+    \intertext{If $X$ and $Y$ are independent} \\
+    \Var(aX + bY) &= a ^ 2\Var(X) + b ^ 2\Var(Y). \\
+    \intertext{If $X$ and $Y$ are not independent} \\
+    \Var(aX + bY) &= a ^ 2\Var(X) + b ^ 2\Var(Y) + 2ab\Cov(X, Y).
+\end{align*}
+These rules can be extended to sums of several random variables.
+
+Consider any $n$ random variables $X_1, X_2, \dotsc, X_n$ then
+\[
+\E(X_1 + X_2 + \dotsi + X_n) = \E(X_1) + \E(X_2) + \dotsi + \E(X_n)
+\]
+additionally if all $X_i$ are independent of each other then
+\[
+\Var(X_1 + X_2 + \dotsi + X_n) = \Var(X_1) + \Var(X_2) + \dotsi + \Var(X_n).
+\]
 
 
 
