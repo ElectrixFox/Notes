@@ -1,7 +1,6 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage{preamble}
 
-\newcommand{\cP}[2]{\P\left(#1 \mmid #2\right)}
 
 \title{Statistics I}
 \author{Luke Phillips}
@@ -593,6 +592,169 @@ additionally if all $X_i$ are independent of each other then
 \[
 \Var(X_1 + X_2 + \dotsi + X_n) = \Var(X_1) + \Var(X_2) + \dotsi + \Var(X_n).
 \]
+
+\subsection{Random Sampling,
+Proportions and the Bernoulli Distribution}
+
+\subsubsection{The Bernoulli Distribution}
+
+For an experiment where there are only two possible outcomes,
+and we can designate the two possible outcomes as $0$ or $1$,
+we can apply the following definition.
+\begin{definition}[Bernoulli Distribution]
+    We say that a random variable $X$ has a Bernoulli distribution with parameter $p$ with
+    ($0 \leq p \leq 1$)
+    if $X$ can take only the values $0$ and $1$ with respective probabilities
+    \begin{align*}
+        \P(X = 1) = p&&\text{and}&&\P(X = 0) = 1 - p
+    \end{align*}
+    setting $q = 1 - p$ we can write the pmf as
+    \[
+    f\left(x \mmid p\right) = \begin{cases}
+        p ^ xq ^ {1 - x} &\text{for } x = 0, 1, \\
+        0 &\text{otherwise}.
+    \end{cases}
+    \]
+    To see that $f\left(x \mmid p\right)$ represents the Bernoulli distribution as given by the probabilities we can just note that
+    \begin{align*}
+        f\left(1 \mmid p\right) = p &&\text{and}&&f\left(0 \mmid p\right) = q.
+    \end{align*}
+\end{definition}
+
+If $X$ has a Bernoulli distribution with parameter $p$ then we can directly calculate its expectation and variance:
+\begin{align*}
+    \E(X) &= \sum_{x \in X}xf\left(x \mmid p\right) = p \\
+    \E(X ^ 2) &= \sum_{x \in X}x ^ 2f\left(x \mmid p\right) = p \\
+    \intertext{Hence the variance is given by} \\
+    \Var(X) &= \E(X ^ 2) - \E(X) ^ 2 = pq.
+\end{align*}
+
+Furthermore,
+we can calculate the moment generating function as
+\[
+\psi(t) = \E(e ^ {tX}) = \sum_{x \in X}e ^ {tx}f\left(x \mmid p\right) = q + pe ^ t\qquad\text{for } -\infty < t < \infty.
+\]
+
+\subsubsection{Bernoulli Trials}
+If we have a sequence of $n$ random variables $X_1, \dotsc, X_n$ which are independent and identically distributed and if each of the $X_i$ has a Bernoulli distribution with parameter $p$ then we say that the variables $X_1, \dotsc, X_n$ form $n$ Bernoulli trials with parameter $p$.
+
+\subsubsection{Statistical Inference}
+If we view $p$ as real,
+fixed with a "true" value that is just unknown,
+we may seek to construct from the data $X_1, \dotsc, X_n$ some way of giving an estimate of $p$,
+and then subsequently examining the attributes of this estimator.
+
+We can also view $p$ as an unknown quantity for which we should represent our subjective uncertainty about via a probability distribution.
+Then we can do somewhat similar as what we did with treating it as a fixed "true" value.
+
+\subsubsection{Total and sample proportions as estimators}
+Let us redefine the random quantity $X$ to be the sum of all successes over the $n$ trials,
+\begin{align*}
+    X = \sum_{i = 1}^{n}X_i&&\text{with } X_i = \begin{dcases*}
+        1 & when $i$ is a success \\
+        0 & when $i$ is a failure.
+    \end{dcases*}
+\end{align*}
+
+To guide us in estimating $p$,
+it is worth noting what the pmf is for a set of Bernoulli trials $X_1, \dotsc, X_n$:
+as the $X_i$ are independent we can then just multiply the individual pmfs.
+Therefore
+\begin{align*}
+    f\left(x_1, x_2, \dotsc, x_n \mmid p\right) &= \prod_{i = 1}^{n}f\left(x_i \mmid p\right) \\
+    &= \prod_{i = 1}^{n}p ^ {x_i}q ^ {1 - x_i} \\
+    &= p ^ {\sum_{i = 1}^{n}x_i}q ^ {\sum_{i = 1}^{n}(1 - x_i)} \\
+    &= p ^ xq ^ {n - x}
+\end{align*}
+where we have denoted $x = \sum_{i = 1}^{n}x_i$ the sum of the successes.
+
+We can see that the pmf only relies on the probability $p$,
+the total number of Bernoulli trials $n$ and the number of successes $x$.
+
+To get a good estimator we could ask what value of $p$ will maximise the pmf $f\left(x_1, \dotsc, x_n \mmid p\right)$?
+To maximise $f\left(x_1, \dotsc, x_n \mmid p\right)$ we can maximise the $\log$ of $f\left(x_1, \dotsc, x_n \mmid p\right)$ as this is easier to differentiate
+\begin{align*}
+    f\left(x_1, \dotsc, x_n \mmid p\right) &= p ^ xq ^ {n - x} \\
+    \implies \log{f\left(x_1, \dotsc, x_n \mmid p\right)} &= x\log{p} + (n - x)\log{q} \\
+    \implies \pd{p}\log{f\left(x_1, \dotsc, x_n \mmid p\right)} &= \frac{x}{p} - \frac{n - x}{1 - p}
+\end{align*}
+therefore an estimate for $p$,
+which we will denote $\hat{p}$,
+which maximises $f\left(x_1, \dotsc, x_n \mmid p\right)$ is given by
+\begin{align*}
+    \frac{x}{\hat{p}} - \frac{n - x}{1 - \hat{p}} &= 0 \\
+    \implies x(1 - \hat{p}) &= (n - x)\hat{p} \\
+    \implies x - x\hat{p} &= n\hat{p} - x\hat{p} \\
+    \implies x &= n\hat{p} \\
+    \implies \hat{p} &= \frac{x}{n}
+\end{align*}
+
+This suggests we use the proportion of successes out of our $n$ trials as our estimate for the true probability $p$.
+
+This estimate $\hat{p}$ is also called the sample proportion $Y$ and in terms of random variables we would write
+\[
+\hat{p} = Y = \frac{X}{n} = \frac{1}{n}\sum_{i = 1}^{n}X_i
+\]
+so $Y$ is simply the proportion of successes in our set of Bernoulli trials of size $n$.
+
+\textit{Note:
+$\hat{p} = Y$ can also be considered as simply the mean of the $X_i$.}
+
+\subsubsection{The Binomial Distribution}
+\begin{definition}[The Binomial Distribution]
+    A random variable $X$ has a binomial distribution with parameters $n$ and $p$ if $X$ has a discrete distribution for which the pmf is as follows:
+    \[
+    f\left(x \mmid n, p\right) = \begin{cases}
+        \binom{n}{x}p ^ xq ^ {n - x} & \text{for } x = 0, 1, 2, \dotsc, n, \\
+        0 & \text{otherwise}.
+    \end{cases}
+    \]
+    Here $n$ must be a positive integer and $p$ must lie in the interval $0 \leq p \leq 1$.
+    We write $X \sim \Bin(n, p)$.
+    The Binomial distribution is of fundamental importance to us because of the following result:
+
+    \textit{If the collection of random variables $X_1, \dotsc, X_n$ form $n$ Bernoulli trials with parameter $p$,
+    and if $X = X_1 + \dotsi + X_n$ represents the sum of the successes,
+    then $X$ has a binomial distribution with parameters $n$ and $p$.}
+\end{definition}
+
+When $X$ is viewed as the sum of $n$ Bernoulli trials,
+we can find the expectation,
+variance and moment generating function of the binomial distribution easily.
+\begin{align*}
+    \E(X) &= \sum_{i = 1}^{n}\E(X_i) = np, \\
+    \Var(X) &= \sum_{i = 1}^{n}\Var(X_i) = npq = np(1 - p), \\
+    \psi(t) &= \E(e ^ {tX}) = \prod_{i = 1}^{n}\E(e ^ {tX_i}) = (pe ^ t + q) ^ n.
+\end{align*}
+The above expectation and variance of $X$ are as usual calculated from a view point before $X$ is actually measured.
+
+We can similarly understand our estimator $\hat{p} = Y = \frac{X}{n}$ of the probability $p$.
+
+
+
+\textbf{Aside:
+Normal approximation to Binomial and Continuity Correction}
+
+We know $X \sim \Bin(n, p)$ but this is sometimes cumbersome to calculate probabilities with.
+We can approximate the binomial distribution by a Normal distribution with the same mean and variance:
+\[
+\Bin(n, p)\text{ is approximately } N(np, np(1 - p))
+\]
+this approximation is acceptable when $np \geq 10$ and $n(1 - p) \geq 10$ and the larger these value the better.
+
+For small $n$,
+a continuity correction might be appropriate:
+
+if $X \sim \Bin(n, p)$ and $X' \sim N(np, np(1 - p))$,
+then
+\begin{align*}
+    \P(X \leq k) &\simeq \P(X' \leq k + 1 / 2) \\
+    \P(k_1 \leq X \leq k_2) &\simeq \P(k_1 - 1 / 2 \leq X' \leq k_2 + 1 / 2)
+\end{align*}
+
+
+
+
 
 
 

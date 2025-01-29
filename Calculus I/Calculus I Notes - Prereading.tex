@@ -2,7 +2,6 @@
 \usepackage{preamble}
 
 \newcommand{\limas}[3][n]{#2 \rightarrow #3 \text{ as } #1 \rightarrow \infty}
-\newcommand{\pd}[2][]{\frac{\partial #1}{\partial #2}}
 
 \title{Calculus I \\
     \large Prereading}
@@ -2254,8 +2253,74 @@ Comparing this with $df = \pd[f]{x}\,dx + \pd[f]{y}\,dy$ we have that
 \end{align*}
 This shows how one can replace partial derivative in $x$ with a linear combination of partial derivatives in $u$ and $v$.
 
+As the above equations are true for any arbitrary
+(differentiable)
+$f$,
+it can be useful on occasion to think of 'disembodied' differential operators such $\pd{x}$ etc and to write the above equation as
+\begin{align*}
+    \pd{x} &= \pd[u]{x}\pd{u} + \pd[v]{x}\pd{v} \\
+    \pd{y} &= \pd[u]{y}\pd{u} + \pd[v]{y}\pd{v}.
+\end{align*}
+This can also be rewritten as a vector equation
+\[
+\begin{pmatrix}
+    \pd{x} \\ \pd{y}
+\end{pmatrix} = \begin{pmatrix}
+    \pd[u]{x} & \pd[v]{x} \\ \pd[u]{y} & \pd[v]{y}
+\end{pmatrix}
+\begin{pmatrix}
+    \pd{u} \\ \pd{v}
+\end{pmatrix}
+=
+J
+\begin{pmatrix}
+    \pd{u} \\ \pd{v}
+\end{pmatrix}
+\]
+where $J$ is the Jacobian matrix.
 
+\subsection{Taylor's Theorem for functions of more than one variable}
+For functions of one variable which are suitably differentiable,
+Taylor's Theorem states that
+\[
+f(x_0 + a) = f(x_0) + a\frac{df}{dx}(x_0) + \frac{a ^ 2}{2!}f''(x_0) + \dotsc + \frac{a ^ n}{n!}f ^ {(n)}(x_0) + \frac{a ^ {n + 1}}{(n + 1)!}f ^ {(n + 1)}(\xi)
+\]
+where $\xi \in (x_0, x_0 + a)$.
 
+The derivation of Taylor's theorem for functions of more than one variable is ridiculously long and very symbol intensive so I shall omit it.
+We end up with an expression for the Taylor series of $f(x, y)$ around $(x_0, y_0)$
+\begin{align*}
+    f(x, y) &= f(x_0, y_0) + \left(x\pd[f]{x} + y\pd[f]{y}\right)(x_0, y_0) \\
+    &+ \frac{1}{2!}\left(x ^ 2f_{xx} + 2xyf_{xy} + y ^ 2f_{yy}\right)(x_0, y_0) \\
+    &+ \dotsc + \frac{1}{n!}\left(x\pd{x} + y\pd{y}\right) ^ nf(x_0 y_0) \\
+    &+ \frac{1}{(n + 1)!}\left(x\pd{x} + y\pd{y}\right) ^ {n + 1}f(x_0 + \xi x, y_0 + \xi y).
+\end{align*}
+where $\xi \in (0, 1)$ and so the remainder term is evaluated at a point on the straight line between $(x_0, y_0)$ and $(x_0 + a, y_0 + b)$.
+
+\begin{example}
+    Calculate the expansion of $f(x, y) = \frac{\ln(1 + x)}{\ln(3 - y)}$ around $(x, y) = (0, 0)$ up to quadratic order.
+
+    \begin{solution}
+        First we have that
+        \[
+        f(0, 0) = \frac{\ln(1)}{\ln(3)} = 0.
+        \]
+        Now let us get the following
+        \begin{align*}
+            f_{x}(x, y) &= \frac{1}{1 + x}\frac{1}{\ln(3 - y)} \implies f_{x}(0, 0) = \frac{1}{\ln(3)} \\
+            f_{xx}(x, y) &= -\frac{1}{(1 + x) ^ 2}\frac{1}{\ln(3 - y)} \implies f_{xx}(0, 0) = -\frac{1}{\ln(3)} \\
+            f_{y}(x, y) &= \ln(1 + x)\pd{y}\left(\frac{1}{\ln(3 - y)}\right) = \ln(1 + x)\left(\frac{1}{3 - y}\frac{1}{(\ln(3 - y)) ^ 2}\right) \\ &\implies f_{y}(0, 0) = 0 \\
+            f_{yy}(x, y) &= \ln(1 + x)\pd{y}\left(\frac{1}{3 - y}\frac{1}{(\ln(3 - y)) ^ 2}\right) \implies f_{yy}(0, 0) = 0 \\
+            f_{xy}(x, y) &= \frac{1}{1 + x}\left(\frac{1}{3 - y}\frac{1}{(\ln(3 - y)) ^ 2}\right) \implies f_{xy}(0, 0) = \frac{1}{3(\ln(3)) ^ 2}.
+        \end{align*}
+        Hence we can see that
+        \begin{align*}
+            f(x, y) &= f(0, 0) + (xf_{x}(0, 0) + yf_{y}(0, 0)) + \frac{1}{2}(x ^ 2f_{xx}(0, 0) + 2xyf_{xy}(0, 0) + y ^ 2f_{yy}(0, 0)) \\
+            &= 0 + \frac{1}{\ln(3)}x - \frac{x ^ 2}{2\ln(3)} + \frac{xy}{3(\ln(3)) ^ 2} \\
+            &= \frac{1}{\ln(3)}x - \frac{x ^ 2}{2\ln(3)} + \frac{xy}{3(\ln(3)) ^ 2} + \dotsi.
+        \end{align*}
+    \end{solution}
+\end{example}
 
 
 
