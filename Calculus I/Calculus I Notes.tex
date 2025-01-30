@@ -3730,6 +3730,133 @@ therefore $\nabla f$ is normal to level set $f = c$.
     \end{solution}
 \end{example}
 
+\subsection{Taylor's Theorem}
+
+\begin{example}
+    Find Taylor series of $f(x, y) = x + \sin(x + y)$ around the point $(x_0, y_0) = \left(\frac{\pi}{2}, 0\right)$ to quadratic order.
+
+    \begin{solution}
+        $f(x_0, y_0) = f\left(\frac{\pi}{2}, 0\right) = \frac{\pi}{2} + \sin\left(\frac{\pi}{2} + 0\right) = \frac{\pi}{2} + 1$.
+        \begin{align*}
+            f_x &= 1 + \cos(x + y) = 1 + 0 = 1 \\
+            f_y &= \cos(x + y) = 0 \\
+            f_{xx} &= -\sin(x + y) = -1 \\
+            f_{xy} &= -\sin(x + y) = -1 \\
+            f_{yy} &= -\sin(x + y) = -1
+        \end{align*}
+
+        \[
+        f(x, y) = \frac{\pi}{2} + 1 + \left(x - \frac{\pi}{2}\right) + \frac{1}{2}\left(-\left(x - \frac{\pi}{2}\right) - 2\left(x - \frac{\pi}{2}\right)y - y ^ 2\right) + \dotsc.
+        \]
+    \end{solution}
+\end{example}
+
+\subsection{Stationary Points}
+
+In $1$D for $f(x)$,
+$f(x)$ has a maximum or minimum when $\frac{df}{dx} = 0$.
+\begin{example}
+    \[
+    f(x) = 1 + x ^ 2.
+    \]
+    
+    \begin{solution}
+        $\frac{df}{dx} = 2x = 0$ when $x = 0$.
+    \end{solution}
+\end{example}
+
+In $2$D for $f(x, y)$,
+stationary points come in three categories.
+
+\begin{example}
+    $f(x, y) = 1 + x ^ 2 + y ^ 2$,
+    this has a minimum.
+
+    $f(x, y) = 1 - x ^ 2 - y ^ 2$,
+    has a maximum.
+
+    $f(x, y) = 1 + x ^ 2 - y ^ 2$,
+    this has a saddle point.
+\end{example}
+
+At a stationary point the slope vanishes,
+$\nabla f \cdot \hat{\mbf{n}} = 0 \implies \forall \hat{\mbf{n}} \nabla f = 0$.
+
+\begin{definition}
+    Let $f(x_1, \dotsc, x_n)$ be a function $f : D \rightarrow \R$,
+    $D \subseteq \R ^ n$.
+    The point $\mbf{a} = (a_1, \dotsc, a_n)$ is a stationary point of $f$ if and only if $f$ is differentiable at $\mbf{a}$ and $\nabla f = \left(\pd[f]{x_1}, \pd[f]{x_2}, \dotsc, \pd[f]{x_n}\right) = (0, 0, \dotsc, 0)$,
+    i.e. $\pd[f]{x_i} = 0$ $1 \leq i \leq n$.
+\end{definition}
+
+\begin{example}
+    Find the stationary points of $f(x, y) = xye ^ {-x ^ 2 - y ^ 2}$.
+
+    \begin{solution}
+        \[
+        \pd[f]{x} = 0 = ye ^ {-x ^ 2 - y ^ 2} + x(-2x)ye ^ {-x ^ 2 - y ^ 2} = y(1 - 2x ^ 2)e ^ {-x ^ 2 - y ^ 2}
+        \]
+        \[
+        \pd[f]{y} = 0 = x(1 - 2y ^ 2)e ^ {-x ^ 2 - y ^ 2}
+        \]
+        \begin{align*}
+            y(1 - 2x ^ 2) &= 0 \\
+            x(1 - 2y ^ 2) &= 0
+        \end{align*}
+        this implies either $y = 0$ or $2x ^ 2 = 1$.
+
+        If $y = 0$ we have $x = 0$.
+        If $x ^ 2 = \frac{1}{2}$ we have $2y ^ 2 = 1 \implies y ^ 2 = \frac{1}{2}$.
+
+        Stationary points are $(0, 0), \left(\pm\frac{1}{\sqrt{2}}, \pm\frac{1}{\sqrt{2}}\right)$,
+        with $(0, 0)$ a saddle point,
+        $\left(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right), \left(-\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right)$ maxima,
+        $\left(\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right), \left(-\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right)$ minima.
+    \end{solution}
+\end{example}
+
+How can we see if we have a maximum,
+minimum or saddle?
+
+In $1$D we decide between maximum and minimum as follows.
+Suppose $f(x)$ has a stationary point at $x = x_0$ i.e. $f'(x_0) = 0$
+\[
+f(x_0 + \delta x) = f(x_0) + \delta xf'(x_0) + \frac{(\delta x) ^ 2}{2!}f''(x_0) + \dotsc
+\]
+\[
+f(x_0 + \delta x) = f(x_0) + \frac{(\delta x) ^ 2}{2!}f''(x_0) + o(\delta x ^ 2).
+\]
+For small enough $\delta x$,
+quadratic term dominates $+ \dotsc$
+\[
+\delta f = f(x_0 + \delta x) - f(x_0) \approx \frac{(\delta x) ^ 2}{2!}f''(x_0) > 0 \qquad\text{ if } f''(x_0) > 0
+\]
+must be at a minimum
+$< 0$ if $f''(x_0) > 0$ maximum.
+
+If $f''(x_0) = 0$ stationary point it is called degenerate.
+
+
+We shall use three methods to determine the nature of stationary points for functions of more than one variable.
+
+\textbf{Method $1$}
+
+Suppose $f(x, y)$ has a stationary point at $(x_0, y_0)$
+\[
+\pd[f]{x}(x_0, y_0) = \pd[f]{y}(x_0, y_0) = 0.
+\]
+Near the stationary point by Taylor series.
+\[
+f(x_0 + \delta x, y_0 + \delta y) = f(x_0, y_0) + f_x\delta x + f_y\delta y + \frac{1}{2}\left(f_{xx}(\delta x) ^ 2 + 2f_{xy}(\delta x) + f_{yy}(\delta y) ^ 2\right) + \dotsc
+\]
+\[
+\delta f = f(x_0 + \delta x, y_0 + \delta y) - f(x_0, y_0) = \frac{1}{2}\left(f_{xx}(\delta x) ^ 2 + 2f_{xy}(\delta x) + f_{yy}(\delta y) ^ 2\right) + \dotsc + o((\|\delta\mbf{x}\|) ^ 2).
+\]
+
+
+
+
+
 
 
 
