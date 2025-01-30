@@ -1426,7 +1426,7 @@ e ^ x = \lim_{n \rightarrow \infty}\left(1 + \frac{x}{n}\right) ^ n\text{ for } 
     \end{proof}
 \end{theorem}
 
-\begin{lemma}
+\begin{lemma}\label{analy:lem:expboundlemma}
     Let $x \in (-\infty, 1)$.
     Then
     \[
@@ -3462,6 +3462,11 @@ but not differentiable at any point.
     \[
     (f(x)g(x))'(c) = f'(c)g(c) + f(c)g'(c).
     \]
+    Assume $f(c) \neq 0$.
+    Then $\frac{1}{f(x)}$ is defined in a open neighbourhood around $x = c$ and is differentiable with
+    \[
+    \left(\frac{1}{f(c)}\right)' = \frac{-f'(c)}{f ^ 2(c)}
+    \]
     
     \begin{proof}
         For the product.
@@ -3485,11 +3490,142 @@ but not differentiable at any point.
     \end{proof}
 \end{theorem}
 
+\begin{theorem}[Chain rule]
+    $g : X \rightarrow Y \subseteq \R$,
+    $f : Y \rightarrow \R$,
+    $X, Y$ open,
+    $g$ is differentiable at $x = c$,
+    $f$ is differentiable at $y = d = g(c)$.
 
+    Then the composition
+    \[
+    f \circ g(x) : X \rightarrow \R
+    \]
+    is differentiable at $x = c$ and
+    \[
+    (f \circ g)'(c) = g'(c)f'(g(c)).
+    \]
 
+    \begin{proof}
+        $g$ differentiable at $c$:
+        \[
+        g(x) = g(c) + g_1(x)(x - c)
+        \]
+        continuous at $c$ and $g_1(c) = \lim_{x \rightarrow c}g_1(x) = g'(c)$.
 
+        $f$ differentiable at $g(c) = d$:
+        \[
+        f(y) = f(g(c)) + f_1(y)(y - g(c)).
+        \]
+        So
+        \begin{align*}
+            f \circ g(x) &= f(g(x)) \\
+            &= f(g(c)) + f_1(g(x))(g(x) - g(c)) \\
+            &= f(g(c)) + f_1(g(x))[g(c) + g_1(x)(x - c) - g(c) ^ 2] \\
+            &= f(g(c)) + f_1(g(x))g_1(x)(x - c)
+            \intertext{have $h(x) = f \circ g(x)$,
+            $h_1(x) = f_1(g(x))g_1(x)$}
+            &= h(c) + h_1(x)(x - c)
+        \end{align*}
+        since $f_1$ is continuous at $g(c)$ and $g_1$ is continuous at $c$,
+        \begin{align*}
+            \lim_{x \rightarrow c}h_1(x) &= f_1(g(c))g_1(c)
+            \intertext{by continuity}
+            &= f'(g(c))g'(c).
+        \end{align*}
+    \end{proof}
+\end{theorem}
 
+\begin{example}
+    $f(x) = \frac{1}{x}$.
 
+    \begin{solution}
+        \begin{align*}
+            \frac{f(x) - f(c)}{x - c} &= \frac{\frac{1}{x} - \frac{1}{c}}{x - c} \\
+            &= \frac{c - x}{xc(x - c)} \\
+            &= -\frac{1}{xc} \xrightarrow[x \rightarrow c]{} -\frac{1}{c ^ 2}.
+        \end{align*}
+        \begin{align*}
+            r(x) &= \frac{f(x) - f(c)}{x - c} - f'(c) \\
+            &= -\frac{1}{xc} + \frac{1}{c ^ 2} \\
+            &= \frac{x - c}{xc ^ 2}.
+        \end{align*}
+    \end{solution}
+\end{example}
+
+\begin{lemma}
+    \[
+    x \leq e ^ x - 1 \leq \frac{x}{1 - x}\qquad(x < 1).
+    \]
+\end{lemma}
+
+\begin{example}
+    $f(x) = e ^ x$.
+    
+    \begin{solution}
+        By previous
+        \[
+        1 \leq \frac{e ^ x - 1}{x} \leq \frac{1}{1 - x}\qquad(x > 0).
+        \]
+        By squeezing
+        \[
+        \lim_{x \rightarrow 0}\frac{e ^ x - 1}{x} = \lim_{x \rightarrow 0}\frac{e ^ x - e ^ 0}{x - 0} = 1 = e ^ 0.
+        \]
+
+        General $c$
+        \begin{align*}
+            \frac{e ^ x - e ^ c}{x - c} &= e ^ c\left(\frac{e ^ {x - c} - 1}{x - c}\right) \\
+            &\xrightarrow[x \rightarrow c]{}e ^ c \cdot 1 = e ^ c.
+        \end{align*}
+
+        We have shown $(e ^ x)' = e ^ x$.
+    \end{solution}
+\end{example}
+
+\subsection{Inverse functions}
+\begin{theorem}
+    $f : I \rightarrow \R$
+    ($I$ an interval)
+    continuous and differentiable at $x = c$,
+    and $f'(c) \neq 0$.
+    Assume $f$ is $1$-$1$
+    (invertible).
+    So
+    \[
+    f ^ {-1} = g : \underset{= f(I)}{Y} \rightarrow \R
+    \]
+    exists and is differentiable at $y = d = f(c)$ and
+    \[
+    (f ^ {-1})'(d) = \frac{1}{f'(f ^ {-1}(d))} = \frac{1}{f'(c)}.
+    \]
+
+    \begin{proof}
+        Simple case.
+        Assume you knew that the inverse function $f ^ {-1}$ is differentiable.
+        Then $f ^ {-1} \circ f(x) = x$ by the chain rule
+        \[
+        f ^ {-1}'(f(x))f'(x) = 1
+        \]
+        \[
+        (f ^ {-1}(f(x)))' = \frac{1}{f'(x)}
+        \]
+        write $x = f ^ {-1}(y)$,
+        \[
+        (f ^ {-1})'(y) = \frac{1}{f'(f ^ {-1}(y))}.
+        \]
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    For $\log(x) = (e ^ x) ^ {-1}$.
+
+    \begin{solution}
+        We have
+        \[
+        (\log(x))' = \frac{1}{e ^ {\log(x)}} = \frac{1}{x}.
+        \]
+    \end{solution}
+\end{example}
 
 
 
