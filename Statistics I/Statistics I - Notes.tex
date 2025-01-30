@@ -752,7 +752,64 @@ then
     \P(k_1 \leq X \leq k_2) &\simeq \P(k_1 - 1 / 2 \leq X' \leq k_2 + 1 / 2)
 \end{align*}
 
+\subsection{The Sample Proportion as an Estimator for \texorpdfstring{$p$}{}}
+As $X \sim \Bin(n, p)$ we have that
+\begin{align*}
+    \E(\hat{p}) = \E(Y) &= \E\left(\frac{X}{n}\right) = \frac{1}{n}\E(X) \\
+    &= \frac{1}{n}np = p \\
+    \Var(\hat{p}) = \Var(Y) &= \Var\left(\frac{X}{n}\right) = \frac{1}{n ^ 2}(X) \\
+    &= \frac{1}{n ^ 2}npq = \frac{pq}{n} = \frac{p(1 - p)}{n}.
+\end{align*}
 
+We have that $\E(\hat{p}) = p$,
+that is the expectation of our estimator $\hat{p}$ is equal to the thing we are trying to estimate.
+We say the estimator is unbiased.
+
+As we have $\Var(\hat{p}) = \frac{p(1 - p)}{n}$ we now have some understanding and some control over how accurate our estimate is:
+if we double the size of the sample $n$ then the variance will decrease by $2$.
+The corresponding standard deviation would only decrease by $\sqrt{2}$.
+
+\textbf{Normal Approximation}
+
+As $X \sim \Bin(n, p)$ and $Y = \frac{X}{n}$,
+we can calculate probabilities for $Y = \hat{p}$
+(if we are given $n$ and $p$ say),
+but if $n$ is large this is cumbersome.
+
+Instead we can employ the Normal approximation for $X$ and then $Y$:
+\begin{align*}
+    X &\sim \Bin(n, p) \\
+    \implies X &\sim N(np, np(1 - p)) \\
+\implies \hat{p} = Y &\sim N\left(p, \frac{p(1 - p)}{n}\right).
+\end{align*}
+
+\textbf{Margin of Error}
+
+How accurate is our estimator $Y$?
+The margin of error of an estimate can be roughly defined
+(for now)
+as two standard deviations $\mathrm{SD}(Y)$ on either side of the estimate,
+suggesting the true value $p$ may lie in an interval of the form:
+\[
+Y \pm 2\sqrt{\frac{p(1 - p)}{n}}
+\]
+this is pretty useless since we don't know $p$,
+if we did then there would be no point in estimating.
+
+We can find a very useful upper bound on the margin of error:
+\[
+\max_{p \in [0, 1]}p(1 - p) = \frac{1}{4}\text{ at } p = \frac{1}{2}.
+\]
+Therefore,
+\[
+\text{Margin of Error } = 2\sqrt{\frac{p(1 - p)}{n}} \leq 2\sqrt{\frac{1}{4n}} = \frac{1}{\sqrt{n}}
+\]
+that is,
+the margin of error is bounded by $\frac{1}{\sqrt{n}}$ no matter what the value of $p$.
+So our suggested standard deviation interval becomes the famous result:
+\[
+Y \pm 2\sqrt{\frac{p(1 - p)}{n}} = Y \pm \frac{1}{\sqrt{n}}.
+\]
 
 
 
