@@ -1,0 +1,268 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+\usepackage{tikz-cd}
+
+\declaretheorem[style = avgstyle, name = Problem]{problem}
+\newcommand{\ts}[1]{\textsuperscript{#1}}
+
+\title{Linear Algebra I \\
+\large Problem Class}
+\author{Luke Phillips}
+\date{January 2025}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Class \texorpdfstring{$1$}{}}
+
+\begin{problem}
+    Let $A = \frac{1}{2}\begin{pmatrix}
+        9 & -7 \\
+        -7 & 9
+    \end{pmatrix}$
+
+    \begin{enumerate}[label = (\alph*)]
+        \item Find an invertible $M$ such that $M ^ {-1}AM = \text{diagonal}$.
+
+        \item Find $B$ such that $B ^ 3 = A$.
+    \end{enumerate}
+
+    \begin{solution}\phantom{}
+        \begin{enumerate}[label = (\alph*)]
+            \item
+            \begin{align*}
+                p_A(t) &= \det\begin{pmatrix}
+                    \frac{9}{2} - t & -\frac{7}{2} \\
+                    -\frac{7}{2} & \frac{9}{2} - t
+                \end{pmatrix} \\
+                &= \left(\frac{9}{2} - t\right) ^ 2 - \left(-\frac{7}{2}\right) ^ 2 \\
+                &= \left(\frac{9}{2} - t\right)\left(\frac{9}{2} - t + \frac{7}{2}\right) \\
+                &= (1 - t)(8 - t)
+            \end{align*}
+            so the eigenvalues are $\lambda = 1, 8$
+        
+            \[
+            \lambda = 1
+            \]
+            \begin{align*}
+                (A - I)\mbf{v} &= \mbf{0} \\
+                \begin{pmatrix}
+                    \frac{7}{2} & -\frac{7}{2} \\
+                    -\frac{7}{2} & \frac{7}{2}
+                 \end{pmatrix}
+                 \begin{pmatrix}
+                     a \\ b
+                 \end{pmatrix} = \begin{pmatrix}
+                     0 \\ 0
+                 \end{pmatrix} \\
+                 \implies a = b
+            \end{align*}
+            \[
+            \mbf{v}_{\lambda = 1} = \begin{pmatrix}
+                1 \\ 1
+            \end{pmatrix}.
+            \]
+    
+            \[
+            \lambda = 8
+            \]
+            $\mbf{v}_{\lambda = 8} = \begin{pmatrix}
+                1 \\ -1
+            \end{pmatrix}$.
+            
+            \begin{align*}
+                V_{\lambda = 1} &= \mathrm{span}\left\{\begin{pmatrix}
+                    1 \\ 1
+                \end{pmatrix}\right\} \\
+                V_{\lambda = 8} &= \mathrm{span}\left\{\begin{pmatrix}
+                    1 \\ -1
+                \end{pmatrix}\right\} \\
+                \R ^ 2 &= V_{\lambda = 1} \oplus V_{\lambda = 8}.
+            \end{align*}
+            Hence
+            $M = [\mbf{v}_{\lambda = 1}, \mbf{v}_{\lambda = 8}] = \begin{pmatrix}
+                1 & 1 \\ 1 & -1
+            \end{pmatrix}$.
+
+            \item We want
+            \begin{align*}
+                B ^ 3 = A = MDM ^ {-1} &\iff M ^ {-1}B ^ 3M = D \\
+                &\iff M ^ {-1}BBBM = D = M ^ {-1}BMM ^ {-1}BMM ^ {-1}BM = D \\
+                &\iff (M ^ {-1}BM) ^ 3 = D.
+            \end{align*}
+            Need $\tilde{D}$ such that $\tilde{D} ^ 3 = \begin{pmatrix}
+                1 & 0 \\ 0 & 8
+            \end{pmatrix} \implies \tilde{D} = \begin{pmatrix}
+                1 & 0 \\ 0 & 2
+            \end{pmatrix}$
+            so $M ^ {-1}BM = \tilde{D} \implies B = M\tilde{D}M ^ {-1}$.
+        \end{enumerate}
+    \end{solution}
+\end{problem}
+
+\begin{problem}\phantom{}
+    \begin{enumerate}[label = (\alph*)]
+        \item Find $D$ such that $P ^ {-1}AP$ is diagonal when $A = \begin{pmatrix}
+            1 & -1 \\ 5 & -1
+        \end{pmatrix}$
+
+        \item Find the solution $x(t), y(t)$ to the ODE system
+        \begin{align*}
+            \dot{x} &= x - y \\
+            \dot{y} = 5x - y
+        \end{align*}
+        with
+        \[
+        \begin{pmatrix}
+            x(0) \\ y(0)
+        \end{pmatrix} = \begin{pmatrix}
+            0 \\ 4
+        \end{pmatrix}.
+        \]
+    \end{enumerate}
+
+    \begin{solution}\phantom{}
+        \begin{enumerate}[label = (\alph*)]
+            \item 
+            \begin{align*}
+                p_A(t) &= \det\begin{pmatrix}
+                    1 - t & -1 \\ 5 & -1 - t
+                \end{pmatrix} \\
+                &= t ^ 2 + 4 \\
+                &= (t + 2i)(t - 2i).
+            \end{align*}
+            Even though $A$ is real the eigenvalues are complex.
+            Hence $\lambda = -2i, 2i$.
+    
+            \[
+            \lambda = -2i
+            \]
+            \begin{align*}
+                (A - (-2i)I)\mbf{v} &= \begin{pmatrix}
+                    1 + 2i & -1 \\ 5 & -1 + 2i
+                \end{pmatrix}\begin{pmatrix}
+                    a \\ b
+                \end{pmatrix} = \begin{pmatrix}
+                     0 \\ 0
+                \end{pmatrix} \\
+                &\implies
+                (1 + 2i)a - b = 0 \\
+                5a + (-1 + 2i)b = 0 \\
+                \implies b = (1 + 2i)a
+            \end{align*}
+    
+            \[
+            \mbf{v}_{\lambda = -2i} = \begin{pmatrix}
+                1 \\ 1 + 2i
+            \end{pmatrix}.
+            \]
+            Likewise,
+            $\mbf{v}_{\lambda = 2i} = \begin{pmatrix}
+                1 \\ 1 - 2i
+            \end{pmatrix}$.
+    
+            So $P = [\mbf{v}_{\lambda = -2i}, \mbf{v}_{\lambda = 2i}] = \begin{pmatrix}
+                1 & 1 \\ 1 + 2i & 1 - 2i
+            \end{pmatrix} \implies P\begin{pmatrix}
+                2 + i & -i \\
+                2 - i & i
+            \end{pmatrix}$
+            \[
+            P ^ {-1}AP = \begin{pmatrix}
+                -2i & 0 \\
+                0 & 2i
+            \end{pmatrix} = D
+            \]
+            \[
+            \implies A = PDP ^ {-1}.
+            \]
+
+            \item
+            \[
+            \begin{pmatrix}
+                \dot{x} \\ \dot{y}
+            \end{pmatrix} = A\begin{pmatrix}
+                x \\ y
+            \end{pmatrix}
+            \]
+            with $A$ as above.
+
+            \[
+            \dot{\mbf{x}} = A\mbf{x} = PDP ^ {-1}\mbf{x} \implies (P ^ {-1}\dot{\mbf{x}}) = DP ^ {-1}\mbf{x}
+            \]
+            i.e.
+            if $\mbf{w} = P ^ {-1}\mbf{x}$,
+            $\dot{\mbf{w}} = D\mbf{w}$.
+
+            If $\mbf{w} = \begin{pmatrix}
+                w_1 \\ w_2
+            \end{pmatrix},
+            \begin{pmatrix}
+                \dot{w}_1 \\ \dot{w}_2
+            \end{pmatrix} = \begin{pmatrix}
+                -2i & 0 \\ 0 & 2i
+            \end{pmatrix}\begin{pmatrix}
+                w_1 \\ w_2
+            \end{pmatrix} \implies$
+            \begin{align*}
+                \dot{w}_1 &= -2iw_1 \\
+                \dot{w}_2 &= 2iw_2
+            \end{align*}
+            \[
+            \implies
+            \begin{pmatrix}
+                w_1 \\ w_2
+            \end{pmatrix} = \begin{pmatrix}
+                \alpha e ^ {-2it} \\
+                \beta e ^ {2it}
+            \end{pmatrix}
+            \]
+            \[
+            \implies \begin{pmatrix}
+                x(t) \\ y(t)
+            \end{pmatrix} = P\begin{pmatrix}
+                w_1(t) \\ w_2(t)
+            \end{pmatrix} = \begin{pmatrix}
+                \alpha e ^ {-2it} + \beta e ^ {2it} \\
+                (1 + 2i)\alpha e ^ {-2it} + (1 - 2i)\beta e ^ {wit}
+            \end{pmatrix}.
+            \]
+            Fix $\alpha$ and $\beta$:
+            \[
+            \begin{pmatrix}
+                x(0) \\ y(0)
+            \end{pmatrix} = \begin{pmatrix}
+                0 \\ 4
+            \end{pmatrix} \\
+            \begin{pmatrix}
+                \alpha - \beta \\
+                (1 + 2i)\alpha + (1 - 2i)\beta
+            \end{pmatrix}
+            \]
+            solve
+            \[
+            \alpha + \beta = 0 \implies \alpha = -\beta
+            \]
+            etc.
+            $\implies \alpha = -i$.
+            \[
+            \begin{pmatrix}
+                x(t) \\ y(t)
+            \end{pmatrix} = \begin{pmatrix}
+                -2\sin(2t) \\
+                4\cos(2t)
+            \end{pmatrix}
+            \]
+            real.
+        \end{enumerate}
+    \end{solution}
+\end{problem}
+
+\end{document}

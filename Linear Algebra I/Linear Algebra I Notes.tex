@@ -6043,6 +6043,64 @@ the eigenvalues might be complex.}
     We need to work on $\C ^ 2$ to diagonalise this matrix.
 \end{example}
 
+\newpage
+
+\section{Inner-product spaces}
+
+\subsection{Real bilinear forms and inner products}
+
+\begin{proposition}
+    Algebraic multiplicities $\geq$ geometric multiplicities for every eigenvalue $\lambda$.
+
+    \begin{proof}
+        Suppose geometric multiplicity of $\lambda$ is $p$,
+        then let $\mbf{v}_1, \dotsc, \mbf{v}_p$ be independent eigenvectors with this eigenvalue:
+        $A\mbf{v}_i = \lambda\mbf{v}_i$,
+        $i = 1, \dotsc, p$.
+        Complete the basis with $\mbf{w}_1, \dotsc, \mbf{w}_{n - p}$
+        (if $A$ is $N \times N$)
+        so $\{\mbf{v}_1, \dotsc, \mbf{v}_p, \mbf{w}_1, \dotsc, \mbf{w}_{n - p}\}$ spans $\R ^ N$.
+        In this basis 
+        $A = \left(\begin{array}{c|c}
+             \begin{matrix}
+                 \lambda & 0 & 0 \\
+                 0 & \lambda & 0 \\
+                 0 & 0 & \ddots
+             \end{matrix} & B  \\
+              & \\
+             \hline
+             0 & C
+        \end{array}\right)$
+        since $A\mbf{v}_1 = A\begin{pmatrix}
+            1 \\ 0 \\ \vdots \\ 0
+        \end{pmatrix} = \begin{pmatrix}
+            A_{11} \\ A_{21} \\ \vdots \\ A_{n1}
+        \end{pmatrix} = \lambda\begin{pmatrix}
+            1 \\ \vdots \\ 1
+        \end{pmatrix}$ etc.
+        So $\det(A - tI) = (\lambda - t) ^ p\det(C - tI) \implies$ result.
+    \end{proof}
+\end{proposition}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
