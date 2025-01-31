@@ -3853,7 +3853,143 @@ f(x_0 + \delta x, y_0 + \delta y) = f(x_0, y_0) + f_x\delta x + f_y\delta y + \f
 \delta f = f(x_0 + \delta x, y_0 + \delta y) - f(x_0, y_0) = \frac{1}{2}\left(f_{xx}(\delta x) ^ 2 + 2f_{xy}(\delta x) + f_{yy}(\delta y) ^ 2\right) + \dotsc + o((\|\delta\mbf{x}\|) ^ 2).
 \]
 
+$\delta f = f(x_0 + \delta x, y_0 + \delta y) - f(x_0, y_0) \approx \frac{1}{2}Q(\delta x, \delta y)$
+where
+\[
+Q(x, y) = f_{xx}x ^ 2 + 2f_{xy}xy + f_{yy}y ^ 2.
+\]
+$Q$ is an example of a quadratic form $Ax ^ 2 + Bxy + Cy ^ 2$.
+$Q$ can be written
+\[
+\begin{pmatrix}
+    x & y
+\end{pmatrix}\overbrace{\begin{pmatrix}
+    f_{xx} & f_{xy} \\
+    f_{xy} & f_{yy}
+\end{pmatrix}} ^ {= H}
+\begin{pmatrix}
+    x \\ y
+\end{pmatrix} = \mbf{x} ^ TH\mbf{x}
+\]
+$H$ is called the Hessian matrix.
+For a function of $n$ variables $f(x_1, x_2, \dotsc, x_n)$
+\[
+H_{ij} = \frac{\partial ^ 2f}{\partial x_i\partial x_j}.
+\]
+Because order of differentiation doesn't matter $H_{ij} = H_{ji}$ i.e. $H$ is symmetric.
+Note that $Q(\lambda x, \lambda y) = (\lambda x) ^ 2 f_{xx}(\lambda x\lambda y)f_{xy} + (\lambda y) ^ 2f_{yy} = \lambda ^ 2Q(x, y)$.
 
+\begin{example}
+    $Q(x, y) = x ^ 2 - y ^ 2$ has a saddle point.
+\end{example}
+
+For a saddle point regions where $Q > 0$ and $Q < 0$ we must have two lines
+(at least)
+where $Q = 0$.
+
+If $Q = 0$
+\begin{align*}
+    f_{xx}x ^ 2 + 2f_{xy}xy + f_{yy}y ^ 2 = 0 &\iff f_{xx} + 2f_{xy}\left(\frac{y}{x}\right) + f_{yy}\left(\frac{y}{x}\right) ^ 2 \\
+    &\implies \frac{y}{x} = \frac{-2f_{xy} \pm \sqrt{(2f_{xy}) ^ 2 - 4f_{xx}f_{yy}}}{2f_{yy}}
+\end{align*}
+Need two real roots.
+Therefore we must have $(f_{xy}) ^ 2 - f_{xx}f_{yy} > 0$ which implies $\det(H) < 0$.
+
+If $\det(H) > 0$ then there are no lines for which $Q = 0 \implies Q > 0 \forall (x, y) \neq (0, 0) \text{ or } Q < 0 \forall (x, y) \neq (0, 0)$,
+in the first case there is a minimum and the second would be a maximum.
+
+$Q(x, y) = f_{xx}x ^ 2 + 2f_{xy}xy + f_{yy}y ^ 2$.
+Consider $Q(x, 0) = f_{xx}x ^ 2$,
+so $Q < 0 \forall (x, y) \neq (0, 0)$ if $f_{xx} > 0$ and $Q < 0 \forall (x, y) \neq (0, 0)$ if $f_{xx} < 0$.
+
+Classification of stationary points using method $1$.
+\begin{enumerate}[label = \arabic*.]
+    \item $\det(H) < 0$ $f_{xx} > 0$ then minimum.
+    
+    \item $\det(H) > 0$ $f_{xx} < 0$ then maximum.
+    
+    \item $\det(H) > 0$ then saddle.
+
+    \item $\det(H) = 0$ then degenerate.
+\end{enumerate}
+
+\begin{example}
+    Find and classify the stationary points of $f(x, y) = -\frac{x ^ 2}{2}(y - 1) + \frac{y ^ 2}{2} + y$.
+
+    \begin{solution}
+        For a stationary point
+        \begin{align*}
+            0 &= f_x = -x(y - 1) \\
+            0 &= f_y = -\frac{x ^ 2}{2} + y + 1
+        \end{align*}
+
+        The first implies $x = 0$ or $y = 1$,
+        then the second would imply $y = -1$.
+
+        If $y = 1$ then the first would imply $x = \pm 2$.
+
+        Hence three stationary points,
+        $(0, -1), (2, 1), (-2, 1)$.
+
+        Hessian matrix
+        \[
+        H = \begin{pmatrix}
+            f_{xx} & f_{xy} \\
+            f_{yx} & f_{yy}
+        \end{pmatrix}
+        = \begin{pmatrix}
+            -y + 1 & -x \\
+            -x & 1
+        \end{pmatrix}
+        \]
+        \[
+        \det(H) = 1 - y - x ^ 2.
+        \]
+        At $(0, -1)$ $\det(H) = 2 > 0$ $f_{xx} = 2 > 0$ so $(0, -1)$ is a minimum.
+
+        At $(\pm 2, 1)$ $\det(H) = -4 < 0$ so it is a saddle point.
+    \end{solution}
+\end{example}
+
+\textbf{Method 2}
+
+This method relies on diagonalising $H = \begin{pmatrix}
+    f_{xx} & f_{xy} \\
+    f_{yx} & f_{yy}
+\end{pmatrix}$,
+$Q = (x, y)\begin{pmatrix}
+    f_{xx} & f_{xy} \\
+    f_{yx} \\ f_{yy}
+\end{pmatrix}\begin{pmatrix}
+    x \\ y
+\end{pmatrix} = \mbf{x} ^ TH\mbf{x} = \mbf{x} \cdot H\mbf{x}$.
+
+\begin{example}
+    $Q(x, y) = 2x ^ 2 + 2xy + y ^ 2 = (x, y)\begin{pmatrix}
+        2 & 1 \\ 1 & 1
+    \end{pmatrix}\begin{pmatrix}
+        x \\ y
+    \end{pmatrix}$
+
+    Looking at the contour plot.
+    The "natural" axes for ellipse are the axis of symmetry $\nabla Q$ parallel to $\mbf{x}$ so $\nabla Q = 2\lambda\mbf{x}$,
+    $Q = f_{xx}x ^ 2 + 2f_{xy}xy + f_{yy}y ^ 2$.
+    \[
+    \nabla Q = \begin{pmatrix}
+        \pd[Q]{x} \\
+        \pd[Q]{y}
+    \end{pmatrix} = \begin{pmatrix}
+        2f_{xx}x + 2f_{xy}y \\
+        2f_{xx}x + 2f_{yy}y
+    \end{pmatrix} = 2\begin{pmatrix}
+        f_{xx} & f_{xy} \\
+        f_{yx} & f_{yy}
+    \end{pmatrix}\begin{pmatrix}
+        x \\ y
+    \end{pmatrix} = 2H\mbf{x}
+    \]
+    along the axes of symmetry $wH\mbf{x} = 2\lambda\mbf{x} \implies H\mbf{x} = \lambda\mbf{x}$.
+\end{example}
 
 
 
