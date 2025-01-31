@@ -1896,6 +1896,102 @@ the unbounded region is on the other side.
     \end{proof}
 \end{corollary}
 
+\subsection{Euler's Formula}
+\begin{theorem}[Euler's formula]
+    Let $G = (V, E, \phi)$ be a planar graph,
+    with set of faces $F$,
+    and $k$ connected components.
+    Then
+    \[
+    |V| - |E| + |F| = k + 1.
+    \]
+\end{theorem}
+
+\subsection{Simple planar graphs have few edges}
+
+\begin{theorem}
+    If $G = (V, E)$ is a simple planar graph with $|V| \geq 3$,
+    then
+    \[
+    |E| \leq 3|V| - 6
+    \]
+\end{theorem}
+
+\begin{corollary}
+    $K_5$ is not planar.
+    
+    \begin{proof}
+        For $G = K_5$ we have $|V| = 5$,
+        $|E| = 10$.
+        So $|E| = 10 \nleq 9 = 3|V| - 6$.
+    \end{proof}
+\end{corollary}
+
+\begin{definition}
+    The girth $g$ of $G$ is the shortest length of a cycle in $G$.
+    If $G$ has no cycles,
+    then $g = 0$.
+\end{definition}
+
+\begin{proposition}
+    If $G$ is simple,
+    planar,
+    with girth $g \neq 0$,
+    then
+    \[
+    |E| \leq \frac{g}{g - 2}(|V| - 2).
+    \]
+\end{proposition}
+
+\begin{corollary}
+    $K_{3, 3}$ is not planar.
+\end{corollary}
+
+\begin{definition}
+    A subdivision of $G$ is a graph obtained from $G$ by subdividing edges of $G$,
+    where subdividing an edge $e = uv$ of $G$ means
+    \begin{enumerate}[label = \arabic*.]
+        \item Adding a new vertex $w$ to $G$;
+        
+        \item Adding edges $uw, wv$;
+        and
+
+        \item Removing the original edge $e$.
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    A graph $G$ is planar if and only if $G$ contains no subdivision of $K_5$ or $K_{3, 3}$ as a subgraph.
+\end{theorem}
+
+\begin{theorem}
+    Every finite simple planar graph has a vertex of degree $\leq 5$.
+\end{theorem}
+
+\subsection{Platonic graphs}
+
+\begin{definition}
+    A platonic graph is finite,
+    simple,
+    planar,
+    connected,
+    with all vertices of the same degree $d \geq 3$,
+    and all faces of the same boundary length,
+    $b \geq 3$.
+\end{definition}
+
+\begin{theorem}
+    There are just five Platonic graphs.
+\end{theorem}
+
+
+
+
+
+
+
+
+
 
 
 

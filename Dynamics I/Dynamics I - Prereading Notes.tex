@@ -596,7 +596,42 @@ then the velocity of $B$ relative to $A$ is $\mbf{v}_B - \mbf{v}_A$.
     \end{solution}
 \end{example}
 
+\subsection{Sliding down an inclined plane}
+A mass $m$ is free to slide down a plane which is inclined at an angle $\alpha$ to the horizontal.
+Gravity acts downwards,
+there is a frictional force
+(directed up the slope)
+with magnitude $\mu \mbf{N}$,
+where $\mu$ is a positive constant,
+and $\mbf{N}$ is the normal force exerted by the inclined plane on the particle.
+(The direction of $\mbf{N}$ is perpendicular to the plane).
+Starting from rest,
+how far does the particle travel in time $t$?
+How large does $\alpha$ have to be for the mass to move at all?
 
+\begin{solution}
+    Take $\mbf{e}_1$ to point down the slope.
+    Take $\mbf{e}_2$ to be perpendicular to $\mbf{e}_1$.
+
+    Motion is in the $\mbf{e}_1$ direction.
+    The weight of the particle is downwards,
+    with magnitude $mg$.
+    Hence its component in the $\mbf{e}_2$-direction is $-mg\cos{\alpha}$,
+    and so $\mbf{N} = mg(\cos{\alpha})\mbf{e}_2$.
+    Thus,
+    the total force in the $\mbf{e}_1$ direction is
+    \[
+    F = -\mu mg\cos{\alpha} + mg\sin{\alpha}
+    \]
+    which is constant;
+    so
+    \[
+    x(t) = \frac{1}{2}g(\sin{\alpha} - \mu\cos{\alpha})t ^ 2,
+    \]
+    provided $\tan{\alpha} > \mu$,
+    else the particle does not move,
+    and $x(t) = 0$ for all $t$.
+\end{solution}
 
 
 

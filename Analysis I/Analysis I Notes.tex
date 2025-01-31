@@ -3627,12 +3627,159 @@ but not differentiable at any point.
     \end{solution}
 \end{example}
 
+\subsection{Mean Value Theorems}
 
+\begin{proposition}
+    If $f$ is differentiable at $c$ and it has a local maximum or a local minimum at $C$,
+    then $f'(c) = 0$.
 
+    \begin{proof}
+        $f'(c) = \lim_{x \rightarrow c}\frac{f(x) - f(c)}{x - c}$.
+        If $x > c$,
+        but $x$ is near $c$,
+        then $f(x) \leq f(c)$ since $c$ is a local maximum.
+        In particular $\frac{f(x) - f(c)}{x - c} \leq 0$.
+        Similarly,
+        for $x < c$,
+        $\frac{f(x) - f(c)}{x - c} \geq 0$ so $\lim_{x \rightarrow c ^ {+}}\frac{f(x) - f(c)}{x - c} \leq 0, \lim_{x \rightarrow c ^ {-}}\frac{f(x) - f(c)}{x - c} \geq 0 \implies f'(c) = 0$.
+    \end{proof}
+\end{proposition}
 
+\begin{theorem}[Rolle's Theorem]
+    Let $f : [a, b] \rightarrow \R$ be continuous and differentiable on $(a, b)$,
+    and suppose $f(a) = f(b)$.
+    Then there exists $c \in (a, b)$ with $f'(c) = 0$.
 
+    \begin{proof}
+        A continuous function on a closed interval attains a maximum and a minimum.
+        So there is a $c \in [a, b]$ with $f(c) \geq f(x)$ for all $x \in [a, b]$,
+        $d \in [a, b]$ with $f(d) \leq f(x)$ for all $x \in [a, b]$.
+        If $c \in (a, b)$,
+        we get $f'(c) = 0$ by last result.
+        If $c = a$ or $c = b$.
+        Then look at minimum $d$ if $f \in (a, b)$ we can use the last result again $f'(d) = 0$.
+        If $d = a$ or $d = b$,
+        then $f(d) = f(c)$ and the whole function is constant.
+        Then $f'(x) = 0$ for all $x \in (a, b)$.
+    \end{proof}
+\end{theorem}
 
+\begin{theorem}[Mean Value Theorem]
+    Let $f : [a, b] \rightarrow \R$ be continuous and differentiable on $(a, b)$.
+    Then there exists a $c \in (a, b)$ such that $f'(c) = \frac{f(b) - f(a)}{b - a}$.
 
+    \begin{proof}
+        $g(x) = f(x) - \frac{f(b) - f(a)}{b - a}(x - a)$.
+        Then $g$ is continuous on $[a, b]$ and differentiable on $(a, b)$.
+        \[
+        g(b) = f(b) - \frac{f(b) - f(a)}{b - a}(b - a) = f(b) - f(b) + f(a) = f(a).
+        \]
+        \[
+        g(a) = f(a).
+        \]
+        By Rolle,
+        there is a $c \in (a, b)$ with $g'(c) = 0$.
+        \[
+        g'(c) = f'(c) - \frac{f(b) - f(a)}{b - a} = 0.
+        \]
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Let $f : I \rightarrow \R$ be continuous on an interval $I$,
+    differentiable in its interior.
+    \begin{enumerate}[label = (\roman*)]
+        \item If $f'(x) = 0$ for all $x$,
+        then $f$ is constant.
+
+        \item If $f'(x) \geq 0$
+        ($\leq 0$)
+        for all $x$,
+        then $f$ is monotonically increasing
+        (decreasing).
+
+        \item If $f'(x) > 0$
+        ($< 0$)
+        for all $x$,
+        then $f$ is strictly monotonically increasing
+        (decreasing).
+    \end{enumerate}
+    \begin{proof}
+        Let $c < d$ be two points in $I$.
+        By MVT there is an $\alpha \in (c, d)$ such that
+        \[
+        f(d) - f(c) = (d - c)f'(\alpha) = \begin{dcases*}
+            0 & in case (i) \\
+            \geq 0 & in case (ii) \\
+            > 0 & in case (iii).
+        \end{dcases*}
+        \]
+        In case (i) $f(d) = f(c)$,
+        in case (ii) $f(d) \geq f(c)$,
+        in case (iii) $f(d) > f(c)$.
+    \end{proof}
+\end{theorem}
+
+\textit{Caution:
+It is important that $f$ is defined on an interval.}
+$f(x) = \frac{1}{x}$ differentiable on $(-\infty, 0) \cup (0, \infty)$ $f'(x) = -\frac{1}{x ^ 2} < 0$.
+Only on the two separate intervals do we get strictly monotonically decreasing.
+
+\begin{theorem}[Cauchy's Generalised Mean Value Theorem]
+    Let $f, g : [a, b] \rightarrow \R$ continuous and differentiable on $(a, b)$.
+    Assume $g'(x) \neq 0$ for all $x \in (a, b)$.
+    Then there exists $c \in (a, b)$ such that
+    \[
+    \frac{f'(c)}{g'(c)} = \frac{f(b) - f(a)}{g(b) - g(a)}.
+    \]
+
+    \begin{proof}
+        Consider
+        \[
+        h(x) = (g(b) - g(a))f(x) - (f(b) - f(a))g(x)
+        \]
+        continuous on $[a, b]$,
+        differentiable on $(a, b)$.
+        By Rolle there is $c \in (a, b)$ with $h'(c) = 0$
+        \[
+        h'(c) = (g(b) - g(a))f'(c) - (f(b) - f(a))g'(c) = 0.
+        \]
+    \end{proof}
+\end{theorem}
+
+If you try MVT,
+you get $c \in (a, b)$ with $f'(c) = \frac{f(b) - f(a)}{b - a}$,
+$g'(c') = \frac{g(b) - g(a)}{b - a}$.
+
+\subsection{L'H\^opital's Rule}
+
+\begin{theorem}
+    Let $f$ and $g$ be two differentiable functions on $(a, b)$.
+    Assume that
+    \[
+    \lim_{x \rightarrow a ^ {+}}f(x) = 0
+    \]
+    and
+    \[
+    \lim_{x \rightarrow a ^ {+}}g(x) = 0
+    \]
+    and $g(x) \neq 0$,
+    $g'(x) \neq 0$ for all $x$ on $(a, b)$.
+    Then
+    If
+    \[
+    \lim_{x \rightarrow a ^ {+}}\frac{f'(x)}{g'(x)}
+    \]
+    exists then also
+    \[
+    \lim_{x \rightarrow a ^ {+}}\frac{f(x)}{g(x)}
+    \]
+    exists
+    and
+    \[
+    \lim_{x \rightarrow a ^ {+}}\frac{f(x)}{g(x)} = \lim_{x \rightarrow a ^ {+}}\frac{f'(x)}{g'(x)}.
+    \]
+\end{theorem}
 
 
 
