@@ -3790,15 +3790,224 @@ i.e.
 
 \begin{proposition}
     A symmetric matrix $B$ is positive-definite if and only if its eigenvalues are all positive.
+
+    \begin{proof}
+        "$\implies$".
+        For each eigenvalue $\lambda_i$ choose an eigenvector $\mbf{v}_i$ with eigenvalue $\lambda_i$.
+        For a positive-definite matrix we then have
+        \[
+        0 < \mbf{v}_i ^ tB\mbf{v}_i = \lambda_i\mbf{v}_i ^ t\mbf{v}_i = \lambda_i \mbf{v}_i \cdot \mbf{v}_i.
+        \]
+        But $\mbf{v}_i \cdot \mbf{v}_i > 0$,
+        so we conclude that $\lambda_i > 0$.
+
+        "$\impliedby$".
+        Given a real $n \times n$ symmetric matrix $B$,
+        we can form a basis for $\R ^ n$ formed by eigenvectors $\mbf{v}_i$ of $B$,
+        with eigenvalue $\lambda_i$,
+        and such that $\mbf{v}_i \cdot \mbf{v}_j = 0$ for $i \neq j$.
+        If we express an arbitrary non-zero vector $\mbf{v}$ in this basis as $\mbf{v} = \sum_{i = 1}^{n}c_i\mbf{v}_i$
+        (with at least one $c_i \neq 0$) we have
+        \begin{align*}
+            \mbf{v} ^ tB\mbf{v} &= \left(\sum_{i = 1}^{n}c_i\mbf{v}_i\right)\cdot \left(B\sum_{j = 1}^{n}c_j\mbf{v}_j\right) \\
+            &= \left(\sum_{i = 1}^{n}c_i\mbf{v}_i\right)\cdot \left(\sum_{j = 1}^{n}c_j\lambda_j\mbf{v}_j\right) \\
+            &= \sum_{i = 1}^{n}c_i ^ 2(\mbf{v}_i \cdot \mbf{v}_i)\lambda_i.
+        \end{align*}
+        where in going from the second to the third lines we have used $\mbf{v}_i \cdot \mbf{v}_j = 0$ for $i \neq j$.
+        The last line is greater than $0$ if all the eigenvalues are positive.
+    \end{proof}
 \end{proposition}
 
+\begin{proposition}
+    An alternative,
+    equivalent,
+    criterion for a real symmetric matrix $B$ to be positive-definite is that all $n$ of its upper-left square submatrices,
+    i.e.
+    the upper left $1$-by-$1$ corner of $B$,
+    the upper left $2$-by-$2$ corner of $B$,
+    etc,
+    $B$ itself,
+    have positive determinant.
 
+    This is called Sylvester's criterion,
+    and these subdeterminants are called the leading principle minors of $B$.
+\end{proposition}
 
+\begin{example}
+    We have
+    \[
+    B = \begin{pmatrix}
+        1 & 1 \\
+        1 & 1
+    \end{pmatrix},
+    \]
+    is this positive-definite?
 
+    \begin{solution}
+        No,
+        the subdeterminants are
+        \[
+        \det\begin{pmatrix}
+            1
+        \end{pmatrix} = 1\qquad\text{and}\qquad\det{B} = \det\begin{pmatrix}
+            1 & 1 \\ 1 & 1
+        \end{pmatrix} = 1 - 1 = 0
+        \]
+        so $B$ is not positive-definite by the previous proposition.
+    \end{solution}
+\end{example}
 
+\begin{proposition}
+    Consider a bilinear form $B$ on $\R ^ n$,
+    and denote by $A$ its matrix form for some given choice of basis for $\R ^ n$.
+    $B$ defines an inner product on $\R ^ n$ if and only if its matrix representation $A$ is a positive-definite symmetric matrix.
 
+    \begin{proof}
+        
+    \end{proof}
+\end{proposition}
 
+\subsection{Hermitian inner products}
+\begin{definition}
+    A complex
+    (or hermitian)
+    inner product on a complex vector space $V$ assigns to each pair of vectors $\mbf{u}, \mbf{v} \in V$ a complex number $\langle \mbf{u}, \mbf{v}\rangle$,
+    satisfying the following for all $\mbf{u}, \mbf{v}, \mbf{w} \in V$ and all $\lambda \in \C$:
+    \begin{enumerate}[label = (\roman*)]
+        \item $\langle\mbf{u} + \mbf{v}, \mbf{w}\rangle = \langle\mbf{u}, \mbf{w}\rangle + \langle\mbf{v}, \mbf{w}\rangle$;
 
+        \item $\langle\lambda\mbf{u}, \mbf{v}\rangle = \lambda\langle\mbf{u}, \mbf{v}\rangle$;
+
+        \item $\langle\mbf{u}, \mbf{v}\rangle = \overline{\langle \mbf{v}, \mbf{u}\rangle}$
+        (hermiticity);
+
+        \item $\langle \mbf{v}, \mbf{v}\rangle \geq 0$ with $\langle\mbf{v}, \mbf{v}\rangle = 0 \iff \mbf{v} = 0$
+        (positivity).
+    \end{enumerate}
+\end{definition}
+\begin{remark}
+    We will use $\overline{z}$ to denote the complex conjugate of the complex number $z$.
+\end{remark}
+
+\begin{example}
+    $V = \C ^ 2$ and $\langle\mbf{z}, \mbf{w}\rangle = 3z_1\overline{w}_1 + 2z_2\overline{w}_2 + iz_1\overline{w}_2 - iz_2\overline{w}_1$.
+    Hermiticity is satisfied,
+    the linearity properties are satisfied since the right hand side is linear in $z_1, z_2$.
+    For positivity,
+    we have
+    \begin{align*}
+        \langle\mbf{z}, \mbf{z}\rangle &= 3z_1\overline{z}_1 + 2z_2\overline{z}_2 + iz_1\overline{z}_2 - iz_2\overline{z}_1 \\
+        &= 2|z_1| ^ 2 + |z_2| ^ 2 + |z_1 - iz_2| ^ 2 \\
+        &\geq 0,
+    \end{align*}
+    with equality if and only if $z_1 = z_2 = 0$.
+    So positivity is satisfied as well.
+\end{example}
+
+\begin{example}
+    $V = \C ^ 2$ and $\langle\mbf{z}, \mbf{w}\rangle = z_1\overline{w}_1 + iz_1\overline{w}_2 - iz_2\overline{w}_1 + z_2\overline{w}_2$ satisfies linearity and hermiticity,
+    but positivity fails,
+    since $\langle\mbf{z}, \mbf{z}\rangle = |z_1 - iz_2| ^ 2$ which is zero for $\mbf{z} = (1, -i)$.
+\end{example}
+
+\textbf{Matrix version of the hermitian product}
+
+\begin{definition}
+    The Hermitian transpose
+    (or complex-conjugate transpose)
+    $B ^ {*}$ of a matrix $B$ is the matrix with components
+    \[
+    (B ^ {*})_{ij} = \overline{B_{{ji}}}.
+    \]
+\end{definition}
+
+\begin{remark}
+    If we denote by $\overline{B}$ the matrix such that
+    \[
+    (\overline{B})_{ij} = \overline{B_{ij}}
+    \]
+    (that is,
+    the matrix whose entries are the complex conjugates of those of $B$)
+    then
+    \[
+    B ^ {*} = (\overline{B}) ^ t = \overline{B ^ t}.
+    \]
+\end{remark}
+
+\begin{remark}
+    If $A$ and $B$ are matrices,
+    then $(AB) ^ {*} = \overline{(AB) ^ t} = \overline{B ^ tA ^ t} = B ^ {*}A ^ {*}$.
+\end{remark}
+
+\begin{proposition}
+    If $V = \C ^ n$ with basis $\{\mbf{v}_i\}$,
+    then an inner product on $V$ is realised by a $n \times n$ matrix $B$ as
+    \[
+    \langle\mbf{u}, \mbf{w}\rangle = \mbf{y} ^ {*}B\mbf{x}
+    \]
+    where $\mbf{x}$ and $\mbf{y}$ are the vector of components of $\mbf{u}$ and $\mbf{w}$ in the $\{\mbf{v}_i\}$ basis
+    (so $\mbf{u} = x_1\mbf{v}_1 + \dotsc + x_n\mbf{v}_n$ and $\mbf{w} = y_1\mbf{v}_1 + \dotsc + y_n\mbf{v}_n$) and $B$ is the matrix with components
+    \[
+    B_{ij} = \langle\mbf{v}_j, \mbf{v}_i\rangle.
+    \]
+
+    \begin{proof}
+        The argument is analogous to the one in the real case.
+        That $B$ has the components given in the proposition follows from expanding $\mbf{u}, \mbf{w} \in V$ in the $\{\mbf{v}_i\}$ basis,
+        and using
+        (sesqui)linearity.
+        That the resulting matrix $B$ is hermitian and positive-definite follows from the definitions below.
+    \end{proof}
+\end{proposition}
+
+\begin{definition}
+    We say that a matrix $B$ is hermitian if $B ^ {*} = B$.
+    Similarly $B$ is an anti-hermitian matrix if $B ^ {*} = -B$.
+\end{definition}
+
+\begin{proposition}
+    $A$ is Hermitian if and only if $\mbf{y} ^ {*}A\mbf{x} = (A\mbf{y}) * \mbf{x}$ for all $\mbf{x}, \mbf{y} \in \C ^ n$.
+    If we choose the standard inner product on $\C ^ n$,
+    this can be written as $\langle A\mbf{x}, \mbf{y}\rangle = \langle \mbf{x}, A\mbf{y} \rangle$ for all $\mbf{x}, \mbf{y} \in \C ^ n$.
+
+    \begin{proof}
+        This follows by choosing $\mbf{x}$ and $\mbf{y}$ the standard basis vectors of $\C ^ n$.
+        For instance,
+        choosing $\mbf{x} = \mbf{e}_i$ and $\mbf{y} = \mbf{e}_j$ we have
+        \[
+        \langle\mbf{e}_i, A\mbf{e}_j\rangle = \langle \mbf{e}_i, \sum_{k = 1}^{n}A_{kj}\mbf{e}_k\rangle = \overline{A_{ij}}
+        \]
+        and similarly $\langle A\mbf{e}_i, \mbf{e}_j\rangle = A_{ji}$.
+    \end{proof}
+\end{proposition}
+
+\begin{definition}
+    We say that a hermitian matrix $B$ is positive-definite if
+    \[
+    \mbf{v} ^ {*}B\mbf{v} > 0
+    \]
+    for all non-zero $\mbf{v} \in \C ^ n$.
+\end{definition}
+
+\begin{proposition}
+    A hermitian matrix has real eigenvalues.
+    
+    \begin{proof}
+    \end{proof}
+\end{proposition}
+
+\begin{proposition}
+    A hermitian matrix is positive-definite if and only if its eigenvalues are all positive.
+
+    \begin{proof}
+        The proof is entirely analogous to the one in the real case,
+        just by replacing $\mbf{v} ^ t$ by $\mbf{v} ^ {*}$ everywhere.
+    \end{proof}
+\end{proposition}
+
+\begin{proposition}[Sylvester's criterion]
+    A hermitian matrix $B$ is positive-definite if and only if the determinants of all of its leading minors are positive.
+\end{proposition}
 
 
 \end{document}
