@@ -633,10 +633,173 @@ How large does $\alpha$ have to be for the mass to move at all?
     and $x(t) = 0$ for all $t$.
 \end{solution}
 
+\subsection{Motion in an electromagnetic field}
 
+A particle with mass $m$ and electric charge $q$,
+placed in an electric field $\mbf{E}$ and a magnetic field $\mbf{B}$,
+feels the Lorentz force
+\[
+\mbf{F} = q(\mbf{E} + \mbf{v} \times \mbf{B}).
+\]
 
+\begin{example}
+    Take $\mbf{E} = \mbf{0}$ and $\mbf{B} = B\mbf{e}_3$ with $B$ constant,
+    and with initial conditions $\mbf{r}(0) = \mbf{0}$ and $\dot{\mbf{r}}(0) = u\mbf{e}_1$.
+    The equation of motion is
+    \begin{align*}
+        m\ddot{\mbf{r}} &= \mbf{F} \\
+        &= q(\mbf{E} + \mbf{v} \times \mbf{B}) \\
+        &= q(\mbf{v} \times \mbf{B}) \\
+        &= Bq\left(\begin{pmatrix}
+            \dot{x} \\ \dot{y} \\ \dot{z}
+        \end{pmatrix} \times \begin{pmatrix}
+            0 \\ 0 \\ 1
+        \end{pmatrix}\right) \\
+        &= Bq\begin{pmatrix}
+            \dot{y} \\ \dot{x} \\ 0
+        \end{pmatrix}
+    \end{align*}
+    so we have
+    \[
+    m\begin{pmatrix}
+        \ddot{x} \\
+        \ddot{y} \\
+        \ddot{z}
+    \end{pmatrix} = \begin{pmatrix}
+        Bq\dot{y} \\
+        Bq\dot{x} \\
+        0
+    \end{pmatrix}
+    \]
+    which is equivalent to
+    \[
+    m\ddot{x} = Bq\dot{y} \implies m\dot{x} = Bqy + C
+    \]
+    \[
+    m\ddot{y} = Bq\dot{x} \implies m\dot{y} = -Bqx + D
+    \]
+    and
+    $\ddot{z} = 0 \implies z = 0$.
 
+    Applying the initial conditions $x(0) = 0, \dot{x}(0) = u, y(0) = 0, \dot{y}(0) = 0$
+    \[
+    m\dot{x}(0) = Bqy(0) + C \iff C = mu
+    \]
+    and
+    \[
+    m\dot{y}(0) = -Bq(0) + D \iff D = 0.
+    \]
+    Hence we get
+    \[
+    m\dot{x} = Bqy + mu
+    \]
+    \[
+    m\dot{y} = -Bqx.
+    \]
+    So we have two simultaneous equations,
+    solving for $x(t)$
+    \begin{align*}
+        m\dot{x} &= Bqy + mu \\
+        &\implies \\
+        m\ddot{x} &= Bq\dot{y} \\
+        &= Bq\left(-\frac{Bq}{m}x\right) \\
+        &= -\frac{(Bq) ^ 2}{m}x \\
+        &\iff \\
+        \ddot{x} + \left(\frac{Bq}{m}\right) ^ 2x &= 0 \\
+        &\implies \\
+        x(t) &= C\sin\left(\frac{Bq}{m}t\right) + D\cos\left(\frac{Bq}{m}t\right)
+    \end{align*}
+    applying the initial conditions we get
+    \[
+    x(t) = \frac{Bq}{m}u\sin\left(\frac{Bq}{m}t\right)
+    \]
+    then applying the equation for $x(t)$,
+    integrating and applying initial conditions we get
+    \[
+    y(t) = \frac{Bq}{m}u\left(\cos\left(\frac{Bq}{m}t\right) - 1\right).
+    \]
+\end{example}
 
+\subsection{Conservative forces and potential energy}
+The kinetic energy of a particle of mass $m$ and speed $v$ is $\frac{1}{2}mv ^ 2$.
+If the force $\mbf{F}$ depends only on position $\mbf{r}$,
+and if there exists a real function $V(\mbf{r})$ such that
+\[
+\mbf{F} = \left(-\pd[V]{x}, -\pd[V]{y}, -\pd[V]{z}\right) = -\pd[V]{x}\mbf{e}_1 -\pd[V]{y}\mbf{e}_2 - \pd[V]{z}\mbf{e}_3,
+\]
+then the force is conservative,
+and $V$ is called the potential energy.
+The total energy is
+\[
+E(\mbf{r}, \mbf{v}) = \frac{1}{2}mv ^ 2 + V(\mbf{r}).
+\]
+
+\begin{proposition}
+    In a conservative force field,
+    the total energy is conserved.
+
+    \begin{proof}
+        Write $\mbf{v} = (v_x, v_y, v_z)$.
+        Then
+        \[
+        \frac{dV}{dt} = \pd[V]{x}v_x + \pd[V]{y}v_y + \pd[V]{z}v_z = -\mbf{F} \cdot \mbf{v},
+        \]
+        by the chain rule.
+        Secondly,
+        \[
+        \frac{d}{dt}\left(\frac{1}{2}mv ^ 2\right) = \frac{d}{dt}\left(\frac{1}{2}m(v_x ^ 2 + v_y ^ 2 + v_z ^ 2)\right) = m(v_x\dot{v}_x + v_y\dot{v}_y + v_z\dot{v}_z) = m\mbf{a} \cdot \mbf{v}.
+        \]
+        And so
+        \[
+        \frac{dE}{dt} = (m\mbf{a} - \mbf{F}) \cdot \mbf{v} = 0.
+        \]
+    \end{proof}
+\end{proposition}
+
+\begin{remark}
+    The force $\mbf{F} = F_x\mbf{e}_1 + F_y\mbf{e}_2 + F_z\mbf{e}_3$ is conservative if and only if
+    \[
+    \pd[F_z]{y} = \pd[F_y]{z},\qquad\pd[F_x]{z} = \pd[F_z]{x},\qquad\pd[F_y]{x} = \pd[F_x]{y}.
+    \]
+\end{remark}
+
+\begin{example}
+    Take $\mbf{F} = (z - y)\mbf{e}_1 + (\alpha x - z)\mbf{e}_2 + (\beta x - y)\mbf{e}_3$,
+    where $\alpha$ and $\beta$ are constants.
+    For which value(s) of these constants,
+    if any,
+    is $\mbf{F}$ conservative?
+    For these values,
+    find $V$.
+
+    \begin{solution}
+        We can start by identifying that
+        \[
+        \pd[V]{x} = z - y \implies V(x, y, z) = (y - z)x + g(y, z)
+        \]
+        this is because $\mbf{F} = \left(-\pd[V]{x}, -\pd[V]{y}, -\pd[V]{z}\right)$ so $-\pd[V]{x} = (z - y)$.
+
+        Now we can apply this $V$ since we know that
+        \[
+        \pd[V]{y} = z - \alpha x = (0 - 1)x + h(z) \iff h(z) - x
+        \]
+        so $h(z) = z$ and $\alpha = -1$.
+
+        Similarly
+        \[
+        \pd[V][z] = y - \beta x = -x + f(y) \iff f(y) - x
+        \]
+        so $f(y) = y$ and $\beta = 1$.
+
+        Since $\pd{y}g(y, z) = h(z) = z$ and $\pd{z}g(y, z) = f(y) = y$ we have naturally that $g(y, z) = yz$.
+
+        Using these we can see that
+        \[
+        V(x, y, z) = (y - z)x + yz = yx - xz + yz + C
+        \]
+        where $C$ is an arbitrary constant.
+    \end{solution}
+\end{example}
 
 
 
