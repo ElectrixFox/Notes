@@ -811,7 +811,76 @@ So our suggested standard deviation interval becomes the famous result:
 Y \pm 2\sqrt{\frac{p(1 - p)}{n}} = Y \pm \frac{1}{\sqrt{n}}.
 \]
 
+\begin{example}
+    $22$nd October $2024$,
+    we are about to ask $1000$ people in our poll.
+    
+    Question $1$:
+    Find the expected value and the margin of error for the proportion of Trump voters in our sample if we were told that
+    \begin{enumerate}[label = (\alph*)]
+        \item $p = 0.5$
+        \item $p = 0.3$.
+    \end{enumerate}
+    
+    \begin{solution}
+        \begin{enumerate}[label = (\alph*)]
+            \item
+            $\E(X) = np = 1000 \times 0.5 = 500$.
+    
+            $\E(\hat{p}) = p = 0.5 = 50\%$.
+    
+            $\Var(X) = np(1 - p) = 1000 \times 0.5 \times 0.5 = 250$.
+    
+            $\mathrm{SD}(X) = 15.8$ people.
 
+            \[
+            \Var(\hat{p}) = \frac{p(1 - p)}{n} = \frac{0.5(0.5)}{1000} = 0.00025
+            \]
+
+            Margin of error $2\sqrt{\frac{p(1 - p)}{n}} = 2\sqrt{\frac{0.5 \times 0.5}{1000}} \approx 0.0316 = 3.16\%$.
+            
+            \item
+            If $p = 0.3 \implies \E(\hat{p}) = 0.3$ and margin of error is $0.0290 = 2.90\%$.
+        \end{enumerate}
+    \end{solution}
+\end{example}
+
+\begin{example}
+    Poll was performed $n = 1000$,
+    $515$ for Trump $485$ for Harris.
+
+    What is your estimate for $p$ and its margin or error?
+
+    \begin{solution}
+        We use $\hat{p}$ to estimate $p$:
+        \[
+        \hat{p} = \frac{x}{n} = \frac{515}{1000} = 0.515 = 51.5\%.
+        \]
+        We do not know $p$,
+        so we use the maximum bound for the margin of error
+        \[
+        \frac{1}{\sqrt{n}} = \frac{1}{\sqrt{1000}} \approx 0.0316 = 3.16\%.
+        \]
+        So we thing $p$ will lie within:
+        \[
+        51.5\% \pm 3.16\%.
+        \]
+
+        \textit{Note that $50\%$ lies in this interval.}
+    \end{solution}
+\end{example}
+
+\begin{example}
+    Your company has time to perform one more poll before the election.
+    How large a poll is needed to ensure a margin of error less than $1\%$?
+
+    \begin{solution}
+        Must have:
+        \[
+        \frac{1}{\sqrt{n}} < 0.01 \iff n > \frac{1}{0.01 ^ 2} \iff n > 10000.
+        \]
+    \end{solution}
+\end{example}
 
 
 
