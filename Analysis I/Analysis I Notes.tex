@@ -3779,7 +3779,71 @@ $g'(c') = \frac{g(b) - g(a)}{b - a}$.
     \[
     \lim_{x \rightarrow a ^ {+}}\frac{f(x)}{g(x)} = \lim_{x \rightarrow a ^ {+}}\frac{f'(x)}{g'(x)}.
     \]
+    
+    \begin{proof}
+        We can extend $f, g$ continuously to $x = a$ by setting $f(a) = g(a) = 0$.
+        Take any  sequence $x_n \in (a, b)$ with $\liminfty x_n = a$.
+
+        Need to show
+        \[
+        \liminfty \frac{f(x_n)}{g(x_n)} = L.
+        \]
+        Apply the generalised mean value theorem for $f$ and $g$ on the intervals $[a, x_n]$.
+        So exists a $y_n \in (a, x_n)$ such that $\frac{f'(y_n)}{g'(y_n)} = \frac{f(x_n) - f(a)}{g(x_n) - g(a)} = \frac{f(x_n)}{g(x_n)}$.
+
+        By squeezing $\liminfty y_n = a$
+        ($a < y_n < \underbrace{x_n}_{\rightarrow a}$)
+        so
+        \[
+        L = \liminfty\frac{f(y_n)}{g(y_n)} = \liminfty\frac{f(x_n)}{g(x_n)}.
+        \]
+    \end{proof}
 \end{theorem}
+
+\begin{remark}
+    \begin{enumerate}[label = (\roman*)]
+        \item Also holds for left-sided limits or both sided limits.
+
+        \item $a = \pm\infty$ is also ok.
+
+        \item "$\frac{\infty}{\infty}$" is fine.
+
+        \item "$\infty \cdot 0$" can often be handled by $f(x)g(x) = \frac{f(x)}{\frac{1}{g(x)}}$.
+
+        \item $\lim_{x \rightarrow 0}\frac{e ^ x - 1}{x} = \lim_{x \rightarrow 0}\frac{e ^ x}{1} = 1$.
+
+        \item $\lim_{x \rightarrow 1}\frac{x ^ 2 + x + 2}{x - 2} = \lim_{x \rightarrow 1}\frac{2x + 1}{-2} = 2$ but this is wrong,
+        we get $\frac{4}{1 - 2} = -4$.
+
+        \item Powers beat $\log$.
+        
+        $a > 0$:
+        \[
+        \liminfty[x]\frac{\log(x)}{x ^ a} = \liminfty[x]\frac{\frac{1}{x}}{a \cdot x ^ {a - 1}} = \liminfty[x]\frac{1}{ax ^ a} = 0
+        \]
+        \[
+        \lim_{x \rightarrow 0 ^ {+}}x ^ a\log(x) = \lim_{x \rightarrow 0 ^ {+}}\frac{\log(x)}{x ^ {-a}} = \lim_{x \rightarrow 0 ^ {+}}\frac{\frac{1}{x}}{-ax ^ {-a - 1}} = \lim_{x \rightarrow 0 ^ {+}}-\frac{1}{a}x ^ a = 0.
+        \]
+
+        \item Exponentials beat powers.
+        
+        $a > 0$:
+        \begin{align*}
+            \liminfty[x]\frac{x ^ a}{e ^ x} &= \liminfty[x]\frac{ax ^ {a - 1}}{e ^ x} \\
+            &= \liminfty[x]\frac{a(a - 1)x ^ {a - 2}}{e ^ x} &= \\
+            \dotsi \\
+            &= \frac{(a(a - 1)(a - 2)\dotsi 3 \cdot 2 \cdot 1) \cdot x ^ {-1}}{e ^ x} = 0.
+        \end{align*}
+
+        \item
+        \[
+        \lim_{x \rightarrow 0}\frac{\log(1 + x) - x}{x ^ 2} = \lim_{x \rightarrow 0}\frac{\frac{1}{1 + x} - 1}{2x} = \lim_{x \rightarrow 0}\frac{1 - (1 + x)}{2x(1 + x)} = \lim_{x \rightarrow 0}\frac{-\frac{1}{2}}{1 + x} = -\frac{1}{2}.
+        \]
+        So $\frac{\log(1 + x ^ 2) - x}{x ^ 2} = -\frac{1}{2} + r(x)$ with $\lim_{x \rightarrow 0}r(x) = 0$.
+
+        So $\log(1 + x ^ 2) = \underbrace{1}_{\frac{d}{dx}\log(1 + x)\text{ at x = 1}}x - \frac{1}{2}x ^ 2 + r(x)x ^ 2$.
+    \end{enumerate}
+\end{remark}
 
 
 
