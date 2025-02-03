@@ -6082,6 +6082,144 @@ the eigenvalues might be complex.}
     \end{proof}
 \end{proposition}
 
+\begin{example}
+    $V = \R ^ 4$,
+    $(\mbf{x}, \mbf{y}) = x_1y_1 + x_2y_2 + x_3y_3 - x_4y_4$,
+
+    this is not an inner product since for example
+    $\mbf{x} = (E, 0, 0, E) \neq 0$ yet $(\mbf{x}, \mbf{x}) = E ^ 2 - E ^ 2 = 0\ \forall E$.
+\end{example}
+
+\begin{example}
+    Take $V = C[a, b]$ infinite dimensional space of continuous functions of $f : [a, b] \rightarrow \R$.
+
+    \begin{proof}
+        (The zero vector is $f(x) = 0\ \forall x \in [a, b]$.)
+    
+        Define $(f \circ g) = \int_{a}^{b}f(t)g(t)\,dt$.
+        This is an inner product,
+        (i), (ii), (iii) follow from properties of $\int\,dx$.
+    
+        For (iv)
+        $(f, f) = \int_{a}^{b}(f(t)) ^ 2\,dt \geq 0$
+        (since $(f(t)) ^ 2 \geq 0$)
+        but,
+        does $(f, f) = 0 \implies f = 0$?
+
+        Suppose there exists $t_0 \in [a, b]$ such that $f(t_0) \neq 0$ and $(f, f) = 0$,
+        i.e. $f(t_0) = c \neq 0$.
+        Take $c > 0$.
+        Since $f$ is continuous,
+        there exists a small interval $(t_0 - \delta, t_0 + \delta)$ such that $f(t) > \frac{c}{2}$ for all $t \in (t_0 - \delta, t_0 + \delta)$.
+        Then
+        \[
+        (f, f) = \int_{a}^{b}f ^ 2(t)\,dt \geq \int_{t_0 - \delta}^{t_0 + \delta}f ^ 2(t)\,dt \geq \int_{t_0 - \delta}^{t_0 + \delta}\frac{c}{2} ^ 2\,dt \geq \frac{c ^ 2}{2}\delta > 0
+        \]
+        contradiction.
+    \end{proof}
+\end{example}
+
+Fix basis $\{\mbf{v}_1, \dotsc, \mbf{v}_N\}$.
+Then
+\[
+(\mbf{u}, \mbf{v}) = \left(\sum_{i = 1}^{N}x_i\mbf{v}_i, \sum_{j = 1}^{N}y_j\mbf{v}_j\right) = \sum_{j = 1}^{N}\sum_{i = 1}^{N}y_i(\mbf{v}_i, \mbf{v}_j)x_k
+\]
+just as for a bilinear form.
+
+Define numbers
+$(\mbf{v}_i, \mbf{v}_j) = A_{ji}$.
+Then
+\[
+(\mbf{u}, \mbf{v}) = \sum_{i = 1}^{N}\sum_{j = 1}^{N}y_jA_{ji}x_i = \mbf{y} ^ TA\mbf{x}
+\]
+since $(\mbf{v}_i, \mbf{v}_j) = (\mbf{v}_i, \mbf{v}_j), A_{ji} = A_{ij}, A ^ T = A$,
+$A$ is symmetric.
+
+\begin{definition}
+    An $N \times N$ matrix $A$ is symmetric if $A ^ T = A$,
+    anti-symmetric
+    (skew)
+    if $A ^ T = -A$.
+\end{definition}
+
+Every matrix is a sum of two matrices,
+one symmetric and one antisymmetric
+\[
+B = \frac{B + B ^ T}{2} + \frac{B - B ^ T}{2}
+\]
+is symmetric $+$ anti-symmetric.
+
+If a bilinear form $B$ is symmetric,
+we need $B(\mbf{u}, \mbf{v}) = B(\mbf{v}, \mbf{u}) \iff B_{ij} = B_{ji}$.
+
+In particular,
+the matrix representing an inner product is always symmetric:
+$A_{ij} = A_{ji}$.
+
+\begin{definition}
+    A real symmetric $N \times N$ matrix $B$ is called positive definite if $\mbf{v} ^ TB\mbf{v} > 0$ for all non-zero vectors $\mbf{v} \in \R ^ N$.
+\end{definition}
+
+\begin{proposition}
+    A symmetric matrix $B$ is positive definite if and only if its eigenvalues are all positive.
+
+    \begin{proof}
+        "$\implies$".
+        For each eigenvalue $\lambda$,
+        pick an eigenvector $\mbf{v}$ with $B\mbf{v} = \lambda\mbf{v}$.
+        Then we have $0 < \mbf{v} ^ TB\mbf{v} = \lambda\mbf{v} ^ T\mbf{v} = \lambda\overbrace{\mbf{v} \cdot \mbf{v}} ^ {\text{usual dot product}}$.
+        But since $\mbf{v} \neq \mbf{0}$,
+        $\mbf{v} \cdot \mbf{v} > 0$,
+        so $\lambda > 0$.
+
+        "$\impliedby$".
+        If $B$ is real and symmetric then there is a basis for $\R ^ N$ made from eigenvectors $\mbf{v}_i$ with eigenvalues $\lambda_i$,
+        such that $\mbf{v}_i \cdot \mbf{v}_j = 0j$ for $i \neq j$.\footnote{We will see this later.}
+
+        If $\mbf{v} \in \R ^ N$,
+        $\mbf{v} \neq \mbf{0}$,
+        then
+        \[
+        \mbf{v} = \sum_{1}^{N}c_i\mbf{v}_i
+        \]
+        and at least one $c_i \neq 0$.
+
+        Then
+        \begin{align*}
+            \mbf{v} ^ TB\mbf{v} &= \left(\sum_{i = 1}^{N}c_i\mbf{v}_i\right) \cdot \left(B\sum_{j = 1}^{N}c_j\mbf{v}_j\right) \\
+            &= \left(\sum_{i = 1}^{N}c_i\mbf{v}_i\right) \cdot \left(\sum_{j = 1}^{N}c_j\lambda_j\mbf{v}_j\right) \\
+            &= \sum_{i = 1}^{N}c_i ^ 2\mbf{v}_i\cdot \mbf{v}_i\lambda_i \\
+            &> 0
+        \end{align*}
+        for all $\lambda_i > 0$.
+    \end{proof}
+\end{proposition}
+
+Equivalently,
+there's Sylvester's criterion.
+
+Check that all the $n$ upper left submatrices of $A$
+(called the leading principle minors of $A$)
+have positive determinant.
+\[
+A = \begin{pmatrix}
+    A_{11} & A_{12} & \dotsi \\
+    A_{21} & A_{22} & \dotsi \\
+    \vdots & \vdots &
+\end{pmatrix}
+\]
+with $A_1 = (A_{11})$,
+$A_2 = \begin{pmatrix}
+    A_{11} & A_{12} \\
+    A_{21} & A_{22}
+\end{pmatrix}$,
+$\dotsc,$
+$A_N = (A)$.
+
+$\det{A_1} > 0$,
+$\det{A_2} > 0$,
+$\dotsc$,
+$\det{A_N} > 0$.
 
 
 

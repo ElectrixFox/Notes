@@ -1,0 +1,71 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\title{Discrete Mathematics}
+\author{}
+\date{January 2025}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\section{Flows and Matchings}
+
+\begin{definition}
+    Let $V$ be a finite set,
+    the vertices,
+    containing two special
+    (distinct)
+    elements $s$
+    (the source)
+    and $t$
+    (the sink).
+    Suppose for every ordered pair $u, v \in V$ we have a capacity $c_{uv}$,
+    which is a non-negative integer;
+    denote the set of capacities by $C = \{c_{uv}\,:\,u, v \in V\}$.
+    We call $(V, C)$ a capacitated network.
+\end{definition}
+
+If we have some resource we want to move from the source $s$ to the sink $t$.
+We have unlimited resource to transport,
+we are limited by the fact that we must route the resource from vertex to vertex is bounded by the capacity $c_{uv}$.
+If $c_{uv} = 0$,
+we cannot move anything directly from $u$ to $v$,
+however there may be an indirect route.
+
+\textbf{Application examples}:
+
+Water flows through pipes,
+or a river network,
+linking the vertices of $V$.
+Our capacity of the river or pipe is the volume of water which can pass through per unit time.
+
+In a road network built on the cities located at vertices of $V$,
+traffic can get from city $s$ to city $t$.
+The capacity of the road would be how many cars can travel the route per unit time.
+
+
+We should look at directed graph.
+
+\begin{definition}
+    Given a capacitated network $(V, C)$,
+    let $E$ be the set of directed edges $E = \{(u, v)\,:\, u, v \in V, c_{uv} > 0\}$.
+    Then $G = (V, E)$ is the directed graph representing the available routes on vertices $V$ given capacities $C$.
+\end{definition}
+
+Usually we write $uv$ for $(u, v)$.
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
