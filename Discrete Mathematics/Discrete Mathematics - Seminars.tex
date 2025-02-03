@@ -133,13 +133,30 @@ we will assume:
     \end{solution}
 \end{example}
 
+\begin{center}
+    \begin{tikzpicture}[>=stealth, node distance=2cm, every node/.style={draw, circle}]
+        % Nodes
+        \node (s) {s};
+        \node[right of=s] (v1) {$v_1$};
+        \node[right of=v1] (v3) {$v_3$};
+        \node[below of=v1] (v2) {$v_2$};
+        \node[right of=v2] (v4) {$v_4$};
+        \node[below of=v2] (v5) {$v_5$};
+        \node[right of=v5] (t) {t};
 
-
-
-
-
-
-
-
+        % Edges
+        \draw[->] (s) -- (v1) node[midway, above, rectangle, minimum size = 10pt, yshift = 3pt] {\small 3};
+        \draw[->] (s) -- (v2) node[midway, below left, yshift = -3pt, xshift = -3pt, rectangle] {\small 7};
+        \draw[->] (v1) -- (v2) node[midway, left, rectangle, xshift = -3pt] {\small 2};
+        \draw[->] (v1) -- (v3) node[midway, above, rectangle, yshift = 3pt] {\small 3};
+        \draw[->] (v2) -- (v5) node[midway, left, rectangle] {\small 9};
+        \draw[->] (v2) -- (v4) node[midway, above, rectangle] {\small 2};
+        \draw[->] (v3) -- (v4) node[midway, right, rectangle, xshift = 3pt] {\small 3};
+        \draw[->] (v3) -- (t) node[midway, right, rectangle, xshift = 3pt] {\small 1};
+        \draw[->] (v4) -- (v5) node[midway, left, rectangle] {\small 2};
+        \draw[->] (v4) -- (t) node[midway, right, rectangle] {\small 1};
+        \draw[->] (v5) -- (t) node[midway, below, rectangle] {\small 8};
+    \end{tikzpicture}
+\end{center}
 
 \end{document}
