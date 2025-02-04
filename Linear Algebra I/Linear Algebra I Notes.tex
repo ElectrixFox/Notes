@@ -6222,11 +6222,133 @@ $\dotsc$,
 $\det{A_N} > 0$.
 
 
+\begin{example}
+    $V = \R ^ 2$,
+    $(\mbf{x}, \mbf{y}) = x_1y_1 + x_1y_2 + x_2y_1 + 2x_2y_2$.
+    Is this an inner product?
+
+    \begin{solution}
+        It is symmetric and bilinear by inspection.
+        \[
+        (\mbf{x}, \mbf{x}) = x_1 ^ 2 + 2x_1x_2 + 2x_2 ^ 2 = (x_1 + x_2) ^ 2 + x_2 ^ 2 \geq 0
+        \]
+        also $(\mbf{x}, \mbf{x}) = 0 \iff x_1 + x_2 = 0 \text{ and } x_2 = 0 \implies x_1 = x_2 = 0$.
+
+        Matrices
+        \[
+        A_{ji} = (\mbf{v}_i, \mbf{v}_j) \implies A = \begin{pmatrix}
+            1 & 1 \\ 1 & 2
+        \end{pmatrix}.
+        \]
+        $(\mbf{x}, \mbf{y} = (y_1, y_2)\begin{pmatrix}
+            1 & 1 \\ 1 & 2
+        \end{pmatrix}\begin{pmatrix}
+            x_1 \\ x_2
+        \end{pmatrix} = \mbf{y} ^ TA\mbf{x}$.
+
+        $A$ is symmetric,
+        $A$ is positive definite by Sylvester,
+        $A_1 = (1)$,
+        $\det(A_1) > 0$,
+        $A_2 = \begin{pmatrix}
+            1 & 1 \\ 1 & 2
+        \end{pmatrix}$,
+        $\det(A_2) > 0$.
+    \end{solution}
+\end{example}
+
+\begin{example}
+    $V = \R[x]_1 = \{p(x) = p_0 + p_1x\,: p_0, p_1 \in \R\}$
+
+    $\R[x]_1$,
+    and more generally $\R[x]_n$,
+    are finite dimensional vector subspaces $[a, b]$ and $(f, g) = \int_{a}^{b}f(t)g(t)\,dt$ defines an inner product on $[a, b]$,
+    so it also given an inner product on $\R[x]_n$.
+    In particular,
+    for $\R[x]_1$,
+    fix $a = 0, b = 1$
+    \begin{align*}
+        (p(x), q(x)) &= \int_{0}^{1}p(x)q(x)\,dx \\
+        &= \int_{0}^{1}(p_0 + xp_1)(q_0 + xq_1)\,dx \\
+        &= \int_{0}^{1}(p_0q_0 + (p_0q_1 + p_1q_0)x + p_1q_1x ^ 2)\,dx \\
+        &= p_0q_0 + \frac{p_0q_1 + p_1q_0}{2} + \frac{p_1q_1}{3} \\
+        &= \begin{pmatrix}
+            q_0 & q_1
+        \end{pmatrix}\begin{pmatrix}
+            1 & \frac{1}{2} \\
+            \frac{1}{2} & \frac{1}{3}
+        \end{pmatrix}\begin{pmatrix}
+            p_0 & p_1
+        \end{pmatrix} \\
+        &= q ^ TAp.
+    \end{align*}
+    $A = \begin{pmatrix}
+        1 & \frac{1}{2} \\
+        \frac{1}{2} & \frac{1}{3}
+    \end{pmatrix}$.
+    This is symmetric and positive definite.
+\end{example}
+
+\textbf{Complex version}
+
+\begin{definition}
+    A complex,
+    or Hermitian inner product on complex vector space $V$
+    (e.g. $\C ^ n$)
+    is a mapping
+    \begin{align*}
+        \langle\,,\,\rangle &: V \times V \rightarrow \C \\
+        \mbf{u}, \mbf{v} &\mapsto \langle\mbf{u}, \mbf{v}\rangle \in \C
+    \end{align*}
+    such that
+    \begin{enumerate}[label = (\roman*)]
+        \item $\langle\mbf{u}, \mbf{v}\rangle = \overline{\langle\mbf{v}, \mbf{u}\rangle}$
+        (Hermiticity).
+
+        \item $\langle\mbf{u} + \mbf{v}, \mbf{w}\rangle = \langle\mbf{u}, \mbf{w}\rangle + \langle\mbf{v}, \mbf{w}\rangle$.
+
+        \item $\langle\lambda\mbf{u}, \mbf{v}\rangle = \lambda\langle\mbf{u}, \mbf{v}\rangle$.
+
+        \item $\langle\mbf{v}, \mbf{v}\rangle \geq 0$,
+        with $\langle\mbf{v}, \mbf{v}\rangle = 0 \iff \mbf{v} = \mbf{0}$.
+    \end{enumerate}
+\end{definition}
+\textit{Note:
+$\langle\,,\,\rangle$ is not quite linear in its second argument.}
+
+We have
+\[
+\langle\mbf{u}, \lambda\mbf{v}\rangle = \overline{\langle\lambda\mbf{u}, \mbf{v}\rangle} = \overline{\lambda\langle\mbf{v}, \mbf{u}\rangle} = \overline{\lambda}\langle\mbf{v}, \mbf{u}\rangle = \overline{\lambda}\langle\mbf{u}, \mbf{v}\rangle.
+\]
+The property of linearity in first argument,
+complex conjugate linearity in second argument,
+is called sesquilinearity.
 
 
+As for a real inner product,
+fix a basis $\{\mbf{v}_1, \dotsc, \mbf{v}_N\}$ of $V$ $\mbf{u} = \sum_{i = 1}^{N}x_i\mbf{v}_i, \mbf{v} = \sum_{j = 1}^{N}y_j\mbf{v}_j$,
+$x_i, y_j \in \C$.
+\[
+\langle \mbf{u}, \mbf{v}\rangle = \sum_{i, j \in \C}^{N}\Bar{y_j}\langle\mbf{v}_i, \mbf{v}_j\rangle x_i = \sum_{i, j = 1}^{N}\Bar{y_j}B_{ji}x_i = (\bar{\mbf{y}}) ^ TB\mbf{x} = y ^ {*}B\mbf{x}
+\]
+where $B_{ji} = \langle\mbf{v}_i, \mbf{v}_j\rangle \in \C$ and $y ^ {*} = (\Bar{\mbf{y}}) ^ T$.
+$B$ is the matrix representation of $\langle\,,\,\rangle$ in the basis $\{\mbf{v}_i\}$.
 
+$\langle\mbf{u}, \mbf{v}\rangle =
+\begin{pmatrix}
+    \Bar{y_1} & \Bar{y_2} & \dotsi & \Bar{y_N}
+\end{pmatrix}\begin{pmatrix}
+    B_{11} & \dotsi & B_{1N} \\
+    \vdots &  & \vdots \\
+    B_{N1} & \dotsi & B_{NN}
+\end{pmatrix}\begin{pmatrix}
+    x_1 \\ \vdots \\ x_{N}
+\end{pmatrix}$
+$B$ must satisfy $B = (\Bar{B}) ^ T = B ^ {*}$,
+sometimes written as $B ^ {\dagger}$,
+the Hermitian transpose or the conjugate transpose or the Hermitian conjugate.
 
-
+$B$ is Hermitian if $B = B ^ {*}$.
 
 
 
