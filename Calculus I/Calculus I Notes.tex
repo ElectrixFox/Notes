@@ -3991,12 +3991,150 @@ $Q = (x, y)\begin{pmatrix}
     along the axes of symmetry $wH\mbf{x} = 2\lambda\mbf{x} \implies H\mbf{x} = \lambda\mbf{x}$.
 \end{example}
 
+If $\mbf{x}$ lies along axis of symmetry of ellipse,
+eigenvector of $H$.
+Two axes of symmetry if and only if two eigenvectors,
+axes of symmetry are orthogonal,
+$H\mbf{e}_1 = \lambda_1\mbf{e}_1$
+$H\mbf{e}_2 = \lambda_2\mbf{e}_2$.
+\begin{proof}
+    Consider
+    \begin{align*}
+        \mbf{e}_1(H\mbf{e}_2) &= \mbf{e}_1 ^ TH\mbf{e}_2 \\
+        &= (\mbf{e}_1 ^ TH\mbf{e}_2) ^ T \\
+        &= \mbf{e}_2 ^ TH ^ T\mbf{e}_1
+    \end{align*}
+    $H$ is symmetric since $H_{ij} = \frac{\partial ^ 2f}{\partial x_i\partial x_j} = \frac{\partial ^ 2f}{\partial x_j\partial x_i} = H_{ji}$,
+    therefore $\mbf{e}_1(H\mbf{e}_2) = \mbf{e}_2 ^ TH\mbf{e}_1 = \mbf{e}_2(H\mbf{e}_1)$,
+    therefore
+    \[
+    \mbf{e}_1 \cdot H\mbf{e}_2 = \mbf{e}_1 \cdot \lambda_2\mbf{e}_2 = \mbf{e}_2 \cdot H\mbf{e}_1 = \mbf{e}_2 \cdot \lambda_1\mbf{e}_1 \implies (\lambda_2 - \lambda_1)\mbf{e}_1 \cdot \mbf{e}_2 = 0.
+    \]
+    $\lambda_2 \neq \lambda_1 \implies \mbf{e}_1 \cdot \mbf{e}_2 = 0$,
+    $\mbf{e}_1, \mbf{e}_2$ are orthogonal.
+    If $\lambda_1 = \lambda_2$,
+    ellipse becomes a circle all directions are axes of symmetry,
+    all vectors are eigenvectors of $H$ can pick $\mbf{e}_1, \mbf{e}_2$ to be orthogonal.
+\end{proof}
 
+Lets work in a basis of eigenvectors $\mbf{e}_1, \mbf{e}_2$,
+$\mbf{e}_1 \cdot \mbf{e}_2 = 0$.
+Choose $\mbf{e}_1 \cdot \mbf{e}_1 = \mbf{e}_2 \cdot \mbf{e}_2 = 1$.
 
+\[
+Q = \mbf{x} \cdot H\mbf{x}
+\]
+\[
+\mbf{x} = x_1\mbf{e}_1 + x_2\mbf{e}_2.
+\]
+\begin{align*}
+    Q &= (x_1\mbf{e}_1, x_2\mbf{e}_2) \cdot H(x\mbf{e}_1 + x_2\mbf{e}_2) \\
+    &= (x_2\mbf{e}_1 + x_2\mbf{e}_2) \cdot (x_1H\mbf{e}_1 + x_2H\mbf{e}_2) \\
+    &= (x_1\mbf{e}_1 + x_2\mbf{e}_2) \cdot (x_1\lambda_1\mbf{e}_1 + x_2\lambda_2\mbf{e}_2) \\
+    &= \lambda_1x_1 ^ 2 + \lambda_2x_2 ^ 2 \\
+    &= \begin{pmatrix}
+        x_1 & x_2
+    \end{pmatrix}\begin{pmatrix}
+        \lambda_1 & 0 \\
+        0 & \lambda_2
+    \end{pmatrix}\begin{pmatrix}
+        x_1 \\ x_2
+    \end{pmatrix}.
+\end{align*}
 
+$Q > 0$ for all $(x_1, x_2) \neq (0, 0)$ if $\lambda_1, \lambda_2 > 0$ is a minimum.
 
+$Q < 0$ for all $(x_1, x_2) \neq (0, 0)$ if $\lambda_1, \lambda_2 < 0$ is a maximum.
 
+If $\lambda_1, \lambda_2 \neq 0$ and different signs then it is a saddle point.
 
+For functions of $n$ variables $f(x_1, \dotsc, x_n)$ we will find
+(when we work in an basis of eigenvectors)
+$\mbf{x} = x_1\mbf{e}_1 + x_2\mbf{e}_2 + \dotsi + x_n\mbf{e}_n$,
+$\mbf{e}_1, \dotsc, \mbf{e}_n$ are eigenvectors of $H$,
+$H\mbf{e}_j = \lambda_j\mbf{e}_j$
+\[
+Q = \lambda_1x_1 ^ 2 + \lambda_2x_2 ^ 2 + \dotsi + \lambda_nx_n ^ 2.
+\]
+If we move away from the stationary point in the direction of the $\mbf{e}_j$ eigenvector $\mbf{x} = (0, 0, 0, \dotsc, \underset{\text{$j$th entry}}{\delta x_j}, 0, 0)$.
+\[
+Q = \lambda_j(\delta x_j) ^ 2.
+\]
+
+\textbf{Rules for Method $2$}
+
+Suppose $f(x_1, \dotsc, x_n)$ has a stationary point at $\mbf{x} = \mbf{a}$.
+Evaluate the Hessian $H$ at $\mbf{x} = \mbf{a}$ and find its $n$ eigenvalues $\lambda_1, \dotsc, \lambda_n$
+(guaranteed real by symmetry of $H$).
+
+\begin{enumerate}[label = (\arabic*)]
+    \item If $\lambda_j > 0$ for all $j$ $1 \leq j \leq n$ $Q > 0$ for all $\mbf{x} \neq \mbf{0}$ is minimum.
+    
+    \item If $\lambda_j < 0$ for all $j$ $1 \leq j \leq n$ $Q < 0$ for all $\mbf{x} \neq \mbf{0}$ is maximum.
+
+    \item If $\lambda_j \neq 0$ for all $j$ and have different signs is a saddle point.
+
+    \item If $\lambda_j = 0$ for some $j$,
+    $\det(H) = \prod_{i = 1}^{n}\lambda_i = 0$ is degenerate.
+\end{enumerate}
+
+\begin{example}
+    $f(x, y, z) = xy + xz + yz$.
+    Find and classify the stationary points.
+
+    \begin{solution}
+        \begin{align*}
+            0 = f_x &= y + z \\
+            0 = f_y &= x + z \\
+            0 = f_z &= x + y
+        \end{align*}
+        this implies $(x, y, z) = (0, 0, 0)$ is the only solution.
+        Hessian matrix
+        \[
+        H = \begin{pmatrix}
+            f_{xx} & f_{xy} & f_{xz} \\
+            f_{yx} & f_{yy} & f_{yz} \\
+            f_{zx} & f_{zy} & f_{zz}
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            0 & 1 & 1 \\
+            1 & 0 & 1 \\
+            1 & 1 & 0
+        \end{pmatrix}.
+        \]
+        Eigenvalues given by
+        \[
+        \det(H - \lambda I) = \begin{vmatrix}
+            -\lambda & 1 & 1 \\
+            1 & -\lambda & 1 \\
+            1 & 1 & -\lambda
+        \end{vmatrix} = -\lambda ^ 3 + 3\lambda + 2 \implies \det{H} = -(\lambda - 2)(\lambda + 1) ^ 2
+        \]
+        therefore $\lambda = -1, -1, 2$.
+        $\lambda$'s not zero and different signs implies saddle point.
+    \end{solution}
+\end{example}
+
+\textbf{Method $3$}
+
+Sylvester's Criterion.
+Suppose $H$ is a symmetric $n \times n$ matrix.
+Define $H ^ {(i)}$ to be the $j \times j$ matrix restriction of $H$ in the top left hand corner.
+
+Sylvester's Criterion states:
+$H$ has positive eigenvalues $\lambda_j > 0$ if and only if $\det(H ^ {(i)}) > 0$ for all $1 \leq i \leq n$.
+
+Therefore $H$ will correspond to a minimum.
+
+If $H$ has all negative eigenvalues then $-H$ must have all positive eigenvalues and satisfy Sylvester's Criterion,
+i.e. we must have $\det{H ^ {(j)}}(-1) ^ k > 0$.
+
+For maximum need pattern of determinants with alternating signs starting with a minus.
+
+If $H$ corresponds to a degenerate stationary point this implies $\lambda_j = 0$ for some $j$ which implies $\det(H) = 0$.
+
+If the pattern is none of the above $H$ corresponds to a saddle point.
 
 
 
