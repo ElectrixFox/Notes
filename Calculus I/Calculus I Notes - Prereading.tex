@@ -2322,7 +2322,101 @@ where $\xi \in (0, 1)$ and so the remainder term is evaluated at a point on the 
     \end{solution}
 \end{example}
 
+\subsection{Stationary Points for Functions of more than one Variable}
+We have
+\[
+H = \begin{pmatrix}
+    f_{xx} & f_{xy} \\
+    f_{yx} & f_{yy}
+\end{pmatrix}
+\]
+is the Hessian matrix of $f$.
+We can find the Hessian matrix as follows
+\[
+H_{ij} = \frac{\partial ^ 2f}{\partial x_i\partial x_j}.
+\]
 
+\textbf{Classification of Stationary Points}
+
+\textbf{Method $1$}:
+(only works for functions of two variables).
+
+Through some tedious derivation we get that the stationary point of a function can be classified as a saddle-point if $\det(H) > 0$
+\[
+\det(H) = \begin{vmatrix}
+    f_{xx} & f_{xy} \\
+    f_{yx} & f_{yy}
+\end{vmatrix} = f_{xx}f_{yy} - f_{xy} ^ 2 < 0.
+\]
+
+We can summarise the other cases as following:
+\begin{enumerate}[label = (\arabic*)]
+    \item If $\det(H) < 0$,
+    the stationary point is a saddle point.
+
+    \item If $\det(H) > 0$,
+    and $f_{xx} > 0$,
+    the stationary point is a minimum.
+
+    \item If $\det(H) > 0$,
+    and $f_{xx} < 0$,
+    the stationary point is a maximum.
+
+    \item If $\det(H) = 0$,
+    the rank of $H$ is less than two,
+    and the stationary point is degenerate.
+\end{enumerate}
+
+
+\textbf{Method $2$}:
+For functions of any number of variables $f(x_1, \dotsc, x_n)$.
+
+We will calculate the Hessian matrix for the function,
+\[
+H = \begin{pmatrix}
+    f_{x_1x_1} & f_{x_2x_1} & \dotsi & f_{x_nx_1} \\
+    f_{x_2x_1} & f_{x_2x_2} & \dotsi & f_{x_nx_2} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    f_{x_nx_1} & f_{x_nx_2} & \dotsi & f_{x_nx_n}
+\end{pmatrix}.
+\]
+Once we have the Hessian matrix,
+we need to find the eigenvalues of the matrix $\lambda_1, \dotsc, \lambda_n$.
+
+When we have the eigenvalues of the Hessian we can use the following criterion
+\begin{enumerate}[label = (\arabic*)]
+    \item If $\lambda_i > 0$ for $i = 1, \dotsc, n$,
+    $Q$ is positive for $\mbf{x} \neq 0$ and the stationary point is a minimum.
+    
+    \item If $\lambda_i < 0$ for $i = 1, \dotsc, n$,
+    $Q$ is negative for $\mbf{x} \neq 0$ and the stationary point is a maximum.
+    
+    \item If $\lambda_i \neq 0$ for $i = 1, \dotsc, n$,
+    and have differing signs then the stationary point is a saddle point.
+
+    \item If $\lambda_i = 0$ for some $i$ then $\det(H) = \prod_{i = 1}^{n}\lambda_i = 0$ so the rank of $H$ is less than $n$,
+    and the stationary point is degenerate.
+\end{enumerate}
+
+
+\textbf{Method $3$}:
+Based on Sylvester's Criterion.
+
+\textbf{Sylvester's Criterion}
+A real $n \times n$ symmetric matrix $H$ has all strictly positive eigenvalues $\lambda_i > 0$,
+$i = 1, \dotsc, n$ if and only if all of its leading principal minors are strictly positive.
+We define $H ^ {(m)}$ to be the $m \times m$ matrix formed by restricting the matrix $H$ to its top-left $m \times m$ submatrix then the leading principal minors are defined to be $\det(H ^ {(m)})$ for $m = 1, \dotsc, n$.
+
+We can use Sylvester's Criterion to classify stationary points.
+\begin{enumerate}[label = (\arabic*)]
+    \item The stationary point is a minimum if and only if $\det(H ^ {(i)}) > 0$ for all $i = 1, \dotsc, n$.
+    
+    \item The stationary point is a maximum if and only if $\det(H ^ {(i)})(-1) ^ i > 0$ for all $i = 1, \dotsc, n$.
+    
+    \item The stationary point is degenerate if and only if $\det(H) = 0$.
+
+    \item The stationary point is a saddle point if and only if none of the above conditions are met.
+\end{enumerate}
 
 
 \end{document}
