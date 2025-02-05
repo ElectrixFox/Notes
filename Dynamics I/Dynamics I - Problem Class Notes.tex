@@ -1,0 +1,106 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\declaretheorem[style = avgstyle, name = Problem]{problem}
+
+\title{Dynamics I \\
+    \large Problem Class}
+\author{Luke Phillips}
+\date{Feburary 2025}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Questions from \texorpdfstring{$2020$}{} exam}
+
+\begin{problem}
+    Unit mass and charge,
+    magnetic field upwards
+    (constant)
+    with magnitude $B$,
+    gravity downwards
+    (acceleration $g$).
+    Throw mass with initial speed $u$,
+    at angle $\alpha$ to the horizontal.
+    Find condition on $S = Bu\sin{\alpha}$ such that the mass returns to its starting location.
+
+    \begin{solution}
+        (Expect answer involves $g$ and $n = 1, 2, 3, \dotsc$).
+        Choose
+        (say)
+        $\mbf{e}_3$ upwards,
+        $\mbf{e}_1$ and $\mbf{e}_2$ horizontal,
+        (say)
+        \[
+        \dot{\mbf{r}}(0) = u(\cos{\alpha})\mbf{e}_1 + u(\sin{\alpha})\mbf{e}_3.
+        \]
+        And $\mbf{r}(0) = \mbf{0}$.
+        The equation of motion is
+        \[
+        m\ddot{\mbf{r}} = \ddot{\mbf{r}} = -g\mbf{e}_3 + \dot{\mbf{r}} \times (B\mbf{e}_3).
+        \]
+        (Optional)
+        Do $\int\,dt$ gives $\dot{\mbf{r}} = -gt\mbf{e}_3 + B\mbf{r} \times \mbf{e}_3 + u(\cos{\alpha})\mbf{e}_1 + u(\sin{\alpha})\mbf{e}_3$.
+
+        This is
+        \begin{align*}
+            \dot{x} &= By + u\cos{\alpha} \\
+            &\implies \ddot{x} = B\dot{y} = -B ^ 2x \\
+            &\implies x(t) = C\sin(Bt) \\
+            \intertext{$\dot{x}(0) = Bc = u\cos{\alpha} \implies \frac{u}{b}\cos{\alpha}$}
+            &\implies x(t) = \frac{u}{b}(\cos{\alpha})\sin(Bt) \\
+            \dot{y} &= -Bx \\
+            &\implies y(t) = B ^ {-1}(\dot{x} - u\cos{\alpha}) \\
+            &\implies y(t) = \frac{u}{B}(\cos{\alpha})(\cos(Bt) - 1) \\
+            \dot{z} &= -gt + u\sin{\alpha} \\
+            &\implies z(t) = -\frac{gt ^ 2}{2} + ut\sin{\alpha} + 0.
+        \end{align*}
+
+        We want $\mbf{r}(t) = \mbf{0} \implies t = \frac{2u}{g}\sin{\alpha}, \sin(Bt) = 0, \cos(Bt) = 1$,
+        so $Bt = 2\pi n$,
+        with $n \in \N$.
+        Thus $\frac{2uB}{g}\sin{\alpha} = 2\pi n \implies S = \pi n g$ for $n = 1, 2, 3, \dotsc$.
+    \end{solution}
+\end{problem}
+
+\begin{problem}
+    Mass $m$ on $x$-axis
+    ($x > 0$),
+    repelled from $x = 0$ by a force $\frac{k}{\sqrt{x}}$
+    ($k$ constant).
+    Initial conditions $x(0) = 1$,
+    $\dot{x}(0) = 2\sqrt{\frac{k}{m}}$.
+    Find $x(t)$.
+
+    \begin{solution}
+        Two equivalent methods:
+        \[
+        F = mv\frac{dv}{dx} = \frac{k}{\sqrt{x}}
+        \]
+        get $v(x)$ etc.
+        Use conserved energy $E$.
+
+        Potential energy $V(x) = -\int F(x)\,dx = -\int\frac{k}{\sqrt{x}}\,dx = -2k\sqrt{x}+ C$
+        ($C$ works out to be $0$).
+
+        So
+        \[
+        E = \frac{1}{2}m\dot{x} ^ 2 - 2k\sqrt{x} \overset{t = 0}{=} 2k - 2k = 0.
+        \]
+        So
+        \[
+        \frac{dx}{dt} = \sqrt{\frac{4k}{m}}x ^ {\frac{1}{4}} \implies \int x ^ {-\frac{1}{4}}\,dx = \int\sqrt{\frac{4k}{m}}\,dt \implies \frac{4}{3}x ^ {\frac{3}{4}} = \sqrt{\frac{4k}{m}}t + C
+        \]
+        etc.
+    \end{solution}
+\end{problem}
+
+
+\end{document}
