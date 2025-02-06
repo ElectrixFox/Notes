@@ -883,8 +883,92 @@ Y \pm 2\sqrt{\frac{p(1 - p)}{n}} = Y \pm \frac{1}{\sqrt{n}}.
 \end{example}
 
 
+We wanted $p$ and had data
+\[
+X_i = \frac{0 \text{ or } 1}{i = 1, \dotsc, n}
+\]
 
+Used estimator:
+$\hat{p}$ as a guess.
 
+$\hat{p}$ properties:
+\begin{align*}
+    \E(\hat{p}) &= p \\
+    \Var(\hat{p}) &= \frac{p(1 - p)}{n} < \frac{1}{4n}.
+\end{align*}
+
+\textbf{Big question:}
+Does this structure generalise e.g. $X_i \in \R$
+(not just $0, 1$)
+or where $X_i$ are generated from more complex distributions?
+
+Answer:
+Yes.
+
+\section{The Frequentist Statistics Paradigm}
+
+\subsection{Sampling,
+Inference and the Sample Mean}
+
+\textbf{Terminology:}
+
+A population is a group of $N$ people or objects of interest.
+Call the objects units or subjects.
+
+A sample is the subset of the population that is examined.
+
+Many ways to choose this sample.
+
+A simple random sample
+(SRS)
+of size $n$.
+
+A stratified random sample take a simple random sample from strata e.g. men,
+women,
+old,
+young.
+
+A quota sample.
+
+A population parameter:
+e.g. the mean of population $\mu$,
+the variance of the population $\sigma ^ 2$
+could be from a Normal distribution or more complex.
+The probability $p$ of success in a binomial distribution.
+
+We want to make inferences i.e. to learn about these population parameters.
+A statistic is a number that is calculated from the sample data,
+usually a summary:
+e.g. the sample mean $\Bar{X}$ and the sample variance $s ^ 2$,
+e.g. the sample proportion $Y = \hat{p}$.
+
+The sampling distribution is the distribution of the statistic that describes how it can vary from sample to sample.
+
+Statistics are often used as estimators of population parameters.
+For example we saw $\hat{p} = Y$ which is the estimator for $p$.
+
+We will be concerned with certain aspects of estimators:
+whether or not they are biased e.g. if $\E(\text{estimator}) \overset{\neq}{=} \text{ population parameter}$,
+degree of variability
+(i.e. their variance).
+
+\textbf{Randomisation:}
+is the key weapon to ensure zero bias.
+
+\textbf{Variability:}
+is usually proportional to $(\text{sample size}) ^ {-1}$.
+
+We can look at an estimator with:
+high bias and high variance,
+high bias and low variance,
+low bias and high variance,
+low bias and low variance.
+
+\subsubsection{Inference}
+Inference is the act of drawing conclusions from certain basic facts and premises.
+
+The inferences we draw are rarely certain:
+uncertainty is everywhere.
 
 
 
