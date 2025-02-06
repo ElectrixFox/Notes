@@ -6348,14 +6348,162 @@ $B$ must satisfy $B = (\Bar{B}) ^ T = B ^ {*}$,
 sometimes written as $B ^ {\dagger}$,
 the Hermitian transpose or the conjugate transpose or the Hermitian conjugate.
 
-$B$ is Hermitian if $B = B ^ {*}$.
+$B$ is Hermitian if
+\[
+B = B ^ {*}.
+\]
 
+$B$ is anti-Hermitian if
+\[
+B ^ {*} = -B.
+\]
 
+Any complex matrix is a sum of a Hermitian and an anti-Hermitian matrix:
+\[
+A = \frac{1}{2}(A + A ^ {*}) + \frac{1}{2}(A - A ^ {*})\qquad(\text{uses fact that $(A ^ {*}) ^ {*} = A$}).
+\]
 
+Aside:
+if $A$ is real and symmetric,
+it is Hermitian
+($A ^ {*} = (\Bar{A}) ^ T = A ^ T = A$ deduce $A$ is Hermitian).
 
+A complex Hermitian inner product takes the form
+(if $\mbf{v}$ and $\mbf{w}$ have components $\mbf{x}$ and $\mbf{y}$)
+$\langle\mbf{v}, \mbf{w}\rangle = \mbf{y} ^ {*}B\mbf{x}$ with $B$ Hermitian and positive definite.
 
+\begin{example}
+    $V = \C ^ n$ with "standard" Hermitian inner product
+    \begin{align*}
+        \langle\mbf{z}, \mbf{w}\rangle &= z_1\Bar{w}_1 + z_2\Bar{w}_2 + \dotsc + z_n\Bar{w}_n \\
+        &= \begin{pmatrix}
+            \Bar{w}_1 & \Bar{w}_2 & \dotsi & \Bar{w}_n
+        \end{pmatrix}\begin{pmatrix}
+            1 & 0 & 0 & 0 \\
+            0 & 1 & 0 & 0 \\
+            \vdots & \dotsi & \ddots & \vdots \\
+            0 & 0 & 0 & 1
+        \end{pmatrix}
+        \begin{pmatrix}
+            z_1 \\
+            \vdots \\
+            z_n
+        \end{pmatrix}
+    \end{align*}
 
+    is $\langle\mbf{z}, \mbf{z}\rangle \geq 0$
+    \[
+    \langle\mbf{z}, \mbf{z}\rangle = |z_1| ^ 2 + \dotsc + |z_n| ^ 2 \geq 0,
+    \]
+    and $\langle\mbf{z}, \mbf{z}\rangle = 0 \implies |z_i| ^ 2 = 0 \implies z_i = 0 \forall i \implies \mbf{z} = \mbf{0}$.
+\end{example}
 
+\begin{example}
+    Does $\langle\mbf{z}, \mbf{w}\rangle = z_1\Bar{w}_1 + iz_1\Bar{w}_2 + iz_2\Bar{w}_1 + z_2\Bar{w}_2$ define an inner product on $\C ^ 2$?
+
+    \begin{solution}
+        No
+        \[
+        \langle\mbf{w}, \mbf{z}\rangle = w_1\Bar{z}_1 + iw_1\Bar{z}_2 + iw_2\Bar{z}_1 + w_2\Bar{z}_2
+        \]
+        while $\overline{\langle\mbf{z}, \mbf{w}\rangle} = \Bar{z}_1w_1 - i\Bar{z}_1w_2 - i\Bar{z}_2w_1 + \Bar{z}_2w_2$.
+        Alternatively
+        \[
+        \langle\mbf{z}, \mbf{w}\rangle =\begin{pmatrix}
+            \Bar{w}_1 & \Bar{w}_2
+        \end{pmatrix}\begin{pmatrix}
+            1 & i \\ i & 1
+        \end{pmatrix}\begin{pmatrix}
+            z_1 \\ z_2
+        \end{pmatrix},
+        \]
+        so $B = \begin{pmatrix}
+            1 & i \\ i & 1
+        \end{pmatrix}$ and $B \neq B ^ {*} = \begin{pmatrix}
+            1 & -i \\ -i & 1
+        \end{pmatrix}$.
+    \end{solution}
+\end{example}
+
+\begin{example}
+    Let $V$ be the infinite dimensional vector space $V = C ^ {0}([a, b], \C) = \{f : [a, b] \rightarrow \C, \text{ continuous complex valued functions}\}$
+    (continuous functions)
+    \[
+    \langle f, g\rangle = \int_{a}^{b}f(t)\Bar{g(t)}\,dt
+    \]
+    defines a Hermitian inner product,
+    very like in the real case.
+\end{example}
+
+\subsection{Norms}
+
+\begin{definition}
+    Given a vector space over $\R$
+    (or $\C$),
+    a norm on $V$,
+    is a function $\| .\| : V \rightarrow \R$,
+    $\mbf{v} \mapsto \|\mbf{v}\|$ such that
+    \begin{enumerate}[label = (\roman*)]
+        \item $\|a\mbf{v}\| = |a|\|\mbf{v}\|$
+        (absolute homogeneity).
+
+        \item $\|\mbf{u} + \mbf{v}\| \leq \|\mbf{u}\| + \|\mbf{v}\|$
+        (triangle inequality).
+
+        \item $\|\mbf{v}\| = 0 \iff \mbf{v} = \mbf{0}$
+        (separation of points).
+    \end{enumerate}
+\end{definition}
+
+\textit{Note:
+from (i) we have $\|-\mbf{v}\| = \|\mbf{v}\|$ and also $\|\mbf{0}\| = 0$ so $0 = \|\mbf{0}\| = \|\mbf{v} + -\mbf{v}\| \leq \|\mbf{v}\| + \|-\mbf{v}\| = 2\|\mbf{v}\|$
+so $\|\mbf{v}\| \geq 0\ \forall \mbf{v} \in V$.}
+
+When $V$ has an inner product,
+there is a "special" norm induced by the inner product.
+
+\textbf{Real case:}
+If $\{V, (,)\}$ is a real inner product space then the norm induced by $(,)$ is $\|\mbf{v}\|_{(,)} = \|\mbf{v}\| = \sqrt{(\mbf{v}, \mbf{v})} \in \R ^ {\geq 0}$
+(well defined since $(\mbf{v}, \mbf{v}) \geq 0\ \forall \mbf{v} \in V$.
+
+\begin{example}
+    Take $V = \R ^ 3$ with standard inner product $\|\mbf{v}\| = \sqrt{\mbf{v} \cdot \mbf{v}} = \sqrt{v_1 ^ 2 + v_2 ^ 2 + v_3 ^ 2}$
+    (the usual length of a vector).
+\end{example}
+
+Let $V, (,)$ be a real inner product space and $\|.\|$ be the induced norm
+(assumed from now on).
+
+\begin{definition}
+    $\mbf{v}$ is a unit vector if $\|\mbf{v}\| = 1$.
+    $\mbf{u}, \mbf{v}$ are orthogonal if $(\mbf{u}, \mbf{v}) = 0$
+    (write $\mbf{u} \perp \mbf{v}$).
+\end{definition}
+
+\begin{theorem}[Pythagoras]
+    If $\mbf{u}$ and $\mbf{v}$ are orthogonal,
+    then $\|\mbf{u} + \mbf{v}\| = \|\mbf{u}\| ^ 2 + \|\mbf{v}\| ^ 2$.
+
+    \begin{proof}
+        $\|\mbf{u} + \mbf{v}\| ^ 2 = (\mbf{u} + \mbf{v}, \mbf{u} + \mbf{v}) = (\mbf{u}, \mbf{u}) + (\mbf{u, v}) + (\mbf{v, u}) + (\mbf{v, v}) = (\mbf{u, u}) + (\mbf{v, v}) = \|\mbf{u}\| ^ 2 + \|\mbf{v}\| ^ 2$.
+    \end{proof}
+\end{theorem}
+
+We must check that this really is a norm,
+i.e. that (i) - (iii) hold.
+\[
+\|a\mbf{v}\| = \sqrt{(a\mbf{v}, a\mbf{v})} = \sqrt{a ^ 2(\mbf{v, v})} = |a|\|\mbf{v}\|
+\]
+so (i) is ok.
+\[
+\|\mbf{v}\| = 0 \iff (\mbf{v, v}) = 0 \iff \mbf{v = 0}
+\]
+by positive definite,
+so (iii) is ok.
+
+For (ii) we will need the
+(real)
+Cauchy-Schwartz inequality.
 
 
 
