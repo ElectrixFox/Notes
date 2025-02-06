@@ -3845,6 +3845,96 @@ $g'(c') = \frac{g(b) - g(a)}{b - a}$.
     \end{enumerate}
 \end{remark}
 
+\subsection{Taylor}
+
+Recall:
+$f : I \rightarrow \R$ differentiability at $x = c$:
+\[
+f(x) = f(c) + f'(c)(x - c) + r(x)(x - c)
+\]
+with $\lim_{x \rightarrow c}r(x) = 0$.
+
+$f(x)$ differentiable $n$-times on $I$.
+$n$-th Taylor polynomial
+\[
+T_{f, c} ^ {(n)} = f(c) + f'(c)(x - c) + \frac{f'(c)}{2}(x - c) ^ 2 + \dotsc + \frac{f ^ {(n)}(c)}{n!}(x - c) ^ n.
+\]
+Why?
+\begin{align*}
+    f(c) &= T_{f, c} ^ {(n)}(c) \\
+    f'(c) &= \left[T_{f, c} ^ {(c)}\right]'(c) \\
+    &\vdots \\
+    f ^ {(k)} &= \left[T_{f, c} ^ {(n)}\right] ^ {(k)}(c)
+\end{align*}
+$k = 0, \dotsc, n$.
+
+\begin{theorem}[Taylor's Theorem
+(Peano remainder)]
+    $f : I \rightarrow \R$ $n$-times differentiable.
+    Then there exists a function $r_n(x)$ with $\lim_{x \rightarrow c}r_n(x) = 0$ such that
+    \begin{equation}\label{analy:eq:3}
+        f(x) = T_{f, c} ^ {(n)}(x) + r_n(x)(x - c) ^ n.
+    \end{equation}
+
+    \begin{proof}
+        Solve for $r_n(x)$ in \eqref{analy:eq:3}.
+        \[
+        r_n(x) = \frac{f(x) - T_{f, c} ^{(n)}(x)}{(x - c) ^ n}.
+        \]
+        Need to compute $\lim_{x \rightarrow c}r_n(x)$.
+        Apply L'H\^opital $n$-times get $\lim_{x \rightarrow c}\frac{f ^ {(n)}(x) - f ^ {(n)}(c)}{n!} = 0$.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}[Taylor's Theorem
+(Lagrange remainder)]
+    Assume in addition that $f$ is $(n + 1)$ times differentiable.
+    Then there exists a $\xi$ between $x$ and $c$ such that
+    \[
+    f(x) = T_{f, c} ^ {(n)}(x) + \frac{f ^ {(n + 1)}(\xi)}{(n + 1)!}(x - c) ^ {n + 1}.
+    \]
+
+    \begin{proof}
+        Fix $x \in I$.
+        Define
+        \[
+        F(t) = f(x) - T_{f, t} ^ {(n)}(x)
+        \]
+        \[
+        f(x) - \left[f(t) - f'(t)(x - t) + \dotsc + \frac{f ^ {(n)}(t)}{n!}(x - t) ^ n\right].
+        \]
+        So $F(c) = r_n(x)(x - c) ^ n$.
+        Have $F'(t) = -\frac{f ^ {(n + 1)}(t)}{n!}(x - t) ^ n$.
+        Apply Cauchy's generalised mean value theorem for $F(t)$ and $G(t) = (x - t) ^ {n + 1}$.
+        Then
+        \[
+        \frac{r_n(x)}{x - c} = \frac{F(c)}{(x - c) ^ {n + 1}} = \frac{F(c)}{G(c)} = \frac{F(c) - \overbrace{F(x)}^{= 0}}{G(c) - \underbrace{G(x)}_{= 0}} = \frac{F'(\xi)}{G'(\xi)} = \frac{{-\frac{f ^ {(n + 1)}(\xi)}{n!}(x - \xi) ^ n}}{-(n + 1)(x - \xi) ^ n} = \frac{f ^ {(n + 1)}(\xi)}{(n + 1)!}
+        \]
+        with $\xi$ between $x$ and $c$.
+    \end{proof}
+\end{theorem}
+That is,
+$r_n(x) = f ^ {(n + 1)}(\xi)(x - c)$.
+
+
+Assume $\left|f ^ {(n + 1)}(x)\right| \leq M_{n + 1}$ is bounded on $I$.
+(e.g. $f ^ {(n + 1)}(x)$ is continuous on $[a, b]$).
+Then $\left|f(x) - T_{f, c}^{(n)}(x)\right| \leq \frac{M_{n + 1}}{(n + 1)!}|x - c| ^ {n + 1}$
+
+\begin{example}
+    $f(X) = e ^ x$,
+    $n = 4$.
+
+    \[
+    T_{f, 0}(x) = 1 + x + \frac{x ^ 2}{2} + \frac{x ^ 3}{6} + \frac{x ^ 4}{24}.
+    \]
+    Then
+    \[
+    \left|e ^ {\frac{1}{2}} - T_{f, 0}\left(\frac{1}{2}\right)\right| \leq \frac{e ^ {\frac{1}{2}}}{120}\left(\frac{1}{2}\right) ^ 5 \leq \frac{2}{1920} = \frac{1}{360}.
+    \]
+\end{example}
+
+
 
 
 
