@@ -1,5 +1,6 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage{preamble}
+\usepackage{calc}
 
 \title{Discrete Mathematics}
 \author{}
@@ -180,7 +181,7 @@ we will assume:
                     node[midway, left, draw = none] {\small 1};
                 
                 \draw[->] (v3) -- (v4)
-                    node[midway, right, rectangle, xshift = 3pt] {\small 3}
+                    node[midway, right, rectangle, xshift = 3pt] {\small 2}
                     node[midway, above left, draw = none] {\small 3};
                 
                 \draw[->] (v4) -- (v5)
@@ -188,13 +189,13 @@ we will assume:
                     node[midway, below right, draw = none] {\small 2};
                 
                 \draw[->] (v5) -- (t)
-                    node[midway, below, rectangle, yshift = -3pt] {\small 8}
+                    node[midway, below, rectangle, yshift = -3pt] {\small 7}
                     node[midway, above, draw = none] {\small 8};
             \end{tikzpicture}
             
             \begin{solution}
                 We can see that the best $\Phi_{tot}(F)$ will be $8$ as we can increase the flow along the edge $sv_1$,
-                $v_1v_5$ and $v_1v_2$ to get them to their capacities or closer to,
+                $v_1v_5$ and $v_5t$ to get them to their capacities or closer to,
                 e.g.
     
                 \begin{figure}[H]
@@ -219,7 +220,7 @@ we will assume:
                             node[midway, right, draw = none] {\small 7};
                             
                         \draw[->] (v1) -- (v2)
-                            node[midway, below right, rectangle, xshift = 3pt, yshift = -3pt] {\small 1 + 1}
+                            node[midway, below right, rectangle, xshift = 3pt, yshift = -3pt] {\small 1}
                             node[midway, above left, draw = none] {\small 2};
                             
                         \draw[->] (v1) -- (v5)
@@ -235,7 +236,7 @@ we will assume:
                             node[midway, left, draw = none] {\small 1};
                         
                         \draw[->] (v3) -- (v4)
-                            node[midway, right, rectangle, xshift = 3pt] {\small 3}
+                            node[midway, right, rectangle, xshift = 3pt] {\small 2}
                             node[midway, above left, draw = none] {\small 3};
                         
                         \draw[->] (v4) -- (v5)
@@ -243,13 +244,223 @@ we will assume:
                             node[midway, below right, draw = none] {\small 2};
                         
                         \draw[->] (v5) -- (t)
-                            node[midway, below, rectangle, yshift = -3pt] {\small 8}
+                            node[midway, below, rectangle, yshift = -3pt] {\small 7 + 1}
                             node[midway, above, draw = none] {\small 8};
                     \end{tikzpicture}
                 \end{figure}
         \end{solution}
     \end{figure}
 \end{example}
+
+\begin{definition}
+    Let $S \subset V$ with $s \in S$ and $t \notin S$.
+    Then the cut associated with $S$ is
+    \[
+    K(S) \coloneqq \{uv \in E\,:\,u \in S, v \in V \setminus S\},
+    \]
+    i.e.,
+    all the directed edges that start in $S$ and finish in $V \setminus S$.
+    The capacity of $K(S)$ is
+    \[
+    \kappa(S) \coloneqq \sum_{e \in K(S)}c_e = \sum_{u \in S, v \in V \setminus S}c_{uv}.
+    \]
+\end{definition}
+
+The above is saying we cut the graph such that we separate $s$ from $t$.
+
+\begin{example}
+    Here is an example of a cut:
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[>=stealth, node distance=2cm, every node/.style={draw, circle}]
+            % Nodes
+            \node[draw] at (0, 0) (s) {s};
+            \node[draw] at (0, -2) (v1) {$v_1$};
+            \node[draw] at (2, 0) (v2) {$v_2$};
+            \node[draw] at (4, 0) (v3) {$v_3$};
+            \node[draw] at (2.5, -2) (v4) {$v_4$};
+            \node[draw] at (1, -4) (v5) {$v_5$};
+            \node[draw] at (4, -4) (t) {t};
+    
+            % Edges
+            \draw[->] (s) -- (v2);
+            \draw[->] (s) -- (v1);
+            \draw[->] (v1) -- (v2);
+            \draw[->] (v1) -- (v5);
+            \draw[->] (v2) -- (v3);
+            \draw[->] (v3) -- (t);
+            \draw[->] (v3) -- (v4);
+            \draw[->] (v4) -- (v5);
+            \draw[->] (v5) -- (t);
+
+            % Cut
+            \draw[blue] (0, -3) -- (4.5, -3);              
+        \end{tikzpicture}
+    \end{figure}
+\end{example}
+
+
+\begin{theorem}[Max-flow min-cut]
+    Given a capacitated network $(V, C)$,
+    \[
+    \max_{F}\phi_{\text{tot}}(F) = \min_{S}\kappa(S),
+    \]
+    i.e.,
+    the maximum total value over all flows is equal to the minimum cut capacity of the network.
+\end{theorem}
+
+\begin{example}
+    With these cuts we can see that
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[>=stealth, node distance=2cm, every node/.style={draw, circle}]
+            % Nodes
+            \node[draw] at (0, 0) (s) {s};
+            \node[draw] at (0, -2) (v1) {$v_1$};
+            \node[draw] at (2, 0) (v2) {$v_2$};
+            \node[draw] at (4, 0) (v3) {$v_3$};
+            \node[draw] at (2.5, -2) (v4) {$v_4$};
+            \node[draw] at (1, -4) (v5) {$v_5$};
+            \node[draw] at (4, -4) (t) {t};
+    
+            % Edges
+            \draw[->] (s) -- (v2);
+            \draw[->] (s) -- (v1)
+                node[midway, left, yshift=5pt, draw=none] {\small d};
+            \draw[->] (v1) -- (v2)
+                node[midway, above, draw=none] {\small e};
+            \draw[->] (v1) -- (v5)
+                node[midway, above, draw=none] {\small a};
+            \draw[->] (v2) -- (v3);
+            \draw[->] (v3) -- (t)
+                node[midway, right, draw=none] {\small c};
+            \draw[->] (v3) -- (v4)
+                node[midway, above, draw=none] {\small f};
+            \draw[->] (v4) -- (v5)
+                node[midway, above, draw=none] {\small b};
+            \draw[->] (v5) -- (t);
+
+            % Cut
+            \draw[blue] (-0.5, -3) -- (4.5, -3);
+            \draw[blue] (-0.5, -1) -- (4.5, -1);
+        \end{tikzpicture}
+    \end{figure}
+    For the bottom cut we have
+    \[
+    a + b + c \leq \max{F}
+    \]
+    and for the top cut we would have
+    \[
+    d - e + f + c \leq \max{F}.
+    \]
+    These show how the flow in and out is less than the maximum flow.
+\end{example}
+
+\begin{example}
+    Construct a maximal flow,
+    that is,
+    a flow for which $\Phi_{\text{tot}}(F)$ is as big as possible.
+
+    \begin{solution}
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[>=stealth, node distance=2cm, every node/.style={draw, circle}]
+                % Nodes
+                \node[draw] at (0, 0) (s) {s};
+                \node[draw] at (0, -2) (v1) {$v_1$};
+                \node[draw] at (2, 0) (v2) {$v_2$};
+                \node[draw] at (4, 0) (v3) {$v_3$};
+                \node[draw] at (2.5, -2) (v4) {$v_4$};
+                \node[draw] at (1, -4) (v5) {$v_5$};
+                \node[draw] at (4, -4) (t) {t};
+        
+                % Edges
+                \draw[->] (s) -- (v2)
+                    node[midway, above, rectangle, yshift = 3pt] {\small 2} 
+                    node[midway, below, draw = none] {\small 3};
+                    
+                \draw[->] (s) -- (v1)
+                    node[midway, left, xshift = -3pt, rectangle] {\small 6 + 1}
+                    node[midway, right, draw = none] {\small 7};
+                    
+                \draw[->] (v1) -- (v2)
+                    node[midway, below right, rectangle, xshift = 3pt, yshift = -3pt] {\small 1}
+                    node[midway, above left, draw = none] {\small 2};
+                    
+                \draw[->] (v1) -- (v5)
+                    node[midway, below left, rectangle, yshift = -3pt] {\small 5 + 1}
+                    node[midway, above right, draw = none] {\small 9};
+                
+                \draw[->] (v2) -- (v3)
+                    node[midway, above, rectangle, yshift = 3pt] {\small 3}
+                    node[midway, below, draw = none] {\small 4};
+                
+                \draw[->] (v3) -- (t)
+                    node[midway, right, rectangle, xshift = 3pt] {\small 1}
+                    node[midway, left, draw = none] {\small 1};
+                
+                \draw[->] (v3) -- (v4)
+                    node[midway, right, rectangle, xshift = 3pt] {\small 2}
+                    node[midway, above left, draw = none] {\small 3};
+                
+                \draw[->] (v4) -- (v5)
+                    node[midway, above left, rectangle] {\small 2}
+                    node[midway, below right, draw = none] {\small 2};
+                
+                \draw[->] (v5) -- (t)
+                    node[midway, below, rectangle, yshift = -3pt] {\small 7 + 1}
+                    node[midway, above, draw = none] {\small 8};
+            \end{tikzpicture}
+        \end{figure}
+        the  minimal cut would be
+        \[
+        S = \{s, v_1, v_2, v_3, v_4, v_5\}.
+        \]
+    \end{solution}
+\end{example}
+
+For $W \subseteq V$,
+define
+\[
+\phi_{\text{in}}(W) \coloneqq \sum_{u \in V \setminus W}\sum_{v \in W}f_{uv},
+\]
+the total flow into the set $W$ from vertices outside $W$.
+Similarly,
+let
+\[
+\phi_{\text{out}}(W) \coloneqq \sum_{u \in W}\sum_{v \in V \setminus W}f_{uv},
+\]
+the total flow out of $W$.
+With the convention that an empty sum is zero,
+note that $\phi_{\text{in}}(V) = \phi_{\text{out}}(V) = 0$
+(because there's nowhere outside $V$).
+
+\begin{example}
+    Let $W \subset V$ with $y \in V \setminus W$.
+    Show that
+    \begin{align*}
+        \phi_{\text{in}}(W \cup \{y\}) &= \phi_{\text{in}}(W) + \sum_{u \in V \setminus W}f_{uy} - \sum_{v \in W}f_{yv}. \\
+        \intertext{Similarly,
+        show that}
+        \phi_{\text{out}}(W \cup \{y\}) &= \phi_{\text{out}}(W) + \sum_{v \in V \setminus W}f_{yv} - \sum_{u \in W}f_{uy}.
+    \end{align*}
+    Let $\Delta(W) \coloneqq \phi_{\text{out}}(W) - \phi_{\text{in}}(W)$.
+
+    \begin{solution}
+        \begin{align*}
+            \phi_{\text{in}}(W \cup \{y\}) &= \phi_{\text{in}}(W) + \phi_{\text{in}}(\{y\}) - \phi_{\text{in}}(W \cap \{y\}) \\
+            &= \phi_{\text{in}}(W) + \sum_{u \in V \setminus W}f_{uy} - \text{ flow from $y$ to $W$} \\
+            &=\phi_{\text{in}}(W) + \sum_{u \in V \setminus W}f_{uy} - \sum_{v \in W}f_{yv}.
+        \end{align*}
+        Similarly
+        \begin{align*}
+            \phi_{\text{out}}(W \cup \{y\}) &= \phi_{\text{out}}(W) + \phi_{\text{out}}(\{y\}) - \phi_{\text{out}}(W \cap \{y\}) \\
+            &= \phi_{\text{out}}(W) + \sum_{v \in V \setminus W}f_{yv} - \text{ flow from $W$ to $y$} \\
+            &=\phi_{\text{out}}(W) + \sum_{v \in V \setminus W}f_{yv} - \sum_{u \in W}f_{uy}.
+        \end{align*}
+    \end{solution}
+\end{example}
+
 
 
 
