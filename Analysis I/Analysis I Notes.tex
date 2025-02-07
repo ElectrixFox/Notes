@@ -328,7 +328,7 @@ The next property of the reals is an existence of an order $<$. For any $a, b \i
 
 We require
 \begin{enumerate}[label = (O.\arabic*)]
-    \item Trichotomy\label{analy_axiom_trichotomy}: We either have $a < b,\, a = b,\,\text{or } b < a$ (as a true statement).
+    \item Trichotomy\label{analy:axiom:trichotomy}: We either have $a < b,\, a = b,\,\text{or } b < a$ (as a true statement).
     \item Transitivity: If $a < b$ and $b < c$, then $a < c$.
     \item Monotony of Addition: If $a < b$, then $a + c < b + c$ for all $c \in \R$.
     \item Monotony of Multiplication: If $a < b$ and $0 < c$ then $c \cdot a < c \cdot b$
@@ -337,7 +337,7 @@ If $a < b$ we also write $b > a$, we also write $a \leq b$ for ($a < b$ or $a = 
 
 If $a \in \R$ different from $0$, then either $a < 0$ or $0 < a$. Then $-a$ is also different from $0$ and by   (O.3) we have $0 < -a$ or $-a < 0$.
 
-\begin{proposition}\label{prop_anly_prop1}
+\begin{proposition}\label{prop:anly:prop1}
     Let $a, b, c, d \in \R$. Then
     \begin{enumerate}[label = (\alph*)]
         \item If $a \neq 0$, then $a ^ 2 > 0$. In particular $1 > 0$.
@@ -411,7 +411,7 @@ We also use the usual notation for intervals
     This is a function $|\cdot|\,:\, \R \rightarrow [0,\,\infty)$.
 \end{definition}
 
-\begin{proposition}\label{prop_anly_prop2}
+\begin{proposition}\label{prop:anly:prop2}
     Let $a, b, c \in \R$. Then
     \begin{enumerate}[label = (\alph*)]
         \item $0 \leq |a| = |-a|$
@@ -447,7 +447,7 @@ We also use the usual notation for intervals
         \[
         -|b| \leq b \leq |b|
         \]
-        By \autoref{prop_anly_prop1}(b)
+        By \autoref{prop:anly:prop1}(b)
         \[
         \overbrace{-(|a| + |b|)}^{-c} \leq a + b \leq \overbrace{|a| + |b|}^{c}
         \]
@@ -485,7 +485,7 @@ We also use the usual notation for intervals
     
     \begin{enumerate}[label = (\alph*)]
     \item
-    by \autoref{prop_anly_prop2}(b) this is equivalent to
+    by \autoref{prop:anly:prop2}(b) this is equivalent to
     \begin{align*}
     -2 \leq 3x - 4 \leq 2 &\iff 2 \leq 3x \leq 6 \\
     &\iff \frac{2}{3} \leq x \text{ and } x \leq 2 \\
@@ -671,7 +671,7 @@ For $n = 0$ use $0! = 1$.
     \]
 \end{definition}
 
-\begin{theorem}[Binomial Theorem]\label{analy_thm_binom}
+\begin{theorem}[Binomial Theorem]\label{analy:thm:binom}
     Let $a, b \in \R$ and $n \in \N$. Then
     \[
     (a + b) ^ n = \sum_{k = 0}^{n}\binom{n}{k}a^{n - k}b^{k} = a ^ n + \binom{n}{1}a^{n - 1}b + \dotsc + b ^ n.
@@ -695,7 +695,7 @@ For $n = 0$ use $0! = 1$.
     \end{proof}
 \end{theorem}
 
-\begin{theorem}[Bernoulli Inequality]\label{analy_thm_bernoineq}
+\begin{theorem}[Bernoulli Inequality]\label{analy:thm:bernoineq}
     Let $x \geq -1$ and $n \in \N$. Then
     \[
     (1 + x) ^ n \geq 1 + nx.
@@ -747,7 +747,7 @@ For $n = 0$ use $0! = 1$.
     Similarly, $m \in X$ is called the minimum of $X$, if $m \leq x$ for all $x \in M$, we write $m = \min X$, if such $m$ exists.
 \end{definition}
 
-\begin{example}\label{examp_analy_1}
+\begin{example}\label{examp:analy:1}
     $x = \N$ $1$ is the minimum since $1 \leq n$ for all $n \in \N$, but $1 \in \N$. This set has no maximum. A maximum would have to be some $n \in \N$. But $n < n + 1$, so $n \geq x$ for all $x \in \N$ is not possible, since $n + 1 \in \N$.
 \end{example}
 
@@ -813,14 +813,14 @@ so (b) is also satisfied.
     this implies (b) is satisfied.
 \end{example}
 
-\begin{example}\label{examp_analy_2}
+\begin{example}\label{examp:analy:2}
     $Y = \left\{\frac{1}{n}\,\middle|\, n \in \N\right\}$
 
     $\sup Y = \max Y = 1$,
     $0$ is a lower bound,
     is it the infimum?
     (a) is satisfied.
-    (b) same as \autoref{examp_analy_1}
+    (b) same as \autoref{examp:analy:1}
 \end{example}
 
 
@@ -828,7 +828,7 @@ The Completeness Axiom:
 
 (C.1) Every non-empty subset of $\R$ which is bounded above has a supremum.
 
-\begin{theorem}[Archimedes]\label{analy_thm_archim}
+\begin{theorem}[Archimedes]\label{analy:thm:archim}
     Let $a, b \in \R$ with $b > 0$. Then there exists an $n \in \N$ with $nb > a$.
     [Think $b = 1$, then this is saying for every $a \in \R$ there is $n \in \N$ with $n > a$.]
     \begin{proof}
@@ -845,7 +845,7 @@ The Completeness Axiom:
     \end{proof}
 \end{theorem}
 
-Looking back at \autoref{examp_analy_2},
+Looking back at \autoref{examp:analy:2},
 $0 = \inf Y$,
 it is a lower bound.
 Assume $b \in \R$ satisfies $0 < b$ we cannot have $b < \frac{1}{n}$ for all $n \in \N$,
@@ -898,8 +898,8 @@ as this is equivalent to $n < \frac{1}{b}$ for all $n \in \N$.
             &\leq \xi ^ p + \frac{1}{n}\left(\binom{p}{2}\xi ^ {p - 1} + \binom{p}{2}\xi ^ {p - 2} + \dotsi + 1\right) \\
             &= \xi ^ p + \frac{\alpha}{n}\quad\text{ with } \alpha > 0
         \end{align*}
-        \footnotetext{By \autoref{analy_thm_binom}.}
-        We want $\xi ^ p + \frac{\alpha}{n} < a \iff \frac{\alpha}{n} < a - \xi ^ p \iff \alpha < \left(a - \xi ^ p\right) \cdot n$ By \autoref{analy_thm_archim} there exists such an $n \in \N$
+        \footnotetext{By \autoref{analy:thm:binom}.}
+        We want $\xi ^ p + \frac{\alpha}{n} < a \iff \frac{\alpha}{n} < a - \xi ^ p \iff \alpha < \left(a - \xi ^ p\right) \cdot n$ By \autoref{analy:thm:archim} there exists such an $n \in \N$
         so far such $n$
         \[
         \left(\xi + \frac{1}{n}\right) ^ p < a
@@ -914,11 +914,11 @@ as this is equivalent to $n < \frac{1}{b}$ for all $n \in \N$.
             &\geq \xi ^ p \left(1 - \frac{p}{\xi n}\right)\footnotemark \\
             &= \xi ^ p - \frac{\xi ^ {p - 1}p}{n}
         \end{align*}
-        \footnotetext{By \autoref{analy_thm_bernoineq}}
+        \footnotetext{By \autoref{analy:thm:bernoineq}}
         Want $\xi ^ p - \frac{\xi ^ {p - 1}p}{n} > a \iff (\xi ^ p - a) > \frac{\xi ^ {p - 1}p}{n} \iff n \cdot (\xi ^ p - a) > \xi ^ {p - 1} \cdot p \in \R$.
-        By \autoref{analy_thm_archim} there exists such $n \in \N$.
+        By \autoref{analy:thm:archim} there exists such $n \in \N$.
         Contradicting $\xi$ being the supremum (We showed that $\xi - \frac{1}{n}$ is also an upper bound of $A$).
-        By \autoref{analy_axiom_trichotomy} axiom $\xi ^ p = a$.
+        By \autoref{analy:axiom:trichotomy} axiom $\xi ^ p = a$.
         \end{proof}
 \end{theorem}
 
@@ -1023,7 +1023,7 @@ If a sequence does not converge to a limit we call it a divergent sequence.
     \[
     \left|\frac{1}{n} - 0\right| = \frac{1}{n} < \varepsilon\text{ for all } n \geq n_0
     \]
-    choose $n_0 \in \N$ such that $n_0 > \frac{1}{\varepsilon}$ (possible by \autoref{analy_thm_archim})
+    choose $n_0 \in \N$ such that $n_0 > \frac{1}{\varepsilon}$ (possible by \autoref{analy:thm:archim})
     \item
     \[
     b_n = (-1) ^ n
@@ -1098,7 +1098,7 @@ If a sequence does not converge to a limit we call it a divergent sequence.
 \end{example}
 A sequence which is not bounded is called unbounded.
 
-\begin{theorem}\label{analy_thm_convseqisbound}
+\begin{theorem}\label{analy:thm:convseqisbound}
     Every convergent sequence is bounded.
 \end{theorem}
 \begin{remark}
@@ -1107,12 +1107,12 @@ A sequence which is not bounded is called unbounded.
     e.g. $(-1) ^ n$
 \end{remark}
 
-Contrapositive of \autoref{analy_thm_convseqisbound} says:
+Contrapositive of \autoref{analy:thm:convseqisbound} says:
 An unbounded sequence is divergent.
 Fibonacci sequence is divergent.
 
 \subsection{Convergence criteria}
-\begin{theorem}[Squeezing Theorem]\label{analy_thm_squeezethm}
+\begin{theorem}[Squeezing Theorem]\label{analy:thm:squeezethm}
     Let $\seq$ and $\seq[y]$ be real sequences.
     If $|x_n| \leq y_n$ for all $n \in \N$ and $y_n \rightarrow 0$ as $n \rightarrow \infty$, then
     \[
@@ -1142,7 +1142,7 @@ Fibonacci sequence is divergent.
     If $c > 1$,
     write $c = 1 + h$ with $h > 0$.
     Now $x_n = (1 + h) ^ n \geq 1 + nh \geq nh$ (Bernoulli inequality)
-    this implies $x_n$ is unbounded so is divergent by \autoref{analy_thm_convseqisbound}.
+    this implies $x_n$ is unbounded so is divergent by \autoref{analy:thm:convseqisbound}.
     If $c < -1$,
     $x_{2n} = (c ^ 2) ^ n$ with $c ^ 2 > 1$ is also unbounded and divergent.
 
@@ -1150,13 +1150,13 @@ Fibonacci sequence is divergent.
     \[
     x_n = \frac{1}{(1 + h) ^ n} \leq \frac{1}{1 + nh} \leq \frac{1}{nh} = y_n \rightarrow 0
     \]
-    this implies $x_n \rightarrow 0$ by \autoref{analy_thm_squeezethm}.
+    this implies $x_n \rightarrow 0$ by \autoref{analy:thm:squeezethm}.
 
     If $-1 < c < 0$ write $c = -\frac{1}{1 + h}$ with $h > 0$
     \[
     |x_n| = \frac{1}{(1 + h) ^ n} \rightarrow 0.
     \]
-    By \autoref{analy_thm_squeezethm} $x_n \rightarrow 0$.
+    By \autoref{analy:thm:squeezethm} $x_n \rightarrow 0$.
 \end{example}
 
 \begin{example}
@@ -1169,7 +1169,7 @@ Fibonacci sequence is divergent.
     \]
 \end{example}
 
-\begin{theorem}[Calculus of Limits Theorem (COLT)]\label{analy_thm_COLT}
+\begin{theorem}[Calculus of Limits Theorem (COLT)]\label{analy:thm:COLT}
     Let $\seq$ and $\seq[y]$ be sequences which are convergent with $x = \lim_{n \rightarrow \infty}x_n$ and $y = \lim_{n \rightarrow \infty}$.
     Also, let $a, b \in \R$.
     Then
@@ -1191,7 +1191,7 @@ Fibonacci sequence is divergent.
         &= |x_n| \cdot |y_n - y| + |x_n - x| \cdot |y|
         \end{align*}
         Note,
-        there is a $C > 0$ with $|x_n| \leq C$ by \autoref{analy_thm_convseqisbound}.
+        there is a $C > 0$ with $|x_n| \leq C$ by \autoref{analy:thm:convseqisbound}.
         Can also assume that $C \geq |y|$.
         Then we have
         \[
@@ -1240,7 +1240,7 @@ Fibonacci sequence is divergent.
 
     Let us assume that $x_n$ converges to $x$.
     Then $x_{n - 1}$ also converges to $x$
-    By \autoref{analy_thm_COLT} $x = \lim x_n = \lim \left(\frac{x_{n - 1}}{2} + \frac{1}{x_{n - 1}}\right) = \frac{x}{2} + \frac{1}{x} \implies x ^ 2 = 2$
+    By \autoref{analy:thm:COLT} $x = \lim x_n = \lim \left(\frac{x_{n - 1}}{2} + \frac{1}{x_{n - 1}}\right) = \frac{x}{2} + \frac{1}{x} \implies x ^ 2 = 2$
     Two candidates for $x$,
     $x = \sqrt{2}$ or $x = -\sqrt{2}$ but $x_n \in [1, 2]$ so no $-\sqrt{2}$.
     Now let's try to show convergence:
@@ -1252,11 +1252,11 @@ Fibonacci sequence is divergent.
         &\leq \frac{|x_{n - 2} - \sqrt{2}|}{4} \\
         &\leq \frac{1}{2 ^ n} \text{by induction true for all } n \in \N.
     \end{align*}
-    By \autoref{analy_thm_squeezethm} $x_n - \sqrt{2} \rightarrow 0$ so by \autoref{analy_thm_COLT}
+    By \autoref{analy:thm:squeezethm} $x_n - \sqrt{2} \rightarrow 0$ so by \autoref{analy:thm:COLT}
     $x_n \rightarrow \sqrt{2}$.
 \end{example}
 
-\begin{theorem}\label{analy_thm_contofsqrt}
+\begin{theorem}\label{analy:thm:contofsqrt}
     Let $\seq$ be a sequence such that $x_n \in [a, b]$ for all $n$.
     If the sequence converges to $x \in \R$.
     Then $x \in [a, b]$.
@@ -1273,7 +1273,7 @@ Fibonacci sequence is divergent.
     \end{proof}
 \end{theorem}
 
-\begin{corollary}\label{analy_corol_seq_convgeq}
+\begin{corollary}\label{analy:corol:seq:convgeq}
     Let $\seq$ and $\seq[y]$ be convergent sequences with $x_n \leq y_n$ for all $n \in \N$.
     Then
     \[
@@ -1282,7 +1282,7 @@ Fibonacci sequence is divergent.
     \begin{proof}
         Consider $a_n = y_n - x_n$.
         Then $a_n \geq 0$
-        By the previous $\lim_{n \rightarrow \infty}a_n \geq 0$. By \autoref{analy_thm_COLT}
+        By the previous $\lim_{n \rightarrow \infty}a_n \geq 0$. By \autoref{analy:thm:COLT}
         \[
         \lim_{n \rightarrow \infty}y_n - \lim_{n \rightarrow \infty}x_n \geq 0.
         \]
@@ -1296,7 +1296,7 @@ Fibonacci sequence is divergent.
     \lim_{n \rightarrow \infty}\sqrt{x_n} = \sqrt{\lim_{n \rightarrow \infty}x_n}.
     \]
     \begin{proof}
-        Denote $x = \lim_{n \rightarrow \infty}x_n \geq 0$ by \autoref{analy_corol_seq_convgeq}.
+        Denote $x = \lim_{n \rightarrow \infty}x_n \geq 0$ by \autoref{analy:corol:seq:convgeq}.
         Distinguish the cases $x = 0$ and $x > 0$.
         Assume $x > 0$.
         \begin{align*}
@@ -1304,7 +1304,7 @@ Fibonacci sequence is divergent.
             &= \frac{|x_n - x|}{\sqrt{x_n} + \sqrt{x}} \\
             &\leq \frac{|x_n - x|}{\sqrt{x}}
         \end{align*}
-        by \autoref{analy_thm_squeezethm} $\sqrt{x_n} - \sqrt{x} \rightarrow 0$ and by \autoref{analy_thm_COLT} $\sqrt{x_n} \rightarrow \sqrt{x}$.
+        by \autoref{analy:thm:squeezethm} $\sqrt{x_n} - \sqrt{x} \rightarrow 0$ and by \autoref{analy:thm:COLT} $\sqrt{x_n} \rightarrow \sqrt{x}$.
     \end{proof}
 \end{theorem}
 
@@ -1317,19 +1317,19 @@ Fibonacci sequence is divergent.
             &= \frac{n ^ 2 \left(1 - \frac{(-1) ^ n}{n}\right)}{n ^ 2 \sqrt{1 + \frac{1}{n ^ 4}}} \\
             &= \frac{1 - \frac{(-1) ^ n}{n}}{\sqrt{1 + \frac{1}{n ^ 4}}}
         \end{align*}
-        by \autoref{analy_thm_COLT} and \autoref{analy_thm_contofsqrt} $y_n \rightarrow \frac{1 - 0}{\sqrt{1 + 0}} = 1$.
+        by \autoref{analy:thm:COLT} and \autoref{analy:thm:contofsqrt} $y_n \rightarrow \frac{1 - 0}{\sqrt{1 + 0}} = 1$.
         \item
         \begin{align*}
             \sqrt{n}(\sqrt{n + 1} - \sqrt{n}) &= \frac{\sqrt{n}(\sqrt{n + 1} - \sqrt{n})(\sqrt{n + 1} + \sqrt{n}}{\sqrt{n + 1} + \sqrt{n}} \\
             &= \sqrt{n} \cdot \frac{1}{\sqrt{n + 1} + \sqrt{n}} \\
             &= \frac{\sqrt{n}}{\sqrt{n}\left(\sqrt{\frac{n + 1}{n}} + 1\right)} \\
-            &= \frac{1}{\underbrace{\sqrt{1 + \frac{1}{n}}}_{\text{by \autoref{analy_thm_contofsqrt}} \rightarrow 0} + 1} \rightarrow \frac{1}{2}
+            &= \frac{1}{\underbrace{\sqrt{1 + \frac{1}{n}}}_{\text{by \autoref{analy:thm:contofsqrt}} \rightarrow 0} + 1} \rightarrow \frac{1}{2}
         \end{align*}
-        by \autoref{analy_thm_COLT}.
+        by \autoref{analy:thm:COLT}.
     \end{enumerate}
 \end{example}
 
-\begin{theorem}\label{analy_thm_boundmonoincseqconv}
+\begin{theorem}\label{analy:thm:boundmonoincseqconv}
     Let $\seq$ be a sequence which is monotonically increasing,
     that is,
     $x_m \leq x_n$ for $m \leq n$.
@@ -1365,7 +1365,7 @@ Note, $\lim_{n \rightarrow \infty}x_n = \sup\{x_n \in \R | n \in \N\}$.
     So $x_m \leq x_n$ for $m \leq n$ and the sequence is monotonically increasing.
     Also $x_n \leq 2 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \dotsc + \frac{1}{2 ^ {n - 1}} < 3$
     and the sequence is bounded.
-    By \autoref{analy_thm_boundmonoincseqconv} $\lim_{n \rightarrow \infty}x_n$ exists and is in $[2, 3]$.
+    By \autoref{analy:thm:boundmonoincseqconv} $\lim_{n \rightarrow \infty}x_n$ exists and is in $[2, 3]$.
     
     The limit is Euler's number $e = \displaystyle\lim_{n \rightarrow \infty}\left(1 + \frac{1}{n}\right) ^ n = 2.71828182\dotsc$.
 \end{example}
@@ -1414,12 +1414,12 @@ e ^ x = \lim_{n \rightarrow \infty}\left(1 + \frac{x}{n}\right) ^ n\text{ for } 
         \[
         1 \geq \left(1 - \frac{x ^ 2}{n ^ 2}\right) ^ n \geq 1 - \frac{nx ^ 2}{n ^ 2} = 1 - \frac{x ^ 2}{n}
         \]
-        By \autoref{analy_thm_bernoineq} for $n ^ 2 > x ^ 2$
-        and by \autoref{analy_thm_squeezethm}
+        By \autoref{analy:thm:bernoineq} for $n ^ 2 > x ^ 2$
+        and by \autoref{analy:thm:squeezethm}
         \[
         \left(1 - \frac{x ^ 2}{n ^ 2}\right) ^ n \rightarrow 1
         \]
-        then by \autoref{analy_thm_COLT} this implies
+        then by \autoref{analy:thm:COLT} this implies
         \[
         e ^ x = \frac{1}{e ^ {-x}}.
         \]
@@ -1630,7 +1630,7 @@ For $a > 0, a \neq 1$ define $\log_a x = \frac{\log x}{\log a}$
     \begin{proof}
         Let $(x_{n_j})_{j \in \N}$ be a subsequence which is monotonically increasing or decreasing.
         This is also bounded.
-        By \autoref{analy_thm_boundmonoincseqconv} $(x_{n_j})_{j \in \N}$ is convergent.
+        By \autoref{analy:thm:boundmonoincseqconv} $(x_{n_j})_{j \in \N}$ is convergent.
     \end{proof}
 \end{theorem}
 
@@ -1684,7 +1684,7 @@ sequences $\seq[\overline{x}]$ and $\seq[\underline{x}]$ as follows let
     \overline{x_n} = \sup\left\{-1 - \frac{1}{n}, 1 + \frac{1}{n + 1}, -1 - \frac{1}{n + 2}, \dotsc\right\} \implies \overline{x_n} = 1 + \frac{1}{n + 1}
     \]
     Note $1 \leq x_n \leq 1 + \frac{1}{n}$ for all $n \in \N$.
-    By \autoref{analy_thm_squeezethm} $\lim_{n \rightarrow \infty}\overline{x_n} = 1$
+    By \autoref{analy:thm:squeezethm} $\lim_{n \rightarrow \infty}\overline{x_n} = 1$
     (b) $y_n = (-1) ^ n(1 - \frac{1}{n})$
     Hence
     \[
@@ -1748,7 +1748,7 @@ sequences $\seq[\overline{x}]$ and $\seq[\underline{x}]$ as follows let
     \]
 \end{definition}
 
-\begin{theorem}\label{analy_thm_cauchyisbounded}
+\begin{theorem}\label{analy:thm:cauchyisbounded}
     Let $\seq$ be a Cauchy sequence.
     Then $\seq$ is bounded.
     \begin{proof}
@@ -1768,7 +1768,7 @@ sequences $\seq[\overline{x}]$ and $\seq[\underline{x}]$ as follows let
     Let $\seq$ be a Cauchy sequence.
     Then $\seq$ is a convergent sequence.
     \begin{proof}
-        By \autoref{analy_thm_cauchyisbounded} $\seq$ is a bounded sequence.
+        By \autoref{analy:thm:cauchyisbounded} $\seq$ is a bounded sequence.
         By \autoref{analy:thm:bolzanoweierstrass},
         there is a convergent subsequence $(x_{n_j})_{j \in \N}$.
         Let $x = \lim_{j \rightarrow \infty}x_{n_j}$.
@@ -2051,7 +2051,7 @@ it is not a criterion for convergence of a series.
         \end{align*}
         Since the sequence is monotonically increasing,
         it is now also bounded.
-        By \autoref{analy_thm_boundmonoincseqconv} the sequence of partial sums is convergent.
+        By \autoref{analy:thm:boundmonoincseqconv} the sequence of partial sums is convergent.
         
         Hence $\displaystyle\infsum[n = 1]\frac{1}{n ^ \alpha}$ is convergent for $\alpha > 1$.
     \end{proof}

@@ -468,7 +468,7 @@ we will provide an example involving two of them.
     \end{enumerate}
 \end{theorem}
 
-\begin{definition}[Independence of multiple events]\label{pre_prob_def_indepomulev}
+\begin{definition}[Independence of multiple events]\label{pre:prob:def:indepomulev}
     A (possible infinite) collection of events $\mathcal{A} \subseteq \mathcal{F}$ are mutually independent if for every finite non-empty $\mathcal{C} \subseteq \mathcal{A}$
     (that is, $\mathcal{B}$ is a finite subcollection of the events in question),
     \[
@@ -699,7 +699,7 @@ Note that $\P_X$ therefore also has properties C1-C10.
 \subsection{Discrete random variables}
 The function $\P_X$ tells us everything we might need to know about the random variable $X$: it is called the distribution of $X$.
 
-\begin{definition}[Discrete random variable and probability mass function]\label{pre_prob_def_drvpmf}
+\begin{definition}[Discrete random variable and probability mass function]\label{pre:prob:def:drvpmf}
     A random variable $X : \Omega \rightarrow X(\Omega)$ is said to be discrete when there is a finite or countable set of values $\mathcal{X} \subseteq X(\Omega)$ such that $\P(X \in \mathcal{X}) = 0$.
     The function $p: \mathcal{X} \rightarrow [0, 1]$ defined by
     \[
@@ -738,7 +738,7 @@ Specifically, it allows us to calculate the probability of every event of the fo
     or (ii) $\Omega$ is finite or countable.
     \begin{proof}
         Clearly, (ii) implies (i),
-        therefore if (i) then the statement holds which can be seen immediately from \autoref{pre_prob_def_drvpmf} as we can take $\mathcal{X} = X(\Omega)$.
+        therefore if (i) then the statement holds which can be seen immediately from \autoref{pre:prob:def:drvpmf} as we can take $\mathcal{X} = X(\Omega)$.
     \end{proof}
 \end{theorem}
 
@@ -758,7 +758,7 @@ The random variable $X$ takes values in $X(\Omega) := \{0, 1, \dotsc, n\}$,
 $X(\omega) = \sum_{i = 1}^{n}\omega_i$, the total numbers of $1$s in the string.
 For each $x \in \{0, 1, \dotsc, n\}$:
 \begin{itemize}
-    \item because trials are independent (see \autoref{pre_prob_def_indepomulev}, every sequence $\omega \in \Omega$ with exactly $x$ successes and $n - x$ failures has probability $\P(\{\omega\}) = p ^ x (1 - p) ^ {n - x}$; and
+    \item because trials are independent (see \autoref{pre:prob:def:indepomulev}, every sequence $\omega \in \Omega$ with exactly $x$ successes and $n - x$ failures has probability $\P(\{\omega\}) = p ^ x (1 - p) ^ {n - x}$; and
     \item there are $\binom{n}{x}$ sequences with exactly $x$ successes.
 \end{itemize}
 By C7, we can sum the probabilities of the outcomes in the event
@@ -844,7 +844,7 @@ Thus, $\lambda$ in $\Po(\lambda)$ is interpreted as the average number events.
 \end{theorem}
 
 \subsection{Continuous random variables}
-\begin{definition}[Continuous random variable and probability density function]\label{pre_prob_def_crvandpdf}
+\begin{definition}[Continuous random variable and probability density function]\label{pre:prob:def:crvandpdf}
 Consider a real-valued random variable $X : \Omega \rightarrow \R$.
 We say that $X$ is a continuous random variable,
 or that $X$ has a continuous probability distribution,
@@ -981,7 +981,7 @@ and so on.
     F(x) = \int_{-\infty}^{x}f(t)\,dt,\qquad f(x) = \frac{dF}{dx}(x)\textit{ when $f$ is continuous at $x$}.
     \]
     \begin{proof}
-        The first equality follows from \autoref{pre_prob_def_crvandpdf},
+        The first equality follows from \autoref{pre:prob:def:crvandpdf},
         and it follows that $F$ is continuous.
         The second equality is a consequence of the fundamental theorem of calculus (the correspondence between derivative and integral).
     \end{proof}
@@ -1160,7 +1160,7 @@ The above is simply stating the probability mass function for a bivariate discre
     \end{proof}
 \end{theorem}
 
-\begin{theorem}\label{pre_prop_thm_discretevarcountsumeqone}
+\begin{theorem}\label{pre:prop:thm:discretevarcountsumeqone}
     Let $X$ and $Y$ be discrete random variables with $\P((X, Y) \in \mathcal{Z}) = 1$ for a finite or countable $\mathcal{Z}$.
     Then we have that
     \[
@@ -1218,7 +1218,7 @@ The above is simply stating the probability mass function for a bivariate discre
         as required.
         On the other hand,
         suppose that $p_{X, Y}(x, y) = p_X(x)p_Y(y)$.
-        Then by \autoref{pre_prop_thm_discretevarcountsumeqone},
+        Then by \autoref{pre:prop:thm:discretevarcountsumeqone},
         for any sets $A$ and $B$,
         \begin{align*}
             \P(X \in A, Y \in B) &= \P((X, Y) \in A \times B) = \sum_{x \in A}\sum_{y \in B}p_{X, Y}(x, y) \\
@@ -1442,7 +1442,7 @@ distributivity, change of order of summation, and distributivity again.
 A similar result can be proven when $X$ is continuously distributed.
 
 The following result, sometimes known as the Law of the Unconscious Statistician, follows from what we have just shown.
-\begin{theorem}[Expectation of a function of a random variable]\label{pre_prob_thm_lawofunconsciousstatistician}
+\begin{theorem}[Expectation of a function of a random variable]\label{pre:prob:thm:lawofunconsciousstatistician}
     For any discrete random variable $X$ taking values in $\chi$,
     and any function $g : \chi \rightarrow \R$,
     \begin{equation}
@@ -1470,7 +1470,7 @@ The following result, sometimes known as the Law of the Unconscious Statistician
 
 For multiple random variables,
 the Law of the Unconscious Statistician reads as follows:
-\begin{theorem}[Expectation of a function of multiple random variables]\label{pre_prob_thm_multilawofunconsciousstatistician}
+\begin{theorem}[Expectation of a function of multiple random variables]\label{pre:prob:thm:multilawofunconsciousstatistician}
     For any discrete random variables $X$ and $Y$ taking values in $\mathcal{X}$ and $\mathcal{Y}$,
     and for any function $g : \mathcal{X} \times \mathcal{Y} \rightarrow \R$,
     \[
@@ -1521,7 +1521,7 @@ result is the following.
         We give the proof in the case where $X$ and $Y$ are discrete.
         Consider the multiple random variable $(X, Y)$ and the function $g(x, y) = x + y$.
         By the Law of the Unconscious Statistician
-        (\autoref{pre_prob_thm_lawofunconsciousstatistician})
+        (\autoref{pre:prob:thm:lawofunconsciousstatistician})
         we get
         \begin{align*}
             \E(g(X, Y)) &= \sum_{x \in \mathcal{X}}x\sum_{y \in \mathcal{Y}}p(x, y) + \sum_{y \in \mathcal{Y}}y\sum_{x \in \mathcal{X}}p(x, y) \\
@@ -1548,7 +1548,7 @@ A popular and mathematically convenient way to measure the variability of $X$ i.
     \]
 \end{definition}
 
-From \autoref{pre_prob_thm_lawofunconsciousstatistician} we can see that
+From \autoref{pre:prob:thm:lawofunconsciousstatistician} we can see that
 \begin{align*}
     \Var(X) &= \sum_{x \in \mathcal{X}}(x - \E(X)) ^ 2p(x)&\text{if $X$ is discrete, and} \\
     \Var(X) &= \int_{-\infty}^{\infty}(x - \E(X)) ^ 2f(x)\,dx&\text{if $X$ is continuously distributed},
@@ -1583,7 +1583,7 @@ It can be proved that
 \[
 -1 \leq \rho(X, Y) \leq 1.
 \]
-From \autoref{pre_prob_thm_multilawofunconsciousstatistician},
+From \autoref{pre:prob:thm:multilawofunconsciousstatistician},
 we can immediately derive the following expressions for the covariance:
 \[
 \Cov(X, Y) = \sum_{x \in \mathcal{X}}\sum_{y \in \mathcal{Y}}(x - \E(X))(y - \E(Y))p(x, y),
@@ -1757,7 +1757,7 @@ One may also view $\E(\cdot\mid A)$ as expectation with respect to the condition
     \end{proof}
 \end{theorem}
 
-\begin{theorem}[Partition theorem for expectation]\label{pre_prob_thm_partthmforexp}
+\begin{theorem}[Partition theorem for expectation]\label{pre:prob:thm:partthmforexp}
     Let $X$ be any real-valued random variable.
     Let $E_1, E_2, \dotsc, E_k$ be any events that form a partition.
     Then,
@@ -1806,7 +1806,7 @@ One may also view $\E(\cdot\mid A)$ as expectation with respect to the condition
         which shows why we call this a partition theorem.
         In this case $\{Y = y\}, y \in \mathcal{Y}$,
         forms a partition,
-        and so \autoref{pre_prob_thm_partthmforexp} gives
+        and so \autoref{pre:prob:thm:partthmforexp} gives
         \[
         \E(X) = \sum_{y \in \mathcal{Y}}\E(X\mid Y = y)\P(Y = y),
         \]
@@ -1819,7 +1819,7 @@ One may also view $\E(\cdot\mid A)$ as expectation with respect to the condition
 \end{theorem}
 
 \subsection{Independence: multiplication rule for expectation}
-\begin{theorem}[Independence means multiply]\label{pre_prob_thm_expindepmeansmult}
+\begin{theorem}[Independence means multiply]\label{pre:prob:thm:expindepmeansmult}
     If $X$ and $Y$ are independent real-valued random variables then
     \[
     \E(XY) = \E(X)\E(Y).
@@ -1863,7 +1863,7 @@ One may also view $\E(\cdot\mid A)$ as expectation with respect to the condition
 \end{corollary}
 
 \subsection{Expectation and probability inequalities}
-\begin{theorem}[Monotonicity of expectation]\label{pre_prob_thm_monotonicityofexpectation}
+\begin{theorem}[Monotonicity of expectation]\label{pre:prob:thm:monotonicityofexpectation}
     For any random variable $X$,
     and any $a \in \R$,
     if $\P(X \geq a) = 1$ then $\E(X) \geq a$.
@@ -2045,8 +2045,8 @@ we approximately have that
 
 Because $e ^ {tX} \geq 0$,
 we have that $M_X(t) \geq 0$
-(\autoref{pre_prob_thm_monotonicityofexpectation}).
-From \autoref{pre_prob_thm_lawofunconsciousstatistician},
+(\autoref{pre:prob:thm:monotonicityofexpectation}).
+From \autoref{pre:prob:thm:lawofunconsciousstatistician},
 we immediately derive the following expressions for $M_X(t)$:
 \begin{align*}
     M_X(t) &= \sum_{x \in \mathcal{X}}e ^ {tx}p(x) &\text{if $X$ is discrete, and} \\
@@ -2109,7 +2109,7 @@ Here we will state some properties of moment generating functions.
         $M1, M2$,
         and $M5$ use some deeper analysis.
         For $M4$,
-        we apply \autoref{pre_prob_thm_expindepmeansmult}
+        we apply \autoref{pre:prob:thm:expindepmeansmult}
         \begin{align*}
             M_{S_n}(t) &= \E\left(e ^ {t(X_1 + X_2 + \dotsi + X_n)}\right) \\
             &= \E(e ^ {tX_1}e ^ {tX_2}\dotsi e ^ {tX_n}) \\

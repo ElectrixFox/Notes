@@ -473,7 +473,7 @@ If a function is differentiable sufficiently close to an endpoint then examining
 If $f(x)$ is continuous on an interval $[a, b]$ then the global extreme values in the interval are attained at either critical points or end points, can be determined by examining all the possibilities.
 
 \subsection{Rolle's theorem}
-\begin{theorem}[Rolle's theorem]\label{pre_calc_thm_rolle}
+\begin{theorem}[Rolle's theorem]\label{pre:calc:thm:rolle}
     If $f$ is differentiable on the open interval $(a, b)$ and continuous on the closed interval $[a, b]$, with $f(a) = f(b)$,
     then there is at least one $c \in (a, b)$ for which $f'(c) = 0$.
     \begin{proof}
@@ -717,7 +717,7 @@ The following results can be proved.
 \subsection{Limits with logarithms, powers and exponentials}
 There are some important results concerning limits as $x \rightarrow \infty$ for the logarithm and exponential functions.
 
-\begin{lemma}\label{pre_calc_lem_lemma1}
+\begin{lemma}\label{pre:calc:lem:lemma1}
     $\forall\, x \geq 0,\quad e ^ x \geq 1 + x$
     \begin{proof}
         Consider $f(x) = e ^ x - (1 + x)$ then $f(0) = 0$ and $f'(x) = e ^ x - 1 \geq 0$.
@@ -725,7 +725,7 @@ There are some important results concerning limits as $x \rightarrow \infty$ for
     \end{proof}
 \end{lemma}
 
-\begin{lemma}\label{pre_calc_lem_lemma2}
+\begin{lemma}\label{pre:calc:lem:lemma2}
     $\forall\, x \geq 0$,
     and for any positive integer $n$,
     $e ^ x \geq \sum_{j = 0}^{n}\frac{x ^ j}{j!}$.
@@ -748,7 +748,7 @@ For any constant $a > 0$
     \[
     \lim_{x \rightarrow \infty}\frac{\log x}{x ^ a} = \lim_{y \rightarrow \infty}\frac{y}{e ^ {ay}}.
     \]
-    For $y > 0$ the by \autoref{pre_calc_lem_lemma2} with $n = 2$
+    For $y > 0$ the by \autoref{pre:calc:lem:lemma2} with $n = 2$
     \[
     0 \leq \frac{y}{e ^ {ay}} \leq \frac{y}{1 + ay + \frac{1}{2}a ^ 2 y ^ 2} \leq \frac{y}{\frac{1}{2}a ^ 2 y ^ 2} = \frac{2}{a ^ 2 y}.
     \]
@@ -766,7 +766,7 @@ For any constant $a > 0$
 \]
 \begin{proof}
     Let $n$ be the smallest integer such that $n > a$.
-    By \autoref{pre_calc_lem_lemma2},
+    By \autoref{pre:calc:lem:lemma2},
     for $x > 0$ we have that
     \[
     0 \leq \frac{x ^ a}{e ^ x} \leq \frac{x ^ a}{1 + x + \dotsc + \frac{x ^ n}{n!}} = \frac{x ^ {a - n}}{x ^ {-n} + x ^ {1 - n} + \dotsc + \frac{1}{n!}}
@@ -1535,13 +1535,13 @@ To prove this expression for the remainder we will first need to prove the follo
     Then $\exists c \in (a, x)$ such that $h ^ {(n + 1)}(c) = 0$.
 
     \begin{proof}
-        $h(a) = 0 = h(x)$ so by \autoref{pre_calc_thm_rolle} $\exists c_1 \in (a, x)$ such that $h'(c_1) = 0$.
-        $h'(a) = 0 = h(c_1)$ so by \autoref{pre_calc_thm_rolle} $\exists c_2 \in (a, c_1)$ such that $h''(c_1) = 0$.
+        $h(a) = 0 = h(x)$ so by \autoref{pre:calc:thm:rolle} $\exists c_1 \in (a, x)$ such that $h'(c_1) = 0$.
+        $h'(a) = 0 = h(c_1)$ so by \autoref{pre:calc:thm:rolle} $\exists c_2 \in (a, c_1)$ such that $h''(c_1) = 0$.
         Repeating this argument a total of $n$ times we arrive at
         \[
         h ^ {(n)}(a) = 0 = h ^ {(n)}(c_n)
         \]
-        so by \autoref{pre_calc_thm_rolle} $\exists c_{n + 1} \in (a, c_n)$ such that $h ^ {(n + 1)}(c_{n + 1}) = 0$.
+        so by \autoref{pre:calc:thm:rolle} $\exists c_{n + 1} \in (a, c_n)$ such that $h ^ {(n + 1)}(c_{n + 1}) = 0$.
         This proves the lemma with $c = c_{n + 1} \in (a, x)$.
     \end{proof}
 \end{lemma}

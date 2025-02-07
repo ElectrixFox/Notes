@@ -1453,7 +1453,7 @@ Comment: $\P(X = x) \neq f(x)$
     The pdf is unique up to a set of measure zero.
 \end{example}
 
-\begin{theorem}\label{prob_thm_622}
+\begin{theorem}\label{prob:thm:622}
     Let $B \subseteq \R$,
     such that $\displaystyle B = \bigcup_{i = 1}^{m}[a_i, b_i]$
     ($B$ is a finite union of intervals,
@@ -1486,7 +1486,7 @@ Comment: $\P(X = x) \neq f(x)$
     \]
 \end{itemize}
 
-\begin{corollary}\label{prob_col_623}
+\begin{corollary}\label{prob:col:623}
     \[
     \P(X \in \R) = \P(-\infty < X < \infty) = \int_{-\infty}^{\infty}f(t)\,dt = 1.
     \]
@@ -1507,14 +1507,14 @@ Comment: $\P(X = x) \neq f(x)$
     \textbf{Exercise: } check whether it is continuous everywhere.
 \end{example}
 
-From \autoref{prob_col_623} we know that
+From \autoref{prob:col:623} we know that
 \begin{equation}
     \int_{-\infty}^{\infty}f(x) = 1,\text{ if } f \text{ is a pdf}.
 \end{equation}
-Then from \autoref{prob_thm_622},
+Then from \autoref{prob:thm:622},
 $(-\infty, \infty) = \underbrace{(-\infty, -1) \cup [1, 0) \cup [0, 2] \cup (2, \infty)}_{\text{disjoint}}$.
 
-So from \autoref{prob_thm_622},
+So from \autoref{prob:thm:622},
 we know that
 \[
 \int_{-\infty}^{\infty}f(x)\,dx = \int_{-\infty}^{-1}f(x)\,dx + \int_{-1}^0f(x)\,dx + \int_0^2f(x)\,dx + \int_2^{\infty}f(x)\,dx.
@@ -3051,7 +3051,7 @@ then
 \[
 \int_{\R}f(x)\,dx \geq \int_{\R}g(x)\,dx.
 \]
-\begin{theorem}[Monotonicity of expectation]\label{prob_thm_monotonicityofexpectation}
+\begin{theorem}[Monotonicity of expectation]\label{prob:thm:monotonicityofexpectation}
     Let $X : \Omega \rightarrow \R$,
     $a \in \R$,
     such that $\P(X \geq a) = 1$.
@@ -3086,7 +3086,7 @@ then
     \begin{proof}
         $Z := (X - Y)$ then $\P(Z \geq 0) = 1$,
         since $\P(X \geq Y) = 1$.
-        From \autoref{prob_thm_monotonicityofexpectation} we have $\E(Z) \geq 0$.
+        From \autoref{prob:thm:monotonicityofexpectation} we have $\E(Z) \geq 0$.
         By linearity,
         $\E(Z) = \E(X) - \E(Y)$,
         hence,
@@ -3103,7 +3103,7 @@ then
         \Var(X) = \E((X - \E(X)) ^ 2).
         \]
         Observe that $Y := (X - \E(X)) ^ 2 \geq 0$.
-        From \autoref{prob_thm_monotonicityofexpectation},
+        From \autoref{prob:thm:monotonicityofexpectation},
         we have $\E(Y) \geq 0$.
         Putting this in the following,
         \[
@@ -3140,7 +3140,7 @@ then
     \end{proof}
 \end{corollary}
 
-\begin{corollary}[Chebyshev's inequality]\label{prob_col_chebyshevineq}
+\begin{corollary}[Chebyshev's inequality]\label{prob:col:chebyshevineq}
     Let $X : \Omega \rightarrow \R$ be a random variable.
     Let $0 < a \in \R$.
     Then
@@ -3195,7 +3195,7 @@ Therefore,
 \[
 \Var(B_n) = \frac{1}{n ^ 2}\Var(X) = \frac{p(1 - p)}{n}
 \]
-Apply \autoref{prob_col_chebyshevineq},
+Apply \autoref{prob:col:chebyshevineq},
 for any $\varepsilon > 0$,
 \[
 \P(|B_n - \E(B_n)| > \varepsilon) = \P(|B_n - p| > \varepsilon) \leq \frac{1}{\varepsilon ^ 2}\Var(B_n) = \frac{p(1 - p)}{\varepsilon ^ 2 \cdot n} \rightarrow 0

@@ -334,7 +334,7 @@ First consider the arrangements (ordered, no repetitions) there are $P(n, k) = \
 
 Standard problem \#4: How many arrangements are there of a list of objects in which some objects are repeated?
 
-\begin{theorem}\label{disc_thm_41}
+\begin{theorem}\label{disc:thm:41}
     Given a list of $n$ objects of $r$ different types, in which each object of type $i$ occur $n_i$ times (with $n_1 + \dotsi + n_r = n$), the number of arrangements of the list is
     \[
     P(n; n_1, n_2, \dotsc, n_r) = \frac{n!}{n_1!n_2!\dotsi n_r!}.
@@ -356,7 +356,7 @@ Standard problem \#4: How many arrangements are there of a list of objects in wh
             \item
             We have
             AA EE G N RRR
-            by \autoref{disc_thm_41} we get $\frac{9!}{3!2!2!1!1!}$
+            by \autoref{disc:thm:41} we get $\frac{9!}{3!2!2!1!1!}$
             \item Treat RRR as a single object so
             $n = 2$ we have $2 + 2 + 1 + 1$ elements,
             we get $\frac{7!}{2!2!}$.
@@ -409,7 +409,7 @@ Remark, need $k \geq n$ for a non-zero answer.
     \end{proof}
 \end{example}
 
-\begin{theorem}\label{disc_thm_kcombwrep}
+\begin{theorem}\label{disc:thm:kcombwrep}
     The number of $k$-combinations from $n$ objects with repetitions and each object occurring at least once is
     \[
     \binom{k - 1}{n - 1}\text{ for } k \geq n.
@@ -432,7 +432,7 @@ Remark, need $k \geq n$ for a non-zero answer.
     \end{proof}
 \end{example}
 
-\begin{theorem}\label{disc_thm_diffobjrep}
+\begin{theorem}\label{disc:thm:diffobjrep}
     The number of $k$-combinations from $n$ different objects with repetitions is
     \[
     \binom{k + n - 1}{n - 1} = \binom{k + n - 1}{k}
@@ -484,14 +484,14 @@ Remark, need $k \geq n$ for a non-zero answer.
     \begin{enumerate}[label = E\arabic*]
         \item Each $6$-combination from A-Z (with repetitions) corresponds to a word when arranged in (weak) alphabetical order.
         So this is Standard Problem \#5 with $k = 6$ and $n = 26$,
-        so \autoref{disc_thm_diffobjrep} gives the answer $\binom{26 + 6 - 1}{6} = \binom{31}{6}$.
+        so \autoref{disc:thm:diffobjrep} gives the answer $\binom{26 + 6 - 1}{6} = \binom{31}{6}$.
         \item
         \begin{enumerate}[label = (\alph*)]
             \item Again Standard Problem \#5 $k = 7$, $n = 4$
             so we get $\binom{k + n - 1}{n - 1} = \binom{10}{3}$.
             \item Firstly, how many use each meal at least one?
             This is Standard Problem \#6 with $k = 7$, $n = 4$.
-            So the answer will be \autoref{disc_thm_kcombwrep} $\binom{k - 1}{n - 1}$ we get
+            So the answer will be \autoref{disc:thm:kcombwrep} $\binom{k - 1}{n - 1}$ we get
             \[
             \binom{7 - 1}{4 - 1} = \binom{6}{3}.
             \]
@@ -1089,7 +1089,7 @@ they encode combinatorial information into a continuous analytic form.
     \end{proof}
 \end{example}
 
-\begin{lemma}\phantom{}\label{disc_lem_71}
+\begin{lemma}\phantom{}\label{disc:lem:71}
     \begin{enumerate}[label = (\alph*)]
         \item For $n \geq 0$ an integer
         \[
@@ -1326,7 +1326,7 @@ We can apply calculus to find the generating functions of sequences.
         \[
         h(x) = \infsum[n = 0]s_nx ^ n.
         \]
-        By \autoref{disc_lem_71} we get that
+        By \autoref{disc:lem:71} we get that
         \[
         f(x)g(x) = \infsum[k = 0]c_kx ^ k
         \]

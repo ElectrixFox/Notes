@@ -2140,7 +2140,7 @@ So for a set of vectors to span a subspace $U$,
 everything in $U$ must be able to be written as a combination of the vectors which span $U$.
 \medskip
 
-\begin{proposition}\label{pre_linalg_prop_spanissolutionset}
+\begin{proposition}\label{pre:linalg:prop:spanissolutionset}
     Let $\mbf{u}_1, \dotsc, \mbf{u}_k \in \R ^ n$ be $k$ vectors,
     and let $A = (\mbf{u}_1, \dotsc, \mbf{u}_k) \in M_{n, k}(\R)$ be the associated matrix of column vectors.
     Then we have
@@ -2246,7 +2246,7 @@ Here is a more informative example
     \]
     \footnotetext{Has a solution where $\pmb{\lambda} \neq 0$.}
     \begin{proof}
-        We can see this from \autoref{pre_linalg_prop_spanissolutionset}.
+        We can see this from \autoref{pre:linalg:prop:spanissolutionset}.
         
         \textit{As this states that $\pmb{\lambda} = \mbf{0}$ which is the same as $\lambda_1 = \lambda_2 = \dotsi = \lambda_k$.}
     \end{proof}
@@ -2429,7 +2429,7 @@ The notations for linear combination, linear span, spanning sets, and linear ind
     Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be $k$ vectors in a vector space $V$.
     Then $\mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_k)$ is a vector subspace of $V$.
 \end{lemma}
-\begin{lemma}\label{pre_linalg_lem_lincombeqspanof}
+\begin{lemma}\label{pre:linalg:lem:lincombeqspanof}
     Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be vectors in a vector space $V$ and assume that one of the vectors,
     say $\mbf{u}_1$,
     can be expressed as a linear combination of the others.
@@ -2456,11 +2456,11 @@ The notations for linear combination, linear span, spanning sets, and linear ind
         \[
         \mbf{u}_i = \sum_{j = 1}^{i - 1}\frac{\lambda_j}{-\lambda_i}\mbf{u}_j + \sum_{j = i + 1}^{k}\frac{\lambda_j}{-\lambda_i}\mbf{u}_j.
         \]
-        The equivalence of the spans then follows from \autoref{pre_linalg_lem_lincombeqspanof}.
+        The equivalence of the spans then follows from \autoref{pre:linalg:lem:lincombeqspanof}.
     \end{proof}
 \end{lemma}
 
-\begin{lemma}\label{pre_linalg_lem_ifnotinspanofvecspacethenlinindep}
+\begin{lemma}\label{pre:linalg:lem:ifnotinspanofvecspacethenlinindep}
     Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be $k$ linearly independent vectors in a vector space $V$ and let $\mbf{u} \in V$ such that
     \[
     \mbf{u} \notin \mathrm{span}(\mbf{u}_1, \dotsc, \mbf{u}_k).
@@ -2475,7 +2475,7 @@ The notations for linear combination, linear span, spanning sets, and linear ind
     Every vector space that is spanned by finitely many vectors has a basis.
 \end{theorem}
 
-\begin{theorem}["What is a basis?"]\label{pre_linalg_thm_whatisabasis}
+\begin{theorem}["What is a basis?"]\label{pre:linalg:thm:whatisabasis}
     Let $\mbf{u}_1, \dotsc, \mbf{u}_k$ be vectors in a vector space $V$.
     Then the following statements are
     (pairwise)
@@ -2553,7 +2553,7 @@ This definition is best understood through the following examples.
     \]
 \end{example}
 
-\begin{theorem}\label{pre_linalg_thm_finitedimensionalvecspacegivesdimresults}
+\begin{theorem}\label{pre:linalg:thm:finitedimensionalvecspacegivesdimresults}
     Let $V$ be a finite dimensional vector space and $U$ a vector subspace of $V$.
     Then
     \begin{enumerate}[label = (\roman*)]
@@ -2647,7 +2647,7 @@ The following theorem provides us with a list of useful observations.
     \end{enumerate}
 \end{definition}
 
-\begin{lemma}\label{pre_linalg_lem_linindepvecmulmatrisindep}
+\begin{lemma}\label{pre:linalg:lem:linindepvecmulmatrisindep}
     Let $\mbf{v}_1, \dotsc, \mbf{v}_k$ be linear independent vectors in $\R ^ n$ and let $P \in M_n(\R)$ be an invertible matrix.
     Then the vectors $P\mbf{v}_1, \dotsc,P\mbf{v}_k$ are linear independent.
     \begin{proof}
@@ -2660,7 +2660,7 @@ The following theorem provides us with a list of useful observations.
     \end{proof}
 \end{lemma}
 
-\begin{proposition}\label{pre_linalg_prop_invmatrsameranksandnul}
+\begin{proposition}\label{pre:linalg:prop:invmatrsameranksandnul}
     Let $A \in M_{n \times k}(\R)$ and let $P \in M_{n}(\R)$ be an invertible matrix.
     Then $A$ and $PA$ have the same column rank,
     row rank,
@@ -2704,7 +2704,7 @@ The following theorem provides us with a list of useful observations.
             We claim $E\mbf{u}_1, \dotsc, E\mbf{u}_{\ell}$ is a basis of $EU$,
             and this will show the dimension of the two spaces $U$ and $EU$ is the same.
             To do this we need to show the vectors form a linearly independent spanning set of $EU$.
-            By \autoref{pre_linalg_lem_linindepvecmulmatrisindep} we know $E\mbf{u}_1, \dotsc, E\mbf{v}_{\ell}$ are linearly independent.
+            By \autoref{pre:linalg:lem:linindepvecmulmatrisindep} we know $E\mbf{u}_1, \dotsc, E\mbf{v}_{\ell}$ are linearly independent.
             For spanning,
             let $\mbf{v} \in EU$ be given by $\mbf{v} = E\mbf{u}$ for some $\mbf{u} \in U$.
             We can write $\mbf{u} = \lambda_1\mbf{u}_1 + \dotsi + \lambda_{\ell}\mbf{u}_{\ell}$ for some $\lambda_i \in \R$.
@@ -2714,7 +2714,7 @@ The following theorem provides us with a list of useful observations.
     \end{proof}
 \end{proposition}
 
-\begin{theorem}[Rank Theorem]\label{pre_linalg_thm_ranktheorem}
+\begin{theorem}[Rank Theorem]\label{pre:linalg:thm:ranktheorem}
     The row rank of a matrix is equal to its column rank.
 \end{theorem}
 
@@ -2730,8 +2730,8 @@ The following theorem provides us with a list of useful observations.
     \mathrm{rk}(A) + \mathrm{nullity}(A) = k.
     \]
     \begin{proof}
-        We prove \autoref{pre_linalg_thm_ranktheorem} and this theorem together.
-        By \autoref{pre_linalg_prop_invmatrsameranksandnul} we can switch to the RREF $A'$ of $A$.
+        We prove \autoref{pre:linalg:thm:ranktheorem} and this theorem together.
+        By \autoref{pre:linalg:prop:invmatrsameranksandnul} we can switch to the RREF $A'$ of $A$.
         After switching some columns if necessary we can assume it looks as follows:
         \[
         A' = \left(\hspace{-5pt}\begin{array}{c|c}
@@ -2819,7 +2819,7 @@ Then define
 
 Both $U + W$ and $U \cap W$ are vector subspaces of $V$.
 
-\begin{proposition}\label{pre_linalg_prop_sumofdimsissumofsumandintersection}
+\begin{proposition}\label{pre:linalg:prop:sumofdimsissumofsumandintersection}
     Let $U$ and $W$ be finite-dimensional vector subspaces of a vector space $V$.
     Then
     \[
@@ -2827,8 +2827,8 @@ Both $U + W$ and $U \cap W$ are vector subspaces of $V$.
     \]
     \begin{proof}
         Let $\{\mbf{v}_1, \dotsc, \mbf{v}_r\}$ be a basis for $U \cap W$
-        (we know such a basis exists by \autoref{pre_linalg_thm_finitedimensionalvecspacegivesdimresults}).
-        Using \autoref{pre_linalg_lem_ifnotinspanofvecspacethenlinindep} multiple times,
+        (we know such a basis exists by \autoref{pre:linalg:thm:finitedimensionalvecspacegivesdimresults}).
+        Using \autoref{pre:linalg:lem:ifnotinspanofvecspacethenlinindep} multiple times,
         we may repeatedly add vectors in $U$ to this set
         (keeping it linearly independent)
         until we span $U$.
@@ -2897,14 +2897,14 @@ Both $U + W$ and $U \cap W$ are vector subspaces of $V$.
         \item Every $\mbf{v} \in V$ can be written uniquely as $\mbf{v} = \mbf{u} + \mbf{w}$ where $\mbf{u} \in U$ and $\mbf{w} \in W$.
     \end{enumerate}
     \begin{proof}
-        $(i) \iff (ii) \iff (iii)$ follows from \autoref{pre_linalg_prop_sumofdimsissumofsumandintersection} and its proof.
+        $(i) \iff (ii) \iff (iii)$ follows from \autoref{pre:linalg:prop:sumofdimsissumofsumandintersection} and its proof.
         For $(i) \iff (iv)$ see problem sheet $9$.
     \end{proof}
 \end{proposition}
 
 \subsection{Coordinates}
 If $B = \{\mbf{v}_1, \dotsc, \mbf{v}_n\}$ is a basis for $V$ and if $\mbf{u}$ is any point of $V$ then
-(by \autoref{pre_linalg_thm_whatisabasis})
+(by \autoref{pre:linalg:thm:whatisabasis})
 we can uniquely express $\mbf{u}$ as
 \[
 \mbf{u} = x_1\mbf{v}_1 + \dotsi + x_n\mbf{v}_n.
