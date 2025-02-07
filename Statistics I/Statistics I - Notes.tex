@@ -970,6 +970,125 @@ Inference is the act of drawing conclusions from certain basic facts and premise
 The inferences we draw are rarely certain:
 uncertainty is everywhere.
 
+\subsubsection{The Sample Mean \texorpdfstring{$\Bar{X}$}{} as an Estimator for the Population Mean \texorpdfstring{$\mu$}{}}
+
+We assume that:
+there is a population of interest,
+with mean value $\mu$ and standard deviation $\sigma$,
+often both unknown.
+
+Out main aim is to say something about $\mu$,
+then our secondary aim is to say something about $\sigma$.
+We would like to estimate $\mu$ with little or no bias and small variance,
+so that our guess is on target and can be expected to be close.
+
+We take a simple random sample of size $n$ from this population
+(assume successive samples independent).
+We will label the sample values $X_1, X_2, \dotsc, X_n$.
+
+Each random variable having the same mean $\E(X_i) = \mu$ and standard deviation $\mathrm{SD}(X_i) = \sigma$ as the population.
+
+We summarise that each $X_i$ is independent and has the same distribution,
+expectation and variance by writing that $X_1, \dotsc, X_n$ are independent and identically distributed with mean $\mu$ and standard deviation $\sigma$.
+
+We define the sample mean to be
+\[
+\Bar{X} = \frac{1}{n}\sum_{i = 1}^{n}X_i.
+\]
+
+\textbf{Derivation of properties of the sample mean $\Bar{X}$}
+\begin{align*}
+    \E(\Bar{X}) &= \E\left(\frac{1}{n}\sum_{i = 1}^{n}X_i\right) = \frac{1}{n}\E\left(\sum_{i = 1}^{n}X_i\right) = \frac{1}{n}\sum_{i = 1}^{n}\E(X_i) \\
+    &= \frac{1}{n}\sum_{i = 1}^{n}\mu = \frac{1}{n}n\mu = \mu \\
+    \Var(\Bar{X}) &= \Var\left(\frac{1}{n}\sum_{i = 1}^{n}X_i\right) = \frac{1}{n ^ 2}\Var\left(\sum_{i = 1}^{n}X_i\right) = \frac{1}{n ^ 2}\frac{1}{n}\sum_{i = 1}^{n}\Var(X_i) \\
+    &= \frac{1}{n ^ 2}\sum_{i = 1}^{n}\sigma ^ 2 = \frac{1}{n ^ 2}n\sigma ^ 2 = \frac{\sigma ^ 2}{n}.
+\end{align*}
+
+Will the sample mean $\Bar{X}$ be a good estimator for the population mean $\mu$?
+
+We say that $\Bar{X}$ is an unbiased estimator of $\mu$ since $\E(\Bar{X}) = \mu$.
+
+$\Var(\Bar{X}) = \frac{\sigma ^ 2}{n}$ is understood,
+and can be controlled by $n$,
+but it is not unbounded:
+it depends on the population variance $\sigma ^ 2$.
+
+$\Bar{X}$ therefore has a smaller standard deviation than a single observation.
+
+If the main population of $X$ is normally distributed with mean $\mu$ and standard deviation $\sigma$,
+then the distribution of the sample mean is also Normal,
+but now with $\Bar{X} \sim N(\mu, \sigma ^ 2 / n)$.
+
+\begin{example}
+    Consider the distribution of heights of US males aged $18$-$74$.
+    The average height is about $69$ inches,
+    with standard deviation about $3$ inches.
+
+    Find the expectation and standard deviation of the sample mean from a simple random sample
+    (SRS)
+    of size $n = 25$ and $n = 50$.
+
+    \begin{solution}
+        $n = 25$
+        \[
+        \E(X) = 69 \implies \sigma = \frac{3}{\sqrt{25}} = \frac{3}{5}.
+        \]
+
+        $n = 50$
+        \[
+        \E(X) = 69 \implies \sigma = \frac{3}{\sqrt{50}} = \frac{3}{5\sqrt{2}}.
+        \]
+    \end{solution}
+\end{example}
+
+\subsection{The Central Limit Theorem}
+
+\begin{theorem}[The Central Limit Theorem]
+    Suppose $X_1, X_2, \dotsc, X_n$ are $n$ independent and identically distributed random variables,
+    each with mean $\mu$ and variance $\sigma ^ 2$.
+
+    The distribution of the sample mean $\Bar{X} = \frac{1}{n}\sum_{i}X_i$ of these random variables is such that
+    \[
+    \Bar{X} \rightarrow N\left(\mu, \frac{\sigma ^ 2}{n}\right) \text{ as } n \rightarrow \infty,
+    \]
+    regardless of the distribution of the $X_i$.
+\end{theorem}
+
+\begin{example}
+    The number of flaws per square metre in a type of carpet is variable with mean $1.6$ flaws per square metre and standard deviation $1.2$ flaws per square metre.
+
+    An inspector studies $200$ square metres of material,
+    records the number of flaws found in each square metre,
+    and calculates $\Bar{X}$,
+    the mean number of flaws per square metre inspected.
+    What is the probability that $\Bar{X}$ exceeds $1.7$ per square metre?
+
+    \begin{solution}
+        We have a random sample $X_1, \dotsc, X_{200}$,
+        each with expectation $\E(X_i) = 1.6$ and $\Var(X_i) = 1.2 ^ 2$.
+        By CLT
+        \[
+        \Bar{X} \sim N\left(1.6, \frac{1.2}{\sqrt{200}}\right) = N(1.6, 0.085 ^ 2).
+        \]
+        We seek the
+        \[
+        \P(\Bar{X} > 1.7) = \P\left(\frac{\Bar{X} - \mu}{\frac{\sigma}{\sqrt{n}}} > \frac{1.7 - \mu}{\frac{\sigma}{\sqrt{n}}}\right) = \P\left(Z > \frac{1.7 - 1.6}{0.085}\right) = \P(Z > 1.18).
+        \]
+        From the tables we see that the probability is $1 - 0.8810 = 0.1190$.
+        Hence the probability that $\Bar{X}$ will exceed $1.7$ is $0.1190$.
+    \end{solution}
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
