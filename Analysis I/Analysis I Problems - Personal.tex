@@ -2,7 +2,7 @@
 \usepackage{preamble}
 
 \newcommand{\limas}[3][n]{#2 \rightarrow #3 \text{ as } #1 \rightarrow \infty}
-\newcommand{\infsum}[1][n = 1]{\sum_{#1}^{\infty}}
+\renewcommand{\infsum}[1][n = 1]{\sum_{#1}^{\infty}}
 \newcommand{\seq}[2][x]{(#1_{#2})_{#2 \in \N}}
 
 \title{Analysis Problems}
@@ -524,5 +524,77 @@ The problems in this sheet are from the course given by Dirk Schuetz.
     \]
 \end{example}
 
+\section{Differentiability}
+
+\begin{example}
+    Let
+    \[
+    f(x) = \begin{cases}
+        e ^ {-\frac{1}{x ^ 2}} & \text{if } x \neq 0 \\
+        0 & \text{if } x = 0
+    \end{cases}.
+    \]
+    Show
+    (by induction)
+    that there exists for each $n \in \N$ a polynomial $p_n(x)$ such that for the $n$-th derivative we have
+    \[
+    f ^ {(n)}(x) = p_n\left(\frac{1}{x}\right)e ^ {-\frac{1}{x ^ 2}}
+    \]
+    for $x \neq 0$.
+    Use this to compute to show that $f$ is also infinitely often differentiable at $x = 0$ with $f ^ {(n)}(0) = 0$ for all $n$.
+
+    \begin{solution}
+        For $x \neq 0$.
+        \begin{align*}
+            f'(x) &= \lim_{x \rightarrow 0}\frac{f(x) - f(0)}{x - 0} \\
+            &= \frac{x \rightarrow 0}{\frac{e ^ {-\frac{1}{x ^ 2}}}{x}} \\
+            &= \lim_{x \rightarrow \pm\infty}\frac{e ^ {-x ^ 2}}{\frac{1}{x ^ 2}} \\
+            &= \lim_{x \rightarrow \pm\infty}x ^ 2e ^ {-x ^ 2} = 0
+        \end{align*}
+        exponentials beat powers.
+
+        $n = 0$:
+        $p_0(x) = 1$,
+        $n = 1$:
+        $p_1(x) = 2x ^ 3$.
+
+        at $n + 1$
+        \begin{align*}
+            \left[p_n\left(\frac{1}{x}\right)e ^ {-\frac{1}{x ^ 2}}\right]' &= \left[-\frac{1}{x ^ 2}p_n'\left(\frac{1}{x}\right) + p_n\left(\frac{1}{x}\right)2x ^ {-3}\right]e ^ {-\frac{1}{x ^ 2}}
+        \end{align*}
+        this is a polynomial in $\frac{1}{x}$,
+        $p_{n + 1}(x) = -x ^ 2p_n'(x) + p_n(x)2x ^ 3$
+        all at $x \neq 0$.
+
+        $x = 0$.
+
+        Induction:
+        $n = 0$,
+        $n = 1$ are fine.
+
+        \begin{align*}
+            f ^ {(n + 1)}(0) &= \lim_{x \rightarrow 0}\frac{p_n\left(\frac{1}{x}\right)e ^ {-\frac{1}{x ^ 2}} - 0}{x - 0} \\
+            &= \lim_{x \rightarrow \pm\infty}xp_n(x)e ^ {-x ^ 2} \\
+            &= 0
+        \end{align*}
+        since exponentials beat polynomials.
+    \end{solution}
+\end{example}
+
+\begin{example}
+    Know $\log(x)$ is differentiable as inverse function of $e ^ x$ with derivative
+    \[
+    \log'(x) = \frac{1}{e ^ {\log{x}}} = \frac{1}{x}.
+    \]
+
+    \begin{align*}
+        \lim_{h \rightarrow 0}\frac{\log(x + h) - \log{x}}{h} &= \lim_{h \rightarrow 0}\frac{\log\left(\frac{x + h}{h}\right)}{h} \\
+        &= \lim_{h \rightarrow 0}\frac{\log\left(1 + \frac{x}{h}\right)}{h}
+        \intertext{if $h > 0$
+        ($h < 0$ goes same)} \\
+        \frac{\frac{\frac{h}{x}}{1 + \frac{h}{x}}}{h}&\leq \lim_{h \rightarrow 0}\frac{\log\left(1 + \frac{x}{h}\right)}{h} \leq \frac{\frac{h}{x}}{h}
+    \end{align*}
+    by squeezing it goes to $\frac{1}{x}$.
+\end{example}
 
 \end{document}
