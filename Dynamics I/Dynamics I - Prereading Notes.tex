@@ -802,11 +802,170 @@ E(\mbf{r}, \mbf{v}) = \frac{1}{2}mv ^ 2 + V(\mbf{r}).
 \end{example}
 
 \subsection{The simple pendulum}
+A point mass $m$ is attached to one end of a rigid light rod of length $L$.
+The rod is pivoted at the other end,
+and is free to swing in a vertical plane.
+Let $\theta(t)$ denote the angle between the pendulum and the vertical.
+The gravitational potential energy is $V = mgz$,
+where $z$ is the height of the mass above its hanging-straight-down position.
+So $V$ is effectively a function of $\theta$ given by
+\[
+V(\theta) = mgL(1 - \cos{\theta}).
+\]
+If the coordinate in the horizontal direction is $x$,
+then $x = L\sin{\theta}$,
+and so
+\[
+v ^ 2 = \dot{x} ^ 2 + \dot{z} ^ 2 = L ^ 2\dot{\theta} ^ 2.
+\]
+Here $\dot{\theta}$ is the angular velocity;
+note $v = L|\dot{\theta}|$.
+The total energy is conserved is
+\[
+E = \frac{1}{2}mL ^ 2\dot{\theta} ^ 2 + mgL(1 - \cos{\theta}).
+\]
+The equation of motion obtained from $\frac{dE}{dt} = 0$ is $\ddot{\theta} = -\left(\frac{g}{L}\right)\sin{\theta}$.
+For small oscillations about the stable equilibrium,
+the equation becomes $\ddot{\theta} = -\frac{g\theta}{L}$,
+so we get simple harmonic motion with angular frequency $\omega = \sqrt{\frac{g}{L}}$.
+This is just an approximation for small $\theta$.
+
+\begin{example}
+    Release the pendulum from rest in a horizontal position.
+    What is the speed $u$ of the mass when it passes the vertical position?
+
+    \begin{solution}
+        By conservation of energy
+        \[
+        E = \frac{1}{2}mL ^ 2\dot{\theta} ^ 2 + mgL(1 - \cos{\theta}).
+        \]
+        So initial $E$ equals final $E$
+        \[
+        V\left(\frac{\pi}{2}\right) - \frac{1}{2}mL ^ 2\dot{\theta} ^ 2 = \frac{1}{2}m(L\dot{\theta}) ^ 2 + V(0) \iff V\left(\frac{\pi}{2}\right) = \frac{1}{2}mL ^ 2\dot{\theta} ^ 2 + 0 + V(0)
+        \]
+        \[
+        V\left(\frac{\pi}{2}\right) = mgL = \frac{1}{2}m(L\dot{\theta}) ^ 2 + V(0) = \frac{1}{2}m(L\dot{\theta}) ^ 2
+        \]
+        \[
+        mgL = \frac{1}{2}m(L\dot{\theta}) ^ 2 \iff \sqrt{2gL} = L|\dot{\theta}| = v
+        \]
+        hence $v = \sqrt{2gL}$.
+    \end{solution}
+\end{example}
+
+\begin{example}
+    If you start at $\theta(0) = 0$,
+    with $\dot{\theta}(0) = \omega$,
+    how large does $\omega$ have to be for the pendulum to 'loop the loop'?
+
+    \begin{solution}
+        We need $E = \frac{1}{2}mL ^ 2\dot{\theta} ^ 2 + V(0) > V(\pi)$ since the energy before the movement has to be larger than the energy at the top of the swing.
+        \[
+        \frac{1}{2}mL ^ 2\dot{\theta} ^ 2 > V(\pi) = 2mgL \iff \dot{\theta} > 2\sqrt{\frac{g}{L}}
+        \]
+        but $\dot{\theta}(0) = \omega$ so $\omega > 2\sqrt{\frac{g}{L}}$.
+    \end{solution}
+\end{example}
+
+\subsection{Projectiles}
+Setup.
+You fire a projectile at an angle $\theta$ to the horizontal,
+with initial speed $u$.
+The subsequent motion is in a plane.
+Take axes $z$ and $\mbf{e}_3$ upwards,
+and $x$ and $\mbf{e}_1$ horizontal,
+with no motion in the $y$-direction.
+The initial velocity is
+\[
+\mbf{v}(0) = u\mbf{e}_1\cos{\theta} + u\mbf{e}_3\sin{\theta}.
+\]
+The forces are $-mg\mbf{e}_3$ for gravity,
+and $-\lambda\mbf{v}$ for air resistance.
+Take $\mbf{r}(0) = \mbf{0}$.
+If there is no resistance,
+then we get
+\[
+\mbf{r}(t) = ut\mbf{e}_1\cos{\theta} + \left(ut\sin{\theta} - \frac{1}{2}gt ^ 2\right)\mbf{e}_3.
+\]
+
+\begin{example}
+    Suppose that the ground surface is horizontal,
+    and that there is no resistance.
+    Let $T$ be the time taken for the projectile to land.
+    In other words,
+    $z(T) = 0$.
+    Find the maximum range of the projectile.
+
+    \begin{solution}
+        \[
+        \begin{pmatrix}
+            x(t) \\ 0 \\ 0
+        \end{pmatrix} = \mbf{r}(t) = \begin{pmatrix}
+            ut\cos{\theta} \\
+            0 \\
+            ut\sin{\theta} - \frac{1}{2}gt ^ 2
+        \end{pmatrix}
+        \]
+        so $ut\sin{\theta} - \frac{1}{2}gt ^ 2 = 0 \iff t = \frac{2u}{g}\sin{\theta}$.
+
+        Hence $T = \frac{2u}{g}\sin{\theta}$.
+        To maximise the range we have
+        \[
+        x(t) = ut\cos{\theta} = \frac{2u ^ 2}{g}\sin{\theta}\cos{\theta} = \frac{u ^ 2}{g}\sin(2\theta)
+        \]
+        so $\dot{x} = \frac{2u ^ 2}{g}\cos(2\theta)$ which maximised would be $\dot{x} = 0 = \frac{2u ^ 2}{g}\cos(2\theta) \implies \theta = \frac{\pi}{4}$.
+
+        So for a given $u$ we can maximise the range by $\theta = \frac{\pi}{4}$.
+    \end{solution}
+\end{example}
 
 
+\subsection{Momentum and collisions}
 
+\begin{definition}
+    Momentum.
+    A particle with mass $m$ and velocity $\mbf{v}$ has momentum $\mbf{p} = m\mbf{v}$.
+    If a force $\mbf{F}$ is acting,
+    then the equation of motion is $\dot{\mbf{p}} = \mbf{F}$.
+    In general,
+    momentum is not conserved.
 
+    If
+    (say)
+    the $x$-component of the force is zero,
+    then $p_x$ is conserved
+    (constant in time).
+\end{definition}
 
+\textbf{Collisions}.
+If there are no external forces,
+then the total momentum is conserved.
+If the collision is elastic,
+then kinetic energy is conserved too.
+
+\begin{example}
+    A particle of uni mass is travelling with velocity $\mbf{v} = 3\mbf{e}_1 + 3\mbf{e}_2$ when it collides with a stationary particle of mass $2$.
+    If the unit-mass particle comes away from the collision with velocity $\mbf{u} = -\mbf{e}_1 + \mbf{e}_2$,
+    calculate the velocity $\mbf{w}$ of the other particle after the collision,
+    and calculate the fractional loss in kinetic energy.
+
+    \begin{solution}
+        Total momentum before is $\mbf{p} = 3\mbf{e}_1 + 3\mbf{e}_2$ and total momentum after is $(-\mbf{e}_1 + \mbf{e}_2) + 2\mbf{w}$.
+        Conservation says
+        $\begin{pmatrix}
+            3 \\ 3
+        \end{pmatrix} = \begin{pmatrix}
+            -1 \\ 1
+        \end{pmatrix} + 2\mbf{w} \iff \mbf{w} = \begin{pmatrix}
+            2 \\ 1
+        \end{pmatrix}$.
+
+        The total kinetic energy before is $K = \frac{1}{2}\sqrt{3 ^ 2 + 3 ^ 2} ^ 2 = 9$ and after $K' = \frac{1}{2}\sqrt{(-1) ^ 2 + 1 ^ 2} ^ 2 + \frac{1}{2}\cdot 2\sqrt{2 ^ 2 + 1 ^ 2} ^ 2 = 6$ so the fractional kinetic energy loss is
+        \[
+        \frac{K - K'}{K} = \frac{1}{3}.
+        \]
+    \end{solution}
+\end{example}
 
 
 
