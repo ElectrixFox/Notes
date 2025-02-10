@@ -4009,6 +4009,196 @@ i.e.
     A hermitian matrix $B$ is positive-definite if and only if the determinants of all of its leading minors are positive.
 \end{proposition}
 
+\subsection{Norms, orthogonality and the Cauchy-Schwarz inequality}
+
+\begin{definition}
+    Given a vector space $V$ over $\R$
+    (or $\C$),
+    a norm on $V$ is a function usually denoted by $\|\cdot\| : V \rightarrow \R$ with the following properties
+    \begin{enumerate}[label = (\roman*)]
+        \item $\|a\mbf{v}\| = |a|\|\mbf{v}\|$
+        (absolute homogeneity),
+
+        \item $\|\mbf{v} + \mbf{u}\| \leq \|\mbf{v}\| + \|\mbf{u}\|$
+        (triangle inequality or subadditivity),
+
+        \item If $\|\mbf{v}\| = 0$ then $\mbf{v} = \mbf{0}$
+        (separation of points),
+    \end{enumerate}
+    for all $a \in \R$
+    (or $\C$)
+    and all $\mbf{v}, \mbf{u} \in V$.
+\end{definition}
+
+\begin{definition}
+    If $(V, (\,,\,))$ is a real inner product space,
+    then we define the norm $\|\mbf{v}\|$ of a vector $\mbf{v} \in V$ by
+    \[
+    \|\mbf{v}\| \coloneqq \sqrt{(\mbf{v}, \mbf{v})}.
+    \]
+\end{definition}
+
+\begin{definition}
+    A vector $\mbf{v} \in V$ is a unit vector if $\|\mbf{v}\| = 1$.
+\end{definition}
+
+\begin{definition}
+    Two vectors $\mbf{u}$ and $\mbf{v}$ are orthogonal if $(\mbf{u}, \mbf{v}) = 0$.
+\end{definition}
+
+\begin{definition}
+    An orthonormal basis $\{\mbf{u}_1, \dotsc, \mbf{u}_n\}$ of $V$ is a basis consisting of mutually orthogonal unit vectors.
+    For the bases $\{\mbf{u}_1, \dotsc, \mbf{u}_n\}$ to be orthonormal we then must have
+    \[
+    (\mbf{u}_i, \mbf{u}_i) = \|\mbf{u}_i\| ^ 2 = 1, \text{ for } i = 1, \dotsc, n,\qquad(\mbf{u}_i, \mbf{u}_j) = 0, \text{ when } i \neq j,
+    \]
+    these conditions can be written in the compact form
+    \[
+    (\mbf{u}_i, \mbf{u}_j) = \delta_{ij},
+    \]
+    with $\delta_{ij}$ denoting Kronecker's delta.
+\end{definition}
+
+\begin{theorem}[The real Cauchy-Schwarz inequality]\label{pre:linalg:thm:cauchyschwarz}
+    We have
+    \[
+    (\mbf{u}, \mbf{v}) ^ 2 \leq (\mbf{u}, \mbf{u})(\mbf{v}, \mbf{v})
+    \]
+    with equality if and only if $\mbf{u}$ and $\mbf{v}$ are linearly dependent.
+    Equivalently,
+    $|(\mbf{u}, \mbf{v})| \leq \|\mbf{u}\|\|\mbf{v}\|$.
+
+    \begin{proof}
+        For $\mbf{u} = \mbf{0}$ the proof is trivial,
+        suppose $\mbf{u} \neq \mbf{0}$.
+        For all real numbers $x$ we have
+        \[
+        \|x\mbf{u} - \mbf{v}\| ^ 2 = x ^ 2\|\mbf{u}\| ^ 2 - 2x(\mbf{u}, \mbf{v}) + \|\mbf{v}\| ^ 2 \geq 0,
+        \]
+        with equality if and only if $x\mbf{u} - \mbf{v} = 0$.
+
+        If $\mbf{u}, \mbf{v}$ are linearly independent then there is no $x$ such that $x\mbf{u} = \mbf{v}$ then the quadratic equation in $x$ we just formed would have a discriminant less than zero
+        \[
+        (\mbf{u}, \mbf{v}) ^ 2 - \|\mbf{u}\|\|\mbf{v}\| ^ 2 < 0.
+        \]
+        Alternatively,
+        if they are linearly dependent,
+        from linearity of the inner product we can see that
+        \[
+        (\mbf{u}, \mbf{v}) ^ 2 - \|\mbf{u}\| ^ 2\|\mbf{v}\| ^ 2 = 0.
+        \]
+    \end{proof}
+\end{theorem}
+
+\begin{corollary}[The triangle inequality]
+    For all $\mbf{u}, \mbf{v} \in V$,
+    we have
+    \[
+    \|\mbf{u} + \mbf{v}\| \leq \|\mbf{u}\| + \|\mbf{v}\|.
+    \]
+
+    \begin{proof}
+        \begin{align*}
+            (\|\mbf{u}\| + \|\mbf{v}\|) ^ 2 - \|\mbf{u} + \mbf{v}\| ^ 2 &= \|\mbf{u}\| ^ 2 + 2\|\mbf{u}\|\|\mbf{v}\| + \|\mbf{v}\| ^ 2 - \|\mbf{u}\| ^ 2 - 2(\mbf{u}, \mbf{v}) - \|\mbf{v}\| ^ 2 \\
+            &= 2(\|\mbf{u}\|\|\mbf{v}\| - (\mbf{u}, \mbf{v})) \\
+            &\geq 0.
+        \end{align*}
+    \end{proof}
+\end{corollary}
+
+\begin{corollary}
+    For a real inner-product space,
+    the angle $\theta \in [0, \pi]$ between $\mbf{u}$ and $\mbf{v}$,
+    given by $(\mbf{u}, \mbf{v}) = \|\mbf{u}\|\|\mbf{v}\|\cos{\theta}$,
+    is well-defined.
+
+    \begin{proof}
+        By Cauchy-Schwarz
+        (\autoref{pre:linalg:thm:cauchyschwarz})
+        we know that $-\|\mbf{u}\|\|\mbf{v}\| \leq (\mbf{u}, \mbf{v}) \leq \|\mbf{u}\|\|\mbf{v}\|$.
+        Additionally,
+        if $\mbf{u}$ and $\mbf{v}$ are orthogonal then $(\mbf{u}, \mbf{v}) = 0$ so the angle between them is $\\theta = pm\pi / 2$.
+        If they are parallel,
+        linearly dependent with $\mbf{v} = x\mbf{u}$ with $x > 0$,
+        the angle is $\theta = 0$,
+        if they are anti-parallel,
+        linearly dependent with $\mbf{v} = x\mbf{u}$ with $x < 0$,
+        the angle is $\theta = \pi$.
+    \end{proof}
+\end{corollary}
+
+\textbf{The norm induced by a Hermitian inner product}
+
+\begin{definition}
+    Let $(V, \langle\,,\,\rangle)$ be a Hermitian inner product space,
+    then we define the norm $\|\mbf{v}\|$ of a vector $\mbf{v} \in V$ by
+    \[
+    \|\mbf{v}\| \coloneqq \sqrt{\langle\mbf{v}, \mbf{v}\rangle}.
+    \]
+\end{definition}
+
+\begin{definition}
+    A vector $\mbf{v} \in V$ is a unit vector if $\|\mbf{v}\| = 1$.
+\end{definition}
+
+\begin{definition}
+    Two vectors $\mbf{u}$ and $\mbf{v}$ are orthogonal if $\langle\mbf{u}, \mbf{v}\rangle = 0$.
+\end{definition}
+
+\begin{theorem}[The complex Cauchy-Schwarz inequality]
+    Let $(V, \langle\,,\,\rangle)$ be a Hermitian inner product space,
+    then for all vectors $\mbf{u}, \mbf{v} \in V$ we have
+    \[
+    |\langle\mbf{u}, \mbf{v}\rangle| ^ 2 \leq \|\mbf{u}\| ^ 2\|\mbf{v}\| ^ 2,
+    \]
+    with equality if and only if $\mbf{u}$ and $\mbf{v}$ are linearly dependent.
+
+    \begin{proof}
+        Assume $\mbf{u} \neq 0$ and $\langle\mbf{u}, \mbf{v}\rangle \neq 0$,
+        otherwise the statement is trivial and let us consider the following quadratic expression in $x \in \C$
+        \[
+        \|x\mbf{u} - \mbf{v}\| ^ 2 = |x| ^ 2\|\mbf{u}\| ^ 2 - 2\mathrm{Re}(x\langle\mbf{u}, \mbf{v}\rangle) + \|\mbf{v}\| ^ 2 \geq 0,
+        \]
+        with equality if and only if $x\mbf{u} - \mbf{v} = 0$.
+
+        Since this expression must be non-negative for all $x \in \C$ we can choose in particular
+        \[
+        x = \lambda\frac{|\langle\mbf{u}, \mbf{v}\rangle|}{\langle\mbf{u}, \mbf{v}\rangle},
+        \]
+        with $\lambda \in \R$.
+
+        The above inequality becomes
+        \[
+        \lambda ^ 2\|\mbf{u}\| ^ 2 - 2\lambda|\langle\mbf{u}, \mbf{v}\rangle| + \|\mbf{v}\| ^ 2 \geq 0,
+        \]
+        at this point we can apply the same argument used in the real Cauchy-Schwarz inequality
+        (\autoref{pre:linalg:thm:cauchyschwarz})
+    \end{proof}
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \end{document}
