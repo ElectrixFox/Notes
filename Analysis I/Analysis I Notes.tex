@@ -3934,6 +3934,131 @@ Then $\left|f(x) - T_{f, c}^{(n)}(x)\right| \leq \frac{M_{n + 1}}{(n + 1)!}|x - 
     \]
 \end{example}
 
+\newpage
+
+\section{Power Series}
+
+\begin{definition}
+    \[
+    \infsumo a_kx ^ k
+    \]
+    is a power series.
+    $a_k \in \R$ and $x \in \R$.
+\end{definition}
+
+\begin{theorem}[Cauchy-Hadamard]
+    Given $\infsumo a_kx ^ k$,
+    there exists $R \geq 0$
+    (possibly $\infty$)
+    ($R$ is the radius of convergence)
+    such that
+    \begin{enumerate}[label = (\roman*)]
+        \item $\infsumo a_kx ^ k$ converges absolutely for $|x| < R$,
+
+        \item $\infsumo a_kx ^ k$ diverges for $|x| > R$.
+    \end{enumerate}
+    In fact.
+    If $c = \limsup\sqrt[k]{|a_k|}$ then $R = \frac{1}{c}$
+    (if $c = 0, \infty$,
+    $R = \infty, 0$).
+    
+    \begin{proof}
+        We apply the root test to
+        \[
+        \infsumo a_kx ^ k
+        \]
+        \begin{align*}
+            \limsup\sqrt[k]{|a_kx ^ k|} &= \limsup\sqrt[k]{|a_k|}|x| \\
+            &= |x|\limsup\sqrt[k]{|a_k|} \\
+            &= c|x| &= \begin{cases}
+                < 1 & \text{if } |x| < 1 / c \\
+                > 1 & \text{if } |x| > 1 / c
+            \end{cases}
+        \end{align*}
+        with absolute convergence in the first case and divergence in the second.
+    \end{proof}
+\end{theorem}
+
+\begin{remark}
+    \begin{enumerate}[label = (\roman*)]
+        \item In practice,
+        the ratio test works just as well:
+        \[
+        \frac{|a_{k + 1}|x| ^ {k + 1}}{|a_k||x| ^ k} = \frac{|a_{k + 1}|}{|a_k|}|x|
+        \]
+        if $\liminfty[k]\frac{|a_{k + 1}|}{|a_k|}$ exists and is equal to $c$
+        (say)
+        then as before $R = \frac{1}{c}$.
+
+        \item $x = \pm R$ endpoints of interval of convergence anything can happen.
+        To check do not use the ratio or root test.
+        Plug in $x = \pm R$,
+        and see what happens.
+    \end{enumerate}
+\end{remark}
+
+\begin{example}\phantom{}
+    \begin{enumerate}[label = (\roman*)]
+        \item
+        \[
+        \sum_{k = 0}^{N}a_kx ^ k
+        \]
+        a polynomial.
+        $R = \infty$
+        (of course,
+        no infinite series).
+        Also $\lim\sqrt[k]{|a_k|} = 0$ so $c = 0 \implies R = \infty$.
+
+        \item $\infsumo x ^ k$ geometric series.
+        $a_k = 1$,
+        by root/ratio test $c = 1$ so $R = 1$.
+        \[
+        \infsumo x ^ k = \frac{1}{1 - x}\qquad\text{for } |x| < 1
+        \]
+        divergence for $|x| > 1$
+        $x = \pm 1$:
+        \[
+        \sum(\pm 1) ^ k
+        \]
+        diverges.
+
+        \item $\infsumo\frac{x ^ k}{k!}$.
+        Ratio test,
+        for $x \neq 0$ have
+        \[
+        \frac{|x| ^ {k + 1}}{(k + 1)!} \cdot \frac{k!}{|x| ^ k} = \limas[k]{\frac{|x|}{k + 1}}{0 < 1}
+        \]
+        so $R = \infty$.
+        Hence converges absolutely for all $x \in \R$.
+
+        \item $\infsumo k ^ kx ^ k$.
+        Root test
+        \[
+        \sqrt[k]{|a_k|} = \sqrt[k]{k ^ k} = \limas[k]{k}{\infty}.
+        \]
+        So $c = \infty$ and $R = 0$ only converges for $x = 0$.
+
+        \item $\infsumo\frac{k}{3 ^ k}x ^ k$.
+        Ratio test
+        ($x \neq 0$)
+        \[
+        \frac{k + 1}{3 ^ {k + 1}}|x| ^ {k + 1} / \frac{k|x| ^ k}{3 ^ k} = \frac{k + 1}{k}\cdot\frac{1}{3}|x| \xrightarrow[k \rightarrow \infty]{} \frac{1}{3}|x| = \begin{cases}
+            < 1 & |x| < 3 \\
+            > 1 & |x| > 3
+        \end{cases}
+        \]
+        $x = \pm 3$
+        \[
+        \infsumo(\pm k)
+        \]
+        diverges.
+
+        The radius of convergence is the same for $\infsumo\frac{p(k)}{3 ^ k}x ^ k$ and $\infsumo\frac{1}{p(k)x ^ k}$ but not at the endpoints.
+    \end{enumerate}
+\end{example}
+
+
+
 
 
 
