@@ -6463,8 +6463,10 @@ When $V$ has an inner product,
 there is a "special" norm induced by the inner product.
 
 \textbf{Real case:}
-If $\{V, (,)\}$ is a real inner product space then the norm induced by $(,)$ is $\|\mbf{v}\|_{(,)} = \|\mbf{v}\| = \sqrt{(\mbf{v}, \mbf{v})} \in \R ^ {\geq 0}$
-(well defined since $(\mbf{v}, \mbf{v}) \geq 0\ \forall \mbf{v} \in V$.
+\begin{definition}
+    If $\{V, (,)\}$ is a real inner product space then the norm induced by $(,)$ is $\|\mbf{v}\|_{(,)} = \|\mbf{v}\| = \sqrt{(\mbf{v}, \mbf{v})} \in \R ^ {\geq 0}$
+    (well defined since $(\mbf{v}, \mbf{v}) \geq 0\ \forall \mbf{v} \in V$.
+\end{definition}
 
 \begin{example}
     Take $V = \R ^ 3$ with standard inner product $\|\mbf{v}\| = \sqrt{\mbf{v} \cdot \mbf{v}} = \sqrt{v_1 ^ 2 + v_2 ^ 2 + v_3 ^ 2}$
@@ -6503,7 +6505,163 @@ so (iii) is ok.
 
 For (ii) we will need the
 (real)
-Cauchy-Schwartz inequality.
+Cauchy-Schwarz inequality.
+
+\begin{theorem}[The real Cauchy-Schwarz inequality]
+    Suppose $\{V, (\,,\,)\}$ is a real inner product space.
+    Then for all $\mbf{u}, \mbf{v} \in V$,
+    \[
+    (\mbf{u}, \mbf{v}) ^ 2 \leq (\mbf{u}, \mbf{u})(\mbf{v}, \mbf{v})
+    \]
+    i.e.
+    \[
+    |(\mbf{u}, \mbf{v})| \leq \|\mbf{u}\|\|\mbf{v}\|
+    \]
+    with equality if and only if $\mbf{u}, \mbf{v}$ are linearly dependent.
+    
+    \begin{proof}
+        If $\mbf{v} = \mbf{0}$ it is trivial,
+        so assume $\mbf{v} \neq \mbf{0}$ which implies $\|\mbf{v}\| \neq 0$.
+
+        Consider $\mbf{w} = \frac{(\mbf{u}, \mbf{v})}{\|\mbf{v}\| ^ 2}\mbf{v}$
+        \begin{align*}
+            0 &\leq \|\mbf{w}\| ^ 2 \\
+            &= (\mbf{w}, \mbf{w}) \\
+            &= \left(\mbf{u} - \frac{(\mbf{u}, \mbf{v})}{\|\mbf{v}\| ^ 2}\mbf{v}, \mbf{u} - \frac{(\mbf{u}, \mbf{v})}{\|\mbf{v}\| ^ 2}\mbf{v}\right) \\
+            &= (\mbf{u}, \mbf{u}) - \frac{2(\mbf{u}, \mbf{v}) ^ 2}{\|\mbf{v}\| ^ 2} + \frac{(\mbf{u}, \mbf{v}) ^ 2}{\|\mbf{v}\| ^ 2} \\
+            &= (\mbf{u}, \mbf{u}) - \frac{(\mbf{u}, \mbf{v}) ^ 2}{(\mbf{v}, \mbf{v})} \\
+            &\implies (\mbf{u}, \mbf{u})(\mbf{v}, \mbf{v}) \geq (\mbf{u}, \mbf{v}) ^ 2.
+        \end{align*}
+        Equality if and only if $\|\mbf{w}\| = 0$ if and only if $\mbf{w} = \mbf{0}$ by the linearity of the inner product,
+        this is equivalent to $\mbf{u}, \mbf{w}$ are linearly dependent.
+    \end{proof}
+\end{theorem}
+
+\begin{corollary}
+    We can define the angle between two vectors
+    \[
+    -\|\mbf{u}\|\|\mbf{v}\| \leq (\mbf{u}, \mbf{v}) \leq \|\mbf{u}\|\|\mbf{v}\|
+    \]
+    this implies
+    \[
+    (\mbf{u}, \mbf{v}) = \|\mbf{u}\|\|\mbf{v}\|\cos{\theta}
+    \]
+    with $\theta \in [0, \pi]$ since $-1 \leq \cos{\theta} \leq 1$.
+
+    Special cases:
+    \begin{align*}
+        \theta &= \frac{\pi}{2} \iff (\mbf{u}, \mbf{v}) = 0 \iff \mbf{u} \perp \mbf{v}\quad(\text{orthogonal}) \\
+        \theta &= 0 \iff (\mbf{u}, \mbf{v}) = \|\mbf{u}\|\|\mbf{v}\| \iff \mbf{u}, \mbf{v} \text{ parallel} \\
+        \theta &= \pi \iff (\mbf{u}, \mbf{v}) = -\|\mbf{u}\|\|\mbf{v}\| \iff \mbf{u}, \mbf{v}\text{ anti-parallel}.
+    \end{align*}
+\end{corollary}
+
+\begin{corollary}
+    The norm induced by $(\,,\,)$ does satisfy the triangle inequality.
+
+    \begin{proof}
+        \begin{align*}
+            (\|\mbf{u}\| + \|\mbf{v}\|) ^ 2 - \|\mbf{u} + \mbf{v}\| ^ 2 &= \|\mbf{u}\| ^ 2 + 2\|\mbf{u}\|\|\mbf{v}\| + \|\mbf{v}\| ^ 2 - (\mbf{u} + \mbf{v}, \mbf{u} + \mbf{v}) \\
+            &= \|\mbf{u}\| ^ 2 + 2\|\mbf{u}\|\|\mbf{v}\| + \|\mbf{v}\| ^ 2 - \|\mbf{u}\| ^ 2 - 2(\mbf{u}, \mbf{v}) - \|\mbf{v}\| ^ 2 \\
+            &= 2(\|\mbf{u}\|\|\mbf{v}\| - (\mbf{u}, \mbf{v})) \\
+            &\geq 0\qquad(\text{By Cauchy-Schwarz})
+        \end{align*}
+        so $\|\mbf{u}\| + \|\mbf{v}\| \geq \|\mbf{u} + \mbf{v}\|$.
+    \end{proof}
+\end{corollary}
+
+\begin{proposition}
+    $\|\mbf{v}\| = \sqrt{(\mbf{v}, \mbf{v})}$ is a norm.
+
+    \begin{proof}
+        See above.
+    \end{proof}
+\end{proposition}
+
+\textbf{Complex case}
+
+\begin{definition}
+    Let $\{V, \langle\,,\,\rangle\}$ be a complex inner product space.
+    Then the norm $\|\cdot\|$ induced by $\langle\,,\,\rangle$ is
+    \[
+    \|\mbf{v}\| = \sqrt{\langle\mbf{v}, \mbf{v}\rangle}
+    \]
+    for all $\mbf{v} \in V$.
+\end{definition}
+
+\begin{definition}
+    $\mbf{v}$ is a unit vector if $\|\mbf{v}\| = 1$.
+\end{definition}
+
+\begin{definition}
+    $\mbf{u}, \mbf{v}$ are orthogonal if $\langle\mbf{u}, \mbf{v}\rangle = 0$.
+\end{definition}
+
+\textbf{Properties:}
+\begin{enumerate}[label = (\roman*)]
+    \item 
+    \begin{align*}
+        \|a\mbf{v}\| &= \sqrt{\langle a\mbf{v}, a\mbf{v}\rangle} \\
+        &= \sqrt{|a| ^ 2\langle\mbf{v}, \mbf{v}} & (\text{since $|a| ^ 2 = a\bar{a}$ for any $a \in \C$}) \\
+        &= |a|\sqrt{\langle\mbf{v}, \mbf{v}\rangle}.
+    \end{align*}
+
+    \item Follows from the definition.
+\end{enumerate}
+
+We get the triangle inequality from
+\begin{theorem}[The complex Cauchy-Schwarz inequality]
+    $\{V, \langle\,,\,\rangle\}$ a complex inner product space,
+    and $\|\cdot\|$,
+    the norm,
+    induced by $\langle\,,\,\rangle$.
+    Then
+    \[
+    |\langle\mbf{u}, \mbf{v}\rangle| ^ 2 \leq \|\mbf{u}\| ^ 2\|\mbf{v}\| ^ 2
+    \]
+    for all $\mbf{u}, \mbf{v} \in V$.
+    Equality if and only $\mbf{u}, \mbf{v}$ are linearly dependent.
+
+    \begin{proof}
+        Complex analogue of real case.
+    \end{proof}
+\end{theorem}
+
+\textit{Note:
+we cannot define a real angle as before,
+since $\langle\mbf{u}, \mbf{v}\rangle$ might be complex
+(but orthogonality still makes sense).}
+
+\begin{corollary}[Triangle inequality]
+    Triangle inequality holds for the deduced norm:
+    $\|\mbf{u} + \mbf{v}\| \leq \|\mbf{u}\| + \|\mbf{v}\|$.
+\end{corollary}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
