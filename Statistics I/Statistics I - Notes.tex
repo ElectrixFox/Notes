@@ -1079,10 +1079,153 @@ but now with $\Bar{X} \sim N(\mu, \sigma ^ 2 / n)$.
     \end{solution}
 \end{example}
 
+\subsubsection{Standard Errors and the \texorpdfstring{$t$}{} Distribution}
 
+The standard error of the sample mean,
+if the individual $X_i \sim UK(\mu, \sigma ^ 2)$,
+unknown distribution with mean $\mu$ and variance $\sigma ^ 2$,
+the CLT tells us that the distribution of the sample mean is $\Bar{X} \sim N(\mu, \sigma ^ 2 / n)$ as $n \rightarrow \infty$.
+However,
+we need to know the population variance $\sigma ^ 2$ in order to use these results,
+which we don't know.
 
+What if the population standard deviation $\sigma$ is unknown,
+and $n$ is large?
 
+Estimate the population standard deviation $\sigma$ by the sample standard deviation,
+which before the data is measured is the random variable $S$:
+\[
+S = \sqrt{\frac{1}{n - 1}\sum_{i = 1}^{n}(X_i - \Bar{X}) ^ 2} = \sqrt{\frac{1}{n - 1}\left(\sum_{i = 1}^{n}X_i ^ 2 - n\Bar{X} ^ 2\right)}
+\]
+and after the data is measured becomes just the real number $s$:
+\[
+s = \sqrt{\frac{1}{n - 1}\sum_{i = 1}^{n}(x_i - \Bar{x}) ^ 2} = \sqrt{\frac{1}{n - 1}\left(\sum_{i = 1}^{n}x_i ^ 2 - n\Bar{x} ^ 2\right)}.
+\]
+Under certain conditions we have $\E(S ^ 2) = \sigma ^ 2$,
+and is hence an unbiased estimator
+(the unbiased condition requires $\frac{1}{n - 1}$ instead of $\frac{1}{n}$).
 
+We can estimate the standard deviation of the sample mean $\frac{\sigma}{\sqrt{n}}$ by the standard error of the sample mean,
+$\frac{s}{\sqrt{n}}$.
+
+Putting this standard error,
+in the random variable form $\frac{S}{\sqrt{n}}$,
+into the Central Limit Theorem,
+we get the result
+\[
+\frac{\Bar{X} - \mu}{\frac{S}{\sqrt{n}}} \sim N(0, 1)
+\]
+if $n$ sufficiently large.
+
+If $n$ is not sufficiently large then $s$ is a poor estimate for $\sigma$,
+$\frac{\Bar{X} - \mu}{\frac{S}{\sqrt{n}}}$ is no longer Normally distributed.
+
+\textit{In general,
+we need $n \geq 30$ for these results to hold.}
+
+\textbf{The $t$ Distribution}
+
+What if the population standard deviation $\sigma$ is unknown and $n$ is small?
+
+If the distribution of the $X_i$ is Normal then we can proceed as follows.
+We still estimate $\sigma$ by $s$,
+but now we use the $t$ distribution instead of the Normal distribution.
+
+The sample mean then has the following distribution
+\[
+\frac{\Bar{X} - \mu}{\frac{S}{\sqrt{n}}} \sim t_{n - 1}
+\]
+and our sampling theory still holds.
+
+\begin{definition}
+    A random variable $T$ has a $t$ distribution with degrees of freedom parameter $\nu$ if it has continuous distribution with probability density function
+    \[
+    f\left(t\mmid v\right) = \frac{\Gamma\left(\frac{\nu + 1}{2}\right)}{\sqrt{\nu\pi}\Gamma\left(\frac{\nu}{2}\right)}\left(1 + \frac{t ^ 2}{\nu}\right) ^ {-\frac{v + 1}{2}}
+    \]
+    where the normalising factor employs the gamma function $\Gamma$,
+    a continuous version of the factorial function,
+    with $\Gamma(n) = (n - 1)!$ for positive integer $n$.
+\end{definition}
+
+We write that $T \sim t_{\nu}$,
+and note that $\E(T) = 0$ and $\Var(T) = \frac{\nu}{\nu - 2}$ for $\nu > 2$,
+($\infty$ or undefined otherwise).
+
+Calculating directly using $f\left(t\mmid v\right)$ is difficult,
+so we use pre-calculated tables,
+just as for the Normal distribution.
+
+The full definition of the Gamma function is
+\[
+\Gamma(z) = \int_{0}^{\infty}x ^ {z - 1}e ^ {-x}\,dx.
+\]
+
+\textbf{Properties of the $t$ Distribution}
+\begin{enumerate}[label = (\roman*)]
+    \item The $t_{n - 1}$ distribution has a similar shape to a standard normal $N(0, 1)$.
+
+    \item The $t_{n - 1}$ has "fatter tails" - more probability is assigned to values farther from the centre and with the tails getting fatter as $n$ gets smaller.
+
+    \item The $t_{n - 1}$ has variance greater than one,
+    and is given by $\frac{n - 1}{n - 3}$ for $n \geq 4$ and $\infty$ otherwise
+    (note we are using $\nu = n - 1$).
+    It has greater spread than a standard normal random variable.
+
+    \item $\liminfty t_{n - 1} = N(0, 1)$,
+    so it converges towards the normal distribution as $n$ gets larger.
+
+    \item If $n \geq 15$ we can test whether our data is normally distributed via a normal quantile plot:
+    use of the $t_{n - 1}$ distribution here requires the original population to be
+    (approximately)
+    normally distributed.
+\end{enumerate}
+
+\begin{example}
+    A lightbulb manufacturer claims that the mean life of a lightbulb is $1200$ hours.
+    A consumer association randomly selects $16$ bulbs,
+    with the intention of rejecting the manufacturers claim if the sample mean $\Bar{X}$ is less than $1160$ hours.
+    The sample standard deviation is $s = 200$.
+
+    If the manufacturers are,
+    in fact,
+    honest,
+    what is the probability that they will be declared dishonest?
+    Find a value $c$ so that the probability that the lightbulb sample mean is smaller than $c$ is $0.05$.
+
+    \begin{solution}
+        By our theory,
+        the distribution of the standardised sample mean is
+        \[
+        T = \frac{\Bar{X} - \mu}{\frac{S}{\sqrt{n}}} = \frac{\Bar{X} - 1200}{\frac{200}{\sqrt{16}}} \sim t_{15}.
+        \]
+        Now,
+        the probability that this sample mean is smaller than $1160$ is
+        \begin{align*}
+            \P(\Bar{X} < 1160) &= \P\left(\frac{\Bar{X} - 1200}{\frac{200}{\sqrt{16}}} < \frac{1160 - 1200}{\frac{200}{\sqrt{16}}}\right) \\
+            &= \P(T < -0.8), & T \sim t_{15} \\
+            &= \P(T > 0.8), &(\text{By symmetry})
+        \end{align*}
+        Examining the tables of the $t$ distribution with $15$ degrees of freedom,
+        we see that $\P(T > 0.691) = 0.25$ and $\P(T > 0.866) = 0.20$,
+        so the probability we require is somewhere between $0.20$ and $0.25$.
+
+        The $t$ distribution is most often used in reverse,
+        as follows.
+
+        Find a value $c$ so that the probability that the lightbulb sample mean is smaller than $c$ is,
+        say,
+        $0.05$,
+        i.e. $\P(\Bar{X} < c) = 0.05$.
+        For $15$ degrees of freedom,
+        the $t$ table shows us that $\P(T < -1.753) = \P(T > 1.753) = 0.05$.
+        Therefore $\P\left(\frac{\Bar{X} - 1200}{\frac{200}{\srqt{16}}} < -1.753\right) = 0.05$.
+        Rearranging shows us that $\P(\Bar{X} < 1200 - 50(1.753)) = 0.05$,
+        i.e. $\P(\Bar{X} < 1112.35) = 0.05$.
+        Thus,
+        if the consumer association want to accuse the manufacturers of dishonest with probability $5\%$ of being wrong,
+        their threshold under these circumstances should be $1112.35$.
+    \end{solution}
+\end{example}
 
 
 
