@@ -4194,7 +4194,7 @@ The procedure is as follows.
     Then $(\mbf{u}_1, \Bar{\mbf{v}_2}) = 0$ and $\Bar{\mbf{v}_2} \neq 0$,
     since $\mbf{v}_2 \notin \mathrm{span}\{\mbf{u}_1\}$.
     Now define $\mbf{u}_2 = \frac{\mbf{v}_1}{\|\mbf{v}_1\|}$.
-    Then $\mbf{u}_1, \mbf{u}_2$ are mututallly orthogonal unit vectors,
+    Then $\mbf{u}_1, \mbf{u}_2$ are mutually orthogonal unit vectors,
     and $\mathrm{span}\{\mbf{u}_1, \mbf{u}_2\} = \mathrm{span}\{\mbf{v}_1, \mbf{v}_2\}$
     (because clearly $u_1, u_2 \in \mathrm{span}(v_1, v_2)$ and also $v_1, v_2 \in \mathrm{span}(u_1, u_2)$).
 
@@ -4211,9 +4211,25 @@ The procedure is as follows.
     and $\Bar{\mbf{v}_{r + 1}} \neq 0$ since $\mbf{v}_{r + 1} \notin \mathrm{span}\{\mbf{u}_1, \dotsc, \mbf{u}_r\} = \mathrm{span}\{\mbf{v}_1, \dotsc, \mbf{v}_r\}$.
     Define $\mbf{u}_{r + 1} = \frac{\Bar{\mbf{v}_{r + 1}}}{\|\Bar{\mbf{v}_{r + 1}}\|}$.
     Then $\mbf{u}_1, \dotsc, \mbf{u}_{r + 1}$ are mutually orthogonal unit vectors,
-    and $\mathrm{span}\{\mbf{u}_1, \dotsc, \mbf{u}_{r + 1}\} = \mathrm{span}\{\mbf{v}_1, \dotsc, \mbf{v}_{r + 1}\}
+    and $\mathrm{span}\{\mbf{u}_1, \dotsc, \mbf{u}_{r + 1}\} = \mathrm{span}\{\mbf{v}_1, \dotsc, \mbf{v}_{r + 1}\}$
 \end{enumerate}
 
+\begin{example}
+    In $\R ^ 3$ with the standard inner product,
+    apply Gram-Schmidt to
+    \[
+    \mbf{v}_1 = (1, 1, 0)\qquad\mbf{v}_2 = (1, 0, 1)\qquad\mbf{v}_3 = (0, 1, 1).
+    \]
+
+    \begin{solution}
+        \begin{align*}
+        \mbf{u}_1 &= \frac{1}{\sqrt{2}}\begin{pmatrix}
+            1 \\ 0 \\ 0
+        \end{pmatrix},
+        \Bar{\mbf{}}}
+        \end{align*}
+    \end{solution}
+\end{example}
 
 
 
