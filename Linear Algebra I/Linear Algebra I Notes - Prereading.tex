@@ -4211,17 +4211,126 @@ The procedure is as follows.
     and $\Bar{\mbf{v}_{r + 1}} \neq 0$ since $\mbf{v}_{r + 1} \notin \mathrm{span}\{\mbf{u}_1, \dotsc, \mbf{u}_r\} = \mathrm{span}\{\mbf{v}_1, \dotsc, \mbf{v}_r\}$.
     Define $\mbf{u}_{r + 1} = \frac{\Bar{\mbf{v}_{r + 1}}}{\|\Bar{\mbf{v}_{r + 1}}\|}$.
     Then $\mbf{u}_1, \dotsc, \mbf{u}_{r + 1}$ are mutually orthogonal unit vectors,
-    and $\mathrm{span}\{\mbf{u}_1, \dotsc, \mbf{u}_{r + 1}\} = \mathrm{span}\{\mbf{v}_1, \dotsc, \mbf{v}_{r + 1}\}
+    and $\mathrm{span}\{\mbf{u}_1, \dotsc, \mbf{u}_{r + 1}\} = \mathrm{span}\{\mbf{v}_1, \dotsc, \mbf{v}_{r + 1}\}$
 \end{enumerate}
 
+\begin{example}
+    In $\R ^ 3$ with the standard inner product,
+    apply Gram-Schmidt to
+    \[
+    \mbf{v}_1 = (1, 1, 0)\qquad\mbf{v}_2 = (1, 0, 1)\qquad\mbf{v}_3 = (0, 1, 1).
+    \]
 
+    \begin{solution}
+        \begin{align*}
+        \mbf{u}_1 &= \frac{1}{\sqrt{2}}\begin{pmatrix}
+            1 \\ 0 \\ 0
+        \end{pmatrix}, \\
+        \Bar{\mbf{v}_2} = \mbf{v}_2 - (\mbf{v}_2, \mbf{u}_1)\mbf{u}_1 = \begin{pmatrix}
+            1 \\ 0 \\ 1
+        \end{pmatrix}
+        - \frac{1}{2}\begin{pmatrix}
+            1 \\ 1 \\ 0
+        \end{pmatrix} = \frac{1}{2}\begin{pmatrix}
+            1 \\ -1 \\ 2
+        \end{pmatrix} \\ 
+        \mbf{u}_2 &= \frac{1}{6}\begin{pmatrix}
+            1 \\ -1 \\ 2
+        \end{pmatrix},
+        \Bar{\mbf{v}_3} &= \mbf{v}_3 - (\mbf{v}_3, \mbf{u}_1)\mbf{u}_1 - (\mbf{v}_3, \mbf{u}_2)\mbf{u}_2 \\
+        &= \begin{pmatrix}
+            0 \\ 1 \\ 1
+        \end{pmatrix} - \frac{1}{2}\begin{pmatrix}
+            1 \\ 1 \\ 0
+        \end{pmatrix} - \frac{1}{6}\begin{pmatrix}
+            1 \\ -1 \\ 2
+        \end{pmatrix} = \frac{2}{3}\begin{pmatrix}
+            -1 \\ 1 \\ 1
+        \end{pmatrix}, \\
+        \mbf{u}_3 &= \frac{1}{\sqrt{3}}\begin{pmatrix}
+            -1 \\ 1 \\ 1
+        \end{pmatrix}.
+        \end{align*}
+    \end{solution}
+\end{example}
 
+\subsection{Orthogonal complement and orthogonal projection}
+Let us explore some consequences of ortohogonality between vectors in a vector space $V$.
 
+\begin{definition}
+    Let $U$ be a vector subspace of an inner product space $V$.
+    Then the orthogonal complement of $U$ is the set
+    \[
+    U ^ {\perp} = \{\mbf{v} \in V\,:\, (\mbf{u}, \mbf{v}) = 0\text{ for all } \mbf{u} \in U\},
+    \]
+    of vectors in $V$ which are orthogonal to all the vectors in $U$.
+\end{definition}
 
+\begin{remark}
+    $U ^ {\perp}$ is a vector subspace of $V$.
+\end{remark}
 
+\begin{definition}
+    Given any vector $\mbf{v} \in V$,
+    there is a unique vector $\mbf{u} \in U$ called the orthogonal projection of $\mbf{v}$ onto $U$
+    (at least if $U$ is finite-dimensional),
+    and one may find this $\mbf{u}$ explicitly as follows.
+\end{definition}
 
+\begin{proposition}
+    If $U$ is finite-dimensional,
+    then there always exists a unique decomposition $\mbf{v} = \mbf{u} + \Tilde{\mbf{u}}$,
+    where $\mbf{u} \in U$ and $\Tilde{\mbf{u}} \in U ^ {\perp}$.
+    so we can write $V = U \oplus U ^ {\perp}$.
 
+    \begin{proof}
+        Let $\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ be an orthonomal basis of $U$,
+        and set
+        \[
+        \mbf{u} = (\mbf{v}, \mbf{u}_1)\mbf{u}_1 + \dotsc + (\mbf{v}, \mbf{u}_k)\mbf{u}_k,\qquad\Tilde{\mbf{u}} = \mbf{v} - \mbf{u}.
+        \]
+        Clearly $\mbf{u} \in U$;
+        and for each $\mbf{u}_i$ note that $(\mbf{u}, \mbf{u}_i) = (\mbf{v}, \mbf{u}_i) \cdot (\mbf{u}_i, \mbf{u}_i) = (\mbf{v}, \mbf{u}_i)$.
+        So for each $\mbf{u}_i$ we have
+        \begin{align*}
+            (\Tilde{\mbf{u}}, \mbf{u}_i) &= (\mbf{v} - \mbf{u}, \mbf{u}_i) \\
+            &= (\mbf{v}, \mbf{u}_i) - (\mbf{u}, \mbf{u}_i) \\
+            &= (\mbf{v}, \mbf{u}_i) - (\mbf{v}, \mbf{u}_i) \\
+            &= 0.
+        \end{align*}
+        Hence $\Tidle{\mbf{u}} \in U ^ {\perp}$.
+        This shows that $V = U + U ^ {\perp}$.
+        To show that $V = U \oplus U ^ {\perp}$ we need to show additionally that $U \cap U ^ {\perp} = \{\mbf{0}\}$.
+        Take $\mbf{w} = w_1\mbf{u}_1 + \dotsc + w_k\mbf{u}_k$.
+        Clearly $\mbf{w} \in U$,
+        and let us assume that also $\mbf{w} \in U ^ {\perp}$.
+        In this case,
+        by the definition of $U ^ {\perp}$,
+        we must have that $(\mbf{w}, \mbf{u}_i) = 0$ for all $i \in 1, \dotsc, k$.
+        Since the $\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ form an orthonormal basis,
+        this implies
+        (by linearity of the inner product)
+        $w_i = 0$ for all $i$,
+        and therefore $\mbf{w} = \mbf{0}$.
+        To show uniqueness,
+        assume that there is a second decomposition $\mbf{v} = \mbf{u} + \Tilde{\mbf{u}} = \mbf{u}' + \Tilde{\mbf{u}}'$,
+        with $\mbf{u}' \in U$ and $\Tilde{\mbf{u}} \in U ^ {\perp}$.
+        This implies $\mbf{u}' - \mbf{u} = \Tilde{\mbf{u}} - \Tilde{\mbf{u}}'$.
+        The left hand side of thie equality lives in $U$,
+        while the right hand side lives in $U ^ {\perp}$.
+        Since $U \cap U ^ {\perp} = \{\mbf{0}\}$ this implies $\mbf{u}' - \mbf{u} = \mbf{0}$ and $\Tilde{\mbf{u}} - \Tilde{\mbf{u}}' = \mbf{0}$,
+        so the decomposition is indeed unique.
+    \end{proof}
+\end{proposition}
 
+\begin{definition}
+    Given a finite-dimensional vector subspace $U$ of the inner product space $(V, (\,,\,))$ we can consider the orthogonal projection operator $P$ onto $U$,
+    defined by
+    \[
+    P(\mbf{v}) \coloneqq (\mbf{v}, \mbf{u}_1)\mbf{u}_1 + \dotsc + (\mbf{v}, \mbf{u}_k)\mbf{u}_k,
+    \]
+    where $\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ is an orthonormal basis of $U$.
+\end{definition}
 
 
 
