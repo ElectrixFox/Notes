@@ -2609,7 +2609,103 @@ A point $x_0$ which is not a regular point of the differential equation is refer
     \end{solution}
 \end{example}
 
+\subsection{Frobenius' Method}
+Frobenius' method allows a minor modification of the series solution which allows us to expand in a series solution at a singular point,
+provided that the singularity is particularly benign.
+Given a differential equation $y'' + p(x)y' + q(x)y = 0$ we classify points into three categories:
+\begin{enumerate}[label = (\roman*)]
+    \item $x_0$ is a regular
+    (sometimes called ordinary)
+    point of the differential equation if $p(x), q(x)$ can be represented by a Taylor expansion about $x = x_0$.
 
+    \item $x_0$ is a regular singular point of the differential equation if $(x - x_0)p(x), (x - x_0) ^ 2q(x)$ can be represented by a Taylor expansion about $x = x_0$.
+
+    \item $x_0$ is an irregular singular point of the differential equation if neither of the above conditions are met.
+\end{enumerate}
+
+The method is a simple variant on the series solution method.
+We look for a solution in the form
+\[
+y(x) = \infsum[n = 0]a_n(x - x_0) ^ {n + r}
+\]
+where $r$ is a constant
+(not necessarily integer)
+to be determined and we can assume that $a_0 \neq 0$ without loss of generality.
+
+\begin{example}
+    Find a solution to $2x(x + 1)y'' + (x + 1)y' - 3y = 0$,
+    expressed as a series solution expanded around $x = 0$.
+
+    \begin{solution}
+        Putting the equation in canonical form by making the coefficient of $y''$ equal to one we have
+        \[
+        \frac{d ^ 2y}{dx ^ 2} + \frac{1}{2x}\frac{dy}{dx} - \frac{3}{2x(x + 1)}y = 0,
+        \]
+        so that $p(x) = \frac{1}{2x}$ and $q(x) = \frac{-3}{2x(x + 1)}$.
+
+        Both of these do not have finite limits and $x \rightarrow 0$ so the point $x = 0$ is not a regular point,
+        and a standard series solution will not work.
+        However,
+        the functions
+        \[
+        xp(x) = \frac{1}{2},\quad x ^ 2q(x) = -\frac{3x}{2(x + 1)}
+        \]
+        both have Taylor expansions about $x = 0$,
+        so the point $x = 0$ is a regular singular point,
+        and we can use Frobenius' method to solve the equation.
+
+        Taking $y = \infsum[n = 1]a_nx ^ {n + r}$ and substituting it into the differential equation we find
+        \begin{align*}
+            2x(x + 1)&\infsum[n = 0](n + r)(n + r - 1)a_nx ^ {n + r - 2} + (x + 1)\infsum[n = 0](n + r)a_nx ^ {n + r - 1} - 3\infsum[n = 0]a_nx ^ {n + r} = 0 \\
+            \implies &\infsum[n = 0]2(n + r)(n + r - 1)a_nx ^ {n + r} + \infsum[n = 0]2(n + r)(n + r - 1)a_nx ^ {n + r - 1} \\
+            +&\infsum[n = 0](n + r)a_nx ^ {n + r - 1} + \infsum[n = 0](n + r)a_nx ^ {n + r} - 3\infsum[n = 0]a_nx ^ {n + r} = 0 \\
+            \implies &\infsum[n = 0]((n + r)(2n + 2r - 1) - 3)a_nx ^ {n + r} + \infsum[n = 0](n + r)(2n + 2r - 1)a_nx ^ {n + r - 1} = 0
+        \end{align*}
+        to make their powers of $x$ look the same in both sums,
+        we relabel the second sum so that $n \rightarrow n + 1$ in which case we have
+        \[
+        \infsum[n = 0]((n + r)(2n + 2r - 1) - 3)a_nx ^ {n + r} + \infsum[n = -1](n + r + 1)(2n + 2r + 1)a_{n + 1}x ^ {n + r} = 0.
+        \]
+        One begins by looking at the lowest power(s) of $x$.
+        $x ^ {r - 1}$ which only appears in the second sum.
+        Since the solution is true for all $x$,
+        the coefficients of any power of $x$ on the left-hand side of the equation must vanish.
+        The coefficient of $x ^ {r - 1}$ gives
+        \[
+        a_0r(2r - 1) = 0
+        \]
+        which given that $a_0 \neq 0$ means $r = 0$ or $r = \frac{1}{2}$.
+
+        the equation that is obtained by looking at the lowest power(s) of $x$ is called the indicial equation and determines the value of $r$.
+
+        At this point one proceeds to use the equations coming from higher powers of $x$ to determine the $a_n$'s taking each case of $r$ in turn.
+
+        Choose $r = \frac{1}{2}$.
+        \begin{align*}
+            \infsum[n = 0]((n + r)(2n + 2r - 1) - 3)a_nx ^ {n + r} + \infsum[n = 0](n + r + 1)(2n + 2r + 1)a_{n + 1}x ^ {n + r} &= 0 \\
+            \implies \infsum[n = 0](((n + r)(2n + 2r - 1) - 3)a_n + (n + r + 1)(2n + 2r + 1)a_{n + 1}a_{n + 1})x ^ {n + r} &= 0 \\
+            \implies \infsum[n = 0]((n(2n + 1) - 3)a_n + (2n + 3)(n + 1)a_{n + 1})x ^ {n + \frac{1}{2}} &= 0
+        \end{align*}
+        where in the last line wee have substituted in $r = \frac{1}{2}$.
+        Setting the coefficients of $x ^ {n + \frac{1}{2}}$ to zero we find the relation
+        \[
+        a_{n + 1} = -\frac{n(2n + 1) - 3}{(2n + 3)(n + 1)}a_n
+        \]
+        which gives
+        \[
+        a_1 = -\frac{0 - 3}{3}a_0 = a_0,\ a_2 = -\frac{3 - 3}{5 \cdot 2}a_1 = 0,\ a_3 = -\frac{7}{7 \cdot 3}a_2 = 0\dotsc\text{etc}
+        \]
+        and so all $a_n = 0$ for $n > 1$.
+        Therefore we have a solution
+        \[
+        y(x) = \infsum[n = 0]a_nx ^ {n + \frac{1}{2}} = a_0\sqrt{x}(1 + x).
+        \]
+        To find the second independent solution we need to take $r = 0$ instead,
+        and solve anew the recurrence relation.
+        In this case the series one gets happens not to terminate after a finite number of steps,
+        although the answer can be expressed in terms of elementary functions.
+    \end{solution}
+\end{example}
 
 
 

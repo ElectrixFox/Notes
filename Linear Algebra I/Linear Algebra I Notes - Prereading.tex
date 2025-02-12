@@ -4194,7 +4194,7 @@ The procedure is as follows.
     Then $(\mbf{u}_1, \Bar{\mbf{v}_2}) = 0$ and $\Bar{\mbf{v}_2} \neq 0$,
     since $\mbf{v}_2 \notin \mathrm{span}\{\mbf{u}_1\}$.
     Now define $\mbf{u}_2 = \frac{\mbf{v}_1}{\|\mbf{v}_1\|}$.
-    Then $\mbf{u}_1, \mbf{u}_2$ are mututallly orthogonal unit vectors,
+    Then $\mbf{u}_1, \mbf{u}_2$ are mutually orthogonal unit vectors,
     and $\mathrm{span}\{\mbf{u}_1, \mbf{u}_2\} = \mathrm{span}\{\mbf{v}_1, \mbf{v}_2\}$
     (because clearly $u_1, u_2 \in \mathrm{span}(v_1, v_2)$ and also $v_1, v_2 \in \mathrm{span}(u_1, u_2)$).
 
@@ -4255,7 +4255,7 @@ The procedure is as follows.
 \end{example}
 
 \subsection{Orthogonal complement and orthogonal projection}
-Let us explore some consequences of ortohogonality between vectors in a vector space $V$.
+Let us explore some consequences of orthogonality between vectors in a vector space $V$.
 
 \begin{definition}
     Let $U$ be a vector subspace of an inner product space $V$.
@@ -4284,7 +4284,7 @@ Let us explore some consequences of ortohogonality between vectors in a vector s
     so we can write $V = U \oplus U ^ {\perp}$.
 
     \begin{proof}
-        Let $\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ be an orthonomal basis of $U$,
+        Let $\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ be an orthonormal basis of $U$,
         and set
         \[
         \mbf{u} = (\mbf{v}, \mbf{u}_1)\mbf{u}_1 + \dotsc + (\mbf{v}, \mbf{u}_k)\mbf{u}_k,\qquad\Tilde{\mbf{u}} = \mbf{v} - \mbf{u}.
@@ -4298,7 +4298,7 @@ Let us explore some consequences of ortohogonality between vectors in a vector s
             &= (\mbf{v}, \mbf{u}_i) - (\mbf{v}, \mbf{u}_i) \\
             &= 0.
         \end{align*}
-        Hence $\Tidle{\mbf{u}} \in U ^ {\perp}$.
+        Hence $\Tilde{\mbf{u}} \in U ^ {\perp}$.
         This shows that $V = U + U ^ {\perp}$.
         To show that $V = U \oplus U ^ {\perp}$ we need to show additionally that $U \cap U ^ {\perp} = \{\mbf{0}\}$.
         Take $\mbf{w} = w_1\mbf{u}_1 + \dotsc + w_k\mbf{u}_k$.
@@ -4316,7 +4316,7 @@ Let us explore some consequences of ortohogonality between vectors in a vector s
         assume that there is a second decomposition $\mbf{v} = \mbf{u} + \Tilde{\mbf{u}} = \mbf{u}' + \Tilde{\mbf{u}}'$,
         with $\mbf{u}' \in U$ and $\Tilde{\mbf{u}} \in U ^ {\perp}$.
         This implies $\mbf{u}' - \mbf{u} = \Tilde{\mbf{u}} - \Tilde{\mbf{u}}'$.
-        The left hand side of thie equality lives in $U$,
+        The left hand side of this equality lives in $U$,
         while the right hand side lives in $U ^ {\perp}$.
         Since $U \cap U ^ {\perp} = \{\mbf{0}\}$ this implies $\mbf{u}' - \mbf{u} = \mbf{0}$ and $\Tilde{\mbf{u}} - \Tilde{\mbf{u}}' = \mbf{0}$,
         so the decomposition is indeed unique.
