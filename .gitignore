@@ -1,2 +1,9 @@
-*.pdf
 /build
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.gz
+*.unq
+*.toc
