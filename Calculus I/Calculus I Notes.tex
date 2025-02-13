@@ -4280,6 +4280,137 @@ Now have $n$ equations $\pd[\phi]{x_i} = 0$ $1 \leq i \leq n$.
 $m$ constraint equations $g_j = 0$ $1 \leq j \leq m$.
 $m + n$ variables and equations.
 
+\newpage
+
+\section{Linear Ordinary Differential Equations}
+
+\subsection{Series solutions of second order linear ODEs}
+
+\begin{example}[Legendre's Equation]
+    \[
+    (1 - x ^ 2)\frac{d ^ 2y}{dx ^ 2} -2x\frac{dy}{dx} + \lambda y = 0.
+    \]
+
+    \begin{solution}
+        Canonical form:
+        \[
+        \frac{d ^ 2y}{dx ^ 2} + p(x)\frac{dy}{dx} + q(x)y = 0
+        \]
+        \[
+        \frac{d ^ 2y}{dx ^ 2} + \frac{2x}{x ^ 2 - 1}\frac{dy}{dx} - \frac{\lambda}{x ^ 2 - 1}y = 0
+        \]
+        \[
+        p(x) = \frac{2x}{x ^ 2 - 1},\qquad q(x) = -\frac{\lambda}{x ^ 2 - 1}.
+        \]
+        $p, q$ are rational functions which implies they are analytic except when $x ^ 2 - 1 = 0$,
+        $x = \pm 1$.
+        All points $x_0 \in \R$ are regular/ordinary points of Legendre's equation except $x_0 = \pm 1$ which are singular.
+        Take $x_0 = 0$
+        \[
+        y(x) = \infsum[n = 0]a_nx ^ n.
+        \]
+        Substituting power series into Legendre's equation
+        \begin{align*}
+            0 &= (1 - x ^ 2)\infsum[n = 0]a_nn(n - 1)x ^ {n - 2} - 2x\infsum[n = 0]a_nnx ^ {n - 1} + \lambda\infsum[n = 0]a_nx ^ n \\
+            0 &= \infsum[n = 0]a_nn(n - 1)x ^ {n - 2} - \infsum[n = 0]a_nn(n - 1)x ^ n - \infsum[n = 0]2a_nnx ^ n + \infsum[n = 0]\lambda a_nx ^ n
+            \intertext{let $n \rightarrow n + 2$ in first term}
+            0 &= \infsum[n = 0]a_{n + 2}(n + 2)(n + 1)x ^ {n} - \infsum[n = 0]a_nx ^ n(n(n - 1) - \lambda) \\
+            0 &= \infsum[n = 0](a_{n + 1}(n + 2)(n + 1) - a_n(n(n + 1) - \lambda))x ^ n \\
+            &\implies a_{n + 2} = \frac{n(n + 1) - \lambda}{(n + 2)(n + 1)}a_n
+        \end{align*}
+        Recurrence relation between $a_{n + 2}, a_n$ implies $a_n$ for $n$ even related to $a_0$,
+        and all $a_n$ for $n$ odd related to $a_1$.
+        \[
+        a_2 = a_0\frac{-\lambda}{1 \cdot 2} = -\frac{\lambda}{2}a_0,\qquad a_4 = \frac{6 - \lambda}{3 \cdot 4}a_2 = -\frac{\lambda(6 - \lambda)}{4!}a_0
+        \]
+        \[
+        a_3 = \frac{2 - \lambda}{2 \cdot 3}a_1,\qquad a_5 = \frac{12 - \lambda}{4 \cdot 5}a_3 = \frac{(2 - \lambda)(12 - \lambda)}{5!}a_1.
+        \]
+        \begin{align*}
+            y(x) &= \infsum[n = 0]a_nx ^ n = a_0 + a_1x + a_2x ^ 2 + a_3x ^ 3 + \dotsc \\
+            &= (a_0 + a_2x ^ 2 + a_4x ^ 4 + \dotsc) + (a_1x + a_3x ^ 3 + a_5x ^ 5 + \dotsc) \\
+            &= a_0\left(1 - \frac{\lambda}{2}x ^ 2 - \frac{\lambda(6 - \lambda)}{4!}x ^ 4 + \dotsc\right) + a_1\left(x + \frac{2 - \lambda}{3!}x ^ 3 + \frac{(2 - \lambda)(12 - \lambda)}{5!}x ^ 5 + \dotsc\right) \\
+            &= a_0y_e(x) + a_1y_o(x).
+        \end{align*}
+        $y_e(x), y_o(x)$ are called Legendre functions,
+        and they are special functions.
+        In general,
+        they "blow up" at $x = \pm 1$,
+        the singular points of Legendre's equation.
+
+        Using the ratio test:
+
+        $\sum b_n$ converges if $\liminfty\left|\frac{b_{n + 1}}{b_n}\right| < 1$ and diverges if $\liminfty\left|\frac{b_{n + 1}}{b_n}\right| > 1$.
+
+        Neighbouring terms in the odd/even series were $a_nx ^ n$,
+        $a_{n + 2}x ^ {n + 2}$
+        \[
+        \liminfty\left|\frac{a_{n + 2}x ^ {n + 2}}{a_nx ^ n}\right| = \liminfty\left|\frac{n(n + 1) - \lambda}{(n + 1)(n + 2)}\right|x ^ 2 = x ^ 2
+        \]
+        convergence for $x ^ 2 < 1$ and divergence for $x ^ 2 > 1$.
+        Suppose $\lambda = m(m + 1)$ $m$ is a non-negative integer.
+        Recurrence relation for $n = m$,
+        \[
+        a_{m + 2} = a_m\underbrace{\frac{m(m + 1) - \lambda}{(m + 1)(m + 2)}}_{0\text{ if } \lambda = m(m + 1)} = 0
+        \]
+        $a_{m + 4} = a_{m + 2}(\dotsc) = 0$ in this case $a_{n + 2}, a_{n + 4}, a_{n + 6}, \dotsc$ will all vanish.
+
+        For $m$ even $y_e(x)$ will be an $m$th order polynomial.
+        For $m$ odd $y_o(x)$ will be an $m$th order polynomial.
+        These polynomials are called Legendre polynomials.
+
+        These are examples of "orthogonal polynomials".
+    \end{solution}
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
