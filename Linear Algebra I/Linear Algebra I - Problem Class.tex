@@ -2,9 +2,6 @@
 \usepackage{preamble}
 \usepackage{tikz-cd}
 
-\declaretheorem[style = avgstyle, name = Problem]{problem}
-\newcommand{\ts}[1]{\textsuperscript{#1}}
-
 \title{Linear Algebra I \\
 \large Problem Class}
 \author{Luke Phillips}
@@ -264,5 +261,271 @@
         \end{enumerate}
     \end{solution}
 \end{problem}
+
+\newpage
+
+\section{Class \texorpdfstring{$2$}{}}
+
+\begin{problem}
+    $a\ddot{x} + b\dot{x} + cx = 0$ with $x(0) = \alpha$ and $\dot{x}(0) = \beta$.
+
+    Introduce $y = \dot{x}$ so we get
+    \[
+    a\dot{y} + by + cx = 0
+    \]
+    with $x(0) = \alpha$ and $y(0) = \beta$.
+
+    So we can rewrite a first order system of ODEs:
+    $\dot{x} = y$ and $\dot{y} = -\frac{c}{a}x - \frac{b}{a}y$.
+
+    This can be solved with matrices
+    \[
+    \begin{pmatrix}
+        \dot{x} \\ \dot{y}
+    \end{pmatrix} = \begin{pmatrix}
+        0 & 1 \\
+        -\frac{c}{a} & -\frac{b}{a}
+    \end{pmatrix}\begin{pmatrix}
+        x \\ y
+    \end{pmatrix}
+    \]
+    so
+    $\dot{\mbf{x}} = B\mbf{x}$.
+    Then we would diagonalise $B$ where $B = \begin{pmatrix}
+        0 & 1 \\
+        -\frac{c}{a} & -\frac{b}{a}
+    \end{pmatrix}$
+    \[
+    p_B(t) = \det\begin{pmatrix}
+        -t & 1 \\ -\frac{c}{a} & -\frac{b}{a} - t
+    \end{pmatrix} = t ^ 2 + \frac{b}{a}t + \frac{c}{a} = 0 \iff at ^ 2 + bt + c = 0.
+    \]
+    The problem case is
+    \[
+    \begin{pmatrix}
+        \lambda & ? \\ 0 & \lambda
+    \end{pmatrix}.
+    \]
+\end{problem}
+
+\begin{problem}[Fibonacci sequence]
+    \[
+    F_{n + 1} = F_n + F_{n - 1}
+    \]
+    with $F_0 = 0, F_1 = 1$.
+    Define
+    \[
+    \mbf{F}_n = \begin{pmatrix}
+        F_{n + 1} \\ F_n
+    \end{pmatrix}
+    \]
+    \[
+    \mbf{F}_0 = \begin{pmatrix}
+        F_1 \\ F_0
+    \end{pmatrix} = \begin{pmatrix}
+        1 \\ 0
+    \end{pmatrix}
+    \]
+    \[
+    \mbf{F}_n = \begin{pmatrix}
+        F_{n + 1} \\ F_n
+    \end{pmatrix} = \begin{pmatrix}
+        F_n + F_{n - 1} \\ F_n
+    \end{pmatrix} = \begin{pmatrix}
+        1 & 1 \\ 1 & 0
+    \end{pmatrix}\begin{pmatrix}
+        F_n \\ F_{n - 1}
+    \end{pmatrix} = A\mbf{F}_{n - 1}
+    \]
+    \[
+    A = \begin{pmatrix}
+        1 & 1 \\ 1 & 0
+    \end{pmatrix}.
+    \]
+    \[
+    \mbf{F}_n = A\mbf{F}_{n - 1} = A ^ 2\mbf{F}_{n - 2} = \dotsi = A ^ n\mbf{F}_0.
+    \]
+    We would just diagonalise $A$.
+    \[
+    p_A(t) = \det\begin{pmatrix}
+        1 - t & 1 \\ 1 & -t
+    \end{pmatrix} = (1 - t)(-t) - 1 = t ^ 2 - t - 1
+    \]
+    so $t = \frac{1 \pm \sqrt{5}}{2}$.
+\end{problem}
+
+\begin{problem}
+    $V = \R ^ 3$,
+    \[
+    (\mbf{x}, \mbf{y}) = 2x_1y_1 + x_2y_2 - 2x_2y_3 + ax_3y_2 + kx_3y_3
+    \]
+    $a, k \in \R$.
+    For which values of $a$ and $k$ does this define an inner product?
+
+    \begin{solution}
+        Check that this is linear and homogeneous,
+        the quickest way to do this is to show that $(\mbf{x}, \mbf{y}) = \mbf{y} ^ TB\mbf{x}$.
+
+        \[
+        B = \begin{pmatrix}
+            2 & 0 & 0 \\
+            0 & 1 & a \\
+            0 & -2 & k
+        \end{pmatrix}.
+        \]
+        Is it symmetric?
+        \[
+        B \overset{?}{=} B ^ T = \begin{pmatrix}
+            2 & 0 & 0 \\
+            0 & 1 & -2 \\
+            0 & a & k
+        \end{pmatrix} \implies a = -2.
+        \]
+
+        Is it positive definite?
+        \[
+        B = \begin{pmatrix}
+            2 & 0 & 0 \\
+            0 & 1 & -2 \\
+            0 & -2 & k
+        \end{pmatrix}
+        \]
+        using Sylvester's:
+        \[
+        B_1 = (2),\qquad B_2 = \begin{pmatrix}
+            2 & 0 \\ 0 & 1
+        \end{pmatrix},\qquad B_3 = B
+        \]
+        these must be strictly positive
+        \begin{align*}
+            \det(B_1) &= 2 > 0 \\
+            \det(B_2) &= 2 > 0 \\
+            \det(B_3) &= 2(k - 4)
+        \end{align*}
+        so for $B$ to be positive definite we need $k > 4$
+        ($k = 4$ not allowed).
+        
+        Or
+        $a = -2$
+        \begin{align*}
+            (\mbf{x}, \mbf{x}) &= 2x_1 ^ 2 + x_2 ^ 2 - 4x_2x_3 + kx_3 ^ 2 \\
+            &= 2x_1 ^ 2 + (x_2 - 2x_3 ^ 2) + (k - 4)x_3 ^ 2
+        \end{align*}
+        clearly $\geq 0$ for $k \geq 4$.
+        Does $(\mbf{x}, \mbf{x}) = 0 \iff \mbf{x} = \mbf{0}$.
+        For $k > 4$,
+        we must have $x_1 = 0$,
+        $x_2 - 2x_3 = 0$ and $x_3 = 0$ hence $\mbf{x} = \mbf{0}$.
+        But for $k = 4$ we only need $x_1 = 0$ and $x_2 = 2x_3$,
+        for example
+        \[
+        \begin{pmatrix}
+            0 \\ 2 \\ 1
+        \end{pmatrix}
+        \begin{pmatrix}
+            0 \\ 2 \\ 1
+        \end{pmatrix} = 0
+        \]
+        so we cannot have $k = 4$.
+    \end{solution}
+\end{problem}
+
+\begin{problem}
+    $V = \R[x]_1 = \{p_0 + p_1x,\ p_0, p_1 \in \R\}$ and
+    \[
+    (p(x), q(x)) = \int_{0}^{1}p(x)q(x)\,dx.
+    \]
+    Find the angle between $p(x) = 1$ and $q(x) = x$.
+    
+    \begin{solution}
+        \[
+        (p, q) = \|p\|\|q\|\cos{\theta}.
+        \]
+        \begin{align*}
+            \|p\| ^ 2 &= \|1\| ^ 2 = \int_{0}^{1}1\cdot 1\,dx = 1 \\
+            \|q\| ^ 2 &= \|x\| ^ 2 = \int_{0}^{1}x\cdot x\,dx = \frac{1}{\sqrt{3}}
+        \end{align*}
+        \[
+        (p, q) = \int_{0}^{1}1\cdot x\,dx = \frac{1}{2}
+        \]
+        so
+        \[
+        \cos{\theta} = \frac{(p, q)}{\|p\|\|q\|} = \frac{\sqrt{3}}{2} \implies \theta = \frac{\pi}{6}.
+        \]
+    \end{solution}
+\end{problem}
+
+\begin{problem}
+    $V = \C ^ 2$ standard basis,
+    \[
+    \langle\mbf{z}, \mbf{w}\rangle = z_1\Bar{w}_1 + iz_1\Bar{w}_2 - iz_2\Bar{w}_1 + kz_2\Bar{w}_2.
+    \]
+    For which $k \in \C$ does this define a complex inner product?
+
+    \begin{solution}
+        To be sesquilinear one of the conditions is that we must have that $\langle\mbf{z}, \mbf{w}\rangle = \mbf{w} ^ {*}B\mbf{z}$ for some $B$.
+
+        Here
+        \[
+        B = \begin{pmatrix}
+            1 & -i \\
+            i & k
+        \end{pmatrix}
+        \]
+        does the job.
+        It is Hermitian if and only if $B ^ {*} = (\Bar{B}) ^ T \overset{?}{=} B$.
+        \[
+        (\Bar{B}) ^ T = \begin{pmatrix}
+            1 & -i \\ i & \bar{k}
+        \end{pmatrix} \overset{?}{=} \begin{pmatrix}
+            1 & -i \\ i & k
+        \end{pmatrix}
+        \]
+        so we need $k = \Bar{k}$,
+        i.e. $k \in \R$.
+        Positive definite
+        \begin{align*}
+            B_1 &= (1)&\det(B_1) = 1 > 0 \\
+            B_2 &= B&\det(B_2) = \det\begin{pmatrix}
+                1 & -i \\ i & k
+            \end{pmatrix} = k - (i)(-i) = k - 1
+        \end{align*}
+        so we need $k > 1$.
+        \[
+        \]
+        
+    \end{solution}
+\end{problem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \end{document}
