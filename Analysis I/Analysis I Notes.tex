@@ -4057,9 +4057,119 @@ Then $\left|f(x) - T_{f, c}^{(n)}(x)\right| \leq \frac{M_{n + 1}}{(n + 1)!}|x - 
     \end{enumerate}
 \end{example}
 
+\begin{corollary}
+    If $\infsumo a_kc ^ k$ converges for some $c \in \R$,
+    then $\sum a_kx ^ k$ converges for all $x \in (-|c|, |c|)$.
 
+    \begin{proof}
+        Must have $|c| \leq R \implies (-|c|, |c|) \subseteq (-R, R)$.
+    \end{proof}
+\end{corollary}
 
+\begin{proposition}\label{analy:prop:powserderivandantiderivsameradconv}
+    $\infsumo a_kx ^ k$ with radius $R > 0$.
+    Then the formal derivative
+    \[
+    \infsum ka_kx ^ {k - 1} = \frac{1}{x}\infsum ka_kx ^ k
+    \]
+    anti-derivative
+    \[
+    \infsumo \frac{1}{k + 1}a_kx ^ {k + 1}
+    \]
+    have the same radius of convergence $R$.
+    
+    \begin{proof}
+        \begin{align*}
+            \limsup\sqrt[k]{k|a_k|} &= \lim\sqrt[k]{k}\limsup\sqrt[k]{|a_k|} \\
+            &= 1 \cdot \limsup\sqrt[k]{|a_k|}.
+        \end{align*}
+        Anti-derivative the same.
+    \end{proof}
+\end{proposition}
 
+\subsection{Power series as a function}
+\[
+f(x) = \liminfty f_n(x) = \infsumo a_kx ^ k
+\]
+with $f_n = \sum_{k = 0}^{n}a_kx ^ k$.
+
+\begin{theorem}
+    Power series are continuous in $(-R, R)$.
+    
+    In fact,
+    they are "locally" Lipschitz,
+    that is,
+    for any $0 < r < \R$ there exists a constant $M = M_r$ such that
+    \[
+    |f(x) - f(y)| \leq M_r|x - y|
+    \]
+    for all $x \in [-r, r]$.
+
+    \begin{proof}
+        \begin{align*}
+            0 &\leq |f_n(x) - f_n(y)| \\
+            &= \left|\sum_{k = 1}^{n}a_k(x ^ k - y ^ k)\right| \\
+            &= |x - y|\cdot\left|\sum_{k = 1}^{n}a_k(x ^ {k - 1} + x ^ {k - 2}y + \dotsc + xy ^ {k - 2} + y ^ {k - 1})\right|
+            \intertext{assume $|x|, |y| \leq r$}
+            &\leq |x - y|\cdot\sum_{k = 1}^{n}|a_k|\cdot k \cdot r ^ {k - 1} \\
+            &\xrightarrow[n \rightarrow \infty]{} |x - y|\cdot\sum_{k = 1}^{n}\underbrace{|a_k|\cdot k \cdot r ^ {k - 1}}_{= M_r}
+        \end{align*}
+        converges by \autoref{analy:prop:powserderivandantiderivsameradconv} which implies by squeezing
+        \[
+        |f(x) - f(y)| \leq |x - y|M_r.
+        \]
+    \end{proof}
+\end{theorem}
+
+\textbf{Warning:}
+Typically $\sum a_kx ^ k$ is not Lipschitz on $(-R, R)$.
+
+\begin{theorem}\label{analy:thm:powerserisdiff}
+    The power series $f(x) = \infsumo a_kx ^ k$ is differentiable in $(-R, R)$ with term-wise derivative
+    \[
+    f'(x) = \infsum ka_kx ^ {k - 1}
+    \]
+    and $f ^ {(n)}(0) = n!a_n$.
+
+    \begin{proof}
+        Next section.
+        
+        Assuming the term-wise derivative,
+        we have
+        \begin{align*}
+            f'(0) &= \infsum ka_k0 ^ {k - 1} \underset{k = 0}{=} 1 \cdot a_1 \\
+            f''(0) &= \infsum[k = 2]k(k - 1)a_kx ^ {k - 2} = 2(2 - 1)a_2 = 2 \cdot a_2 \\
+            &\vdots \\
+            f ^ {(n)}(0) &= \infsum[k = n]k(k - 1) \dotsi (k - n + 1)a_kx ^ {k - n} \underset{x = 0}{=} n!a_n.
+        \end{align*}
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}[Identity Theorem for Power Series]
+    Assume
+    \[
+    \infsumo a_kx ^ k = \infsumo b_kx ^ k
+    \]
+    in some
+    (small)
+    neighbourhood of $x = 0$.
+    Then $a_k = b_k$.
+
+    \begin{proof}
+        Call $f(x) = \infsumo a_kx ^ k$,
+        then $n!b_n = f ^ {(n)}(0) = n!a_n$ by \autoref{analy:thm:powerserisdiff}.
+        So $a_n = b_n$ for all $n$.
+    \end{proof}
+\end{theorem}
+
+What happens at the end points?
+Assume $f(x) = \infsumo a_kx ^ k$ converges at $x = R$.
+Is $f(x)$ left continuous at $x = R$?
+I.e. $\lim_{x \rightarrow R ^ {-}}f(x) = f(R)$?
+
+\begin{theorem}[Abel's Limit Theorem]
+    
+\end{theorem}
 
 
 
