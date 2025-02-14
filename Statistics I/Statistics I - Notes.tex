@@ -1227,6 +1227,189 @@ The full definition of the Gamma function is
     \end{solution}
 \end{example}
 
+\subsection{Confidence Intervals}
+\subsubsection{Inference about \texorpdfstring{$\mu$}{}}
+
+Suppose we take a simple random sample,
+$X_1, \dotsc, X_n$ from our population with mean $\mu$ and variance $\sigma ^ 2$.
+
+The central limit theorem implies that $\Bar{X} \sim Nl\left(\mu, \frac{\sigma ^ 2}{n}\right)$,
+if $n > 20$ then it is good.
+
+Since we know the distribution of $\Bar{X}$ we can make probability statements about $\Bar{X}$,
+e.g. $\P(\Bar{X} > A)$.
+
+E.g.
+from our normal tables
+($Z \sim N(0, 1)$):
+\[
+\P(-1.96 \leq Z \leq 1.96) = 0.95 \implies \P\left(-1.96 \leq \frac{\Bar{X} - \mu}{\frac{\sigma}{\sqrt{n}}} \leq 1.96\right) = 0.95.
+\]
+But this is the wrong way around as we are interested in $\mu$ not $\Bar{X}$.
+So,
+we can rearrange to get $\mu$ in the middle:
+\[
+\P\left(\Bar{X} - 1.96\frac{\sigma}{\sqrt{n}} \leq \mu \leq \Bar{X} + 1.96\frac{\sigma}{\sqrt{n}}\right)
+\]
+\[
+\mu \in \left[\Bar{X} - 1.96\frac{\sigma}{\sqrt{n}}, \Bar{X} + 1.96\frac{\sigma}{\sqrt{n}}\right]
+\]
+with probability $0.95$.
+Note:
+this is a random interval and as $\Bar{X}$ is still random until we observe it,
+we still cannot use this to learn about $\mu$ yet.
+
+\subsubsection{Confidence Intervals:
+Definition}
+Suppose we actually observe a particular random sample:
+\[
+X_1 = x_1, X_2 = x_2, \dotsc, X_n = x_n.
+\]
+We can now substitute $\Bar{x} = \frac{1}{n}\sum_{i = 1}^{n}x_i$ into our random interval to construct a confidence interval for $\mu$:
+\[
+\mu \in \left[\Bar{x} - 1.96\frac{\sigma}{\sqrt{n}}, \Bar{x} + 1.96\frac{\sigma}{\sqrt{n}}\right]
+\]
+we call this a $95\%$ confidence interval as the theoretical probability statement from which it is derived had probability $0.95$.
+
+\textbf{Important:}
+A confidence interval is not a probability statement.
+It is the realisation of a random interval.
+Once it is observed,
+it is no longer random.
+
+$\mu$ is not a random variable.
+
+Note the following \textbf{important} statement
+\[
+\P\left(\Bar{x} - 1.96\frac{\sigma}{\sqrt{n}} \leq \mu \leq \Bar{x} + 1.96\frac{\sigma}{\sqrt{n}}\right) \neq 0.95.
+\]
+
+\subsubsection{Confidence Intervals for the Population Mean \texorpdfstring{$\mu$}{}}
+
+$\sigma$ known.
+
+We have a simple random sample $X_1, \dotsc, X_n$.
+The population standard deviation $\sigma$ is known.
+
+Either:
+\begin{enumerate}[label = \alph*)]
+    \item We know the population is normal.
+
+    \item $n$ is large
+    ($n \geq 20$)
+    so we can safely use CLT.
+\end{enumerate}
+We calculated the observed sample mean $\bar{x}$.
+Then a $(1 - \alpha)\%$ confidence interval for $\mu$ is:
+\[
+\bar{x} \pm z ^ {*}\frac{\sigma}{\sqrt{n}}
+\]
+where $z ^ {*}$ is called a critical value of a standard normal random variable $z$ such that:
+\[
+\P(-z ^ {*} \leq Z \leq z ^ {*}) = 1 - \alpha
+\]
+where $Z \sim N(0, 1)$.
+
+\textbf{$\sigma$ unknown,
+$n$ small,
+population normal $N(0, 1)$}
+
+Same setup but:
+$\sigma$ is unknown,
+$n$ is small.
+We know the population is Normal,
+we calculate $\bar{x}$ and $s$
+(sample standard deviation).
+Then a $(1 - \alpha)\%$ confidence interval is
+\[
+\bar{x} \pm t_{n - 1} ^ {*}\frac{s}{\sqrt{n}}
+\]
+where $t_{n - 1} ^ {*}$ is a critical value such that:
+\[
+\P(-t_{n - 1} ^ {*} \leq T \leq t_{n - 1} ^ {*}) = 1 - \alpha
+\]
+where $T \sim t_{n - 1}$.
+
+E.g.
+if $\alpha = 0.05$ and $n = 11$ this implies $t_{10} ^ {*} = 2.228$ from the table.
+
+\textbf{$\sigma$ unknown,
+$n$ large}
+
+Setup is the same as before.
+$\sigma$ is unknown,
+$n$ is large,
+say $n \geq 30$.
+We calculate $\Bar{x}$ and now $s$ is an accurate estimate for $\sigma$.
+Then a $(1 - \alpha)\%$ confidence interval for $\mu$ is
+\[
+\bar{x} \pm z ^ {*}\frac{s}{\sqrt{n}}
+\]
+$z ^ {*}$ the same as before.
+
+\begin{example}[Candle lifetimes]
+    A candle making process makes candles with varying lifetimes $X_i$,
+    with $\sigma ^ 2 = 0.4$.
+    Lifetimes are known to be Normally distributed.
+    The mean lifetimes $\mu$ is unknown.
+    Sample of $n = 6$,
+    \[
+    8.1, 8.7, 9.7, 7.8, 8.4, 9.4
+    \]
+    hours.
+
+    Find a $99\%$ confidence interval for $\mu$.
+
+    \begin{solution}
+        We calculate:
+        $\Bar{x} = 8.6, n = 6$ population normally distributed implies
+        \[
+        \Bar{x} = N\left(\mu, \frac{\sigma ^ 2}{n}\right).
+        \]
+        $99\%$ confidence interval implies $\alpha = 0.01$.
+        $z ^ {*}$ with $0.5\%$ to the right on a normal table is $z ^ {*} = 2.575$ which implies $99\%$ confidence interval is:
+        \begin{align*}
+            \Bar{x} \pm z ^ {*}\frac{\sigma}{\sqrt{n}} &= 8.6 \pm 2.575 \cdot \frac{\sqrt{0.4}}{\sqrt{6}} \\
+            &= [7.94, 9.26].
+        \end{align*}
+    \end{solution}
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
