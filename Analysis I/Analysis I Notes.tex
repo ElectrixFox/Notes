@@ -4171,9 +4171,173 @@ I.e. $\lim_{x \rightarrow R ^ {-}}f(x) = f(R)$?
     
 \end{theorem}
 
+Have the following definition
+\[
+e ^ x = \infsumo\frac{x ^ k}{k!}.
+\]
 
+\begin{theorem}
+    \begin{enumerate}[label = (\roman*)]
+        \item $\exp(0) = 1$.
 
+        \item The exponential function is infinitely often differentiable on $\R$ with
+        \[
+        \exp'(x) = \exp(x).
+        \]
 
+        \item For all $x, y \in \R$ we have
+        \begin{align*}
+            \exp(x + y) &= \exp(x)\exp(y); \\
+            \exp(-x) &= \frac{1}{\exp(x)}.
+        \end{align*}
+
+        \item $\exp(x) > 0$ for all $x \in \R$.
+
+        \item $\exp(x)$ is strictly monotone increasing.
+
+        \item
+        \[
+        \liminfty[x]\exp(x) = \infty\qquad\text{and}\qquad\lim_{x \rightarrow -\infty}\exp(x) = 0.
+        \]
+    \end{enumerate}
+
+    \begin{proof}\phantom{}
+        \begin{enumerate}[label = (\roman*)]
+            \item Trivial by substitution.
+
+            \item
+            \begin{align*}
+                \left(\infsumo \frac{x ^ k}{k!}\right)' &= \infsum\frac{kx ^ {k - 1}}{k!} \\
+                &= \infsumo\frac{(k + 1)x ^ k}{(k + 1)!} \\
+                &= \infsumo\frac{x ^ k}{k!}.
+            \end{align*}
+
+            \item Two options:
+            for the first property we can use the Cauchy product for infinite series.
+
+            Set $f(t) = \exp(x + t)\cdot\exp(y - t)$.
+            \[
+            f(0) = \exp(x)\exp(y)
+            \]
+            \[
+            f(y) = \exp(x + y) \cdot 1 = \exp(x + y)
+            \]
+            \[
+            f'(t) = \exp(x + t)\exp(y - t) + \exp(x + t)(-1)\exp(y - t) = 0
+            \]
+            by the mean value theorem $f(t)$ is constant.
+
+            For $\exp(-x) = \frac{1}{\exp(x)}$.
+            Plug in $y = -x$.
+
+            \item True for $x > 0$,
+            for $x < 0$ use $\exp(x) = \frac{1}{\exp(-x)} > 0$.
+
+            \item $\exp'(x) = \exp(x) > 0$ hence is strictly increasing.
+
+            \item For $x > 0$ $\exp(x) > 1 + x$ $1 + x$ is unbounded so $\exp(x)$ is unbounded.
+            Then for $x < 0$ reuse $\exp(x) = \frac{1}{\exp(-x)}$.
+        \end{enumerate}
+    \end{proof}
+\end{theorem}
+
+\begin{definition}
+    We define the sine and cosine function by
+    \[
+    \sin(x) \coloneqq \infsumo\frac{(-1) ^ k}{(2k + 1)!}x ^ {2k + 1};\qquad\cos(x) \coloneqq \infsumo\frac{(-1) ^ k}{(2k)!}x ^ {2k}.
+    \]
+\end{definition}
+
+\begin{theorem}
+    We have
+    \begin{enumerate}[label = (\roman*)]
+        \item $\sin(0) = 0$ and $\cos(0) = 1$.
+
+        \item The sine-function is odd;
+        cosine is even.
+
+        \item Sine and cosine are infinitely often differentiable on $\R$ with
+        \[
+        \sin'(x) = \cos(x)\qquad\text{and}\qquad\cos'(x) = -\sin(x).
+        \]
+
+        \item For all $x, y \in \R$ we have
+        \begin{align*}
+            \sin(x + y) &= \sin(x)\cos(y) + \cos(x)\sin(y) \\
+            \cos(x + y) &= \cos(x)\cos(y) + \sin(x)\sin(y)
+        \end{align*}
+
+        \item For all $x \in \R$ we have
+        \[
+        \sin ^ 2(x) + \cos ^ 2(x) = 1.
+        \]
+        In particular,
+        $|\sin(x)| \leq 1$;
+        $|\cos(x)| \leq 1$ for all $x \in \R$.
+    \end{enumerate}
+
+    \begin{proof}\phantom{}
+        \begin{enumerate}[label = (\roman*)]
+            \item By definition.
+            
+            \item By definition.
+
+            \item Differentiating term-wise.
+
+            \item
+            \[
+            f(t) \coloneqq \sin(x + t)\cos(y - t) + \cos(x + t)\sin(y - t).
+            \]
+            \begin{align*}
+                f(0) &= \sin(x)\cos(y) + \cos(x)\sin(y) \\
+                f(y) &= \sin(x + y)\cos(0) + \cos(x + y)\sin(0) = \sin(x + y) \\
+                f'(t) &= \dotsi = 0.
+            \end{align*}
+            Hence $f(t)$ is constant so $f(0) = f(y)$,
+            addition law for sine.
+
+            \item
+            \[
+            \sin ^ 2(x) + \cos ^ 2(x) = 1
+            \]
+            true for $x = 0$.
+            Differentiate
+            \[
+            2\sin(x)\cos(x) + 2\cos(x)(-\sin(x)) = 0
+            \]
+            by mean value theorem.
+        \end{enumerate}
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    The equation $\cos(x) = 0$ has a smallest positive solution.
+
+    \begin{proof}
+        \[
+        \cos(2) = \underbrace{1 - 2 + \frac{16}{24}}_{-\frac{2}{3}} + \underbrace{\infsum[k = 3]\frac{(-1) ^ k}{(2k)!}2 ^ {2k}}_{-+-\dotsc} < 0
+        \]
+        by alternating series test.
+        \[
+        \cos(0) = 1 > 0
+        \]
+        by IVT there exists a zero at $\frac{\pi}{2}$.
+    \end{proof}
+\end{theorem}
+
+\begin{definition}
+    We denote twice the smallest positive root of cosine by $\pi$,
+    that is,
+    \[
+    \cos\left(\frac{\pi}{2}\right) = 0.
+    \]
+\end{definition}
+
+\begin{theorem}
+    \[
+    \sin\left(\frac{\pi}{2}\right) = 1.
+    \]
+\end{theorem}
 
 
 
