@@ -461,6 +461,109 @@ note that $\phi_{\text{in}}(V) = \phi_{\text{out}}(V) = 0$
     \end{solution}
 \end{example}
 
+\begin{example}\phantom{}
+    \begin{enumerate}[label = (\roman*)]
+        \item Show that $\nabla(\{v\}) = 0$ for a single vertex $v \notin \{s, t\}$.
+
+        \item Let $W \subset V$ with $y \in V \setminus W$.
+        Use the previous to show that
+        \[
+        \nabla(W \cup \{y\}) = \nabla(W) + \sum_{v \in V}f_{yv} - \sum_{u \in V}f_{uy}.
+        \]
+
+        \item Use induction (i) and (ii) to show that $\nabla(W) = 0$ if $s \notin W$ and $t \notin W$.
+
+        \item Use (ii) and (iii) to show that
+        \[
+        \nabla(W) = \begin{cases}
+            0 & \text{if } s \notin W, t \notin W; \\
+            \Phi_{tot}(F) & \text{if } s \in W, t \notin W; \\
+            -\Phi_{tot}(F) & \text{if } s \notin W, t \in W; \\
+            0 & \text{if } s \in W, t \in W.
+        \end{cases}
+        \]
+    \end{enumerate}
+
+    \begin{solution}\phantom{}
+        \begin{enumerate}[label = (\roman*)]
+            \item
+            From the previous
+            \[
+            \phi_{in}(W \cup \{y\}) = \phi_{in}(W) + \sum_{u \in V \setminus W}f_{uy} - \sum_{u \in W}f_{yu}
+            \]
+            \[
+            \phi_{out}(W \cup \{y\}) = \phi_{out}(W) + \sum_{u \in V \setminus W}f_{yu} - \sum_{u \in W}f_{uy}.
+            \]
+            Let $W = \{\}$ any $y = v$.
+
+            \begin{align*}
+                \nabla(W \cup \{v\}) &= \phi_{in} - \phi_{out} \\
+                &= \phi_{in}(W) + \sum_{u \in V \setminus W}f_{uv} - \left(\sum_{u \in W}f_{vu} + \phi_{out}(W) + \sum_{u \in V \setminus W}f_{vu} - \sum_{u \in W}f_{uv}\right) \\
+                \intertext{as $w = \{\}$}
+                &= \sum_{u \in V \setminus W}f_{uv} - \sum_{u \in V \setminus W}f_{vu} \\
+                &= \sum_{u \in V}f_{uv} - \sum_{u \in V}f_{vu}.
+            \end{align*}
+            The flow into any vertex is equal to the flow out if it is not $s$ or $t$,
+            so
+            \[
+            \sum_{u \in V}f_{uv} - \sum_{u \in V}f_{vu} = 0
+            \]
+            such that $v \neq s, t$.
+
+            \item Let $W \subset V$,
+            $y \in V \setminus W$.
+            \begin{align*}
+                \nabla(W \cup \{y\}) &= -\phi_{in} + \phi_{out} \\
+                &= -\phi_{in}(W) - \sum_{u \in V \setminus W}f_{uy} + \sum_{u \in W}f_{yu} + \left(\phi_{out}(W) + \sum_{u \in V \setminus W}f_{yu} \cdot \sum_{u \in W}f_{uy}\right) \\
+                &= \left(-\phi_{in}(W) + \phi_{out}(W)\right) - \left(\sum_{u \in V \setminus W}f_{uy} + \sum_{u \in W}f_{uy}\right) + \left(\sum_{u \in W}f_{yu} + \sum_{u \in V \setminus W}f_{yu}\right) \\
+                &= \nabla(W) - \sum_{u \in V}f_{uy} + \sum_{u \in V}f_{yu}.
+            \end{align*}
+
+            \item
+            ($1$)
+            $w = \{\}, \{v_1\}$,
+            $v_1 \neq s, t$.
+            ($2$)
+            Assume true for $w = \{v_1, \dotsc, v_n\}$,
+            $v_i \neq s, t$.
+            ($3$)
+            $W = \{v_1, \dotsc, v_n\}$ $W = \{v_1, \dotsc, v_n\} \cup \{y\}$ by (ii) $\nabla(W \cup \{y\}) = \nabla W + \sum_{u \in V}f_{yu} - \sum_{u \in V}f_{uy}$,
+            by assumption $\nabla W = 0$ and flow into every vertex
+            ($\neq s, t$)
+            flow out so if $y \neq s, t$ then $\sum_{u \in V}f_{yu} - \sum_{u \in V}f_{uy} = 0$ so $\nabla(W \cup \{y\}) = 0 + 0 = 0$.
+
+            ($4$)
+            True for $W = \text{ empty set}$.
+            True for $W = \text{ some set $+$ $1$ vertex}$.
+            Hence true for all $w$ such that $s, t \notin W$.
+
+            \[
+            \nabla(W) = \begin{cases}
+                0 & \text{if } s \notin W, t \notin W;\qquad(1) \\
+                \Phi_{tot}(F) & \text{if } s \in W, t \notin W;\qquad(2) \\
+                -\Phi_{tot}(F) & \text{if } s \notin W, t \in W;\qquad(3) \\
+                0 & \text{if } s \in W, t \in W.\qquad(4)
+            \end{cases}
+            \]
+            ($1$) same as (iii)
+            ($2$)
+            set $y = s$ then $\sum_{u \in V}f_{yu} - \sum_{u \in V}f_{uy} = \Phi_{tot}(F) - 0 = \Phi_{tot}(F)$ as flow out of the source is equal to the total flow,
+            so $\nabla(W \cup \{s\}) = \Phi_{tot}(F)$.
+
+            ($4$)
+            Take $w_1 = (W \cup \{s\})$,
+            $\nabla(W \cup \{s\}) = \Phi_{tot}(F)$,
+            take $y = t$
+            \[
+            \nabla(w_1 \cup \{t\}) = \nabla(w_1) + \sum_{u \in V}f_{tu} - \sum_{u \in V}u_t = \Phi_{tot}(F) + 0 - \Phi_{tot}(F) = 0
+            \]
+            as flow into sink is equal to the flow out of the source.
+
+            ($3$)
+            let $y = t$ then $\nabla(W \cup \{t\}) = o(W) + \sum_{u \in V}f_{tu} - \sum_{u \in V}u_t = 0 + 0 - \Phi_{tot}(F)$ as flow into sink equals total flow so $=\Phi_{tot}(F)$.
+        \end{enumerate}
+    \end{solution}
+\end{example}
 
 
 
