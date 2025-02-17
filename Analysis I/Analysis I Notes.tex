@@ -4339,12 +4339,138 @@ e ^ x = \infsumo\frac{x ^ k}{k!}.
     \]
 \end{theorem}
 
+\subsection{Taylor series}
+\[
+f(x) = \infsumo a_k(x - c) ^ k
+\]
+everything works as before.
+\begin{remark}
+    \begin{enumerate}[label = (\roman*)]
+        \item Radius of convergence $R \geq 0$.
 
+        \item We can term-wise differentiate or take antiderivatives.
 
+        \item $f ^ {(k)}(c) = k!a_k$
+    \end{enumerate}
+\end{remark}
 
+Take $f(x)$ to be a smooth\footnote{Infinitely often differentiable} function on an interval $I \ni c$.
+Taylor Series
+\[
+T_{f, c}(x) = \infsumo\frac{f ^ {(k)}(c)}{k!}(x - c) ^ k
+\]
 
+\[
+T_{f, c}(x) = \liminfty T_{f, c}^{(n)}(x) = \sum_{k = 0}^{n}\frac{f ^ {(k)}(c)}{k!}(x - c) ^ k.
+\]
 
+Clearly a function given as a power series at $c$ is equal to its Taylor series at $c$.
 
+\textbf{Questions}
+\begin{enumerate}[label = (\roman*)]
+    \item Where does $T_{f, c}(x)$ converge?
+    (apart from $x = c$)
+
+    \item Is $T_{f, c}(x) = f(x)$?
+    If so,
+    in what region?
+    If a function can be represented by its Taylor series then it is analytic.
+\end{enumerate}
+
+\begin{example}
+    \[
+    f(x) = \begin{cases}
+        e ^ {-\frac{1}{x ^ 2}} & x \neq 0 \\
+        0 & x = 0.
+    \end{cases}
+    \]
+    Problem sheet $2$ says $f$ is infinitely often differentiable at $x = 0$ with $f ^ {(k)} = 0$.
+
+    \begin{solution}
+        \[
+        T_{f, 0}(x) = 0 + 0 \cdot x + \dotsc = 0 \neq f(x)\quad\text{(only at $x = 0$)}.
+        \]
+    \end{solution}
+\end{example}
+
+\begin{example}[Bump function]
+    \[
+    f(x) = \begin{cases}
+        e ^ {-\frac{1}{(1 - x) ^ 2}} & |x| \leq 1 \\
+        0 & |x| \geq 1
+    \end{cases}
+    \]
+\end{example}
+
+\begin{example}
+    \[
+    \infsumo k!x ^ k
+    \]
+    has $R = 0$.
+
+    \begin{solution}
+        There exists a smooth function $g(x)$ such that $g ^ {(k)}(0) = (k!) ^ 2$.
+    \end{solution}
+\end{example}
+\textit{The power series approach yields the previous for the following differential equation $(x - 1)y + xy' + 1 = 0$}.
+
+\begin{example}
+    \[
+    f(x) = \frac{1}{1 + x ^ 2}
+    \]
+    $x \in \R$.
+    \begin{solution}
+        \begin{align*}
+            f(x) &= \frac{1}{1 + x ^ 2} \\
+            &= \frac{1}{1 - (-x ^ 2)} \\
+            &= \infsum(-x ^ 2) ^ k & (|x| < 1) \\
+            &= \infsumo(-1) ^ kx ^ {2k}.
+        \end{align*}
+        This is the Taylor series at $c = 0$.
+        So the Taylor series represents the function not everywhere but only "locally" $(-1, 1)$.
+    \end{solution}
+\end{example}
+
+The question of representability is equivalent to:
+the remainder in Taylor's theorem vanishes at $n \rightarrow \infty$.
+\begin{align*}
+    |f(x) - T_{f, c}^{(n)}(x)| &= \text{remainder} \\
+    &= \left|\frac{f ^ {(n + 1)}(\xi_n)}{(n + 1)!}(x - c) ^ {n + 1}\right|
+\end{align*}
+with $\xi$ between $c$ and $x$.
+
+\begin{example}
+    \[
+    f(x) = p(x)
+    \]
+    a polynomial of degree $N$.
+
+    \begin{solution}
+        Then $f ^ {(n)}(x) = 0$ for all $n \geq N + 1$ Lagrange remainder vanishes,
+        for all $n \geq N$,
+        so
+        \[
+        f(x) = T_{f, c}^{(N)}(x) = \sum_{k = 0}^{N}\frac{f ^ {(k)}(c)}{k!}(x - c) ^ k.
+        \]
+    \end{solution}
+\end{example}
+
+\begin{example}
+    \[
+    f(x) = \sin(x), \cos(x)
+    \]
+
+    \begin{solution}
+        Then,
+        \[
+        f ^ {(k)} = \pm\sin(x), \cos(x)
+        \]
+        so $|f ^ {(n + 1)}(\xi)| \leq 1$ so the Lagrange remainder
+        \[
+        \left|\frac{f ^ {(n + 1)}(\xi)}{(n + 1)!}(x - c) ^ {n + 1}\right| \leq \frac{\left|(x - c) ^ {n + 1}\right|}{(n + 1)!} \xrightarrow[n \rightarrow \infty]{} 0.
+        \]
+    \end{solution}
+\end{example}
 
 
 
