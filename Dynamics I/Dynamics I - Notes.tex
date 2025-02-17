@@ -848,7 +848,79 @@ then kinetic energy is conserved too.
     \end{solution}
 \end{example}
 
+\subsection{Angular Momentum}
+\begin{definition}
+    Particle mass $m$ at position $\mbf{r}$ with velocity $\mbf{v} = \dot{\mbf{r}}$ has angular momentum $\mbf{L} = m\mbf{r} \times \mbf{v}$.
+\end{definition}
 
+So
+\begin{align*}
+    \frac{d}{dt}\mbf{L} &= m\dot{\mbf{r}} \times \mbf{v} + m\mbf{r} \times \dot{\mbf{v}} \\
+    &= \mbf{r} \times (m\dot{\mbf{v}}) \\
+    &= \mbf{r} \times \mbf{F} \\
+    &= \mbf{0} &(\mbf{v} = \dot{\mbf{r}}).
+\end{align*}
+$\mbf{F}$ is the torque.
+
+This angular momentum and torque are about the origin $O$.
+Note:
+if $\mbf{F} = \alpha\mbf{r}$ for some real function $\alpha$,
+then torque is zero,
+and $\mbf{L}$ is conserved:
+constant in time.
+
+\subsection{Central Forces}
+A force $\mbf{F}$ is a central force if it has the form
+\[
+\mbf{F} = f(r)\mbf{e}_r = r ^ {-1}f(r)\mbf{r}.
+\]
+Note $|\mbf{F}| = |f|$.
+So $\mbf{L} = m\mbf{r} \times \dot{\mbf{r}}$ is conserved,
+also $\mbf{L} \cdot \mbf{r} = 0$
+(since $\mbf{r} \times \dot{\mbf{r}}$ is orthogonal to $\mbf{r}$).
+Time $\mbf{L} \cdot \mbf{r} = 0$ defines a plane in $\R ^ 3$ through $O$.
+Note:
+it's a constant plane,
+since $\mbf{L}$ is constant.
+So the trajectory of the particle lies in this fixed plane,
+which we can take take the $xy$-plane,
+i.e. the $r\theta$-plane.
+This means $\mbf{L} = L\mbf{e}_2$ pointing in the $z$-direction.
+
+\begin{example}
+    Gravity is a central force
+    (planet moving around a fixed star)
+    with $f(r) = -\frac{k}{r ^ 2}$ with $k > 0$ constant.
+\end{example}
+
+\subsection{Equation of motion and Energy}
+Central force $\mbf{F} = f(r)\mbf{e}_r$.
+Recall
+\[
+\mbf{r} = r\mbf{e}_r,\quad\mbf{v} = \dot{\mbf{r}} = \dot{r}\mbf{e}_r + r\dot{\theta}\mbf{e}_{\theta} \implies \mbf{L} = m\mbf{r} \times \mbf{v} = mr ^ 2\dot{\theta}\overbrace{\mbf{e}_r \times \mbf{e}_{\theta}} ^ {=\mbf{e}_3}.
+\]
+So
+\[
+L = mr ^ 2\dot{\theta}.
+\]
+Next
+\[
+\dot{\mbf{v}} = \ddot{\mbf{r}} = (\ddot{r} - r\dot{\theta} ^ 2)\mbf{e}_r + (2\dot{r}\dot{\theta} + r\ddot{\theta})\mbf{e}_{\theta},
+\]
+so the equation of motion $m\ddot{\mbf{r}} = \mbf{F} = f(r)\mbf{e}_n$ becomes $m(\ddot{r} - r\dot{\theta} ^ 2) = f(r)$,
+$2\dot{r}\dot{\theta} + r\ddot{\theta} = 0$.
+
+Note:
+\[
+\frac{dL}{dt} = \frac{d}{dt}(mr ^ 2\dot{\theta}) = m(2r\dot{r}\dot{\theta} + r ^ 2\ddot{\theta}) = mr(2\dot{r}\dot{\theta} + r\ddot{\theta}) = 0
+\]
+since $L$ is constant.
+So we're left with $mr ^ 2\dot{\theta} = L$ constant,
+and $m(\ddot{r} - r\dot{\theta} ^ 2) = f$.
+Substituting $\dot{\theta} = \frac{L}{mr ^ 2}$ into the $\ddot{r}$ equation gives
+\[
+m\ddot{r} - \frac{L ^ 2}{mr ^ 3} = f(r).
+\]
 
 
 
