@@ -4226,7 +4226,7 @@ The procedure is as follows.
         \mbf{u}_1 &= \frac{1}{\sqrt{2}}\begin{pmatrix}
             1 \\ 0 \\ 0
         \end{pmatrix}, \\
-        \Bar{\mbf{v}_2} = \mbf{v}_2 - (\mbf{v}_2, \mbf{u}_1)\mbf{u}_1 = \begin{pmatrix}
+        \Bar{\mbf{v}_2} &= \mbf{v}_2 - (\mbf{v}_2, \mbf{u}_1)\mbf{u}_1 = \begin{pmatrix}
             1 \\ 0 \\ 1
         \end{pmatrix}
         - \frac{1}{2}\begin{pmatrix}
@@ -4236,7 +4236,7 @@ The procedure is as follows.
         \end{pmatrix} \\ 
         \mbf{u}_2 &= \frac{1}{6}\begin{pmatrix}
             1 \\ -1 \\ 2
-        \end{pmatrix},
+        \end{pmatrix}, \\
         \Bar{\mbf{v}_3} &= \mbf{v}_3 - (\mbf{v}_3, \mbf{u}_1)\mbf{u}_1 - (\mbf{v}_3, \mbf{u}_2)\mbf{u}_2 \\
         &= \begin{pmatrix}
             0 \\ 1 \\ 1
@@ -4332,11 +4332,98 @@ Let us explore some consequences of orthogonality between vectors in a vector sp
     where $\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ is an orthonormal basis of $U$.
 \end{definition}
 
+We can assume that the inner product space $V$ has finite dimension $\dim{V} = n$,
+then the matrix form of the projection onto $U$ takes a simple form if we use the correct basis.
+We known $V = U \oplut U ^ {\perp}$,
+hence we can use Gram-Schmidt to obtain a basis $\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ for $U$,
+made of orthonormal vectors,
+with $k = \dim{U}$,
+similarly a basis $\{\mbf{v}_1, \dotsc, \mbf{v}_{n - k}\}$ for $U ^ {\perp}$,
+with $n - k = \dim{U ^ {\perp}}$.
+This means that the set $\{\mbf{u}_1, \dotsc, \mbf{u}_k, \mbf{v}_1, \dotsc, \mbf{v}_{n - k}\}$ forms an orthonormal basis for $V$.
+The orthogonal projection onto $U$ can be easily evaluated on these basis elements:
+\begin{align*}
+    P(\mbf{u}_i) = \mbf{u}_i, && \forall i = 1, \dotsc, k && \text{while} && P(\mbf{v}_j) = 0, && \forall j = 1, \dotsc, n - k,
+\end{align*}
+so $P = \mathrm{diag}(1, \dotsc, 1, 0, \dotsc, 0)$ where the number of $1$s on the diagonal is $k = \dim{U}$,
+while the number of $0$s on the diagonal is $n - k = \dim{U ^ {\perp}}$.
 
+\begin{proposition}
+    This projection operator satisfies the following properties:
+    \begin{enumerate}[label = (\roman*)]
+        \item $P$ is a linear operator $P : V \rightarrow V$;
 
+        \item the image of $P$ is $\mathrm{Im}\,P = U$,
+        while its kernel is $\ker{P} = U ^ {\perp}$;
 
+        \item $P$ is idempotent,
+        i.e. $P ^ 2 = P$;
 
+        \item $P$ is restricted to $U$ is the identity operator,
+        which we usually write as $P|_{U} = I$,
+        i.e. $P(\mbf{u}) = \mbf{u}$ for all $\mbf{u} \in U$;
 
+        \item $(I - P)P = P(I - P) = 0$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{remark}
+    The last equation tells us that if we project first a vector $\mbf{v}$ onto $U$,
+    then take the component of this projection orthogonal to $U$,
+    or if we take the component of a vector $\mbf{v}$ orthogonal to $U$ and then project it onto $U$,
+    we always find the zero vector.
+\end{remark}
+
+\begin{remark}
+    From the idempotency condition it is easy to see the eigenvalues of $P$.
+    Let $\mbf{v} \neq \mbf{0}$ be an eigenvector of $P$,
+    with eigenvalue $\lambda$,
+    i.e. $P\mbf{v} = \lambda\mbf{v}$,
+    since $P ^ 2 = P$
+    \[
+    \lambda\mbf{v} = P\mbf{v} = P ^ 2\mbf{v} = \lambda ^ 2\mbf{v},
+    \]
+    meaning that the only possible eigenvalues are $\lambda = 0, 1$ since $\mbf{v} \neq \mbf{0}$.
+\end{remark}
+
+In a sense,
+the projection $P(\mbf{v})$ of a vector $\mbf{v}$ onto the vector subspace $U$,
+is the vector $P(\mbf{v}) = \mbf{u} \in U$ which is
+"nearest"
+to $\mbf{v}$.
+
+\begin{proposition}
+    Let $U$ be a finite-dimensional subspace of an inner product space $V$,
+    and let $\mbf{v}_0 \in V$.
+    If $\mbf{u}_0$ is the orthogonal projection of $\mbf{v}_0$ onto $U$,
+    then for all $\mbf{u} \in U$ we have
+    \[
+    \|\mbf{u} - \mbf{v}_0\| \geq \|\mbf{u}_0 - \mbf{v}_0\|,
+    \]
+    with equality if and only if $\mbf{u} = \mbf{u}_0$.
+    Thus $\mbf{u}_0$ gives the nearest point on $U$ to $\mbf{v}_0$.
+
+    \begin{proof}
+        Write $\mbf{v}_0 = \mbf{u}_0 + \Tilde{\mbf{u}}_0$.
+        Then
+        \begin{align*}
+            \|\mbf{v}_0 - \mbf{u}\| ^ 2 &= \|\mbf{v}_0 - \mbf{u}_0 + \mbf{u}_0 - \mbf{u}\| ^ 2 \\
+            &= \|\mbf{v}_0 - \mbf{u}_0\| ^ 2 + \|\mbf{u}_0 - \mbf{u}\| ^ 2
+        \end{align*}
+        by Pythagoras,
+        since $\mbf{v}_0 - \mbf{u}_0 = \Tilde{\mbf{u}}_0 \in U ^ {\perp}$ and $\mbf{u}_0 - \mbf{u} \in U$.
+        Thus
+        \[
+        \|\mbf{v}_0 - \mbf{u}\| ^ 2 \geq \|\mbf{v}_0 - \mbf{u}_0\| ^ 2,
+        \]
+        with equality if and only if $\|\mbf{u}_0 - \mbf{u}\| ^ 2 = 0$.
+    \end{proof}
+\end{proposition}
+
+\begin{remark}
+    In some contexts,
+    $\mbf{u}_0$ is known as the least-squares approximation to $\mbf{v}_0$.
+\end{remark}
 
 
 
