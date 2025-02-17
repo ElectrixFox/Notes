@@ -1375,18 +1375,283 @@ $z ^ {*}$ the same as before.
     \end{solution}
 \end{example}
 
+\textbf{$\sigma$ unknown,
+$n$ small,
+Normal}
+
+Suppose that,
+we have a simple random sample $X_1, \dotsc, X_n$,
+the population standard deviation $\sigma$ is unknown,
+we know the population is normal,
+$n$ is small,
+we calculated the observed sample mean $\Bar{x}$,
+and the observed sample standard deviation $s$.
+
+Then a $(1 - \alpha)\%$ confidence interval for $\mu$ is
+\[
+\Bar{x} \pm t_{n - 1}^{*}\frac{s}{\sqrt{n}}
+\]
+where $t_{n - 1}^{*}$ is the critical value of a $t$ distributed random variable with $(n - 1)$ degrees of freedom such that
+\[
+\P(-t_{n - 1}^{*} \leq T \leq t_{n - 1}^{*}) = 1 - \alpha.
+\]
+For example,
+we see $\alpha = 0.05$ and $n = 11$ gives $t_{10}^{*} = 2.228$ from the $t$-table.
+
+\textbf{Normal Quantile Plots}:
+We draw a normal quantile plot by ordering the $n$ data values $x_1, \dotsc, x_n$ from smallest to largest,
+plotting these ordered values against the $n$ quantiles $z_k$ that satisfy $\Phi(z_k) = \frac{k}{n + 1}$,
+$k = 1, \dotsc, n$,
+where $\Phi(x)$ is the normal cumulative distribution function,
+that we get from the normal table.
+If the plotted points form roughly a straight line we conclude there is no evidence against normality.
+
+\begin{example}[Iron Retention in Mice]
+    An experiment was performed to determine how well a particular form of iron ($\text{Fe} ^ {3+}$) is retained in the body.
+    The investigators gave $\text{Fe} ^ {3+}$ to $18$ mice.
+    The percentage of iron retained is listed for each mouse below.
+    \begin{table}[H]
+        \begin{tabular}{cccccccccc}
+             $\text{Fe} ^ {3+}$ & $2.20$ & $2.93$ & $3.08$ & $3.49$ & $4.11$ & $4.95$ & $5.16$ & $5.54$ & $5.68$ \\
+             \phantom{} &  $6.25$ & $7.25$ & $7.90$ & $8.85$ & $11.96$ & $15.54$ & $15.89$ & $18.30$ & $18.59$
+        \end{tabular}
+    \end{table}
+
+    $\Bar{x} = 8.20$ and $s = 5.45$.
+    Obtain a $90\%$ confidence interval for the population mean for the $\text{Fe} ^ {3+}$ data.
+    $\sigma$ is unknown,
+    so first check for Normality of the data:
+    draw a boxplot and a normal quantile plot.
+
+    \begin{solution}
+        A boxplot isn't that hard to draw so we will not draw it.
+
+        For our Iron Retention in Mice data we have $n = 18$ and the largest data value is $18.59$ which we plot against $z_{18}$ which satisfies $\Phi(z_{18}) = \frac{18}{18 + 1} \simeq 0.947$.
+        From the normal table we see that $z_{18} \simeq 1.62$ and we hence plot the point with coordinates $(1.62, 18.59)$.
+        Doing this for all ordered points gives the following table,
+        \begin{table}[H]
+            \begin{tabular}{|c|ccccccccc|}
+                \hline
+                $k$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ \\
+                \hline
+                 Ordered data $x_k$ & $2.20$ & $2.93$ & $3.08$ & $3.49$ & $4.11$ & $4.95$ & $5.16$ & $5.54$ & $5.68$ \\
+                 $\Phi(z_k) = \frac{k}{n + 1}$ & $0.0526$ & $0.105$ & $0.158$ & $0.211$ & $0.263$ & $0.316$ & $0.368$ & $0.421$ & $0.474$ \\
+                 Quantiles $z_k$ & $-1.62$ & $-1.25$ & $-1.00$ & $-0.80$ & $-0.63$ & $-0.48$ & $-0.34$ & $-0.20$ & $-0.07$ \\
+                \hline
+                $k$ & $10$ & $11$ & $12$ & $13$ & $14$ & $15$ & $16$ & $17$ & $18$ \\
+                \hline
+                 Ordered data $x_k$ &  $6.25$ & $7.25$ & $7.90$ & $8.85$ & $11.96$ & $15.54$ & $15.89$ & $18.30$ & $18.59$ \\
+                 $\Phi(z_k) = \frac{k}{n + 1}$ & $0.526$ & $0.579$ & $0.632$ & $0.684$ & $0.737$ & $0.789$ & $0.842$ & $0.895$ & $0.947$ \\
+                 Quantiles $z_k$ & $0.07$ & $0.20$ & $0.34$ & $0.48$ & $0.63$ & $0.80$ & $1.00$ & $1.25$ & $1.62$ \\
+                 \hline
+            \end{tabular}
+        \end{table}
+        then plot the $x_k$ against $z_k$.
+
+        The normal quantile plot is curved,
+        so it is not approximately a straight line,
+        so the data doesn't look normal.
+
+        The sample size is only $18$,
+        so CLT plus direct estimate of $\sigma$ by $s$ does not apply.
+
+        If we take logs then the quantile plot is approximately normal.
+        $n$ is small and data appears to be normal so we can construct a confidence interval using $t$-distribution,
+        so we have:
+        $\bar{x} \pm t_{n - 1}^{*}\frac{s}{\sqrt{n}}$.
+        We want a $90\%$ confidence interval,
+        so find the critical value from $t$ tables with $\alpha = 0.1$.
+        $t_{17}^{*} = 1.740$
+        (from $t_{17}$ table with $5\%$ probability to right of $t_{17}^{*}$).
+        So the confidence interval is $\bar{x} \pm t_{n - 1}^{*}\frac{s}{\sqrt{n}} = 1.90 \pm 1.740 \times 0.66 / \sqrt{18} = [1.63, 2.17]$.
+    \end{solution}
+\end{example}
+
+\textbf{$\sigma$ unknown,
+$n$ large}
+
+Suppose that we have a simple random sample $X_1, \dotsc, X_n$,
+the population standard deviation $\sigma$ is unknown,
+the sample is large,
+$n \geq 30$,
+we calculated the observed sample mean $\bar{x}$,
+and the observed sample standard deviation $s$.
+
+Then a $(1 - \alpha)\%$ confidence interval for $\mu$ is
+\[
+\bar{x} \pm z ^ {*}\frac{s}{\sqrt{n}}
+\]
+where $z ^ {*}$ is the critical value of the standard normal random variable such that
+\[
+\P(-z ^ {*} \leq Z \leq z ^ {*}) = 1 - \alpha.
+\]
+
+\textbf{Summary}
+
+We have seen the following cases:
+
+$\sigma$ is known,
+$n$ is large,
+or population is normal
+\[
+\bar{x} \pm z ^ {*}\frac{\sigma}{\sqrt{n}}.
+\]
+$\sigma$ is unknown:
+
+$n$ is small and the population is normal
+\[
+\bar{x} \pm t_{n - 1}^{*}\frac{s}{\sqrt{n}}
+\]
+$n$ is large
+\[
+\bar{x} \pm z ^ {*}\frac{s}{\sqrt{n}}.
+\]
+If we don't find ourselves in any of these cases,
+we need to use alternative methods
+(e.g. non-parametric methods).
 
 
+\subsubsection{Margin of Error}
+Most of our confidence intervals have the form
+\begin{align*}
+    \bar{x} &\pm \frac{c}{\sqrt{n}} \\
+    \text{Estimate}&\pm\text{Margin of error}
+\end{align*}
+The value of the margin of error is an indication of the inaccuracy of the estimate at this level of confidence.
+The large $n$,
+the smaller the margin of error.
 
+\begin{example}[Margin of Error for Candle Data]
+    The candle data,
+    we know that $\sigma = \sqrt{0.4}$.
+    Hence the margin of error for a $95\%$ confidence interval would be
+    \[
+    \frac{1.96\sqrt{0.4}}{\sqrt{n}}.
+    \]
+    suppose we want to find $n$ such that the margin of error is $\pm 0.1$.
+    \begin{solution}
+        \begin{align*}
+            \frac{1.96\sqrt{0.4}}{\sqrt{n}} &= 0.1 \\
+            \frac{1.96\sqrt{0.4}}{0.1} &= \sqrt{n} \\
+            153.7 &= n.
+        \end{align*}
+        Hence we need a sample of about $154$ candles to give a $95\%$ confidence interval with a margin of error of $\pm 0.1$.
+    \end{solution}
+\end{example}
 
+\subsection{Hypothesis Testing}
 
+\subsubsection{Introduction}
+A way to test a hypothesis about a $\mu$ is to construct a confidence interval for $\mu$.
+If the hypothesised value is contained within the confidence interval,
+the data supports the hypothesis,
+otherwise,
+the data does not support the hypothesis.
 
+\textbf{Terminology}
 
+Suppose we are interested in a single unknown population parameter $\theta$,
+e.g. the mean $\mu$ of a population,
+or the population standard deviation $\sigma$.
 
+We have a number $r$ which we either believe may be the value for $\theta$,
+or is a value against which we wish to compare $\theta$.
 
+\begin{definition}[Null and Alternative Hypotheses]
+    $H_0$ is the null hypothesis,
+    $H_0$ generally hypothesises that $\theta$ is equal to some value $r$.
 
+    $H_a$ is the alternative hypothesis,
+    $H_a$ denies the null hypothesis,
+    the type of denial determines whether it is a two or one sided test.
 
+    A two-sided hypothesis test is stated as
+    \begin{align*}
+        H_0 : \theta &= r \\
+        H_a : \theta &\neq r.
+    \end{align*}
 
+    The one-sided hypothesis test is stated as either of these two combinations:
+    \begin{align*}
+        H_0 : \theta &= r & H_0 : \theta &= r \\
+        H_a : \theta &< r & H_a : \theta &> r.
+    \end{align*}
+\end{definition}
+
+\begin{example}
+    Let $\mu$ be the mean of the population of cuckoo egg lengths.
+    An ornithologist wishes to test the hypothesis that $\mu = 22.5$.
+
+    \begin{solution}
+        The two sided test:
+        \begin{align*}
+            H_0 : \mu &= 22.5 \\
+            H_a : \mu &\neq 22.5
+        \end{align*}
+    \end{solution}
+\end{example}
+
+\subsubsection{Hypothesis Testing via Confidence Intervals}
+\textbf{Two-sided case}
+
+If we have,
+a two-sided hypothesis,
+$H_0 : \theta = r$,
+$H_a : \theta \neq r$.
+An estimator for $\theta$,
+the sampling distribution of the estimator
+(as a function of $\theta$),
+and a level of significance $\alpha$.
+
+We can then construct a $1 - \alpha$ confidence interval for $\theta$,
+and then we can do one of the following things
+\begin{enumerate}[label = (\roman*)]
+    \item Reject $H_0$ if $r$ lies outside the confidence interval,
+    and find the test statistically significant at the $\alpha\%$ level of significance.
+
+    \item Fail to reject $H_0$ otherwise and find the test not significant at the $\alpha\%$ level of significance.
+\end{enumerate}
+
+\textbf{One-sided case}
+
+If we have:
+a one-sided hypothesis:
+$H_0 : \theta = r$,
+$H_a : \theta < r$
+(or $H_a : \theta > r$).
+An estimator for $\theta$,
+the sampling distribution of the estimator
+(as a function of $\theta$),
+a level of significance $\alpha$.
+
+We can then construct a $1 - 2\alpha$ confidence interval for $\theta$,
+and then we can do one of the following things
+\begin{enumerate}[label = (\roman*)]
+    \item Reject $H_0$ if $r$ falls to the right
+    (left)
+    of the confidence interval.
+
+    \item Fail to reject $H_0$ otherwise.
+\end{enumerate}
+
+\begin{example}[Candle Lifetimes]
+    For the earlier example of candle lifetimes,
+    let $H_0 : \mu = 9.2$ and $H_a : \mu \neq 9.2$.
+    Should we reject $H_0$ or not,
+    at $1\%$ significance level?
+
+    \begin{solution}
+        Significance level $\alpha = 1\%$ implies $1 - \alpha = 99\%$ confidence interval as seen, $n$ small,
+        normally distributed,
+        $\sigma$ known,
+        so the confidence interval is given by
+        \[
+        \bar{x} \pm z ^ {*}\frac{\sigma}{\sqrt{n}} = 8.6 \pm 2.575 \times \frac{\sqrt{0.4}}{\sqrt{6}} = [7.94, 9.26]
+        \]
+        $99\%$ confidence interval contains $\mu = 9.2$ therefore we:
+        fail to reject $H_0$ at the $1\%$ significance level.
+    \end{solution}
+\end{example}
 
 
 
