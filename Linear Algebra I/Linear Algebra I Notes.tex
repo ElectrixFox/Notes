@@ -6637,12 +6637,160 @@ since $\langle\mbf{u}, \mbf{v}\rangle$ might be complex
     $\|\mbf{u} + \mbf{v}\| \leq \|\mbf{u}\| + \|\mbf{v}\|$.
 \end{corollary}
 
+\begin{example}
+    $V = C[-1, 1]$
+    \[
+    (f, g) = \int_{-1}^{1}f(t)g(t)\,dt
+    \]
+    $U = \mathrm{span}\{f_1(t), f_2(t)\}$
+    $f_1(t) = 1$,
+    $f_2(t) = t ^ 2$.
 
+    Find an orthonormal basis $\{g_1, g_n\}$ of $U$.
+    I.e. $(g_i, g_j) = \delta_{ij}$.
 
+    \begin{solution}
+        Take $g_1 = \frac{f_1}{\|f_1\|}$ and $\|f_1\| ^ 2 = \int_{-1}^{1}t\cdot 1\,dt = 2$.
+        So $g_1(t) = \frac{1}{\sqrt{2}}$.
+        Take $\Tilde{f}_2 = f_2 - (f_2, g_1)g_1$
+        \[
+        (f_2, g_1) = \int_{-1}^{1}t ^ 2\cdot\frac{1}{\sqrt{2}}\,dt = \frac{\sqrt{2}}{3},
+        \]
+        so
+        \[
+        \Tilde{f}_2 = t ^ 2 - \frac{\sqrt{2}}{3}\cdot\frac{1}{\sqrt{2}} = t ^ 2 - \frac{1}{3}.
+        \]
+        Finally
+        \[
+        \|\Tilde{f}_2\| ^ 2 = (\Tilde{f}_2, \Tilde{f}_2) = \int_{-1}^{1}\left(t ^ 2 - \frac{1}{3}\right) ^ 2\,dt = \frac{8}{45},
+        \]
+        \[
+        g_2 = \frac{\Tilde{f}_2}{\|\Tilde{f}_2\|} = \sqrt{\frac{45}{8}}\left(t ^2 - \frac{1}{3}\right) = \sqrt{\frac{5}{8}}\left(3t ^ 2 - 1\right).
+        \]
+    \end{solution}
+\end{example}
 
+We can conclude that given a finite dimensional subspace of $\{V, (\,,)\}$ we can always find an orthonormal basis.
+We also know what's left,
+orthogonal to $U$.
 
+\begin{definition}
+    Let $U$ be a subspace of $\{V, (\,,)\}$ then the orthogonal complement of $U$ is
+    \[
+    U ^ {\perp} = \{\mbf{v} \in V\text{ s.t. } (\mbf{u}, \mbf{v}) = 0\text{ for all } \mbf{u} \in U\}
+    \]
+\end{definition}
 
+So all vectors in $U ^ {\perp}$ are orthogonal to all vectors in $U$.
 
+\begin{remark}
+    $U ^ {\perp}$ is a subspace of $V$.
+\end{remark}
+
+\begin{remark}
+    If $V$ has finite dimension,
+    $V = U \oplus U ^ {\perp}$.
+\end{remark}
+
+Furthermore,
+given any vector $\mbf{v} \in V$ there is a unique vector $\mbf{u} \in U$ called called the orthogonal projection of $\mbf{v}$ onto $U$.
+
+\begin{proposition}
+    If $U$ is a finite dimensional subspace of $V$ then we can always decompose any $\mbf{v} \in V$ as
+    \[
+    \mbf{v} = \mbf{u} + \Tilde{\mbf{u}}.
+    \]
+    with $\mbf{u} \in U$ and $\Tilde{\mbf{u}} \in U ^ {\perp}$.
+
+    \begin{proof}
+        Apply Gram-Schmidt to $U$,
+        so $U = \mathrm{span}\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ with $(\mbf{u}_i, \mbf{u}_j) = \delta_{ij}$.
+        Then set
+        \[
+        \mbf{u} = (\mbf{v}, \mbf{u}_1)\mbf{u}_1 + (\mbf{v}, \mbf{u}_2)\mbf{u}_2 + \dotsc + (\mbf{v}, \mbf{u}_k)\mbf{u}_k
+        \]
+        and $\Tilde{\mbf{u}} = \mbf{v} - \mbf{u}$.
+        Then clearly $\mbf{v} = \mbf{u} + \Tilde{\mbf{u}}$ and $\mbf{u} \in U$ and,
+        \begin{align*}
+            (\Tilde{\mbf{u}}, \mbf{u}_i) &= (\mbf{v} - \mbf{u}, \mbf{u}_i) \\
+            &= (\mbf{v}, \mbf{u}_i) - (\mbf{u}, \mbf{u}_i) \\
+            &= (\mbf{v}, \mbf{u}_i) - (\mbf{v}, \mbf{u}_i) \\
+            &= 0.
+        \end{align*}
+        So $\Tilde{\mbf{u}} \perp \mbf{u}_i$ for all $i = 1, \dotsc, k$ which implies $\Tilde{\mbf{u}}$ is perpendicular to all elements of $U$,
+        so $\Tilde{\mbf{u}} \in U ^ {\perp}$.
+    \end{proof}
+\end{proposition}
+
+We call $\mbf{u}$ the orthogonal projection of $\mbf{v}$ onto $U$,
+and write it as $P_{U}(\mbf{v})$.
+
+\begin{proposition}
+    Properties of $P_{U}$
+    (a "projection")
+    \begin{enumerate}[label = (\roman*)]
+        \item $P_{U} ^ 2 = P_{U}$
+        ($P_{U}$ is a linear transformation).
+        I.e.
+        for all $\mbf{v} \in V$,
+        \[
+        P_{U} ^ 2(\mbf{v}) = P_{U}(\mbf{v}).
+        \]
+        ("$P_{U}$ is idempotent").
+
+        \item $P_{U}|_{U} = I$,
+        i.e. for all $\mbf{v} \in U$,
+        $P_{U}(\mbf{v}) = \mbf{v}$.
+
+        \item $P_{U}(I - P_{U}) = 0$,
+        i.e. for all $x$,
+        $(I - P_{U})\mbf{v}$ is perpendicular to $U$.
+
+        \item The eigenvalues of $P_{U}$ are just $0$ and $1$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{remark}
+    $P_{U}(\mbf{v})$ is the "closest" vector to $\mbf{v}$ belonging to $U$.
+\end{remark}
+
+\begin{proposition}
+    $U$ is a finite dimensional subspace of $\{V, (\,,)\}$.
+    Let $\mbf{v}_0 \in V$ and $\mbf{u}_0 = P_{U}(\mbf{v}_0)$ i.e. $\mbf{v}_0$ is the orthogonal projection of $\mbf{v}_0$ onto $U$.
+    Then for all $\mbf{u} \in U$,
+    \[
+    \|\mbf{u} - \mbf{v}_0\| \geq \|\mbf{u}_0 - \mbf{v}_0\|
+    \]
+    with equality if and only if $\mbf{u} = \mbf{u}_0$.
+
+    \begin{proof}
+        See notes.
+    \end{proof}
+\end{proposition}
+
+\begin{remark}
+    $\mbf{u}_0$ is sometimes known as the least-squares approximation to $\mbf{v}_0$.
+\end{remark}
+
+\begin{example}
+    $V = \R ^ 4$ with standard inner product.
+    Let
+    \[
+    U = \mathrm{span}\left\{\mbf{v}_1 = \begin{pmatrix}
+        1 \\ 1 \\ 0 \\ 1
+    \end{pmatrix}, \mbf{v}_2 = \begin{pmatrix}
+        0 \\ 1 \\ 1 \\ 0
+    \end{pmatrix}\right\}.
+    \]
+    \begin{enumerate}[label = (\alph*)]
+        \item Find $U ^ {\perp}$.
+
+        \item Find the point in $U$ nearest to $\mbf{v} = \begin{pmatrix}
+            1 \\ 1 \\ 1 \\ 1
+        \end{pmatrix}$
+        (i.e. find $P_{U}(\mbf{v})$).
+    \end{enumerate}
+\end{example}
 
 
 
