@@ -6777,7 +6777,7 @@ and write it as $P_{U}(\mbf{v})$.
     Let
     \[
     U = \mathrm{span}\left\{\mbf{v}_1 = \begin{pmatrix}
-        1 \\ 1 \\ 0 \\ 1
+        1 \\ 1 \\ 0 \\ 0
     \end{pmatrix}, \mbf{v}_2 = \begin{pmatrix}
         0 \\ 1 \\ 1 \\ 0
     \end{pmatrix}\right\}.
@@ -6790,7 +6790,203 @@ and write it as $P_{U}(\mbf{v})$.
         \end{pmatrix}$
         (i.e. find $P_{U}(\mbf{v})$).
     \end{enumerate}
+
+    \begin{solution}
+        \begin{enumerate}[label = (\alph*)]
+            \item 
+            \[
+            \mbf{v} = \begin{pmatrix}
+                a \\ b \\ c \\ d
+            \end{pmatrix}
+            \]
+            it is enough to check that $(\mbf{v}, \mbf{v}_1) = (\mbf{v}, \mbf{v}_2) = 0$ since $\{\mbf{v}_1, \mbf{v}_2\}$ span $U$.
+            \begin{align*}
+                (\mbf{v}, \mbf{v}_1) &= a + b = 0 \implies a = -b \\
+                (\mbf{v}, \mbf{v}_2) &= b + c = 0 \implies c = -b
+            \end{align*}
+            so
+            \[
+            \mbf{v} = a\begin{pmatrix}
+                1 \\ -1 \\ 1 \\ 0 
+            \end{pmatrix} + d\begin{pmatrix}
+                0 \\ 0 \\ 0 \\ 1
+            \end{pmatrix}
+            \]
+            so
+            \[
+            U ^ {\perp} = \mathrm{span}\left\{\begin{pmatrix}
+                1 \\ -1 \\ 1 \\ 0
+            \end{pmatrix}, \begin{pmatrix}
+                0 \\ 0 \\ 0 \\ 1
+            \end{pmatrix}\right\}
+            \]
+            $V = U \oplus U ^ {\perp}$.
+
+            \item We need to use Gram-Schmidt on $U$.
+            \[
+            \mbf{u}_1 = \frac{\mbf{v}_1}{\|\mbf{v}_1\|} = \frac{1}{\sqrt{2}}\begin{pmatrix}
+                1 \\ 1 \\ 0 \\ 0
+            \end{pmatrix}
+            \]
+            \[
+            \Tilde{\mbf{v}} = \mbf{v}_2 - (\mbf{v}_2, \mbf{u}_1)\mbf{u}_1\qquad(\mbf{v}_2, \mbf{u}_1) = \frac{1}{\sqrt{2}}
+            \]
+            so $\Tilde{\mbf{v}}_2 = \frac{1}{2}\begin{pmatrix}
+                -1 \\ 1 \\ 2 \\ 0
+            \end{pmatrix}$,
+            \[
+            \mbf{u}_2 = \frac{\Tilde{\mbf{v}}_2}{\|\Tilde{\mbf{v}}_2\|} = \frac{1}{\sqrt{6}}\begin{pmatrix}
+                -1 \\ 1 \\ 2 \\ 0
+            \end{pmatrix}.
+            \]
+            So $U = \mathrm{span}\{\mbf{u}_1, \mbf{u}_2\}$ with $(\mbf{u}_i, \mbf{u}_j) = \delta_{ij}$
+            \[
+            P_U(\mbf{v} = P_U\begin{pmatrix}
+                1 \\ 1 \\ 1 \\ 1
+            \end{pmatrix} = \left(\begin{pmatrix}
+                1 \\ 1 \\ 1 \\ 1
+            \end{pmatrix}, \mbf{u}_1\right)\mbf{u}_1 + \left(\begin{pmatrix}
+                1 \\ 1 \\ 1 \\ 1
+            \end{pmatrix}, \mbf{u}_2\right)\mbf{u}_2 = \frac{1}{3}\begin{pmatrix}
+                2 \\ 4 \\ 2 \\ 0
+            \end{pmatrix} \in U.
+            \]
+        \end{enumerate}
+    \end{solution}
 \end{example}
+
+\begin{remark}
+    $P_U(\mbf{v})$ is the nearest vector to $\mbf{v}$ in $U$,
+    and it is shorter than $\mbf{v}$.
+\end{remark}
+This is Bessel's inequality.
+
+\begin{proposition}[Bessel's inequality]
+    If $\{V, (\,,)\}$ is an inner product space,
+    $U$ a finite dimensional subspace,
+    $\mbf{v} \in V$,
+    $\mbf{u} = P_U(\mbf{v})$.
+    Then
+    \[
+    \|\mbf{u}\| ^ 2 \leq \|\mbf{v}\| ^ 2.
+    \]
+    In particular,
+    if $\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ is an orthonormal basis for $U$,
+    and $P_U(\mbf{v}) = \mbf{u} = \alpha_1\mbf{u}_1 + \dotsc + \alpha_k\mbf{u}_k$ then
+    \[
+    \sum_{1}^{k}|\lambda_i| ^ 2 \leq \|\mbf{v}\| ^ 2.
+    \]
+\end{proposition}
+
+\subsection{Orthogonal and unitary diagonalisation}
+The change of basis for inner products.
+
+Every real or complex inner product has the form:
+
+Real:
+\[
+(\mbf{u}, \mbf{v}) = \mbf{y} ^ TA\mbf{x}
+\]
+$\mbf{x}$ coordinates of $\mbf{u}$ in given basis $\{\mbf{v}_1, \dotsc, \mbf{v}_k\}$,
+$\mbf{y}$ coordinates of $\mbf{v}$ in given basis $\{\mbf{v}_1, \dotsc, \mbf{v}_k\}$,
+$A_{ij} = (\mbf{v}_i, \mbf{v}_j)$ - matrix representation of $(\,,\,)$ in this basis.
+
+Complex:
+\[
+\langle\mbf{z}, \mbf{w}\rangle = \mbf{q} ^ {*}B\mbf{p}
+\]
+$\mbf{p}$ - coordinates of $\mbf{z}$ in the given basis $\{\mbf{w}_1, \dotsc, \mbf{w}_k\}$,
+$\mbf{q}$ - coordinates of $\mbf{w}$ in the given basis $\{\mbf{w}_1, \dotsc, \mbf{w}_k\}$,
+$B_{ij} = \langle\mbf{w}_j, \mbf{w}_i\rangle$ - matrix representation of $\langle\,,\,\rangle$.
+
+The change of basis:
+
+There exists an invertible matrix $M$ such that $\mbf{x} = M\Tilde{\mbf{x}}$ and $\mbf{y} = M\Tilde{\mbf{y}}$ being the coordinates of $\mbf{u}, \mbf{v}$ in the new basis.
+
+Likewise,
+there exists $N$ invertible with $\mbf{p} = N\Tilde{\mbf{p}}$,
+$\mbf{q} = N\Tilde{\mbf{q}}$,
+having these as the new coordinates of $\mbf{z}$ and $\mbf{w}$ in the new basis.
+
+What is the matrix representation of the same inner product in the new basis?
+\[
+(\mbf{u}, \mbf{v}) = \mbf{y} ^ TA\mbf{x} = (M\Tilde{\mbf{y}}) ^ TA(M\Tilde{\mbf{x}}) = \Tilde{\mbf{y}} ^ T(M ^ TAM)\Tilde{\mbf{x}}
+\]
+\[
+\langle\mbf{z}, \mbf{w}\rangle = \mbf{q} ^ {*}B\mbf{p} = (N\Tilde{\mbf{q}}) ^ {*}B(N\mbf{p}) = \Tilde{\mbf{q}} ^ {*}(N ^ {*}BN)\mbf{p}.
+\]
+
+Conclude:
+in a new basis,
+$A \rightarrow \Tilde{A} = M ^ TAM$ and $B \rightarrow \Tilde{B} = N ^ {*}BN$.
+
+\begin{remark}
+    For the matrix of a linear transformation,
+    we instead found that $A \rightarrow P ^ {-1}AP$.
+\end{remark}
+
+Can we find $M, N$ such that $M ^ TAM$ is diagonal or $N ^ {*}BN$ is diagonal?
+
+What if $M ^ T = M ^ {-1}$,
+or $N ^ {*} = N ^ {-1}$.
+
+\textbf{Real case}:
+
+\begin{definition}
+    $M$,
+    a real $n \times n$ matrix is orthogonal if $M ^ TM = MM ^ T = I$.
+    I.e. if $M ^ {-1} = M ^ T$.
+\end{definition}
+
+\begin{remark}
+    Since $\det(M ^ T) = \det(M)$ we have $1 = \det(M ^ {-1}M) = \det(M ^ TM) = \det(M ^ T)\det(M) = (\det(M)) ^ 2$
+    (since $M$ is orthogonal).
+    So if $M$ is orthogonal,
+    $\det(M) = \pm 1$.
+\end{remark}
+
+Notation:
+\[
+O(n) \coloneqq \{M \in \mathrm{GL}(n, \R)\footnotemark\text{ such that } M ^ TM = MM ^ T = 1\}
+\]
+\footnotetext{The set of invertible matrices.}
+"the orthogonal group"
+
+\[
+\mathrm{SO}(n) = \{M \in O(n)\text{ such that } \det(M) = +1\}
+\]
+"the special orthogonal group".
+
+In practice:
+
+If $M \in O(n)$,
+$M = [\mbf{v}_1, \dotsc, \mbf{v}_n]$,
+$n$ column vectors.
+$M ^ T = \begin{pmatrix}
+    \mbf{v}_1 ^ T \\
+    \mbf{v}_2 ^ T \\
+    \vdots \\
+    \mbf{v}_n ^ T
+\end{pmatrix}$,
+$n$ row vectors.
+
+\[
+(M ^ TM)_{ij} = \left(\begin{pmatrix}
+    \mbf{v}_1 ^ T \\
+    \mbf{v}_2 ^ T \\
+    \vdots \\
+    \mbf{v}_n ^ T
+\end{pmatrix}\begin{pmatrix}
+    \mbf{v}_1 & \mbf{v}_2 & \dotsi & \mbf{v}_n
+\end{pmatrix}\right) = \mbf{v}_i ^ T\mbf{v}_j = \mbf{v}_i \cdot \mbf{v_j} = (\mbf{v}_i, \mbf{v}_j) = \delta_{ij}
+\]
+standard dot product.
+So the columns of $M$ form an orthonormal basis of $\R ^ n$ with respect to the standard inner product.
+
+
+
+
+
 
 
 

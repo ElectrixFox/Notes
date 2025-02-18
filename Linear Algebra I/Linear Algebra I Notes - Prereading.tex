@@ -4334,7 +4334,7 @@ Let us explore some consequences of orthogonality between vectors in a vector sp
 
 We can assume that the inner product space $V$ has finite dimension $\dim{V} = n$,
 then the matrix form of the projection onto $U$ takes a simple form if we use the correct basis.
-We known $V = U \oplut U ^ {\perp}$,
+We known $V = U \oplus U ^ {\perp}$,
 hence we can use Gram-Schmidt to obtain a basis $\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ for $U$,
 made of orthonormal vectors,
 with $k = \dim{U}$,
@@ -4425,16 +4425,171 @@ to $\mbf{v}$.
     $\mbf{u}_0$ is known as the least-squares approximation to $\mbf{v}_0$.
 \end{remark}
 
+\begin{proposition}[Bessel's Inequality]
+    Let $V$ be an inner product space and $U$ a finite-dimensional subspace.
+    If $\mbf{v} \in V$,
+    and $\mbf{u} \in U$ is the orthogonal projection of $\mbf{v}$ onto $U$,
+    then $\|\mbf{u}\| ^ 2 \leq \|\mbf{v}\| ^ 2$.
+    In particular if $\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ is an orthonormal basis for $U$ and $\mbf{u} = \lambda_1\mbf{u}_1 + \dotsc + \lambda__k\mbf{u}_k$ then
+    \[
+    \sum_{i = 1}^{k}\lambda_i ^ 2 \leq \|\mbf{v}\| ^ 2.
+    \]
+    
+    \begin{proof}
+        Writing $\mbf{v} = \mbf{u} + \Tilde{\mbf{u}}$ as usual,
+        we have
+        \[
+        \sum_{i = 1}^{k}\lambda_i ^ 2 = \|\mbf{u}\| ^ 2 \leq \|\mbf{u}\| ^ 2 + \|\Tilde{\mbf{u}}\| ^ 2 = \|\mbf{v}\| ^ 2.
+        \]
+        The fact that $\|\mbf{u}\| ^ 2 = (\mbf{u}, \mbf{u}) = \sum_{i = 1}^{k}\lambda_i ^ 2$ follows from bilinearity of the inner product together with orthonormality of the $\{\mbf{u}_1, \dotsc, \mbf{u}_k\}$ basis.
+    \end{proof}
+\end{proposition}
 
+\subsection{Orthogonal and unitary diagonalisation}
+\begin{definition}
+    A real $n \times n$ matrix $M$ is orthogonal if
+    \[
+    M ^ tM = MM ^ t = I,
+    \]
+    or equivalently if $M ^ {-1} = M ^ t$.
+\end{definition}
 
+\begin{definition}
+    The set of $n \times n$ orthogonal matrices is known as the orthogonal group,
+    and is denoted by
+    \[
+    O(n) \coloneqq \{M \in \mathrm{GL}(n, \R) \text{ such that } M ^ tM = MM ^ t = I\}.
+    \]
+\end{definition}
 
+\begin{remark}
+    Since $\det(M) = \det(M ^ t)$,
+    orthogonal matrices must have $\det{M} = \pm 1$.
+\end{remark}
 
+\begin{definition}
+    The subset of all the orthogonal matrices with determinant $+1$ is known as the special orthogonal group,
+    and is denoted by
+    \[
+    \mathrm{SO}(n) \coloneqq \{M \in O(n)\text{ such that } \det{M} = +1\}.
+    \]
+\end{definition}
 
+\begin{definition}
+    A complex $n \times n$ matrix $U$ is called unitary if
+    \[
+    UU ^ {*} = U ^ {*}U = I,
+    \]
+    or equivalently if $U ^ {-1} = U ^ {*}$.
+\end{definition}
 
+\begin{definition}
+    The set of $n \times n$ unitary matrices is known as the unitary group,
+    and is usually denoted by
+    \[
+    O(n) \coloneqq \{U \in \mathrm{GL}(n, \C)\text{ such that } U ^ {*}U = UU ^ {*} = I\}.
+    \]
+\end{definition}
 
+\begin{remark}
+    $\det(U ^ {*}) = \overline{\det(U)}$,
+    so a unitary matrix has
+    \[
+    |\det(U)| ^ 2 = \det(U)\det(U ^ {*}) = \det(UU ^ {*}) = 1.
+    \]
+\end{remark}
 
+\begin{definition}
+    The subset of all unitary matrices with determinant $+1$ known as the special unitary group,
+    and is usually denoted by
+    \[
+    \mathrm{SU}(n) \coloneqq \{M \in U(n)\text{ such that } \det(M) = +1\}.
+    \]
+\end{definition}
 
+\begin{proposition}
+    A matrix is orthogonal
+    (or unitary)
+    if and only if its columns form an orthonormal set of vectors,
+    using the standard inner product on $\R ^ n$
+    (or $\C ^ n$).
 
+    \begin{proof}
+        Let us prove the complex case
+        (the real case follows from taking the special case in which all the vectors are real).
+
+        Think of a complex matrix $U$ as a matrix of column vectors $(\mbf{u}_1, \dotsc, \mbf{u}_n)$.
+        Then matrix $U ^ {*}$ is then the matrix of row vectors $(\mbf{u}_1 ^ {*}, \dotsc, \mbf{u}_n ^ {*})$.
+        By the usual rules of matrix multiplication we have that $\delta_{ij} = (U ^ {*}U)_{ij} = \langle\mbf{u}_j, \mbf{u}_i\rangle$ with the standard hermitian inner product in $\C ^ n$.
+        These are the entries of the identity matrix if and only if the $\mbf{u}_i$ are orthonormal.
+    \end{proof}
+\end{proposition}
+
+\begin{example}
+    \[
+    \frac{1}{\sqrt{2}}\begin{pmatrix}
+        1 & -1 \\ 1 & 1
+    \end{pmatrix}
+    \]
+    is orthogonal but not symmetric.
+\end{example}
+
+\begin{example}
+    \[
+    \frac{1}{\sqrt{2}}\begin{pmatrix}
+        1 & -i \\ -i & 1
+    \end{pmatrix}
+    \]
+    is unitary but not hermitian.
+\end{example}
+
+\begin{proposition}
+    Let $A$ be a complex Hermitian
+    (or real symmetric)
+    $n \times n$ matrix.
+    Then the eigenvalues of $A$ are real.
+
+    \begin{proof}
+        Let $\lambda$ be an eigenvalue of $A$,
+        so $A\mbf{x} = \lambda\mbf{x}$ for some $\mbf{x} \neq \mbf{0}$.
+        Then we have
+        \begin{align*}
+            \mbf{x} ^ {*}A\mbf{x} &= \lambda\mbf{x} ^ {*}\mbf{x}, \\
+            \mbf{x} ^ {*}A ^ {*}\mbf{x} &= \Bar{\lambda}\mbf{x} ^ {*}\mbf{x} & (\text{conjugate transpose}) \\
+            \mbf{x} ^ {*}A\mbf{x} &= \Bar{\lambda}\mbf{x} ^ {*}\mbf{x} & (\text{$A = A ^ {*}$ as $A$ is hermitian}) \\
+            \lambda\mbf{x} ^ {*}\mbf{x} &= \Bar{\lambda}\mbf{x} ^ {*}\mbf{x} & (\text{using $A\mbf{x} = \lambda\mbf{x}$}) \\
+            \lambda &= \Bar{\lambda} & (\mbf{x} ^ {*}\mbf{x} > 0).
+        \end{align*}
+    \end{proof}
+\end{proposition}
+
+\begin{proposition}
+    Let $A$ be a complex Hermitian
+    (or real symmetric)
+    $n \times n$ matrix.
+    Eigenvectors corresponding to different eigenvalues of $A$ are mutually orthogonal using the standard inner product in $\C ^ n$
+    (or $\R ^ n$).
+
+    \begin{proof}
+        Suppose that $\lambda, \mu$ are eigenvalues
+        (which are real,
+        as we have just shown),
+        with $\lambda \neq \mu$.
+        Then for some $\mbf{x}, \mbf{y}$ we have
+        \begin{align*}
+            A\mbf{x} = \lambda\mbf{x}, \mbf{x} \neq \mbf{0}, & A\mbf{y} = \mu\mbf{y}, \mbf{y} \neq \mbf{0}
+        \end{align*}
+        and
+        \begin{align*}
+            \mbf{x} ^ {*}A\mbf{y} &= \mu\mbf{x} ^ {*}\mbf{y}, \\
+            \mbf{y} ^ {*}A\mbf{x} &= \lambda\mbf{y} ^ {*}\mbf{x}, \\
+            \mbf{x} ^ {*}A\mbf{y} &= \overline{\mbf{y} ^ {*}A ^ {*}\mbf{x}} = \overline{\mbf{y} ^ {*}A\mbf{x}} = \overline{\mbf{y} ^ {*}\lambda\mbf{x}} = \Bar{\lambda}\mbf{x} ^ {*}\mbf{y} = \lambda\mbf{x} ^ {*}\mbf{y}, \\
+            \text{so } (\lambda - \mu)\mbf{x} ^ {*}\mbf{y} &= 0, \\
+            \mbf{x} ^ {*}\mbf{y} = 0
+        \end{align*}
+        and thus $\mbf{x} \perp \mbf{y}$.
+    \end{proof}
+\end{proposition}
 
 
 
