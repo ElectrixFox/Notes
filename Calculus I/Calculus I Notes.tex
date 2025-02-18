@@ -4488,10 +4488,161 @@ If we write $\mathcal{L}$ as
 M\mbf{v} = \lambda\mbf{v}.
 \]
 
+\begin{example}[Legendre polynomial of order $m$]
+    $P_m(x)$
+    \[
+    \mathcal{L}_LP_m(x) = m(m + 1)p_m(x)\qquad m = 0, 1, 2, \dotsc
+    \]
+    $P_m(x)$ is an eigenfunction of $\mathcal{L}_L$ with eigenvalue $m(m + 1)$.
+\end{example}
 
+Making the analogy between differential operators and matrices precise by restricting
+\[
+y(x) \in \R[x]_3\qquad y\text{ is cubic}.
+\]
+choose as basis $1, x, x ^ 2, x ^ 3$,
+$x ^ i$
+$i = 0, \dotsc, 3$
+\[
+y(x) = a_0 + a_1x + a_2x ^ 2 + a_3x ^ 3
+\]
+$y(x)$ corresponds to $\begin{pmatrix}
+    a_0 \\ a_1 \\ a_2 \\ a_3
+\end{pmatrix}$.
 
+Consider action of $\mathcal{L}_L$ on the basis $x ^ n$,
+$n = 0, \dotsc 3$
+\begin{align*}
+    \left[(x ^ 2 - 1)\frac{d ^ 2}{dx ^ 2} + 2x\frac{d}{dx}\right]x ^ n &= (x ^ 2 - 1)(n(n - 1))x ^ {n - 2} + 2xnx ^ {n - 1} \\
+    &= n(n - 1)x ^ n - n(n - 1)x ^ {n - 2} + 2nx ^ n \\
+    \mathcal{L}x ^ n &= n(n + 1)x ^ n - n(n - 1)x ^ {n - 2}.
+\end{align*}
 
+$\mathcal{L}_L$ never raises power of $x$ so $\mathcal{L}_L$ acting on a cubic polynomial gives a cubic polynomial.
+\[
+\mathcal{L}_L : \R[x]_3 \rightarrow \R[x]_3
+\]
+$\mathcal{L}_L$ is a linear map $\mathcal{L}_L(\alpha y_1 + \beta y_2) = \alpha_1\mathcal{L}_Ly_1 + \beta\mathcal{L}_Ly_2$,
+therefore $\mathcal{L}_L$ can be represented by a $4 \times 4$ matrix,
+$M_L$.
+\begin{align*}
+    \mathcal{L}_Lx ^ 0 &= 0 && M_L \begin{pmatrix}
+        1 \\ 0 \\ 0 \\ 0
+    \end{pmatrix} = \begin{pmatrix}
+        0 \\ 0 \\ 0 \\ 0
+    \end{pmatrix} \\
+    \mathcal{L}_L x ^ 1 &= 2x && M_L\begin{pmatrix}
+        0 \\ 1 \\ 0 \\ 0
+    \end{pmatrix} = \begin{pmatrix}
+        0 \\ 2 \\ 0 \\ 0
+    \end{pmatrix} \\
+    \mathcal{L}_L x ^ 2 &= 6x ^ 2 - 2 &&  M_L\begin{pmatrix}
+        0 \\ 0 \\ 1 \\ 0
+    \end{pmatrix} = \begin{pmatrix}
+        -2 \\ 0 \\ 6 \\ 0
+    \end{pmatrix} \\
+    \mathcal{L}_L x ^ 3 &= 12x ^ 3 - 6x && M_L \begin{pmatrix}
+        0 \\ 0 \\ 0 \\ 1
+    \end{pmatrix} = \begin{pmatrix}
+        0 \\ -6 \\ 0 \\ 12
+    \end{pmatrix}
+\end{align*}
+hence
+\[
+M_L = \begin{pmatrix}
+    0 & 0 & -2 & 0 \\
+    0 & 2 & 0 & -6 \\
+    0 & 0 & 6 & 0 \\
+    0 & 0 & 0 & 12
+\end{pmatrix}
+\]
+$M_L$ is upper triangular
+(lowers powers of $x$).
+Therefore the eigenvalues are $0, 2, 6, 12$,
+$m(m + 1)$ for $m = 0, 1, 2, 3$.
+These are the eigenvalues of $P_m(x)$,
+$m = 0, 1, 2, 3$,
+$P_m(x) \in \R[x]_3$ for $m = 0, 1, 2, 3$.
+$P_0(x) = 1$,
+$P_1(x) = x$,
+$P_2(x) = 3x ^ 2 - 1$,
+$P_3(x) = \frac{5x ^ 3 - 3x}{2}$.
 
+\begin{example}
+    \[
+    P_2(x) = \frac{3}{2}x ^ 2 - \frac{1}{2}
+    \]
+    corresponds to
+    \[
+    M_L\begin{pmatrix}
+        -\frac{1}{2} \\ 0 \\ \frac{3}{2} \\ 0
+    \end{pmatrix} = \begin{pmatrix}
+        0 & 0 & -2 & 0 \\
+        0 & 2 & 0 & -6 \\
+        0 & 0 & 6 & 0 \\
+        0 & 0 & 0 & 12
+    \end{pmatrix}\begin{pmatrix}
+        -\frac{1}{2} \\ 0 \\ \frac{3}{2} \\ 0
+    \end{pmatrix} = \begin{pmatrix}
+        -3 \\ 0 \\ 9 \\ 0
+    \end{pmatrix} = \overbrace{6}^{m(m + 1)\ m = 2}\begin{pmatrix}
+        -\frac{1}{2} \\ 0 \\ \frac{3}{2} \\ 0
+    \end{pmatrix}.
+    \]
+\end{example}
+
+$P_m$ are of order $m$,
+(different orders to each other),
+therefore $P_m$ is linearly independent $P_0, \dotsc, P_3$ is a basis for $\R[x]_3$.
+So we can write $y \in \R[x]_3$ then $y = \sum_{n = 0}^{3}b_nP_n(x)$.
+\begin{align*}
+    y &= a_0 + a_1x + a_2x ^ 2 + a_3x ^ 3 \\
+    &= b_0P_0(x) + b_1P_1(x) + b_2P_2(x) + b_3P_3(x) \\
+    &= b_0 + b_1x + b_2\left(\frac{3x ^ 2}{2} - \frac{1}{2}\right) + b_3\left(\frac{5x ^ 3}{2} - \frac{3x}{2}\right)
+\end{align*}
+\begin{align*}
+    a_0 &= b_0 - \frac{b_2}{2} \\
+    a_1 &= b_1 - \frac{3b_3}{2} \\
+    a_2 &= \frac{3b_2}{2} \\
+    a_3 &= \frac{5b_3}{2}.
+\end{align*}
+
+\[
+\begin{pmatrix}
+    a_0 \\ a_1 \\ a_2 \\ a_3
+\end{pmatrix} = N\begin{pmatrix}
+    b_0 \\ b_1 \\ b_2 \\ b_3
+\end{pmatrix} = \begin{pmatrix}
+    1 & 0 & -\frac{1}{2} & 0 \\
+    0 & 1 & 0 & -\frac{3}{2} \\
+    0 & 0 & \frac{3}{2} & 0 \\
+    0 & 0 & 0 & \frac{5}{2}
+\end{pmatrix}\begin{pmatrix}
+    b_0 \\ b_1 \\ b_2 \\ b_3
+\end{pmatrix}.
+\]
+In the "Legendre polynomial basis" we have
+\[
+\mathcal{L}_Ly = \mathcal{L}_L\sum_{i = 0}^{3}b_iP_i(x) = \sum_{i = 0}^{3}b_i\mathcal{L}_LP_i(x) = \sum_{i = 0}^{3}i(i + 1)b_iP_i(x)
+\]
+represented as a diagonal matrix
+\[
+\begin{pmatrix}
+    0 & 0 & 0 & 0 \\
+    0 & 2 & 0 & 0 \\
+    0 & 0 & 6 & 0 \\
+    0 & 0 & 0 & 12
+\end{pmatrix} = NM_LN ^ {-1}.
+\]
+
+Rather than cubic polynomials could have used $10$th order polynomials.
+Can represent $\mathcal{L}_L$ as an $11 \times 11$ matrix.
+Eigenvalues would be $m(m + 1)$ $m = 0, \dotsc, 10$.
+Eigenvectors would correspond to $P_m(x)$ $m = 0, \dotsc, 10$.
+Could write $y(x) \in \R[x]_{10}$ as $y(x) = \sum_{i = 0}^{10}b_iP_i(x)$.
+In this basis $\mathcal{L}_L$ would be diagonal.
+
+For suitable non-polynomial functions we can write $y(x) = \infsum[i = 0]b_iP_i(x)$.
 
 
 
