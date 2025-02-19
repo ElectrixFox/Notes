@@ -1,8 +1,6 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage{preamble}
 
-\declaretheorem[style = avgstyle, name = Problem]{problem}
-
 \title{Dynamics I \\
     \large Problem Class}
 \author{Luke Phillips}
@@ -101,6 +99,122 @@
         etc.
     \end{solution}
 \end{problem}
+
+\section{Questions from problem class \texorpdfstring{$2$}{}}
+
+\begin{problem}[$2019$ exam]
+    Particle mass $m$ moves on the $xy$-plane,
+    with velocity $u(\cos{\alpha})\mbf{e}_1 + u(\sin{\alpha})\mbf{e}_2$.
+    Another particle,
+    mass $2m$,
+    has velocity $-U\mbf{e}_1$ where $U > 0$.
+    After an elastic collision,
+    the $2m$ particle is at rest.
+    Find $U$ in terms of $u$ and $\alpha$.
+
+    \begin{solution}
+        Know $u$ and $\alpha$
+        (and $m$),
+        unknowns $U$ and $\mbf{w}$ velocity of $m$ afterwards:
+        \[
+        \mbf{w} = w_1\mbf{e}_1 + w_2\mbf{e}_2,
+        \]
+        so three unknown numbers.
+        Need three equations:
+        momentum gives two,
+        plus energy
+        ("elastic").
+
+        \begin{align*}
+            mu\cos{\alpha} - 2mU &= mw_1 \\
+            mu\sin{\alpha} &= mw_2 \\
+            \frac{1}{2}mu ^ 2 + \frac{1}{2}2mU ^ 2 &= \frac{1}{2}m(w_1 ^ 2 + w_2 ^ 2).
+        \end{align*}
+        Eliminate $w_1$ and $w_2$ using the two linear equations:
+        substitute into the final equation.
+        \begin{align*}
+            u ^ 2 + 2U ^ 2 &= (u\cos{\alpha} - 2U) ^ 2 + (u\sin{\alpha}) ^ 2 \\
+            &= u ^ 2 - 4uU\cos{\alpha} + 4U ^ 2 \\
+            &\iff \\
+            2U ^ 2 - 4uU\cos{\alpha} &= 0 \implies U = 2u\cos{\alpha} && (U > 0).
+        \end{align*}
+    \end{solution}
+\end{problem}
+
+\begin{problem}[$2020$ exam]
+    Mass $m$ moves on $x$-axis,
+    in potential $V(x) = me ^ x(x - 1) ^ 2$.
+    \begin{enumerate}[label = (\alph*)]
+        \item Find period $P$ of small oscillations about the stable equilibrium.
+
+        \item Starting at $x = 0$ with speed $u$,
+        how big does $u$ have to be for $x \rightarrow -\infty$.
+    \end{enumerate}
+
+    \begin{solution}
+        \begin{enumerate}[label = (\alph*)]
+            \item
+            \[
+            V'(x) = me ^ x(x - 1)((x - 1) + 2) = me ^ x(x - 1)(x + 1).
+            \]
+            Two equilibria at $x = \pm 1$.
+            Note $V(x) \geq 0$,
+            $V(x) = 0$ only at $x = 1$,
+            $V(x) \rightarrow \infty$ as $x \rightarrow \infty$,
+            $V(x) \rightarrow 0$ as $x \rightarrow -\infty$.
+
+            Stable equilibrium at $x = 1$,
+            period,
+            with $\omega = \sqrt{\frac{V''(1)}{m}}$,
+            $p = \frac{2\pi}{\omega} = 2\pi\sqrt{\frac{m}{V''(1)}}$.
+            Now
+            \[
+            V''(1) = me ^ x(x + 1)|_{x = 1} = 2me.
+            \]
+            Hence $p = \frac{2\pi}{\sqrt{2e}}$.
+
+            \item Energy:
+            \begin{align*}
+                \frac{1}{2}mu ^ 2 + V(0) &> V(-1) \\
+                &\iff \\
+                u ^ 2 &> \frac{2}{m}(V(-1) - V(0) \\
+                &= 2(4e ^ {-1} - 1).
+            \end{align*}
+            $u > \sqrt{2(4e ^ {-1} - 1)}$.
+        \end{enumerate}
+    \end{solution}
+\end{problem}
+
+\begin{problem}[$2022$ exam]
+    Unit mass moves on a line with a force $F = -2v + e ^ {-t}$
+    ($v$ is velocity).
+    At rest at $t = 0$.
+    For what value of $t$ is the speed maximum?
+
+    \begin{solution}
+        \[
+        \frac{dv}{dt} = -2v + e ^ {-t},
+        \]
+        linear.
+        Integrating factor,
+        get
+        \[
+        v(t) = e ^ {-t} - e ^ {-2t}.
+        \]
+        Then
+        \[
+        \frac{dv}{dt} = -e ^ {-t} + 2e ^ {-2t} = 0 \iff e ^ {-t} = \frac{1}{2} \iff t = \log(2).
+        \]
+        
+    \end{solution}
+\end{problem}
+
+
+
+
+
+
+
 
 
 \end{document}
