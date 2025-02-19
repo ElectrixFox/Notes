@@ -967,9 +967,48 @@ then kinetic energy is conserved too.
     \end{solution}
 \end{example}
 
+\newpage
 
+\section{Central Forces and Orbits}
 
+\subsection{Polar basis}
+Using polar coordinates $(r, \theta)$,
+$x = r\cos{\theta}$ and $y = r\sin{\theta}$ for our basis.
+$\mbf{r} = r\mbf{e}_r$,
+$\mbf{e}_r$ is the radial unit vector pointing away from the origin,
+the tangential unit vector $\mbf{e}_{\theta}$ is the vector perpendicular to $\mbf{e}_r$.
 
+We have
+\[
+\mbf{e}_r = \mbf{e}_1\cos{\theta} + \mbf{e}_2\sin{\theta}
+\]
+and
+\[
+\mbf{e}_{\theta} = -\mbf{e}_1\sin{\theta} + \mbf{e}_2\cos{\theta}
+\]
+giving these time derivatives
+\begin{align*}
+    \dot{\mbf{e}}_r &= \frac{d\theta}{dt}\frac{d}{d\theta}\mbf{e}_r = \dot{\theta}(-\mbf{e}_1\sin(\theta) + \mbf{e}_2\cos{\theta}) = \dot{\theta}\mbf{e}_{\theta} \\
+    \dot{\mbf{e}}_{\theta} &= \frac{d\theta}{dt}\frac{d}{d\theta}\mbf{e}_{\theta} = \dot{\theta}(-\mbf{e}_1\cos(\theta) - \mbf{e}_2\sin{\theta}) = -\dot{\theta}\mbf{e}_r
+\end{align*}
+Since $\mbf{r} = r\mbf{e}_r$,
+we can get an expression for velocity
+(and acceleration)
+\[
+\mbf{v} = \dot{r}\mbf{e}_r + r\dot{\mbf{e}}_r = \dot{r}\mbf{e}_r + r\dot{\theta}\mbf{e}_{\theta}.
+\]
+
+\subsection{Angular momentum}
+A particle with position $\mbf{r}$ and momentum $\mbf{p}$ has angular momentum $\mbf{L} = \mbf{r} \times \mbf{p}$ about $\mbf{r} = \mbf{0}$.
+
+If a force $\mbf{F}$ acts at the point with position vector $\mbf{r}$,
+then its torque or moment about $\mbf{r} = \mbf{0}$ is $\mbf{T} = \mbf{r} \times mbf{F}$.
+If the mass is constant,
+so that $\dot{\mbf{r}} \times \mbf{p} = \mbf{0}$,
+the equation of motion stays that the rate of change of angular momentum equals the applied torque:
+\[
+\frac{d\mbf{L}}{dt} = \mbf{r} \times \dot{\mbf{p}} = \mbf{r} \times \mbf{F} = \mbf{T}.
+\]
 
 
 
