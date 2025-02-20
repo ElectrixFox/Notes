@@ -1653,6 +1653,170 @@ and then we can do one of the following things
     \end{solution}
 \end{example}
 
+\begin{example}[Nicotine]
+     To test whether the mean nicotine content of a brand of cigarettes is the advertised value of $1.4$mg,
+     a health group takes a random sample of $n = 80$ cigarettes,
+     with $\bar{x} = 1.5$,
+     $s = 0.3$.
+
+     Consider a two sided test,
+     $H_0 : \mu = 1.4$,
+     $H_a : \mu \neq 1.4$.
+     Would they reject $H_0$ at the $10\%$ significance level,
+     or not?
+
+     \begin{solution}
+         $n$ is large which means we can use a normal approximation,
+         $\sigma \simeq s$,
+         and the $90\%$ confidence interval for $\mu$ is
+         \[
+         \bar{x} \pm z ^ {*}\frac{s}{\sqrt{n}} = 1.5 \pm 1.645\frac{0.3}{\sqrt{80}} = [1.44, 1.56]
+         \]
+         which does not contain $\mu = 1.4$ therefore we:
+         reject $H_0$ at the $10\%$ significance level.
+     \end{solution}
+\end{example}
+
+\subsubsection{Hypothesis Testing via \texorpdfstring{$p$}{}-Values}
+\textbf{Method}:
+
+\begin{definition}[$p$-value]
+    Calculating confidence intervals is one way to test a hypothesis,
+    alternatively we can calculate an appropriate test statistic from the data.
+    We can then work out the probability of observing a value at least as extreme as the statistic under the assumption that $H_0$ is true.
+    This probability is known as the $p$-value.
+\end{definition}
+
+We can find the $p$-value by comparing the value of the statistic with critical values of the relevant sampling distribution.
+
+The more extreme the statistic,
+the more unlikely it is that the assumptions of $H_0$ are true.
+I.e.,
+small $p$-value implies we reject $H_0$.
+
+The threshold for $p$-value is the significance level $\alpha$.
+
+A typical test statistic,
+for testing the population mean,
+is the
+(standardised)
+sample mean.
+
+\begin{example}
+    Again,
+    for the earlier example of candle lifetimes,
+    let $H_0 : \mu = 9.2$ and $H_a : \mu \neq 9.2$.
+    Find the $p$-value.
+    Should we reject $H_0$ or not?
+
+    \begin{solution}
+        $n$ is small,
+        normally distributed and $\sigma$ is known.
+
+        Under $H_0$,
+        i.e. assuming $H_0$ is true,
+        $\mu = 9.2$,
+        so $\bar{X} \sim N(9.2, 0.4 / 6)$.
+
+        Hence we get our $p$-value:
+        \begin{align*}
+            p\text{-value} &= \text{probability of observing $\bar{X}$ at least as extreme as $\bar{x} = 8.6$,
+            given $H_0$} \\
+            &= \P(\bar{X} \leq 8.6) + \P(\bar{X} \geq 9.8) \\
+            &= 2\P(\bar{X} \geq 9.8)\qquad (\text{by symmetry about } \mu = 9.2) \\
+            &= 2\P\left(\frac{\bar{X} - 9.2}{\sqrt{\frac{0.4}{6}}}\geq \frac{9.8 - 9.2}{\sqrt{\frac{0.4}{6}}}\right)\qquad (\text{using $\mu = 9.2$ given $H_0$}) \\
+            &= 2\P\left(Z \geq \frac{9.8 - 9.2}{\sqrt{\frac{0.4}{6}}}\right) \\
+            &= 2\P(Z \geq 2.32) \\
+            &= 2(1 - \P(Z \leq 2.32)) \\
+            &= 2(1 - 0.9898) = 0.0204.
+        \end{align*}
+        Therefore,
+        as the $p\text{-value} < 0.05$,
+        we reject $H_0$ at the $5\%$ significance level.
+
+        However,
+        we would fail to reject $H_0$ at the $1\%$ significance level.
+    \end{solution}
+\end{example}
+
+\subsubsection{Case Summary}
+Given $H_0 : \mu = \mu_0$ and $H_a : \mu \neq \mu_0$,
+we have the following:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c|c|c|c}
+         $\sigma$ & $n$ & sampling & confidence interval & test statistic for $p$-value  \\
+         \hline
+         known & large & any & $\bar{x} \pm z ^ {*}\frac{\sigma}{\sqrt{n}}$ & $\frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}} \sim N(0, 1)$ \\
+         known & small & normal & $\bar{x} \pm z ^ {*}\frac{\sigma}{\sqrt{n}}$ & $\frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}} \sim N(0, 1)$ \\
+         unknown & large & any & $\bar{x} \pm z ^ {*}\frac{s}{\sqrt{n}}$ & $\frac{\bar{X} - \mu_0}{S / \sqrt{n}} \sim N(0, 1)$ \\
+         unknown & small & normal & $\bar{x} \pm t_{n - 1}^{*}\frac{s}{\sqrt{n}}$ & $\frac{\bar{X} - \mu_0}{S / \sqrt{n}} \sim t_{n - 1}$
+    \end{tabular}
+\end{table}
+
+\subsubsection{Terminology Summary}
+There are two "flows" a test can follow,
+they go as follows:
+
+Observed standardised sample mean in tail of distribution,
+test statistic extreme,
+reject $H_0$,
+hypothesised value outside $(100 - \alpha)\%$ confidence interval,
+test is significant at $\alpha\%$.
+
+Observed standardised sample mean in middle of distribution,
+test statistic not extreme,
+fail to reject $H_0$,
+hypothesised value inside $(100 - \alpha)\%$ confidence interval,
+test is not significant at $\alpha\%$.
+
+\subsubsection{Errors in Hypothesis Tests}
+There are two kinds of errors in hypothesis testing:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c|c}
+         & $H_0$ true & $H_0$ false \\
+         \hline
+         Fail to reject $H_0$ & Correct decision & Type $II$ error \\
+         Reject $H_0$ & Type $I$ error & Correct decision
+    \end{tabular}
+\end{table}
+
+\begin{remark}
+    Type $I$ and type $II$ errors are similar to false positive and false negatives.
+\end{remark}
+
+\begin{definition}[Significance and Power of a test]
+    All hypothesis tests have two related properties.
+    The first is:
+    \[
+    \text{Significance level $\alpha$} = \cP{\text{Type $I$ error}}{H_0}.
+    \]
+    A low significance level is desirable.
+
+    The second is:
+    \[
+    \text{Power of the test} = 1 - \cP{\text{Type $II$ error}}{H_a}.
+    \]
+    A high power is desirable.
+\end{definition}
+
+As we expect about $1$ in every $20$ of a set of independently constructed $95\%$ confidence intervals not to contain $\mu$,
+so too do we expect mistakenly to reject $H_0$ in about $1$ in every $20$ hypothesis tests at the $5\%$ level,
+given that $H_0$ was actually true.
+
+For example,
+the number of type $I$ errors in $n$ independent experiments where we carry out a hypothesis test at a $10\%$ level of significance is distributed $\Bin(n, 0.1)$,
+again,
+given that $H_0$ was actually true in each case.
+
+The significance and power are similar to false positives and false negatives as we saw when doing disease testing.
+
+\subsubsection{Dangers of Significance Tests}
+Why would we fail to reject a hypothesis at $5.01\%$ and yet reject at $5\%$,
+the significance levels dichotomise the test procedure arbitrarily,
+when in fact the degree of support for a hypothesis has hardly changed.
 
 
 
