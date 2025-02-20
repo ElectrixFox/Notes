@@ -4644,11 +4644,183 @@ In this basis $\mathcal{L}_L$ would be diagonal.
 
 For suitable non-polynomial functions we can write $y(x) = \infsum[i = 0]b_iP_i(x)$.
 
+\subsection{Polynomial Expansions and Self-Adjoint Operators}
+We postulate that we can write $y(x)$ as
+\[
+y(x) = \infsum[n = 0]b_nP_n(x)
+\]
+with $P_n$ the $n$th order Legendre polynomial,
+\[
+\mathcal{L}_LP_n = \left[(x ^ 2 - 1)\frac{d ^ 2}{dx ^ 2} + 2x\frac{d}{dx}\right]P_n = n(n + 1)P_n
+\]
+\[
+P_n(x) = \frac{1}{2 ^ nn!}\frac{d ^ n}{dx ^ n}\left[(x ^ 2 - 1) ^ n\right]
+\]
+\[
+y(x) = \frac{a_0}{2} + \infsum[n = 1]a_n\cos(nx) + \infsum[n = 1]b_n\sin(nx)
+\]
+with $\frac{1}{2}, \cos(nx), \sin(nx)$ basis of periodic functions,
+$a_0, a_n, b_n$ coefficients/components.
 
+Given $y(x)$ how do we determine the coefficients $\{a_n, b_n\}$ in Fourier expansion?
+Similarly,
+given $y(x)$ how do we determine the coefficients $\{b_n\}$ in Legendre expansion?
 
+Relying on two key observations:
 
+\textbf{Key observation $1$}:
 
+Easy to find components if basis vectors are orthogonal.
 
+\begin{example}
+    Let $V$ be a three dimensional vector space with orthogonal basis $\mbf{x}_1, \mbf{x}_2, \mbf{x}_3$.
+    If $\mbf{v} \in V$ we can have $\mbf{v} = b_1\mbf{x}_1 + b_2\mbf{x}_2 + b_3\mbf{x}_3$.
+    To calculate $b_2$,
+    "dot the equation"
+    with $\mbf{x}_2$
+    \begin{align*}
+        \mbf{v} \cdot \mbf{x}_2 &= (b_1\mbf{x}_1 + b_2\mbf{x}_2 + b_3\mbf{x}_3) \cdot \mbf{x}_2 \\
+        &= b_1\mbf{x}_1\cdot\mbf{x}_2 + b_2\mbf{x}_2 \cdot \mbf{x}_2 + b_3\mbf{x}_3\cdot\mbf{x}_2 \\
+        &= b_2\mbf{x}_2 \cdot \mbf{x}_2
+    \end{align*}
+    hence $b_2 = \frac{\mbf{v} \cdot \mbf{x}_2}{\mbf{x}_2 \cdot \mbf{x}_2}$
+\end{example}
+
+\begin{example}
+    Find components of $\begin{pmatrix}
+        -1 \\ -7
+    \end{pmatrix}$
+    in basis $\mbf{x}_1 = \begin{pmatrix}
+        2 \\ -1
+    \end{pmatrix}$,
+    $\mbf{x}_2 = \begin{pmatrix}
+        1 \\ 2
+    \end{pmatrix}$.
+    
+    \begin{solution}
+        \[
+        \mbf{v} = b_1\mbf{x}_1 + b_2\mbf{x}_2
+        \]
+        \[
+        b_1 = \frac{\mbf{v}_1 \cdot \mbf{x}_1}{\mbf{x}_1 \cdot \mbf{x}_1} = \frac{\begin{pmatrix}
+            -1 \\ -7
+        \end{pmatrix} \cdot \begin{pmatrix}
+            2 \\ -1
+        \end{pmatrix}}{\begin{pmatrix}
+            2 \\ -1
+        \end{pmatrix}\begin{pmatrix}
+            2 \\ -1
+        \end{pmatrix}} = \frac{5}{5} = 1
+        \]
+        \[
+        b_2 = \frac{\mbf{v}_1 \cdot \mbf{x}_1}{\mbf{x}_1 \cdot \mbf{x}_1} = \frac{\begin{pmatrix}
+            -1 \\ -7
+        \end{pmatrix} \cdot \begin{pmatrix}
+            1 \\ 2
+        \end{pmatrix}}{\begin{pmatrix}
+            1 \\ 2
+        \end{pmatrix}\begin{pmatrix}
+            1 \\ 2
+        \end{pmatrix}} = \frac{-15}{5} = -3
+        \]
+        so
+        \[
+        \begin{pmatrix}
+            -1 \\ -7
+        \end{pmatrix} = 1\begin{pmatrix}
+            2 \\ -1
+        \end{pmatrix} -3\begin{pmatrix}
+            1 \\ 2
+        \end{pmatrix}
+        \]
+    \end{solution}
+\end{example}
+
+\textbf{Key observation $2$}:
+
+The eigenvectors/eigenfunctions of a self-adjoint matrix/operator are orthogonal.
+
+\begin{definition}
+    Let $V$ be a vector space on which we define an inner product $(f, g)$
+    ($V \times V \rightarrow \R$)
+    for all $f, g \in V$.
+
+    A linear map $\mathcal{L} : V \rightarrow V$  is called self-adjoint if
+    \[
+    (\mathcal{L} f, g) = (f, \mathcal{L}g).
+    \]
+
+    \begin{proof}
+        Let $\mbf{v}_1, \mbf{v}_2$ be eigenvectors of $\mathcal{L}$:
+        $\mathcal{L}\mbf{v}_1 = \lambda_1\mbf{v}_1$,
+        $\mathcal{L}\mbf{v}_2 = \lambda_2\mbf{v}_2$.
+
+        Consider $(\mbf{v}_1, \mathcal{L}\mbf{v}_2) = (\mbf{v}_1, \lambda_2\mbf{v}_2) = \lambda_2(\mbf{v}_1, \mbf{v}_2)$,
+        if $\mathcal{L}$ is self adjoint $(\mathcal{L}\mbf{v}_1, \mbf{v}_2) = (\lambda_1\mbf{v}_1, \mbf{v}_2) = \lambda_1(\mbf{v}_1, \mbf{v}_2)$ implies $(\lambda_1 - \lambda_2)(\mbf{v}_1, \mbf{v}_2) = 0$,
+        if $\lambda_1 \neq \lambda_2$ then $(\mbf{v}_1, \mbf{v}_2) = 0$ orthogonal.
+
+        If $\lambda_1 = \lambda_2$ can pick $\mbf{v}_1, \mbf{v}_2$ orthogonal (Gram-Schmidt)
+    \end{proof}
+\end{definition}
+
+Legendre expansion $y = \infsum[n = 0]b_nP_n$,
+$P_n$ are eigenvectors of $\mathcal{L}_L$.
+If $\mathcal{L}_L$ is self-adjoint this implies
+(by key observation $2$)
+$P_n$ are orthogonal to each other,
+then
+(by key observation $1$)
+it is easy to find components $b_n$.
+
+Need to find an inner product for which $\mathcal{L}_L$ is self-adjoint.
+\[
+(f(x), g(x)) = \int_{-1}^{1}f(x)g(x)\,dx.
+\]
+Legendre differential operator can be written
+\[
+\mathcal{L}_Ly = \left[(x ^ 2 - 1)\frac{d ^ 2y}{dx ^ 2} + 2x\frac{dy}{dx}\right] = \frac{d}{dx}\left[(x ^ 2 - 1)\frac{dy}{dx}\right].
+\]
+\begin{align*}
+    (\mathcal{L}_Lf, g) &= \left(\frac{d}{dx}\left[(x ^ 2 - 1)\frac{df}{dx}\right]g, g\right) \\
+    &= \int_{-1}^{1}\frac{d}{dx}\left[(x ^ 2 - 1)\frac{df}{dx}\right]g(x)\,dx \\
+    &= \left[(x ^ 2 - 1)\frac{df}{dx}g\right]_{-1}^{1} - \int_{-1}^{1}(x ^ 2 - 1)\frac{df}{dx}\frac{dg}{dx}\,dx
+    \intertext{Insist $f, g$ twice differentiable and $f, f'$ finite at $x = \pm 1$}
+    &= -\left[(x ^ 2 - 1)f\frac{dg}{dx}\right]_{-1}^{1} + \int_{-1}^{1}f\frac{d}{dx}\left[(x ^ 2 - 1)\frac{dg}{dx}\right]\,dx \\
+    &= \int_{-1}^{1}f\mathcal{L}_Lg\,dx \\
+    &= (f, \mathcal{L}_Lg).
+\end{align*}
+Therefore $\mathcal{L}_L$ is self adjoint with respect to this inner product.
+This implies that the eigenfunctions of $\mathcal{L}_L$ are orthogonal $(P_n, P_m) = \int_{-1}^{1}P_n(x)P_m(x) = 0$,
+$n \neq m$.
+
+Legendre expansion
+\[
+y(x) = \infsum[n = 0]b_nP_n(x).
+\]
+To find $b_m$ we shall dot
+(take inner product of)
+the equation with $P_m(x)$
+\begin{align*}
+    (y, P_n) &= \left(\infsum[n = 0]b_nP_n, P_m\right) \\
+    &= \infsum[n = 0]b_n\overbrace{(P_n, P_m)}^{=0, \forall n\neq m} \\
+    &= b_m(P_m, P_m)
+\end{align*}
+hence
+\[
+b_m = \frac{(y, P_m)}{(P_m, P_m)}.
+\]
+\[
+(P_m, P_m) = \int_{-1}^{1}P_m ^ 2(x)\,dx = \frac{2}{2m + 1}
+\]
+therefore
+\[
+b_m = \frac{2m + 1}{2}(y, P_m) = \frac{2m + 1}{2}\int_{-1}^{1}y(x)P_m(x)\,dx.
+\]
+
+For Eulers we get
+\[
+a_n = \frac{1}{\pi}\int_{-\pi}^{\pi}y(x)\cos(nx)\,dx.
+\]
 
 
 
