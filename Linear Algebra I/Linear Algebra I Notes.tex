@@ -6983,10 +6983,137 @@ $n$ row vectors.
 standard dot product.
 So the columns of $M$ form an orthonormal basis of $\R ^ n$ with respect to the standard inner product.
 
+\textbf{Complex case}:
 
+What if $N ^ {*} = N ^ {-1}$?
 
+\begin{definition}[Unitary]
+    An $n \times n$ matrix $P$ is unitary if $P ^ {*}P = PP ^ {*} = 1$,
+    i.e. $P ^ {-1} = P$
+    \[
+    U(n) \coloneqq \{P \in \mathrm{GL}(n, \C)\text{ such that } P ^ {*}P = PP ^ {*} = 1\}.
+    \]
+    "the unitary group"
+\end{definition}
 
+$\det{P}$ for $P$ unitary?
 
+\[
+1 = \det(P ^ {*}P) = \det(P ^ {*})\det{P} = |\det(P)| ^ 2
+\]
+so if $P \in U(n)$,
+$\det{P} = e ^ {i\varphi}$ for some $\varphi \in \R$.
+
+We define
+\[
+\mathrm{SU}(n) = \{P \in U(n) \text{ such that } \det{P} = +1\}
+\]
+"special unitary group".
+In practice:
+$P = [\mbf{w}_1, \dotsc, \mbf{w}_n]$,
+$P ^ {*} = \begin{pmatrix}
+    \mbf{w}_1 ^ {*} \\
+    \mbf{w}_2 ^ {*} \\
+    \vdots \\
+    \mbf{w}_n ^ {*}
+\end{pmatrix}$,
+\[
+(P ^ {*}P)_{ij} = \mbf{w}_i ^ {*} \cdot \mbf{w}_j \overset{\text{standard i.p.}}{=} \langle\mbf{w}_j, \mbf{w}_i\rangle = (1)_{ij} = \delta_{ij}.
+\]
+
+We will say that a matrix $A$ is orthogonally diagonalisable if we can find a matrix $M \in O(n)$
+(which is orthogonal)
+such that $M ^ TAM$ is diagonal.
+
+Likewise $B$ is unitarily diagonalisable if there is a $P \in U(n)$  such that $P ^ {*}AP$ is diagonal.
+
+\begin{proposition}
+    Suppose $A$ is complex Hermitian
+    (i.e. $A = A ^ {*}$)
+    or real symmetric
+    (i.e. $A = A ^ T$)
+    then the eigenvalues of $A$ are real.
+
+    \begin{proof}
+        (phrased in the complex case).
+        Suppose $A\mbf{x} = \lambda\mbf{x}$ for some $\mbf{x} \neq \mbf{0}$.
+        Then $\mbf{x} ^ {*}A\mbf{x} = \lambda\mbf{x} ^ {*}\mbf{x}$,
+        recall $\mbf{x} ^ {*}\mbf{x} = \langle\mbf{x}, \mbf{x}\rangle$ using standard inner product on $\C ^ n$.
+        Therefore
+        (take "$*$")
+        \begin{align*}
+            \mbf{x} ^ {*}A ^ {*}\mbf{x} &= \bar{\lambda}\mbf{x} ^ {*}\mbf{x} \\
+            &\iff \\
+            \mbf{x} ^ {*}A\mbf{x} &= \bar{\lambda}\mbf{x} ^ {*}\mbf{x} &(\text{since $A = A ^ {*}$}) \\
+            &\iff \\
+            \lambda\mbf{x} ^ {*}\mbf{x} &= \bar{\lambda}\mbf{x} ^ {*}\mbf{x} \implies \lambda = \bar{\lambda} &(\text{since $\mbf{x} ^ {*}\mbf{x} \neq 0$}) \\
+            &\implies \lambda \in \R.
+        \end{align*}
+    \end{proof}
+\end{proposition}
+
+\begin{remark}
+    If $A$ is real symmetric,
+    then the eigenvectors can be taken real as well,
+    since they solve $(A - \lambda I)\mbf{v} = \mbf{0}$.
+\end{remark}
+
+Further,
+if the eigenvalues are different,
+corresponding eigenvectors are orthogonal.
+
+\begin{proposition}
+    Let $A$ be complex Hermitian
+    (or real symmetric).
+    Then the eigenvectors of $A$ corresponding to different eigenvalues are mutually orthogonal using a standard inner product on $\C ^ n$
+    (or $\R ^ n$).
+
+    \begin{proof}
+        Suppose the eigenvalues are $\lambda$ and $\mu$
+        (both in $\R$ by above).
+        then $A\mbf{x} = \lambda\mbf{x}$,
+        $\mbf{x} \neq 0$ and
+        $A\mbf{y} = \mu\mbf{y}$,
+        $\mbf{y} \neq \mbf{0}$.
+        So
+        \begin{align*}
+            \mbf{x} ^ {*}A\mbf{y} &= \mu\mbf{x} ^ {*}\mbf{y} \\
+            \mbf{y} ^ {*}A\mbf{x} &= \lambda\mbf{y} ^ {*}\mbf{x}
+            \intertext{("$*$") $\implies$}
+            \mbf{x} ^ {*}A ^ {*}\mbf{y} &= \bar{\lambda}\mbf{x}\mbf{y} ^ {*} \\
+            &\implies \\
+            \mbf{x} ^{*}A\mbf{y} &(\text{since $A = A ^ {*}$}) \\
+            \mbf{x} ^{*}A\mbf{y} &= \lambda\mbf{x}\mbf{y} ^ {*} &(\text{since $\lambda \in \R$)}.
+        \end{align*}
+        So setting the first line equal to the last
+        \begin{align*}
+            \mu\mbf{x} ^ {*}\mbf{y} &= \lambda\mbf{x} ^ {*}\mbf{y} \\
+            &\implies \\
+            (\lambda - \mu)\mbf{x} ^ {*}\mbf{y} &= 0 \\
+            &\implies \\
+            \mbf{x} ^ {*}\mbf{y} &= 0 &(\text{since $\lambda \neq \mu$})
+        \end{align*}
+        so $\mbf{x} \perp \mbf{y}$.
+    \end{proof}
+\end{proposition}
+
+So if all eigenvalues of $A$ are different,
+we have $n$ orthogonal eigenvectors,
+so we can diagonalise $A$ with an orthogonal/unitary matrix $P$
+(after rescaling eigenvectors to unit length).
+In fact,
+this is even true if some eigenvalues are equal.
+
+\begin{proposition}
+    If $A$ is real symmetric,
+    then there exists a $P \in O(n)$  such that $P ^ TAP = D$ diagonal.
+    If $A$ is complex Hermitian,
+    then there exists $P \in U(n)$ such that $P ^ {*}AP = D$ is diagonal
+    (and real).
+
+    In each case,
+    the columns of $P$ are an orthonormal basis of eigenvectors of $A$.
+\end{proposition}
 
 
 
