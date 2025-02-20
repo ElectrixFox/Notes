@@ -565,6 +565,73 @@ note that $\phi_{\text{in}}(V) = \phi_{\text{out}}(V) = 0$
     \end{solution}
 \end{example}
 
+\begin{theorem}
+    Given a network $(V, C)$,
+    \[
+    \max_{F}\Phi_{\text{tot}}(F) = \min_{S}\kappa(S),
+    \]
+    i.e.,
+    the maximum total value over all flows is equal to the minimum cut capacity of the network.
+\end{theorem}
+
+We have shown that for any $S$-cut,
+the total value of a flow satisfies the following
+\[
+\Phi_{\text{tot}}(F) = \sum_{u \in S, v \in V \setminus S}(f_{uv} - f_{vu}),
+\]
+and hence $\Phi_{\text{tot}}(F) \leq \min_S\kappa(S)$ for every flow $F$.
+
+An undirected walk $p$ is a sequence of vertices $s = v_0, v_1, \dotsc$ where for each $r$ at least one of $v_rv_{r + 1}$ or $v_{r + 1}v_r$ is an edge.
+One can visit any given vertex as many times as you may wish.
+
+\begin{definition}
+    An undirected walk $p = (s = v_0, \dotsc, v_k = t)$ from the source to the sink is called usable if for every successive pair of vertices $v_r, v_{r + 1}$ along the walk,
+    at least one of the following holds:
+    \begin{enumerate}[label = (\roman*)]
+        \item We have $c_{v_r, v_{r + 1}} > 0$ and $c_{v_{r + 1}, v_r} > f_{v_r, v_{r + 1}}$.
+
+        \item We have $c_{v_{r + 1}, v_r} > 0$ and $f_{v_{r + 1}, v_r} > 0$.
+    \end{enumerate}
+\end{definition}
+
+This is saying,
+the walk is usable if for each $r$,
+either there is a positive-capacity forwards-oriented edge
+(as in $v_r$ to $v_{r + 1}$)
+that has spare capacity,
+or if there is a positive-capacity backwards-oriented edge
+(as in $v_{r + 1}$ to $v_r$)
+that has non-zero flow.
+
+It is best to think of the walk as a sequence of vertices,
+rather than edges,
+to properly understand this definition.
+
+For a vertex $v_r$ in a walk $p$,
+let
+\[
+a(v_r) = \begin{cases}
+    c_{v_r, v_{r + 1}} - f_{v_r, v_{r + 1}} & \text{if }c_{v_r, v_{r + 1}} = 0, \\
+    c_{v_r, v_{r + 1}} - f_{v_r, v_{r + 1}} + f_{v_{r + 1}, v_r} & \text{if }c_{v_r, v_{r + 1}} > 0.
+\end{cases}
+\]
+So we have $a(v_r)$ being equal to the excess capacity of the forwards oriented edge $v_rv_{r + 1}$,
+the flow of the backwards-oriented edge $v_{r + 1}v_r$,
+or the sum of both if both directed edges are presented.
+Then define the availability of a usable walk $p$ to be
+\[
+A(p) \coloneqq \min_ra(v_r).
+\]
+
+
+
+
+
+
+
+
+
+
 
 
 
