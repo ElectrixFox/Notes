@@ -4472,6 +4472,127 @@ with $\xi$ between $c$ and $x$.
     \end{solution}
 \end{example}
 
+\begin{proposition}
+    Assume $f(x) = \infsumo a_kx ^ k$ is given by a power series converging in $(-R, R)$,
+    ($R > 0$).
+
+    Let $c \in (-R, R)$.
+    Then $T_{f, c}(x)$ converges with radius of convergence
+    \[
+    ||c| - R|
+    \]
+    and is equal to $f(x)$.
+
+    \begin{proof}
+        Skipped.
+        More naturally explained in the context of complex analysis.
+    \end{proof}
+\end{proposition}
+
+\begin{example}
+    \begin{enumerate}[label = (\roman*)]
+        \item $\sin(x), \cos(x)$.
+
+        \item $f(x) = e ^ x$.
+
+        \item $f(x) = \frac{1}{1 - x} = \infsumo x ^ k$.
+
+        \item $e ^ {x ^ 2}$.
+
+        \item $\frac{\sin{x}}{x}$.
+
+        \item $f(x) = \log(1 + x)$.
+    \end{enumerate}
+
+    \begin{solution}
+        \begin{enumerate}[label = (\roman*)]
+            \item Done.
+
+            \item Remainder
+            \[
+            |R_n(x)| = \left|\frac{e ^ {\xi}}{(n + 1)!}(x - c) ^ {n + 1}\right| \leq \frac{e ^ {y}|x - c| ^ {n + 1}}{(n + 1)!} \xrightarrow[n \rightarrow \infty]{} 0
+            \]
+            $y = \max{\{|x|, |c|\}}$,
+            hence $e ^ x$ is equal to its Taylor series at any point $c$.
+
+            \item
+            \begin{align*}
+                f(x) &= \frac{1}{1 - x} \\
+                &= \frac{1}{(1 - c) - (x - c)} \\
+                &= \frac{\frac{1}{1 - c}}{1 - \left(\frac{x - c}{1 - c}\right)} \\
+                &= \frac{1}{1 - c}\infsumo\left(\frac{x - c}{1 - c}\right) ^ k \\
+                &= \infsumo\left(\frac{1}{1 - c}\right) ^ {k + 1}(x - c) ^ k.
+            \end{align*}
+            Valid if
+            \[
+            \left|\frac{x - c}{1 - c}\right| < 1 \iff |x - c| < |1 - c|.
+            \]
+
+            \item
+            \[
+            e ^ {x ^ 2} = \infsumo\frac{(x ^ 2) ^ k}{k!} = \infsumo\frac{x ^ {2k}}{k!}.
+            \]
+
+            \item
+            \[
+            \frac{\sin{x}}{x} = \frac{1}{x}\infsumo(-1) ^ k\frac{x ^ {2k + 1}}{(2k + 1)!} = \infsumo\frac{(-1) ^ kx ^ {2k}}{(2k + 1)!} = 1 - \frac{x ^ 2}{6} + \frac{x ^ 4}{120} + \dotsc.
+            \]
+
+            \item
+            Recall $\frac{1}{1 + x} = \frac{1}{1 - (-x)} = \infsumo (-1) ^ kx ^ k$ for $|x| < 1$.
+            Also $\log(1 + x)' = \frac{1}{1 + x}$.
+            So
+            \[
+            \log(1 + x) = \infsumo\frac{(-1) ^ k}{k}x ^ {k + 1} + C
+            \]
+            with $C = \log(1 + x)|_{x = 0} = \log(1) = 0$.
+            So
+            \[
+            \log(1 + x) = \infsum\frac{(-1) ^ {k + 1}}{k}x ^ k
+            \]
+            for $|x| < 1$.
+        \end{enumerate}
+    \end{solution}
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
