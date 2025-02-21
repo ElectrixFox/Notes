@@ -1002,13 +1002,167 @@ we can get an expression for velocity
 A particle with position $\mbf{r}$ and momentum $\mbf{p}$ has angular momentum $\mbf{L} = \mbf{r} \times \mbf{p}$ about $\mbf{r} = \mbf{0}$.
 
 If a force $\mbf{F}$ acts at the point with position vector $\mbf{r}$,
-then its torque or moment about $\mbf{r} = \mbf{0}$ is $\mbf{T} = \mbf{r} \times mbf{F}$.
+then its torque or moment about $\mbf{r} = \mbf{0}$ is $\mbf{T} = \mbf{r} \times \mbf{F}$.
 If the mass is constant,
 so that $\dot{\mbf{r}} \times \mbf{p} = \mbf{0}$,
 the equation of motion stays that the rate of change of angular momentum equals the applied torque:
 \[
 \frac{d\mbf{L}}{dt} = \mbf{r} \times \dot{\mbf{p}} = \mbf{r} \times \mbf{F} = \mbf{T}.
 \]
+
+\begin{proposition}
+    Suppose that the force on a particle at position $\mbf{r}$ is always proportional to $\mbf{r}$.
+    Then its angular momentum about $\mbf{0}$ is conserved.
+
+    \begin{proof}
+        \[
+        \frac{d\mbf{L}}{dt} = \frac{d}{dt}(m\mbf{r} \times \mbf{v}) = \mbf{r} \times \mbf{F} = \mbf{0},
+        \]
+        since $\mbf{F}$ and $\mbf{r}$ are proportional.
+        In other words,
+        such a force cannot exert torque,
+        which is what changes angular momentum.
+    \end{proof}
+\end{proposition}
+
+\begin{example}
+    A particle with constant mass $m$ has trajectory $\mbf{r}(t) = t\mbf{e}_1 + \mbf{e}_2 + t ^ 2\mbf{e}_3$.
+    Calculate its angular momentum $\mbf{L}$ about $\mbf{0}$,
+    and compute the torque which is affecting its motion.
+
+    \begin{solution}
+        We have
+        \[
+        \mbf{r}(t) = \begin{pmatrix}
+            t \\ 1 \\ t ^ 2
+        \end{pmatrix}
+        \]
+        using $\mbf{L} = \mbf{r} \times \mbf{p}$,
+        and $\dot{\mbf{p}} = m\mbf{v} = m\dot{\mbf{v}}$ we have
+        \begin{align*}
+            \mbf{L} &= \mbf{r} \times \mbf{p} \\
+            &= \begin{pmatrix}
+                t \\ 1 \\ t ^ 2
+            \end{pmatrix} \times m\begin{pmatrix}
+                1 \\ 0 \\ 2t
+            \end{pmatrix} \\
+            &= m\begin{pmatrix}
+                2t \\ -t ^ 2 \\ -1
+            \end{pmatrix}.
+        \end{align*}
+        Now for our torque we get $\mbf{T} = \mbf{r} \times \mbf{F}$,
+        \begin{align*}
+            \mbf{T} &= \mbf{r} \times \mbf{F} \\
+            &= \mbf{r} \times m\ddot{\mbf{r}} \\
+            &= \mbf{r} \times \dot{\mbf{p}} \\
+            &= \frac{d\mbf{L}}{dt} \\
+            &= m\begin{pmatrix}
+                2 \\ -2t \\ 0
+            \end{pmatrix}.
+        \end{align*}
+    \end{solution}
+\end{example}
+
+\subsection{Central forces}
+\begin{definition}
+    A central force based at $\mbf{r} = \mbf{0}$ has the form
+    \[
+    \mbf{F} = f(r)\mbf{e}_r = r ^ {-1}f(r)\mbf{r}.
+    \]
+    Note that $|\mbf{F}| = |f|$.
+\end{definition}
+
+The force can act towards or away from the origin $\mbf{O}$:
+it is attractive if $f(r) < 0$ and repulsive if $f(r) > 0$.
+The angular momentum of a particle moving in a central force is constant.
+
+Since $\mbf{L} \cdot \mbf{r}(t) = 0$,
+the motion of the particle lies in the plane through $\mbf{O}$ perpendicular to the constant vector $\mbf{L}$,
+and we take this to be the $r\theta$-plane.
+
+Our basis is $\{\mbf{e}_r, \mbf{e}_{\theta}, \mbf{e}_3\}$,
+where $\mbf{e}_3$ is constant.
+
+The crucial point is that,
+because angular momentum is conserved,
+the plane does not change with time.
+
+\begin{example}
+    Compute the acceleration $g$ due to gravity at the surface of the Earth.
+    The mass of the Earth is $6 \times 10 ^ {24}$kg,
+    and its radius is $6400$km.
+
+    \begin{solution}
+        
+    \end{solution}
+\end{example}
+
+\subsection{Motion in a central force}
+Motion in polar coordinates.
+Take $\mbf{L}$ to be in the $z$-direction,
+so that $\mbf{L} = L\mbf{e}_3$.
+Let $r$ and $\theta$ be polar coordinates in the $xy$-plane.
+Recall that
+\[
+\mbf{r} = r\mbf{e}_r,\quad\dot{\mbf{r}} = \dot{r}\mbf{e}_r + r\dot{\theta}\mbf{r}_{\theta},\quad\ddot{\mbf{r}} = (\ddot{r} - r\dot{\theta} ^ 2)\mbf{e}_r + (2\dot{r}\dot{\theta} + r\ddot{\theta})\mbf{e}_{\theta}.
+\]
+Note that the angular momentum is
+\[
+\mbf{L} = mr\mbf{e}_r \times (\dot{r}\mbf{e}_r + r\dot{\theta}\mbf{e}_{\theta}) = mr ^ 2\dot{\theta}\mbf{e}_3,
+\]
+using $\mbf{e}_r \times \dot{\theta} = \mbf{e}_3$,
+and so  $L = mr ^ 2\dot{\theta}$.
+The equation of motion $m\ddot{\mbf{r}} = \mbf{F}$ becomes
+\[
+m(\ddot{r} - r\dot{\theta} ^ 2) = f(r),\quad 2\dot{r}\dot{\theta} + r\ddot{\theta} = 0.
+\]
+If we multiply the second of these by $r$,
+we see it simply says that $r ^ 2\dot{\theta}$ is constant:
+it is equivalent to conservation of angular momentum,
+and we can replace it by $mr ^ 2\dot{\theta} = L$.
+Then use this to eliminate $\dot{\theta}$ from the first
+(radial)
+equation,
+to leave
+\[
+m\ddot{r} - \frac{L ^ 2}{mr ^ 3} = f(r).
+\]
+Note that the kinetic is
+\[
+K = \frac{1}{2}m|\dot{\mbf{r}}| ^ 2 = \frac{1}{2}m(\dot{r} ^ 2 + r ^ 2\dot{\theta} ^ 2) = \frac{1}{2}m\left(\dot{r} ^ 2 + \frac{L ^ 2}{m ^ 2r ^ 2}\right).
+\]
+Now any central force is conservative,
+and the potential energy is
+\[
+V(r) = -\int f(r)\,dr,
+\]
+where the constant of integration is usually chosen so that $V(r) \rightarrow 0$ as $r \rightarrow \infty$.
+For example,
+the gravitational potential energy is $V(r) = -GMm / r$.
+That any central is conservative can be proved directly;
+but the crucial justification is that the total energy $E = K + V$ is constant.
+Indeed,
+\[
+\frac{dK}{dt} = \dot{r}\left(m\ddot{r} - \frac{L ^ 2}{mr ^ 3}\right),
+\]
+and $dV / dt = -f(r)\dot{r}$,
+so $dE / dt = 0$ is equivalent to the following equation:
+\[
+m\ddot{r} - \frac{L ^ 2}{mr ^ 3} = f(r).
+\]
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
