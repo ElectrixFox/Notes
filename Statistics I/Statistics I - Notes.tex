@@ -1818,10 +1818,109 @@ Why would we fail to reject a hypothesis at $5.01\%$ and yet reject at $5\%$,
 the significance levels dichotomise the test procedure arbitrarily,
 when in fact the degree of support for a hypothesis has hardly changed.
 
+\subsubsection{Are Hypothesis Tests Meaningful?}
+Looking at the prosecutor's fallacy with $E$ representing evidence and $G$ representing guilt.
+Suspect is guilty if $\cP{E}{G ^ c}$ is small.
+This is wrong we should actually calculate $\cP{G}{E}$.
 
+We see a similar pattern for $p$-values and hypothesis tests:
+We reject $H_0$ if $p$-value is small
+\[
+p\text{-value} = \cP{\text{sample mean is at least as extreme as the one observed}}{H_0\text{ is true}}
+\]
+this is also wrong,
+we should calculate
+\[
+\cP{\text{$H_0$ is true}}{\text{sample mean}}.
+\]
 
+\subsection{Inference for a Proportion}
 
+\subsubsection{Normal Approximation}
+Consider a binomially distributed random variable $X$ with parameters $n$ and $p$
+\[
+X \sim \Bin(n, p)
+\]
+The population proportion $p$ is unknown,
+it is to be estimated from data.
+The sample proportion $\hat{p} = Y = X / n$ can be used as an estimator for $p$ for example if we take a simple random sample of $1000$ adults and find that the number of men is $483$,
+our estimate of the proportion of men in the UK adult population would be $y = 483 / 1000 = 0.483$.
+Denoting $Y$ the sample proportion,
+instead of $\hat{p}$ allows us to represent the observed sample proportion as $y$.
 
+We have
+\begin{align*}
+    \E(Y) &= p \\
+    \Var(Y) &= \frac{p(1 - p)}{n}
+\end{align*}
+so that means,
+the estimator $Y$ is unbiased,
+the variance of the estimator gets smaller as $n$ increases.
+
+\textbf{Issue $1$}:
+$p$ is unknown,
+so $\Var(Y)$ is also unknown
+(although we can bound it to $\Var(Y) < \frac{1}{4n}$).
+$n$ is large which implies $\Var(Y) \simeq \frac{y(1 - y)}{n}$,
+where $y$ is the observed sample proportion.
+
+\textbf{Issue $2$}:
+The sampling distribution of $Y$ is hard to calculate.
+If $np \geq 10$ and $n(1 - p) \geq 10$ then the normal approximation is valid.
+
+With these two issues solved,
+we write:
+\[
+Y \sim N(p, \Var(Y)),\text{ or equivalently } \frac{Y - p}{\sqrt{\Var(Y)}} \sim N(0, 1),\text{ with } \Var(Y) \simeq \frac{y(1 - y)}{n}.
+\]
+
+Given the sampling distribution for $Y$,
+and the observed proportion $y$ we can do hypothesis testing and construct confidence intervals for $p$.
+
+The $1 - \alpha$ confidence interval for $p$ is:
+\[
+y \pm z ^ {*}\sqrt{\frac{y(1 - y)}{n}}
+\]
+with $z ^ {*}$ such that $\P(-z ^ {*} \leq Z \leq z ^ {*}) = 1 - \alpha$ for $Z \sim N(0, 1)$.
+
+The $p$-value for the hypothesis test $H_0 : p = p_0$ vs $H_a : p \neq p_0$ is given by:
+\[
+p\text{-value} = 2\left[1 - \P\left(Z < \frac{|y - p_0|}{\sqrt{\frac{y(1 - y)}{n}}}\right)\right],\quad\text{with } Z \sim N(0, 1).
+\]
+\begin{proof}[Proof for $p$-value for proportions]
+    \begin{align*}
+        p\text{-value for proportions} &= \text{Probability $Y$ is as extreme as $y$,
+        given $H_0 : p = p_0$ is true} \\
+        &= \P(Y \leq p_0 - \delta) + \P(Y \geq p_0 + \delta)\qquad(\text{with $\delta = |y - p_0|$}) \\
+        &= 2\P(Y \geq p_0 + \delta)\ (\text{by symmetry of approximating norm dist}) \\
+        &= 2\P\left(\frac{Y - p_0}{\sqrt{\frac{y(1 - y)}{n}}} \geq \frac{\delta}{\sqrt{\frac{y(1 - y)}{n}}}\right) \\
+        &= 2\P\left(Z \geq \frac{\delta}{\sqrt{\frac{y(1 - y)}{n}}}\right) \\
+        &= 2\left[1 - \P\left(Z \leq \frac{\delta}{\sqrt{\frac{y(1 - y)}{n}}}\right)\right] \\
+        &= 2\left[1 - \P\left(Z \leq \frac{|y - p_0|}{\sqrt{\frac{y(1 - y)}{n}}}\right)\right]\qquad(\text{replacing $\delta = |y - p_0|$}).
+    \end{align*}
+\end{proof}
+
+\subsubsection{Better Approximations}
+It has been shown that the $1 - \alpha$ confidence interval given above is not that reliable.
+In the long run,
+generally,
+it contains the population parameter $p$ at a rate far less than $1 - \alpha$.
+
+Consequently,
+the normal approximation can be a very poor approximation,
+particularly for extreme values of $p$ and low $n$.
+
+More detailed calculations yield improved confidence intervals for $p$.
+For example:
+
+\textbf{The Wilson Interval}
+\[
+\frac{y + \frac{t}{2}}{1 + t} \pm \frac{\sqrt{y(1 - y)t + \frac{t ^ 2}{4}}}{1 + t},\ \text{with } t = \frac{(z ^ {*}) ^ 2}{n}.
+\]
+\textbf{The Agresti-Coull Interval}
+\[
+\tilde{y} \pm z ^ {*}\sqrt{\frac{\tilde{y}(1 - \tilde{y})}{\tilde{n}}}\text{ with } \tilde{y} = \frac{ny + 2}{n + 4} \text{ and } \tilde{n} = n + 4.
+\]
 
 
 
