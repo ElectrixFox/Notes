@@ -581,6 +581,14 @@ the total value of a flow satisfies the following
 \]
 and hence $\Phi_{\text{tot}}(F) \leq \min_S\kappa(S)$ for every flow $F$.
 
+\begin{example}
+    Here we have constructed a maximal flow:
+    
+    \textbf{Insert Diagram}.
+
+    
+\end{example}
+
 An undirected walk $p$ is a sequence of vertices $s = v_0, v_1, \dotsc$ where for each $r$ at least one of $v_rv_{r + 1}$ or $v_{r + 1}v_r$ is an edge.
 One can visit any given vertex as many times as you may wish.
 
@@ -622,6 +630,42 @@ Then define the availability of a usable walk $p$ to be
 \[
 A(p) \coloneqq \min_ra(v_r).
 \]
+\begin{example}
+    Here are some usable walks and paths and their availabilities.
+\end{example}
+
+\begin{example}
+    Suppose you have a flow $F$.
+    Show that if you can find a usable path $p$,
+    then you can use it to create a new flow,
+    $F'$ say,
+    with
+    \[
+    \Phi_{\text{tot}}(F') = \Phi_{\text{tot}}(F) + A(p).
+    \]
+    I.e.,
+    you can create a new flow and it respects the capacity constraints and satisfies the 'no leaks' condition.
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
