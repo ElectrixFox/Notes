@@ -645,7 +645,120 @@ A(p) \coloneqq \min_ra(v_r).
     \]
     I.e.,
     you can create a new flow and it respects the capacity constraints and satisfies the 'no leaks' condition.
+
+    \begin{solution}
+        Have a path $p = \{s, v_1, \dotsc, v_n, t\}$ such that $v_i$ forms a path $i \leq 1 \leq n$,
+        then we have
+        \[
+        A(p) = \min_r{a(v_r)} = \min\{(c_{sv_1} - f_{sv_1}), (c_{v_1v_2} - f_{v_1v_2}), \dotsc (c_{v_nt} - f_{v_nt})\}
+        \]
+        which implies we have availability in the path so we can create the new flow
+        \[
+        \Phi_{\text{tot}}(F') = \Phi_{\text{tot}}(F) + A(p).
+        \]
+    \end{solution}
 \end{example}
+
+\begin{example}
+    Suppose you have a flow $F$ and there are no usable paths to be found.
+    Let $S$ be the set of all vertices that can be reached from $s$ along undirected paths that satisfy the conditions (i) and (ii) in the definition of usable path above.
+
+    Why is $t \notin S$?
+    Consider the cut $K(S)$ defined by $S$.
+    Prove that $\Phi_{\text{tot}}(F) = \kappa(S)$,
+    the capacity of this cut.    
+\end{example}
+
+\begin{example}
+    Prove the maximum possible total flow is equal to the minimum cut capacity,
+    i.e.,
+    \[
+    \max_{F}\Phi_{\text{tot}}(F) = \min_{S}\kappa(S).
+    \]
+\end{example}
+
+\begin{example}
+    Can we create a maximal flow using the algorithm we gain from identifying a usable path?
+
+    \begin{solution}
+        Not always.
+        We can only get to $v_1, v_2$ from $s$,
+        so there is no usable path between $s$ and $t$.
+        Hence this algorithm stops.
+        But it is not a maximal flow:
+
+        To increase the flow we can do the following:
+        $f_{sv_1} + 1$,
+        $f_{st} + 1$,
+        $f_{v_3v_1} - 1$,
+        $f_{v_3v_5} + 1$ which gives us the maximal flow in the network.
+    \end{solution}
+\end{example}
+
+\begin{example}
+    At the start,
+    we assumed that $c_{uu} = 0$,
+    i.e.,
+    there were no self-loops in he network.
+    We also assumed all the capacities were integers.
+    Did either of these assumptions matter?
+
+    \begin{solution}
+        Assume $c_{uu} = 0$.
+        This should not matter as:
+        \[
+        \Phi_{\text{in}} - \Phi_{\text{out}} = 0
+        \]
+        for not $s, t$ with $c_{uu} \neq 0$
+        \[
+        \Phi_{\text{in}} + f_{uu} - \Phi_{\text{out}} - f_{uu} = 0.
+        \]
+
+        The fact that the capacities are integers should not matter as we can work as though they are scaled integers,
+        e.g. $0.1$ as a capacity would be $1$ if we scaled every capacity by $\times 10$.
+    \end{solution}
+\end{example}
+
+\begin{example}
+    Write down the natural generalisation of the definition of the flow constraints for a multiple-source,
+    multiple-sink network.
+
+    \begin{solution}
+        Let us have sources $s_1, \dotsc$ and sinks $t_1, \dotsc$.
+        We can imagine that we have a vertex connecting all of the sources,
+        say $\alpha$,
+        and one connecting all of the sinks,
+        say $\beta$.
+        Once we have these vertices $\alpha, \beta$ we can treat all of the sources and sinks as normal vertices.
+        If we chose all of the edges from $\alpha$ to $s_1, \dotsc$ and give them at least the maximum capacity of $s_1, \dotsc$ and the relevant flow then this would mean we can only have one source $\alpha$.
+
+        We can do similar for $\beta$ our sink,
+        allowing us to have a single sink with edges connected to $t_1, \dotsc$ with capacities and flows as before.
+    \end{solution}
+\end{example}
+
+
+Suppose we wan to maximise the total flow volume,
+that is,
+the sum of the net flow into all the sinks.
+Can we convert this problem into a maximal flow problem of the type we have already studied,
+with a single source and single sink?
+
+One idea if you have $n$ sources,
+say $s_1, \dotsc, s_n$,
+in a network $G$ is to introduce a new network,
+we'll call it $G ^ {*}$,
+which is the same as $G$ but with a extra vertex,
+let's say $\sigma$,
+a 'supersource',
+and $n$ new edges from $\sigma$ to each $s_i$.
+Simply if there is more than one sink,
+our new graph $G ^ {*}$ will have a new 'supersink' $\tau$ with an edge to it from each of the original sinks;
+if $G$ has both multiple sources and multiple sinks,
+we'll do both,
+and $G ^ {*}$ will have two new vertices.
+Call the resulting network an augmented network.
+
 
 
 
