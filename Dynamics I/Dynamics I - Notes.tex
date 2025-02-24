@@ -922,7 +922,96 @@ Substituting $\dot{\theta} = \frac{L}{mr ^ 2}$ into the $\ddot{r}$ equation give
 m\ddot{r} - \frac{L ^ 2}{mr ^ 3} = f(r).
 \]
 
+\newpage
 
+\section{}
+
+\subsection{Gravitational Trajectories}
+
+Take $m = 1$,
+$f(r) = -1 / r ^ 2$,
+start at $r = 1$,
+with speed $v_0$.
+
+\begin{problem}
+    Show that the particle is bounded,
+    if $v_0 < \sqrt{2}$;
+    if $v_0 < \sqrt{2}$ and the initial velocity $v_0$ is perpendicular to the position vector $\mbf{r}$,
+    find $r_{\text{min}}$ and $r_{\text{max}}$.
+
+    \begin{solution}
+        Look at energy.
+        Potential energy is $V(r) = -\int f(r)\,dr = -\frac{1}{r}$.
+        So
+        \[
+        E = \frac{1}{2}v ^ 2 + \left(-\frac{1}{r}\right) \overset{t = 0}{=} \frac{1}{2}v_0 ^ 2 - 1.
+        \]
+        Thus
+        \[
+        v ^ 2 = (v_0 ^ 2 - 2) + \frac{2}{r} \geq 0 \implies \frac{2}{r} \geq 2 - v_0 ^ 2
+        \]
+        if $2 - v_0 ^ 2 > 0$
+        \[
+        r \leq \frac{2}{2 - v_0 ^ 2}
+        \]
+        so if $v_0 < \sqrt{2}$ then $r \leq \frac{2}{2 - v_0 ^ 2}$.
+
+
+        For the second part,
+        $\mbf{r}(0) = \mbf{e}_r$ and $\mbf{v}(0) = v_0\mbf{e}_{\theta}$.
+        Then angular momentum is $\mbf{L} = \mbf{r} \times \mbf{v} = v_0\mbf{e}_r \times \mbf{e}_{\theta} = v_0\mbf{e}_3$ hence $L = v_0$.
+
+        Now
+        \[
+        E = \frac{1}{2}(\dot{r} ^ 2 + r ^ 2\dot{\theta} ^ 2) - \frac{1}{r} = \frac{1}{2}v_0 ^ 2 - 1.
+        \]
+        $L = r ^ 2\dot{\theta}$.
+        \[
+        E = \frac{1}{2}\left(\dot{r} ^ 2 + \frac{v_0 ^ 2}{r ^ 2}\right) - \frac{1}{r} = \frac{1}{2}v_0 ^ 2 - 1.
+        \]
+        So
+        \[
+        \dot{r} ^ 2 + \frac{v_0 ^ 2}{r ^ 2} - \frac{2}{r} + (2 - v_0 ^ 2) = 0.
+        \]
+        \[
+        \dot{r} ^ 2 + \frac{1}{r ^ 2}Q(r)
+        \]
+        where
+        $Q(r) = (2 - r_0 ^ 2)r ^ 2 - 2r + r_0 ^ 2$.
+        Since $\dot{r} ^ 2 \geq 0$ we need $Q(r) \leq 0$.
+
+        If $v_0 = 1$ then $Q(r) = r ^ 2 - 2r + 1 = (r - 1) ^ 2$ so $r = 1$ for all $t$ and $\dot{r} = 0$ for all $t$.
+
+        If $v_0 = \sqrt{2}$ then $Q(r) = -2r + 2 = 2(1 - r)$ so $r \geq 1$.
+
+        If $v_0 > \sqrt{2}$ $r(t) \geq 1$ same as previous case.
+
+        If $v_0 < \sqrt{2}$ then roots $r = 1, \frac{v_0 ^ 2}{2 - v_0 ^ 2}$,
+        these two roots are $r_{\text{min}}$ and $r_{\text{max}}$
+        (in some order).
+        If $v_0 = 1 \implies r_{\text{max}} = r_{\text{min}} = 1$.
+
+        Bounded orbit.
+    \end{solution}
+\end{problem}
+
+\begin{example}
+    For shooting a projectile from surface of the Earth,
+    we have $f(r) = -\frac{GMm}{r ^ 2}$
+    ($M$ mass of Earth,
+    $m$ mass of projectile,
+    $G$ is Newton's constant)
+    Start at $r = R$ radius of Earth.
+
+    \begin{solution}
+        Now $E = \underbrace{\frac{1}{2}mv ^ 2}_{\geq 0} - \underbrace{\frac{GMm}{r}}_{\rightarrow 0\text{ for escape}} = \frac{1}{2}mv_0 ^ 2 - \frac{GMm}{R}$.
+        So the escape speed has
+        \[
+        \frac{1}{2}mv_0 ^ 2 \geq \frac{GMm}{R} \implies v_0 \geq \sqrt{\frac{2GM}{R ^ 2}}
+        \]
+        independent of $m$ and of direction.
+    \end{solution}
+\end{example}
 
 
 
