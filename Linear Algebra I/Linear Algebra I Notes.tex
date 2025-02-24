@@ -7115,9 +7115,180 @@ this is even true if some eigenvalues are equal.
     the columns of $P$ are an orthonormal basis of eigenvectors of $A$.
 \end{proposition}
 
+\begin{proposition}
+    If $A$ is real $n \times n$ symmetric,
+    then there exists an $n \times n$ orthogonal matrix $P$ such that $P ^ TAP = D$ diagonal
+    (and real).
 
+    If $A$ is $n \times n$ complex Hermitian,
+    then there exists an $n \times n$ unitary matrix $P$ such that $P ^ {*}AP = D$ diagonal
+    (and real).
+    In each case,
+    columns of $P$ are an orthonormal basis of eigenvector space of $A$.
 
+    \begin{proof}[Proof Complex case]
+        Pick an eigenvalue $\lambda_1$,
+        and associated unit eigenvector $\mbf{u}_1 : A\mbf{u}_1 = \lambda_1\mbf{u}_1$.
+        Write $U_1 = \mathrm{span}\{\mbf{u}_1\}$,
+        and construct $U_1 ^ {\perp}$,
+        the orthogonal complement of $U_1$,
+        using the standard inner product of $\C ^ n$.
+        Then $\C ^ n = U_1 \oplus U_1 ^ {\perp}$.
+        Now note that $A$ acting on any $\mbf{v} \in U_1 ^ {\perp}$ gives another element of $U_1 ^ {\perp}$
+        (here,
+        we use $A = A ^ {*}$).
+        \begin{align*}
+            \langle A\mbf{v}, \mbf{u}_1\rangle &= \mbf{u}_1 ^ {*}A\mbf{v} \\
+            &= (A\mbf{u}_1) ^ {*}\mbf{v}\qquad(\text{using $A = A ^ {*}$}) \\
+            &= (\lambda_1\mbf{u}_1) ^ {*}\mbf{v} \\
+            &= \bar{\lambda}_1\mbf{u}_1 ^ {*}\mbf{v} \\
+            &= \bar{\lambda}_1\langle\mbf{u}_1, \mbf{v}\rangle \\
+            &= 0\qquad(\text{since $v \in U ^ {\perp}$}).
+        \end{align*}
+        Hence $A\mbf{v} \in U_1 ^ {\perp}$.
+        So we can talk about the restriction of $A$ to $U_1 ^ {\perp}$,
+        denoted $A|_{U_1 ^ {\perp}} : U_1 ^ {\perp} \rightarrow U_1 ^ {\perp}$,
+        this is a Hermitian operator acting on $U_1 ^ {\perp} \simeq \C ^ {n - 1}$
+        (one dimension less).
 
+        Now repeat.
+        Pick $\mbf{u}_2 \in U_1 ^ {\perp}$ with $A\mbf{u}_2 = \lambda_2\mbf{u}_2$,
+        set $U_2 = \mathrm{span}\{\mbf{u}_2\}$,
+        split $U_1 ^ {\perp} = U_2 \oplus U_2 ^ {\perp}$ and so on.
+        In the end,
+        get to
+        \[
+        \C ^ n = U_1 \oplus U_2 \oplus \dotsc \oplus U_n
+        \]
+        each $U_i = \mathrm{span}\{\mbf{u}_i\}$,
+        all $\mbf{u}_i$'s are orthogonal
+        (and unit length).
+    \end{proof}
+\end{proposition}
+
+It works the other way too:
+
+\begin{proposition}
+    If $A$ is orthogonally diagonalisable,
+    then $A$ is symmetric.
+
+    \begin{proof}
+        If $P ^ TAP = D$,
+        with $D$ diagonal,
+        $P$ orthogonal,
+        then $A = PDP ^ T$,
+        which is symmetric
+        (since $D ^ T = T$).
+    \end{proof}
+\end{proposition}
+
+\begin{proposition}
+    If $A$ is unitary diagonalisable and the eigenvalues of $A$ are all real,
+    then $A$ is Hermitian.
+
+    \begin{proof}
+        $P ^ {*}AP = D$ since unitary $A = PDP ^ {*}$ which is Hermitian provided $D ^ {*} = D$,
+        which is true if and only if the eigenvalues of $D$ are all real.
+    \end{proof}
+\end{proposition}
+
+\begin{example}
+    If possible,
+    find some $P \in O(2)$ such that
+    $P ^ TAP = D$,
+    $D$ diagonal,
+    when $A = \begin{pmatrix}
+        2 & -2 \\ -2 & 5
+    \end{pmatrix}$.
+
+    \begin{solution}
+        Note $A ^ T = A$.
+        \[
+        p_A(t) = \det(A - tI) = \det\begin{pmatrix}
+            2 - t & -2 \\
+            -2 & 5 - t
+        \end{pmatrix} = (2 - t)(5 - t) - 4 = t ^ 2 - 7t + 6 = (t - 6)(t - 1)
+        \]
+        so the eigenvalues are $\lambda_1 = 1, \lambda_2 = 6$.
+
+        Taking $\lambda_1$
+        \[
+        (A - I)\begin{pmatrix}
+            a \\ b
+        \end{pmatrix} = \begin{pmatrix}
+            1 & -2 \\ -2 & 4
+        \end{pmatrix}\begin{pmatrix}
+            a \\ b
+        \end{pmatrix} = \begin{pmatrix}
+            0  \\ 0
+        \end{pmatrix}
+        \]
+        which implies $\mbf{v}_1 = \begin{pmatrix}
+            2 \\ 1
+        \end{pmatrix}$
+        $\|\mbf{v}_1\| ^ 2 = 5$ so
+        \[
+        \mbf{u}_1 = \frac{\mbf{v}_1}{\|\mbf{v}_1\|} = \frac{1}{\sqrt{5}}\begin{pmatrix}
+            2 \\ 1
+        \end{pmatrix}.
+        \]
+
+        So $U_1 = \mathrm{span}\left\{\frac{1}{\sqrt{5}}\begin{pmatrix}
+            2 \\ 1
+        \end{pmatrix}\right\}$ and
+        \[
+        U_1 ^ {\perp} : \mbf{u}_1 \cdot \begin{pmatrix}
+            a \\ b
+        \end{pmatrix} = \begin{pmatrix}
+            0 \\ 0
+        \end{pmatrix} \implies 2a + b = 0,
+        \]
+        so $U_1 ^ {\perp} = \mathrm{span}\left\{\begin{pmatrix}
+            1 \\ -2
+        \end{pmatrix}\right\}$.
+        So take $\mbf{u}_2 = \frac{1}{\sqrt{5}}\begin{pmatrix}
+            1 \\ -2
+        \end{pmatrix}$.
+
+        Checking:
+        \[
+        A\mbf{u}_2 = \frac{1}{\sqrt{5}}\begin{pmatrix}
+            1 & -2 \\ -2 & 5
+        \end{pmatrix}\begin{pmatrix}
+            1 \\ 2
+        \end{pmatrix} = \frac{1}{\sqrt{5}}\begin{pmatrix}
+            6 \\ -12
+        \end{pmatrix} = 6\mbf{u}_2.
+        \]
+
+        So
+        \[
+        P = \begin{pmatrix}
+            \mbf{u}_1 & \mbf{u}_2
+        \end{pmatrix} = \frac{1}{\sqrt{5}}\begin{pmatrix}
+            2 & 1 \\ 1 & -2
+        \end{pmatrix}
+        \]
+        further check:
+        \[
+        PP ^ T = \frac{1}{5}\begin{pmatrix}
+            2 & 1 \\ 1 & -2
+        \end{pmatrix}\begin{pmatrix}
+            2 & 1 \\ 1 & -2
+        \end{pmatrix} = \frac{1}{5}\begin{pmatrix}
+            5 & 0 \\ 0 & 5
+        \end{pmatrix} = \begin{pmatrix}
+            1 & 0 \\ 0 & 1
+        \end{pmatrix}.
+        \]
+    \end{solution}
+\end{example}
+
+\newpage
+
+\section{Special Polynomials}
+Look at vector spaces of polynomials,
+equipped with some "special" inner products.
 
 
 

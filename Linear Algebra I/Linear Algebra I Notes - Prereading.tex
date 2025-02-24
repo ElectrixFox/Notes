@@ -4591,8 +4591,110 @@ to $\mbf{v}$.
     \end{proof}
 \end{proposition}
 
+\begin{proposition}
+    If $A$ is real and symmetric,
+    then there exists an orthogonal $n\ \times n$ matrix $P$ such that $P ^ TAP = D$ with $D$ diagonal.
+    If $A$ is a complex hermitian $n \times n$ matrix,
+    then there exists a unitary $n \times n$ matrix $P$ such that $P ^ {*}AP = D$ with a $D$ diagonal real matrix.
+    The entries of $D$ are the eigenvalues of $A$.
+    In each case,
+    the columns of $P$ are an orthonormal basis of eigenvectors of $A$.
+
+    \begin{proof}
+        Let us probe the hermitian case,
+        so we are working on $\C ^ n$.
+        Pick an eigenvalue $\lambda_1$,
+        with associated unit norm eigenvector $\mbf{u}_1$.
+        We denote $U_1 = \mathrm{span}(\mbf{u}_1)$,
+        and construct,
+        using the standard inner product on $\C ^ n$,
+        the orthogonal complement $U_1 ^ {\perp}$,
+        so that $\C ^ n = U_1 \oplus U_1 ^ {\perp}$.
+
+        Now note that $A$ acting on any element $\mbf{v} \in U_1 ^ {\perp}$ gives another element in $U_1 ^ {\perp}$:
+        \[
+        \langle A\mbf{v}, \mbf{u}_1\rangle = (\mbf{u}_1) ^ {*}A\mbf{v} = (A\mbf{u}_1) ^ {*}\mbf{v} = \bar{\lambda_1}\mbf{u}_1 ^ {*}\mbf{v} = \bar{\lambda}_1\langle\mbf{v}, \mbf{u}_1\rangle = 0,
+        \]
+        where in the second equality we have used hermiticity of $A$.
+        We can talk about the restriction  of $A$ to $U_1 ^ {\perp}$,
+        which we denote by $A|_{U_1 ^ {\perp}} : U_1 ^ {\perp} \rightarrow U_1 ^ {\perp}$.
+        This restriction $A|_{U_1 ^ {\perp}}$ is a hermitian operator acting on $U_1 ^ {\perp} \simeq \C ^ {n - 1}$,
+        so we can iterate the process:
+        pick an eigenvalue of $\lambda_2$ for $A|_{U_1 ^ {\perp}}$,
+        with an associated unit norm eigenvector $\mbf{u}_2$,
+        define $U_2 \coloneqq \mathrm{span}(\mbf{u}_2)$,
+        write $U_1 ^ {\perp} = U_2 \oplus U_2 ^ {\perp}$.
+        and so on,
+        until you achieve a full decomposition
+        \[
+        C ^ n = U_1 \oplus \dotsc \oplus U_n
+        \]
+        with each $U_i = \mathrm{span}(\mbf{u}_i)$ and all $\mbf{u}_i$ orthonormal.
+        Because by construction the $\mbf{u}_i$ are an orthonormal basis of $\C ^ n$,
+        one of the propositions implies that the change of basis matrix $P$ is unitary.
+    \end{proof}
+\end{proposition}
+
+\begin{proposition}
+    If $A$ is orthogonally diagonalisable,
+    then $A$ is symmetric.
+
+    \begin{proof}
+        If $P ^ TAP = D$ with $P$ orthogonal and $D$ diagonal,
+        then $A = PDP ^ T$ which is clearly symmetric.
+    \end{proof}
+\end{proposition}
 
 
+\begin{proposition}
+    If $A$ us unitary diagonalisable and the eigenvalues of $A$ are all real,
+    then $A$ is hermitian.
+
+    \begin{proof}
+        If $P ^ {*}AP = D$ with $P$ unitary and $D$ diagonal,
+        then $A = PDP ^ {*}$ which is clearly hermitian because we assumed that the eigenvalues of $A$ were all real,
+        i.e. $D ^ {*} = D$.
+    \end{proof}
+\end{proposition}
+
+\textbf{(Diagonalisation of real inner products)}
+
+Every real inner product on $\R ^ n$ may be written as $(\mbf{u}, \mbf{v}) = \mbf{y} ^ TA\mbf{x}$,
+where $A$ is a symmetric $n \times n$ matrix and $\mbf{x}, \mbf{y}$ are the coordinates of the two vectors $\mbf{u}, \mbf{v}$ in the chosen basis.
+If we change basis,
+the coordinates representing the two vectors $\mbf{u}, \mbf{v}$ will change to
+\begin{align*}
+    \mbf{x} &= M\mbf{z},
+    \mbf{y} &= M\mbf{w},
+\end{align*}
+for some invertible matrix $M$,
+where $\mbf{z}$ and $\mbf{w}$ are the coordinates of the vectors $\mbf{u}, \mbf{v}$ in the new basis.
+
+In the new basis the inner product will take the form
+\[
+(\mbf{u}, \mbf{v}) = \mbf{y} ^ TA\mbf{x} = (M\mbf{w}) ^ TA(M\mbf{z}) = \mbf{w} ^ TM ^ TAM\mbf{z} = \mbf{w} ^ TB\mbf{z},
+\]
+where the symmetric matrix $B = M ^ TAM$ represents the same inner product but in a different basis.
+
+\textbf{(Diagonalisation of hermitian inner products)}
+
+Every complex inner product on $\C ^ n$ may be written as $\langle\mbf{u}, \mbf{v}\ranlge = \mbf{y} ^ {*}A\mbf{x}$,
+where $A$ is an hermitian $n \times n$ matrix and $\mbf{x}, \mbf{y}$ are the coordinates of the two vectors $\mbf{u}, \mbf{v}$ in the chosen basis.
+
+If we change basis,
+the coordinates representing the two vectors $\mbf{u}, \mbf{v}$ will change to $\mbf{x} = M\mbf{z}, \mbf{u} = M\mbf{w}$ for some invertible matrix $M$,
+where $\mbf{z}$ and $\mbf{w}$ are the coordinates of the vectors $\mbf{u}, \mbf{v}$ in the new basis.
+In the new basis the inner product will take the form
+\[
+(\mbf{u}, \mbf{v}) = \mbf{y} ^ {*}A\mbf{x} = (M\mbf{w}) ^ {*}A(M\mbf{z}) = \mbf{w} ^ {*}M ^ {*}AM\mbf{z} = \mbf{w} ^ {*}B\mbf{z},
+\]
+where the hermitian matrix $B =M ^ {*}AM$ represents the same inner product but in a different basis.
+
+\newpage
+
+\section{Special polynomials}
+
+\subsection{Orthogonal polynomials}
 
 
 
