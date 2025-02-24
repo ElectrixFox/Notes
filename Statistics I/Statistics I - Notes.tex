@@ -1922,7 +1922,28 @@ For example:
 \tilde{y} \pm z ^ {*}\sqrt{\frac{\tilde{y}(1 - \tilde{y})}{\tilde{n}}}\text{ with } \tilde{y} = \frac{ny + 2}{n + 4} \text{ and } \tilde{n} = n + 4.
 \]
 
+\subsubsection{Examples of Confidence Intervals and \texorpdfstring{$p$}{} for Proportions}
 
+\begin{example}[Drop out rates at U.K. Universities]
+    Suppose we want to estimate the first year drop out rate $p$ across the country and take a simple random sample of size $n = 250$ and see $28$ students failed to continue beyond first year.
+
+    Calculate standard $95\%$ confidence interval for $p$,
+    and the Wilson $95\%$ confidence interval.
+
+    \begin{solution}
+        We have $y = \frac{x}{n} = \frac{28}{250} = 0.112$.
+        \[
+        y \pm z ^ {*}\sqrt{\frac{y(1 - y)}{n}} = 0.112 \pm 1.96\sqrt{\frac{0.112 \cdot 0.588}{250}} = [0.073, 0.151].
+        \]
+
+        Wilson interval:
+        $t = \frac{(z ^ {*}) ^ 2}{n} = \frac{1.96 ^ 2}{250} = 0.0154$,
+        Wilson $95\%$ confidence interval:
+        \[
+        \frac{y + \frac{t}{2}}{1 + t} \pm \frac{\sqrt{y(1 - y)t + \frac{t ^ 2}{4}}}{1 + t} = [0.079, 0.157].
+        \]
+    \end{solution}
+\end{example}
 
 
 
