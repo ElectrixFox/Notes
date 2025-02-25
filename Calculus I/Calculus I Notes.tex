@@ -4817,16 +4817,120 @@ therefore
 b_m = \frac{2m + 1}{2}(y, P_m) = \frac{2m + 1}{2}\int_{-1}^{1}y(x)P_m(x)\,dx.
 \]
 
-For Eulers we get
+For Euler's we get
 \[
 a_n = \frac{1}{\pi}\int_{-\pi}^{\pi}y(x)\cos(nx)\,dx.
 \]
 
+\begin{example}
+    Find the first non-vanishing term in the Legendre expansion of
+    \[
+    \cos(\pi x) = \infsum[n = 0] b_nP_n(x).
+    \]
+    
+    \begin{solution}
+        \begin{align*}
+            b_0 &= \frac{1}{2}\int_{-1}^{1}y(x)P_0(x)\,dx \\
+            &= \frac{1}{2}\int_{-1}^{1}\cos(\pi x)\,dx \\
+            &= \frac{1}{2\pi}[\sin(\pi x)]_{-1}^{1} = 0 \\
+            b_1 &= \frac{3}{2}\int_{-1}^{1}\cos(\pi x)P_1(x)\,dx \\
+            &= \frac{3}{2}\int_{-1}^{1}\cos(\pi x)x\,dx \\
+            &= 0 \\
+            b_2 &= \frac{5}{2}\int_{-1}^{1}\cos(\pi x)P_2(x)\,dx \\
+            &= \frac{5}{4}\int_{-1}^{1}\cos(\pi x)(3x ^ 2 - 1)\,dx \\
+            &= \frac{5}{4}\left[\sin(\pi x)(3x ^ 2 - 1)\right]_{-1}^{1} - \frac{15}{2\pi}\int\sin(\pi x)x\,dx \\
+            &= -\left[\frac{15}{2\pi ^ 2}\cos(\pi x)x\right]_{-1}^{1} + \frac{15}{2\pi ^ 2}\int_{-1}^{1}\cos(\pi x)\,dx \\
+            &= \frac{15}{2\pi ^ 2}(-1 - 1) \\
+            &= -\frac{15}{\pi ^ 2}
+        \end{align*}
+        hence the first non-vanishing term is $\cos(\pi x) = -\frac{15}{\pi ^ 2}\left(\frac{3x ^ 2 - 1}{2}\right) + \dotsc$
+    \end{solution}
+\end{example}
 
+\begin{remark}
+    $P_n(x)$ is an even function of $x$ if $n$ is even,
+    and $P_n(x)$ is odd for odd $n$.
+\end{remark}
 
+\subsection{Fourier Series Revisited}
+The Legendre differential equation $\mathcal{L}_Ly = \left[(x ^ 2 - 1)\frac{d ^ 2}{dx ^ 2} + 2x\frac{d}{dx}\right]y = \lambda y$.
+$\mathcal{L}_L$ is self adjoint with respect to an inner product $(f, g) = \int_{-1}^{1}f(x)g(x)\,dx$ where $f, g$
+($f', g'$)
+finite at $x = \pm 1$.
 
+Eigenfunctions of $\mathcal{L}_L$
+(satisfying finiteness conditions at $x = \pm 1$)
+are orthogonal.
 
+For continuously differentiable $y(x)$ can write
+\[
+y(x) = \infsum[n = 0]b_nP_n(x)
+\]
+eigenfunctions of $\mathcal{L}_L$ satisfying finiteness conditions,
+orthogonality implies
+\[
+b_n = \frac{(y, P_n)}{(P_n, P_n)} = \frac{2n + 1}{2}\int_{-1}^{1}y(x)P_n(x)\,dx.
+\]
 
+On the other hand,
+if $y(x)$ is a function of periodicity $2\pi$ we can write
+\[
+y(x) = \frac{a_0}{2} + \infsum[n = 1]a_n\cos(nx) + \infsum[n = 1]b_n\sin(nx).
+\]
+$\left\{\frac{1}{2}, \cos(nx), \sin(nx)\right\}$ are the basis functions which are eigenfunctions of $\mathcal{L}_F$.
+\[
+a_n = \frac{1}{\pi}\int_{-\pi}^{\pi}y(x)\cos(nx)\,dx = \frac{(y, \cos(nx))}{(\cos(nx), \cos(nx))}
+\]
+will take $(f, g) = \int_{-\pi}^{\pi}f(x)g(x)\,dx$
+$\{\sin(nx), \cos(nx)\}$ satisfy simple harmonic oscillator,
+$y'' + n ^ 2y = 0$,
+$\mathcal{L}_Fy = -n ^ 2y$ where $\mathcal{L}_F = \frac{d ^ 2}{dx ^ 2}$.
+Is $\mathcal{L}_F$ self-adjoint with respect to the inner product $(f, g) = \int_{-\pi}^{\pi}f(x)g(x)\,dx$,
+\begin{align*}
+    (\mathcal{L}_Ff, g) &= (f'', g) \\
+    &= \int_{-\pi}^{\pi}f''g\,dx \\
+    &= \left[fg'\right]_{-\pi}^{\pi} - \int_{-\pi}^{\pi}f'g'\,dx \\
+    &= \left[f'g\right]_{-\pi}^{\pi} - \left[fg'\right]_{-\pi}^{\pi} + \int_{-\pi}^{\pi}fg''\,dx \\
+    &= \left[f'g - fg'\right]_{-\pi}^{\pi} + (f, \mathcal{L}_Fg) \\
+    &= (f, \mathcal{L}_Fg) &(\text{by periodicity}).
+\end{align*}
+
+What are the eigenfunctions of $\mathcal{L}_F = \frac{d ^ 2}{dx ^ 2}$ which are periodic with period $2\pi$?
+
+We want to solve $y'' = \lambda y$.
+
+If $\lambda = n ^ 2 > 0$,
+$y'' = n ^ 2y \implies y(x) = Ae ^ {nx} + Be ^ {-nx}$,
+no non-vanishing periodic functions which are exponential.
+
+$\lambda = 0$,
+$y'' = 0 \implies y(x) = Ax + b$,
+$y = 1$ is periodic.
+
+$\lambda = -n ^ 2 < 0$,
+$y'' = -n ^ 2y \implies y(x) = A\sin(nx) + B\cos(nx)$,
+periodicity $2\pi$ if $n$ is a positive integer.
+
+Eigenfunctions of $\mathcal{L}_F$ with period $2\pi$ are $\{1, \cos(nx), \sin(nx)\}$ for $n$ positive integer,
+this implies $y(x) = a_0\frac{1}{2} + \infsum[n = 1]a_n\cos(nx) + \infsum[n = 1]b_n\sin(nx)$.
+$\{\cos(nx), \sin(nx), 1\}$ are orthogonal since $\mathcal{L}_F$ is self-adjoint
+\[
+(\sin(3x), \sin(7x)) = \int_{-\pi}^{\pi}\sin(3x)\sin(7x)\,dx = 0.
+\]
+
+To find $b_7$ "dot" the expansion.
+$\sin(7x)$,
+\begin{align*}
+    (y(x), \sin(7x)) &= \left(\frac{a_0}{2} + \infsum[n = 1]a_n\cos(nx) + \infsum[n = 1]b_n\sin(nx), \sin(7x)\right) \\
+    &= a_0\left(\frac{1}{2}, \sin(7x)\right) + \infsum[n = 1]a_n(\cos(nx), \sin(7x)) + \infsum[n = 1]b_n(\sin(nx), \sin(7x)) \\
+    &= a_0 \cdot 0 + \infsum[n = 1]a_n\cdot 0 + b_7(\sin(7x), \sin(7x))
+\end{align*}
+hence
+\[
+b_7 = \frac{(y, \sin(7x))}{(\sin(7x), \sin(7x))} = \frac{\int_{-\pi}^{\pi}y(x)\sin(7x)\,dx}{\int_{-\pi}^{\pi}\sin ^ 2(7x)\,dx} = \frac{1}{\pi}\int_{-\pi}^{\pi}y(x)\sin(7x)\,dx = b_7.
+\]
+\[
+\]
 
 
 
