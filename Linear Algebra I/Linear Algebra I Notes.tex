@@ -7290,9 +7290,146 @@ It works the other way too:
 Look at vector spaces of polynomials,
 equipped with some "special" inner products.
 
+\textbf{The Legendre equation}
 
+\[
+(1 - x ^ 2)\frac{d ^ 2}{dx ^ 2}y(x) - 2x\frac{d}{dx}y(x) = \lambda y(x).
+\]
+$\mathcal{L}_L(y(x)) = \lambda y(x)$ with
+\[
+\mathcal{L}_L = (1 - x ^ 2)\frac{d ^ 2}{dx ^ 2} - 2x\frac{d}{dx}
+\]
+a linear operator on a vector space $V$ of functions.
 
+For which values of $\lambda$ does
+\[
+(1 - x ^ 2)\frac{d ^ 2}{dx ^ 2}y(x) - 2x\frac{d}{dx}y(x) = \lambda y(x).
+\]
+have polynomial solutions?
 
+If the vector space $V$ is the space of polynomials,
+then the "special" values of $\lambda$ are the eigenvalues of $\mathcal{L}_L$.
+
+Consider $\R[x]$,
+the infinite dimensional vector space of all real polynomials in $x$ and $\R[x]_n$ its
+($n + 1$ dimensional)
+subspace of polynomials of degree less than or equal to $n$.
+\[
+\R[x]_n = \mathrm{span}\{1, x, x ^ 2, \dotsc, x ^ n\}
+\]
+standard basis.
+Taking as inner product
+\[
+(f, g) = \int_{a}^{b}f(x)g(x)k(x)\,dx
+\]
+for some fixed function $k : [a, b] \rightarrow \R$ with $k(x) > 0$ for all $x \in [a, b]$,
+and $a < b$ real numbers.
+
+This is an inner product on $C[a, b]$ continuous functions on $[a, b]$ and hence on its subspaces $\R[x]_n$.
+
+How do we find an orthonormal basis $\{f_0, \dotsc, f_n\}$ of $\R[x]_n$ with this inner product?
+(also this will depend $k, a, b$).
+
+One way to find an orthonormal basis is to start with the standard basis $\{1, x, \dotsc, x ^ n\}$ and apply Gram-Schmidt.
+
+\begin{example}[Legendre polynomials]
+    Consider $\R[x]_n$ with inner product defined via $k(x) = 1$ and $[a, b] = [-1, 1]$.
+    Apply Gram-Schmidt to this situation to find
+    \[
+    P_0(x) = \frac{1}{\sqrt{2}},\qquad P_1(x) = \sqrt{\frac{3}{2}}x,\qquad P_2(x) = \sqrt{\frac{5}{8}}(3x ^ 2 - 1),\dotsc
+    \]
+    these are an orthonormal basis with respect to $(\,,\,)$.
+    I.e. $(P_i, P_j) = \int_{-1}^{1}P_i(x)P_j(x)\,dx = \delta_{ij}$.
+
+    These are called the Legendre polynomials.
+
+    \textit{Sometimes,
+    they are normalised differently,
+    as $\tilde{p}_i(x) = 1 \cdot x ^ {i} + (\text{lower orders})$,
+    leading coefficient equals one.}
+
+    The connection with Legendre's ODE:
+
+    The $k$th Legendre polynomial solves
+    \[
+    (1 - x ^ 2)y'' - 2xy' = \lambda y
+    \]
+    for $\lambda = -(k + 1) \cdot k$,
+    the "special" values of $\lambda$.
+    I.e.
+    \[
+    \mathcal{L}_L(P_k(x)) = -k(k + 1)P_k(x)\qquad k = 0, 1, 2, \dotsc
+    \]
+    with $\mathcal{L}_L$ a linear operator,
+    $-k(k + 1)$ eigenvalue,
+    and $P_k(x)$ an eigenfunction.
+\end{example}
+
+List of other notable examples:
+
+Looking for orthonormal basis of $\R[x]_n$ with respect to the inner product $(p, q) = \int_{a}^{b}p(x)q(x)k(x)\,dx$,
+using Gram-Schmidt on $\{1, x, x ^ 2, \dotsc\}$
+\begin{itemize}
+    \item
+    \[
+    k_L(x) = 1,
+    \]
+    $[a, b] = [-1, 1]$,
+    Legendre polynomials.
+
+    \item
+    \[
+    k_{CI}(x) = \frac{1}{\sqrt{1 - x ^ 2}},
+    \]
+    $[a, b] = [-1, 1]$,
+    Chebyshev-I polynomials.
+
+    \item
+    \[
+    k_{CII}(x) = \sqrt{1 - x ^ 2},
+    \]
+    $[a, b] = [-1, 1]$,
+    Chebyshev-II polynomials.
+
+    \item
+    \[
+    k_H(x) = e ^ {-x ^ 2},
+    \]
+    $(a, b) = (-\infty, \infty)$,
+    Hermite polynomials.
+
+    \item
+    \[
+    k_{La}(x) = e ^ {-x},
+    \]
+    $[a, b) = [0, \infty)$,
+    Laguerre polynomials.
+\end{itemize}
+
+In each case,
+the polynomials solve a special ODE.
+
+Key property turns out to be:
+
+\begin{definition}
+    If $V$,
+    $(\,,\,)$ is a real inner product space,
+    and $\mathcal{L} : V \rightarrow V$ is a linear operator.
+    Then $\mathcal{L}$ is symmetric
+    (self-adjoint)
+    with respect to this inner product if
+    \[
+    (\mathcal{L}\mbf{v}, \mbf{w}) = (\mbf{v}, \mathcal{L}\mbf{w})
+    \]
+    for all $\mbf{v}, \mbf{w} \in V$.
+\end{definition}
+
+\begin{example}
+    If $V = \R ^ n$,
+    with standard inner product,
+    and $\mathcal{L} : V \rightarrow V$ is represented by a matrix $M$,
+    then $\mathcal{L}$ symmetric is equivalent to $M ^ T = M$.
+\end{example}
 
 
 
