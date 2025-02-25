@@ -4695,7 +4695,72 @@ where the hermitian matrix $B =M ^ {*}AM$ represents the same inner product but 
 \section{Special polynomials}
 
 \subsection{Orthogonal polynomials}
+Let $\R[x]$ denote the
+(infinite-dimensional)
+vector space of all real polynomials in $x$,
+and let $\R[x]_n$ denote the $(n + 1)$-dimensional subspace of all real polynomials of degree at most $n$.
+The inner product is taken to be
+\[
+(f, g) = \int_{a}^{b}f(x)g(x)k(x)\,dx,
+\]
+where $k(x)$ is some fixed,
+continuous function such that $k(x) > 0$ for all $x \in [a, b]$,
+with $a, b$ fixed numbers.
 
+This is indeed an inner product over the space of continuous,
+real valued functions $C[a, b]$,
+over the interval $[a, b]$,
+and hence also on its vector subspace $\R[x]$ and $\R[x]_n$.
+
+Here is the proof of this
+\begin{enumerate}
+    \item It is symmetric and homogeneous:
+    \begin{align*}
+        (\lambda f_1 + \mu f_2, g) &= \int_{a}^{b}(\lambda f_1(x) + \mu f_2(x))g(x)k(x)\,dx \\
+        &= \lambda\int_{a}^{b}f_1(x)g(x)k(x) + \mu\int_{a}^{b}f_2(x)g(x)k(x) \\
+        &= \lambda(f_1, g) + \mu(f_2, g) \\
+        &= \lambda(g, f_1) + \mu(g, f_2),
+    \end{align*}
+    for all constants $\lambda, \mu \in \R$,
+    and all $f_1, f_2, g \in C[a, b]$.
+
+    \item It is positive definite
+    \[
+    (f, f) = \int_{a}^{b}f(x) ^ 2k(x)\,dx \geq 0
+    \]
+    since $f(x) ^ 2 \geq 0$ and $k(x)$ was chosen by the hypothesis to be positive over the interval $[a, b]$.
+
+    \item It is non degenerate,
+    i.e. $(f, f) = 0$ if and only if $f = 0$,
+    using the properties of continuous functions and the fact that $k(x) > 0$ is strictly positive.
+    If $f \neq 0$,
+    it means that there exists $x_0 \in [a, b]$ such that $f(x_0) = c \neq 0$.
+    By continuity we know that if $f$ is non-vanishing at $x_0$,
+    there must be an interval around $x_0$ such that $f$ is non-zero on the whole interval,
+    i.e. there exists $\delta > 0$ such that $|f(x)| > \varepsilon$ for all $x \in (x_0, - \delta, x_0 + \delta)$ for some $\varepsilon > 0$
+    (for simplicity,
+    assume that this interval is entirely contained in $[a, b]$).
+    On the interval $(x_0 - \delta, x_0 + \delta)$,
+    the function $f ^ 2(x)$,
+    and $k(x)$ as well,
+    are strictly bigger than zero,
+    i.e. $f ^ 2(x)k(x) > \bar{\varepsilon}$,
+    for some $\bar{\varepsilon} > 0$ related to $\varepsilon$,
+    $c$ and the minimum of $k(x)$ in the interval
+    (which is strictly bigger than zero).
+    So
+    \[
+    (f, f) = \int_{a}^{b}f ^ 2(x)k(x)\,dx \geq \int_{x_0 - \delta}^{x_0 + \delta}f ^ 2(x)k(x)\,dx > 2\bar{\varepsilon}\delta > 0.
+    \]
+    The crucial points are continuity and the fact that $k(x)$ is positive definite over the interval $[a, b]$.
+\end{enumerate}
+
+Suppose we want an orthonormal basis $\{f_0, f_1, f_2, \dotsc, f_n\}$,
+where $f_n \in \R[x]_n$.
+One way to get such a basis is to start with $\{1, x, x ^ 2, \dotsc, x ^ n\}$ as a "first guess",
+and apply the Gram-Schmidt procedure.
+In some special cases there is a more interesting way,
+related to the fact that many such examples arose in the study of differential equations.
 
 
 
