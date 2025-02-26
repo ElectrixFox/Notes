@@ -922,10 +922,6 @@ Substituting $\dot{\theta} = \frac{L}{mr ^ 2}$ into the $\ddot{r}$ equation give
 m\ddot{r} - \frac{L ^ 2}{mr ^ 3} = f(r).
 \]
 
-\newpage
-
-\section{}
-
 \subsection{Gravitational Trajectories}
 
 Take $m = 1$,
@@ -1013,8 +1009,115 @@ with speed $v_0$.
     \end{solution}
 \end{example}
 
+\subsection{Finding an orbit}
 
+We have an equation for $r(t)$,
+namely
+\[
+m\ddot{r} - \frac{L ^ 2}{mr ^ 3} = f(r).
+\]
+Want a curve
+(orbit)
+as $r = r(\theta)$.
+Use the chain rule:
+for any function $h$ we have $\frac{dh}{dt} = \frac{dh}{d\theta}\frac{d\theta}{dt}$.
+Recall,
+$L = mr ^ 2\dot{\theta}$.
+Which takes us to
+\[
+\frac{dh}{dt} = \frac{dh}{d\theta}\frac{d\theta}{dt} = \frac{dh}{d\theta}\frac{L}{mr ^ 2}.
+\]
+Also,
+it is convenient to change the variable from $r$ to $u = \frac{1}{r}$.
+Then
+\[
+\frac{dr}{dt} = \frac{d}{dt}\underbrace{\left(\frac{1}{u}\right)}_{= r} = -\frac{1}{u ^ 2}\frac{du}{d\theta}\frac{L}{mr ^ 2} = -\frac{L}{m}\frac{du}{d\theta}.
+\]
+And to get $\ddot{r}$ we need
+\[
+\frac{d}{dt}\left(\frac{dr}{dt}\right) = \frac{d}{dt}\left(-\frac{L}{m}\frac{du}{d\theta}\right) = -\frac{L}{m}\frac{d}{dt}\left(\frac{du}{d\theta}\right) = -\frac{L}{m}\frac{d ^ 2u}{d\theta ^ 2}\frac{L}{m}u ^ 2 = -\frac{L ^ 2u ^ 2}{m ^ 2}\frac{d ^ 2u}{d\theta ^ 2}.
+\]
+So
+\[
+m\ddot{r} - \frac{L ^ 2}{mr ^ 3} = f(r)
+\]
+becomes
+\[
+-\frac{L ^ 2u ^ 2}{m}\frac{d ^ 2u}{d\theta ^ 2} - \frac{L ^ 2}{m}u ^ 3 = f\left(\frac{1}{u}\right)
+\]
+this can be rewritten as
+\[
+\frac{du ^ 2}{d\theta ^ 2} + u = -\frac{m}{L ^ 2u ^ 2}f\left(\frac{1}{u}\right).
+\]
 
+\begin{example}
+    $f(r) = -\frac{1}{r ^ 2}$ with $m = 1$.
+
+    This equation becomes
+    \[
+    \frac{d ^ 2u}{d\theta ^ 2} + u = -\frac{1}{L ^ 2u ^ 2}(-u ^ 2) = \frac{1}{L ^ 2}.
+    \]
+    The solution is the complementary function plus the particular integral.
+    Impose $u'(0) = 0$ where $u' = \frac{du}{d\theta}$.
+    Solution
+    \[
+    u(\theta) = \underbrace{A\cos{\theta}}_{CF} + \underbrace{\frac{1}{L ^ 2}}_{PI}.
+    \]
+    Can write as
+    \[
+    r(\theta) = \frac{L ^ 2}{1 + \varepsilon\cos{\theta}}
+    \]
+    where $\varepsilon = AL ^ 2$.
+
+    Note:
+    if $|\varepsilon| < 1$ then $r(\theta)$ is finite for all $\theta$,
+    and $r_{\text{min}} \leq r(\theta) \leq r_{\text{max}}$.
+    Also
+    \[
+    L ^ 2 = r + \varepsilon r\cos{\theta} = r + \varepsilon x
+    \]
+    which can be rewritten as
+    \[
+    r = L ^ 2 - \varepsilon x \implies r ^ 2 = (L ^ 2 - \varepsilon x) ^ 2
+    \]
+    this is the equation of an ellipse in the $xy$-plane.
+
+    $\varepsilon$ is the eccentricity of the ellipse.
+    The case $\varepsilon = 0$ is a circle $r = \text{constant}$.
+
+    If $|\varepsilon| \geq 1$ it is an unbound orbit
+    (trajectory).
+\end{example}
+
+\begin{example}
+    $m = 1$,
+    $f(r) = -\frac{1}{r ^ 3}$.
+    Then the new equation is
+    (with $u'(0) = 0$)
+    \[
+    u'' + u = -\frac{1}{L ^ 2u ^ 2}(-u ^ 3) = \frac{1}{L ^ 2}u
+    \]
+    this is equivalent to
+    \[
+    u'' + \left(1 - \frac{1}{L ^ 2}\right)u = 0.
+    \]
+    Case $L = 1$:
+    this has solution $u = \text{constant} \implies r = \text{constant}$ which is a circle.
+
+    If initial velocity $\mbf{v}$ is perpendicular to $\mbf{r}$,
+    then $\dot{r}(0) = 0$,
+    this implies $u'(0) = 0$
+    (from $\dot{r} = -\frac{L}{m}u'$).
+
+    Case $L > 1$:
+    this implies $1 - \frac{1}{L ^ 2} > 0$,
+    write $1 = \frac{1}{L ^ 2} = -\omega ^ 2$ and
+    \[
+    u(\theta) = A\cos(\omega\theta)
+    \]
+    which implies $r(\theta) = \frac{1}{A\cos(\omega\theta)}$ for $|\theta| < \frac{\pi}{2\omega}$,
+    and the particle escapes to infinity.
+\end{example}
 
 
 

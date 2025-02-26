@@ -1151,6 +1151,182 @@ so $dE / dt = 0$ is equivalent to the following equation:
 m\ddot{r} - \frac{L ^ 2}{mr ^ 3} = f(r).
 \]
 
+\subsection{Bound orbits}
+
+A unit-mass particle moves under the influence of the attractive central force $f(r) = -\frac{1}{r ^ 2}$.
+It starts at $r = 1$,
+with speed $v_0$ and direction perpendicular to $\mbf{r}$.
+Show that the particle cannot escape to infinity
+(it is in a bound orbit)
+if $v_0 ^ 2 < 2$.
+In this case,
+find the smallest and largest values of the radius $r$.
+What value of $v_0$ gives a circular orbit?
+
+\begin{solution}
+    Here $V(r) = -\int f(r)\,dr = -\frac{1}{r}$,
+    and so the energy is
+    \[
+    E = \frac{v ^ 2}{2} - \frac{1}{r} = \frac{v_0 ^ 2}{2} - 1,
+    \]
+    using the initial conditions.
+    If the particle reaches infinity we would have $E = \frac{1}{2}v ^ 2 + 0 \geq 0$,
+    so it is bound if $E < 0$,
+    which gives $v_0 ^ 2 < 2$.
+
+    For the second part,
+    we need the angular momentum
+    \[
+    L = r ^ 2\dot{\theta} = r(r\dot{\theta}) = v_0.
+    \]
+    Expressing $v$ in polar coordinates and eliminating $\dot{\theta}$ then gives
+    \[
+    E = \frac{1}{2}\left(\dot{r} ^ 2 + \frac{v_0 ^ 2}{r ^ 2}\right) - \frac{1}{r} = \frac{v_0 ^ 2}{2} - 1.
+    \]
+    This equation can be written as $\dot{r} ^ 2 + r ^ {-2}Q(r) = 0$,
+    where $Q(r) = (2 - v_0 ^ 2)r ^ 2 - 2r + v_0 ^ 2$.
+    The maximum and minimum values of $r$ occur when $\dot{r} = 0$,
+    giving a quadratic equation $Q(r) = 0$ for $r$.
+    The roots are $r = r_1 = 1$ and $r = r_2 = \frac{v_0 ^ 2}{2 - v_0 ^ 2}$.
+    Furthermore,
+    $r$ is restricted to a range for which $Q(r) \leq 0$.
+    Sketching $Q(r)$ reveals three possibilities:
+    if $v_0 ^ 2 < 2$ then $r$ lies between $r_1$ and $r_2$,
+    a bound orbit;
+    if $v_0 = 1$ then $r = 1$ for all times,
+    a circular orbit;
+    if $v_0 ^ 2 > 2$ then $r_2 < 0$ and $r > r_1$,
+    an unbound trajectory.
+    In fact,
+    $r_2 \rightarrow \infty$ as $v_0 ^ 2 \rightarrow 2$ from below:
+    the escape speed is $v_0 = \sqrt{2}$.
+\end{solution}
+
+\begin{example}[Escape speed]
+    This is a variant of the previous example.
+    A projectile is launched from the surface of the Earth
+    (radius $R$ and mass $M$),
+    with initial speed $v_0$.
+    How large does $v_0$ have to be in order that the projectile escapes the Earth's gravitational pull?
+
+    \begin{solution}
+        We need
+        \[
+        E = \frac{1}{2}mv_0 ^ 2 - \frac{GMm}{R} \geq 0 - 0 = 0,
+        \]
+        and so $v_0 \geq \sqrt{\frac{2GM}{R}}$,
+        consistent with the previous example.
+    \end{solution}
+\end{example}
+
+\begin{example}
+    A unit-mass particle is subject to an attractive central force $f(r) = -\frac{1}{r ^ 3}$.
+    What is its escape speed $v_0$ if it starts at $r = R$?
+
+    \begin{solution}
+        Here we have
+        \[
+        V(r) = -\int f(r)\,dr = -\int-\frac{1}{r ^ 3}\,dr = -\frac{1}{2r ^ 2}
+        \]
+        and we have
+        \[
+        E = \frac{1}{2}mv_0 ^ 2 + V(r) = \frac{v_0 ^ 2}{2} - \frac{1}{2R ^ 2}
+        \]
+        but $E \geq 0$ hence
+        \[
+        0 \leq E = \frac{v_0 ^ 2}{2} - \frac{1}{2}\cdot\frac{1}{R ^ 2} \iff v_0 \geq \frac{1}{R}
+        \]
+        hence the escape speed is $v_0 = \frac{1}{R}$.
+    \end{solution}
+\end{example}
+
+\subsection{Finding the orbit}
+We want to find the orbit of an object in a central force,
+in the form $r = r(\theta)$.
+It is convenient to use the variable $u = \frac{1}{r}$ rather than $r$,
+so we want an equation for $u(\theta)$.
+Note that the chain rules gives
+\[
+\frac{d}{dt} = \frac{Lu ^ 2}{m}\frac{d}{d\theta}.
+\]
+This enables us to write $\dot{r}$ and $\ddot{r}$ as
+\[
+\dot{r} = \frac{dr}{dt} = \frac{Lu ^ 2}{m}\frac{d}{d\theta}\left(\frac{1}{u}\right) = -\frac{L}{m}u',\quad \ddot{r} = \frac{d}{dt}\dot{r} = -\frac{L ^ 2u ^ 2}{m ^ 2}u'',
+\]
+where $u'$ denotes $\frac{du}{d\theta}$ and similarly for $u''$.
+Then the equation of motion becomes
+\[
+u'' + u = -mL ^ {-2}u ^ {-2}f(u ^ {-1}).
+\]
+This is the orbit equation,
+a second-order differential equation for $u(\theta)$.
+
+\begin{example}
+    Let us take $f(r) = -\frac{1}{r ^ 2}$,
+    namely gravity,
+    and $m = 1$.
+
+    \begin{solution}
+        We have the standard orbit equation:
+        \[
+        u'' + u = -mL ^ {-2}u ^ {-2}f(u ^ {-1})
+        \]
+        which taking $u = \frac{1}{r}$ gets us
+        \[
+        u'' + u = -\frac{m}{L ^ 2u ^ 2}\cdot\left(-\frac{1}{r ^ 2}\right) = -\frac{r ^ 2}{L ^ 2}\cdot\left(-\frac{1}{r ^ 2}\right) = \frac{1}{L ^ 2}
+        \]
+        so we get
+        \[
+        \frac{d ^ 2u}{d\theta ^ 2} + u = \frac{1}{L ^ 2},
+        \]
+        then using the fact that
+        $m ^ 2 + 1 \iff m ^ 2 = -1$ we get the complementary function
+        \[
+        u(\theta) = A\sin(\theta) + B\cos(\theta)
+        \]
+        which we can simplify to being only in terms of cosine
+        \[
+        u(\theta) = C\cos(\theta + \theta_0).
+        \]
+        Finding the particular integral through
+        \[
+        u(\theta) = D = \frac{1}{L ^ 2}\quad u'(\theta) = 0\quad u''(\theta) = 0
+        \]
+        we get
+        \[
+        u(\theta) = C\cos(\theta + \theta_0) + \frac{1}{L ^ 2}.
+        \]
+        We can then rotate this in the polar coordinates,
+        we may take $\theta_0 = 0$.
+        This gets us
+        \[
+        r(\theta) = \frac{L ^ 2}{1 + \varepsilon\cos(\theta)},
+        \]
+        where $\varepsilon \geq 0$ is arbitrary.
+        If $\varepsilon < 1$,
+        then $r$ is bounded
+        (since the denominator is never zero),
+        and the curve is an ellipse.
+        If $\varepsilon > 1$,
+        $r$ is unbounded,
+        and the curve is a hyperbola.
+        $\varepsilon = 1$ is a parabola,
+        also unbounded,
+        $\varepsilon = 0$ is a circle.
+        The parameter $\varepsilon$ is called the eccentricity of the orbit.
+        Then the orbit equation becomes
+        \[
+        \frac{d ^ 2u}{d\theta ^ 2} + u = \frac{1}{L ^ 2}.
+        \]
+    \end{solution}
+\end{example}
+
+
+
+
+
+
+
 
 
 
