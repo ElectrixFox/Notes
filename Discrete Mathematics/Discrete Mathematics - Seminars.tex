@@ -759,6 +759,98 @@ we'll do both,
 and $G ^ {*}$ will have two new vertices.
 Call the resulting network an augmented network.
 
+\subsection{Counting Paths and Menger's Theorem}
+From now on we will define a network to mean a graph with two distinguished vertices $s$ and $t$ as before,
+but as of yet no capacities assigned to the edges.
+It is a directed network if the edges have a direction marked,
+and is called undirected if not.
+
+\begin{definition}
+    A path in a network will always refer to a sequence of edges going from $s$ to $t$.
+    Two paths are said to be edge disjoint if they share no edges in common
+    (though they are allowed to share some vertices).
+    A directed path in a directed network must at all times be in the direction of the edges it passes along.
+\end{definition}
+
+Let $\mathcal{N}_d = \mathcal{N}_d(G)$ denote the number of edge-disjoint directed paths in the directed network $G$.
+We will use the max-flow min-cut theorem to prove the following result:
+
+\begin{theorem}
+    If a directed network $G$ is turned into a capacitated network by declaring that each edge has unit capacity,
+    then the number $\mathcal{N}_d$ of edge-disjoint directed paths is equal to the minimal cut capacity,
+    i.e.,
+    $\mathcal{N}_d = \min_{S}\kappa(S)$.
+\end{theorem}
+
+\begin{example}
+    In the setting of the previous theorem,
+    show that if we have a flow $F$ on the network,
+    then we can construct $\Phi_{\text{tot}}(F)$ edge-disjoint directed paths from the source to the sink;
+    explain the relevance of the flow constraint to the edge-disjointness.
+    Hence show that $\mathcal{N}_d \geq \max_{F}\Phi_{\text{tot}}(F)$.
+
+    \begin{solution}
+        As each edge has unit capacity adding a path from $s$ to $t$ set $c_{uv} = f_{uv}$ for $u, v$ in the path.
+
+        Hence $\Phi_{\text{tot}}(F) = \text{Number of paths for a given flow}$ as each path "fills" the capacity of each edge so they must be disjoint.
+        So for any flow there is at least $\Phi_{\text{tot}}(F)$ edge disjoint paths.
+        I.e.
+        \[
+        \mathcal{N}_d \geq \max_{F}\Phi_{\text{tot}}(F)
+        \]
+    \end{solution}
+\end{example}
+
+\begin{example}
+    Once again,
+    in the setting of the previous theorem,
+    show that any cut $K(S)$ constrains the maximum number of edge-disjoint paths.
+    In particular,
+    show that $\mathcal{N}_d \leq \min_{S}\kappa(S)$.
+
+    \begin{solution}
+        We have $K(S) \coloneqq \{uv \in E\,:\, u \in S,\, v \in V \setminus S\}$,
+        $S \subset V$ so $s \in S$,
+        $t \notin S$.
+        By the previous example
+        \[
+        K(S) \geq \mathcal{N}_d \geq \max_F\Phi_{\text{tot}}(F)
+        \]
+        From max-flow min-cut we get
+        \[
+        \min_S\kappa(S) = \max_F\Phi_{\text{tot}}(F).
+        \]
+        Hence
+        \[
+        \mathcal{N}_d \min_S\kappa(S)
+        \]
+        
+
+        The paths are edge disjoint and need to go from $s$ to $t$.
+        And $s \in S$ so the path needs to go from $S$ to some $v \in V \setminus S$.
+        Each path is edge disjoint so once one edge is used from $S$ to $v \in V \setminus S$ it cannot be used again.
+        Hence $K(S) \geq \text{Number of edge disjoint paths} = \mathcal{N}_d$.
+        
+    \end{solution}
+\end{example}
+
+We can turn to the case of undirected networks.
+There is a classical theorem for this type of problem
+\begin{theorem}[Menger's Theorem]
+    The maximum number of edge-disjoint paths from $s$ to $t$ in an undirected graph is equal to the minimal number of edges whose removal leaves no path from $s$ to $t$.
+\end{theorem}
+
+\begin{example}
+    Consider an undirected network.
+    Can you find a way to count the number of edge disjoint paths from $s$ to $t$,
+    by relating the problem to an appropriate problem on a directed network?
+\end{example}
+
+\begin{example}
+    What are the maximum number of directed edge-disjoint paths from $s$ to $t$?
+    Does the answer stay the same if we remove the directions on the edges and consider only edge-distinct paths from $s$ to $t$ in the resulting undirected graphs?
+\end{example}
+
 
 
 

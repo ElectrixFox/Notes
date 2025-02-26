@@ -2722,8 +2722,33 @@ An $n$-th order differential operator $\mathcal{L}$ can be written
 
 \subsection{Polynomial expansions and self-adjoint operators}
 
+\subsection{Fourier Series Revisited}
 
+\subsection{Approximating functions using Legendre expansions}
 
+Say we wanted to find a value of $\sin(x)$ quickly.
+If the Legendre expansion of $\sin(x)$ is given by
+\[
+\sin(x) = \infsum[i = 0]b_iP_i(x)
+\]
+then for instance the first four terms of the series
+\[
+S_3(x) = \sum_{i = 0}^{3}b_iP_i(x)
+\]
+provides a cubic approximation which is a 'best' approximation to $\sin(x)$ amongst all cubic polynomials in a sense.
+
+To approximate a function $f$ we would want to minimise the 'distance' between $f(x)$ and a generic order $n$ polynomial $g(x)$ as such
+\[
+D ^ 2 = \|f(x) - g(x)\| ^ 2 = (f(x) - g(x), f(x) - g(x))
+\]
+using this inner product we can then perform Gram-Schmidt on the basis,
+in our Legendre world this would be $\{P_0, P_1, \dotsc, P_n\}$ with $f$ being our "$v_n$"'s,
+e.g. for $\sin(x)$
+$u_1 = \frac{P_0(x)}{(P_0(x), P_0(x)) ^ {1 / 2}} = \frac{1}{\int_{-1}^{1}1\,dx} ^ {1 / 2} = \frac{1}{\sqrt{2}}$
+\[
+g(x) = \frac{(P_0(x), \sin(x))}{(P_0, P_0) ^ {1 / 2}}u_1 = \frac{\int_{-1}^{1}\sin(x)\,dx}{\sqrt{2}}\cdot 1 = 0,
+\]
+which if one continues expanding like this up to an arbitrary order one gets an increasingly better approximation for $\sin(x)$ in the Legendre basis.
 
 
 
