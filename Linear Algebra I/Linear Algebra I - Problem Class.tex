@@ -497,9 +497,96 @@
     \end{solution}
 \end{problem}
 
+\newpage
 
+\section{Class \texorpdfstring{$3$}{}}
 
+\begin{problem}[$32$]
+    \[
+    \langle\mbf{z}, \mbf{w}\rangle = z_1\bar{\mbf{w}}_1 + 2z_2\bar{w}_2 + \frac{1 + i}{\sqrt{2}}z_1\bar{w}_2 + \frac{1 - i}{\sqrt{2}}z_2\bar{w}_1.
+    \]
 
+    \begin{solution}
+        This can be rewritten as
+        \[
+        (\bar{w}_1, \bar{w}_2)\begin{pmatrix}
+            1 & \frac{1 - i}{\sqrt{2}} \\
+            \frac{1 + i}{\sqrt{2}} & 2
+        \end{pmatrix}\begin{pmatrix}
+            z_1 \\ z_2
+        \end{pmatrix} = \mbf{w} ^ {*}M\mbf{z}
+        \]
+        $M ^ {*} = M$.
+        Positive definite?
+        $\det{M_1} = 1$,
+        $\det{M_2} = \det{M} = 2 - \frac{(1 - i)(1 + i)}{2} = 2 - 1 = 1$,
+        hence it is positive definite.
+    \end{solution}
+\end{problem}
+
+\begin{problem}
+    Let $V = \R[x]_4$ and $S \subseteq V$ be given by $S = \left\{p(x) \in V\mmid p(0) = p''(0) = 0\right\}$.
+
+    \begin{enumerate}[label = (\alph*)]
+        \item Find a basis $S ^ {\perp}$ with respect to
+        \[
+        (f, g) = \int_{-1}^{1}f(x)g(x)\,dx.
+        \]
+
+        \item Find the vector $p(x) \in S$ closest\footnote{The orthogonal projection of $\sin(x)$ onto $S$ with respect to the inner product $(\,,\,)$.} to $f(x) = \sin(x)$.
+    \end{enumerate}
+
+    \begin{solution}
+        \begin{enumerate}[label = (\alph*)]
+            \item Start with any basis for $V$,
+            e.g. $p(x) = ax ^ 4 + bx ^ 3 + cx ^ 2 + dx + e$.
+
+            \[
+            p \in S : 0 = p(0) = e, 0 = p''(0) = 2c
+            \]
+            $e = c = 0$,
+            and $S = \mathrm{span}\{x, x ^ 3, x ^ 4\}$.
+            \[
+            S ^ {\perp} = \{q \in V\text{ s.t. } (q, p) = 0, \forall p \in S\}
+            \]
+            write $q(x) = ax ^ 4 + bx ^ 3 + cx ^ 2 + dx + e$ and it is enough to impose,
+            $(q(x), x) = 0$,
+            $(q(x), x ^ 3) = 0$,
+            $(q(x), x ^ 4) = 0$.
+            \begin{align*}
+                \int_{-1}^{1}q(x)x\,dx &= \frac{2}{5}b + \frac{2}{3}d = 0 \\
+                \int_{-1}^{1}q(x)x ^ 3\,dx &= \frac{2}{7}b + \frac{2}{5}d = 0 \\
+                \int_{-1}^{1}q(x)x ^ 4\,dx &= \frac{2}{9}a + \frac{2}{7}c + \frac{2}{5}e = 0.
+            \end{align*}
+            The first and second equation tell us that $b = d = 0$.
+            The third tells us that $e = -\frac{5}{9}a - \frac{5}{7}c$.
+            So
+            \[
+            q(x) \in S ^ {\perp} \iff q(x) = ax ^ 4 + cx ^ 2 - \frac{5}{9}a - \frac{5}{7}c
+            \]
+            so
+            \[
+            S ^ {\perp} = \mathrm{span}\left\{x ^ 4 - \frac{5}{9}, x ^ 2 - \frac{5}{7}\right\} = \mathrm{span}\left\{9x ^ 4 - 5, 7x ^ 2 - 5\right\}.
+            \]
+
+            \item For this we need an orthonormal basis of $S$,
+            we must do Gram-Schmidt
+            \[
+            S = \mathrm{span}\{x, x ^ 3, x ^ 4\},\qquad(\mbf{v}_1, \mbf{v}_2, \mbf{v}_3)
+            \]
+            \[
+            g_1(x) = \frac{x}{\|x\|} = \frac{x}{\sqrt{\int_{-1}^{1}x ^ 2\,dx}} = \sqrt{\frac{3}{2}}x
+            \]
+            \[
+            x ^ 3 - (x ^ 3, g_1(x))g_1(x) = x ^ 3 - \left(\int_{-1}^{1}x ^ 3\sqrt{\frac{3}{2}}x\,dx\right)\sqrt{\frac{3}{2}}x = x ^ 3 - \frac{3}{2}\left(\int_{-1}^{1}x ^ 4\,dx\right)x = x ^ 3 - \frac{3}{2}\cdot\frac{2}{5}x = x ^ 3 - \frac{3}{5}x.
+            \]
+            \[
+            g_2(x) = \sqrt{\frac{3}{7}}(5x ^ 3 - 3x).
+            \]
+            
+        \end{enumerate}
+    \end{solution}
+\end{problem}
 
 
 
