@@ -1945,6 +1945,126 @@ For example:
     \end{solution}
 \end{example}
 
+\newpage
+
+\section{The Likelihood}
+
+\subsection{Introduction and Definition}
+
+We imagine that we will gather data $X_i$ with $i = 1, 2, \dotsc, n$.
+Now we may not know the precise distribution that generated this data ,
+but we may suspect that the distribution is one of a family of possible distributions,
+labelled or parametrised by a parameter $\theta$
+($\theta$ could even represent a list of parameters).
+
+We saw this when we were discussing Bernoulli trials with $X_i \sim \mathrm{Bernoulli}(p)$ here $\theta = p$.
+
+We also saw this when we were looking at $X_i \sim N(\mu, \sigma ^ 2)$,
+here $\theta = \{\mu, \sigma ^ 2\}$.
+
+The joint probability density function
+(or probability mass function if $X_i$ are discrete)
+of the data is simply represented as
+\[
+f(x_1, x_2, \dotsc, x_n\mid\theta).
+\]
+However,
+once we measure the data:
+\[
+X_1 = x_1, X_2 = x_2, \dotsc, X_n = x_n
+\]
+This joint probability density function can now be viewed as just a function of $\theta$ as the data are now fixed.
+
+\begin{definition}[The likelihood function]
+    Suppose we have $X_1, \dotsc X_n$ that have joint probability density function $f(x_1, \dotsc, x_n\mid \theta)$ the likelihood function $\ell(\theta)$,
+    is just the probability density function of the observed data considered as a function of $\theta$ only i.e.
+    \[
+    \ell(\theta) \equiv \ell(\theta; x_1, \dotsc, x_n) = f(x_1, \dotsc, x_n\mid \theta)
+    \]
+    and the $\log$-likelihood function is:
+    \[
+    \mathcal{L}(\theta) \equiv \log(\ell(\theta)) = \log(f(x_1, \dotsc, x_n\mid \theta)).
+    \]
+\end{definition}
+
+\begin{definition}[Likelihood for independently identically distributed data]
+    If the $X_i$ are independent and identically distributed then the expression for the likelihood takes a more pleasant form.
+
+    Suppose each $X_i$ has a probability density function given by $f(x_i\mid\theta)$ and that all $X_i$ are independent and identically distributed then:
+    \[
+    \ell(\theta) = f(x_1, \dotsc, x_n\mid\theta) = \prod_{i = 1}^{n}f(x_i\mid\theta)
+    \]
+    and the $\log$-likelihood:
+    \[
+    \mathcal{L}(\theta) = \log(f(x_1, \dotsc, x_n\mid\theta) = \log{\prod_{i = 1}^{n}f(x_i\mid\theta)} = \sum_{i = 1}^{n}\log(f(x_i\mid\theta)).
+    \]
+\end{definition}
+
+Note $\ell(\theta)$ is not a probability density function with respect to $\theta$,
+as $\theta$ is just a fixed but unknown parameter
+(at this point),
+so $\ell(\theta)$ will not integrate to one with respect to $\theta$.
+However,
+$\ell(\theta)$ is still useful as it shows us which values of $\theta$ are more 'likely' to have generated the data.
+E.g.
+we saw its use in Bernoulli Trials.
+
+\begin{example}[Likelihood for Bernoulli Trials]
+    In the case of $n$ Bernoulli trials we had independent identically distributed $X_i \sim \mathrm{Bernoulli}(p)$ so $X_i$ discrete and equal $1$ or $0$ with probability $p$ or $(1 - p) = q$.
+    Hence
+    \[
+    f(x_i\mid p) = \begin{cases}
+        p ^ {x_i}q ^ {1 - x_i} & \text{for } x_i = 0, 1 \\
+        0 & \text{otherwise}.
+    \end{cases}
+    \]
+    Here our parameter of interest is $\theta = p$ so we write our likelihood as $\ell(p)$ instead of $\ell(\theta)$.
+    \[
+    \ell(p) = f(x_1, \dotsc, x_n\mid p) = \prod_{i = 1}^{n}f(x_i\mid p) = \prod_{i = 1}^{n}p ^ {x_i}q ^ {1 - x_i} = p ^ {\sum_{i = 1}^{n}x_i}q ^ {\sum_{i = 1}^{n}(1 - x_i)} = p ^ xq ^ {n - x},
+    \]
+    $x = \sum_{i = 1}^{n}x_i$.
+    The $\log$-likelihood:
+    \[
+    \mathcal{L}(p) = \log f(x_1, \dotsc, x_n\mid p) = \log(p ^ xq ^ {n - x}) = x\log{p} + (n - x)\log\underbrace{(1 - p)}_{= q}.
+    \]
+    We then maximised this to find an estimator for $p$
+    (more of this soon).
+\end{example}
+
+\begin{example}[Likelihood for the Binomial Scenario]
+    In a Binomial scenario we have that $X$ is the sum or count of the successes from $n$ Bernoulli trials with parameter $p$,
+    this implies $X \sim \Bin(n, p)$.
+
+    When viewed in this Binomial framework,
+    we have one single experiment,
+    that yields the realisation $X = x$.
+
+    Hence,
+    due to a single experiment the likelihood is simply
+    ($n$ is known):
+    \[
+    \ell(p) = f(x\mid p) = \binom{n}{x}p ^ xq ^ {n - x}
+    \]
+    and the $\log$-likelihood:
+    \[
+    \mathcal{L}(p) = \log{f(x\mid p)} = \log\left[\binom{n}{x}p ^ xq ^ {n - x}\right] = \log\left(\frac{n!}{(n - x)!x!}\right) + x\log{p} + (n - x)\log\underbrace{(1 - p)}_{= q}.
+    \]
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
