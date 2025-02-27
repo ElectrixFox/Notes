@@ -4929,10 +4929,68 @@ hence
 \[
 b_7 = \frac{(y, \sin(7x))}{(\sin(7x), \sin(7x))} = \frac{\int_{-\pi}^{\pi}y(x)\sin(7x)\,dx}{\int_{-\pi}^{\pi}\sin ^ 2(7x)\,dx} = \frac{1}{\pi}\int_{-\pi}^{\pi}y(x)\sin(7x)\,dx = b_7.
 \]
+
+\subsection{Using Legendre expansions to approximate functions}
+Suppose we have the Legendre expansion $y(x) = \infsum[n = 0]b_nP_n(x)$.
+Consider the partial sums $S_m = \sum_{n = 0}^{m}b_nP_n(x)$.
+$S_m$ is the 'best' $m$th order polynomial approximation to $y(x)$.
+
+'Best' means the following.
+Let $f_m$ be an $m$th order polynomial
 \[
+\|y(x) - f_m\| ^ 2 = (y - f_m, y - f_m) = \int_{-1}^{1}(y - f_m) ^ 2\,dx
 \]
+is minimised by picking $f_m = S_m$.
+\begin{proof}
+    Let $g(x) = \infsum[n = 0]a_nP_n(x)$.
+    \begin{align*}
+        \int_{-1}^{1}g(x) ^ 2\,dx &= \|g(x)\| ^ 2 \\
+        &= (g, g) \\
+        &= \left(\infsum[n = 0]a_nP_n(x), \infsum[m = 0]a_mP_m(x)\right) \\
+        &= \infsum[n, m = 0]a_na_m(P_n, P_m) \qquad(= 0 (n \neq m)) \\
+        &= \infsum[n = 0]a_n ^ 2(P_n, P_n) \\
+        &= \infsum[n = 0]a_n ^ 2\frac{2}{2n + 1}.
+    \end{align*}
 
+    $P_0, P_1, \dotsc, P_m$ are a basis for $\R[x]_m$.
+    Can write $f_m = \sum_{n = 0}^{m}c_nP_n(x)$,
+    therefore
+    \[
+    y - f_m = \infsum[n = 0]b_nP_n - \sum_{n = 0}^{m}c_nP_n = \sum_{n = 0}^{m}(b_n - c_n)P_n + \infsum[n = m + 1]b_nP_n.
+    \]
+    Therefore
+    \[
+    \|y - f_m\| ^ 2 = \int_{-1}^{1}(y - f_m) ^ 2\,dx = \sum_{n = 0}^{m}(b_n - c_n) ^ 2\frac{2}{2n + 1} + \infsum[n = m + 1]b_n ^ 2\frac{2}{2n + 1}
+    \]
+    the minimum is $c_n = b_n$,
+    therefore $\|y - f_m\| ^ 2$ is minimised when $f_m = \sum_{n = 0}^{m}b_nP_n = S_m$
+\end{proof}
 
+\newpage
+
+\section{Linear PDEs}
+
+\subsection{Introduction}
+
+Linear PDEs - principle of superposition holds.
+$y_1, y_2$ are solutions then $\alpha y_1 + \beta y_2$ is a solution implies the solution space is a vector space.
+Will focus on second order PDEs.
+Concentrate on two independent variables $u(x, t)$:
+\[
+Au_{xx} + 2Bu_{xt} + Cu_{tt} + Du_x + Eu_t + Fu = 0
+\]
+$A, B, C, D, E, F$ could depend on $x, t$.
+
+PDEs are classified according to the sign of $\det(M)$ where $M = \begin{pmatrix}
+    A & B \\ B & C
+\end{pmatrix}$.
+$\det(M) < 0$ - Hyperbolic PDE.
+E.g.
+wave equation
+\[
+u_{tt} = c ^ 2u_{xx}.
+\]
+On the whole line the general solution is $u(x, t) = f(x - ct) + g(x + ct)$.
 
 
 
