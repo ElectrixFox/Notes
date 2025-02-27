@@ -4664,10 +4664,113 @@ Pointwise limit
 
 We had shown $f_n(x) = x ^ n \rightarrow 0$ uniformly on all compact subintervals $[a, b] \subset [0, r]$ of $(0, 1)$.
 
+\begin{example}
+    \[
+    f(x) = \infsumo x ^ k\qquad|x| < 1
+    \]
+    ($= \frac{1}{1 - x}$).
+    Is this uniformly converging?
 
+    \begin{solution}
+        \[
+        \liminfty\underbrace{\left(\sum_{k = 0}^{n}x ^ k\right)}_{=f_n(x)}
+        \]
+        \begin{align*}
+            |f(x) - f_n(x)| &= \left|\infsum[k = n + 1]x ^ k\right| \\
+            &= \left|\frac{x ^ {n + 1}}{1 - x}\right|
+        \end{align*}
+        Non-uniform on $(-1, 1)$.
+        Pick $x_n = \sqrt[n + 1]{\frac{1}{2}}\quad(\xrightarrow[n \rightarrow \infty]{} 1)$.
+        So
+        \[
+        |f(x_n) - f(x_n)| = \left|\frac{x_n ^ {n + 1}}{1 - x_n}\right| = \frac{\left(\sqrt[n + 1]{\frac{1}{2}}\phantom{1}\right) ^ {n + 1}}{1 - \sqrt[n + 1]{\frac{1}{2}}} = \frac{\frac{1}{2}}{1 - \sqrt[n + 1]{\frac{1}{2}}}
+        \]
+        hence unbounded as $n \rightarrow \infty$.
+        Pick $\varepsilon = 1$.
+        Then for large $n$ we have
+        \[
+        |f_n(x_n) - f(x_n)| \geq 1 = \varepsilon.
+        \]
+        But we are uniform on all compact subsets $[a, b]$ in $(-1, 1)$.
+        For convenience take $r$ with $0 < r < 1$ such that $[a, b] \subseteq [-r, r] \subset (-1, 1)$.
+        Then
+        \[
+        |f(x) - f_n(x)| = \frac{|x ^ {n + 1}|}{|1 - x|} \leq \frac{r ^ {n + 1}}{1 - r} \xrightarrow[n \rightarrow \infty]{} 0.
+        \]
+        Pick $\varepsilon > 0$.
+        Find $N$ such that for all $n \geq N$,
+        $\frac{r ^ {n + 1}}{1 - r} < \varepsilon$.
+        But $|f_n(x) - f(x)| \leq \frac{r + ^ {n + 1}}{1 - r}$.
+    \end{solution}
+\end{example}
 
+\begin{lemma}[Criterion]
+    \begin{enumerate}[label = (\roman*)]
+        \item If $|f(x) - f_n(x)| \leq a_n$ for all $x \in I$ with $\liminfty a_n = 0$ then we have uniform convergence on $I$.
 
+        \item if there exists $\varepsilon > 0$ and a sequence $x_n \in I$ such that for all $n$ sufficiently large.
+        \[
+        |f(x_n) - f_n(x_n)| \geq \varepsilon
+        \]
+        then convergence is not uniform on $I$.
+    \end{enumerate}
+\end{lemma}
 
+\begin{example}
+    \[
+    f_n(x) = \left(1 + \frac{x}{n}\right) ^ n \rightarrow e ^ x = f(x)\quad x \in \R
+    \]
+
+    Is this uniform?
+
+    \begin{solution}
+        On $\R$:
+        No.
+
+        Pick $x_n = n$.
+        Then
+        \[
+        |f_n(x_n) - f(x_n)| = |2 ^ n - e ^ n| = e ^ n - 2 ^ n = e ^ n\left(1 - \left(\frac{2}{e}\right) ^ n\right)
+        \]
+        is unbounded.
+
+        But it is uniform on compact subsets:
+        proof:
+        challenge.
+    \end{solution}
+\end{example}
+
+\subsection{Uniform Convergence and Continuity}
+
+\begin{theorem}
+    Assume $f_n \rightarrow f$ uniformly on $I$,
+    continuous on $I$.
+    Then $f(x)$ is continuous on $I$.
+
+    \begin{proof}
+        ($\frac{\varepsilon}{3}$-trick).
+
+        Have $f_n \rightarrow f$ uniformly,
+        i.e. there exists an $N$ such that for all $n \geq N$ and for all $x \in I$,
+        \[
+        |f(x) - f_n(x)| < \varepsilon.
+        \]
+        Take that $N$,
+        then $f_N(x)$ is continuous.
+        Given $c \in I$.
+        Find $\delta > 0$,
+        such that $|f_N(x) - f_N(c)| < \varepsilon$ for all $x$ with $|x - c| < \delta$
+        \begin{align*}
+            |f(x) - f(c)| &= |f(x) - f_N(x) + f_N(x) - f_N(c) + f_N(c) - f(c)| \\
+            &\leq |f(x) - f_N(x)| + |f_N(x) - f_N(c)| + |f_N(c) - f(c)| &(\text{for $|x - c| < \delta$})\\
+            &< \varepsilon + \varepsilon + \varepsilon \\
+            &= 3\varepsilon.
+        \end{align*}
+
+        \textit{Note:
+        could change all $\varepsilon$ to $\varepsilon / 3$ to get $<\varepsilon$.}
+    \end{proof}
+\end{theorem}
 
 
 
