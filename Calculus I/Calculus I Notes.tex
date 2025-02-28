@@ -4992,8 +4992,131 @@ u_{tt} = c ^ 2u_{xx}.
 \]
 On the whole line the general solution is $u(x, t) = f(x - ct) + g(x + ct)$.
 
+$\det(M) = 0$ - Parabolic PDE.
+E.g.
+heat equation
+\[
+u_t = k ^ 2u_{xx}
+\]
+$u_{xx} - \frac{1}{k ^ 2}u_t = 0$,
+$A = 1$,
+$B = C = 0$
+$M = \begin{pmatrix}
+    1 & 0 \\ 0 & 0
+\end{pmatrix}$,
+$\det(M) = 0$.
+
+$\det(M) < 0$ - Elliptic PDE.
+E.g.
+Laplace's equation
+\[
+u_{xx} + u_{yy} = 0
+\]
+$A = C = 1$,
+$B = 0$
+$M = \begin{pmatrix}
+    1 & 0 \\ 0 & 1
+\end{pmatrix}$
+$\det(M) > 0$.
+
+\subsection{Boundary Conditions}
+An $n$th order linear ODE has $n$ linearly independent solutions $y_i(x)$ $i = 1, \dotsc, n$,
+general solution is a linear combination $y(x) = \sum_{i = 1}^{n}a_iy_i(x)$,
+a particular solution needs to specify $a_1, \dotsc, a_n$,
+$n$ boundary conditions.
+
+For an initial value problem,
+$y(0), y'(0), y''(0), \dotsc, y ^ {(n - 1)}(0)$ at $t = 0$ determines $a_1, \dotsc, a_n$ which implies $y(t)$.
+
+A linear PDE - solution space is an infinite dimensional vector space.
+\[
+u(x, t) = \sum a_iu_i(x, t)
+\]
+(an infinite sum/integral).
+Need to specify an infinite number of $a_i$ numbers
+(or functions).
+
+Important examples:
+
+An IVP on the whole line $x$.
+Transverse displacement of infinitely long string obeys
+\[
+u_{tt} = c ^ 2u_{xx}.
+\]
+Wave equation on whole line:
+Initial position $u(x, 0) = R(x)$.
+Initial velocity $u_t(x, 0) = S(x)$.
+
+Infinitely long bar of metal obeys $u_t = k ^ 2u_{xx}$.
+Heat equation on whole line,
+$u(x, 0) = R(x)$.
+
+Suppose we are interested in the IVP on the interval $a \leq x \leq b$.
+The wave equation.
+At $t = 0$,
+$u(x, 0) = R(x)$,
+$a \leq x \leq b$,
+$u_t(x, 0) = S(x)$,
+$a \leq x \leq b$.
+Need to specify boundary conditions.
+$u(b, t) = 0$
+(fixed end - Dirichlet boundary condition)
+$u_x(b, t) = 0$
+(free end- Neumann boundary condition)
+Same but at $x = a$.
 
 
+Heat equation,
+same thing as the wave equation except for at $t = 0$ where we just need $u(x, 0) = R(x)$.
+
+
+For Laplace's equation,
+specify either $u$ or normal derivative of $u$ on boundary.
+
+\subsection{Method of Separation of Variables}
+Solution space to linear PDEs is an infinite dimensional vector space
+$u(x, t) = \infsum[i = 0] a_iu_i(x, t)$,
+basis functions.
+We will choose the form of the basis function as such
+\[
+u_i(x, t) = X_i(x)T_i(t).
+\]
+
+\begin{example}
+    String lie between $x = 0$ and $x = \pi$.
+
+    Transverse displacement obeys $u_{tt} = c ^ 2u_{xx}$.
+    At ends $u(0, t) = u(\pi, t) = 0$.
+    Initial conditions:
+    \[
+    u(x, 0) = R(x) = \begin{cases}
+        x & 0 \leq x \leq \frac{\pi}{2} \\
+        \pi - x & \frac{\pi}{2} \leq x \leq \pi
+    \end{cases}
+    \]
+    $u_t(x, 0) = 0$.
+
+    \begin{solution}
+        Look for a solution satisfying what we have been given of the form $u(x, t) = X(x)T(t)$.
+        Substitute into the wave equation,
+        \[
+        u_{tt} = X\ddot{T} = c ^ 2u_{xx} = c ^ 2X''T
+        \]
+        divide through by $c ^ 2XT$
+        \[
+        \frac{X\ddot{T}}{c ^ 2XT} = \frac{c ^ 2X''}{c ^ 2XT} \implies \frac{\ddot{T}}{c ^ 2T} = \frac{X''}{X} = \lambda
+        \]
+        $\frac{\ddot{T}}{c ^ 2T}$ is a function of only $t$ and $\frac{X''}{X}$ likewise,
+        $\lambda$ constant.
+
+        The PDE has been turned into two ODEs
+        \begin{align*}
+            X'' &= \lambda X \\
+            \ddot{T} &= \lambda c ^ 2T
+        \end{align*}
+        there are equations of eigenfunction/eigenvalue type.
+    \end{solution}
+\end{example}
 
 
 
