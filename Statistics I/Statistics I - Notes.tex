@@ -2051,8 +2051,114 @@ we saw its use in Bernoulli Trials.
     \]
 \end{example}
 
+\begin{example}[Likelihood for the Poisson Distribution]
+    The Poisson distribution is often used to model radioactive decay counts and a wide range of other phenomena
+    (e.g. traffic,
+    queuing).
 
+    If the data has Poisson distribution we say $X_i \sim \Po(\lambda)$ where $\lambda$ is the parameter of interest
+    (it actually equals the expected number of counts so $\E(X_i) = \lambda$).
 
+    \begin{solution}
+        Poisson distribution:
+        \[
+        f(x_i \mid \lambda) = \begin{cases}
+            \frac{e ^ {-\lambda}\lambda ^ {x_i}}{x_i!} &\text{for } x_i = 0, 1, 2, \dotsc \\
+            0 &\text{otherwise}.
+        \end{cases}
+        \]
+        Therefore the likelihood of $n$ independent and identically distributed data values $X_i = x_i$ is:
+        \[
+        \ell(\lambda) = f(x_1, \dotsc, x_n\mid \lambda) = \prod_{i = 1}^{n}f(x_i\mid \lambda) = \prod_{i = 1}^{n}\frac{e ^ {-\lambda}\lambda ^ {x_i}}{x_i!} = \frac{e ^ {-n\lambda}\lambda ^ {\sum_{i = 1}^{n}x_i}}{\prod_{i = 1}^{n}x_i!}.
+        \]
+        The $\log$-likelihood:
+        \[
+        \mathcal{L}(\lambda) = \log{f(x_1, \dotsc, x_n\mid \lambda)} = \log\left(\frac{e ^ {-n\lambda}\lambda ^ {\sum_{i = 1}^{n}x_i}}{\prod_{i = 1}^{n}x_i!}\right) = -n\lambda + \left(\sum_{i = 1}^{n}x_i\right)\log{\lambda} - \log\left(\prod_{i = 1}^{n}x_i!\right).
+        \]
+    \end{solution}
+\end{example}
+
+\subsection{Maximum Likelihood Estimation}
+This is useful for many reasons,
+it gives us a way to find good estimators of $\theta$.
+This procedure is known as Maximum Likelihood Estimation:
+we just find the value of $\theta$ that maximises $\ell(\theta)$ for the given sample $x_1, \dotsc, x_n$,
+we typically denote this as $\hat{\theta}_{MLE}$
+(Maximum Likelihood Estimator)
+
+\begin{definition}[Maximum Likelihood Estimator]
+    \[
+    \hat{\theta}_{MLE} \equiv \mathrm{argmax}_{\theta}\,\ell(\theta) = \mathrm{argmax}_{\theta}\,\mathcal{L}(\theta).
+    \]
+\end{definition}
+Note that the $\hat{\theta}_{MLE}$ maximises both $\ell(\theta)$ and $\mathcal{L}(\theta)$ as $\log$ is a monotonic transform
+(so it cannot change the location of the maximum).
+
+This is a general technique.
+As we can find $\hat{\theta}_{MLE}$ for general data $x_1, \dotsc, x_n$ we consider it a full estimator.
+
+In general maximal likelihood estimators have good properties,
+especially for large $n$,
+but note that they are not always unbiased.
+
+\begin{example}[Maximum Likelihood Estimator for Bernoulli Trials]
+    For Bernoulli trials:
+    \[
+    \mathcal{L}(p) \equiv x\log{p} + (n - x)\log(1 - p)
+    \]
+    and we already found:
+    \[
+    \pd[\mathcal{L}(p)]{p} = \frac{x}{p} - \frac{(n - x)}{(1 - p)} = 0
+    \]
+    this is equivalent to $\hat{p}_{MLE} = \frac{x}{n}$.
+
+    Note that to ensure that this is a maximum we should also check the second derivative:
+    \[
+    \frac{\partial ^ 2\mathcal{L}(p)}{\partial p ^ 2} = -\frac{x}{p ^ 2} - \frac{(n - x)}{(1 - p) ^ 2} < 0
+    \]
+    therefore $\hat{p}_{MLE}$ is at a maximum!
+\end{example}
+
+\begin{example}[Maximum Likelihood Estimator for Binomial Scenario]
+    For Binomial Scenario:
+    \[
+    \mathcal{L}(p) = \log\binom{n}{x} + x\log{p} + (n - x)\log(1 - p)
+    \]
+    which implies
+    \[
+    \pd[\mathcal{L}(p)]{p} = 0 + \frac{x}{p} - \frac{(n - x)}{(1 - p)} = 0
+    \]
+    which implies $\hat{p}_{MLE} = \frac{x}{n}$.
+
+    Already checked second derivative in previous example.
+    We can check if this estimator $\hat{p}_{MLE}$ is unbiased:
+    \[
+    \E(\hat{p}_{MLE}) = p.
+    \]
+\end{example}
+
+\begin{example}[Maximum Likelihood Estimator for Poisson Scenario]
+    For the identically independently distributed Poisson data where $X_i \sim \Po(\lambda)$:
+    \[
+    \mathcal{L}(\lambda) = -n\lambda + \left(\sum_{i = 1}^{n}x_i\right)\log{\lambda} - \log\left(\prod_{i = 1}^{n}x_i!\right).
+    \]
+    To find the maximum likelihood estimator $\hat{\lambda}_{MLE}$ for $\lambda$,
+    we just partially differentiate with respect to $\lambda$:
+    \[
+    \pd[\mathcal{L}(\lambda)]{\lambda} = -n + \left(\sum_{i = 1}^{n}x_i\right)\frac{1}{\lambda} - 0 = 0
+    \]
+    this is equivalent to
+    \[
+    \frac{\left(\sum_{i = 1}^{n}x_i\right)}{\hat{\lambda}_{MLE}} = n \iff \hat{\lambda}_{MLE} = \frac{1}{n}\sum_{i = 1}^{n}x_i = \bar{x}.
+    \]
+    Before the data is measured we can view the general maximum likelihood estimate as $\hat{\lambda}_{MLE} = \frac{1}{n}\sum_{i = 1}^{n}X_i = \bar{X}$.
+
+    Therefore
+    \[
+    \E(\hat{\lambda}_{MLE}) = \E\left(\frac{1}{n}\sum_{i = 1}^{n}X_i\right) = \frac{1}{n}\sum_{i = 1}^{n}\E(X_i) = \frac{1}{n}\sum_{i = 1}^{n}\lambda = \frac{1}{n}(n\lambda) = \lambda
+    \]
+    thus $\hat{\lambda}_{MLE}$ is unbiased.
+\end{example}
 
 
 
