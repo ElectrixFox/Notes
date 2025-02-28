@@ -4772,8 +4772,126 @@ We had shown $f_n(x) = x ^ n \rightarrow 0$ uniformly on all compact subinterval
     \end{proof}
 \end{theorem}
 
+\begin{theorem}
+    $f_n : I \rightarrow \R$ continuous,
+    $f_n \rightarrow f$ uniformly on compact subsets of $I$.
+    Then $f(x)$ is continuous.
 
+    \begin{proof}
+        Take $c \in I$,
+        find an $I$ interval $[a, b]$ containing $c$.
+        One $[a, b]$ we have uniform convergence which implies continuity of $f$ in $[a, b] \ni c$.
+    \end{proof}
+\end{theorem}
 
+\begin{theorem}
+    $f_n : I \rightarrow \R$ differentiable with $f_n'$ continuous.
+    Assume $f_n \rightarrow f$ pointwise,
+    $f_n'$ converges uniformly
+    (in compact subsets)
+    to $g(x)$
+    (for some function $g(x)$).
+
+    Then $f(x)$ is differentiable on $I$ with $f'(x) = g(x) = \liminfty f_n'(x)$
+\end{theorem}
+
+\begin{example}
+    $f_n(x) = \frac{\sin(nx)}{n} \rightarrow 0 = f(x)$.
+    In fact uniformly on $\R$.
+
+    \[
+    |f_n(x) - f(x)| = \left|\frac{\sin(nx)}{n}\right| \leq \frac{1}{n} \xrightarrow[n \rightarrow \infty]{} 0.
+    \]
+    For all $x \in \R$ independent of $x$.
+
+    But $f_n'(x) = n\frac{\cos(nx)}{n} = \cos(nx)$,
+    which doesn't converge
+    (not even pointwise,
+    for most points).
+\end{example}
+
+\begin{theorem}[Weierstrass $M$-test]
+    $\infsumo f_k(x)$ on $I$.
+    Assume
+    \[
+    |f_k(x)| \leq M_k
+    \]
+    independent of $x$.
+    \[
+    \infsumo M_k < \infty
+    \]
+    converges.
+    Then $\infsumo f_k(x)$ uniformly on $I$.
+
+    \begin{proof}
+        By comparison
+        \[
+        \sum|f_k(x)| \leq \sum M_k < \infty
+        \]
+        so $\sum f_k(x)$ converges absolutely to a function $f(x)$.
+
+        Set $L = \infsumo M_k = \liminfty\left(\sum_{k = 0}^{n}M_k\right)$.
+        So given $\varepsilon > 0$,
+        there exists an $N$ such that
+        \[
+        \left|L - \sum_{k = 0}^{n}M_k\right| = \infsum[k = n + 1]M_k < \varepsilon
+        \]
+        for all $n \geq N$.
+
+        Will show
+        \[
+        \left|f(x) - \infsumo f_k(x)\right| < \varepsilon.
+        \]
+        for all $n \geq N$.
+
+        Indeed:
+        \[
+        \left|f(x) - \sum_{k = 0}^{n}f_k(x)\right| = \left|\infsum[k = n + 1]f_k(x)\right| \leq \infsum[k = n + 1]|f_k(x)| \leq \infsum[k = n + 1]M_k < \varepsilon.
+        \]
+    \end{proof}
+\end{theorem}
+
+To show continuity of $\sum f_k(x)$ use $M$-test on compact subsets of $I$.
+
+\begin{example}[Weierstrass Monster]
+    \[
+    f(x) = \infsumo\frac{1}{2 ^ k}\cos(15 ^ k\pi x)
+    \]
+    is continuous on $\R$,
+    since it is uniformly convergent on $\R$.
+
+    \begin{solution}
+        Indeed,
+        \[
+        \left|\frac{1}{2 ^ k}\cos(15 ^ k\pi x)\right| \leq \frac{1}{2 ^ k} = M_k
+        \]
+        and
+        \[
+        \infsumo\frac{1}{2 ^ k} = \frac{1}{1 - \frac{1}{2}} = 2 < \infty.
+        \]
+        By the $M$-test,
+        uniform convergence on $\R$,
+        and by $\R$ uniform convergence implies continuous.
+    \end{solution}
+\end{example}
+
+\begin{theorem}
+    Power series $\infsumo a_kx ^ k$ are continuous in $(-R, R)$.
+
+    Since they converge uniformly on compact subsets of $(-R, R)$.
+
+    \begin{proof}
+        Take $[a, b] \subset [-r, r] \subset (-R, R)$,
+        $r \in \R$.
+
+        Take $x \in [-r, r]$.
+        Then
+        \[
+        \infsumo|\underbrace{a_kx ^ k}_{= f_k(x)}| \leq \sum\underbrace{|a_k|r ^ k}_{= M_k} < \infty
+        \]
+        since $r < R$ by $M$-test and the previous theorem.
+    \end{proof}
+\end{theorem}
 
 
 
