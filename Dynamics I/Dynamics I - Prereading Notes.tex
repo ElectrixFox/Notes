@@ -1321,7 +1321,61 @@ a second-order differential equation for $u(\theta)$.
     \end{solution}
 \end{example}
 
+\subsection{Circular orbits and stability}
 
+For a circular orbit.
+we need an attractive force with $f(r) < 0$.
+Let us write $g(u) = -f(1 / u)$,
+so $g(u)$ is positive.
+The orbit equation becomes
+\[
+u'' + u = \frac{mg(u)}{L ^ 2u ^ 2}.
+\]
+A circular orbit $u = b$
+(constant)
+is possible,
+with the angular momentum satisfying $mg(b) = L ^ 2b ^ 3$.
+But is this orbit stable?
+
+We will simply test for stability by making a perturbation which keeps the angular momentum fixed.
+The perturbation is to replace $u = b$ by $u = b + \varepsilon(\theta)$,
+where $\varepsilon(\theta)$ is small;
+the question is whether it stays small.
+Substituting into the orbit equation gives,
+using the Taylor expansion and after some algebra
+\[
+\varepsilon'' = \left[\frac{bg'(b)}{g(b)} - 3\right]\varepsilon,
+\]
+where we ignore terms of order $\varepsilon ^ 2$.
+For stability we need the coefficient on the right-hand-side to be negative,
+in other words
+\[
+bg'(b) < 3g(b).
+\]
+Gravity has $g(u) = ku ^ 2$ which satisfies this.
+The case $f(r) = -\frac{2}{r ^ 2} - \frac{1}{r ^ 3}$ also admits circular orbits.
+But $f(r) = -\frac{1}{r ^ 3}$ does not.
+
+\begin{example}
+    Most communication satellites occupy geostationary orbits,
+    namely circular orbits above the equator which stay at the same point relative to the rotating Earth.
+    Show that only one height $r_0$ is possible for such an orbit.
+
+    \begin{solution}
+        We know $\frac{L}{m} = r_0 ^ 2\dot{\theta}$ by the definition of $L$
+        (the definition of angular momentum),
+        and also $L ^ 2 / m ^ 2 = GMr_0$ for a circular orbit.
+        A geostationary orbit has a particular value of $\dot{\theta}$,
+        one full rotation per day.
+        So we get an equation
+        \[
+        \frac{L}{m} = r_0 ^ 2\dot{\theta} \implies \frac{L ^ 2}{m ^ 2} = r_0 ^ 4\dot{\theta} ^ 2  \iff GMr_0 = r_0 ^ 4\dot{\theta} ^ 2 \iff \frac{GM}{\dot{\theta} ^ 2} = r_0 ^ 3
+        \]
+        this determines $r_0$ uniquely.
+        Its value is $r_0 = 42000$km,
+        corresponding to a height of $35786$km above the Earth.
+    \end{solution}
+\end{example}
 
 
 
