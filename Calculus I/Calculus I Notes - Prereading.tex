@@ -2750,7 +2750,138 @@ g(x) = \frac{(P_0(x), \sin(x))}{(P_0, P_0) ^ {1 / 2}}u_1 = \frac{\int_{-1}^{1}\s
 \]
 which if one continues expanding like this up to an arbitrary order one gets an increasingly better approximation for $\sin(x)$ in the Legendre basis.
 
+\newpage
 
+\section{Linear PDEs}
+
+\subsection{The Method of Separation of Variables}
+
+If we are solving for some function $f(x, y, \dotsc, t)$ the idea is to look for a basis of the solution space in the form $X(x)Y(y)\dotsc T(t)$,
+i.e.,
+as a product of factors,
+each depending on only one of the variables.
+
+Substituting this into the PDE produces a series of eigenfunction/eigenvalue type ODEs for each of the functions $X(x), Y(y), \dotsc$.
+Generally there will be infinitely many such solutions
+(e.g. $X_n(x), Y_n(y), \dotsc T_n(t)$)
+which will act as a basis for the solution space,
+so that any solution can be written as a linear combination
+\[
+f(x, y, \dotsc, t) = \sum_{n}a_nX_n(x)Y_n(y)\dotsc T_n(t).
+\]
+Often the factors such as $X_n(x)$ will be eigenfunctions of self-adjoint operators,
+and so will be orthogonal to one another which greatly facilitates finding the coefficients $a_n$.
+
+\begin{example}[Finite string with fixed ends,
+initially displaced but at rest]
+    A finite string lies along the $x$-axis between $x = 0$ and $x = \pi$.
+    It is subsequently displaced,
+    and its displacement from the $x$-axis,
+    $u(x, t)$ obeys the wave equation $u_{tt} = c ^ 2u_{xx}$.
+    Its ends are held fixed so that $u(0, t) = u(\pi, t) = 0$.
+    If initially the string is released from rest so that $u_t(x, 0) = 0$ and position
+    \[
+    u(x, 0) = R(x) = \begin{cases}
+        0 &\text{for } 0 \leq x \leq \frac{\pi}{2} \\
+        \pi - x &\text{for } \frac{\pi}{2} \leq x \leq \pi.
+    \end{cases}
+    \]
+
+    \begin{solution}
+        Following the method of separation of variables,
+        we try a solution of the form $u(x, t) = X(x)T(t)$.
+        Substituting this into the wave equation we find
+        \[
+        u_{tt} = X(x)\ddot{T}(t) = c ^ 2u_{xx} = c ^ 2X''(x)T(t).
+        \]
+        Dividing through by $X(x)T(t)c ^ 2$ we find
+        \[
+        \frac{X''(x)}{X(x)} = \frac{\ddot{T}(t)}{c ^ 2T(t)}.
+        \]
+        Now the left hand side only depends upon $x$ while the right hand side only depends upon $t$,
+        so consequently they must both be a constant $\lambda$,
+        yielding
+        \[
+        X''(x) = \lambda X(x), \ddot{T}(t) = \lambda c ^ 2T(t).
+        \]
+        Thus our PDE has been turned into two ODEs of eigenfunction/eigenvalue type.
+        Let us concentrate on the equation for $X(x)$.
+        The boundary conditions at the end of the string $u(0, t) = u(\pi, t) = 0$ will bw automatically satisfied by our solution if we take $X(0) = X(\pi) = 0$,
+        so we will look for solutions to $X''(x) = \lambda X(x)$ with this property.
+        We find three cases depending on the sign of $\lambda$:
+
+        $\lambda = n ^ 2 > 0$.
+        In this case $X'' = n ^ 2X$,
+        with the general solution $X = Ae ^ {nx} + Be ^ {-nx}$.
+        Putting in our initial conditions gets us $A = B = 0$,
+        so there are no non-zero solutions fitting the boundary conditions in this case.
+
+        $\lambda = 0$.
+        $X'' = 0$,
+        having solution $X = Ax + B$,
+        as before this leads us to $A = B = 0$,
+        so there are no non-zero solutions to this either.
+
+        However,
+        if we take $\lambda = -n ^ 2 < 0$.
+        We get $X'' = -n ^ 2X$,
+        and the general solution is $X =  A\sin(nx) + B\cos(nx)$.
+        The initial conditions get us $B = 0$,
+        then $X(\pi) = A\sin(n\pi) = 0$.
+        This has a non-zero solution provided that we take $n$ to be a positive integer.
+
+
+
+        Given this we can now solve the equation for $T(t)$.
+        $\ddot{T}(t) = \lambda c ^ 2T(t) = -n ^ 2c ^ 2T(t)$,
+        which has general solution $A_n\cos(nct) + B_n\sin(nct)$.
+        Putting this all together,
+        we have found our 'basis solution':
+        \[
+        u_n(x, t) = \sin(nx)(A_n\cos(nct) + B_n\sin(nct)).
+        \]
+        A general solution is a linear combination of such basis solutions
+        \[
+        u(x, t) = \infsum[n = 1]\sin(nx)(A_n\cos(nct) + B_n\sin(nct)).
+        \]
+        This solution obeys the wave equation and the boundary conditions at the end of the string $u(0, t) = u(\pi, t) = 0$.
+        
+        To determine $A_n, B_n$,
+        we have to satisfy the remaining 'initial conditions'.
+        The string's velocity is given by
+        \[
+        u_t(x, t) = \infsum[n = 1]\sin(nx)nc(-A_n\sin(nct) + B_n\cos(nct))
+        \]
+        so if the string is at rest at $t = 0$ we have
+        \[
+        0 = u_t(x, 0) = \infsum[n = 1]\sin(nx)ncB_n
+        \]
+        which is satisfied provided we take $B_n = 0$.
+        The final boundary condition is that $u(x, 0) = R(x)$,
+        we have
+        \[
+        u(x, 0) = R(x) = \infsum[n = 1]A_n\sin(nx).
+        \]
+        We known the function $R(x)$ and we would like to determine the coefficients of $A_n$.
+        Looking at the right hand side of the above expression we see as a sum of terms of the form $\sin(nx)$ it describes a function which is both periodic with period $2\pi$,
+        and odd which must coincide with $R(x)$ in the range $0 \leq x \leq \pi$.
+        Thus we can think of the right hand side as the 'odd periodic extension' of $R(x)$,
+        and the coefficients of $A_n$ can be determined using the half-range Fourier formula
+        \begin{align*}
+            A_n &= \frac{2}{\pi}\int_{0}^{\pi}R(x)\sin(nx)\,dx \\
+            &= \frac{2}{\pi}\int_{0}^{\pi / 2}x\sin(nx)\,dx + \frac{2}{\pi}\int_{\pi / 2}^{\pi}(\pi - x)\sin(nx)\,dx \\
+            &= -\frac{2}{n\pi}\left[x\cos(nx)\right]_{0}^{\pi / 2} + \frac{2}{n\pi}\int_{0}^{\pi / 2}\cos(nx)\,dx \\
+            &-\frac{2}{n\pi}\left[(\pi - x)\cos(nx)\right]_{\pi / 2}^{\pi} - \frac{2}{n\pi}\int_{\pi / 2}^{\pi}\cos(nx)\,dx \\
+            &= -\frac{1}{n}\cos(n\pi / 2) + \frac{2}{n ^ 2\pi}[\sin(nx)]_{0}^{\pi / 2} \\
+            &+ \frac{1}{n}\cos(n\pi / 2) - \frac{2}{n ^ 2\pi}[\sin(nx)]_{\pi / 2}^{\pi} \\
+            &= \frac{4}{n ^ 2\pi}\sin(n\pi / 2).
+        \end{align*}
+        Finally substituting this into the expression for $u(x, t)$ we find
+        \[
+        u(x, t) = \infsum[n = 1]\frac{4}{n ^ 2\pi}\sin(n\pi / 2)\sin(nx)\cos(nct).
+        \]
+    \end{solution}
+\end{example}
 
 
 
