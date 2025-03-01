@@ -1086,13 +1086,19 @@ There is a classical theorem for this type of problem
     What is the maximum number of
     (undirected)
     edge-disjoint paths in $K_n$ from $s$ to $t$?
+
+    \begin{solution}
+        The number of ways out of $s$ is $n - 1$
+        (for $K_n$)
+        each can go directly to $t$ since the graph is complete.
+    \end{solution}
 \end{example}
 
 \begin{example}
     \begin{enumerate}[label = (\roman*)]
         \item Let $K_{n, m}$ be the complete bipartite graph with $n$ 'source' vertices and $m$ 'sink' vertices.
         The edges are directed and all flow from a source vertex to a sink vertex.
-        Form an augmented network with one 'supersource' $\sigma$and one 'supersink' $\tau$.
+        Form an augmented network with one 'supersource' $\sigma$ and one 'supersink' $\tau$.
         Calculate the maximum number of edge-disjoint paths that go from $\sigma$ to $\tau$.
 
         \item Continuing from (i),
@@ -1100,6 +1106,33 @@ There is a classical theorem for this type of problem
 
         \item What is the maximum number of edges you can allow your enemy to remove from $K_{n, m}$ before he is able to decrease the number of directed edge-disjoint paths from $\sigma$ to $\tau$?
     \end{enumerate}
+
+    \begin{solution}
+        \begin{enumerate}[label = (\roman*)]
+            \item \phantom{}
+
+            \item
+            For this we will denote the number of edges that can be removed from $K_{n, m}$ and still have the same number of directed edge disjoint paths from $\sigma$ to $\tau$ as $\mathcal{E}(n, m)$.
+            If $n = m$ then we have $\mathcal{E}(n, m) = n(m - 1)$,
+            this is because we are removing the edges between each used node.
+
+            If we have $n > m$ then we get
+            \begin{align*}
+                \mathcal{E}(n, m) &= m(m - 1) + (n - m)m \\
+                &= m(m - 1) + (n - m)m + (n - m)
+            \end{align*}
+            since:
+            $m(m - 1)$ - the number of removed edges between each used node,
+            $(n - m)m$ - the removed edges between the unused nodes.
+            $(n - m)$ - removing the edges between $\sigma$ and $\tau$.
+
+            For $m > n$ we have the same just where we swap all of the $m$s for $n$s due to the 'symmetry' of bipartite graphs.
+
+            \item I will reduce it if they remove an edge from $\tau$ to $m$ if $m < n$,
+            or $\sigma$ to $n$ if $n < m$,
+            or the result from (ii) $+1$ if they are taking their time.
+        \end{enumerate}
+    \end{solution}
 \end{example}
 
 \begin{definition}
@@ -1154,6 +1187,22 @@ We will now convert our graphs into directed graphs.
     since $|i(A)| \leq |B|$.
     The remarkable fact about the condition we gave is that it is not only a necessary condition for a perfect matching to exist,
     but also a sufficient one.
+
+    \begin{solution}
+        Say we have a bipartite graph $G$ we can divide the two 'sections' into two sets,
+        $A$,
+        $B$.
+
+        For $|U| = |A|$ this implies that $|i(U)| = |B|$.
+        If $|B| < |A|$,
+        for each $b \in B$ we can find a $u \in U \subseteq A$ such that there exists an edge $bu \in G$,
+        i.e.
+        we can go from any $u \in U$ to many $b \in B$.
+        Thus we would naturally have
+        \[
+        |U| < |i(U)|
+        \]
+    \end{solution}
 \end{example}
 
 \begin{theorem}[Hall's Marriage Theorem]
