@@ -687,12 +687,141 @@ A(p) \coloneqq \min_ra(v_r).
         Hence this algorithm stops.
         But it is not a maximal flow:
 
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[>=stealth, node distance=2cm, every node/.style={draw, circle}]
+                % Nodes
+                \node[draw] at (0, 0) (s) {s};
+                \node[draw] at (0, -2) (v1) {$v_3$};
+                \node[draw] at (2, 0) (v2) {$v_1$};
+                \node[draw] at (4, 0) (v3) {$v_2$};
+                \node[draw] at (2.5, -2) (v4) {$v_4$};
+                \node[draw] at (1, -4) (v5) {$v_5$};
+                \node[draw] at (4, -4) (t) {t};
+        
+                % Edges
+                \draw[->] (s) -- (v2)
+                    node[midway, above, rectangle, yshift = 3pt] {\small 1} 
+                    node[midway, below, draw = none] {\small 3};
+                    
+                \draw[->] (s) -- (v1)
+                    node[midway, left, xshift = -3pt, rectangle] {\small 7}
+                    node[midway, right, draw = none] {\small 7};
+                    
+                \draw[->] (v1) -- (v2)
+                    node[midway, below right, rectangle, xshift = 3pt, yshift = -3pt] {\small 2}
+                    node[midway, above left, draw = none] {\small 2};
+                    
+                \draw[->] (v1) -- (v5)
+                    node[midway, below left, rectangle, yshift = -3pt] {\small 5}
+                    node[midway, above right, draw = none] {\small 9};
+                
+                \draw[->] (v2) -- (v3)
+                    node[midway, above, rectangle, yshift = 3pt] {\small 3}
+                    node[midway, below, draw = none] {\small 4};
+                
+                \draw[->] (v3) -- (t)
+                    node[midway, right, rectangle, xshift = 3pt] {\small 1}
+                    node[midway, left, draw = none] {\small 1};
+                
+                \draw[->] (v3) -- (v4)
+                    node[midway, right, rectangle, xshift = 3pt] {\small 3}
+                    node[midway, above left, draw = none] {\small 3};
+                
+                \draw[->] (v4) -- (v5)
+                    node[midway, above left, rectangle] {\small 2}
+                    node[midway, below right, draw = none] {\small 2};
+                
+                \draw[->] (v5) -- (t)
+                    node[midway, below, rectangle, yshift = -3pt] {\small 7}
+                    node[midway, above, draw = none] {\small 8};
+            \end{tikzpicture}
+        \end{figure}
+        Can only get to $v_1, v_2$ from $s$.
+        so no usable path exists between $s$ and $t$.
+        Hence this algorithm stops.
+        But it is not a maximal flow.
         To increase the flow we can do the following:
         $f_{sv_1} + 1$,
         $f_{st} + 1$,
         $f_{v_3v_1} - 1$,
         $f_{v_3v_5} + 1$ which gives us the maximal flow in the network.
     \end{solution}
+\end{example}
+
+Here is another example of us doing the same thing
+\begin{example}
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[>=stealth, node distance=2cm, every node/.style={draw, circle}]
+            % Nodes
+            \node[draw] at (-6, 0) (s) {s};
+            \node[draw] at (-4, 0) (v1) {$v_1$};
+            \node[draw] at (-2, 0) (v2) {$v_2$};
+            \node[draw] at (0, 0) (v3) {$v_3$};
+            \node[draw] at (2, 0) (v4) {$v_4$};
+            \node[draw] at (4, 0) (t) {t};
+    
+            % Edges
+            \draw[->] (s) -- (v1)
+                node[midway, above, draw = none] {\small 4};
+                
+            \draw[->] (v1) -- (v2)
+                node[midway, above, draw = none] {\small 2};
+                
+            \draw[->] (v2) -- (v3)
+                node[midway, above, draw = none] {\small 6};
+                
+            \draw[->] (v3) -- (v4)
+                node[midway, above, draw = none] {\small 3};
+            
+            \draw[->] (v4) -- (t)
+                node[midway, above, draw = none] {\small 2};
+        \end{tikzpicture}
+    \end{figure}
+    The path is $\{s, v_1, v_2, v_3, v_4, t\}$,
+    then we have the availability of the path:
+    \[
+    A_p = \{4, 2, 6, 3, 2\}.
+    \]
+    $\min{A_p} = 2$,
+    i.e. the minimum availability is $2$.
+
+    So we can add two to each flow:
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[>=stealth, node distance=2cm, every node/.style={draw, circle}]
+            % Nodes
+            \node[draw] at (-6, 0) (s) {s};
+            \node[draw] at (-4, 0) (v1) {$v_1$};
+            \node[draw] at (-2, 0) (v2) {$v_2$};
+            \node[draw] at (0, 0) (v3) {$v_3$};
+            \node[draw] at (2, 0) (v4) {$v_4$};
+            \node[draw] at (4, 0) (t) {t};
+    
+            % Edges
+            \draw[->] (s) -- (v1)
+                node[midway, above, draw = none] {\small 4}
+                node[midway, below, rectangle, yshift = -3pt] {\small 2};
+                
+            \draw[->] (v1) -- (v2)
+                node[midway, above, draw = none] {\small 2}
+                node[midway, below, rectangle, yshift = -3pt] {\small 2};
+                
+            \draw[->] (v2) -- (v3)
+                node[midway, above, draw = none] {\small 6}
+                node[midway, below, rectangle, yshift = -3pt] {\small 2};
+                
+            \draw[->] (v3) -- (v4)
+                node[midway, above, draw = none] {\small 3}
+                node[midway, below, rectangle, yshift = -3pt] {\small 2};
+            
+            \draw[->] (v4) -- (t)
+                node[midway, above, draw = none] {\small 2}
+                node[midway, below, rectangle, yshift = -3pt] {\small 2};
+        \end{tikzpicture}
+    \end{figure}
+    so we end with $\min(A_p) = 0$.
 \end{example}
 
 \begin{example}
@@ -775,7 +904,7 @@ and is called undirected if not.
 Let $\mathcal{N}_d = \mathcal{N}_d(G)$ denote the number of edge-disjoint directed paths in the directed network $G$.
 We will use the max-flow min-cut theorem to prove the following result:
 
-\begin{theorem}
+\begin{theorem}\label{sem:disc:thm:mincuteqnumdirected}
     If a directed network $G$ is turned into a capacitated network by declaring that each edge has unit capacity,
     then the number $\mathcal{N}_d$ of edge-disjoint directed paths is equal to the minimal cut capacity,
     i.e.,
@@ -830,7 +959,6 @@ We will use the max-flow min-cut theorem to prove the following result:
         And $s \in S$ so the path needs to go from $S$ to some $v \in V \setminus S$.
         Each path is edge disjoint so once one edge is used from $S$ to $v \in V \setminus S$ it cannot be used again.
         Hence $K(S) \geq \text{Number of edge disjoint paths} = \mathcal{N}_d$.
-        
     \end{solution}
 \end{example}
 
@@ -844,12 +972,203 @@ There is a classical theorem for this type of problem
     Consider an undirected network.
     Can you find a way to count the number of edge disjoint paths from $s$ to $t$,
     by relating the problem to an appropriate problem on a directed network?
+
+    \begin{solution}
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[>=stealth, node distance=2cm, every node/.style={draw, circle}]
+                % Nodes
+                \node[draw] at (-3, 3) (s) {s};
+                \node[draw] at (0, 5) (v1) {$v_1$};
+                \node[draw] at (0, 2) (v2) {$v_2$};
+                \node[draw] at (-2, 0) (v3) {$v_2$};
+                \node[draw] at (2, 0) (v4) {$v_4$};
+                \node[draw] at (3, 3) (t) {t};
+        
+                % Edges
+                \draw[-] (s) -- (v1);
+                
+                \draw[-] (s) -- (v2);
+                
+                \draw[-] (v1) -- (t);
+                
+                \draw[-] (v2) -- (t);
+                
+                \draw[-] (s) -- (v3);
+                
+                \draw[-] (v3) -- (t);
+                
+                \draw[-] (v3) -- (v4);
+                
+                \draw[-] (v4) -- (t);
+            \end{tikzpicture}
+        \end{figure}
+        for all $uv$ with $u, v \in V$.
+        Add two directed edges one from $uv$ an another from $vu$
+        (both ways).
+        Using \autoref{sem:disc:thm:mincuteqnumdirected} get the number of edge disjoint paths and figure out the paths.
+        \begin{align*}
+            p_1 &= \text{path $1$} = \{s, v_1, v_2, \dotsc, u, v, \dotsc, v_n, t\} \\
+            p_2 &= \text{path $2$} = \{s, u_1, u_2, \dotsc, v, u, \dotsc, u_n, t\}
+        \end{align*}
+        with $u, v \in V$ if two paths use $u, v$ swap the paths after that point.
+        \begin{align*}
+            \tilde{p}_1 &= \{s, v_1, v_2, \dotsc, u, \dotsc, u_n, t\} \\
+            \tilde{p}_2 &= \{s, u_1, u_2, \dotsc, v, \dotsc, v_n, t\}.
+        \end{align*}
+        Repeat until no more $u, v \in V$ such that $uv$ and $vu$ is used.
+        E.g.
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[>=stealth, node distance=2cm, every node/.style={draw, circle}]
+                % Nodes
+                \node[draw] at (-6, 6) (s) {s};
+                \node[draw] at (0, 10) (v1) {$v_1$};
+                \node[draw] at (0, 4) (v2) {$v_2$};
+                \node[draw] at (-4, 0) (v3) {$v_3$};
+                \node[draw] at (4, 0) (v4) {$v_4$};
+                \node[draw] at (6, 6) (t) {t};
+        
+                % Edges
+                \draw[->, bend left = 20] (s) to (v1);
+                \draw[->, bend left = 20] (v1) to (s);
+                
+                \draw[->, bend left = 20] (s) to (v2);
+                \draw[->, bend left = 20] (v2) to (s);
+                
+                \draw[->, bend left = 20] (v1) to (t);
+                \draw[->, bend left = 20] (t) to (v1);
+                
+                \draw[->, bend left = 20] (v2) to (t);
+                \draw[->, bend right = 10] (t) to (v2);
+                
+                \draw[->, bend left = 20] (s) to (v3);
+                \draw[->, bend left = 20] (v3) to (s);
+                
+                \draw[->, bend left = 10] (v3) to (t);
+                \draw[->, bend left = 10] (t) to (v3);
+                
+                \draw[->, bend left = 20] (v3) to (v4);
+                \draw[->, bend left = 20] (v4) to (v3);
+                
+                \draw[->, bend left = 20] (v4) to (t);
+                \draw[->, bend left = 20] (t) to (v4);
+            \end{tikzpicture}
+        \end{figure}
+    \end{solution}
 \end{example}
 
 \begin{example}
     What are the maximum number of directed edge-disjoint paths from $s$ to $t$?
     Does the answer stay the same if we remove the directions on the edges and consider only edge-distinct paths from $s$ to $t$ in the resulting undirected graphs?
 \end{example}
+
+\begin{theorem}
+    The maximum number of edge-disjoint paths from $s$ to $t$ in an undirected graph is equal to the minimal number of edges whose removal leaves no path from $s$ to $t$.
+\end{theorem}
+
+\begin{example}
+    Consider an undirected network.
+    Can you find a way to count the number of edge-disjoint paths from $s$ to $t$,
+    by relating the problem to an appropriate problem n a directed network?
+\end{example}
+
+\begin{example}
+    What are the maximum number of directed edge-disjoint paths from $s$ to $t$?
+    Do the answers stay the same if we remove the directions on the edges and consider only edge-distinct paths from $s$ to $t$ in the resulting undirected graphs?
+\end{example}
+
+\begin{example}
+    Let $K_n$ be the complete graph on $n$ vertices.
+    Pick two
+    (disjoint)
+    vertices and call them $s$ and $t$.
+    What is the maximum number of
+    (undirected)
+    edge-disjoint paths in $K_n$ from $s$ to $t$?
+\end{example}
+
+\begin{example}
+    \begin{enumerate}[label = (\roman*)]
+        \item Let $K_{n, m}$ be the complete bipartite graph with $n$ 'source' vertices and $m$ 'sink' vertices.
+        The edges are directed and all flow from a source vertex to a sink vertex.
+        Form an augmented network with one 'supersource' $\sigma$and one 'supersink' $\tau$.
+        Calculate the maximum number of edge-disjoint paths that go from $\sigma$ to $\tau$.
+
+        \item Continuing from (i),
+        what is the largest number of edges that can be removed from $K_{n, m}$ and still have the same number of directed edge disjoint paths from $\sigma$ to $\tau$?
+
+        \item What is the maximum number of edges you can allow your enemy to remove from $K_{n, m}$ before he is able to decrease the number of directed edge-disjoint paths from $\sigma$ to $\tau$?
+    \end{enumerate}
+\end{example}
+
+\begin{definition}
+    A matching in a graph $G$ is a subset $W$ of the edges of $G$ with the property that no vertex of $G$ has more than one edge in $W$ incident to it.
+\end{definition}
+
+Consider a bipartite graph on vertices $A \cup B$,
+where $A \cap B = \emptyset$,
+and every edge has one endpoint in $A$ and the other in $B$.
+
+\begin{definition}[Complete Matching]
+    A complete matching is a subset $W$ of edges such that every element of $A$ occurs in one edge,
+    and every element of $B$ occurs in at most one edge.
+\end{definition}
+
+One can think of a complete matching as follows.
+The edges in the bipartite graph indicate preferences for each of the vertices in $A$:
+vertex $a \in A$ wants to be matched to one of the vertices in $B$ to which it is joined by an edge.
+
+A complete matching exists if all of these preferences can be simultaneously satisfied.
+
+The definition of complete matching is not symmetric in the $A$ and $B$:
+elements of $B$ can be left 'unmatched',
+and express no preference in the matter!
+
+\begin{remark}
+    Clearly a complete matching can only exist if $|A| \leq |B|$.
+\end{remark}
+
+We will now convert our graphs into directed graphs.
+
+\begin{definition}[Out-neighbourhood]
+    Suppose $G$ is a directed bipartite graph with vertex subsets $A$ and $B$ and all edges flow from $A$ to $B$.
+    For each $U \subseteq A$,
+    define $i(U) \subseteq B$ by
+    \[
+    i(U) = \{b \in B\,:\,\text{there is an edge in $G$ running to $b$ for some $u \in U$}\}.
+    \]
+    We call $i(U)$ the out-neighbourhood of $U$.
+\end{definition}
+
+\begin{example}
+    In such a graph,
+    prove that if there is a complete matching of $A$,
+    then we must have
+    \[
+    |U| \leq |i(U)|,\text{ for all subsets $U$ of $A$}.
+    \]
+    Note that the previous includes
+    (when $U = A$)
+    the observation of our remark that we must have $|A| \leq |B|$,
+    since $|i(A)| \leq |B|$.
+    The remarkable fact about the condition we gave is that it is not only a necessary condition for a perfect matching to exist,
+    but also a sufficient one.
+\end{example}
+
+\begin{theorem}[Hall's Marriage Theorem]
+    If $G$ is a bipartite graph with vertex subsets $A$ and $B$ as above,
+    then there is a complete matching of $A$ if and only if the condition in the previous example holds.
+\end{theorem}
+
+
+
+
+
+
+
+
+
 
 
 
