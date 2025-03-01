@@ -1022,12 +1022,12 @@ There is a classical theorem for this type of problem
             \centering
             \begin{tikzpicture}[>=stealth, node distance=2cm, every node/.style={draw, circle}]
                 % Nodes
-                \node[draw] at (-6, 6) (s) {s};
-                \node[draw] at (0, 10) (v1) {$v_1$};
-                \node[draw] at (0, 4) (v2) {$v_2$};
-                \node[draw] at (-4, 0) (v3) {$v_3$};
-                \node[draw] at (4, 0) (v4) {$v_4$};
-                \node[draw] at (6, 6) (t) {t};
+                \node[draw] at (-3, 3) (s) {s};
+                \node[draw] at (0, 5) (v1) {$v_1$};
+                \node[draw] at (0, 2) (v2) {$v_2$};
+                \node[draw] at (-2, 0) (v3) {$v_3$};
+                \node[draw] at (2, 0) (v4) {$v_4$};
+                \node[draw] at (3, 3) (t) {t};
         
                 % Edges
                 \draw[->, bend left = 20] (s) to (v1);
@@ -1042,8 +1042,8 @@ There is a classical theorem for this type of problem
                 \draw[->, bend left = 20] (v2) to (t);
                 \draw[->, bend right = 10] (t) to (v2);
                 
-                \draw[->, bend left = 20] (s) to (v3);
-                \draw[->, bend left = 20] (v3) to (s);
+                \draw[->, bend left = 10] (s) to (v3);
+                \draw[->, bend left = 10] (v3) to (s);
                 
                 \draw[->, bend left = 10] (v3) to (t);
                 \draw[->, bend left = 10] (t) to (v3);
