@@ -4678,7 +4678,7 @@ where the symmetric matrix $B = M ^ TAM$ represents the same inner product but i
 
 \textbf{(Diagonalisation of hermitian inner products)}
 
-Every complex inner product on $\C ^ n$ may be written as $\langle\mbf{u}, \mbf{v}\ranlge = \mbf{y} ^ {*}A\mbf{x}$,
+Every complex inner product on $\C ^ n$ may be written as $\langle\mbf{u}, \mbf{v}\rangle = \mbf{y} ^ {*}A\mbf{x}$,
 where $A$ is an hermitian $n \times n$ matrix and $\mbf{x}, \mbf{y}$ are the coordinates of the two vectors $\mbf{u}, \mbf{v}$ in the chosen basis.
 
 If we change basis,
@@ -4761,6 +4761,160 @@ One way to get such a basis is to start with $\{1, x, x ^ 2, \dotsc, x ^ n\}$ as
 and apply the Gram-Schmidt procedure.
 In some special cases there is a more interesting way,
 related to the fact that many such examples arose in the study of differential equations.
+
+\subsection{Linear differential operators}
+
+\begin{definition}
+    If $V$ is a real vector space with inner product $(\,,\,)$,
+    and $\mathcal{L} : V \rightarrow V$ is a linear operator,
+    then $\mathcal{L}$ is said to be symmetric with respect to that inner product if
+    \[
+    (\mathcal{L}\mbf{v}, \mbf{w}) = (\mbf{v}, \mathcal{L}\mbf{w})
+    \]
+    for all $\mbf{v}, \mbf{w} \in V$.
+\end{definition}
+
+\begin{proposition}
+    If $V = \R ^ n$ with the standard Euclidean inner product,
+    and $\mathcal{L}$ is represented by an $n \times n$ matrix $M$,
+    then $\mathcal{L}$ is symmetric
+    (according to the above definition)
+    if and only if $M$ is symmetric.
+
+    \begin{proof}
+        
+    \end{proof}
+\end{proposition}
+
+\begin{example}
+    Let $V = \R[x]_3$.
+    Write down the matrix $M$ representing the operator $\mathcal{L}_L$ acting on $V$,
+    using the basis $\{1, x, x ^ 2, x ^ 3\}$ of $V$.
+    Use this to construct the Legendre polynomials $\{f_0, f_1, f_2, f_3\}$.
+
+    \begin{solution}
+        Let us evaluate the operator $\mathcal{L}_L$ on the standard bases $\{1, x, x ^ 2, x ^ 3\}$,
+        \begin{align*}
+            \mathcal{L}_L(1) = 0 &= 0 \cdot x ^ 0 + 0 \cdot x ^ 1 + 0 \cdot x ^ 2 + 0 \cdot x ^ 3, \\
+            \mathcal{L}_L(x ^ 1) = -2x &= 0 \cdot x ^ 0 - 2 \cdot x ^ 1 + 0 \cdot x ^ 2 + 0 \cdot x ^ 3, \\
+            \mathcal{L}_L(x ^ 2) = 2 - 6x ^ 2 &= 2 \cdot x ^ 0 + 0 \cdot x ^ 1 - 6 \cdot x ^ 2 + 0 \cdot x ^ 3, \\
+            \mathcal{L}_L(x ^ 3) = -12x ^ 3 + 6x &= 0 \cdot x ^ 0 + 6 \cdot x ^ 1 + 0 \cdot x ^ 2 - 12 \cdot x ^ 3,
+        \end{align*}
+        so its matrix representation $M$ in the standard bases is
+        \[
+        M = \begin{pmatrix}
+            0 & 0 & 2 & 0 \\
+            0 & -2 & 0 & 6 \\
+            0 & 0 & -6 & 0 \\
+            0 & 0 & 0 & -12
+        \end{pmatrix}.
+        \]
+    \end{solution}
+\end{example}
+
+\begin{definition}
+    A function $f$,
+    satisfying the differential equation
+    \[
+    \mathcal{L}f = \lambda f
+    \]
+    for some linear differential operator $\mathcal{L}$ and some number $\lambda$ is called an eigenfunction of $\mathcal{L}$ corresponding to the eigenvalue $\lambda$.
+\end{definition}
+
+\subsection{Complex version:
+Hermitian operators}
+
+\begin{definition}
+    Let $V$ be a complex vector space.
+    A linear operator $\mathcal{L} : V \rightarrow V$ is said to be hermitian if
+    \[
+    \langle\mathcal{L}\mbf{u}, \mbf{v}\rangle = \langle\mbf{u}, \mathcal{L}\mbf{V}\rangle.
+    \]
+
+    Similarly,
+    we will say that an operator $\mathcal{L}_A : V \rightarrow V$ is anti-hermitian if
+    \[
+    \langle\mathcal{L}_A\mbf{u}, \mbf{v}\rangle = -\langle\mbf{u}, \mathcal{L}_A\mbf{v}\rangle.
+    \]
+\end{definition}
+
+\begin{remark}
+    Because of the properties of the complex inner product $\langle\,,\,\rangle$ an anti-hermitian operator $\mathcal{L}_A$ can always be written as $\mathcal{L}_A = i\mathcal{L}$ with $\mathcal{L}$ hermitian
+    \[
+    \langle\mathcal{L}_A\mbf{u}, \mbf{v}\rangle = i\langle\mathcal{L}\mbf{u}, \mbf{v}\rangle = i\langle\mbf{u}, \mathcal{L}\mbf{v}\rangle = -\langle\mbf{u}, \mathcal{L}_A\mbf{v}\rangle.
+    \]
+\end{remark}
+
+\begin{proposition}
+    If $\mathcal{L}$ is hermitian,
+    then $\langle\mathcal{L}\mbf{v}, \mbf{v}\rangle$ is real for all $\mbf{v} \in V$.
+    
+    \begin{proof}
+        \[
+        \langle\mathcal{L}\mbf{v}, \mbf{v}\rangle = \langle\mbf{v}, \mathcal{L}\mbf{v}\rangle = \overline{\langle\mathcal{L}\mbf{v}, \mbf{v}\rangle},
+        \]
+        from the hermiticity property of the inner product.
+    \end{proof}
+\end{proposition}
+
+\begin{corollary}
+    The eigenvalues of an hermitian operator are all reals.
+
+    \begin{proof}
+        If $\mbf{v}$ is an eigenvector of an hermitian operator $\mathcal{L}$ with eigenvalue $\lambda$,
+        from the above proposition we know that $\langle\mathcal{L}\mbf{v}, \mbf{v}\rangle \in \R$,
+        but since $\mathcal{L}\mbf{v} = \lambda\mbf{v}$ we deduce that $\lambda\langle\mbf{v}, \mbf{v}\rangle \in \R$,
+        hence $\lambda \in \R$.
+    \end{proof}
+\end{corollary}
+
+\begin{proposition}
+    If $\mathcal{L}_A$ is anti-hermitian,
+    then $\langle\mathcal{L}_A\mbf{v}, \mbf{v}\rangle$ is purely imaginary for all $\mbf{v} \in V$.
+
+    \begin{proof}
+        \[
+        \langle\mathcal{L}_A\mbf{v}, \mbf{v}\rangle = -\langle\mbf{v}, \mathcal{L}_A\mbf{v}\rangle = -\overline{\langle\mathcal{L}_A\mbf{v}, \mbf{v}\rangle}
+        \]
+        from the hermiticity property of the inner product.
+        We could have also used the fact that $i\mathcal{L}_A$ is an hermitian operator if $\mathcal{L}_A$ is anti-hermitian.
+    \end{proof}
+\end{proposition}
+
+\begin{corollary}
+    The eigenvalues of an anti-hermitian operator are all purely imaginary,
+    i.e.
+    if $\mathcal{L}_A\mbf{v} = \lambda\mbf{v}$ then $\lambda = ic$ with $c \in \R$.
+\end{corollary}
+
+\begin{lemma}
+    Let $\mathcal{L}$ and $\mathcal{M}$ be hermitian linear operators on $V$.
+    Then
+    \[
+    4|\langle\mathcal{LM}\mbf{v}, \mbf{v}\rangle| ^ 2 \geq |\langle(\mathcal{LM} - \mathcal{ML})\mbf{v}, \mbf{v}\rangle| ^ 2.
+    \]
+
+    \begin{proof}
+        Write $c = \langle\mathcal{LM}\mbf{v}, \mbf{v}\rangle$.
+        Then
+        \begin{align*}
+            c &= \langle\mathcal{LM}\mbf{v}, \mbf{v}\rangle \\
+            &= \langle\mathcal{M}\mbf{v}, \mathcal{L}\mbf{v}\rangle &(\text{since $\mathcal{L}$ is hermitian}) \\
+            &= \langle\mbf{v}, \mathcal{ML}\mbf{v}\rangle &(\text{since $\mathcal{M}$ is hermitian})
+            &= \overline{\langle\mathcal{ML}\mbf{v}, \mbf{v}\rangle} &(\text{hermiticity property of inner product}).
+        \end{align*}
+        So $\langle\mathcal{ML}\mbf{v}, \mbf{v}\rangle = \bar{c}$,
+        and $|\langle(\mathcal{LM} - \mathcal{ML})\mbf{v}, \mbf{v}\rangle| ^ 2 = |c - \bar{c}| ^ 2 = 4[\mathrm{Im}(c)] ^ 2 \leq 4|c| ^ 2$.
+    \end{proof}
+\end{lemma}
+
+
+
+
+
+
+
+
 
 
 
