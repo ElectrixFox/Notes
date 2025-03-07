@@ -4993,7 +4993,140 @@ To show continuity of $\sum f_k(x)$ use $M$-test on compact subsets of $I$.
 \end{theorem}
 
 
+\begin{example}
+    \begin{enumerate}[label = (\arabic*)]
+        \item How to get $f_n \to f$?
+        Assume $f$ is Lipschitz
+        \[
+        |f(x) - f(y)| \leq M|x - y|
+        \]
+        for all $x, y \in [a, b]$.
+        Equidistant partition:
+        \[
+        x_k = a + k \cdot \frac{b - a}{n}, \quad k = 0, \dotsc, n.
+        \]A
+        Take any $x_k ^ {*} \in [x_k, x_{k - 1})$.
+        Say $x_k ^ {*} = x_k$.
+        Set
+        \[
+        f_n(x) = \begin{cases}
+            f(x_k) &\text{if } x \in [x_k, x_{k + 1}) \\
+            f(b) &\text{if } x = b.
+        \end{cases}
+        \]
+        $x \in [x_k, x_{k + 1})$ for some $k$
+        \begin{align*}
+            |f(x) - f_n(x)| &= |f(x) - f(x_k ^ {*})| \\
+            &\leq M|x - x_k ^ {*}| \\
+            &\leq M\cdot\frac{b - a}{n}
+        \end{align*}
+        both lie in $[x_k, x_{k + 1}]$ of length $\frac{b - a}{n}$.
+        Uniform convergence since $M\cdot\frac{b - a}{n} \to 0$ as $n \to \infty$.
 
+        \item Not all functions are regulated.
+        \[
+        d(x) \coloneqq \begin{cases}
+            1 &\text{if } x \in \Q \\
+            0 &\text{otherwise}.
+        \end{cases}
+        \]
+        Note any open set or interval contains infinitely many rational and irrational numbers.
+
+        Assume $d(x)$ was regulated.
+        Given $\varepsilon = 1 / 4$,
+        take the step function $g(x)$ such that $|g(x) - d(x)| < 1 / 4$ for all $x \in [0, 1]$.
+        As a step function $g(x)$ is constant on some interval,
+        $g(x) = c$ for all $x \in I$.
+        But $I$ contains $r \in \Q$ and $s \in \R \setminus \Q$,
+        $d(r) = 1$,
+        $d(s) = 0$,
+        \[
+        |d(r) - g(r)| = |1 - c| < \frac{1}{4}
+        \]
+        \[
+        |d(s) - g(s)| = c < \frac{1}{4}
+        \]
+        contradiction.
+
+        \item Regulated functions can have infinitely many discontinuities.
+
+        Take a sequence $(a_k)$ with limit $\liminfty[k]a_k = 0$.
+        Set
+        \[
+        f(x) = \begin{cases}
+            a & x = 0 \\
+            a_k & x \in \left(\frac{1}{k + 1}, \frac{1}{k}\right] \\
+            a_0 & x = 1.
+        \end{cases}
+        \]
+        on $[0, 1]$.
+        Not a step function,
+        but set
+        \[
+        f_n(x) = \begin{cases}
+            a &\text{if } x \in \left[0, \frac{1}{n + 1}\right] \\
+            f(x) &\text{if } x > \frac{1}{n + 1}.
+        \end{cases}
+        \]
+        Then
+        \[
+        |f_n(x) - f(x)| = \begin{cases}
+            0 &\text{if } x > \frac{1}{n + 1} \\
+            |a_k - a| & k > n
+        \end{cases}
+        \]
+        for $x \in \left[0, \frac{1}{n + 1}\right]$.
+
+        \item Every monotone function is regulated.
+    \end{enumerate}
+\end{example}
+
+\begin{lemma}
+    $f_n \to f$ uniformly,
+    $f_n$ step functions.
+    Then $f_n(x)$,
+    $f(x)$ are uniformly bounded.
+    I.e. $|f_n(x)|, |f(x)| < C$ for all $x \in [a, b]$.
+
+    \begin{proof}
+        Take $\varepsilon = 1$.
+        Exists $N$ such that $|f_n(x) - f(x)| < \varepsilon = 1$ for all $x \in [a, b]$ and for all $n \geq N$.
+        So $|f(x) - f_N(x)| < \varepsilon = 1$ for all $x$,
+        so $|f(x)| < |f_N(x)| + 1$,
+        $f_N(x)$ bounded since $f_N(x)$ takes only finitely many values.
+        Same for $f_n(x)$,
+        $n \geq N$.
+        $f_1, \dotsc, f_{N - 1}$ are universally bounded.
+    \end{proof}
+\end{lemma}
+
+\begin{proposition}[Regulated COLT]
+    $f_n \to f$,
+    $g_n \to g$,
+    $f, g$ regulated.
+    Then
+    \begin{enumerate}[label = (\roman*)]
+        \item $af + bg$ regulated.
+
+        \item $fg$ regulated.
+
+        \item $|f|$ regulated.
+        
+        \item $\max\{f, g\}$ regulated.
+        
+        \item $\min\{f, g\}$ regulated.
+    \end{enumerate}
+
+    \begin{proof}
+        \begin{enumerate}[label = (\roman*)]
+            \item $af_n + bg_n \to af + bg$.
+
+            \item $f_ng_n \to fg$.
+
+            \item $|f_n| \to f$.
+        \end{enumerate}
+    \end{proof}
+\end{proposition}
 
 
 
