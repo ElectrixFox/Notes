@@ -2160,9 +2160,130 @@ but note that they are not always unbiased.
     thus $\hat{\lambda}_{MLE}$ is unbiased.
 \end{example}
 
+\subsection{Sufficiency}
+
+\begin{definition}[Sufficiency]
+    If we have a sample of data $x_1, \dotsc, x_n$,
+    a statistic $T(x_1, \dotsc, x_n)$ is said to be sufficient for $\theta$ if any only if we can factorise the likelihood $\ell(\theta)$ in the following form:
+    \[
+    \ell(\theta) = f(x_1, \dotsc, x_n\mid\theta) = g(T, \theta)h(x_1, \dotsc, x_n)
+    \]
+    where we see that all the $\theta$ behaviour of the likelihood is tied together with $T$ through the function $g(T, \theta)$,
+    but the extra behaviour of $h(x_1, \dotsc, x_n)$ that contains additional details of the data,
+    is essentially irrelevant.
+
+    Therefore,
+    a sufficient statistic $T$ contains all of the information about the parameter $\theta$ that we can extract from the sample $x_1, \dotsc, x_n$.
+
+    The above definition generalises to the case where $T$ represents a vector of sufficient statistics.
+\end{definition}
+
+\begin{example}[Sufficiency for Binomial Scenario]
+    For the Binomial Scenario we had likelihood
+    \[
+    \ell(p) = f(x\mid p) = \binom{n}{x}p ^ x(1 - p) ^ {n - x}
+    \]
+    which can be written inn the form of the Factorisation theorem as
+    \[
+    \ell(p) = g(x, p)h(x_1, \dotsc, x_n)
+    \]
+    with $g(x, p) = p ^ x(1 - p) ^ {n - x}$ and $h(x_1, \dotsc, x_n) = \binom{n}{x}$.
+
+    Hence $T = x$ is the sufficient statistic for our parameter of interest $\theta = p$ as before,
+    again assuming we also know $n$.
+\end{example}
+
+\newpage
+
+\section{The Bayesian Statistics Paradigm}
+
+\textbf{Fundamental Principle of Bayesian Statistics}
+
+Everything that is uncertain can be treated as random and be associated with its own probability distribution,
+provided we use a subjective interpretation of probability.
 
 
+Following this subjective approach,
+we treat the parameter $\theta$ as a random variable.
+Its uncertainty is described by a
+(subjective)
+pdf $f(\theta)$.
+The likelihood of the data $\ell(\theta)$ now can be fully viewed as the conditional probability distribution,
+$f(x\mid\theta)$,
+of the data given by the parameter.
 
+\textbf{Fundamental Procedure of Bayesian Statistics}
+
+The problem of "learning about $\theta$ from the data" then becomes trivial:
+use conditional probability with $f(\theta)$ and $f(x\mid\theta)$ to find $f(\theta\mid x)$,
+which is the conditional pdf of the parameter $\theta$ given the data $x$.
+Thus we use the rules of probability
+(i.e. Bayes Theorem)
+to learn about our parameter from the data.
+
+\subsection{Bayesian Statistics}
+
+\textbf{Prior}:
+We have a collection of possible parameter values represented by $\theta$ for a statistical model,
+(or a collection of potential statistical models,
+or a combination of both)
+which could describe the future data,
+$X$.
+We assign a prior distribution,
+$f(\theta)$ over the possible parameter values or models,
+which expresses our uncertainty about the value of the parameter or the appropriate statistical model,
+$\theta$,
+before we see any data.
+This is often based on scientific insight,
+consideration of previous data/observations,
+and logic.
+
+\textbf{Data}:
+We observe the data,
+$X = x$.
+Having observed $x$,
+we can now formulate the likelihood,
+$f(x\mid\theta)$,
+of seeing the data given the model or parameter value $\theta$.
+This is the same as the standard likelihood $\ell(\theta)$ through the meaning is quite different.
+In the Bayesian approach $\theta$ is a random variable,
+so $f(x\mid\theta)$ is the conditional distribution of $x$ given $\theta$.
+In the frequentist approach,
+$\theta$ is not a random variable,
+so $\ell(\theta)$ is not treated as a density and is instead just a function returning the density of $x$ for different parameter values.
+
+\textbf{Posterior}:
+After seeing the data,
+we evaluate the likelihood of each parameter value or statistical model $\theta$ given the data $x$,
+and apply Bayes theorem to obtain posterior probabilities for each of the different parameter values or models.
+Thus we obtain the posterior distribution,
+$f(\theta\mid x)$,
+of parameter
+(or model)
+$\theta$,
+which expresses our uncertainty about the value of the parameter value or statistical model $\theta$ given the information we have learned after we have seen the data.
+
+\textbf{Inference}:
+Using the posterior distribution,
+$f(\theta\mid x)$,
+the problem of inference becomes one of making statements about the posterior distributions,
+such as probability intervals,
+point estimates,
+or assessments of the probability of particular hypotheses.
+
+
+\textbf{Fundamental Equation of Bayesian Statistics:
+The Posterior}
+
+Any Bayesian statistical problem can then be simply expressed as
+\[
+f(\theta\mid x) = \frac{f(x\mid\theta)f(\theta)}{f(x)},
+\]
+or in words,
+using the terminology above
+\[
+\text{Posterior} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Data probability}}.
+\]
 
 
 
