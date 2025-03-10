@@ -5128,7 +5128,97 @@ To show continuity of $\sum f_k(x)$ use $M$-test on compact subsets of $I$.
     \end{proof}
 \end{proposition}
 
+\newpage
 
+\section{Integration}
+
+The integral $I(f)$ is the signed area of the rectangles
+\[
+I(f) = \sum_{k = 0}^{N - 1}(x_{k + 1} - x_k)f(x_k ^ {*})
+\]
+$x_k ^ {*}$ is any element in $(x_k, x_{k + 1})$,
+this is the Riemann sum.
+This is independent of the choice of the underlying partition,
+nor does it depend on the values at the $x_0, \dotsc, x_N$.
+
+\begin{definition}[Regulated integral]
+    $f : [a, b] \to \R$ regulated,
+    say $f_n \to f$,
+    $f_n$ step functions.
+    Define the integral by
+    \[
+    I(f) = \liminfty I(f_n).
+    \]
+\end{definition}
+
+Need to check two things
+\begin{enumerate}[label = (\alph*)]
+    \item The limit exists.
+
+    \item Independent of the choice of $f_n \to f$.
+\end{enumerate}
+\begin{proof}
+    \begin{enumerate}[label = (\alph*)]
+        \item Show that the sequence $I(f_n) \eqqcolon a_n$ forms a Cauchy sequence.
+
+        Take $\varepsilon > 0$.
+        Need to find an $N$ such that for all $n, m \geq N$,
+        \[
+        |a_n - a_m| < \varepsilon
+        \]
+        we have $|I(f_n) - I(f_m)| = |a_n - a_m|$.
+        Take $N$ as in the definition of the regulated function,
+        and let $n, m \geq N$.
+        For the step functions $f_n(x)$ and $f_m(x)$.
+        Take a common refinement of the two underlying partitions,
+        $a = x_0, x_1, \dotsc, x_N = b$.
+        Then
+        \begin{align*}
+            |I(f_n) - I(f_m)| &= \sum_{k = 0}^{N}|(x_{k + 1} - x_k)f_m(x_k ^ {*}) - (x_{k + 1} - x_k)f_n(x_k ^ {*})| \\
+            &= \sum_{k = 0}^{N}(x_{k + 1} - x_k) \cdot |f_m(x_k) - f_n(x_k ^ {*})| \\
+            &= \sum_{k}^{N}(x_{k + 1} - x_k)|f_m(x_k ^ {*}) - f(x_k ^ {*}) + f(x_k ^ {*}) - f_n(x_k ^ {*})| \\
+            &\leq \sum_{k}^{N}(x_{k + 1} - x_k)\left[|f_m(x_k ^ {*}) - f(x_k ^ {*})| + |f(x_k ^ {*}) - f_n(x_k ^ {*})|\right] \\
+            &< 2\varepsilon\sum_{k = 0}^{N}(x_{k + 1} - x_k) = 2(b - a)\varepsilon
+        \end{align*}
+    
+        \item
+        Take $f_n \to f$,
+        $g_n \to f$ uniformly
+        ($f_n, g_n$ step functions).
+        Need $\liminfty I(f_n) = \liminfty I(g_n)$.
+        Take $\varepsilon > 0$.
+        Need to find an $N$ such that
+        \[
+        |I(f_n) - I(g_n)| < \varepsilon
+        \]
+        Take $N$ as in the definition of the regulated function,
+        for both $f_n, g_n$.
+        \begin{align*}
+            |I(f_n) - I(g_n)| &= \sum_{k = 0}^{N}|(x_{k + 1} - x_k)g_n(x_k ^ {*}) - (x_{k + 1} - x_k)f_n(x_k ^ {*})| \\
+            &= \sum_{k = 0}^{N}(x_{k + 1} - x_k) \cdot |g_n(x_k) - f_n(x_k ^ {*})| \\
+            &= \sum_{k}^{N}(x_{k + 1} - x_k)|g_n(x_k ^ {*}) - f(x_k ^ {*}) + f(x_k ^ {*}) - f_n(x_k ^ {*})| \\
+            &\leq \sum_{k}^{N}(x_{k + 1} - x_k)\left[|g_n(x_k ^ {*}) - f(x_k ^ {*})| + |f(x_k ^ {*}) - f_n(x_k ^ {*})|\right] \\
+            &< 2\varepsilon\sum_{k = 0}^{N}(x_{k + 1} - x_k) = 2(b - a)\varepsilon
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{example}
+    $f(x) = x$ on $[a, b]$.
+    
+    To define the $f_n(x)$,
+    take the equidistant partition $x_k = a + k\frac{b - a}{n}$,
+    $k = 0, \dotsc, n$.
+
+    For the $x_k ^ {*}$ take $x_k$.
+    Set $f(x) = f(x_k ^ {*}) = f(x_k)$ for $x \in (x_k, x_{k + 1})$.
+    Since $f$ Lipschitz $f_n \to f$ uniformly.
+
+    Take $a = 0, b = 1$.
+    \[
+    I(f_n) = \sum_{k = 0}^{n}(x_{k + 1} - x_k)f(x_k ^ {*}) = \frac{x_k ^ {*}}{n} = \frac{x_k}{n ^ 2} = \frac{1}{n ^ 2}\sum_{k = 0}^{N}k = \frac{1}{n ^ 2}\frac{n(n + 1)}{2} = \frac{n + 1}{2n} \to \frac{1}{2}.
+    \]
+\end{example}
 
 
 
