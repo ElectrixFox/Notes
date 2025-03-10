@@ -1119,9 +1119,85 @@ this can be rewritten as
     and the particle escapes to infinity.
 \end{example}
 
+\newpage
 
+\section{Moments of Inertia}
 
+\subsection{Rigid Bodies}
 
+Centre of mass.
+System of $N$ particles,
+masses $m_1, m_2, \dotsc, m_N$ at positions $\mbf{r}_1, \mbf{r}_2, \dotsc, \mbf{r}_N$ has centre of mass at
+(weighted average of $\mbf{r}_i$)
+\[
+\mbf{R} = \frac{m_1\mbf{r}_1 + m_2\mbf{r}_2 + \dotsc + m_N\mbf{r}_N}{m_1 + m_2 + \dotsc m_N}.
+\]
+
+A rigid body is a system of particles such that the position of any particle relative to any other particle is fixed.
+Motion of a rigid body complicated in general.
+Simplest is motion without any rotation:
+then it behaves like a single particle at the centre of mass $\mbf{R}(t)$.
+
+Next simplest:
+allow rotation about a fixed axis.
+Position of body given by $\theta(t)$:
+all the particles have the same angular velocity $\dot{\theta}$.
+
+\begin{example}
+    Simple pendulum.
+
+    Kinetic energy is
+    \[
+    K = \frac{1}{2}m_1v_1 ^ 2 + \dotsc + \frac{1}{2}m_Nv_N ^ 2
+    \]
+    Massses $m_i$ at distance $r_i$ from axis,
+    ($0 \leq i \leq N$)
+    speeds $v_i$,
+    note $v_i = r_i|\dot{\theta}|$.
+    \[
+    K = \frac{1}{2}m_1(r_1\dot{\theta}) ^ 2 + \dotsc + \frac{1}{2}m_N(r_N\dot{\theta}) ^ 2 = \frac{1}{2}I\dot{\theta} ^ 2
+    \]
+    where $I = m_1r_1 ^ 2 + m_2r_2 ^ 2 + \dotsc + m_Nr_N ^ 2$.
+    This $I$ is the moment of inertia of the system about the given axis.
+\end{example}
+
+\begin{example}
+    Light rod and two masses.
+    Distance $D$ from axis to centre of mass:
+    $D = \frac{1}{2m}$.
+    Axis at origin.
+    \[
+    D = \frac{1}{2m}\left(m\cdot\frac{L}{2} + m\cdot L\right) = \frac{3}{4}L
+    \]
+    
+    Moment of inertia:
+    \[
+    I = m\left(\frac{L}{2}\right) ^ 2 + mL ^ 2 = \frac{5}{4}mL ^ 2.
+    \]
+    So
+    \[
+    K = \frac{5}{8}mL ^ 2\dot{\theta} ^ 2.
+    \]
+\end{example}
+
+\begin{example}
+    Light rod,
+    length $L$,
+    three masses $m$,
+    as shown:
+
+    One particle $\frac{L}{3}$ from the axis and the other two spaced $\frac{L}{3}$ apart,
+    i.e. the far left particle is $\frac{L}{3}$ from the axis and the far right is $\frac{2L}{3}$ from the axis.
+
+    Moment of inertia is
+    \[
+    I = m\left(\frac{L}{3}\right) ^ 2 + m\left(\frac{L}{3}\right) ^ 2 + m\left(\frac{2L}{3}\right) ^ 2 = \frac{2}{3}mL ^ 2.
+    \]
+    Distance $D$ from axis to centre of mass is
+    \[
+    D = \frac{1}{3m}\left[m\left(-\frac{L}{3}\right) + m\left(\frac{L}{3}\right) + m\frac{2L}{3}\right] = \frac{2}{9}L
+    \]
+\end{example}
 
 
 
