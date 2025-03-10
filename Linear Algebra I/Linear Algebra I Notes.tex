@@ -7551,11 +7551,175 @@ where $M$ is a matrix representing the operator $\mathcal{L}$ in the basis $(x ^
 In all cases $(i), \dotsc, (v)$
 $\deg(\mathcal{L}(P)) \leq \deg{P}$.
 
+\newpage
 
+\section{Groups}
 
+\begin{definition}
+    A group is a set $G$ together with an operation $\cdot$,
+    $G \times G \to G$ called group multiplication
+    (not necessarily the usual product)
+    such that:
+    \begin{enumerate}[label = (\roman*)]
+        \item If $x, y \in G$ then $x \cdot y \in G$ for all $x, y \in G$
+        (closure).
 
+        \item $(x \cdot y) \cdot z = x \cdot (y \cdot z)$ for all $x, y, z \in G$
+        (associativity).
 
+        \item $G$ contains an identity element $e \in G$ such that $e \cdot x = x \cdot e = x$ for all $x \in G$.
 
+        \item Each $x \in G$ has an inverse element $x ^ {-1}$ such that $x \cdot x ^ {-1} = x ^ {-1} \cdot x = e$.
+    \end{enumerate}
+\end{definition}
+
+We say a group $G$ is abelian if $x \cdot y = y \cdot x$ for all $x, y \in G$
+(they commute,
+$x, y$ commute).
+
+\begin{example}\phantom{}
+    \begin{enumerate}[label = (\roman*)]
+        \item
+        $G = (\R, +)$,
+        usual addition,
+        here $e = 0$,
+        ($x + 0 = 0 + x = x$ for all $x \in \R$)
+        $x ^ {-1} = -x$
+        ($x + (-x) = (-x) + x = 0$).
+
+        \item $G = (\R \setminus \{0\}, *)$
+        (usual multiplication).
+        $e = 1$,
+        $x ^ {-1} = \frac{1}{x}$.
+    \end{enumerate}
+    
+    Both are abelian.
+\end{example}
+
+Both of these had a unique identity element.
+This is true in general:
+
+\begin{proposition}
+    The identity element of a group is unique.
+
+    \begin{proof}
+        Suppose $e_1, e_2$ both satisfy $e_1 \cdot x = x \cdot e_1 = x$ for all $x$ and $e_2 \cdot x = x \cdot e_2 = x$ for all $x$.
+
+        Put $x = e_2$ in the first and $x = e_1$ in the second,
+        to find $e_1 = e_2$.
+    \end{proof}
+\end{proposition}
+
+Other groups:
+\begin{example}
+    $M_n(\R) = \{\text{all $n \times n$ matrices with real coefficients}\}$,
+    is this a group under matrix multiplication?
+
+    \begin{solution}
+        No,
+        not all matrices have inverses.
+
+        However,
+        $M_n(\R)$ is a group under matrix addition.
+        $A \cdot B = A + B$,
+        "$A ^ {-1} = -A$".
+        $e = (0)_{n \times n}$.
+    \end{solution}
+\end{example}
+
+\begin{example}
+    $\mathrm{sym}_n = \{A \in M_n \text{ such that } A ^ T = A\}$.
+    Is this a group under matrix multiplication?
+    Is this a group under matrix addition?
+
+    \begin{solution}
+        Not under multiplication.
+
+        It is under addition.
+    \end{solution}
+\end{example}
+
+\begin{example}
+    $\mathrm{GL}(n, \R)$
+    (invertible $n \times n$ real matrices)
+    is a group under matrix multiplication
+    (the general linear group).
+
+    \begin{solution}
+        $P \in \mathrm{GL}(n, \R)$ implies $\det{P} \neq 0$ therefore there exists $P ^ {-1}$ such that $P ^ {-1}P = PP ^ {-1} = I$ and $\det{P ^ {-1}} \neq 0$ as well,
+        so $P ^ {-1} \in \mathrm{GL}(n, \R)$.
+        If $P, Q \in \mathrm{GL}(n, \R)$,
+        $P \cdot Q \in \mathrm{GL}(n, \R)$.
+
+        Identity:
+        $I = \begin{pmatrix}
+            1 & 0 & \dotsi & 0 \\
+            0 & 1 & \dotsi & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \dotsi & 1
+        \end{pmatrix}$.
+
+        Associativity follows from rules of matrix multiplication
+        (Straightforward)
+        (not abelian for $n > 1$).
+    \end{solution}
+\end{example}
+
+If we have a group $G$,
+if we can find a subset $H \subset G$ which is also a group,
+it's called a subgroup.
+
+\begin{definition}
+    Let $(G, \cdot)$ be a group.
+    Then $H \subset G$ is a subgroup of $G$ if $H$ is a group with respect to the multiplication inherited from $G$.
+\end{definition}
+
+\begin{example}
+    $\mathrm{SL}(n, \R) = \{A \in \mathrm{GL}(n, \R)\mid \det{A} = +1\}$ is a subgroup of $\mathrm{GL}(n, \R)$,
+    called the special linear group.
+
+    \begin{proof}[Check]\renewcommand{\qedsymbol}{}
+        $A, B \in \mathrm{SL}(n, \R)$,
+        then $\det(A\cdot B) = \det{A}\det{B} = 1 \cdot 1 = 1$ so $A\cdot B \in \mathrm{SL}(n, \R)$.
+        $\det{I} = 1$ so $I \in \mathrm{SL}(n, \R)$,
+        $\det{A ^ {-1}} \frac{1}{\det{A}} = \frac{1}{2}$ so $A ^ {-1} \in \mathrm{SL}(n, \R)$
+        (and associativity inherited from $\mathrm{GL}(n, \R)$).
+    \end{proof}
+\end{example}
+
+\begin{example}
+    $\mathrm{O}(n) = \{M \in \mathrm{GL}(n, \R)\mid M ^ TM = MM ^ T = I\}$ is a group
+    (a subgroup of $\mathrm{GL}(n, \R)$)
+    
+    \begin{proof}[Check]\renewcommand{\qedsymbol}{}
+        $A, B \in \mathrm{O}(n)$,
+        \[
+        (AB) ^ TAB = B ^ TA ^ TAB = B ^ T(A ^ TA)B = I
+        \]
+        so $AB \in \mathrm{O}(n)$ closure.
+        
+        Associativity inherited from $\mathrm{GL}(n, \R)$.
+
+        $I$ is an orthogonal matrix
+        (identity).
+
+        If $A \in \mathrm{O}(n)$,
+        $A ^ {-1} = A ^ T$ so
+        \[
+        (A ^ {-1})(A ^ {-1}) ^ T = A ^ {-1}A = I
+        \]
+        so $A ^ {-1} \in \mathrm{O}(n)$.
+    \end{proof}
+\end{example}
+
+\begin{example}
+    $\mathrm{SO}(n) = \{M \in \mathrm{O}(n)\mid \det{M} = +1\}$
+    is a subgroup of $\mathrm{O}(n)$ and $\mathrm{GL}(n, \R)$.
+
+    \begin{proof}[Check]\renewcommand{\qedsymbol}{}
+
+    \end{proof}
+\end{example}
 
 
 
