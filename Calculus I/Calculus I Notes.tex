@@ -5118,6 +5118,88 @@ u_i(x, t) = X_i(x)T_i(t).
     \end{solution}
 \end{example}
 
+\newpage
+
+\section{Fourier Transforms}
+
+\subsection{Introduction}
+For $f(x)$ of periodicity $2\pi$ we can write a Fourier series
+\[
+f(x) = \frac{a_0}{2} + \infsum[n = 1]a_n\cos(nx) + \infsum[n = 1]b_n\sin(nx) = \infsum[n = -\infty]d_ne ^ {inx}.
+\]
+Fourier series can be thought of as "frequency analysis of a periodic function",
+$a_n, b_n$
+(or $d_n, d_{-n}$)
+tells you how much frequency $n$ is in $f(x)$.
+For $\sin(nx)$ we have a wavelength of $\lambda = \frac{2\pi}{n}$,
+the frequency $= \frac{1}{\lambda} = \frac{n}{2\pi}$.
+Angular frequency $= 2\pi f = n$.
+
+Fourier transform does "frequency analysis" for non-periodic functions.
+Fourier series for a function of periodicity $2\pi M$ $M = 1, 2, 3, 4, \dotsc$.
+Fourier series
+\[
+f(x) = \frac{a_0}{2} + \infsum[n = 1]a_n\cos\left(\frac{nx}{M}\right) + \infsum[n = 1]b_n\sin\left(\frac{nx}{M}\right).
+\]
+Need angular frequencies $\frac{1}{M}, \frac{2}{M}, \frac{3}{M}, \frac{4}{M}, \dotsc$.
+As $M \to \infty$,
+the function becomes non-periodic,
+but we need all angular frequencies to describe it.
+The equation becomes $f(x) = \frac{1}{2\pi}\int_{-\infty}^{\infty}\tilde{f}(p)e ^ {ipx}\,dp$,
+$\tilde{f}(p)$ is the Fourier transform of $f(x)$.
+
+\subsection{Fourier Transforms from Fourier Series}
+Let $f(x)$ be a (non)-periodic function on $\R$.
+For each integer $M > 0$,
+construct a function $f_m(x)$ of periodicity $2\pi M$ as follows $f_m(x) = f(x)$,
+$-\pi M \leq x \leq \pi M$,
+$f_m(x + 2\pi M) = f_m(x)$
+\[
+f_m(x) = \infsum[n = -\infty]d_ne ^ {\frac{inx}{M}}
+\]
+where
+\[
+d_n = \frac{1}{2\pi M}\int_{-\pi M}^{\pi M}f_m(x)e ^ {-\frac{inx}{M}}\,dx = \frac{1}{2\pi M}\int_{-\pi M}^{\pi M}f(x)e ^ {-\frac{inx}{M}}\,dx.
+\]
+The label on $d_n$
+("$n$")
+is not the same as the angular frequency $\frac{n}{M}$.
+$d_n \to 0$ as $M \to \infty$ as it goes like $\frac{1}{M}$.
+
+Instead will define $\tilde{f}\left(\frac{n}{M}\right) = d_n2\pi M$
+\[
+\tilde{f}\left(\frac{n}{M}\right) = 2\pi Md_n = \int_{-\pi M}^{\pi M}f(x)e ^ {-\frac{inx}{M}}\,dx.
+\]
+In terms of $\tilde{f}(n / m)$ the Fourier series becomes:
+\[
+f_M(x) = \infsum[n = -\infty]d_ne ^ {\frac{inx}{M}} = \infsum[n = -\infty]\frac{1}{2\pi M}\tilde{f}\left(\frac{n}{M}\right)e ^ {\frac{inx}{M}} = \frac{1}{2\pi}\infsum[n = -\infty]\Delta p\tilde{f}(p)e ^ {ipx}
+\]
+where $p = \frac{n}{M}$ and $\Delta p = \frac{1}{M}$,
+$\Delta p$ is difference between neighbouring values of angular frequency in series $\frac{n}{M}, \frac{n + 1}{M}$.
+In the limit $M \to \infty$,
+$\Delta p \to 0$,
+$\sum \to \int$
+\[
+f_M(x) \to f(x) = \frac{1}{2\pi}\int_{-\infty}^{\infty}\tilde{f}(p)e ^ {ipx}\,dp.
+\]
+\[
+\tilde{f}(p) = \int_{-\infty}^{\infty}f(x)e ^ {-ipx}\,dx.
+\]
+$\tilde{f}(p)$ is the Fourier transform of $f(x)$.
+
+\begin{example}
+    Find the Fourier transform of $F(x) = \begin{cases}
+        1 & |x| < 1 \\
+        0 &\text{otherwise}.
+    \end{cases}$
+
+    \begin{solution}
+        \[
+        \tilde{F}(p) = \int_{-\infty}^{\infty}F(x)e ^ {-ipx}\,dx = \int_{-1}^{1}e ^ {-ipx}\,dx = \left[\frac{e ^ {-ipx}}{-ip}\right]_{-1}^{1} = \frac{e ^ {ip} - e ^ {ip}}{2} = \frac{2(e ^ {ip} - e ^ {-ip})}{2ip} = \frac{2\sin(p)}{p}
+        \]
+    \end{solution}
+\end{example}
+
 
 
 
