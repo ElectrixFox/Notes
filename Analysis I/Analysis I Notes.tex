@@ -5220,6 +5220,136 @@ Need to check two things
     \]
 \end{example}
 
+\subsection{Properties of the integral}
+
+\begin{theorem}[Properties of the integral]\phantom{}
+    \begin{enumerate}[label = (\roman*)]
+        \item Linearity
+        \begin{align*}
+            \int_{a}^{b}f(t) + g(t)\,dt &= \int_{a}^{b}f(t)\,dt + \int_{a}^{b}g(t)\,dt. \\
+            c\int_{a}^{b}f(t)\,dt &= c\int_{a}^{b}f(t)\,dt.
+        \end{align*}
+
+        \item Monotonicity
+
+        \begin{itemize}
+            \item 
+            if $f(t) \leq g(t)$ for all $t \in [a, b]$ then
+            \[
+            \int_{a}^{b}f(t)\,dt \leq \int_{a}^{b}g(t)\,dt.
+            \]
+
+            \item
+            In particular,
+            if $m = \inf_{t \in [a, b]}{f(t)}$,
+            $M = \sup_{t \in [a, b]}{f(t)}$ then
+            \[
+            m(b - a) \leq \int_{a}^{b}f(t)\,dt \leq M(b - a).
+            \]
+
+            \item
+            \[
+            \left|\int_{a}^{b}f(t)\,dt\right| \leq \int_{a}^{b}|f(t)|\,dt.
+            \]
+        \end{itemize}
+        \item Additivity
+        \[
+        \int_{a}^{b}f(t)\,dt + \int_{b}^{c}f(t)\,dt = \int_{a}^{c}f(t)\,dt.
+        \]
+    \end{enumerate}
+
+    \begin{proof}
+        \begin{enumerate}[label = (\roman*)]
+            \item \phantom{}
+            
+            \item
+            By linearity,
+            it is enough to consider $f(t) \geq 0$,
+            and show $\int_{a}^{b}f(t)\,dt \geq 0$.
+            (Consider $g(t) - f(t)$).
+
+            So take $f_n \to f$ uniformly.
+            Given $\varepsilon > 0$,
+            find $f_n(x)$ such that $|f(x) - f_n(x)| < \varepsilon$ for all $x \in [a, b]$.
+            By $f(t) \geq 0$,
+            we get $f_n(x) > -\varepsilon$ for all $x \in [a, b]$.
+            This implies $I(f_n) > -\varepsilon(b - a)$ this implies $\liminfty I(f_n)$ is bigger than any negative number,
+            shows that $I(f) \geq 0$.
+
+            $|f(t)| = \pm f(t)$,
+            $f(t) \leq |f(t)|$.
+        \end{enumerate}
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}[Mean Value Theorem for Intervals]
+    Let $f(x)$ be continuous on $[a, b]$.
+    Then there exists $c \in [a, b]$ such that
+    \[
+    \int_{a}^{b}f(t)\,dt = f(c)(b - a).
+    \]
+    
+    \begin{proof}
+        $f$ continuous hence takes minimum,
+        $m$,
+        and maximum,
+        $M$,
+        on $[a, b]$.
+        By monotonicity there exists $C$ such that
+        \[
+        C = \int_{a}^{b}f(x)\,dx / (b - a)
+        \]
+        with $m \leq C \leq M$.
+        By the intermediate value theorem there exists $c \in [a, b]$ such that $f(c) = C$,
+        so
+        \[
+        f(c)(b - a) = C(b - a) = \int_{a}^{b}f(x)\,dx.
+        \]
+    \end{proof}
+\end{theorem}
+
+The continuity hypothesis is needed in the previous theorem:
+consider
+\[
+f(x) = \begin{cases}
+    0 & \text{on } [0, 1 / 2] \\
+    1 & \text{on } [1 / 2, 1]
+\end{cases}
+\]
+\[
+\int_{0}^{1}f(x)\,dx = \frac{1}{2} = \frac{1}{2}(1 - 0).
+\]
+But $\frac{1}{2}$ is not a value of $f$.
+
+\begin{definition}
+    For $a \geq b$ set
+    \[
+    \int_{a}^{b}f(x)\,dx \coloneqq -\int_{b}^{a}f(x)\,dx.
+    \]
+\end{definition}
+
+\subsection{Fundamental Theorem of Calculus}
+$f$ regulated on some interval $I = [a, b]$.
+Set $F(x) = \int_{a}^{x}f(t)\,dt$.
+
+\begin{proposition}
+    $f$ is regulated on $[a, b]$.
+    $F(x) = \int_{a}^{x}f(t)\,dt$ is Lipschitz continuous on $[a, b]$ with $M = \sup_{x \in [a, b]}|f(x)|$.
+    In particular,
+    $f$ is continuous on $[a, b]$.
+
+    \begin{proof}
+        \begin{align*}
+            |F(x) - F(y)| &= \left|\int_{a}^{x}f(t)\,dt - \int_{a}^{y}f(t)\,dt\right| \\
+            &= \left|\int_{y}^{x}f(t)\,dt\right| \\
+            &\leq \left|\int_{y}^{x}|f(t)|\,dt\right| \\
+            &\leq \left|\int_{y}^{x}M\,dt\right| \\
+            &= M|x - y|
+        \end{align*}
+        hence Lipschitz.
+    \end{proof}
+\end{proposition}
+
 
 
 
