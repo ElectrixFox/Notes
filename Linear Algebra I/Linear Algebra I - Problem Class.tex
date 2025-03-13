@@ -588,6 +588,217 @@
     \end{solution}
 \end{problem}
 
+\newpage
+
+\section{Class \texorpdfstring{$4$}{}}
+
+\begin{problem}
+    \[
+    \mathcal{L}_H = \frac{d ^ 2}{dx ^ 2} - 2x\frac{d}{dx}
+    \]
+    \[
+    (f, g) = \int_{-\infty}^{\infty}e ^ {-x ^ 2}f(x)g(x)\,dx.
+    \]
+    \begin{enumerate}[label = (\alph*)]
+        \item Is $\mathcal{L}_H$ symmetric with respect to $(\,,\,)$?
+
+        \item Find the matrix representation of $\mathcal{L}_H$ on $\R[x]_2$ in standard basis $\{1, x, x ^ 2\}$.
+
+        \item Find the general formula for the eigenvalues.
+
+        \item Find
+        (unnormalised)
+        Hermite polynomials of degree $0, 1, 2$.
+        I.e.,
+        find eigenvectors of $M$.
+
+        \item Find the Hermite polynomial of degree $5$.
+    \end{enumerate}
+
+    \begin{solution}
+        \begin{enumerate}[label = (\alph*)]
+            \item
+            \begin{align*}
+                (\mathcal{L}_H f, g) &= \int_{-\infty}^{\infty}\overbrace{e ^ {-x ^ 2}(f'' - 2xf')}^{\frac{d}{dx}[e ^ {-x ^ 2}f']}g\,dx \\
+                &= \left[e ^ {-x ^ 2}f'g\right]_{-\infty}^{\infty} - \int_{-\infty}^{\infty}e ^ {-x ^ 2}f'g'\,dx \\
+                &= -\int_{-\infty}^{\infty}e ^ {-x ^ 2}f'g'\,dx \\
+                &= -\int_{-\infty}^{\infty}e ^ {-x ^ 2}g'f'\,dx \\
+                &= (\mathcal{L}_Hg, f) = (f, \mathcal{L}_H g)
+            \end{align*}
+
+            \item
+            \begin{align*}
+                \mathcal{L}_H(x ^ 0) &= 0 \\
+                \mathcal{L}_H(x ^ 1) &= \frac{d ^ 2}{dx ^ 2}(x) - 2x\frac{d}{dx}(x) = -2x \\
+                \mathcal{L}_H(x ^ 2) &= \frac{d ^ 2}{dx ^ 2}(x ^ 2) - 2x\frac{d}{dx}(x ^ 2) = -4x ^ 2 + 2
+            \end{align*}
+            hence
+            \[
+            M = \begin{pmatrix}
+                0 & 0 & 2 \\
+                0 & -2 & 0 \\
+                0 & 0 & -4
+            \end{pmatrix}
+            \]
+            note upper triangular,
+            (since $\deg{\mathcal{L}_H}(p(x)) \leq \deg{p(x)}$)
+            so eigenvalues $0, -2, -4$.
+
+            \item
+            \begin{align*}
+                \mathcal{L}_H(x ^ n) &= \frac{d ^ 2}{dx ^ 2}(x ^ n) - 2x\frac{d}{dx}(x ^ n) \\
+                &= n(n - 1)x ^ {n - 2} - 2nx ^ n \\
+                &= -2nx ^ n + (\text{lower orders})
+            \end{align*}
+            hence $-2n$ is the diagonal term,
+            given this is upper triangular the eigenvalues are $\lambda_k = -2k$,
+            $k = 0, 1, 2, \dotsc$.
+            So on $\R[x]_n$
+            \[
+            M = \begin{pmatrix}
+                0 & * & \dotsi & * \\
+                0 & -2 & \dotsi & * \\
+                \vdots & \vdots & \ddots & \vdots \\
+                0 & 0 & \dotsi & -2n 
+            \end{pmatrix}
+            \]
+
+            \item
+            $\lambda = 0$
+            \[
+            (M - 0I)\begin{pmatrix}
+                a \\ b \\ c
+            \end{pmatrix} = \mbf{0} \iff \begin{pmatrix}
+                0 & 0 & 2 \\
+                0 & -2 & 0 \\
+                0 & 0 & -4
+            \end{pmatrix}\begin{pmatrix}
+                a \\ b \\ c
+            \end{pmatrix} = \begin{pmatrix}
+                0 \\ 0 \\ 0
+            \end{pmatrix} \implies \mbf{v}_0 = \begin{pmatrix}
+                1 \\ 0 \\ 0
+            \end{pmatrix}
+            \]
+            $\lambda = 2$
+            \[
+            M - (-2)I = \mbf{0} \iff \begin{pmatrix}
+                2 & 0 & 2 \\ 0 & 0 & 0 \\ 0 & 0 & -2
+            \end{pmatrix}\begin{pmatrix}
+                a \\ b \\ c
+            \end{pmatrix} = \begin{pmatrix}
+                2a + 2c \\ 0 \\ -2c
+            \end{pmatrix} = \begin{pmatrix}
+                0 \\ 0 \\ 0
+            \end{pmatrix} \implies \mbf{v}_1 = \begin{pmatrix}
+                0 \\ 1 \\ 0
+            \end{pmatrix}
+            \]
+            $\lambda = -4$
+            \[
+            M - (-4)I = \mbf{0} \iff \begin{pmatrix}
+                4 & 0 & 2 \\
+                0 & 2 & 0 \\
+                0 & 0 & 0
+            \end{pmatrix}\begin{pmatrix}
+                a \\ b \\ c
+            \end{pmatrix} = \begin{pmatrix}
+                4a + 2c \\ 2b \\ 0
+            \end{pmatrix} = \begin{pmatrix}
+                0 \\ 0 \\ 0
+            \end{pmatrix} \implies \mbf{v}_2 = \begin{pmatrix}
+                -1 \\ 0 \\ 2
+            \end{pmatrix}
+            \]
+            so
+            \begin{align*}
+                f_0 &= x ^ 0 & \mathcal{L}_Hf_0 = 0 \cdot f_0 \\
+                f_1 &= x_1 & \mathcal{L}_Hf_1 = -2f_1\\
+                f_2 &= 2x ^ 2 - 1 & \mathcal{L}_Hf_2 = -4f_2
+            \end{align*}
+
+            \item
+            Write
+            $f_6(x) = x ^ 5 + ax ^ 4 + bx ^ 3 + cx ^ 2 + bx + e$,
+            and use $\mathcal{L}_H(f_6) = -10f_6$.
+            \[
+            \]
+            \begin{align*}
+                \mathcal{L}_Hf_6 &= 20x ^ 3 + 12ax ^ 2 + 6bx + 2c - 2x(5x ^ 4 + 4ax ^ 3 + 3bx ^ 2 + 2cx + d) \\
+                &= -10x ^ 5 - 8ax ^ 4 - (6b - 20)x ^ 3 - (4c - 120)x ^ 2 - (2d - 6b)x + 2c \\
+                &= -10x ^ 5 - 10ax ^ 4 - 10bx ^ 3 - 10cx ^ 2 - 10dx - 10e
+            \end{align*}
+            \begin{align*}
+                x ^ 5 &: 0 \\
+                x ^ 4 &: -8a = -10a \implies a = 0 \\
+                x ^ 3 &: 20 - 6b = -10b \implies b = -5 \\
+                x ^ 2 &: 4c - 120 = -10c \implies c = 0 \\
+                x ^ 1 &: 4c - 120 = -10c \implies d = \frac{15}{4} \\
+                x ^ 0 &: 2c = -10e \implies e = 0
+            \end{align*}
+            so
+            \[
+            f_5 = x ^ 5 - 5x ^ 3 + \frac{15}{4}x.
+            \]
+
+            Aside
+            \[
+            \int_{-\infty}^{\infty}e ^ {-x ^ 2}\,dx = \sqrt{\pi}
+            \]
+            \begin{align*}
+                \int_{-\infty}^{\infty}e ^ {-x ^ 2 + \lambda x}\,dx &= \int_{-\infty}^{\infty}e ^ {-\left(x - \frac{\lambda}{2}\right) ^ 2 + \frac{\lambda ^ 2}{4}}\,dx \\
+                &= e ^ {\frac{\lambda ^ 2}{4}}\int_{-\infty}^{\infty}e ^ {-\left(x - \frac{\lambda}{2}\right) ^ 2}\,dx \\
+                &= e ^ {\frac{\lambda ^ 2}{4}}\sqrt{\pi}
+            \end{align*}
+            \begin{align*}
+                \int_{-\infty}^{\infty}e ^ {-x ^ 2}x ^ {2m}\,dx &= \frac{(2m)!}{m!}\cdot \frac{\sqrt{\pi}}{4 ^ m} \impliedby \int_{-\infty}^{\infty}e ^ {-x ^ 2}\infsum[n = 0]\frac{\lambda ^ n}{n!}x ^ n\,dx \\
+                &= \sqrt{\pi}\infsum[m = 0]\frac{1}{m!}\left(\frac{\lambda ^ 2}{4}\right) ^ m.
+            \end{align*}
+        \end{enumerate}
+    \end{solution}
+\end{problem}
+
+\begin{problem}
+    Let $G = \left\{\begin{pmatrix}
+        a & b \\ 0 & c
+    \end{pmatrix}, a, b, c \in \Q, ac \neq 0\right\}$.
+    Show $G$ is a group with respect to matrix multiplication.
+
+    \begin{solution}
+        Identity for matrix multiplication:
+        \[
+        I = \begin{pmatrix}
+            1 & 0 \\ 0 & 1
+        \end{pmatrix}
+        \]
+        i.e. $a = 1, b = 0, c = 1$,
+        $a, b, c \in \Q$ so $I \in G$.
+
+        Associativity follows from matrix multiplication.
+
+        Closure:
+        \[
+        \begin{pmatrix}
+            a & b \\ 0 & c
+        \end{pmatrix}\begin{pmatrix}
+            \tilde{a} & \tilde{b} \\ 0 & \tilde{c}
+        \end{pmatrix} = \begin{pmatrix}
+            a\tilde{a} & a\tilde{b} + b\tilde{c} \\
+            0 & c\tilde{c}
+        \end{pmatrix} \in G.
+        \]
+
+        Inverse:
+        \[
+        \begin{pmatrix}
+            a & b \\ 0 & c
+        \end{pmatrix} ^ {-1} = \begin{pmatrix}
+            a ^ {-1} & -a ^ {-1}c ^ {-1}b \\ 0 & c ^ {-1}
+        \end{pmatrix} \in G
+        \]
+        (since $ac \neq 0$).
+    \end{solution}
+\end{problem}
 
 
 
