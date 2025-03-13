@@ -2285,11 +2285,218 @@ using the terminology above
 \text{Posterior} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Data probability}}.
 \]
 
+\textbf{Fundamental Equation of Bayesian Statistics:
+The Posterior
+(simplified)}
 
+\begin{align*}
+    f(\theta\mid x) &= \frac{f(x\mid \theta)f(\theta)}{f(x)} \\
+    &= C \times f(x\mid \theta)f(\theta) & (C = 1 / f(x)) \\
+    \implies f(\theta\mid x) &\propto f(x\mid \theta)f(\theta)
+    \intertext{or again in words}
+    \text{Posterior} &\propto \text{Likelihood} \times \text{Prior}.
+\end{align*}
 
+\begin{example}[Drug Trial
+(continued)]
+    We described the number of patients whose condition while on the drug trial was described by $X \sim \Bin(16, \theta)$,
+    this is the likelihood for this problem.
 
+    During the trial,
+    we observed that $x = 11$ patients improved -
+    these are our data.
 
+    The probability parameter of the binomial distribution is not known,
+    in the Bayesian approach we treat it as a random variable and must assign a prior pdf,
+    $f(\theta)$.
 
+    $\theta$ represents a probability,
+    so must be contained in the interval $[0, 1]$.
+    If we have no knowledge or information about possible values of $\theta$,
+    it may be reasonable therefore to consider all possible values of $\theta$ to be equally likely.
+
+    Under this argument,
+    we would use a prior of $\theta \sim U[0, 1]$,
+    i.e. the uniform distribution.
+    Thus we have
+    \begin{align*}
+        &\text{Prior:} & f(\theta) &= 1 \\
+        &\text{Likelihood:} & f(x = 11\mid \theta) &= \binom{n}{x}\theta ^ x(1 - \theta) ^ {n - x} \\
+        && &= \binom{16}{11}\theta ^ {11}(1 - \theta) ^ 5 \\
+        &\text{Posterior:} & f(\theta \mid x) &\propto 1 \times \binom{16}{11}\theta ^ {11}(1 - \theta) ^ 5 \\
+        && &\propto k\theta ^ {11}(1 - \theta) ^ 5,
+    \end{align*}
+    for $\theta \in [0, 1]$,
+    and we can find $k$ by integrating and equating to $1$ to get $k = 74256$.
+
+    It is clear that our initially vague prior for $\theta$ has been transformed into something more informative after updating by the data.
+    The posterior distribution now has a clear mode
+    (peak),
+    located at $\hat{\theta} = \frac{11}{16} \approx 0.69$ -
+    same as the maximum likelihood estimate.
+
+    What if we thought $\theta$ was more likely to take larger values rather than smaller,
+    i.e. our prior belief was that the drug was more likely to have a positive effect.
+    We could express this by choosing a prior that was proportional to $\theta$,
+    then the appropriate choice of density function would be $f(\theta) = 2\theta$.
+    We observe the same data and have the same likelihood,
+    but the posterior for $\theta\mid x$ is now:
+    \begin{align*}
+        f(\theta \mid x) &\propto 2\theta \times \binom{16}{11}\theta ^ {11}(1 - \theta) ^ 5 \\
+        &\propto c\theta ^ {12}(1 - \theta) ^ 5,\qquad\theta \in [0, 1]\text{ and } c > 0,
+    \end{align*}
+    which by a similar argument,
+    we will later see corresponds to a $\beta(13, 6)$ distribution.
+\end{example}
+
+\subsection{Prior distributions and conjugacy}
+The presence of the prior distribution in our calculations is one of the primary differences between the Bayesian and the likelihood approach to statistics.
+Clearly,
+we need a prior distribution for our parameters in order to apply the Bayesian methodology and the results we obtain will be somewhat sensitive to that prior so our choice of prior is important.
+In general,
+there are two types of priors:
+
+\textbf{Informative priors} -
+$f(\theta)$ expresses specific knowledge or information about the behaviour of $\theta$.
+In principle,
+we must
+(subjectively)
+choose or specify a distribution that represents our knowledge about $\theta$,
+or else 'elicit' one from someone else.
+This is particularly difficult when $\theta$ is high-dimensional,
+or not well-understood.
+
+\textbf{Noninformative priors}
+(also known as diffuse,
+vague or objective priors) -
+$f(\theta)$ is deliberately vague about the behaviour of $\theta$.
+The simplest form being a uniform prior to express that all values of $\theta$ are equally likely.
+
+\subsubsection{Conjugacy}
+For certain combinations of priors and likelihoods,
+the posterior we obtain is particularly convenient.
+Identifying and using such combinations can simplify the computation and analysis substantially.
+
+\begin{definition}[Conjugacy]
+    A conjugate prior distribution is one where the form of the posterior distribution is the same as the form of the prior distribution.
+    That is $f(\theta)$ and $f(\theta \mid x)$ are pdfs belonging to the same family of
+    (e.g. they are both normal or they are both gamma).
+    In which case we say
+    \begin{itemize}
+        \item $f(\theta)$ is a conjugate prior for
+        (or is conjugate with,
+        or is closed under sampling from)
+        the likelihood $f(x \mid \theta)$.
+
+        \item The set of all such priors forms a conjugate family for
+        (sampling from)
+        the likelihood $f(x \mid \theta)$.
+    \end{itemize}
+\end{definition}
+
+Conjugacy implies that the prior,
+$f(\theta)$,
+and the posterior,
+$f(\theta \mid x)$,
+have the same functional form.
+
+The form of the conjugate prior depends on the form of the likelihood.
+There is a different conjugate distribution for a different data
+(or "sampling")
+distribution.
+In some cases there is no conjugate prior distribution.
+
+\begin{remark}
+    A more formal definition of conjugacy:
+
+    Suppose that data $x$ are to be observed with distribution $f(x \mid \theta)$.
+    A family $\mathcal{F}$ of prior distributions for $\theta$ is said to be conjugate
+    (or closed under sampling)
+    with $f(x \mid \theta)$ if for every prior distribution $f(\theta) \in \mathcal{F}$ the posterior distribution $f(\theta \mid x) \propto f(x \mid \theta)f(\theta)$ is also in $\mathcal{F}$.
+\end{remark}
+
+\begin{definition}[Core
+(or kernel)
+of a distribution]
+    For a random variable $X$ with pdf $f(x)$,
+    if we can express its pdf $f(x)$ in the form
+    \[
+    f(x) = C_{\kappa}(x),
+    \]
+    where $C > 0$ is a constant that does not depend on $x$,
+    then we call $\kappa(x)$ the core
+    (or kernel)
+    of the density $f(x)$.
+\end{definition}
+
+\begin{lemma}
+    Each core of a distribution,
+    $\kappa(x)$,
+    corresponds to a unique pdf,
+    $f(x)$.
+
+    \begin{proof}
+        Following the definition above,
+        let $\kappa(x)$ be such $f(x) = C_{\kappa}(x)$ where $f(x)$ is a valid pdf.
+        For $f(x)$ to be valid,
+        we must have that
+        \[
+        \int_{-\infty}^{\infty}f(x)\,dx = 1 \implies \int_{-\infty}^{\infty}\kappa(x)\,dx = \frac{1}{C}.
+        \]
+        Now suppose there exists another valid pdf $g(x)$ which also is associated with $\kappa(x)$,
+        so $g(x) \propto \kappa(x)$.
+        If we write $g(x) = B_{\kappa}(x)$,
+        then
+        \[
+        \int_{-\infty}^{\infty}g(x)\,dx = B\int_{-\infty}^{\infty}\kappa(x)\,dx = \frac{B}{C}.
+        \]
+        For $g(x)$ to also be a valid pdf it must integrate to $1$,
+        which implies that we must have $B = C$.
+        Therefore
+        \[
+        g(x) = C_{\kappa}(x) = f(x),
+        \]
+        and so each $\kappa(x)$ is associated with a unique valid pdf $f(x)$.
+    \end{proof}
+\end{lemma}
+
+\subsection{Conjugate Bayesian analysis for binomial data}
+To set up the general approach to Bayesian analysis of binomial data,
+we need to identify an appropriate prior for the probability parameter.
+The distribution we shall use is the Beta distribution,
+which is a very flexible distribution that is defined over $[0, 1]$ making it ideal for representing a probability.
+The Beta distribution has a similar functional form as the binomial likelihood so we will investigate whether it is our first example of a conjugate prior.
+
+\begin{definition}[Beta distribution]
+    Let $X \sim Beta(a, b)$ for $a, b > 0$ known.
+    Then $X$ has a beta distribution with pdf
+    \[
+    f(x) = \frac{1}{B(a, b)}x ^ {a - 1}(1 - x) ^ {b - 1} = \frac{\Gamma(a + b)}{\Gamma(a)\Gamma(b)}x ^ {a - 1}(1 - x) ^ {b - 1}, \quad 0 \leq x \leq 1
+    \]
+    and $0$ otherwise,
+    where $B(a, b) = \frac{\Gamma(a + b)}{\Gamma(a)\Gamma(b)}$ is the Beta function,
+    and $\Gamma(a)$ is the Gamma function and $\Gamma(a) = (a - 1)!$ for $a \in \N$.
+    The Beta distribution has the following properties:
+    \begin{enumerate}[label = \arabic*.]
+        \item The core of a $\mathrm{Beta}(a, b)$ pdf is
+        \[
+        \kappa(x) = x ^ {a - 1}(1 - x) ^ {b - 1}.
+        \]
+
+        \item If $X \sim \mathrm{Beta}(a, b)$,
+        then
+        \[
+        \E(X) = \frac{a}{a + b},\qquad\Var(X) = \frac{ab}{(a + b) ^ 2(a + b + 1)}
+        \]
+        and
+        \[
+        \mathrm{Mode}(X) = \frac{a - 1}{a + b - 2}\text{ for } a, b > 1
+        \]
+
+        \item $\mathrm{Beta}(1, 1)$
+    \end{enumerate}
+    
+\end{definition}
 
 
 
