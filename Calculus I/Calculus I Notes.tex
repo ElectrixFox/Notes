@@ -5200,7 +5200,163 @@ $\tilde{f}(p)$ is the Fourier transform of $f(x)$.
     \end{solution}
 \end{example}
 
+\subsection{Properties of Fourier Transform}
+Taking Fourier transform as a linear operation.
+If $f_1(x), f_2(x)$ have Fourier transform $\tilde{f}_1(p), \tilde{f}_2(p)$ respectively,
+then
+\[
+F(x) = \alpha f_1(x) + \beta f_2(x)
+\]
+has Fourier transform
+\[
+\tilde{F}(p) = \alpha\tilde{f}_1(p) + \beta\tilde{f}_2(p)
+\]
+\begin{proof}
+    \begin{align*}
+        \tilde{F}(p) &= \int_{-\infty}^{\infty}F(x)e ^ {-ipx}\,dx \\
+        &= \int_{-\infty}^{\infty}(\alpha f_1(x) + \beta f_2(x))\,dx \\
+        &= \alpha\int_{-\infty}^{\infty}f_1(x)e ^ {-ipx}\,dx + \beta\int_{-\infty}^{\infty}f_2(x)e ^ {-ipx}\,dx \\
+        &= \alpha\tilde{f}_1(p) + \beta\tilde{f}_2(p).
+    \end{align*}
+\end{proof}
 
+\begin{theorem}[Shift theorem]
+    Let $f(x)$ have Fourier transform $\tilde{f}(p)$.
+    Then $g(x) = f(x + a)$ then $\tilde{g}(p) = e ^ {ipa}\tilde{f}(p)$.
+
+    \begin{proof}
+        \[
+        \tilde{g}(p) = \int_{-\infty}^{\infty}g(x)e ^ {-ipx}\,dx = \int_{-\infty}^{\infty}f(x + a)e ^ {-ipx}\,dx
+        \]
+        let $x' = x + a$,
+        $dx' = dx$
+        \begin{align*}
+            \tilde{g}(p) &= \int_{-\infty}^{\infty}f(x + a)e ^ {-ipx}\,dx \\
+            &= \int_{-\infty}^{\infty}f(x')e ^ {-ip(x' - a)}\,dx' \\
+            &= e ^ {ipa}\int_{-\infty}^{\infty}f(x')e ^ {-ipx'}\,dx' \\
+            &= e ^ {ipa}\tilde{f}(p).
+        \end{align*}
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    What is the Fourier transform of $g(x) = \begin{cases}
+        1 & 0 \leq x \leq 2 \\
+        0 & \text{otherwise}.
+    \end{cases}$
+    $g(x) = F(x - 1)$ therefore,
+    by the shift theorem $\tilde{g}(p) = \tilde{F}(p)e ^ {-ip} = \frac{2\sin(p)}{p}e ^ {-ip}$.
+\end{example}
+
+\begin{theorem}[Scaling theorem]
+    Let $f(x)$ have Fourier transform $\tilde{f}(p)$.
+    Then if $g(x) = f(bx)$ $b \neq 0$ then
+    \[
+    \tilde{g}(p) = \frac{1}{|b|}\tilde{f}\left(\frac{p}{b}\right).
+    \]
+
+    \begin{proof}
+        \[
+        \tilde{g}(p) = \int_{-\infty}^{\infty}g(x)e ^ {-ipx}\,dx = \int_{-\infty}^{\infty}f(bx)e ^ {-ipx}\,dx
+        \]
+        put $x' = bx$,
+        $dx' = bdx$
+        \[
+        \int_{-\infty}^{\infty}f(bx)e ^ {-ipx}\,dx = \int_{\mathrm{sign}(b)(-\infty)}^{\mathrm{sign}(b)\infty}f(x')e ^ {-px' / b}\frac{1}{b}\,dx' = \frac{1}{b\mathrm{sign}(b)}\int_{-\infty}^{\infty}f(x')e ^ {-i\left(\frac{p}{b}\right)x'}\,dx' = \frac{1}{|b|}\tilde{f}\left(\frac{p}{b}\right).
+        \]
+    \end{proof}
+\end{theorem}
+
+Odd/Even functions
+
+The Fourier transform of an even
+(odd)
+function $f(x)$ is $\tilde{f}(p)$ which is even
+(odd).
+Consider $g(x) = f(bx)$ using scaling theorem with $b = -1$
+\[
+\tilde{g}(p) = \frac{1}{|-1|}\tilde{f}\left(\frac{p}{-1}\right) = \tilde{f}(-p).
+\]
+Let $f(x)$ be even,
+this implies $f(x) = f(-x) = g(x)$ which implies $\tilde{f}(p) = \tilde{g}(p) = \tilde{f}(-p)$ therefore $\tilde{f}$ is even
+(works similar for $f(x)$ odd).
+
+\begin{example}
+    \[
+    F(x) = \begin{cases}
+        1 & |x| \leq 1 \\
+        0 & \text{otherwise}.
+    \end{cases}
+    \]
+    $\tilde{F}(p) = \frac{2\sin(p)}{p}$,
+    $F(x), \tilde{F}(p)$ are even.
+\end{example}
+
+\begin{theorem}[Derivative theorem]
+    Let $f(x)$ have Fourier transform $\tilde{f}(p)$,
+    then if $g(x) = \frac{df}{dx}(x)$ implies $\tilde{g}(p) = (ip)\tilde{f}(p)$.
+
+    'differentiating in $x$-space is equal to multiplication by $ip$ in $p$-space'.
+
+    \begin{proof}
+        \begin{align*}
+            \tilde{g}(p) &= \int_{-\infty}^{\infty}g(x)e ^ {-ipx}\,dx \\
+            &= \int_{-\infty}^{\infty}\frac{df}{dx}e ^ {-ipx}\,dx \\
+            &= \left[fe ^ {-ipx}\right]_{-\infty}^{\infty} - \int_{-\infty}^{\infty}f(x)(-ip)e ^ {-ipx}\,dx \\
+            \intertext{Assume $f(x) \to 0$ as $|x| \to \infty$}
+            &= (ip)\int_{-\infty}^{\infty}f(x)e ^ {-ipx}\,dx \\
+            &= (ip)\tilde{f}(p).
+        \end{align*}
+    \end{proof}
+\end{theorem}
+
+\begin{definition}[Convolution]
+    Let $f(x), g(x)$ be two functions.
+    The convolution of $f, g$ is defined to be
+    \[
+    f * g(x) = \int_{-\infty}^{\infty}f(t)g(x - t)\,dt.
+    \]
+\end{definition}
+The product is bilinear.
+If $f = \alpha f_1 + \beta f_2$
+\[
+f * g = (\alpha f_1 + \beta f_2) * g = \alpha f_1 * g + \beta f_2 * g.
+\]
+The product is symmetric
+\[
+f * g = g * f.
+\]
+\[
+f * g = \int_{-\infty}^{\infty}f(t)g(x - t)\,dt
+\]
+let $t' = x - t$,
+$dt' = -dt$
+\[
+f * g = \int_{\infty}^{-\infty}f(x - t')g(t')\,(-dt') = \int_{-\infty}^{\infty}g(t')f(x - t')\,dt' = g * f.
+\]
+
+\begin{theorem}[Convolution theorem]
+    Let $f(x)$ have Fourier transform $\tilde{f}(p)$,
+    $g(x)$ have Fourier transform $\tilde{g}(p)$,
+    then if $F(x) = f * g$ its Fourier transform
+    \[
+    \tilde{F}(p) = \tilde{f}(p)\tilde{g}(p).
+    \]
+
+    \begin{proof}
+        \begin{align*}
+            \tilde{F}(p) &= \int_{-\infty}^{\infty}F(x)e ^ {-ipx}\,dx \\
+            &= \int_{-\infty}^{\infty}f * ge ^ {-ipx}\,dx \\
+            &= \int_{-\infty}^{\infty}\left[\int_{-\infty}^{\infty}f(t)g(x - t)\,dt\right]e ^ {-ipx}\,dx \\
+            &= \int_{-\infty}^{\infty}f(t)\left[\int_{-\infty}^{\infty}g(x - t)e ^ {-ipx}\,dx\right]\,dp \\
+            &= \int_{-\infty}^{\infty}f(t)\tilde{g}(p)e ^ {-ipt}\,dt \\
+            &= \tilde{g}(p)\int_{-\infty}^{\infty}f(t)e ^ {-ipt}\,dt \\
+            &= \tilde{f}(p)\tilde{g}(p).
+        \end{align*}
+        \[
+        \]
+    \end{proof}
+\end{theorem}
 
 
 
