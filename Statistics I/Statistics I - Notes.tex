@@ -2495,9 +2495,69 @@ The Beta distribution has a similar functional form as the binomial likelihood s
 
         \item $\mathrm{Beta}(1, 1)$
     \end{enumerate}
-    
 \end{definition}
 
+\begin{theorem}[The Beta-binomial model]
+    Suppose that we observe a random variable $X = x$ where $X \mid p \sim \Bin(n, p)$.
+    If our prior distribution for $p$ is such that $p \sim \mathrm{Beta}(a, b)$,
+    then the posterior distribution for $p \mid X$ is
+    \[
+    p \mid X \sim \mathrm{Beta}(a + x, b + n - x),
+    \]
+    hence the Beta distribution is a conjugate prior for the Binomial parameter $p$.
+
+    \begin{proof}
+        We have a Beta prior and a Binomial likelihood,
+        so assume we observe $X = x$ successes then our posterior is:
+        \begin{align*}
+            f(p \mid x) &\propto f(x\mid p)f(p) \\
+            &= \binom{n}{x}p ^ x(1 - p) ^ {n - x} \times \frac{1}{B(a, b)}p ^ {a - 1}(1 - p) ^ {b - 1} \\
+            &\propto p ^ {a + x - 1}(1 - p) ^ {b + n - x - 1} \\
+            &\propto p ^ {\tilde{a} - 1}(1 - p) ^ {\tilde{b} - 1},
+        \end{align*}
+        where $\tilde{a} = a + x$ and $\tilde{b} = b + n - x$.
+        From the properties of the Beta distribution given above,
+        we recognise this as the core of a $\mathrm{Beta}(\tilde{a}, \tilde{b}) = \mathrm{Beta}(a + x, b + n - x)$ distribution.
+        Thus $p \mid x \sim \mathrm{Beta}(a + x, b + n - x)$ as required,
+        and since the prior and posterior are both Beta distributions we conclude that the Beta distribution is indeed a conjugate prior for the Binomial parameter $p$.
+        We can now write the posterior as:
+        \[
+        f(p\mid x) = \frac{1}{B(a + x, b + n - x)}p ^ {a + x - 1}(1 - p) ^ {b + n - x - 1}.
+        \]
+    \end{proof}
+\end{theorem}
+
+With a Beta prior and binomial sampling,
+the Bayesian update to $p$ is simply:
+we add the number of observed successes,
+$x$,
+to parameter $a$,
+and the number of observed failures,
+$n - x$,
+to parameter $b$,
+and the corresponding Beta distribution is our posterior for $p \mid x$.
+This is the convenience of conjugacy.
+
+\begin{example}[Beta-Binomial Scenario for the Drug Trial]
+    We considered two different priors $f_1(\theta) = 1$ and $f_2(\theta) = 2\theta$.
+    Its straightforward to see that
+    \begin{align*}
+        f_1(\theta) = 1 &\equiv \mathrm{Beta}(1, 1) \\
+        \text{and } f_2(\theta) = 2\theta &\equiv \mathrm{Beta}(2, 1).
+    \end{align*}
+    So the flat uniform prior for $\theta$ is equivalent to observing one 'prior success' and one 'prior failure' to represent our lack of knowledge about $\theta$.
+
+    Whereas $f_2(\theta)$ placed more prior weight on larger values of $\theta$,
+    we see this is equivalent to $2$ 'prior successes' and one prior failure.
+
+    Given we can express the priors as Beta distributions,
+    it is then trivial to apply the Beta-binomial model which gives the posteriors as
+    \begin{align*}
+        f_1(\theta\mid x) &= \mathrm{Beta}(12, 6) \\
+        f_2(\theta\mid x) &= \mathrm{Beta}(13, 6)
+    \end{align*}
+    which are the same as we obtained before.
+\end{example}
 
 
 
