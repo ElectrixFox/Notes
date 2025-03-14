@@ -1292,6 +1292,33 @@ keeping origin at the pivot.
     \end{solution}
 \end{example}
 
+\begin{example}
+    A uniform round pulley of mass $M$ and radius $L$ can rotate without friction about a fixed horizontal axis through its centre.
+    A mass $m$ is connected by a light string wound around the pulley,
+    hanging downwards,
+    with no slippage.
+    Find the acceleration $a$ of the mass.
+
+    \begin{solution}
+        Compute the moment of inertia of the pulley about its axis.
+        Easiest to use polar coordinates $(r, \theta)$.
+        Then
+        \[
+        I = \iint M\left(\frac{r}{\pi L ^ 2}\right)\,dr\,d\theta r ^ 2 = \frac{1}{2}ML ^ 2.
+        \]
+        The speed $v$ of the mass is related to the angular speed by $v = L\dot{\theta}$.
+        Taking $z$ to point downwards,
+        the potential energy is $V = -mgz$.
+        Putting everything together gives the total energy
+        \[
+        E = \frac{1}{2}I\dot{\theta} ^ 2 + \frac{1}{2}mv ^ 2 - mgz = \frac{1}{2}\left(\frac{1}{2}M + m\right)\dot{z} ^ 2 - mgz.
+        \]
+        Using $dE / dt = 0$ and dividing by $\dot{z}$ then leaves
+        \[
+        a = \ddot{z} = \frac{g}{1 + M / (2m)} < g.
+        \]
+    \end{solution}
+\end{example}
 
 
 
