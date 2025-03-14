@@ -5308,6 +5308,28 @@ Need to check two things
     \end{proof}
 \end{theorem}
 
+\begin{theorem}
+    $f : [a, b]$ continuous.
+    Assume $f(x) \geq 0$ and exists a point $c \in [a, b]$ such that $f(c) > 0$.
+    Then
+    \[
+    \int_{a}^{b}f(t)\,dt > 0.
+    \]
+    
+    \begin{proof}
+        Set $C = f(c)$.
+        By continuity there exists a $\delta > 0$ such that $f(x) \geq \frac{c}{2}$ for all $x \in (c - \delta, c + \delta)$.
+        With this
+        \begin{align*}
+            \int_{a}^{b}f(t)\,dt &= \int_{a}^{c - \delta}f(t)\,dt + \int_{c - \delta}^{c + \delta}f(t)\,dt + \int_{c + \delta}^{b}f(t)\,dt \\
+            &\geq 0 + \frac{C}{2}\cdot 2\cdot \delta + 0 \\
+            &= C\delta \\
+            &> 0.
+        \end{align*}
+    \end{proof}
+\end{theorem}
+
+
 The continuity hypothesis is needed in the previous theorem:
 consider
 \[
@@ -5320,6 +5342,17 @@ f(x) = \begin{cases}
 \int_{0}^{1}f(x)\,dx = \frac{1}{2} = \frac{1}{2}(1 - 0).
 \]
 But $\frac{1}{2}$ is not a value of $f$.
+
+Also
+\[
+f(x) = \begin{cases}
+    0 & x \neq 0 \\
+    1 & x = 0
+\end{cases}
+\]
+not continuous at $x = 0$,
+$f(x) \geq 0$.
+But $\int_{-1}^{1}f(x)\,dx = 0$.
 
 \begin{definition}
     For $a \geq b$ set
@@ -5349,6 +5382,106 @@ Set $F(x) = \int_{a}^{x}f(t)\,dt$.
         hence Lipschitz.
     \end{proof}
 \end{proposition}
+
+\begin{theorem}[Fundamental Theorem of Calculus]
+    $f$ continuous on $[a, b]$.
+    Then $F(x) = \int_{a}^{x}f(t)\,dt$ is differentiable on $[a, b]$ with
+    \[
+    F'(x) = f(x).
+    \]
+
+    \begin{proof}
+        Let $c \in (a, b)$.
+        Need to show
+        \[
+        \lim_{x \to c}\frac{F(x) - F(c)}{x - c}
+        \]
+        exists and is equal to $f(c)$.
+        For $x \neq c$
+        \begin{align*}
+            \frac{1}{x - c}\left(\int_{a}^{x}f(t)\,dt - \int_{a}^{c}f(t)\,dt\right) &= \frac{1}{x - c}\int_{c}^{x}f(t)\,dt \\
+            \intertext{Assume $x > c$
+            ($c > x$ goes the same).
+            By mean value theorem for integrals}
+            &= \frac{1}{x - c}\cdot (x - c)f(\xi_x) \\
+            \intertext{with $\xi_x \in (c, x)$}
+            &= f(\xi_x) \to f(c)
+        \end{align*}
+        since $x \to c$ so does $\xi_x \to c$ by continuity.
+    \end{proof}
+\end{theorem}
+
+\subsection{Functions via integrals}
+Given $f(x)$ continuous,
+define $F(x) = \int_{a}^{x}f(t)\,dt$.
+
+\begin{example}
+    \[
+    f(x) = \frac{1}{x}
+    \]
+    on $(0, \infty)$.
+
+    Set
+    \[
+    L(x) = \int_{1}^{x}\frac{1}{t}\,dt.
+    \]
+
+    Then
+    \[
+    L(1) = 0,
+    \]
+    trivially.
+    
+    \[
+    L'(x) = \frac{1}{x}
+    \]
+    by fundamental theorem of calculus.
+
+    $L(x)$ is increasing
+    (since $L'(x) > 0$).
+
+    \[
+    L(xy) = L(x) + L(y)
+    \]
+    true for $y = 1$.
+    Take derivatives in $x$:
+    \[
+    L'(xy) = y \cdot \frac{1}{xy} = \frac{1}{x} = L'(x).
+    \]
+    \[
+    L\left(\frac{1}{x}\right) = -L(x)
+    \]
+    with $y = \frac{1}{x}$.
+    \[
+    L(2) > \frac{1}{2}
+    \]
+    \[
+    \int_{1}^{2}\frac{1}{t}\,dt > \int_{1}^{2}\frac{1}{2}\,dt = \frac{1}{2},
+    \]
+    \[
+    L(2 ^ n) > \frac{n}{2}
+    \]
+    $nL'(2)$.
+    \[
+    L(2 ^ n) > \frac{n}{2} \implies L(x) \to \infty \text{ as } x \to \infty.
+    \]
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
