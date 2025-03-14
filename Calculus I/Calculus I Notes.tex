@@ -5358,8 +5358,168 @@ f * g = \int_{\infty}^{-\infty}f(x - t')g(t')\,(-dt') = \int_{-\infty}^{\infty}g
     \end{proof}
 \end{theorem}
 
+\subsection{Some examples}
 
+\begin{example}[One-sided exponential]
+    \[
+    f(x) = \begin{cases}
+        e ^ {-ax} & x \geq 0 \\
+        0 & x < 0\qquad a > 0.
+    \end{cases}
+    \]
+    \begin{align*}
+        \tilde{f}(p) &= \int_{-\infty}^{\infty}f(x)e ^ {-ipx}\,dx \\
+        &= \int_{0}^{\infty}e ^ {-ax}e ^ {-ipx}\,dx \\
+        &= \int_{0}^{\infty}e ^ {-(ip + a)x}\,dx \\
+        &= \left[-\frac{1}{ip + a}e ^ {-(ip + a)x}\right]_{0}^{\infty} \\
+        &= \frac{1}{ip + a}.
+    \end{align*}
+\end{example}
 
+\begin{example}[Two-sided exponential]
+    \[
+    g(x) = e ^ {-a|x|}\qquad a > 0.
+    \]
+    \begin{align*}
+        \tilde{g}(p) &= \int_{-\infty}^{\infty}g(x)e ^ {-ipx}\,dx \\
+        &= \int_{-\infty}^{0}e ^ {ax}e ^ {-ipx}\,dx + \int_{0}^{\infty}e ^ {-ax}e ^ {-ipx}\,dx \\
+        &= \int_{-\infty}^{0}e ^ {(a - ip)x}\,dx + \int_{0}^{\infty}e ^ {-(ip + a)x}\,dx \\
+        &= \left[\frac{1}{a - ip}e ^ {(a + ip)x}\right]_{0}^{\infty} - \left[\frac{1}{a + ip}e ^ {-(ip + a)x}\right]_{0}^{\infty} \\
+        &= \frac{1}{a - ip} + \frac{1}{ip + a} \\
+        &= \frac{a + ip + a - ip}{(a - ip)(a + ip)} \\
+        &= \frac{2a}{a ^ 2 + p ^ 2}.
+    \end{align*}
+\end{example}
+
+\begin{example}[Gaussian]
+    \[
+    f(x) = e ^ {-x ^ 2}.
+    \]
+
+    \begin{align*}
+        \tilde{f}(p) &= \int_{-\infty}^{\infty}f(x)e ^ {-x ^ 2}\,dx \\
+        &= \int_{-\infty}^{\infty}e ^ {-x ^ 2}e ^ {-ipx}\,dx \\
+        &= \int_{-\infty}^{\infty}e ^ {-\left(x + \frac{ip}{2}\right) ^ 2}e ^ {\left(\frac{ip}{2}\right) ^ 2}\,dx \\
+        &= e ^ {-\frac{p ^ 2}{4}}\int_{-\infty}^{\infty}e ^ {-\left(x + \frac{ip}{2}\right) ^ 2}\,dx
+        \intertext{$x' = x + \frac{ip}{2}$}
+        &= e ^ {-\frac{p ^ 2}{4}}\int_{-\infty}^{\infty}e ^ {-{x'} ^ 2}\,dx' \\
+        &= \sqrt{\pi}e ^ {-\frac{p ^ 2}{4}}.
+    \end{align*}
+\end{example}
+
+\begin{example}
+    \[
+    F(x) = e ^ {-bx ^ 2 - cx}.
+    \]
+
+    \begin{align*}
+        F(x) &= e ^ {-bx ^ 2 - cx} \\
+        &= e ^ {-\left(\sqrt{b}x + \frac{c}{2\sqrt{b}}\right) ^ 2}e ^ {\frac{c ^ 2}{4b}} \\
+        &= e ^ {\frac{c ^ 2}{4b}}f\left(\sqrt{b}x + \frac{c}{2\sqrt{b}}\right).
+    \end{align*}
+    
+    \begin{align*}
+        h(x) &= f\left(\sqrt{b}x + \frac{c}{2\sqrt{b}}\right) \\
+        g(x) &= h\left(\frac{x}{\sqrt{b}}\right) = f\left(x + \frac{c}{2\sqrt{b}}\right).
+    \end{align*}
+
+    By the shift theorem
+    \begin{align*}
+        \tilde{g}(p) &= \tilde{f}(p)e ^ {\frac{ic}{2\sqrt{b}}p} = \sqrt{\pi}e ^ {-\frac{p ^ 2}{4}}e ^ {\frac{ic}{2\sqrt{b}}p} \\
+        h(x) &= g(\sqrt{b}x)
+        \intertext{by scaling theorem}
+        \tilde{h}(p) &= \frac{1}{\sqrt{b}}\tilde{g}\left(\frac{p}{\sqrt{b}}\right) = \sqrt{\frac{\pi}{b}}e ^ {-\frac{p ^ 2}{4b}}e ^ {\frac{ic}{2b}p} \\
+        F(x) &= e ^ {\frac{c ^ 2}{4b}}h(x) \\
+        \tilde{F}(p) &= \sqrt{\frac{\pi}{b}}e ^ {\frac{c ^ 2}{4b}}e ^ {-\frac{p ^ 2}{4b}}e ^ {\frac{icp}{2b}} = \sqrt{\frac{\pi}{b}}e ^ {-\frac{1}{4b}(1 - ic) ^ 2}.
+    \end{align*}
+\end{example}
+
+\subsection{Application of Fourier Transforms to inhomogeneous ODEs}
+$x$-space:
+$f(x)$.
+$p$-space:
+"$\tilde{f}(p)$".
+\[
+\frac{df}{dx}(x) \to ip\tilde{f}(p).
+\]
+\[
+\text{Differential equation} \to \text{Algebraic equation}.
+\]
+
+\begin{example}
+    \[
+    \frac{dy}{dx} + 3y = f(x).
+    \]
+    Take Fourier transforms of both sides
+    \begin{align*}
+        ip\tilde{y} + 3\tilde{y} &= \tilde{f}(p) \\
+        \tilde{y}(p) &= \frac{\tilde{f}(p)}{ip + 3} = \tilde{f}(p)\tilde{g}(p)
+    \end{align*}
+    $\tilde{g}(p) = \frac{1}{ip + 3}$.
+    If we can find $g(x)$ such that $\tilde{g}(p) = \frac{1}{ip + 3}$ then the convolution theorem implies the Fourier transform of $f * g$ is $f(p)g(p)$,
+    i.e. can take $y = f * g$.
+    One-sided exponential
+    \[
+    g(x) = \begin{cases}
+        e ^ {-ax} & x \geq 0 \\
+        0 & x < 0
+    \end{cases}
+    \]
+    has Fourier transform $\frac{1}{ip + a}$,
+    take $a = 3$
+    \[
+    g(x) = \begin{cases}
+        e ^ {-3x} & x \geq 0 \\
+        0 & x < 0
+    \end{cases}
+    \]
+    \begin{align*}
+        y(x) &= f * g \\
+        &= \int_{-\infty}^{\infty}f(t)g(x - t)\,dt \\
+        &= \int_{-\infty}^{x}f(t)e ^ {-3(x - t)}\,dt \\
+        &= e ^ {-3x}\int_{-\infty}^{x}f(t)e ^ {3t}\,dt \\
+        &\iff \\
+        y(x) &= \frac{1}{e ^ {3x}}\int_{-\infty}^{x}f(t)e ^ {3t}\,dt
+    \end{align*}
+\end{example}
+
+\begin{example}
+    \[
+    y'' + 6y' + 8y = f(x) = xe ^ {-x}
+    \]
+
+    \begin{align*}
+        (ip) ^ 2\tilde{y} + 6(ip)\tilde{y} + 8\tilde{y} &= \tilde{f}(p) \\
+        &\implies \\
+        \tilde{y} &= \frac{\tilde{f}(p)}{(ip) ^ 2 + 6ip + 8} \\
+        &= \frac{\tilde{f}(p)}{(ip + 2)(ip + 4)} = \tilde{f}(p)\tilde{g}(p)
+    \end{align*}
+    where $\tilde{g}(p) = \frac{1}{(ip + 2)(ip + 4)}$.
+    Using convolution theorem $y(x) = f * g(x)$,
+    where the Fourier transform of $g(x)$ is
+    \[
+    \tilde{g}(p) = \frac{1}{(ip + 2)(ip + 4)}.
+    \]
+    \begin{align*}
+        \tilde{g}(p) &= \frac{1}{(ip + 2)(ip + 4)} \\
+        &= \frac{1}{2(ip + 2)} - \frac{1}{2(ip + 4)} \\
+        g(x) &= \begin{cases}
+            \frac{1}{2}e ^ {-2x} - \frac{1}{2}e ^ {-4x} & x \geq 0 \\
+            0 & x < 0
+        \end{cases}
+    \end{align*}
+    \begin{align*}
+        y(x) &= f * g \\
+        &= \int_{-\infty}^{\infty}f(t)g(x - t)\,dt \\
+        &= \int_{-\infty}^{x}f(t)\left[\frac{1}{2}e ^ {-2(x - t)} - \frac{1}{2}e ^ {-4(x - t)}\right]\,dt \\
+        &= \frac{e ^ {-2x}}{2}\int_{-\infty}^{x}f(t)e ^ {2t}\,dt - \frac{e ^ {-4x}}{2}\int_{-\infty}^{x}f(t)e ^ {4t}\,dt
+        \intertext{For $f(x) = xe ^ {-x}$}
+        &= \frac{e ^ {-2x}}{2}\int_{-\infty}^{x}te ^ {t} - \frac{e ^ {-4x}}{2}\int_{-\infty}^{x}te ^ {3t}\,dt \\
+        &= \frac{e ^ {-2x}}{2}\left[te ^ t - e ^ t\right]_{-\infty}^{x} - \frac{e ^ {-4x}}{2}\left[\frac{te ^ {3t}}{3} - \frac{e ^ {3t}}{3}\right]_{-\infty}^{x} \\
+        &= \frac{e ^ {-x}}{2}(x - 1) - \frac{e ^ {-x}}{2}\left(\frac{x}{3} - \frac{1}{9}\right) \\
+        &= e ^ {-x}\left(\frac{x}{3} - \frac{4}{9}\right).
+    \end{align*}
+\end{example}
 
 
 
