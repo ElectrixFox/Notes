@@ -1320,9 +1320,77 @@ keeping origin at the pivot.
     \end{solution}
 \end{example}
 
+\textbf{String with boundary condition}
 
+The equation for $u(x, t)$ is $u_{tt} = c ^ 2u_{xx}$.
+Say the string lies on $x \geq 0$ and is fixed at $x = 0$ by the boundary condition
+\[
+u(0, t) = 0
+\]
+for all $t$.
+The general solution $u(x, t) = f(x - ct) + g(x + ct)$ satisfies this boundary condition if and only if $f(-ct) + g(ct) = 0$ for all $t$ which implies $g(q) = -f(-q)$.
+So $f$ is arbitrary,
+but $g$ is not.
 
+\begin{example}
+    Take $f(p) = e ^ {-p ^ 2}$.
+    Then $u(x, t) = \exp[-(x - ct) ^ 2] - \exp[-(x + ct) ^ 2]$.
+    Check $u(0, t) = \exp[-(ct) ^ 2] - \exp[-(ct) ^ 2] = 0$.
+\end{example}
 
+\begin{remark}
+    For two boundary conditions,
+    get harmonics,
+    i.e. Fourier series.
+\end{remark}
+
+\begin{example}
+    Moment of inertia $I$ of a square light plate with four masses $m$ attached to each corner of this plate,
+    side length $D$,
+    about axis perpendicular to the plate half way along one edge.
+
+    \begin{solution}
+        \[
+        I = m\left(\frac{D}{2}\right) ^ 2 + m\left(\frac{D}{2}\right) ^ 2 + m\left[\left(\frac{D}{2}\right) ^ 2 + D ^ 2\right] + m\left[\left(\frac{D}{2}\right) ^ 2 + D ^ 2\right] = 3mD ^ 2.
+        \]
+    \end{solution}
+\end{example}
+
+\newpage
+
+\section{Miscellaneous Examples}
+
+\subsection{Dimensional Analysis}
+Any quantity $X$ has a dimension $[X]$ which is some combination of $M$
+(mass),
+$L$
+(length),
+$T$
+(time).
+
+E.g. A speed $v$ has $[v] = LT ^ {-1}$.
+
+The rules include:
+In $A + B = C$,
+the quantities all have the same dimension:
+$[A] = [B] = [C]$.
+
+Functions like $\exp, \cos, \log$ act on dimensionless quantities.
+
+E.g. in $\cos(\omega t)$ we have $[t] = T$ and $[\omega] = T ^ {-1}$ so $\omega t$ is dimensionless.
+
+\begin{example}
+    The equation in central forces:
+    \[
+    m\ddot{r} - \frac{Q ^ 2}{mr ^ 3} = f(r)
+    \]
+    where $Q$ is the angular momentum.
+    
+    Here $[m\ddot{r}] = MLT ^ {-2}$;
+    recall $|f| = |\mbf{F}|$ is a force so $[f] = MLT ^ {-2}$;
+    recall angular momentum vector $m\mbf{r}\times\dot{\mbf{r}}$ so $[Q] = ML ^ 2T ^ {-1}$.
+    Hence $\left[\frac{Q ^ 2}{mr ^ 3}\right] = (M ^ 2L ^ 4T ^ {-2})M ^ {-1}L ^ {-3} = MLT ^ {-2}$.
+\end{example}
 
 
 
