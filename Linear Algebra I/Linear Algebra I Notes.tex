@@ -7861,8 +7861,183 @@ Simpler groups have finitely many elements.
     called the cyclic group of order $n$.
 \end{example}
 
+\begin{example}
+    $\Z_4 = \{[0], [1], [2], [3]\}$,
+    write $\bar{0}, \bar{1}, \bar{2}, \bar{3}$ for the equivalence classes.
+    E.g. $\bar{1} = \{-7, -3, 1, 5, 9, \dotsc\}$.
+    Group "multiplication" is addition of integers.
 
+    Encoded in a group table
+    (Cayley table)
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|cccc}
+             $+$ & $\bar{0}$ & $\bar{1}$ & $\bar{2}$ & $\bar{3}$  \\
+             \hline
+             $\bar{0}$ & $\bar{0}$ & $\bar{1}$ & $\bar{2}$ & $\bar{3}$  \\
+             $\bar{1}$ & $\bar{1}$ & $\bar{2}$ & $\bar{3}$ & $\bar{0}$  \\
+             $\bar{2}$ & $\bar{2}$ & $\bar{3}$ & $\bar{0}$ & $\bar{1}$  \\
+             $\bar{3}$ & $\bar{3}$ & $\bar{0}$ & $\bar{1}$ & $\bar{2}$
+        \end{tabular}
+    \end{table}
+    this group is of order $4$.
 
+    There's another group of order $4$ called the Klein group $V = \{a, b, c, e\}$
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|cccc}
+             $\cdot$ & $e$ & $a$ & $b$ & $c$  \\
+             \hline
+             $e$ & $e$ & $a$ & $b$ & $c$ \\
+             $a$ & $a$ & $e$ & $c$ & $b$ \\
+             $b$ & $b$ & $c$ & $e$ & $a$ \\
+             $c$ & $c$ & $b$ & $d$ & $e$
+        \end{tabular}
+    \end{table}
+    this is a model of $180 ^ {\circ}$ about $x, y, z$ axes in $\R ^ 3$.
+
+    These two groups are not isomorphic.
+\end{example}
+
+How can we see if two groups are isomorphic?
+First
+
+\begin{definition}
+    Let $g \in G$ a group.
+    Then the order of $g$,
+    $|g|$ is the smallest integer $n$ such that $g ^ n = e$,
+    using group multiplication with $e$ the identity
+    (so $|e| = 1$).
+    (if $|G|$ is not finite,
+    then $|g|$ might be infinite).
+\end{definition}
+
+In $(\Z, +)$ no element apart from $0$ has finite order.
+In $\Z_n$ everything has finite order.
+
+\begin{example}
+    In $\Z_4$,
+    $\bar{2}$ has order $2$:
+    $\bar{2} ^ 2 = \bar{2} + \bar{2} = \bar{0}$.
+    But $\bar{1}, \bar{3}$ have order $4$
+    \begin{align*}
+        \bar{3} ^ 4 &= \bar{3} + \bar{3} + \bar{3} + \bar{3} = \bar{0} \\
+        \bar{3} ^ 2 &= \bar{2} \neq \bar{0}
+    \end{align*}
+    in $V$
+    (Klein group),
+    $a, b, c$ all have order $2$.
+
+    Hence,
+    $\Z_4$ and $V$ cannot be isomorphic.
+\end{example}
+
+\begin{proposition}
+    If $G$ and $H$ are isomorphic,
+    $f : G \to H$,
+    the order of $g \in G$ is the same as the order of $f(g) \in H$.
+\end{proposition}
+
+If we can distinguish "different" groups can we also make new groups from the old?
+
+\begin{definition}
+    Let $G, H$ be two groups.
+    The direct product $G \times H$ is defined by:
+    
+    The elements of $G \times H$ are the ordered pairs $(g, h)$,
+    with $g \in G$,
+    $h \in H$.
+
+    The group law $\cdot$ is defined component-wise:
+    \[
+    (g_1, h_1) \cdot (g_2, h_2) = (g_1 \cdot_G g_2, h_1 \cdot_H h_2)
+    \]
+    this is a group.
+
+    It has order $|G \times H| = |G|\cdot|H|$.
+\end{definition}
+
+\begin{example}
+    $\Z \times \Z_2$,
+    (the direct product of two copies of the cyclic group of order $2$).
+    $\Z_2 = \{\bar{0}, \bar{1}\}$
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|cc}
+             $+$ & $\bar{0}$ & $\bar{1}$ \\
+             \hline
+             $\bar{0}$ & $\bar{0}$ & $\bar{1}$ \\
+             $\bar{1}$ & $\bar{1}$ & $\bar{0}$
+        \end{tabular}
+    \end{table}
+    $\Z_2 \times \Z_2 = \{(\bar{0}, \bar{0}), (\bar{1}, \bar{0}), (\bar{0}, \bar{1}), (\bar{1}, \bar{1})\}$ and,
+    e.g.,
+    $(\bar{1}, \bar{0}) \cdot (\bar{1}, \bar{0}) = (\bar{1} + \bar{1}, \bar{0} + \bar{0}) = (\bar{0}, \bar{0})$.
+
+    In fact $\Z_2 \times \Z_2$ is isomorphic to $V$,
+    the Klein group.
+\end{example}
+
+Connection with matrices.
+
+\textbf{Rotations,
+reflections,
+and their subgroups}
+
+Consider $\R ^ n$ with standard inner product $(\mbf{v}, \mbf{w}) = \mbf{w} ^ T\mbf{v} = v_1w_1 + v_2w_2 + \dotsc + v_nw_n$.
+
+Rotations are linear transformations $\mbf{v} \to M\mbf{v}$ which are rigid
+(i.e. preserve length and angles)
+and preserve orientation.
+
+Being rigid implies they preserve $(\mbf{v}, \mbf{w})$ for all $\mbf{v}, \mbf{w}$,
+\[
+\mbf{w} ^ T\mbf{v} = (\mbf{v}, \mbf{w}) \to (M\mbf{v}, M\mbf{w}) = (M\mbf{w}) ^ T(M\mbf{v}) = \mbf{w} ^ TM ^ TM\mbf{v}
+\]
+so we need $M ^ TM = I$,
+$M$ is an orthogonal transformation of $\R ^ n$ in $O(n)$.
+If $M \in O(n)$,
+$\det{M} = \pm 1$ when $\det{M} = 1$,
+$M$ is a "pure" rotation,
+$\det{M} = -1$:
+$M$ also contains a reflection.
+E.g.
+\[
+M = \begin{pmatrix}
+    -1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
+\end{pmatrix}
+\]
+$M \in O(3)$,
+$\det{M} = 1$.
+\[
+M\begin{pmatrix}
+    x \\ y \\ z
+\end{pmatrix} = \begin{pmatrix}
+    -x \\ y \\ z
+\end{pmatrix}:
+\]
+reflection in the $y-z$ plane.
+
+Rotations have $\det{M} = +1$ so $\mathrm{SO}(n)$.
+$\mathrm{SO}(2)$,
+abelian,
+infinite group of rotations of the plane,
+\[
+M = \begin{pmatrix}
+    \cos{\theta} & \sin{\theta} \\
+    -\sin{\theta} & \cos{\theta}
+\end{pmatrix}
+\]
+$\mathrm{SO}(3)$:
+rotations of $\R ^ 3$
+(non-abelian).
+
+These groups are both infinite,
+but have interesting finite subgroups.
+
+For $\mathrm{SO}(2)$ consider a regular polygon with $n$ sides.
+The pure rotations of $\R ^ 2$ leaving this polygon unchanged forms a finite abelian subgroup of $\mathrm{SO}(2)$ with order $n$,
+isomorphic to $\Z_n$.
 
 
 
