@@ -5482,34 +5482,113 @@ define $F(x) = \int_{a}^{x}f(t)\,dt$.
     \end{enumerate}
 
     \begin{proof}
-        $f_n \to f$ uniformly.
-        So,
-        given $\varepsilon > 0$.
-        \[
-        |f_n(x) - f(x)| < \varepsilon
-        \]
-        for all $x \in [a, b]$ and for all $n \geq N$.
-        $f_n$ regulated.
-        There exists step functions $g_n(x)$ such that
-        \[
-        |f_n(x) - g_n(x)| < \varepsilon
-        \]
-        for all $x \in [a, b]$.
-        Claim $g_n \to f$ uniformly.
-        So $f$ is regulated.
-        \begin{align*}
-            |f(x) - g_n(x)| &= |f(x) - f_n(x) + f_n(x) - g_n(x)| \\
-            &\leq |f(x) - f_n(x)| + |f_n(x) - g_n(x)| \\
-            &< \varepsilon + \varepsilon = 2\varepsilon
-        \end{align*}
-        for all $x \in [a, b]$ and for all $n \geq N$.
+        \begin{enumerate}[label = (\roman*)]
+            \item
+            $f_n \to f$ uniformly.
+            So,
+            given $\varepsilon > 0$.
+            \[
+            |f_n(x) - f(x)| < \varepsilon
+            \]
+            for all $x \in [a, b]$ and for all $n \geq N$.
+            $f_n$ regulated.
+            There exists step functions $g_n(x)$ such that
+            \[
+            |f_n(x) - g_n(x)| < \varepsilon
+            \]
+            for all $x \in [a, b]$.
+            Claim $g_n \to f$ uniformly.
+            So $f$ is regulated.
+            \begin{align*}
+                |f(x) - g_n(x)| &= |f(x) - f_n(x) + f_n(x) - g_n(x)| \\
+                &\leq |f(x) - f_n(x)| + |f_n(x) - g_n(x)| \\
+                &< \varepsilon + \varepsilon = 2\varepsilon
+            \end{align*}
+            for all $x \in [a, b]$ and for all $n \geq N$.
+
+            \item
+            \begin{align*}
+                \left|\int_{a}^{b}f(t)\,dt - \int_{a}^{b}f_n(t)\,dt\right| &= \left|\int_{a}^{b}|f(t) - f_n(t)|\,dt\right| \\
+                &\leq \int_{a}^{b}|f(t) - f_n(t)|\,dt \\
+                &\leq \int_{a}^{b}\varepsilon\,dt &(n \geq N) \\
+                &= (b - a)\varepsilon.
+            \end{align*}
+        \end{enumerate}
     \end{proof}
 \end{theorem}
 
+\[
+f(x) = \infsumo\frac{1}{2 ^ k}\cos(15 ^ k\pi x)
+\]
+converges uniformly by Weierstrass $M$-test
+($|\cos(15 ^ k\pi x)| \leq 1$)
+hence continuous thus regulated the $\int_{0}^{1 / 2}f(t)\,dt$ exists and is $\infsumo\left(\int_{0}^{1 / 2}\frac{1}{2 ^ k}\cos(15 ^ k\pi t)\,dt\right)$
+\begin{align*}
+    \infsumo\left(\int_{0}^{1 / 2}\frac{1}{2 ^ k}\cos(15 ^ k\pi t)\,dt\right) &= \infsumo\frac{1}{2 ^ k}\frac{1}{15 ^ k\pi}\sin\left(15 ^ k\pi\frac{1}{2}\right) \\
+    &= \frac{1}{\pi}\infsumo\frac{1}{30 ^ k}\cdot (-1) ^ k \\
+    &= \frac{1}{\pi}\frac{1}{1 + \frac{1}{30}} \\
+    &= \frac{1}{\pi}\cdot\frac{30}{31}.
+\end{align*}
 
+\begin{theorem}
+    Let $f_n(x)$ sequence of functions with continuous derivatives $f_n'(x)$.
+    Assume $f_n \to f$ pointwise,
+    $f_n' \to g$ uniformly for some function $g(x)$.
 
+    Then $f(x)$ is differentiable and $f'(x) = g(x) = \liminfty f_n'(x)$.
 
+    \begin{proof}
+        Have
+        \[
+        f_n(x) = f_n(a) + \int_{a}^{x}f_n'(t)\,dt,
+        \]
+        by the fundamental theorem of calculus,
+        as $n \to \infty$
+        \[
+        f(x) = f(a) + \liminfty\int_{a}^{x}g(t)\,dt\footnotemark
+        \]
+        \footnotetext{By the previous theorem.}
+        by the fundamental theorem of calculus $\int_{a}^{x}g(t)\,dt$ is differentiable with derivative $g(x)$.
+    \end{proof}
+\end{theorem}
 
+\subsection{Pointwise Convergence and Integration}
+
+\begin{example}
+    \[
+    f_n(x) = \begin{cases}
+        n - n ^ 2x & 0 < \frac{1}{n} \\
+        0 & x \geq \frac{1}{n}
+    \end{cases}
+    \]
+    \[
+    \int_{0}^{1}f_n(x)\,dx = \frac{1}{2}.
+    \]
+    But $\liminfty f_n(x) = 0$ and $\int_{0}^{1}f(x)\,dx = 0$.
+    Not uniformly
+    (pick $x_n = \frac{1}{2n}$).
+\end{example}
+
+\begin{example}
+    \[
+    f_n(x) = x ^ n\quad x \in [0, 1]
+    \]
+    as $n \to \infty$,
+    \[
+    f(x) = \begin{cases}
+        0 & x \in [0, 1) \\
+        1 & x = 1.
+    \end{cases}
+    \]
+    Not uniform on $[0, 1]$ but uniform on compact subsets of $(0, 1)$.
+
+    \[
+    \int_{0}^{1}f(x)\,dx = 0.
+    \]
+    \[
+    \int_{0}^{1}f_n(x)\,dx = \frac{1}{n + 1} \to 0.
+    \]
+\end{example}
 
 
 
