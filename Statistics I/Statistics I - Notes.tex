@@ -2559,13 +2559,262 @@ This is the convenience of conjugacy.
     which are the same as we obtained before.
 \end{example}
 
+\subsection{Bayesian inference}
 
+\textbf{Information we can extract from the Bayesian Posterior $f(\theta\mid x)$}
 
+Simple summaries of $f(\theta\mid x)$ - plots,
+location summaries
+(mean,
+median,
+mode),
+spread summaries
+(variance,
+quantiles),
+other characteristics
+(symmetry,
+number of peaks).
 
+Probabilities -
+use the distribution to directly calculate relevant probabilities,
+e.g. find $\cP{\theta < a}{x}$,
+related to hypothesis tests.
 
+Point estimates -
+summarise the distribution in terms of a single "best" value of $\theta$;
+often the same as the location summaries of the distribution.
 
+Predictions -
+use $f(\theta\mid x)$ to make predictions about some future data $X ^ {*}$ given $\theta$ and $x$.
 
+Intervals and regions -
+find intervals that capture a proportion of the possible values of $\theta$,
+i.e. the interval $[\ell, u]$ where $\P(\ell < \theta < u) = 1 - \alpha$.
 
+\subsubsection{Point estimates}
+Point estimates are single values of $\theta$ that are,
+a "best" value obtained from $f(\theta\mid x)$.
+Thus the point estimate typically has some useful or meaningful properties associated with it.
+Two obvious choices are:
+
+Posterior mode,
+or MAP estimate,
+$\hat{\theta}_{\text{MAP}}$:
+this is the maximum of the posterior density,
+the obvious analogue to the usual maximum likelihood estimate
+(MLE)
+which maximises only the likelihood.
+
+Posterior mean,
+$\E(\theta\mid x) = \int\theta f(\theta\mid x)\,d\theta$,
+the posterior expectation with all the usual properties and interpretations.
+
+\begin{example}
+    Drug trial,
+    $16$ people,
+    each has unknown probability $\theta$ of condition improving whilst taking the drug.
+    Binomial likelihood $X \sim \Bin(16, \theta)$,
+    observed that $x = 11$ improved.
+
+    \begin{solution}
+        Using flat uniform prior $\theta$,
+        $\theta \sim U(0, 1)$,
+        posterior for $\theta \mid x$ was $\mathrm{Beta}(12, 6)$.
+
+        \begin{align*}
+            \hat{\theta}_{\text{MAP}} &= \frac{12 - 1}{12 + 6 - 2} = \frac{11}{16} \\
+            \E(\theta \mid x) &= \frac{12}{12 + 6} = \frac{12}{18}.
+        \end{align*}
+
+        If we consider the second prior for $\theta$,
+        where $f(\theta) = 2\theta$,
+        then we found that $\theta\mid x$ was $\mathrm{Beta}(13, 6)$ and therefore that:
+        \begin{align*}
+            \hat{\theta}_{\text{MAP}} &= \frac{13 - 1}{13 + 6 - 2} = \frac{12}{17} \\
+            \E(\theta \mid x) &= \frac{13}{13 + 6} = \frac{13}{19}
+        \end{align*}
+        where in this case we note that because the prior places higher probability on larger values of $\theta$ our point estimates are slightly larger than when the prior is flat.
+    \end{solution}
+\end{example}
+
+\subsubsection{Credible intervals}
+\begin{definition}[Credible interval]
+    A $100(1 - \alpha)\%$ credible interval,
+    $[\ell, u]$ for a random variable $\theta \in \R$ satisfies:
+    \[
+    \P(\ell \leq \theta \leq u) = \P(\theta \in [\ell, u]) = 1 - \alpha.
+    \]
+
+    Similarly,
+    a $100(1 - \alpha)\%$ credible interval for $\theta$ given the data $X = x$ satisfies:
+    \[
+    \cP{\ell \leq \theta \leq u}{X = x} = \cP{\theta \in [\ell, u]}{X = x} = 1 - \alpha.
+    \]
+    This is often referred to as a $100(1 - \alpha)\%$ posterior credible interval.
+\end{definition}
+
+A credible region is a set $C$ where $\P(\theta \in C) = 1 - \alpha$.
+
+\textbf{Types of credible intervals}
+\begin{definition}[Equal-tailed intervals
+(EQT)]
+    The interval is constructed such that $\P(\theta < \ell) = \P(\theta > u) = \frac{\alpha}{2}$,
+    so there is an equal probability of falling in the tails of the distribution.
+    If $\theta$ has a standard distribution,
+    we can use its cumulative distribution function $F_{\theta}$ and its inverse to find these values as $F_{\theta}(\ell) = \frac{\alpha}{2}$ and $F_{\theta}(u) = 1 - \frac{\alpha}{2}$.
+\end{definition}
+\begin{definition}[Highest
+(posterior)
+density
+(HPD)
+intervals]
+    The interval
+    (or region)
+    is the narrowest possible interval
+    (i.e. $|u - \ell|$ is smallest)
+    that we could construct which has $\P(\ell \leq \theta \leq u) = 1 - \alpha$.
+    Such an interval contains the regions of highest density.
+\end{definition}
+
+\subsubsection{Normal approximation to Credible Intervals}
+\begin{definition}[Approximate Normal credible intervals]
+    Given a random variable $\theta$,
+    an approximate $100(1 - \alpha)\%$ credible interval for $\theta$ is given by
+    \[
+    \E(\theta) \pm z_{\alpha / 2}^{*}\sqrt{\Var(\theta)}.
+    \]
+    Often,
+    this calculation will be done using the posterior distribution of $\theta\mid X$,
+    and so would use the expectation and variance under that posterior distribution instead:
+    \[
+    \E(\theta\mid x) \pm z_{\alpha / 2}^{*}\sqrt{\Var(\theta\mid x)}.
+    \]
+\end{definition}
+
+\begin{example}
+    Using the Normal approximate credible interval for the posterior distribution $\theta\mid x \sim \mathrm{Beta}(12, 6)$ in the drug trial example.
+
+    To find the approximating Normal distribution,
+    we require the mean and variance of the posterior distribution..
+    These are 
+    \[
+    \E(\theta\mid x) = \frac{12}{12 + 6} = \frac{2}{3},\quad\Var(\theta\mid x) = \frac{12 \times 6}{(12 + 6) ^ 2(12 + 6 + 1)} = \frac{2}{171}.
+    \]
+    So,
+    our approximating Normal distribution is $N\left(\frac{2}{3}, \frac{2}{171}\right)$.
+    The approximate $95\%$ Normal credible interval is then simply
+    \begin{align*}
+        \E(\theta\mid x) \pm z_{\alpha / 2}^{*}\sqrt{\Var(\theta\mid x)} &= \frac{2}{3} \pm 1.96 \times \sqrt{\frac{2}{171}} \\
+        &= [0.4547012, 0.88786321].
+    \end{align*}
+\end{example}
+
+\subsection{Conjugate analysis for Normal data}
+\begin{definition}[Precision]
+    The precision,
+    $\tau$,
+    of a random variable $X$ is defined as the reciprocal of its variance \[
+    \tau = \frac{1}{\Var(X)} = \frac{1}{\sigma ^ 2}.
+    \]
+    So,
+    if $X$ has high precision then it has low variance,
+    and vice versa.
+\end{definition}
+
+\begin{theorem}[The Normal-Normal model,
+with known variance]
+    Let $X_1, \dotsc, X_n$ be independently identically distributed $N\left(\mu, \sigma ^ 2 = \frac{1}{\tau}\right)$ with precision $\tau > 0$ known.
+    Suppose our prior probability density function is $N\left(m, v ^ 2 = \frac{1}{t}\right)$ with $t > 0$,
+    then our posterior probability density function for $\mu\mid x_1, \dotsc, x_n$ is also normal such that
+    \[
+    \mu\mid x_1, \dotsc, x_n \sim N\left(m_1, v_1 ^ 2 = \frac{1}{t_1}\right),
+    \]
+    where
+    \[
+    t_1 = t + n\tau\qquad\text{and}\qquad m_q = \frac{tm + n\tau\bar{x}}{t + n\tau} = \frac{tm + n\tau\bar{x}}{t_1}.
+    \]
+
+    \begin{proof}
+        Note that the normalising constant of a Normal distribution,
+        $1 / \sqrt{2\pi\sigma ^ 2}$,
+        does not depend on the mean $\mu$,
+        so we can just absorb it into the proportionality constant immediately.
+        Thus our likelihood takes the form
+        \begin{align*}
+            f(x_1, \dotsc, x_n\mid\mu, \tau) &= \prod_{i = 1}^{n}f(x_i\mid \mu, \tau) \\
+            &\propto \prod_{i = 1}^{n}\exp\left\{-\frac{\tau}{2}(x_i - \mu) ^ 2\right\} \\
+            &= \exp\left\{-\frac{\tau}{2}\sum_{i}(x_i - \mu) ^ 2\right\}.
+        \end{align*}
+        We can rewrite $\sum_i(x_i - \mu) ^ 2$ as
+        \[
+        \sum_{i}(x_i - \mu) ^ 2 = \sum_i(x_i - \bar{x}) ^ 2 + n(\bar{x} -\mu) ^ 2,
+        \]
+        where the first term is constant for a given sample as it is purely a function of the data.
+        So,
+        our likelihood in terms of $\mu$ is given by:
+        \[
+        f(x_1, \dotsc, x_n\mid\mu, \tau) \propto \exp\left\{-\frac{n\tau}{2}(\bar{x} - \mu) ^ 2\right\}.
+        \]
+        Our prior probability density function for $\mu$ is also Normal,
+        giving
+        \[
+        f(\mu\mid m, t) \propto \exp\left\{-\frac{t}{2}(\mu - m) ^ 2\right\}.
+        \]
+        Thus our posterior probability density function for $\mu\mid x_1, \dotsc, x_n$ is proportional to the product of the likelihood and prior:
+        \begin{align*}
+            f(\mu\mid x_1, \dotsc, x_n) &\propto f(x_1, \dotsc, x_n\mid \mu)f(\mu) \\
+            &\propto \exp\left\{-\frac{n\tau}{2}(\bar{x} - \mu) ^ 2\right\}\exp\left\{-\frac{t}{2}(\mu - m) ^ 2\right\} \\
+            &\propto \exp\left\{-\frac{n\tau}{2}(\bar{x} - \mu) ^ 2 -\frac{t}{2}(\mu - m) ^ 2\right\} \\
+            &\propto \exp\left\{-\frac{1}{2}[n\tau(\mu ^ 2 - 2\mu\bar{x} + \bar{x} ^ 2) + t(\mu ^ 2 - 2\mu m + m ^ 2)]\right\} \\
+            &\propto \exp\left\{-\frac{1}{2}[(n\tau + t)\mu ^ 2 - 2(n\tau\bar{x} + tm)\mu + (n\tau\bar{x} ^ 2 + tm ^ 2)]\right\} \\
+            &\propto \exp\left\{-\frac{n\tau + t}{2}\left[\mu ^ 2 - 2\mu\frac{(n\tau\bar{x} + tm)}{n\tau + t}\right]\right\} \\
+            &\propto \exp\left\{-\frac{t_1}{2}(\mu ^ 2 - 2\mu m_1)\right\}.
+        \end{align*}
+        From
+        \[
+        f(x\mid\mu, \sigma ^ 2) \propto \exp\left\{-\frac{\tau}{2}(x ^ 2 - 2x\mu)\right\},
+        \]
+        this is the core of the Normal density $N\left(m_1, \frac{1}{t_1}\right)$ as required.
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    A process for testing water contamination by a particular agent produces samples that are normally distributed,
+    with mean $\mu$ and standard deviation $\sigma = 135$.
+    Prior beliefs about $\mu$ are normal with mean $m = 750$ and a $95\%$ probability that $250 < \mu < 1250$.
+    The probability statement is equivalent to saying that for a prior standard deviation of $v$,
+    then $1.96v = 500$ thus $v \approx 250$ and our prior precision is thus $t = \frac{1}{250 ^ 2}$.
+
+    To estimate $\mu$ take $n = 18$ independent samples,
+    with mean $\bar{x} = 603.22$.
+
+    By the above theorem,
+    we have that $\mu\mid x_1, \dotsc, x_n$ is $N\left(m_1, v_1 ^ 2 = \frac{1}{t_1}\right)$ where
+    \begin{align*}
+        t_1 &= t + n\tau = \frac{1}{250 ^ 2} + \frac{18}{135 ^ 2} = 1.004 \times 10 ^ {-3} \\
+        v_1 &= \sqrt{\frac{1}{t_1}} = 31.56 \\
+        m_1 &= \frac{n\tau}{t_1}\bar{x} + \frac{t}{t_1}m = 605.53.
+    \end{align*}
+    A new $95\%$ credible interval is therefore:
+    \[
+    m_1 \pm 1.96v_1 = 605.53 \pm 1.96\times 31.56 = [543.67, 667.38].
+    \]
+    If we want a $95\%$ credible interval for $\mu\mid x_1, \dotsc x_n$ $\pm 20$,
+    we need $1.96v_1 = 20$,
+    so $v_1 \approx 10$.
+    Therefore
+    \[
+    t_1 = \frac{1}{100} = t + n\tau = \frac{1}{250 ^ 2} + \frac{n}{135 ^ 2},
+    \]
+    so at least $n \approx 181.96$.
+
+    Suppose we require the contamination below a value of $600$.
+    What is $\cP{\mu < 600}{x_1, \dotsc, x_n}$?
+    \begin{align*}
+        \cP{\mu < 600}{x_1, \dotsc, x_n} &= \cP{\frac{\mu - m_1}{v_1} < \frac{600 - m_1}{v_1}}{x_1, \dotsc, x_n} \\
+        &= \P(Z < -0.1752) = 0.4305.
+    \end{align*}
+\end{example}
 
 
 

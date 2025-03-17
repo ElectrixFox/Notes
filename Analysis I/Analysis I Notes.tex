@@ -5467,6 +5467,44 @@ define $F(x) = \int_{a}^{x}f(t)\,dt$.
     \]
 \end{example}
 
+\subsection{Limit Theorems}
+
+\begin{theorem}
+    $f_n : [a, b] \to \R$ sequence of regulated functions such that $f_n \to f$ uniformly.
+    Then
+    \begin{enumerate}[label = (\roman*)]
+        \item $f$ is regulated.
+        
+        \item
+        \[
+        \int_{a}^{b}f(t)\,dt = \liminfty\int_{a}^{b}f_n(t)\,dt.
+        \]
+    \end{enumerate}
+
+    \begin{proof}
+        $f_n \to f$ uniformly.
+        So,
+        given $\varepsilon > 0$.
+        \[
+        |f_n(x) - f(x)| < \varepsilon
+        \]
+        for all $x \in [a, b]$ and for all $n \geq N$.
+        $f_n$ regulated.
+        There exists step functions $g_n(x)$ such that
+        \[
+        |f_n(x) - g_n(x)| < \varepsilon
+        \]
+        for all $x \in [a, b]$.
+        Claim $g_n \to f$ uniformly.
+        So $f$ is regulated.
+        \begin{align*}
+            |f(x) - g_n(x)| &= |f(x) - f_n(x) + f_n(x) - g_n(x)| \\
+            &\leq |f(x) - f_n(x)| + |f_n(x) - g_n(x)| \\
+            &< \varepsilon + \varepsilon = 2\varepsilon
+        \end{align*}
+        for all $x \in [a, b]$ and for all $n \geq N$.
+    \end{proof}
+\end{theorem}
 
 
 
