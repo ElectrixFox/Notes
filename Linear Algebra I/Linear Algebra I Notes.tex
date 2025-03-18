@@ -8039,6 +8039,164 @@ For $\mathrm{SO}(2)$ consider a regular polygon with $n$ sides.
 The pure rotations of $\R ^ 2$ leaving this polygon unchanged forms a finite abelian subgroup of $\mathrm{SO}(2)$ with order $n$,
 isomorphic to $\Z_n$.
 
+It's the clockwise rotations by $\frac{2\pi}{n}j$,
+$j = 0, 1, \dotsc, n - 1$,
+group elements:
+\[
+M_j = \begin{pmatrix}
+    \cos{\frac{2\pi}{n}j} & \sin{\frac{2\pi}{n}j} \\
+    -\sin{\frac{2\pi}{n}j} & \cos{\frac{2\pi}{n}j}
+\end{pmatrix}.
+\]
+This is isomorphic to $\Z_n$,
+$M_jM_k = M_{j + k}$,
+$j + k$ to be taken modulo $n$.
+
+$n = 4$
+\[
+M_1 = \begin{pmatrix}
+    0 & 1 \\ -1 & 0
+\end{pmatrix},\quad M_2 = \begin{pmatrix}
+    -1 & 0 \\ 0 & -1
+\end{pmatrix},\quad M_3 = \begin{pmatrix}
+    0 & -1 \\ 1 & 0
+\end{pmatrix},\quad M_4 = \begin{pmatrix}
+    1 & 0 \\ 0 & 1
+\end{pmatrix}
+\]
+$\{M_1, M_2, M_3, I\}$ is an order $4$ subgroup of $\mathrm{SO}(2)$ isomorphic to $\Z_4$.
+But the full group of symmetries of a regular $n$-gon also includes reflections:
+rotations $+$ reflections;
+called the dihedral group $D_n$.
+
+E.g.
+$n = 4$
+\[
+D_4 = \{M_1, M_2, M_3, I, R_1, R_2, R_3, R_4\}.
+\]
+\[
+R_1 = \begin{pmatrix}
+    0 & -1 \\ -1 & 0
+\end{pmatrix},\quad R_2 = \begin{pmatrix}
+    -1 & 0 \\ 0 & 1
+\end{pmatrix},\quad R_3 = \begin{pmatrix}
+    0 & 1 \\ 1 & 0
+\end{pmatrix},\quad R_4 = \begin{pmatrix}
+    1 & 0 \\ 0 & -1
+\end{pmatrix}
+\]
+e.g. $R_2\begin{pmatrix}
+    x \\ y
+\end{pmatrix} = \begin{pmatrix}
+    -x \\ y
+\end{pmatrix}$ reflection in $y$-axis
+(in fact Klein group is a subgroup of $D_4$)
+
+$D_4$ is a subgroup of another group:
+the group of permutations of $n$
+(here $n = 4$)
+elements.
+
+\begin{definition}
+    The symmetric group of degree $n$,
+    $S_n$ is the group with elements permutations of $n$ distinct symbols and group operation the composition of permutations.
+    \[
+    |S_n| = n!.
+    \]
+\end{definition}
+
+$D_n$ and $\Z_n$ are subgroups of $S_n$.
+Another is the alternating group:
+\[
+A_n = \{\sigma \in S_n\mid \mathrm{sgn}(\sigma) = +1\}\footnotemark
+\]
+\footnotetext{$\sigma$ is the product of an even number of permutations},
+\[
+|A_n| = \frac{n!}{2}.
+\]
+
+Multiplicative groups:
+
+Consider $S = \{\bar{0}, \bar{1}, \bar{2}\}$ integers modulo $3$.
+Is this a group under multiplication?
+
+Need to take $\bar{1}$ as the identity.
+But then $\bar{0}$ has no inverse,
+since $\bar{0} \cdot (\text{anything}) = 0\mod{3}$.
+Let's remove it.
+Consider $\Z_{3}^{\times} = \{\bar{1}, \bar{2}\}$ a multiplicative group
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|cc}
+         $\times$ & $\bar{1}$ & $\bar{2}$ \\
+         \hline
+         $\bar{1}$ & $\bar{1}$ & $\bar{2}$ \\
+         $\bar{2}$ & $\bar{2}$ & $\bar{1}$
+    \end{tabular}
+\end{table}
+in fact isomorphic to $\Z_2$.
+
+\begin{definition}
+    A subgroup $H \subset G$ is normal if $ghg ^ {-1} \in H$ for all $h \in H$ and $g \in G$.
+\end{definition}
+
+\begin{example}
+    $\mathrm{SL}(n, \R)$ is a normal subgroup of $\mathrm{GL}(n, \R)$.
+
+    Since
+    \[
+    \det(g ^ {-1}hg) = (\det{g}) ^ {-1}\det{h}\det{g} = \det{h}
+    \]
+    so if $\det{h} = 1$
+    (i.e. $h \in \mathrm{SL}(n, \R)$)
+    so is $\det(g ^ {-1}hg)$ for any $g \in \mathrm{GL}(n, \R)$.
+\end{example}
+
+\begin{definition}
+    A group is simple if its only normal subgroups are the trivial group $\{e\}$ and the whole group itself.
+\end{definition}
+
+Examples:
+$\Z_2, \Z_3, A_5$.
+$A_5$ is the smallest non-abelian finite simple group.
+
+
+Returning to continuous groups
+(with some differentiability conditions there are Lie groups)
+These are in general more complicated than vector spaces.
+
+Eg
+if $M \in \mathrm{SO}(n)$,
+then $2M \notin \mathrm{SO}(n)$.
+
+What sort of spaces are they?
+(saw before $\mathrm{SU}(2)$ looks like $S ^ 3 \subset \R ^ 4$).
+
+\[
+\mathrm{SO}(3) = O(3) = \{M \in \mathrm{GL}(3, \R)\mid M ^ TM = MM ^ T = I\}
+\]
+\[
+\mathrm{SO}(3) = \{M \in O(3)\mid\det{M} = 1\}
+\]
+(rotations of $\R ^ 3$).
+
+\begin{proposition}[Euler's principle axis theorem]
+    Every rotation in $3$ dimensions has an axis.
+    I.e. if $M \in \mathrm{SO}(3)$,
+    there is a non-zero vector $\mbf{v}$ such that $M\mbf{v} = \mbf{v}$
+    ($\mbf{v}$ is then the axis of rotation).
+
+    \begin{proof}
+        All we need to do is show that $M \in \mathrm{SO}(3)$ implies $1$ is an eigenvalue of $M$.
+        Eigenvalues of $M$ are the roots of
+        \[
+        p_M(t) = \det(M - tI) = (\lambda_1 - t)(\lambda_2 - t)(\lambda_3 - t)\dotsi.
+        \]
+    \end{proof}
+\end{proposition}
+
+
+
 
 
 
