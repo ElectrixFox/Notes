@@ -1,5 +1,6 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage{preamble}
+\usepackage{accents}
 
 \title{Calculus I}
 \author{Luke Phillips}
@@ -5521,8 +5522,158 @@ $p$-space:
     \end{align*}
 \end{example}
 
+\subsection{Application of Fourier Transforms to solving PDEs}
+PDE with two independent variables $x, t$.
+$1$ dependent variable $u(x, t)$.
+\[
+\tilde{u}(p, t) = \int_{-\infty}^{\infty}u(x, t)e ^ {-ipx}\,dx
+\]
+Fourier transform of $\partial_xu(x, t)$ is $ip\tilde{u}(p, t)$.
 
+Fourier transform of
+\[
+u_t(x, t) = \int_{-\infty}^{\infty}u_t(x, t)e ^ {-ipx}\,dx = \pd{t}\left[\int_{-\infty}^{\infty}u(x, t)e ^ {-ipx}\,dx\right] = \pd{t}\tilde{u}(p, t).
+\]
+PDE had $\partial_x, \partial_t$ in it.
+After Fourier transforming we get $ip, \pd{t}$ so the PDE becomes an ODE in $t$ which we can solve.
 
+\begin{example}
+    Find $u(x, t)$ for $t > 0$ if $u_t = 3u_x - 5u$ and $u(x, 0) = R(x) = \sech(x)$.
+    Take Fourier transform
+    \[
+    \int_{-\infty}^{\infty}u_te ^ {-ipx}\,dx = \int_{-\infty}^{\infty}(3u_x - 5u)e ^ {-ipx}\,dx
+    \]
+    \[
+    \tilde{u}_t = 3ip\undertilde{u} - 5\undertilde{u} = (3ip - 5)\undertilde{u}
+    \]
+    so the solution is
+    \[
+    \tilde{u}(p, t) = A(p)e ^ {(3ip - 5)t}
+    \]
+    \[
+    \tilde{u}(p, 0) = A(p) = \int_{-\infty}^{\infty}u(x, 0)e ^ {-ipx}\,dx = \int_{-\infty}^{\infty}R(x)e ^ {-ipx}\,dx = \tilde{R}(p).
+    \]
+    \[
+    \tilde{u}(p, t) = \tilde{R}(p)e ^ {3ipt}e ^ {-5t}.
+    \]
+
+    Shift theorem:
+    Fourier transform of $f(x + a)$ is $\tilde{f}(p)e ^ {ipa}$.
+
+    Fourier transform of $R(x + 3t)$ is $\tilde{R}(p)e ^ {3ipt}$ therefore $u(x, t) = e ^ {-5t}R(x + 3t) = e ^ {-5t}\sech(x + 3t)$.
+\end{example}
+
+\begin{example}
+    Solution to initial value problem for the wave equation on the whole line
+    (D'Alembert).
+
+    \begin{solution}
+        $u_{tt} = c ^ 2u_{xx}$.
+        \begin{align*}
+            u(x, 0) &= R(x) \\
+            u_t(x, 0) &= S(x)
+        \end{align*}
+        \begin{align*}
+            \tilde{u}_{tt} &= c ^ 2(ip) ^ 2\tilde{u} = -c ^ 2p ^ 2\tilde{u} \\
+            \tilde{u}_{tt} + c ^ 2p ^ 2\tilde{u} &= 0 \\
+            \tilde{u}(p, t) &= A(p)\cos(cpt) + B(p)\sin(cpt) \\
+            \tilde{u}(p, 0) &= A(p) = \tilde{R}(p) \\
+            \tilde{u}_t(p, t) &= -cpA\sin(cpt) + cpB\cos(pct) \\
+            \tilde{u}_t(p, 0) &= cpB(p) = \int_{-\infty}^{\infty}u_t(x, 0)e ^ {-ipx}\,dx = \int_{-\infty}^{\infty}S(x)e ^ {-ipx}\,dx = \tilde{S}(p)
+        \end{align*}
+        so
+        \[
+        \tilde{u}(p, t) = \tilde{R}(p)\cos(pct) + \frac{\tilde{S}(p)}{pc}\sin(pct).
+        \]
+        Need to find a function $u(x, t)$ which has this as its Fourier transform
+        \[
+        \tilde{R}(p)\cos(pct) = \tilde{R}(p)\frac{e ^ {icpt}}{2} + \frac{\tilde{R}(p)e ^ {-icpt}}{2}
+        \]
+        by shift theorem this is the Fourier transform of $\frac{1}{2}R(x + ct) + \frac{1}{2}R(x - ct)$.
+
+        \[
+        \tilde{S}(p)\frac{\sin(pct)}{pc} = \tilde{S}(p)\tilde{g}(p)
+        \]
+        if we can find a function $g(x)$ with Fourier transform $\tilde{g}(p)$ then $S(x) * g(x)$ will have Fourier transform $\tilde{S}(p)\tilde{g}(p)$ by the convolution theorem.
+        Recall the Fourier transform of
+        \[
+        F(x) = \begin{cases}
+            1 & |x| \leq 1 \\
+            0 & |x| > 1
+        \end{cases}
+        \]
+        is $\frac{2\sin(p)}{p}$.
+        Let $g(x) = KF(bx)$ for $b > 0$,
+        by the scaling theorem
+        \[
+        \tilde{g}(p) = \frac{K}{b}\tilde{F}\left(\frac{p}{b}\right) = \frac{K}{b}\frac{2\sin\left(\frac{p}{b}\right)}{\frac{p}{b}} = \frac{2K\sin\left(\frac{p}{b}\right)}{p} = \frac{\sin(pct)}{pc}
+        \]
+        take $K = \frac{1}{2c}$,
+        $b = \frac{1}{ct}$.
+        Therefore
+        \[
+        g(x) = \frac{1}{2c}F\left(\frac{x}{ct}\right) = \begin{cases}
+            \frac{1}{2c} & \left|\frac{x}{ct}\right| < 1 \\
+            0 & \text{otherwise}.
+        \end{cases}
+        \]
+        \[
+        S(x) * g(x) = \int_{-\infty}^{\infty}S(x')g(x - x')\,dx' = \frac{1}{2c}\int_{-x - ct}^{x + ct}S(x')\,dx'.
+        \]
+        Therefore
+        \[
+        u(x, t) = \frac{1}{2}R(x + ct) + \frac{1}{2}R(x - ct) + \frac{1}{2c}\int_{x - ct}^{x + ct}S(x')\,dx'.
+        \]
+        
+    \end{solution}
+\end{example}
+
+\begin{example}
+    Solution to the initial value problem for the heat equation on the whole line.
+
+    \begin{solution}
+        \[
+        u_t = k ^ 2u_{xx}
+        \]
+        $u(x, 0) = R(x)$.
+
+        Take Fourier transform of $u_t = k ^ 2u_{xx}$ with respect to $x$.
+        \[
+        \tilde{u}_t = k ^ 2(ip) ^ 2\tilde{u} = -k ^ 2p ^ 2\tilde{u}
+        \]
+        \[
+        \tilde{u} = A(p)e ^ {-k ^ 2p ^ 2t}
+        \]
+        \[
+        \tilde{u}(p, 0) = A(p) = \int_{-\infty}^{\infty}u(x, 0)e ^ {-ipx}\,dx = \int_{-\infty}^{\infty}R(x) e ^ {-ipx}\,dx = \tilde{R}(p)
+        \]
+        \[
+        \tilde{u}(p, t) = \tilde{R}(p)e ^ {-k ^ 2p ^ 2t} = \tilde{R}(p)\tilde{g}(p)
+        \]
+        $\tilde{g}(p) = e ^ {-k ^ 2p ^ 2t}$ is the Gaussian in $p$.
+
+        By the convolution theorem $u(x, t) = R * g$ we need to find the function $g(x, t)$ with Fourier transform $\tilde{g}(p, t) = e ^ {-k ^ 2p ^ 2t}$.
+
+        Recall $g(x, t) = \Lambda e ^ {-bx ^ 2 - cx}$ has Fourier transform
+        \[
+        \tilde{g}(p, t) = \Lambda\sqrt{\frac{\pi}{b}}e ^ {-\frac{1}{4b}(p - ic) ^ 2} = e ^ {-p ^ 2k ^ 2t}
+        \]
+        $c = 0$,
+        $\Lambda = \sqrt{\frac{b}{\pi}}$,
+        $\frac{1}{4b} = k ^ 2t \implies b = \frac{1}{4k ^ 2t}$ therefore
+        \[
+        g(x, t) = \frac{1}{2k\sqrt{\pi t}}e ^ {-\frac{x ^ 2}{4k ^ 2t}}
+        \]
+        therefore
+        \[
+        u(x, t) = R * g = \int_{-\infty}^{\infty}R(x')g(x - x')\,dx' = \int_{-\infty}^{\infty}R(x')\left[\frac{1}{2k\sqrt{\pi t}}e ^ {-\frac{(x - x') ^ 2}{4k ^ 2t}}\right]\,dx'.
+        \]
+        \[
+        \frac{1}{2k\sqrt{\pi t}}e ^ {-\frac{(x - x') ^ 2}{4k ^ 2t}}
+        \]
+        is known as the Heat Kernel.
+    \end{solution}
+\end{example}
 
 
 
