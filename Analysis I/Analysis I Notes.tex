@@ -5590,12 +5590,124 @@ hence continuous thus regulated the $\int_{0}^{1 / 2}f(t)\,dt$ exists and is $\i
     \]
 \end{example}
 
+\subsection{Improper Integrals}
 
+$f : (a, b) \to \R$ continuous,
+$a = -\infty$,
+$b = \infty$ are allowed.
 
+\[
+\int_{a}^{b}f(t)\,dt = \lim_{c \to b ^ {-}}\int_{a}^{c}f(t)\,dt
+\]
+(if $f(x)$ is defined at $a$)
+\[
+\int_{a}^{b}f(t)\,dt = \lim_{c \to a ^ {+}}\int_{c}^{b}f(t)\,dt
+\]
+if the limit exists we call the integral convergent.
+\begin{align*}
+    \int_{1}^{\infty}x ^ {\alpha}\,dx &= \liminfty[c]\int_{1}^{c}x ^ {\alpha}\,d\alpha \\
+    &= \liminfty[c]\frac{1}{\alpha + 1}x ^ {\alpha + 1}|_{1}^{c} \\
+    &= \liminfty[c]\frac{1}{\alpha + 1}\left(c ^ {\alpha + 1} - 1\right) \\
+    &= \begin{cases}
+        -\frac{1}{\alpha + 1} & \alpha < -1 \\
+        \infty & \alpha \geq 1.
+    \end{cases}
+\end{align*}
 
+\[
+\int_{0}^{1}x ^ {\alpha}\,dx
+\]
+no issue if $\alpha \geq 0$.
+\begin{align*}
+    \int_{0}^{1}x ^ {\alpha}\,dx &= \lim_{c \to 0 ^ {+}}\int_{c}^{1}x ^ {\alpha}\,dx \\
+    &= \lim_{c \to 0 ^ {+}}\frac{1}{\alpha + 1}x ^ {\alpha + 1}|_{c}^{1} \\
+    &= \begin{cases}
+        \frac{1}{\alpha + 1} & \alpha > 1 \\
+        \infty & \alpha < -1 \\
+        \infty & \alpha = -1.
+    \end{cases}
+\end{align*}
 
+\[
+\int_{0}^{\infty}e ^ {-x}\,dx = \liminfty[c]-e ^ x|_{0}^{c} = 1.
+\]
+\[
+\int_{0}^{\infty}\frac{1}{1 + e ^ x}\,dx
+\]
+\[
+\int_{0}^{\infty}e ^ {-x ^ 2}\,dx
+\]
+Comparison test.
 
+If $0 \leq f(x) \leq g(x)$ on $(a, b)$ with $\int_{a}^{b}g(x)\,dx$ converges then $\int_{a}^{b}f(x)\,dx$ converges.
 
+If $\int f(x)\,dx$ diverges then $\int g(x)\,dx$ diverges
+
+\begin{proof}
+    \[
+    0 \leq \int_{a}^{c}f(x)\,dx \leq \int_{a}^{c}g(x)\,dx.
+    \]
+    Now squeeze
+\end{proof}
+\[
+\int_{0}^{\infty}\frac{1}{1 + e ^ x}\,dx \leq \int_{0}^{\infty}\frac{1}{e ^ x}\,dx < \infty.
+\]
+\[
+\int_{0}^{\infty}e ^ {-x ^ 2}\,dx = \int_{0}^{1}e ^ {-x ^ 2}\,dx + \int_{1}^{\infty}e ^ {-x ^ 2}\,dx \leq \int_{1}^{\infty}e ^ {-x}\,dx < \infty.
+\]
+\[
+\int_{1}^{\infty}\frac{\cos(x)}{x ^ 2}\,dx\quad\text{and}\quad\int_{1}^{\infty}\frac{1}{x ^ 2}\,dx = 1 < \infty
+\]
+\[
+\left|\frac{\cos(x)}{x ^ 2}\right| \leq \frac{1}{x ^ 2}
+\]
+then
+\[
+\int_{1}^{\infty}\frac{\cos(x)}{x ^ 2}\,dx
+\]
+converges absolutely.
+
+\[
+\mathrm{Si}(x) = \int_{0}^{x}\frac{\sin(t)}{t}\,dt
+\]
+is conditionally convergent.
+
+\begin{theorem}[Integral test]
+    $f : (N, \infty) \to (0, \infty)$ continuous and decreasing.
+    Set $a_k = f(k)$.
+    \[
+    \infsum[k = N]a_k\text{ converges} \iff \int_{N}^{\infty}f(t)\,dt\text{ converges}.
+    \]
+
+    \begin{proof}
+        \[
+        \sum_{k = N + 1}^{x}a_k \leq \int_{N}^{x}f(t)\,dt \leq \sum_{k = N}^{x - 1}a_k \leq \int_{N + 1}^{x + 1}f(t)\,dt
+        \]
+        converging by comparison and squeeze.
+    \end{proof}
+\end{theorem}
+
+\begin{corollary}
+    \[
+    \infsum[n = 1]n ^ {\alpha}
+    \]
+    converges if and only if $\alpha < -1$.
+\end{corollary}
+
+$\alpha = -1$:
+\[
+\sum_{k = 2}^{n}\frac{1}{k} < \int_{1}^{n}\frac{1}{x}\,dx = \log(n) < \sum_{k = 1}^{n - 1}\frac{1}{k} < \sum_{k = 1}^{n}\frac{1}{k} < \log(n + 1) + 1
+\]
+\[
+0 < \sum_{k = 1}^{n}\frac{1}{k} - \log(n) < \log(n + 1) - \log(n) + 1 = 1 + \log\left(\frac{n + 1}{n}\right) = 1 + \log\left(1 + \frac{1}{n}\right)
+\]
+as $n \to \infty$ goes to $1$.
+Increasing and bounded hence it converges.
+
+'Euler-Mascherini constant'
+\[
+\liminfty\left(\sum_{k = 1}^{n}\frac{1}{k} - \log(n)\right).
+\]
 
 
 
