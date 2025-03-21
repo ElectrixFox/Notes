@@ -493,8 +493,304 @@
     \end{solution}
 \end{problem}
 
+\newpage
 
+\section{Problems Class \texorpdfstring{$3$}{}}
 
+\begin{problem}[Resit $2020$]
+    Find the Fourier transform $\tilde{f}(p)$ of the function.
+    The Fourier transform $\tilde{f}(p)$ of a function $f(x)$ is defined to be
+    \[
+    \tilde{f}(p) = \int_{-\infty}^{\infty}f(x)e ^ {-ipx}\,dx.
+    \]
+
+    \begin{enumerate}[label = (\alph*)]
+        \item 
+        Find the Fourier transform $\tilde{\Pi}(p)$ of the function $\Pi(x)$ defined by
+        \[
+        \Pi(x) = \begin{cases}
+            1 & |x| < 1 \\
+            0 & |x| \geq 1.
+        \end{cases}
+        \]
+
+        \item Show that if $g(x) = f(ax + b)$ for constants $a > 0$,
+        $b$ then
+        \[
+        \tilde{g}(p) = \frac{e ^ {-ipb / a}}{a}\tilde{f}(p / a).
+        \]
+
+        \item Use the relation $\Pi(x / 2) = \Pi(x - 1) + \Pi(x + 1)$ and the result of part (b) to show that $\Pi(p)$ satisfies the equation
+        \[
+        \tilde{\Pi}(2p) = \cos(p)\tilde{\Pi}(p)
+        \]
+        and show explicitly that the answer to part (a) obeys this relation.
+    \end{enumerate}
+
+    \begin{solution}
+        \begin{enumerate}[label = (\alph*)]
+            \item
+            \begin{align*}
+                \tilde{\Pi}(p) &= \int_{-\infty}^{\infty}\Pi(x)e ^ {-ipx}\,dx \\
+                &= \int_{-1}^{1}e ^ {-ipx}\,dx \\
+                &= \left[\frac{e ^ {-ipx}}{-ip}\right]_{-1}^{1} \\
+                &= -\frac{e ^ {-ip}}{-ip} + \frac{e ^ {ip}}{ip} \\
+                &= \frac{2}{p}\left(\frac{e ^ {ip} - e ^ {-ip}}{2i}\right) \\
+                &= \frac{2\sin{p}}{p}.
+            \end{align*}
+
+            \item
+            \[
+            \tilde{g}(p) = \int_{-\infty}^{\infty}g(x)e ^ {-ipx}\,dx = \int_{-\infty}^{\infty}f(ax + b)e ^ {-ipx}\,dx
+            \]
+            $x' = ax + b$
+            \[
+            x = \frac{x' - b}{a}\quad dx = \frac{dx'}{a}.
+            \]
+            \begin{align*}
+                \tilde{g}(p) &= \int_{-\infty}^{\infty}g(x)e ^ {-ipx}\,dx \\
+                &= \int_{-\infty}^{\infty}f(ax + b)e ^ {-ipx}\,dx \\
+                &= \int_{-\infty}^{\infty}f(x')e ^ {-ip\frac{x' - b}{a}}\,\frac{dx'}{a} \\
+                &= \frac{e ^ {ipb / a}}{a}\int_{-\infty}^{\infty}f(x')e ^ {-\frac{ipx'}{a}}\,dx' \\
+                &= \frac{e ^ {ipb / a}}{a}\tilde{f}\left(\frac{p}{a}\right).
+            \end{align*}
+
+            \item
+
+            Fourier transform on left hand side
+            \begin{align*}
+                g(x) &= \Pi(x / 2)\quad(a = 1 / 2, b = 0) \\
+                \tilde{g}(p) &= 2\tilde{\Pi}(2p).
+            \end{align*}
+
+            Fourier transform on right hand side
+            \begin{align*}
+                g(x) &= \Pi(x - 1) + \Pi(x + 1) \\
+                \tilde{g}(p) &= e ^ {-ip}\tilde{\Pi}(p) + e ^ {ip}\tilde{\Pi}(p) \\
+                &= \tilde{\Pi}(p)\left[e ^ {ip} + e ^ {-ip}\right] \\
+                &= 2\tilde{\Pi}(p)\cos(p)
+            \end{align*}
+            so $\tilde{\Pi}(2p) = \cos(p)\tilde{\Pi}(p)$.
+
+            \[
+            \tilde{\Pi}(2p) = \frac{2\sin(2p)}{2p} = \frac{2\sin{p}\cos{p}}{p} = \cos(p)\tilde{\Pi}(p).
+            \]
+        \end{enumerate}
+    \end{solution}
+\end{problem}
+
+\begin{problem}[$2024$]
+    \begin{enumerate}[label = (\alph*)]
+        \item Define the Fourier transform $\tilde{f}(p)$ of the function $f(x)$.
+
+        \item A series of function $f_n(x)$ are defined in terms of $f(x)$ as
+        \[
+        f_n(x) = \frac{1}{b ^ n}f(x - n),
+        \]
+        where $b$ is a constant greater than one.
+        Use the Shift theorem to write the Fourier transform of $f_n(x)$ in terms of $\tilde{f}(p)$,
+        the Fourier transform of $f(x)$.
+
+        \item In the case that
+        \[
+        f(x) = \begin{cases}
+            1 & 0 < x \leq 1 \\
+            0 & \text{otherwise}
+        \end{cases}
+        \]
+        find its Fourier transform $\tilde{f}(p)$.
+
+        \item A function $F(x)$ is defined to be
+        \[
+        F(x) = \begin{cases}
+            b ^ {-n} & \text{for $n < x \leq n + 1$ for each integer $n$ greater than or equal to zero} \\
+            0 & x \leq 0
+        \end{cases}
+        \]
+        where $b$ is a constant greater than one.
+        Find a closed expression for its Fourier transform $\tilde{F}(p)$.
+    \end{enumerate}
+
+    \begin{solution}
+        \begin{enumerate}[label = (\alph*)]
+            \item
+            \[
+            \tilde{f}(p) = \int_{-\infty}^{\infty}f(x)e ^ {-ipx}\,dx.
+            \]
+
+            \item
+            Shift theorem $f(x + a)$ has Fourier transform $\tilde{f}(p)e ^ {ipa}$.
+            Fourier transform $\frac{1}{b ^ n}f(x - n) = \frac{1}{b ^ n}\tilde{f}(p)e ^ {-ipn}$.
+
+            \item
+            \begin{align*}
+                \tilde{f}(p) &= \int_{-\infty}^{\infty}f(x)e ^ {-ipx}\,dx \\
+                &= \int_{0}^{1}e ^ {-ipx}\,dx \\
+                &= \left[\frac{e ^ {-ipx}}{-ip}\right]_{0}^{1} \\
+                &= \frac{e ^ {-ip}}{-ip} - \frac{1}{-ip} \\
+                &= \frac{1}{ip}(1 - e ^ {-ip}).
+            \end{align*}
+
+            \item
+            \begin{align*}
+                F(x) &= \infsum[n = 0]f_n(x) \\
+                \tilde{F}(p) &= \infsum[n = 0]\tilde{f}_n(p) \\
+                &= \infsum[n = 0]\frac{1}{b ^ n}\tilde{f}(p)e ^ {-ipn} \\
+                &= \infsum[n = 0]\left(\frac{e ^ {-ip}}{b}\right)\tilde{f}(p) \\
+                &= \infsum[n = 0]z ^ n\tilde{f}(p) \\
+                &= \frac{1}{1 - z} \\
+                &= \frac{1}{1 - \left(\frac{e ^ {-ip}}{b}\right)}\frac{1}{ip}(1 - e ^ {-ip}) \\
+                &= \frac{be ^ {ip}}{(be ^ {ip} - 1)ip}(1 - e ^ {-ip}) \\
+                &= \frac{b(e ^ {ip} - 1)}{(be ^ {ip} - 1)ip}.
+            \end{align*}
+        \end{enumerate}
+    \end{solution}
+\end{problem}
+
+\begin{problem}[Resit $2024$]
+    The one-sided exponential $f_a(x)$ is defined to be
+    \[
+    f_a(x) = \begin{cases}
+        e ^ {-ax} & x \geq 0 \\
+        0 & x < 0
+    \end{cases}
+    \]
+    where $a$ is a positive constant.
+
+    \begin{enumerate}[label = (\alph*)]
+        \item Find the Fourier transform $\tilde{f}_a(p)$ of the function $f_a(x)$.
+
+        \item The function $u(x)$ satisfies the differential equation $u_x + 3u = f_a(x)$ where $a > 0$ and $a \neq 3$.
+        By taking the Fourier transform of this equation,
+        find an expression for the Fourier transform $\tilde{u}(p)$.
+
+        \item By using partial fractions on $\tilde{u}(p)$ or otherwise,
+        find the corresponding solution $u(x)$ to the differential equaion,
+        and explicitly check that it satisfies the equation.
+    \end{enumerate}
+
+    \begin{solution}
+        \begin{enumerate}[label = (\alph*)]
+            \item
+            \begin{align*}
+                \tilde{f}_a(p) &= \int_{-\infty}^{\infty}f_a(x)e ^ {-ipx}\,dx \\
+                &= \int_{0}^{\infty}e ^ {-ax}e ^ {-ipx}\,dx \\
+                &= \int_{-\infty}^{\infty}e ^ {-(ip + a)x}\,dx \\
+                &= \left[\frac{e ^ {-(ip + a)x}}{-(ip + a)}\right]_{0}^{\infty} \\
+                &= \frac{1}{ip + a}.
+            \end{align*}
+
+            \item
+            \begin{align*}
+                \tilde{u}(ip) + 3\tilde{u} &= \tilde{f}_a = \frac{1}{ip + a} \\
+                \tilde{u}(ip + 3) &= \frac{1}{ip + a} \\
+                &\implies \\
+                \tilde{u}(p) &= \frac{1}{(ip + 3)(ip + a)}
+            \end{align*}
+
+            \item
+            \begin{align*}
+                \tilde{u}(p) &= \frac{1}{(ip + 3)(ip + a)} \\
+                &= \frac{1}{3 - a}\left(\frac{1}{ip + a} - \frac{1}{ip + 3}\right) \\
+                &= \frac{1}{3 - a}\left(\tilde{f}_a(p) - \tilde{f}_3(p)\right)
+            \end{align*}
+            \[
+            u(x) = \frac{1}{3 - a}(f_a(x) - f_3(x)) = \begin{cases}
+                \frac{1}{3 - a}\left(e ^ {-ax} - e ^ {-3x}\right) & x \geq 0 \\
+                0 & x < 0.
+            \end{cases}
+            \]
+            $x < 0$,
+            $u = 0$
+            \[
+            u_x + 3u = 0 = f_a(x) \quad x < 0
+            \]
+            $x \geq 0$,
+            $u = \frac{1}{3 - a}(e ^ {-ax} - e ^ {-3x})$
+            \[
+            u_x + 3u = \frac{1}{3 - a}\left(-ae ^ {-ax} + 3e ^ {-3x}\right) + \frac{3}{3 - a}(e ^ {-ax} - e ^ {-3x}) = e ^ {-ax} = f_a(x)\quad x \geq 0.
+            \]
+        \end{enumerate}
+    \end{solution}
+\end{problem}
+
+\begin{problem}[$2020$]
+    The function $\theta(x, t)$ satisfies
+    \[
+    \pd[\theta]{t} = \frac{\partial ^ 2\theta}{\partial x ^ 2} + \pd[\theta]{x} - \theta.
+    \]
+    The Fourier transform of $\theta$ is defined by
+    \[
+    \tilde{\theta}(p, t) = \int_{-\infty}^{\infty}e ^ {-ipx}\theta(x, t)\,dx.
+    \]
+
+    \begin{enumerate}[label = (\alph*)]
+        \item Use the differential equation to obtain $\tilde{\theta}(p, t)$ in terms of its initial value $\tilde{\theta}(p, 0)$.
+
+        \item If $\theta(x, 0) = e ^ {-x ^ 2 / 2}$ use the result of part (a) to show that
+        \[
+        \theta(x, t) = \frac{1}{\sqrt{2t + 1}}\exp\left(-\frac{(x + t) ^ 2}{4t + 2} - t\right).
+        \]
+        Fourier transform of $F(x) = e ^ {-bx ^ 2}$ is given by
+        \[
+        \tilde{F}(p) = \sqrt{\frac{\pi}{b}}e ^ {-\frac{p ^ 2}{4b ^ 2}}.
+        \]
+    \end{enumerate}
+
+    \begin{solution}
+        \begin{enumerate}[label = (\alph*)]
+            \item Take Fourier transform of the equation
+            \[
+            \tilde{\theta_t} = (ip) ^ 2\tilde{\theta} + (ip)\tilde{\theta} - \tilde{\theta} = [-(p ^ 2 + 1) + ip]\tilde{\theta}
+            \]
+            \[
+            \tilde{\theta}(p, t) = A(p)e ^ {[-(p ^ 2 + 1) + ip]t}.
+            \]
+            At $t = 0$,
+            \[
+            \tilde{\theta}(p, 0) = A(p)e ^ 0 = A(p) \implies \tilde{\theta}(p, t) = \tilde{\theta}(p, 0)e ^ {-(p ^ 2 + 1)t}e ^ {ipt}.
+            \]
+
+            \item
+            $\theta(x, 0) = e ^ {-x ^ 2 / 2}$.
+            \[
+            \tilde{\theta}(p, 0) = \sqrt{2\pi}e ^ {-\frac{p ^ 2}{2}}
+            \]
+            \begin{align*}
+                \tilde{\theta}(p, t) &= \sqrt{2\pi}e ^ {-p ^ 2 / 2}e ^ {-(p ^ 2 + 1)t}e ^ {ipt} \\
+                &= \sqrt{2\pi}e ^ {-t}\frac{e ^ {-p ^ 2(t + 1 / 2)}e ^ {ipt}}{e ^ {-bx ^ 2}\sqrt{\frac{\pi}{b}}e ^ {-\frac{p ^ 2}{4b}}} \\
+            \end{align*}
+
+            \begin{align*}
+                \frac{1}{4b} &= t + 1 / 2 \\
+                b &= \frac{1}{4t + 2}
+            \end{align*}
+
+            \[
+            e ^ {-\frac{x ^ 2}{4t + 2}}\text{ has Fourier transform } \sqrt{(4t + 2)\pi}e ^ {-p ^ 2(t + 1 / 2)}
+            \]
+            \[
+            \frac{\sqrt{2\pi}e ^ {-t}}{\sqrt{2\pi(2t + 1)}}e ^ {-\frac{x ^ 2}{4t + 2}}
+            \]
+            \[
+            \sqrt{2\pi}e ^ {-t}e ^ {-p ^ 2(t + 1 / 2)}.
+            \]
+            Shift theorem
+            \[
+            \frac{e ^ {-t}}{\sqrt{2t + 1}}e ^ {-\frac{(x + t) ^ 2}{4t + 2}}
+            \]
+            has Fourier transform
+            \[
+            \sqrt{2\pi}e ^ {-t}e ^ {-p ^ 2(t + 1 / 2)}e ^ {ipt}.
+            \]
+            So
+            \[
+            \theta(x, t) = \frac{e ^ {-t}}{\sqrt{2t + 1}}.
+            \]
+            
+        \end{enumerate}
+    \end{solution}
+\end{problem}
 
 
 
