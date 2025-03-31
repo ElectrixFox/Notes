@@ -34,6 +34,18 @@
     \]
 \end{definition}
 
+\begin{center}
+\fbox{
+\begin{minipage}{0.9\textwidth}
+    Remember a function can be broken into its odd and even parts
+    \[
+    f(x) = \underbrace{\frac{1}{2}(f(x) - f(-x))}_{f_\text{odd}(x)} + \underbrace{\frac{1}{2}(f(x) + f(-x))}_{f_\text{even}(x)}
+    \]
+\end{minipage}
+}
+\end{center}
+\hfill
+
 \textbf{Horizontal line test}
 
 If no horizontal line intersects the graph of $f$ more than once then $f$ is injective,
@@ -77,6 +89,21 @@ we have the following discontinuities:
     \end{cases}
     \]
 \end{definition}
+
+\begin{center}
+\fbox{
+\begin{minipage}{0.9\textwidth}
+    I.e. if $f(x)$ is defined continuous on $\R \setminus\{a\}$ but $L$ exists and we want $L = f(a)$ we would say
+    \[
+    g(x) = \begin{cases}
+        f(x) & \text{if } x \neq a \\
+        L & \text{if } x = a.
+    \end{cases}
+    \]
+\end{minipage}
+}
+\end{center}
+\hfill
 
 \begin{definition}[Jump discontinuity]
     Both $L ^ {+}$ and $L ^ {-}$ exist but $L ^ {+} \neq L ^ {-}$.
@@ -135,8 +162,64 @@ For a function $f(x)$ defined in some interval $I$.
     If there exists a constant $k_1$such that $f(x) \leq k_1\ \forall x \in I$ we say that $f(x)$ is bounded above in $I$ and we call $k_1$ an upper bound of $f(x)$ in $I$.
 
     If there exists a point $x_1$ in $I$ such that $f(x_1) = k_1$ we say that the upper bound of $k_1$ is attained and we call $k_1$ the global maximum value of $f(x)$ in $I$.
-    
 \end{definition}
+
+\begin{theorem}[Rolle's theorem]
+    If $f$ is differentiable on the open interval $(a, b)$ and continuous on the closed interval $[a, b]$,
+    with $f(a) = f(b)$,
+    then there is at least one $c \in (a, b)$ for which $f'(c) = 0$.
+\end{theorem}
+If $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$ so $f(a) = f(b)$ then $f'(c) = 0$ for some $c \in (a, b)$.
+
+\begin{theorem}[Mean value theorem]
+    If $f$ differentiable on $(a, b)$ continuous on $[a, b]$,
+    there is at least one $c \in (a, b)$ such that
+    \[
+    f'(c) = \frac{f(b) - f(a)}{b - a}.
+    \]
+\end{theorem}
+
+\textbf{Inverse Function Rule}
+
+If $f(x)$ continuous on $[a, b]$ differentiable on $(a, b)$ with $f'(x) > 0$ for $x \in (a, b)$ then its inverse function $g(y)$ is differentiable for all $f(a) < y < f(b)$ with
+\[
+g'(y) = \frac{1}{f'(g(y))}.
+\]
+
+\newpage
+
+\section{Integration}
+
+\begin{theorem}[Fundamental theorem of calculus]
+    If $f(x)$ continuous on $[a, b]$
+    \[
+    F(x) = \int_{a}^{x}f(t)\,dt
+    \]
+    defined for $x \in [a, b]$ is continuous on $[a, b]$ differentiable on $(a, b)$ with
+    \[
+    F'(x) = \frac{d}{dx}\int_{a}^{x}f(t)\,dt = f(x).
+    \]
+\end{theorem}
+\textit{Note that the chain rule can be used with this for when $x = f(x)$ in the bounds.}
+
+
+\textbf{Odd integration}
+\[
+\int_{-a}^{a}f_{\text{odd}}(x)\,dx = 0.
+\]
+
+\textbf{Even integration}
+\[
+\int_{-a}^{a}f_{\text{even}}(x)\,dx = 2\int_{0}^{a}f_{\text{even}}(x).
+\]
+
+\newpage
+
+\section{Double integrals}
+
+\textit{Note that a region is $x$-simple if a horizontal line can be drawn such that it intersects the surface but \textbf{does not} leave the surface and intersect it again at a later point.}
+
+\textit{This is the same for a $y$-simple region but with a vertical line.}
 
 \begin{definition}[The Jacobian]
     The Jacobian of the transformation from the variables $x, y$ to $u, v$ is
@@ -153,12 +236,39 @@ To obtain the area element $dxdy$ in terms of the new variables we first compute
 dxdy = |J|dudv.
 \]
 
+The Jacobian does this:
+\[
+\iint\limits_{D}\dotsc\,dxdy \to \iint\limits_{D}\dotsc\cdot|J|\,dudv.
+\]
+
 \begin{definition}[Gaussian integral]
     \[
     \int_{-\infty}^{\infty}e ^ {-ax ^ 2}\,dx = \sqrt{\frac{\pi}{a}}
     \]
     where $a$ is a positive constant.
 \end{definition}
+
+\textbf{DO NOT FORGET!!!}
+\begin{center}
+\fbox{
+\begin{minipage}{0.9\textwidth}
+    \[
+    \int_{-\infty}^{\infty}e ^ {-ax ^ 2}\,dx = \sqrt{\frac{\pi}{a}}
+    \]
+    where $a$ is a positive constant.
+\end{minipage}
+}
+\end{center}
+\hfill
+
+\newpage
+
+\section{First order differential equations}
+\textbf{The integrating factor}
+\[
+y' + p(x)y = q(x) \implies y = \frac{1}{I(x)}\int I(x)q(x)\,dx
+\]
+with $I(x) = e ^ {\int p(x)\,dx}$.
 
 \[
 M(x, y)\,dx + N(x, y)\,dy = 0.
@@ -190,6 +300,12 @@ y' + p(x)y = q(x)y ^ n.
 To solve a Bernoulli equation use the substitution $v = y ^ {1 - n}$,
 this converts the equation to a linear ODE for $v(x)$.
 
+\newpage
+
+\section{Second order differential equations}
+\textit{Remember that if you cannot find a $y_{PI}$ from $= h(x)$,
+you can then try just start multiplying by $x$ until a nice one pops out.}
+
 \begin{definition}[The Wronskian]
     Given two differentiable functions,
     $y_1(x), y_2(x)$,
@@ -204,7 +320,7 @@ this converts the equation to a linear ODE for $v(x)$.
 
 Solving the ODE
 \[
-\alpha_2y'' + \alpha_2y' + \alpha_0y = \phi
+\alpha_2y'' + \alpha_1y' + \alpha_0y = \phi
 \]
 \[
 y = y_{CF} + y_{PI}
@@ -221,6 +337,40 @@ u_1 = -\int\frac{y_2 \phi / \alpha_2}{W(y_1, y_2)}\,dx\quad\text{and}\quad
 u_2 = \int\frac{y_1 \phi / \alpha_2}{W(y_1, y_2)}\,dx.
 \]
 
+\textbf{VERY IMPORTANT EQUATIONS}
+\begin{center}
+\fbox{
+\begin{minipage}{0.9\textwidth}
+    For $\alpha_2y'' + \alpha_1y' + \alpha_0y = \phi$
+    \[
+    W(y_1, y_2) = \begin{vmatrix}
+        y_1 & y_2 \\ y'_1 & y'_2
+    \end{vmatrix}
+    = y_1y'_2 - y_2y'_1
+    \]
+    we get
+    \[
+    y_{PI} = u_1y_1 + u_2y_2
+    \]
+    where \textbf{THESE ARE CRUCIAL}
+    \[
+    u_1 = -\int\frac{y_2 \phi / \alpha_2}{W(y_1, y_2)}\,dx\quad\text{and}\quad
+    u_2 = \int\frac{y_1 \phi / \alpha_2}{W(y_1, y_2)}\,dx.
+    \]
+\end{minipage}
+}
+\end{center}
+\hfill
+
+\newpage
+
+\section{Taylor series}
+
+\begin{definition}[Taylor series about $a$]
+    \[
+    f(x) = \infsumo\frac{f ^ {(k)}(a)}{k!}(x - a) ^ k = f(a) + f'(a)(x - a) + \frac{f''(a)}{2!}(x - a) ^ 2 + \dotsc + \underbrace{\frac{f ^ {(n)}(a)}{n!}(x - a) ^ n}_{= R_n(x)}
+    \]
+\end{definition}
 
 \begin{definition}[Lagrange form for the remainder]
     \[
@@ -236,6 +386,10 @@ u_2 = \int\frac{y_1 \phi / \alpha_2}{W(y_1, y_2)}\,dx.
     \lim_{x \rightarrow 0}\frac{f(x)}{x ^ n} = 0.
     \]
 \end{definition}
+
+\newpage
+
+\section{Fourier series}
 
 \begin{definition}[Fourier definition of a function]
     \[
@@ -263,6 +417,8 @@ u_2 = \int\frac{y_1 \phi / \alpha_2}{W(y_1, y_2)}\,dx.
     it converges to $f(x)$ at all points where $f(x)$ is continuous and if $x = a$ is a jump discontinuity then it converges to $\frac{1}{2}\lim_{x \rightarrow a ^ {-}}f(x) + \frac{1}{2}\lim_{x \rightarrow a ^ {+}}f(x)$.
 \end{theorem}
 
+\hfill
+
 \begin{theorem}[Parseval’s theorem]
     If $f(x)$ is a function of period $2L$ with Fourier coefficients $a_n, b_n$ then
     \[
@@ -280,6 +436,158 @@ u_2 = \int\frac{y_1 \phi / \alpha_2}{W(y_1, y_2)}\,dx.
     f(x) = \infsum[n = -\infty]c_ne ^ {\frac{in\pi x}{L}}.
     \]
 \end{proposition}
+
+\newpage
+
+\section{Calculus of functions of two and more variables}
+
+\textbf{Contour plots}
+
+Multi-variable functions can be shown through contour plots,
+get your multivariate function $f(x, y)$ then set it equal to a constant $c$,
+i.e. $f(x, y) = c$.
+Plot the function for various values of $c$.
+
+\begin{definition}[Continuity for multiple variables]
+    Let $f(x_1, \dotsc, x_n)$ be a function of $n$ variables $f(x_1, \dotsc, x_n) = f(\mbf{x})$,
+    where $f : D \to \R$ and $D \subseteq \R ^ n$,
+    $f(x_1, \dotsc, x_n)$ is continuous at the point $\mbf{x}_0$ if
+    \[
+    \forall \varepsilon > 0, \exists \delta > 0\text{ such that if } \mbf{x} \in D\text{ and } |\mbf{x} - \mbf{x}_0| < \delta
+    \]
+    this implies that $|\delta f| = |f(\mbf{x}) - f(\mbf{x}_0)| < \varepsilon$.
+    Defining
+    \[
+    |\mbf{x} - \mbf{x}_0| = \sqrt{(\mbf{x} - \mbf{x}_0, \mbf{x} - \mbf{x}_0)}
+    \]
+    with the standard inner product.
+\end{definition}
+
+\subsection{Chain rule and Taylor's theorem}
+
+\textbf{Chain rule for functions of two variables}
+Given a function $f(x, y)$ of two variables we have the total derivative of this function
+\[
+\frac{df}{dx} = \pd[f]{x} + \frac{dy}{dx}\pd[f]{y}.
+\]
+
+For parametrically defined functions
+\[
+\frac{df}{dt} = \frac{dx}{dt}\pd[f]{x} + \frac{dy}{dx}\pd[f]{y}.
+\]
+
+The gradient of $f$ is the vector $\nabla f = \left(\pd[f]{x}, \pd[f]{y}\right)$.
+
+The directional derivative of $f$ in the direction of the unit vector $\hat{\mbf{n}}$ is $\hat{\mbf{n}}\cdot\nabla f$.
+
+An $n$ dimensional gradient of $f(x_1, x_2, \dotsc, x_n)$ to be
+\[
+\nabla f = \left(\pd[f]{x_1}, \pd[f]{x_2}, \dotsc, \pd[f]{x_n}\right).
+\]
+
+The \textbf{direction} of $\hat{\mbf{n}}$ is equal to
+\[
+\hat{\mbf{n}}\cdot \nabla f = |\nabla f|\cos{\theta}.
+\]
+
+\textbf{Changing variables from $(x, y)$ to $(u, v)$.}
+
+Suppose there is some bijection such that we can write $u = u(x, y)$ and $v = v(x, y)$ and $x = x(u, v)$ and $y = y(u, v)$ suppose all these functions are differentiable.
+Then we can get:
+\begin{align*}
+    \pd[f]{x} &= \pd[u]{x}\pd[f]{u} + \pd[v]{x}\pd[f]{v} \\
+    \pd[f]{y} &= \pd[u]{y}\pd[f]{u} + \pd[v]{y}\pd[f]{v}.
+\end{align*}
+
+\textbf{Taylor's theorem for functions of multiple variables}
+\begin{align*}
+    f(x, y) &= f(x_0, y_0) + (x - x_0)\pd[f]{x}(x_0, y_0) + (y - y_0)\pd[f]{y}(x_0, y_0) \\
+    &+ \frac{1}{2!}((x - x_0) ^ 2f_{xx}(x_0, y_0) + 2(x - x_0)(y - y_0)f_{xy}(x_0, y_0) + (y - y_0) ^ 2f_{yy}(x_0, y_0)) + \dotsc
+\end{align*}
+
+\subsection{Stationary points}
+
+A multivariable function $f(\mbf{x}) = f(x_1, \dotsc, x_n)$ has a stationary point at $\mbf{x} = \mbf{a}$ if the function is differentiable at $\mbf{x} = \mbf{a}$ and
+\[
+\nabla f = \left(\pd[f]{x_1}, \pd[f]{x_2}, \dotsc, \pd[f]{x_n}\right) = 0.
+\]
+I.e. all the partial derivatives are $0$.
+
+\textbf{Determining the type of stationary point}
+
+Have the Hessian matrix:
+\[
+H_{ij} = \frac{\partial ^ 2f}{\partial x_i \partial x_j}
+\]
+for example,
+for two variables
+\[
+H = \begin{pmatrix}
+    f_{xx} & f_{xy} \\
+    f_{yx} & f_{yy}
+\end{pmatrix}.
+\]
+
+We classify the points in the following way:
+\begin{enumerate}[label = (\arabic*)]
+    \item $\det(H ^ {(m)}) > 0$ for $m = 1, \dotsc, n$,
+    the stationary point is a \textbf{minimum}.
+
+    \item If $\det(H ^ {(m)})(-1) ^ m > 0$ for $m = 1, \dotsc, n$ the stationary point is a \textbf{maximum}.
+
+    \item If $\det(H ^ {(n)}) = \det(H) = 0$ the stationary point is \textbf{degenerate}.
+
+    \item If none of the above conditions hold,
+    the stationary point is a saddle point.
+\end{enumerate}
+
+\textbf{Lagrange multipliers}
+
+To find the maximum/minimum of a function $f(x, y)$ of two variables subject to a constraint $g(x, y) = 0$.
+
+\[
+\nabla f = \lambda\nabla g
+\]
+for some constant $\lambda$,
+where we have the Lagrange multiplier.
+
+Consider the function $\phi = f - \lambda g$ we see that
+\[
+\nabla \phi = \nabla(f - \lambda g) = \nabla f - \lambda\nabla g = 0
+\]
+then we use
+\begin{align*}
+    \phi_x &= 0 \\
+    \phi_y &= 0 \\
+    g(x, y) &= 0
+\end{align*}
+we can use this to determine three unknowns $x, y$ and $\lambda$.
+
+To find the maximum/minimum of a function $f(x_1, \dotsc, x_n)$ of $n$ variables subject to $m$ constraints $g_i(x_1, \dotsc, x_n) = 0$ for $i = 1, \dotsc, m$.
+
+We can define the function
+\[
+\phi = f - \lambda_1g_1 - \lambda_2g_2 - \dotsc - \lambda_mg_m,
+\]
+then at a constrained maximum/minimum of $f$
+\begin{align*}
+    \nabla \phi &= \left(\pd[\phi]{x_1}, \pd[\phi]{x_2}, \dotsc, \pd[\phi]{x_n}\right) = 0 \\
+    g_i(x_1, \dotsc, x_n) &= 0\text{ for }i = 1, \dotsc, m.
+\end{align*}
+
+Then we can get $n$ equations from $\nabla \phi = 0$ together with the $m$ constraint equations $g_i = 0$ giving us $n + m$ equations.
+
+\newpage
+
+\section{Linear ordinary differential equations}
+
+A point $x_0$ is \textbf{regular} if the functions $p(x)$ and $q(x)$ themselves admit a Taylor series representation at $x = x_0$.
+
+
+A point $x_0$ which is not a regular point of the differential equation is referred to as a \textbf{singular} point.
+
+
+
 
 
 \end{document}
