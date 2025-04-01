@@ -1190,19 +1190,182 @@
     Then with respect to the bases $\{\mbf{v}'_1, \dotsc, \mbf{v}'_n\}$ and $\{\mbf{w}'_1, \dotsc, \mbf{w}'_m\}$ the map $T$ is represented by the matrix $B = Q ^ {-1}AP$.
 \end{corollary}
 
+\newpage
 
+\section{Methods}
 
+\subsection{Finding the kernel,
+rank and nullity of a linear map/matrix}
 
+Let $A \in M_{n \times k}(\R)$
+\begin{definition}[Column space]
+    The column space of $A$ is the span of the columns of $A$.
+    \textit{Note:
+    the column space is the subspace of all $\mbf{b} \in \R ^ n$ such that $A\mbf{x} = \mbf{b}$ has a solution}.
+\end{definition}
 
+\begin{definition}[Row space]
+    The row space of $A$ is the span of the rows of $A$.
+    \textit{Note:
+    the row space is the subspace of all $\mbf{c} \in \R ^ k$ such that $A ^ t\mbf{y} = \mbf{c}$ has a solution}.
+\end{definition}
 
+\begin{definition}[Nullspace]
+    The nullspace
+    (or kernel)
+    of $A$ is the solution space to the homogeneous system $A\mbf{x} = \mbf{0}$.
+\end{definition}
 
+\begin{definition}[Nullity]
+    The nullity of $A$ is the dimension of the nullspace
+    (kernel).
+\end{definition}
 
+\subsubsection{Finding the column space
+(and row space)}
 
+To find the column space,
+simply find the span of the columns of $A$
+\begin{example}
+    for a $2 \times 2$ matrix $\begin{pmatrix}
+        1 & 2 \\ 3 & 1
+    \end{pmatrix}$ we can find the column space
+    \[
+    \begin{pmatrix}
+        1 & 2 \\ 3 & 1
+    \end{pmatrix}\begin{pmatrix}
+        x \\ y
+    \end{pmatrix} = \begin{pmatrix}
+        a \\ b
+    \end{pmatrix} \implies \begin{pmatrix}
+        x \\ y
+    \end{pmatrix} = \begin{pmatrix}
+        \frac{11}{5} \\ -\frac{3}{5}
+    \end{pmatrix}a + \begin{pmatrix}
+        -\frac{2}{5} \\ \frac{1}{5}
+    \end{pmatrix}b
+    \]
+    meaning that we can the column space
+    \[
+    \mathrm{colspace}(A) = \mathrm{span}\left\{\begin{pmatrix}
+        \frac{11}{5} \\ -\frac{3}{5}
+    \end{pmatrix}, \begin{pmatrix}
+        -\frac{2}{5} \\ \frac{1}{5}
+    \end{pmatrix}\right\}
+    \]
+    giving us $\mathrm{colrank}(A) = 2$.
+\end{example}
 
+We can do the same for row rank by using $A ^ t\mbf{x} = \mbf{a}$.
 
+\subsubsection{Finding the kernel and image of a linear map}
 
+To find the kernel of a linear map we get the following from the definition of the kernel
+\[
+\mathrm{ker}(T) = \{\mbf{v} \in V\,:\,T(\mbf{v} = \mbf{0}\} \implies T(\mbf{v}) = \mbf{0}
+\]
+the definition implies we just have to find the vectors $\mbf{v}$ which map to $\mbf{0}$.
 
+For the image we would use the definition
+\[
+\mathrm{im}(T) = \{\mbf{w} \in W\,:\,\exists\mbf{v} \in V,\,\mbf{w} = T(\mbf{v})\} \implies \mbf{w} = T(\mbf{v})
+\]
+which means we would need to find a $\mbf{v}$ such that for all $\mbf{w} \in W$ we get $\mbf{w} = T(\mbf{v})$.
 
+\subsection{Diagonalisation and powers of matrices}
+
+To diagonalise a matrix $A$ we do the following
+\begin{enumerate}[label = (\arabic*)]
+    \item
+    Find the characteristic polynomial of the matrix,
+    i.e. $p_A(t) = \det(A - tI)$.
+
+    \item
+    Solve this polynomial for when $p_A(t) = 0$ to get the eigenvalues $\lambda_1, \dotsc, \lambda_n$.
+
+    \item
+    Now go through all the eigenvalues $\lambda_i$ to solve $(A - \lambda_iI)\mbf{x} = \mbf{0}$ which gets us the eigenvectors of the matrix $A$.
+
+    \item
+    Finally we get a diagonal matrix $D = \begin{pmatrix}
+        \lambda_1 & 0 & \dotsi & 0 \\
+        0 & \lambda_2 & \dotsi & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \dotsi & \lambda_n
+    \end{pmatrix}$
+    and a matrix $P$ whose columns are the eigenvectors.
+
+    \item
+    We get the final relation $A = P ^ {-1}DP$.
+\end{enumerate}
+
+To find powers of our newly diagonalised matrix $A$,
+after manipulation we see
+\[
+A ^ k = P ^ {-1}D ^ kP.
+\]
+
+Also
+\begin{theorem}[Cayley-Hamilton theorem]
+    Let $A$ be $n \times n$ with characteristic polynomial $p_A(t)$.
+    Then $p_A(A) = 0$
+    (as a matrix equation).
+\end{theorem}
+
+\textit{Note:
+we can show equality of matrices by showing that if $A = B$ then $p_A(A) = 0 = p_A(B)$.}
+
+\subsection{Solving a system of differential equations with diagonalisation}
+
+\begin{example}
+    Solve the system of ODEs
+    \begin{align*}
+        \dot{x} &= -x + 4y \\
+        \dot{y} &= -2x + 5y
+    \end{align*}
+    where $x = x(t)$,
+    $y = y(t)$,
+    $\dot{x} = \frac{dx}{dt}$,
+    $\dot{y} = \frac{dy}{dt}$.
+
+    \begin{solution}
+        Let $M = \begin{pmatrix}
+            -1 & 4 \\ -2 & 5
+        \end{pmatrix}$
+        (the system of equations).
+        
+        Denote $\mbf{v}(t) = \begin{pmatrix}
+            x(t) \\ y(t)
+        \end{pmatrix}$.
+
+        Put $\mbf{w}(t) = M ^ {-1}\mbf{v}(t)$ which is equivalent to $\mbf{v}(t) = M\mbf{w}(t)$.
+        Have $\mbf{w}(t)$ be the vector of solutions.
+        
+        Then we have that $\mbf{w}(t)$ satisfies the system $\dot{\mbf{w}}(t) = D\mbf{w}(t)$,
+        with $D = \begin{pmatrix}
+            1 & 0 \\ 0 & 3
+        \end{pmatrix}$.
+        \textit{Note:
+        the intermediate step
+        \[
+        \dot{\mbf{w}}(t) = D\mbf{w}(t) \iff \begin{pmatrix}
+            \dot{w}_1(t) \\ \dot{w}_2(t)
+        \end{pmatrix} = \begin{pmatrix}
+            1 & 0 \\ 0 & 3
+        \end{pmatrix}\begin{pmatrix}
+            w_1(t) \\ w_2(t)
+        \end{pmatrix} \implies \dot{w}_1(t) = w_1(t) \text{ and } \dot{w}_2(t) = 3w_2(t)
+        \]
+        then solve the two independent differential equations.}
+        Giving us the solution $w_1(t) = c_1e ^ t$,
+        $w_2(t) = c_2e ^ {3t}$.
+        Finally $\mbf{v}(t) = M\mbf{w}(t)$ gives
+        \begin{align*}
+            x(t) &= 2c_1e ^ t + c_2e ^ {3t} \\
+            y(t) &= c_1e ^ t + c_2e ^ {3t}.
+        \end{align*}
+    \end{solution}
+\end{example}
 
 
 
