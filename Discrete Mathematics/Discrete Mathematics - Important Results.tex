@@ -1,0 +1,389 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\title{Discrete Mathematics I \\
+    \large Important Results}
+\author{Luke Phillips}
+\date{April 2025}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Counting}
+
+\subsection{Basic definitions}
+
+\begin{definition}[Arrangement]
+    An arrangement is a sequence of items in which order matters.
+\end{definition}
+\begin{example}
+    Here are some arrangements
+    (of length $4$)
+    of the numbers $123$:
+    \begin{align*}
+        1111 && 1122 && 1233 \\
+        2112 && 2312 && 2231 \\
+        3221 && 3332 && 3121
+    \end{align*}
+    These are not all of the arrangements,
+    there are $3 ^ 4$ of them for $123$ of size $4$.
+
+    $1221$ and $2112$ are not the same arrangement,
+    as order matters.
+\end{example}
+
+\begin{definition}[Permutation]
+    A permutation of a set $S$ is an arrangement which uses each item in $S$A exactly once.
+\end{definition}
+\begin{example}
+    The permutations of $123$:
+    \begin{align*}
+        123 && 213 && 312 \\
+        132 && 231 && 321
+    \end{align*}
+\end{example}
+
+\begin{definition}[Combination]
+    A combination is an unordered selection of elements of a set.
+\end{definition}
+\begin{example}
+    The following different arrangements of $123$
+    (size $4$)
+    are the same combination
+    \begin{align*}
+        1233 && 3312 && 3123.
+    \end{align*}
+    Where as
+    \begin{align*}
+        1233 && 3212 && 1123
+    \end{align*}
+    are different combinations of $123$.
+\end{example}
+
+\begin{definition}[Configuration]
+    A configuration can refer to how objects are arranged,
+    ordered,
+    or laid out.
+\end{definition}
+
+\textbf{Binomial coefficient notation}
+
+We use the following notation to denote the number of combinations
+(size $k$)
+of a set $n$ without repetition
+\[
+\binom{n}{k} = \frac{n!}{(n - k)!k!}.
+\]
+
+\subsection{Notes about the binomial coefficient}
+No proofs :C.
+
+\begin{proposition}
+    \[
+    \binom{n}{k} = \binom{n}{n - k}.
+    \]
+\end{proposition}
+
+\begin{proposition}
+    $1 \leq k \leq n - 1$,
+    \[
+    \binom{n}{k} = \binom{n - 1}{k - 1} + \binom{n - 1}{k}.
+    \]
+\end{proposition}
+
+\begin{proposition}
+    \[
+    (a + b) ^ n = \sum_{k = 0}^{n}\binom{n}{k}a ^ kb ^ {n - k}.
+    \]
+\end{proposition}
+
+\textbf{Remember that we can find identities using the last proposition}
+i.e.
+\[
+\sum_{k = 0}^{n}\binom{n}{k} = \sum_{k = 0}^{n}\binom{n}{k}1 ^ k1 ^ {n - k} = (1 + 1) ^ n = 2 ^ n.
+\]
+
+\subsection{Arrangements and combinations with repetitions}
+
+\begin{theorem}
+    Given a list of $n$ objects of $r$ different types,
+    in which objects of type $i$ occur $n_i$ times
+    (with $n_1 + \dotsc + n_r = n$),
+    the number of arrangements of the list is
+    \[
+    \frac{n!}{n_1!n_2!\dotsi n_r!}.
+    \]
+\end{theorem}
+
+\begin{center}
+\fbox{
+\begin{minipage}{0.9\textwidth}
+    The above is pretty much saying,
+    get the $n$ objects and since all of each type are grouped together we can ignore permutations within that group.
+
+    For example,
+    find the arrangements of the word REARRANGE:
+
+    There are $3$ R's,
+    $2$ A's,
+    $2$ E's,
+    $1$ G and $1$ N.
+
+    So looking at one arrangement:
+    RERARANGE,
+    it doesn't matter which A or R is where since they are the same,
+    we can rearrange them the number of times they appear times,
+    i.e.
+    we get
+    \[
+    \frac{9!}{3!2!2!1!1!}
+    \]
+    arrangements.
+\end{minipage}
+}
+\end{center}
+\hfill
+
+Looking at combinations,
+since order doesn't matter we can group the alike elements together.
+
+\begin{example}
+    The number of combinations
+    (size $5$)
+    with repetition of $\{0, 1, 2\}$ where each number appears at least once.
+
+    Since order doesn't matter lets lay it out as such
+    \[
+    0\ 0\ 0\ 1\ 2
+    \]
+    then we can get all different variations of that as long as we have one $0, 1$ and $2$.
+
+    We can separate them using a line
+    \[
+    0\ 0\ 0\ |\ 1\ |\ 2
+    \]
+    which we can see we will need $2$ lines to separate the $3$ different types of items.
+    Looking at this configuration without numbers:
+    \[
+    A\ A\ A\ |\ B\ |\ C
+    \]
+    we can see that we are able to put the lines in $4$ places as we cannot have them on either end as that would eliminate one of our types of item.
+
+    Hence we need to \textbf{choose} \textbf{two} of the \textbf{four} places to put the lines,
+    we can do this
+    \[
+    \binom{4}{2}
+    \]
+    ways,
+    thus this is the number of combinations.
+\end{example}
+
+\begin{theorem}
+    The number of $k$-combinations from $n$ different objects with repetition and each object occurring at least once is $\binom{k - 1}{n - 1}$ for $k \geq n$.
+\end{theorem}
+This is just a generalisation of the above.
+
+Strengthening this to disregard the requirement of needing at least one of each object:
+\begin{theorem}
+    The number of $k$-combinations from $n$ different objects with repetition is
+    \[
+    \binom{k + n - 1}{n - 1} = \binom{k + n - 1}{k}.
+    \]
+\end{theorem}
+This is since we are allowing a combination of size $k$ from $n$ objects given that each object may be selected more than once.
+
+\subsection{Extending binomial coefficients}
+\begin{proposition}
+    \[
+    \binom{-n}{k} = (-1) ^ k\binom{k + n - 1}{k} = (-1) ^ k\binom{k + n - 1}{n - 1}.
+    \]
+\end{proposition}
+
+\textbf{Remember} we can differentiate and integrate series term-wise,
+\begin{example}
+    \[
+    \sum_{r = 1}^{n}\binom{n}{r}(-1) ^ rr.
+    \]
+
+    \begin{align*}
+        (1 + x) ^ n &= \sum_{r = 0}^{n}\binom{n}{r}x ^ r  \\
+        &\iff \\
+        \frac{d}{dx}[(1 + x) ^ n] &= \frac{d}{dx}\left[\sum_{r = 0}^{n}\binom{n}{r}x ^ r\right] \\
+        &\iff \\
+        n(1 + x) ^ {n - 1} &= \sum_{r = 0}^{n}\binom{n}{r}rx ^ r
+        \intertext{Take $x = -1$}
+        &\iff \\
+        n(1 - 1) ^ {n - 1} &= \sum_{r = 0}^{n}\binom{n}{r}(-1) ^ rr \\
+        &\iff \\
+        0 &= \sum_{r = 0}^{n}\binom{n}{r}(-1) ^ rr
+    \end{align*}
+    so we get
+    \[
+    \sum_{r = 1}^{n}\binom{n}{r}(-1) ^ rr = 0
+    \]
+    for all $n > 1$ and $-1$ for $n = 1$.
+\end{example}
+
+\subsection{Pigeon-hole and inclusion-exclusion principle}
+
+\textbf{Pigeon-hole principle}
+
+If $n$ envelopes are distributed among $m$ pigeon-holes,
+and $n > m$,
+then at least one pigeon-hole contains more than one envelope.
+
+\hfill
+\textbf{Inclusion-exclusion principle}
+\begin{theorem}[Inclusion-exclusion formula]
+    For a positive integer $n$ and finite sets $A_1, \dotsc, A_n$
+    \begin{align*}
+        |A_1 \cup A_2 \cup \dotsi \cup A_n| &= \sum_{k = 1}^{n}(-1) ^ {k + 1}S_k,
+        \intertext{where}
+        S_k &= \sum_{i_1 < i_2 < \dotsi < i_k}|A_{i_1} \cap A_{i_2} \cap \dotsi \cap A_{i_k}|.
+    \end{align*}
+\end{theorem}
+
+\begin{definition}[Derangement]
+    A derangement is a permutation in which no element is in its correct position.
+    That is,
+    for every $k$,
+    item $k$ is not in the $k$th place.
+\end{definition}
+
+\subsection{Generating functions}
+
+\begin{definition}
+    Let $a_0, a_1, \dotsc$ be a sequence of real numbers.
+    The
+    (ordinary)
+    generating function for the sequence $(a_k)$ is the formal sum
+    \[
+    f(x) = \infsumo a_kx ^ k.
+    \]
+\end{definition}
+
+\begin{lemma}[Infamous Lemma $7.1.$]
+    \begin{enumerate}[label = (\alph*)]
+        \item
+        For $n \geq 0$ an integer,
+        \[
+        \sum_{k = 0}^{n}x ^ k = \frac{1 - x ^ {n + 1}}{1 - x}.
+        \]
+
+        \item
+        \[
+        \infsumo x ^ k = \frac{1}{1 - x}.
+        \]
+
+        \item
+        \[
+        \infsumo\binom{n + k - 1}{k}x ^ k = \frac{1}{(1 - x) ^ n}.
+        \]
+
+        \item
+        If $f(x) = \infsumo a_kx ^ k$ and $g(x) = \infsumo b_kx ^ k$ are the generating functions of sequences $(a_k)$ and $(b_k)$ respectively,
+        then
+        \[
+        f(x)g(x) = \infsumo c_kx ^ k
+        \]
+        is the generating function of the sequence $(c_k)$ where $c_k = \sum_{\ell = 0}^{k}a_{\ell}b_{k - \ell}$.
+    \end{enumerate}
+\end{lemma}
+
+\newpage
+
+\section{Methods}
+
+\subsection{Recurrence relations}
+To solve a recurrence relation
+\[
+a_n = \dotsc
+\]
+form the characteristic equation of the recurrence relation and its roots,
+$\alpha, \beta$,
+will be part of the final solution
+\[
+a_n = d_1\alpha ^ n + d_2\beta ^ n.
+\]
+
+For recurrence relations of the form
+\[
+a_n = c_1a_{n - 1} + \dotsc + c_ra_{n - r} + f(n)
+\]
+solve the first order case $a_n = c_1a_{n - 1} + \dotsc + c_ra_{n - r}$ and call it $g(n)$.
+
+Find a particular solution $a_n = p(n)$ to the $f(n)$ part.
+
+The general solution is $a_n = g(n) + p(n)$,
+apply the initial conditions to find the unknown constants.
+
+\textit{In short just solve it like an ODE}.
+
+\subsubsection{Stairs example}
+\begin{example}
+    Climb down stairs
+    one or two at a time.
+    How many distinct ways are there to climb $n$ stairs.
+
+    \begin{solution}
+        Call the answer $f_n$.
+
+        $f_1 = 1$ as there is only one way to go one step,
+        $f_2 = 2$ as can go two or one then one.
+        $f_3 = 3$,
+        two and one,
+        one and two;
+        one,
+        one and one.
+
+        $f_0 = 1$ since you can only go zero steps in one way.
+
+        Suppose $n \geq 2$.
+        We can climb one step first then we can climb the other $n - 1$ stairs $f_{n - 1}$ ways.
+        Similarly,
+        we can climb two steps first then $n - 2$ remain to be done in $f_{n - 2}$ ways.
+
+        Since these have different starts they are disjoint combinations,
+        so
+        \[
+        f_n = f_{n - 1} + f_{n - 2}\quad(n \geq 2).
+        \]        
+    \end{solution}
+\end{example}
+
+One can generalise the above example to being able to take $s_1, \dotsc, s_k$ stairs at once,
+then
+\[
+f_n = f_{n - s_1} + f_{n - s_2} + \dotsc + f_{n - s_k}\quad(n \geq s_k + 1).
+\]
+
+\subsection{Counting with generating functions}
+Say we have $(e_1, e_2, e_3, e_4)$ solutions to the equation
+\[
+e_1 + e_2 + e_3 + e_4 = 7,
+\]
+with $0 \leq e_1 \leq 4$,
+$0 \leq e_2 \leq 3$,
+$0 \leq e_2 \leq 2$,
+and $0 \leq e_4 \leq 1$.
+
+Assign each $e_i$ an expressions with the sum of $x ^ p$ for the $p$ possible values of $e_i$,
+e.g.
+$e_1$ would be $x ^ 0 + x ^ 1 + x ^ 2 + x ^ 3 + x ^ 4$.
+
+Now we can multiply them all together
+\[
+f(x) = (x ^ 0 + x ^ 1 + x ^ 2 + x ^ 3 + x ^ 4)(x ^ 0 + x ^ 1 + x ^ 2 + x ^ 3)(x ^ 0 + x ^ 1 + x ^ 2)(x ^ 0 + x ^ 1),
+\]
+each term representing a possible value for $e_i$.
+$x ^ {e_1}\cdot x ^ {e_2}\cdot x ^ {e_3}\cdot x ^ {e_4} = x ^ {e_1 + e_2 + e_3 + e_4} = x ^ 7$.
+So the number of solutions corresponds to the coefficient of $x ^ 7$ in $f(x)$.
+
+\end{document}
