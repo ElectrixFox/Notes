@@ -1,0 +1,212 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\title{Probability I \\
+    \large Important Results}
+\author{Luke Phillips}
+\date{April 2025}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Probability mass functions and probability density functions}
+
+\subsection{Discrete}
+
+\begin{definition}[Binomial distribution]
+    A discrete random variable $X$ is binomially distributed with parameters $n \in \N$ and $p \in [0, 1]$,
+    and we write $X \sim \Bin(n, p)$,
+    when $\mathcal{X} = \{0, 1, \dotsc, n\}$ and
+    \[
+    p(x) = \binom{n}{x}p ^ x(1 - p) ^ {n - x}\text{ for all } x \in \{0, 1, 2, \dotsc, n\}.
+    \]
+\end{definition}
+
+\begin{definition}[Geometric distribution]
+    A discrete random variable $X$ is geometrically distributed with parameter $p \in (0, 1]$,
+    and we write $X \sim \Geo(p)$,
+    when $\mathcal{X} = \N \coloneqq \{1, 2, 3, \dotsc\}$ and
+    \[
+    p(x) = (1 - p) ^ {x - 1}p,\text{ for all } x \in \{1, 2, 3, \dotsc\}.
+    \]
+\end{definition}
+
+\begin{definition}[Poisson distribution]
+    A discrete random variable $X$ is Poisson distributed with parameter $\lambda$,
+    and we write $X \sim \Po(\lambda)$,
+    when $\mathcal{X} = \Z_{+} \coloneqq \{0, 1, 2, \dotsc\}$ and
+    \[
+    p(x) = \frac{e ^ {-\lambda}\lambda ^ x}{x!}\quad\text{for } x \in \Z_{+}.
+    \]
+\end{definition}
+
+\subsubsection{Binomial-Poisson approximation}
+
+\begin{theorem}
+    Consider any $\lambda > 0$.
+    Let $X_n \sim \Bin(n, p_n)$ where $\liminfty np_n = \lambda$,
+    and let $Y \sim \Po(\lambda)$.
+    Then for all $x \in \Z_{+}$,
+    \[
+    \liminfty p_{X_n}(x) = p_Y(x).
+    \]
+\end{theorem}
+
+\subsection{Continuous}
+
+\begin{definition}[Uniform distribution]
+    Let $a, b \in \R$ with $a < b$.
+    We say a continuous random variable $X$ is uniformly distributed on $[a, b]$,
+    and write $X \sim U(a, b)$,
+    when
+    \[
+    f(x) = \begin{cases}
+        1 / (b - a) &\text{for all } x \in [a, b], \\
+        0 &\text{elsewhere}.
+    \end{cases}
+    \]
+\end{definition}
+
+\begin{definition}[Exponential distribution]
+    Let $\beta > 0$.
+    A continuous random variable $X$ is exponentially distributed with parameter $\beta$,
+    and write $X \sim \Exp(\beta)$,
+    when
+    \[
+    f(x) = \begin{cases}
+        \beta e ^ {-\beta x} &\text{for all } x \geq 0, \\
+        0 &\text{elsewhere}.
+    \end{cases}
+    \]
+\end{definition}
+
+\begin{definition}[Normal distribution]
+    Let $\mu, \sigma \in \R$ with $\sigma > 0$.
+    A continuous random variable $X$ is normally distributed with parameters $\mu$ and $\sigma ^ 2$,
+    write $X \sim \mathcal{N}(\mu, \sigma ^ 2)$,
+    when
+    \[
+    f(x) = \frac{1}{\sigma\sqrt{2\pi}}e ^ {-\frac{1}{2}\left(\frac{x - \mu}{\sigma}\right) ^ 2}\text{ for all } x \in \R.
+    \]
+\end{definition}
+
+\textbf{Remember we can standardise the normal distribution}
+\begin{theorem}[Standardising the normal distribution]
+    Suppose $\mu \in \R$ and $\sigma > 0$.
+    If $X \sim \mathcal{N}(\mu, \sigma ^ 2)$ and $Z \sim \mathcal{N}(0, 1)$,
+    then
+    \[
+    \frac{X - \mu}{\sigma} \sim \mathcal{N}(0, 1),\qquad\text{and}\qquad\sigma Z + \mu \sim \mathcal{N}(\mu, \sigma ^ 2).
+    \]
+\end{theorem}
+
+\newpage
+
+\section{Multiple random variables}
+
+\begin{definition}[Independence of two random variables]
+    Two random variables $X, Y$ are independent if
+    \[
+    \P(X \in A, Y \in B) = \P(X \in A)\P(Y \in B)\quad\text{for all } A \subseteq X(\Omega)\text{ and }B \subseteq Y(\Omega).
+    \]
+\end{definition}
+
+\begin{definition}[Joint probability mass function]
+    Let $(X, Y)$ be a bivariate discrete random variable with $\P((X, Y) \in \mathcal{Z}) = 1$ for a finite or countable $\mathcal{Z} \subseteq (X, Y)(\Omega)$.
+    The joint probability mass function $p$ of $X$ and $Y$ is defined by
+    \[
+    p(x, y) \coloneqq \P(X = x, Y = y)\qquad\text{for all } (x, y) \in \mathcal{Z}.
+    \]
+\end{definition}
+
+\begin{theorem}
+    If $X, Y$ are both discrete random variables with $\P(X \in \mathcal{X}) = \P(Y \in \mathcal{Y}) = 1$,
+    then their marginal probability mass functions are given in terms of the joint probability mass function
+    \[
+    p_X(x) = \sum_{y \in \mathcal{Y}}p(x, y)\text{ for all } x \in \mathcal{X} \qquad p_Y(y) = \sum_{x \in \mathcal{X}}p(x, y)\text{ for all } y \in \mathcal{Y}.
+    \]
+\end{theorem}
+
+\begin{definition}[Conditional probability mass function]
+    Let $X, Y$ be discrete random variables.
+    For $y \in \mathcal{Y}$,
+    the conditional probability mass function of $X$ given $Y = y$ is defined by
+    \begin{align*}
+        p_{X \mid Y}\left(x\mmid y\right) &\coloneqq \cP{X = x}{Y = y} = \frac{p_{X, Y}(x, y)}{p_Y(y)} \\
+        &\text{for all $x \in \mathcal{X}$ and $y \in \mathcal{Y}$ such that $p_Y(y) > 0$.}
+        \intertext{and similarly,
+        the conditional probability mass function of $Y$ given $X = x$ is}
+        p_{Y \mid X}\left(y\mmid x\right) &\coloneqq \cP{Y = y}{X = x} = \frac{p_{X, Y}(x, y)}{p_X(x)} \\
+        &\text{for all $y \in \mathcal{Y}$ and $x \in \mathcal{X}$ such that $p_X(x) > 0$.}
+    \end{align*}
+\end{definition}
+
+\begin{theorem}[Partition theorem for discrete random variables]
+    Let $X, Y$ be discrete random variables.
+    Then,
+    \[
+    p_X(x) = \sum_{y \in \mathcal{Y}}p_{X\mid Y}\left(x\mmid y\right)p_Y(y).
+    \]
+\end{theorem}
+
+\begin{lemma}[Independence of discrete random variables]
+    Two discrete random variables $X, Y$ are independent if and only if
+    \[
+    p_{X, Y}(x, y) = p_X(x)p_Y(y)\text{ for all $x \in \mathcal{X}$ and $y \in \mathcal{Y}$.}
+    \]
+\end{lemma}
+
+\begin{definition}[Joint probability density function]
+    Two real-valued random variables $X : \Omega \to \R$ and $Y : \Omega \to \R$.
+    $X, Y$ are jointly continuously distributed when there is a non-negative piecewise continuous function $f : \R ^ 2 \to \R$,
+    called the joint probability density function,
+    such that
+    \[
+    \P(X \in [a, b], Y \in [c, d]) = \int_{a}^{b}\left(\int_{c}^{d}f(x, y)\,dy\right)\,dx
+    \]
+    for all $[a, b] \times [c, d] \subseteq \R ^ 2$.
+\end{definition}
+
+\begin{corollary}[Marginal probability density function]
+    Let $X, Y$ be jointly continuously distributed random variables.
+    Then $X$ and $Y$ are continuously distributed,
+    with
+    \[
+    f_X(x) = \int_{-\infty}^{\infty}f(x, y)\,dy,\text{ for all $x \in \R$},\quad f_Y(y) = \int_{-\infty}^{\infty}f(x, y)\,dx,\text{ for all $y \in \R$}.
+    \]
+\end{corollary}
+
+\newpage
+
+\section{Probability inequalities}
+
+\begin{theorem}[Monotonicity of expectation]
+    For any random variable $X$,
+    and any $a \in \R$,
+    if $\P(X \geq a) = 1$ then $\E(X) \geq a$.
+\end{theorem}
+
+\begin{theorem}[Markov's inequality]
+    If $X \geq 0$ then,
+    for any $a > 0$,
+    \[
+    \P(X \geq a) \leq \frac{\E(X)}{a}.
+    \]
+\end{theorem}
+
+\begin{corollary}[Chebyshev's inequality]
+    For any random variable $X$ and any $a > 0$,
+    we have
+    \[
+    \P(|X - \E(X)| \geq a) \leq \frac{\Var(X)}{a ^ 2}.
+    \]
+\end{corollary}
+
+\end{document}
