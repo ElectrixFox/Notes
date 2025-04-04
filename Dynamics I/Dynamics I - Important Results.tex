@@ -1,0 +1,99 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\title{Dynamics I \\
+    \large Important Results}
+\author{Luke Phillips}
+\date{April 2025}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Solving for force}
+When we have $F = F(t)$ we get $m\ddot{x} = F(t)$,
+that can be solved by direct integration,
+i.e.
+\[
+m\ddot{x} = F(t).
+\]
+
+When we have $F = F(v)$ then we get
+\[
+m\dot{v} = F(v)
+\]
+we can then see
+\[
+m\dot{v} = F(v) \implies m\frac{dv}{dt} = F(v) \implies \frac{1}{F(v)}\,dv = \frac{1}{m}\,dt.
+\]
+
+To solve $F = F(x)$ then we get
+\[
+F(x) =m\ddot{x} = m\overbrace{\frac{d}{dt}v(x(t))}^{= \frac{d}{dx}(v(x))\cdot\frac{d}{dt}x(t)} = m\frac{dv}{dx}\frac{dx}{dt} = m\frac{dv}{dx}v
+\]
+which can be shown as
+\[
+F(x) = m\frac{dv}{dx}v \implies mv\frac{dv}{dx} = F(x) \implies mv\,dv = F(x)\,dx \implies \frac{1}{2}mv ^ 2 = \int F(x)\,dx.
+\]
+After finding $\frac{1}{2}mv ^ 2 = \int F(x)\,dx$ we can get
+\[
+\int\frac{1}{\sqrt{\frac{2}{m}\int F(x)\,dx}}\,dx = t + C.
+\]
+
+\newpage
+
+\section{Energy}
+We have $F = F(x)$ then $V(x) = -\int F(x)\,dx$.
+\[
+\frac{d}{dx}\left(\frac{1}{2}mv ^ 2\right) = mv\frac{dv}{dx} = ma = F = -\frac{dV}{dx},
+\]
+giving us
+\[
+E = \frac{1}{2}mv ^ 2 + V(x)
+\]
+then differentiating
+\[
+\frac{dE}{dt} = \frac{dE}{dx}\dot{x} = 0.
+\]
+
+\newpage
+
+\section{Potential}
+
+\textbf{Equilibrium}
+
+the equilibrium are when the particle is at rest.
+We can find the equilibria at $V'(x) = 0$.
+
+To find if there is enough energy for a particle to reach a specific speed we get
+\[
+\frac{1}{2}mu ^ 2 + V(x_0) > V(x_1)
+\]
+with $x_0$ the initial point and $x_1$ the maxima.
+
+An equilibrium is stable if $V''(x_0) > 0$.
+
+\newpage
+
+\section{Simple harmonic oscillator}
+The potential is $V(x) = -\int F = \frac{1}{2}kx ^ 2$,
+\[
+x(t) = A\cos(\omega t) + B\sin(\omega t),
+\]
+with $\omega = \sqrt{k / m}$ the angular frequency,
+\[
+T = \frac{2\pi}{\omega} = 2\pi\frac{m}{k}.
+\]
+
+\subsection{Small oscillations}
+A conservative force $F(x) = -V'(x)$.
+
+To find the period of small oscillations $\omega = \sqrt{V''(x_0) / m}$ where we approximate things like $\sin{x}$ to $x$.
+
+\end{document}
