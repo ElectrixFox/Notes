@@ -1,0 +1,195 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\title{Statistics I \\
+    \large Important Results}
+\author{Luke Phillips}
+\date{April 2025}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Basic results}
+
+\begin{theorem}[Bayes theorem]
+    \[
+    \cP{A}{B} = \frac{\cP{B}{A}\P(A)}{\P(B)}.
+    \]
+\end{theorem}
+
+\begin{theorem}[Partition theorem]
+    \[
+    \P(A) = \cP{A}{E_1}\P(E_1) + \cP{A}{E_2}\P(E_2) + \cP{A}{E_3}\P(E_3) + \dotsc + \cP{A}{E_n}\P(E_n).
+    \]
+\end{theorem}
+
+\section{Disease testing}
+
+\textbf{Important definitions}
+\begin{enumerate}[label = (\roman*)]
+    \item Sensitivity of a test:
+    \[
+    \cP{T ^ {+}}{D ^ {+}}.
+    \]
+    
+    \item Specificity of a test:
+    \[
+    \cP{T ^ {-}}{D ^ {-}}.
+    \]
+    
+    \item Probability of a false positive:
+    \[
+    \cP{T ^ {+}}{D ^ {-}}.
+    \]
+    
+    \item Probability of a false negative:
+    \[
+    \cP{T ^ {-}}{D ^ {+}}.
+    \]
+\end{enumerate}
+
+\begin{enumerate}[label = (\roman*)]
+    \item $\P(D ^ {+})$ is the prior probability of disease.
+    
+    \item $\P{T ^ {+}}{D ^ {+}}$ and $\P{T ^ {+}}{D ^ {-}}$ is the likelihood of a positive test given disease status.
+    
+    \item $\cP{D ^ {+}}{T ^ {+}}$ is the posterior probability of disease given positive test.
+\end{enumerate}
+
+If the test results are conditionally independent then we have
+\[
+\cP{T ^ {++}}{D ^ {+}} = \cP{T ^ {+}}{D ^ {+}} ^ 2\quad\text{and}\quad\cP{T ^ {++}}{D ^ {-}} = \cP{T ^ {+}}{D ^ {-}} ^ 2.
+\]
+
+\newpage
+
+\section{Random variables}
+The normal distribution $X \sim N(\mu, \sigma ^ 2)$ is given by its pdf
+\[
+f(x\mid \mu, \sigma) = \frac{1}{\sqrt{2\pi\sigma ^ 2}}e ^ {-\frac{1}{2}\left(\frac{x - \mu}{\sigma}\right) ^ 2}.
+\]
+
+\begin{definition}[Bernoulli distribution]
+    $X \sim \mathrm{Bernoulli}(p)$ takes only $X = 0, 1$ with pdf
+    \[
+    f(x\mid p) = \begin{cases}
+        p ^ x(1 - p) ^ {1 - x} &\text{for } x = 0, 1, \\
+        0 & \text{otherwise}.
+    \end{cases}
+    \]
+\end{definition}
+
+Looking at an estimator for $p$.
+We can set $X = \sum_{i = 1}^{n}X_i$ with $X_i$ being $1, 0$ if $i$ is success or failure.
+We have
+\[
+f(x_1, x_2, \dotsc, x_n\mid p) = \prod_{i = 1}^{n}f(x_i\mid p) = p ^ x(1 - p) ^ {n - x}
+\]
+with $x = \sum_{i = 1}^{n}x_i$.
+
+We can then take this as our likelihood
+\[
+\ell(\theta) = f(x_1, x_2, \dotsc, x_n\mid p) = p ^ x(1 - p) ^ {n - x}
+\]
+with $\theta = p$.
+
+Logging and differentiating gives us a maximum for $p$
+($\theta$)
+\[
+\pd{p}\log{f(x_1, \dotsc, x_n\mid p)} = \frac{x}{p} - \frac{n - x}{1 - p}.
+\]
+Now setting this to zero and solving for our maximal $p$,
+which we will denote $\hat{p}$,
+this gets
+\[
+\hat{p} = \frac{x}{n}.
+\]
+
+$\hat{p}$ is also called the sample proportion $Y$,
+in terms of random variables this is
+\[
+\hat{p} = Y = \frac{X}{n} = \frac{1}{n}\sum_{i = 1}^{n}X_i.
+\]
+
+\begin{definition}[Binomial distribution]
+    $X \sim \Bin(n, p)$ has probability mass function
+    \[
+    f(x\mid n, p) = \begin{cases}
+        \binom{n}{x}p ^ x(1 - p) ^ {n - x} &\text{for } x = 0, 1, \dotsc, n, \\
+        0 &\text{otherwise}.
+    \end{cases}
+    \]
+\end{definition}
+
+\subsection{Binomial-Normal approximation}
+\[
+\Bin(n, p) \approx N(np, np(1 - p))
+\]
+when $np \geq 10$ and $n(1 - p) \geq 10$ this is acceptable.
+
+For $n$ small a correction is needed,
+$X \sim \Bin(n, p)$,
+$X' \sim N(np, np(1 - p))$,
+then
+\[
+\P(X \leq k) \simeq \P(X' \leq k + 1 / 2)\quad\P(k_1 \leq X \leq k_2) \simeq \P(k_1 - 1 / 2 \leq X' \leq k_2 + 1 / 2).
+\]
+
+\subsection{Estimation \texorpdfstring{$\hat{p}$}{} for binomial}
+We can find the expectation and variance of $\hat{p}$ for Binomial
+\begin{align*}
+    \E(\hat{p}) &= \E(Y) = \frac{1}{n}\E(X) = \frac{1}{n}np = p \\
+    \Var(\hat{p}) &= \Var(Y) = \frac{1}{n ^ 2}\Var(X) = \frac{1}{n ^ 2}np(1 - p) = \frac{p(1 - p)}{n}.
+\end{align*}
+
+Since $\E(\hat{p}) = p$ we have an \textbf{unbiased estimator} for $p$.
+
+\subsection{Margin of error}
+
+The margin of error is defined as $Y \pm 2\mathrm{SD}(Y)$ which may look like
+\[
+Y \pm 2\sqrt{\frac{p(1 - p)}{n}}
+\]
+that can be shown to be
+\[
+Y \pm 2\sqrt{\frac{p(1 - p)}{n}} \iff Y \pm 2\sqrt{\frac{\frac{1}{2}\left(1 - \frac{1}{2}\right)}{n}} \iff Y \pm \frac{1}{\sqrt{n}}.
+\]
+
+\newpage
+
+\section{Estimator for population mean}
+Have $\bar{X}$ the sample mean of $X_1, \dotsc, X_n$,
+i.e.
+\[
+\bar{X} = \frac{1}{n}\sum_{i = 1}^{n}X_i.
+\]
+Taking $\mu = \E(X_i)$ and $\sigma = \mathrm{SD}(X_i)$.
+
+So
+\begin{align*}
+    \E(\bar{X}) &= \E\left(\frac{1}{n}\sum_{i = 1}^{n}X_i\right) = \frac{1}{n}\sum_{i = 1}^{n}\E(X_i) = \frac{1}{n}\sum_{i = 1}^{n}\mu = \frac{1}{n}n\mu = \mu. \\
+    \Var(\bar{X}) &= \Var\left(\frac{1}{n}\sum_{i = 1}^{n}X_i\right) = \frac{1}{n ^ 2}\Var\left(\sum_{i = 1}^{n}X_i\right) = \frac{1}{n ^ 2}\sum_{i = 1}^{n}\Var(X_i) = \frac{1}{n ^ 2}n\sigma ^ 2 = \frac{\sigma ^ 2}{n}.
+\end{align*}
+Since $\E(\bar{X}) = \mu$ $\bar{X}$ is unbiased.
+
+\subsection{Central limit theorem}
+\begin{theorem}[Central limit theorem]
+    Suppose $X_1, \dotsc, X_n$ are independent and identically distributed random variables,
+    each with mean $\mu$ and variance $\sigma ^ 2$.
+
+    The distribution of the sample mean $\bar{X} = \frac{1}{n}\sum_{i}X_i$ is such that
+    \[
+    \bar{X} \to N\left(\mu, \frac{\sigma ^ 2}{n}\right)\quad\text{as } n \to \infty.
+    \]
+\end{theorem}
+
+
+
+\end{document}
