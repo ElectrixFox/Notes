@@ -587,6 +587,329 @@ A point $x_0$ is \textbf{regular} if the functions $p(x)$ and $q(x)$ themselves 
 A point $x_0$ which is not a regular point of the differential equation is referred to as a \textbf{singular} point.
 
 
+$x_0$ is a \textbf{regular singular} point of the differential equation if $(x - x_0)p(x)$,
+$(x - x_0) ^ 2q(x)$ can be represented by a Taylor expansion about $x = x_0$.
+
+
+$x_0$ is an \textbf{irregular singular} point of the differential equation if it is neither regular or a regular singular point.
+
+\subsection{Frobenius' Method}
+\[
+y(x) = \infsumo a_n(x - x_0) ^ {n + r}
+\]
+where $r$ is a constant.
+
+\begin{example}
+    Find a solution to
+    \[
+    2x(x + 1)y'' + (x + 1)y' - 3y = 0
+    \]
+    expanded around $x = 0$.
+
+    \begin{solution}
+        This can be written as follows
+        \[
+        y'' + \frac{1}{2x}y' - \frac{3}{2x(x + 1)}y = 0,
+        \]
+        so that $p(x) = \frac{1}{2x}$ and $q(x) = -\frac{3}{2x(x + 1)}$.
+
+        $x = 0$ is not a regular point.
+
+        \[
+        xp(x) = \frac{1}{2},\quad x ^ 2q(x) = -\frac{3x}{2(x + 1)}
+        \]
+        both have Taylor expansions about $x = 0$,
+        so the point $x = 0$ is a regular single point.
+        \[
+        \infsum[n = 0][(n + r)(2n + 2r - 1) - 3]a_nx ^ {n + r} + \infsum[n = 0](n + r)(2n + 2r - 1)a_nx ^ {n + r - 1} = 0
+        \]
+        to have the same power we get
+        \[
+        \infsum[n = 0][(n + r)(2n + 2r - 1) - 3]a_nx ^ {n + r} + \infsum[n = -1](n + r)(2n + 2r - 1)a_{n + 1}x ^ {n + r} = 0.
+        \]
+        Since the solution is true for all $x$ this can then be solved as usual.
+    \end{solution}
+\end{example}
+
+\newpage
+
+\section{Differential operators}
+
+\subsection{Legendre expansions}
+We can find the Legendre expansion of an equation using the orthogonality of the differential operators.
+Given the two orthogonal eigenfunctions $P_i(x), P_j(x)$ we have
+\[
+(P_i(x), P_j(x)) = \int_{-1}^{1}P_i(x)P_j(x)\,dx = 0\quad\text{for $i \neq j$}.
+\]
+Using $f(x) = \infsum[i = 0]b_iP_i(x)$ we can find the coefficients of the Legendre expansion.
+Taking the inner product we get
+\[
+(P_j(x), f(x)) = \left(P_j(x), \infsum[i = 0]b_iP_i(x)\right) = \infsum[i = 0]b_j(P_j(x), P_i(x)) = b_j(P_j(x), P_j(x))
+\]
+where $(P_i(x), P_j(x)) = 0$ for $i \neq j$.
+We find
+\[
+b_j = \frac{(P_j(x), f(x))}{(P_j(x), P_j(x))}.
+\]
+Giving us
+\[
+b_j = \frac{2j + 1}{2}\int_{-1}^{1}f(x)P_j(x)\,dx.
+\]
+\begin{center}
+\fbox{
+\begin{minipage}{0.9\textwidth}
+    This gives the following procedure:
+    \begin{enumerate}[label = (\roman*)]
+        \item Show that the eigenfunctions are mutually orthogonal.
+
+        \item Set the function $f(x) = \infsum[i = 0]b_iP_i(x)$,
+        then take the inner product $(P_j(x), f(x)) = b_j(P_j(x), P_j(x))$.
+
+        \item Then rearrange to find $b_j$.
+
+        \item Get a simpler expression for $b_j$.
+
+        \item The final formula gives us the coefficients for the expansion.
+    \end{enumerate}
+\end{minipage}
+}
+\end{center}
+\hfill
+
+\newpage
+
+\section{Solving PDEs}
+
+To separate variables we let $f(x, y, \dotsc, t) = \sum_na_nX_n(x)Y_n(y)\dotsc T_n(t)$.
+
+\begin{example}
+    A string lies along the $x$-axis between $x = 0$ $x = \pi$.
+    Its displacement from the $x$-axis,
+    $u(x, t)$ obeys the wave equation $u_{tt} = c ^ 2u_{xx}$.
+    Boundary conditions $u(0, t) = u(\pi, t) = 0$.
+    Initially released from rest so that $u_t(x, 0) = 0$ and position
+    \[
+    u(x, 0) = R(x) = \begin{cases}
+        x & 0 \leq x \leq \pi / 2 \\
+        \pi - x & \pi / 2 \leq x \leq \pi.
+    \end{cases}
+    \]
+
+    \begin{solution}
+        Using $u(x, t) = X(x)T(t)$ and substituting we find:
+        \[
+        u_{tt} = X(x)\ddot{T}(t) = c ^ 2u_{xx} = c ^ 2X''(x)T(t).
+        \]
+        This is equivalent to
+        \[
+        \frac{X''(x)}{X(x)} = \frac{\ddot{T}(t)}{c ^ 2T(t)}
+        \]
+        so they both must be a constant $\lambda$.
+        Giving us
+        \[
+        X''(x) = \lambda X(x),\quad \ddot{T}(t) = \lambda c ^ 2T(t).
+        \]
+
+        Now we need to find the form of $X(x)$ which match the boundary conditions.
+
+        $\lambda = n ^ 2 > 0$ we get
+        \[
+        X'' = n ^ 2X \implies X = Ae ^ {nx} + Be ^ {-nx}
+        \]
+        which gives $A = B = 0$,
+        hence no non-zero solutions.
+
+        $\lambda = 0$ we get
+        \[
+        X'' = 0 \implies X = Ax + B \implies A = B = 0
+        \]
+        no non-zero solutions.
+
+        $\lambda = -n ^ 2 < 0$ getting us
+        \[
+        X'' = -n ^ 2X \implies X = A\sin(nx) + B\cos(nx) \implies B = 0\text{ and } X(\pi) = A\sin(n\pi) = 0
+        \]
+        which has non-zero solutions.
+
+        Given this we can now solve $T(t)$,
+        \[
+        \ddot{T}(t) = -n ^ 2c ^ 2T(t)
+        \]
+        (\textbf{since we found that $\lambda = -n ^ 2$ for $X(x)$ to have non-zero solutions})
+        this gives general solution
+        \[
+        T(t) = A_n\cos(nct) + B_n\sin(nct).
+        \]
+        \[
+        u_n(x, t) = \sin(nx)(A_n\cos(nct) + B_n\sin(nct)).
+        \]
+        \[
+        u(x, t) = \infsum[n = 1]\sin(nx)(A_n\cos(nct) + B_n\sin(nct)).
+        \]
+        \[
+        0 = u_t(x, 0) \implies B_n = 0.
+        \]
+        Finding the final boundary condition:
+        \[
+        u(x, 0) = R(x),
+        \]
+        so we have
+        \[
+        u(x, 0) = R(x) = \infsum[n = 1]A_n\sin(nx).
+        \]
+        We can use the Fourier series to see that
+        \[
+        R(x) = \infsum[n = 1]A_n\sin(nx)
+        \]
+        then
+        \[
+        \infsum[n = 1]A_n\sin(nx) = R(x) = \frac{a_0}{2} + \infsum[n = 1]a_n\cos(n\pi x / L) + b_n\sin(n\pi x / L) \implies L = \pi, a_n = 0, b_n = A_n
+        \]
+        so we use the formula for $b_n$ which is
+        \begin{align*}
+            \frac{1}{\pi}\int_{-L}^{L}R(x)\sin(n\pi x / L)\,dx &= \frac{1}{\pi}\int_{-\pi}^{\pi}R(x)\sin(nx)\,dx \\
+            &= \frac{2}{\pi}\int_{0}^{\pi}R(x)\sin(nx)\,dx\qquad(\text{since $\text{odd} \cdot \text{odd} = \text{even}$}) \\
+            &= \frac{2}{\pi}\int_{0}^{\pi / 2}R(x)\sin(nx)\,dx + \frac{2}{\pi}\int_{\pi / 2}^{\pi}R(x)\sin(nx)\,dx \\
+            &= \frac{2}{\pi}\int_{0}^{\pi / 2}x\sin(nx)\,dx + \frac{2}{\pi}\int_{\pi / 2}^{\pi}(\pi - x)\sin(nx)\,dx \\
+            &= \frac{4}{n ^ 2\pi}\sin(n\pi / 2).
+        \end{align*}
+        Giving us the final answer
+        \[
+        u(x, t) = \infsum[n  1]\frac{4}{n ^ 2\pi}\sin(n\pi / 2)\sin(nx)\cos(nct).
+        \]
+    \end{solution}
+    
+\end{example}
+
+\newpage
+
+\section{Fourier transforms}
+\begin{align*}
+    f(x) &= \frac{1}{2\pi}\int_{-\infty}^{\infty}\tilde{f}(p)e ^ {ipx}\,dp \\
+    \tilde{f}(p) &= \int_{-\infty}^{\infty}f(x)e ^ {-ipx}\,dx.
+\end{align*}
+
+\textbf{Important results}
+
+Let $f, g$ be two functions with Fourier transforms $\tilde{f}(p), \tilde{g}(p)$
+\begin{enumerate}[label = (\roman*)]
+    \item
+    If $u(x) = \alpha f(x) + \beta g(x)$
+    \[
+    \tilde{u}(p) = \alpha\tilde{f}(p) + \beta\tilde{g}(p)
+    \]
+    for all $\alpha, \beta \in \R$.
+
+    \item
+    If $g(x) = f(x + a)$ then
+    \[
+    \tilde{g}(p) = e ^ {ipa}\tilde{f}(p).
+    \]
+
+    \item
+    If $F(x) = f(bx)$ then
+    \[
+    \tilde{F}(p) = \frac{1}{|b|}\tilde{f}\left(\frac{p}{b}\right).
+    \]
+
+    \item
+    If $f$ is odd
+    (even)
+    then $\tilde{f}$ will be even
+    (odd).
+
+    \item
+    If $F(x) = f'(x)$ then
+    \[
+    \tilde{F}(p) = ip\tilde{f}(p).
+    \]
+
+    \item
+    Let $f \star g$ be the convolution of two functions
+    \[
+    f \star g(x) = \int_{-\infty}^{\infty}f(t)g(x - t)\,dt.
+    \]
+    If $F(x) = f \star g(x)$ then
+    \[
+    \tilde{F}(p) = \tilde{f}(p)\tilde{g}(p).
+    \]
+\end{enumerate}
+
+\newpage
+
+\section{Methods}
+
+\subsection{Solving ODEs with Fourier transforms}
+Using the following
+\[
+F(x) = f'(x) \implies \tilde{F}(p) = ip\tilde{f}(p)
+\]
+we can simplify ODEs.
+
+\begin{example}
+    \[
+    -y'' + y = f(x).
+    \]
+
+    We can then get
+    \[
+    -y'' + y = f(x) \implies -(ip) ^ 2\tilde{y}(p) + \tilde{y}(p) = \tilde{f}(p)
+    \]
+    solving we get
+    \[
+    \tilde{y}(p) = \frac{\tilde{f}(p)}{p ^ 2 + 1}
+    \]
+    then we can use the convolution theorem to see if we let $\tilde{g}(p) = \frac{1}{p ^ 2 + 1}$ then
+    \[
+    \tilde{y}(p) = \tilde{f}(p)\tilde{g}(p)
+    \]
+    which means
+    \[
+    y(x) = f(x) \star g(x)
+    \]
+    then using some other facts
+    (from lecture notes)
+    we get $g(x) = e ^ {-|x|} / 2$ giving us
+    \[
+    y(x) = \frac{1}{2}\int_{-\infty}^{\infty}f(t)e ^ {-|x - t|}\,dt.
+    \]
+\end{example}
+
+\subsection{Solving PDEs with Fourier transforms}
+For functions $u(x, t)$ we can take Fourier transforms of one of the variables to get
+\[
+\tilde{u}(p, t) = \int_{-\infty}^{\infty}u(x, t)e ^ {-ipx}\,dx.
+\]
+Then we get $u_{x}(x, t) \implies (ip)\tilde{u}(p, t)$ giving us an ODE in $t$.
+
+\begin{example}
+    \[
+    u_t - 3u_x = -5u
+    \]
+    initially $u(x, 0) = R(x)$.
+
+    We can take Fourier transforms of the equation
+    \[
+    \tilde{u}_t - 3(ip)\tilde{u} = -5\tilde{u} \implies \pd[\tilde{u}]{t} = (3ip - t)\tilde{u}.
+    \]
+    Which is a separable ODE
+    \[
+    \tilde{u} = A(p)e ^ {(3ip - 5)t}
+    \]
+    applying the initial conditions to find $A(p)$ we get
+    \[
+    A(p) = \tilde{u}(p, 0) = \int_{-\infty}^{\infty}u(x, 0)e ^ {-ipx}\,dx = \int_{-\infty}^{\infty}R(x)e ^ {-ipx}\,dx = \tilde{R}(p)
+    \]
+    hence
+    \[
+    \tilde{u}(p, t) = \tilde{R}(p)e ^ {(3ip - 5)t} = e ^ {-5t}(\tilde{R}(p)e ^ {3ipt}).
+    \]
+    So we can apply the shift theorem to get
+    \[
+    u(x, t) = e ^ {-5t}R(x + 3t).
+    \]
+\end{example}
+
 
 
 
