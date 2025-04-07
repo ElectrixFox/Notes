@@ -66,6 +66,20 @@ then differentiating
 
 \section{Potential}
 
+A potential $V(\mbf{r})$ corresponds to a conservative force if
+\[
+\mbf{F} = \left(-\pd[V]{x}, -\pd[V]{y}, -\pd[V]{z}\right) = -\pd[V]{x}\mbf{e}_1 - \pd[V]{y}\mbf{e}_2 - \pd[V]{z}\mbf{e}_3.
+\]
+The total energy is
+\[
+E(\mbf{r}, \mbf{v}) = \frac{1}{2}mv ^ 2 + V(\mbf{r}).
+\]
+The energy is conserved,
+i.e.
+\[
+\frac{dE}{dt} = 0.
+\]
+
 \textbf{Equilibrium}
 
 the equilibrium are when the particle is at rest.
@@ -95,5 +109,42 @@ T = \frac{2\pi}{\omega} = 2\pi\frac{m}{k}.
 A conservative force $F(x) = -V'(x)$.
 
 To find the period of small oscillations $\omega = \sqrt{V''(x_0) / m}$ where we approximate things like $\sin{x}$ to $x$.
+
+\newpage
+
+\section{Electromagnetic field}
+A particle mass $m$ ad electric charge $q$ placed in an electric field $\mbf{E}$ with magnetic field $\mbf{B}$,
+feels the following force
+\[
+\mbf{F} = q(\mbf{E} + \mbf{v} \times \mbf{B}).
+\]
+
+\newpage
+
+\section{Angular momentum}
+
+In the polar basis
+\begin{align*}
+    \dot{\mbf{e}}_r &= \dot{\theta}\mbf{e}_{\theta} \\
+    \dot{\mbf{e}}_\theta &= -\dot{\theta}\mbf{e}_r
+\end{align*}
+
+We have $\mbf{r} = r\mbf{e}_r$ then
+\begin{align*}
+    \mbf{v} &= \dot{r}\mbf{e}_r + r\dot{\theta}\mbf{e}_{\theta} \\
+    \mbf{a} &= (\ddot{r} - r\dot{\theta} ^ 2)\mbf{e}_r + (2\dot{r}\dot{\theta} + r\ddot{\theta})\mbf{e}_{\theta}.
+\end{align*}
+
+A particle with position $\mbf{r}$,
+momentum $\mbf{p}$ has angular momentum $\mbf{L} = \mbf{r} \times \mbf{p}$ about $\mbf{r} = \mbf{0}$.
+
+If a force $\mbf{F}$ acts at the point with position vector $\mbf{r}$,
+then its torque or moment about $\mbf{r} = \mbf{0}$ is $\mbf{T} = \mbf{r} \times \mbf{F}$.
+If mass is constant $\dot{\mbf{r}} \times \mbf{p} = \mbf{0}$,
+the rate of change of angular momentum equals the applied torque:
+\[
+\frac{d\mbf{L}}{dt} = \mbf{r} \times \dot{\mbf{p}} = \mbf{r} \times \mbf{F} = \mbf{T}.
+\]
+
 
 \end{document}
