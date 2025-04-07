@@ -1,0 +1,180 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{preamble}
+
+\newcommand{\limas}[3][n]{#2 \rightarrow #3 \text{ as } #1 \rightarrow \infty}
+
+\title{Analysis I \\
+    \large Important Results}
+\author{Luke Phillips}
+\date{April 2025}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Definitions}
+
+\begin{definition}
+    Let $X$ be a set which is bounded above.
+    A number $C \in \R$ is called the supremum of $X$ if:
+    \begin{enumerate}[label = (\roman*)]
+        \item $C$ is an upper bound of $X$.
+
+        \item Whenever $B \in \R$ is another upper bound of $X$,
+        then $C \leq B$.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    A real sequence $(x_n)_{n \in \N}$ converges to the limit $x \in \R$,
+    if for every $\varepsilon > 0$,
+    there exists an $N \in \N$ with
+    \[
+    |x_n - x| < \varepsilon\text{ for all } n \geq N.
+    \]
+\end{definition}
+
+\begin{definition}
+    Let $(x_n)_{n \in \N}$ be a sequence.
+    A subsequence of $(x_n)_{n \in \N}$ is a sequence $(x_{n_j})_{j \in \N}$ with $n_1 < n_2 < n_3 < \dotsi$,
+    $n_j$ is strictly monotone increasing.
+\end{definition}
+
+\begin{definition}
+    A sequence $(x_n)_{n \in \N}$ is called a Cauchy sequence,
+    if for every $\varepsilon > 0$ there exists an $N \in \N$ such that
+    \[
+    |x_m - x_n| < \varepsilon\quad\forall n, m \geq N.
+    \]
+\end{definition}
+
+\begin{definition}
+    Let $\infsum a_k$ be a series,
+    it is absolutely convergent if $\infsum|a_k|$ is convergent.
+\end{definition}
+
+\begin{definition}
+    Let $\infsum a_k$ be a series.
+    It is conditionally convergent if it is convergent but not absolutely convergent.
+\end{definition}
+
+\begin{definition}
+    Let $f : (a, b) \to \R$ be a function.
+    Let $c \in (a, b)$ and $f$ is possibly not defined at $c$.
+    We say
+    \[
+    \lim_{x \to c}f(x) = L
+    \]
+    if for all $\varepsilon > 0$ there exists a $\delta > 0$ such that
+    \[
+    |f(x) - L| < \varepsilon
+    \]
+    for all $x \neq c$ with
+    \[
+    |x - c| < \delta.
+    \]
+    I.e.
+    \[
+    \forall \varepsilon > 0, \exists \delta > 0, |x - c| < \delta \implies |f(x) - L| < \varepsilon.
+    \]
+\end{definition}
+
+\textbf{Very important!}
+\begin{definition}[Continuous at a point]
+    $f : X \to \R$,
+    $X = (a, b)$,
+    $c \in (a, b)$.
+    $f(x)$ is continuous at $x = c$ if
+    \[
+    \forall \varepsilon > 0, \exists \delta > 0, \forall x \in X, |x - c| < \delta \implies |f(x) - f(c)| < \varepsilon.
+    \]
+\end{definition}
+
+\begin{definition}[Continuity on a set]
+    Let $X$ be a set.
+    \[
+    \forall c \in X, \forall \varepsilon > 0, \exists \delta > 0, \forall x \in X, |x - c| < \delta \implies |f(x) - f(c)| < \varepsilon.
+    \]
+\end{definition}
+
+\begin{definition}[Uniform continuity]
+    $f : X \to \R$ is uniform continuous if
+    \[
+    \forall \varepsilon > 0, \exists \delta > 0, \forall x, y \in X, |x - y| < \delta \implies |f(x) - f(y)| < \varepsilon.
+    \]
+\end{definition}
+
+\textbf{Very important!}
+\begin{definition}[Differentiability]
+    $f : X \to \R$
+    ($X$ open).
+    $f$ is differentiable at $c \in X$ if
+    \[
+    \lim_{x \to c}\frac{f(x) - f(c)}{x - c}
+    \]
+    with the limit equal to $f'(c)$.
+\end{definition}
+
+\begin{definition}
+    \[
+    \infsumo a_kx ^ k
+    \]
+    is a power series.
+    $a_k \in \R$ and $x \in \R$.
+\end{definition}
+
+\begin{definition}[Pointwise limit]
+    $f(x) : I \to \R$ is the pointwise limit of $(f_n(x))$ if
+    \[
+    \forall x \in I, \forall \varepsilon > 0, \exists N > 0, \forall n \geq N, |f_n(x) - f(x)| < \varepsilon.
+    \]
+\end{definition}
+
+\begin{definition}[Uniform convergence]
+    $f_n \to f$ uniformly on $I$
+    \[
+    \forall\varepsilon > 0, \exists N > 0, \forall x \in I, \forall n \geq N, |f_n(x) - f(x)| < \varepsilon.
+    \]
+\end{definition}
+
+\begin{definition}[Uniform convergence on compact subsets]
+    $f_n : I \to \R$,
+    $f_n \to f$ uniformly in compact subsets.
+    If $f_n \to f$ uniformly on all $[a, b] \subset I$.
+\end{definition}
+
+\begin{definition}[Step function]
+    $f : [a, b] \to \R$.
+    Exists a partition
+    \[
+    x_0 = a < x_1 < x_2 < \dotsi < x_N = b
+    \]
+    of $[a, b]$ such that on each open subinterval $(x_k, x_{k + 1})$ the function $f(x)$ is constant.
+\end{definition}
+
+\begin{definition}[Regulated functions]
+    $f : [a, b] \to \R$ is called regulated if there exists a sequence $f_n(x) : [a, b] \to \R$ of step functions such that $f_n \to f$ uniformly.
+\end{definition}
+
+\begin{definition}[Regulated integral]
+    $f : [a, b] \to \R$ regulated,
+    say $f_n \to f$,
+    $f_n$ step functions.
+    Define the integral by
+    \[
+    I(f) = \liminfty I(f_n).
+    \]
+    Where
+    \[
+    I(f) = \sum_{k = 0}^{N - 1}(x_{k + 1} - x_k)f(x_k ^ {*})
+    \]
+    $x_k ^ {*}$ is any element in $(x_k, x_{k + 1})$.
+\end{definition}
+
+\end{document}
