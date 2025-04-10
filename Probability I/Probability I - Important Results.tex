@@ -185,6 +185,39 @@
 
 \newpage
 
+\section{Expectation identities}
+
+We define expectation of a random variable $X$ as
+\[
+\E(X) = \sum_{x \in \mathcal{X}}x\P(X = x)
+\]
+discrete $X$,
+\[
+\E(X) = \int_{-\infty}^{\infty}x\P(X = x)
+\]
+continuous $X$.
+
+We also define variance of a random variable $X$ as
+\[
+\Var(X) = \E((X - \E(X)) ^ 2).
+\]
+
+We define the covariance of two random variables $X, Y$ by
+\[
+\Cov(X, Y) = \E((X - \E(X))(Y - \E(Y)))
+\]
+or similarly
+\[
+\Cov(X, Y) = \E(XY) - \E(X)\E(Y).
+\]
+
+Additionally there is the conditional expectation
+\[
+\E(X\mid A) = \sum_{x \in \mathcal{X}}x\cP{X = x}{A}.
+\]
+
+\newpage
+
 \section{Probability inequalities}
 
 \begin{theorem}[Monotonicity of expectation]
@@ -208,5 +241,66 @@
     \P(|X - \E(X)| \geq a) \leq \frac{\Var(X)}{a ^ 2}.
     \]
 \end{corollary}
+
+\newpage
+
+\section{Methods}
+
+\subsection{Central limit theorem}
+Given a distribution if we can find $\sigma$ and $\mu$ then we are able to use the central limit theorem to show that
+\[
+X \sim \sigma ^ 2 Z + \mu
+\]
+which means that for any
+\[
+\P(X \leq x) = \P\left(\sigma ^ 2 Z + \mu \leq x\right) \iff \P(X \leq x) = \P\left(Z \leq \frac{x - \mu}{\sigma ^ 2}\right) = \Phi\left(\frac{x - \mu}{\sigma}\right).
+\]
+
+However,
+if we are looking at a situation with $n$ "parts" then we will need to account for this.
+Let $S_n \coloneqq \sum_{i = 1}^{n}X_i$,
+so $\bar{X}_n \coloneqq S_n / n$ thus
+\[
+\P(\bar{X} \leq x) = \P\left(\sigma ^ 2\frac{S_n}{n} + \mu \leq x\right) \iff \P(\bar{X} \leq x) = \P\left(Z \leq \frac{x - \mu}{\sigma ^ 2 / n}\right) = \Phi\left(\frac{x - \mu}{\sigma / \sqrt{n}}\right).
+\]
+
+\subsection{Joint distribution tables}
+To find a joint distribution table from variables $X, Y$,
+label the columns with $y = 0, 1, 2, \dotsc$ and the rows $x = 0, 1, 2, \dotsc$,
+then in the box where $x = i, y = j$ put $\P(x = i, y = j)$,
+with an extra row on the bottom being the sum of the column for each $y$,
+likewise for the rows to get $p(y)$ along the bottom and $p(x)$ down the side.
+
+\begin{example}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|ccc|c}
+             $p(x, y)$ & $y = 0$ & $y = 1$ & $y = 2$ & $p(x)$  \\
+             \hline
+             $x = 0$ & $p(0, 0)$ & $p(0, 1)$ & $p(0, 1)$ & $\sum_{i = 0}^{2}p(0, i)$ \\
+             $x = 1$ & $p(1, 0)$ & $p(1, 1)$ & $p(1, 1)$ & $\sum_{i = 0}^{2}p(1, i)$ \\
+             $x = 2$ & $p(2, 0)$ & $p(2, 1)$ & $p(2, 1)$ & $\sum_{i = 0}^{2}p(2, i)$ \\
+             \hline
+             $p(y)$ & $\sum_{i = 0}^{2}p(i, 0)$ & $\sum_{i = 0}^{2}p(i, 1)$ & $\sum_{i = 0}^{2}p(i, 2)$ &
+        \end{tabular}
+    \end{table}
+\end{example}
+
+\subsection{Finding \texorpdfstring{$\E(X ^ k)$}{} using moment generating functions}
+If we can find a moment generating function $M_X(t)$ for a random variable $X$ then we can find $\E(X ^ k)$ by the following
+\[
+\E(X ^ k) = \frac{d ^ k}{dt ^ k}M_X(0) = M_X ^ {(k)}(0).
+\]
+We can use this together with the fact that
+\[
+M_{aX + b}(t) = e ^ {bt}M_X(at)
+\]
+and for $X_1, \dotsc, X_n$ independent random variables with $Y = \sum_{i = 1}^{n}X_i$ then
+\[
+M_Y(t) = \prod_{i = 1}^{n}M_{X_i}(t)
+\]
+to get expectations for distributions such as the Binomial distribution
+($Y_n = X_1 + X_2 + \dotsc X_n$ Bernoulli random variables).
+
 
 \end{document}
