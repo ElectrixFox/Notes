@@ -386,4 +386,93 @@ each term representing a possible value for $e_i$.
 $x ^ {e_1}\cdot x ^ {e_2}\cdot x ^ {e_3}\cdot x ^ {e_4} = x ^ {e_1 + e_2 + e_3 + e_4} = x ^ 7$.
 So the number of solutions corresponds to the coefficient of $x ^ 7$ in $f(x)$.
 
+\subsection{Recurrence relations with generating functions}
+Say we have a recurrence relation $f_n = f_{n - 2} + f_{n - 4}$ with the generating function for $f_n$ being $f(x) = \infsum[n = 0]f_nx ^ n$ then we can do the following.
+
+Clearly
+\[
+f_n = f_{n - 2} + f_{n - 4}
+\]
+is only true for $n \geq 4$ as we cannot have $f_{-1}$.
+
+Now we need to work with this expression for the generating function
+\begin{align*}
+    f(x) &= \infsum[n = 0]f_nx ^ n \\
+    &= f_0 + f_1x + f_2x ^ 2 + f_3x ^ 3 + \infsum[n = 4]f_nx ^ n \\
+    &= f_0 + f_1x + f_2x ^ 2 + f_3x ^ 3 + \infsum[n = 4]f_{n - 2}x ^ n + \infsum[n = 4]f_{n - 4}x ^ n \\
+    &= f_0 + f_1x + f_2x ^ 2 + f_3x ^ 3 + x ^ 2\infsum[n = 2]f_nx ^ n + x ^ 4\infsum[n = 0]f_nx ^ n \\
+    &= f_0 + f_1x + f_2x ^ 2 + f_3x ^ 3 + x ^ 2(\infsum[n = 0]f_nx ^ n - f_0 - f_1x) + x ^ 4\infsum[n = 0]f_nx ^ n \\
+    &= f_0 + f_1x + f_2x ^ 2 + f_3x ^ 3 - f_0x ^ 2 - f_1x ^ 3 + x ^ 2\infsum[n = 0]f_nx ^ n + x ^ 4\infsum[n = 0]f_nx ^ n \\
+    &= f_0 + f_1x + f_2x ^ 2 + f_3x ^ 3 - f_0x ^ 2 - f_1x ^ 3 + x ^ 2f(x) + x ^ 4f(x) \\
+    \intertext{which we can then substitute in values for $f_0, \dotsc, f_3$ to get an expression}
+    &\iff \\
+    f(x)(1 - x ^ 2 - x ^ 4) &= f_0 + f_1x + f_2x ^ 2 + f_3x ^ 3 - f_0x ^ 2 - f_1x ^ 3 \\
+    &\iff \\
+    f(x) &= \frac{f_0 + f_1x + f_2x ^ 2 + f_3x ^ 3 - f_0x ^ 2 - f_1x ^ 3}{1 - x ^ 2 - x ^ 4}.
+\end{align*}
+This is the expression for this particular sequence.
+
+\begin{center}
+\fbox{
+\begin{minipage}{0.9\textwidth}  
+    In compact terms,
+    we expand the series to the starting point of our recurrence relation $n \geq s$.
+    Then we apply the recurrence relation,
+    expand,
+    and relabel the series to get $\infsum[n = 0]a_nx ^ n = f(x)$ and $x$ terms.
+    Finally,
+    we rearrange for $f(x)$.
+\end{minipage}
+}
+\end{center}
+\hfill
+
+
+\subsection{Counting integer solutions}
+Given an expression of the following form
+\[
+x_1 + x_2 + \dotsc + x_n = k
+\]
+how many integer solutions are there to this equation where $\forall i \in \N, 0 \leq x_i$?
+
+The answer is
+\[
+\binom{k + n - 1}{n - 1}.
+\]
+
+We also have the case where $n_i \leq x_i$,
+in general we can rewrite this equation as follows:
+say we have
+\[
+x_1 + \dotsc + x_n = k
+\]
+and $n_i \leq x_i$ then to find the number of integer solutions which satisfy these conditions we use the following substitution
+\[
+y_i = x_i + n_i
+\]
+then we get
+\[
+x_1 + \dotsc + x_n = k \iff y_1 + \dotsc + y_n + (n_1 + \dotsc + n_n) = k \iff y_1 + \dotsc + y_n = k - (n_1 + \dotsc + n_n)
+\]
+meaning if we let $a = k - (n_1 + \dotsc + n_n)$ and simply relabel $y_i = x_i$ then
+\[
+x_1 + \dotsc + x_i = a
+\]
+is the same problem as the original which gives us the final answer:
+\[
+\binom{a + n - 1}{n - 1} = \binom{k - (n_1 + \dotsc + n_n) + n - 1}{n - 1}.
+\]
+
+Now let us look at the case where $x_i \leq n_i$ for some $x_i$ we would need to use the inclusion-exclusion principle to find the number of combinations,
+e.g.
+if we had $x_1 + x_2 + x_3 = 5$ with $0 \leq x_1$,
+$0 \leq x_2$ and $x_3 \leq 3$,
+we would find the number with only $x_1 + x_2 = 5$,
+$x_1 + x_2 = 4$,
+and subtract the intersection.
+
+
+
+
+
 \end{document}
