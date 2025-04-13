@@ -190,6 +190,90 @@ Since $\E(\bar{X}) = \mu$ $\bar{X}$ is unbiased.
     \]
 \end{theorem}
 
+\newpage
+
+\section{Confidence intervals}
+
+To find the confidence interval for $\mu$ we have these cases:
+\begin{enumerate}[label = (\roman*)]
+    \item 
+    $\sigma$ is known:
+    $n$ large or Normal population
+    (and $n$ small)
+    \[
+    \bar{x} \pm z ^ {*}\frac{\sigma}{\sqrt{n}}.
+    \]
+
+    \item
+    $\sigma$ is unknown:
+    $n$ small and population Normal
+    \[
+    \bar{x} \pm t_{n - 1} ^ {*}\frac{s}{\sqrt{n}}.
+    \]
+
+    $n$ large
+    \[
+    \bar{x} \pm z ^ {*}\frac{s}{\sqrt{n}}.
+    \]
+\end{enumerate}
+
+\subsection{Hypothesis testing using confidence intervals}
+
+\textbf{Two-sided case}
+
+Given $H_0 : \theta = r$ and $H_a : \theta \neq r$ and a significance level $\alpha$,
+we construct a $1 - \alpha$ confidence interval for $\theta$,
+then we reject $H_0$ if $r$ lies outside the confidence interval,
+then the test is statistically significant at the $\alpha\%$ level of significance.
+
+Otherwise we fail to reject $H_0$ and the test is not significant at the $\alpha\%$ significance level.
+
+\textbf{One-sided case}
+
+Given $H_0 : \theta = r$,
+$H_a : \theta < r$
+(or $H_a : \theta > r$)
+and a level of significance $\alpha$;
+we can construct a $1 - 2\alpha$ confidence interval for $\theta$,
+and we can reject $H_0$ if $r$ falls to the right
+(left)
+of the confidence interval,
+otherwise we fail to reject $H_0$.
+
+\subsection{Hypothesis testing using \texorpdfstring{$p$}{}-values}
+
+For a one-sided test the $p$-value is the probability of being in the tail.
+In a two-sided test it is the probability of being in both tails,
+so we can just double the probability of being in one of the tails
+(since it is symmetric).
+
+\subsection{Types of test}
+Type I error:
+\[
+\cP{\text{reject $H_0$}}{\text{$H_0$ true}}.
+\]
+
+Type II error:
+\[
+\cP{\text{not reject $H_0$}}{\text{$H_0$ false}}.
+\]
+
+The significance level $\alpha$ of a test is $\cP{\text{type I error}}{H_0}$.
+
+The power of a test is $1 - \cP{\text{type II error}}{H_a}$.
+
+\newpage
+
+\section{Bayesian}
+
+We have
+\[
+f(\theta\mid x) = \frac{f(x\mid \theta)f(\theta)}{f(x)}
+\]
+which is equivalent to
+\[
+\text{Posterior} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Data probability}}
+\]
 
 
 \end{document}
