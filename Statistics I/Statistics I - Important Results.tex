@@ -58,7 +58,7 @@
 \begin{enumerate}[label = (\roman*)]
     \item $\P(D ^ {+})$ is the prior probability of disease.
     
-    \item $\P{T ^ {+}}{D ^ {+}}$ and $\P{T ^ {+}}{D ^ {-}}$ is the likelihood of a positive test given disease status.
+    \item $\cP{T ^ {+}}{D ^ {+}}$ and $\cP{T ^ {+}}{D ^ {-}}$ is the likelihood of a positive test given disease status.
     
     \item $\cP{D ^ {+}}{T ^ {+}}$ is the posterior probability of disease given positive test.
 \end{enumerate}
@@ -275,5 +275,92 @@ which is equivalent to
 \text{Posterior} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Data probability}}
 \]
 
+\newpage
+
+\section{Methods}
+
+\subsection{Disease testing}
+
+Given a test group and data in the following form
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|cc|c}
+        & $D ^ {+}$ & $D ^ {-}$ & \text{Total}  \\
+        \hline
+        $T ^ {+}$ & $t_{11}$ & $t_{12}$ & $t_{11} + t_{12}$ \\
+        $T ^ {-}$ & $t_{21}$ & $t_{22}$ & $t_{21} + t_{22}$ \\
+        \hline
+        \text{Total} & $t_{11} + t_{21}$ & $t_{12} + t_{22}$
+    \end{tabular}
+\end{table}
+
+We can define the sensitivity of a test as:
+the \textbf{probability} of testing \textbf{positive} given \textbf{has disease}:
+\[
+\cP{T ^ {+}}{D ^ {+}}.
+\]
+Similarly,
+the specificity can be defined as:
+the probability of testing \textbf{negative} given \textbf{doesn't have disease}:
+\[
+\cP{T ^ {-}}{D ^ {-}}.
+\]
+
+The false positive probability can be defined as
+\[
+\cP{T ^ {+}}{D ^ {-}}
+\]
+similarly for the false negative:
+\[
+\cP{T ^ {-}}{D ^ {+}}.
+\]
+
+We can calculate the probability of false positive then we would need
+\[
+\cP{D ^ {+}}{T ^ {+}} = \frac{\cP{T ^ {+}}{D ^ {+}}\P(D ^ {+})}{\P(T ^ {+})} = \frac{\cP{T ^ {+}}{D ^ {+}}\P(D ^ {+})}{\cP{T ^ {+}}{D ^ {+}}\P(D ^ {+}) + \cP{T ^ {+}}{D ^ {-}}\P(D ^ {-})}.
+\]
+When we have conditionally independent test results given disease status,
+we can say $\cP{T ^ {n+}}{D ^ {+}} = \cP{T ^ {+}}{D ^ {+}} ^ n$ similarly for $\cP{T ^ {n+}}{D ^ {-}}$.
+Then we would simply repeat the previous calculation to find the probability of $\cP{D ^ {+}}{T ^ {++}}$.
+
+\subsection{Sets of Bernoulli trials}
+Say $n$ Bernoulli trials $X_1, \dotsc, X_n$ are performed with probability $p$ of success.
+Let $X = \sum_{i = 1}^{n}X_i$.
+
+The \textbf{distribution} of $X$ is $X \sim \Bin(n, p)$.
+
+We can find the \textbf{likelihood} as a function of $p$ by
+\[
+\ell(p) = f(x\mid p) = \binom{n}{x}p ^ x(1 - p) ^ {n - x}.
+\]
+
+To find the \textbf{maximum likelihood estimate} of $p$ given $n = 20$ and $x = 5$ then we would use the log likelihood,
+i.e.
+\[
+\mathcal{L}(p) = \log{\ell(p)} = \log{\binom{n}{x}} + x\log{p} + (n - x)\log(1 - p)
+\]
+which for $p_{MLE}$ we would need
+\[
+0 = \pd[\mathcal{L}]{p} = \pd{p}\left(\log{\binom{n}{x}} + x\log{p} + (n - x)\log(1 - p)\right) = \frac{x}{\hat{p}} - \frac{n - x}{1 - \hat{p}}
+\]
+which is equivalent to
+\[
+\frac{x}{\hat{p}} = \frac{n - x}{1 - \hat{p}} \iff \hat{p} = \frac{x}{n}
+\]
+in our case this would be $\hat{p} = \frac{1}{4}$.
+
+
+Given a prior with distribution $p \sim \mathrm{Beta}(a, b)$,
+in order to derive a posterior pdf we would need
+\[
+f(p\mid x) \propto f(x\mid p)f(p)
+\]
+(using Bayes theorem)
+then
+\[
+f(p \mid x) \propto \binom{n}{x}p ^ x(1 - p) ^ {n - x}\times\frac{1}{B(a, b)}p ^ {a - 1}(1 - p) ^ {b - 1}\propto p ^ {a + x - 1}(1 - p) ^ {b + n - x - 1}
+\]
+giving us a posterior distribution:
+$\mathrm{Beta}(a + x, b + n - x)$.
 
 \end{document}
