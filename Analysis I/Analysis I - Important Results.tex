@@ -1,6 +1,7 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage{preamble}
 
+\newcommand{\lhopital}[0]{L' H\^opital}
 \newcommand{\limas}[3][n]{#2 \rightarrow #3 \text{ as } #1 \rightarrow \infty}
 
 \title{Analysis I \\
@@ -176,5 +177,167 @@
     \]
     $x_k ^ {*}$ is any element in $(x_k, x_{k + 1})$.
 \end{definition}
+
+\newpage
+
+\section{Important theorems}
+
+\begin{proposition}[Inverse function rule]
+    Let $f : I \to \R$ be continuous on the interval $I$,
+    differentiable at a point $d$.
+    Assume that $f$ is invertible with inverse $f ^ {-1}$ and that $f'(d) \neq 0$.
+    Then $f ^ {-1}$ is differentiable at $c \coloneqq f(d)$ with
+    \[
+    (f ^ {-1})'(c) = \frac{1}{f'(f ^ {-1}(c))}.
+    \]
+\end{proposition}
+
+\begin{theorem}[Mean Value Theorem]
+    Let $f : [a, b] \to \R$ be continuous and differentiable on $(a, b)$.
+    Then there exists $c \in (a, b)$ such that
+    \[
+    f'(c) = \frac{f(b) - f(a)}{b - a}.
+    \]
+\end{theorem}
+
+\begin{theorem}[Growth Theorem]
+    Let $f : I \to \R$ be continuous function on an interval $I$,
+    differentiable in its interior points.
+    Then if $f'(x) = 0$ for all $x$,
+    then $f$ is constant.
+\end{theorem}
+
+\begin{theorem}[\lhopital's Rule]
+    Let $f, g$ differentiable functions on $(a, b)$.
+    Assume $\lim_{x \to a ^ {+}}f(x) = 0 = \lim_{x \to a ^ {+}}g(x)$ and $g(x) \neq 0, g'(x) \neq 0$ for all $x$.
+    If $\lim_{x \to a ^ {+}}f'(x) / g'(x)$ exists,
+    then also $\lim_{x \to a ^ {+}}f(x) / g(x)$ exists,
+    and we have
+    \[
+    \lim_{x \to a ^ {+}}\frac{f(x)}{g(x)} = \lim_{x \to a ^ {+}}\frac{f'(x)}{g'(x)}.
+    \]
+\end{theorem}
+
+\begin{theorem}[Ratio Test]
+    Let $(a_k)$ be a sequence $a_k \neq 0$ for all but some $k$ if
+    \[
+    \liminfty[k]\frac{|a_{k + 1}|}{|a_k|} < 1
+    \]
+    then $\infsumo a_k$ converges absolutely.
+\end{theorem}
+
+\begin{theorem}[Root Test]
+    For a sequence $(a_k)$ if
+    \[
+    \limsup_{k \to \infty}|a_k| ^ {1 / k} < 1
+    \]
+    then $\infsumo a_k$ converges absolutely.
+\end{theorem}
+
+\textbf{Both of the above tell nothing for equality to $1$.}
+
+\begin{theorem}[Cauchy-Hadamard]
+    Let $\infsumo a_kx ^ k$ be a power series.
+    Then there exists a constant $R \in [0, \infty]$ such that:
+    if $R = 0$,
+    $\infsumo a_kx ^ k$ converges only for $x = 0$.
+    If $R > 0$,
+    then
+    \[
+    \infsumo a_kx ^ k\text{ converges absolutely for $x \in (-R, R)$}.
+    \]
+\end{theorem}
+
+\begin{theorem}
+    Let $f_n$ be a sequence of continuous functions on an interval $I$ such that $f_n \to f$ uniformly.
+    Then the limit function $f$ is also continuous.
+\end{theorem}
+
+\begin{theorem}[Weierstrass M-Test]
+    Let $I \subset \R$ be an interval and $(f_k)$ be a sequence of functions $f_k : I \to \R$.
+    Let $M_k$ be a sequence of real numbers
+    (not depending on $x \in I$!)
+    satisfying
+    \begin{center}
+        \begin{enumerate}[label = (\roman*)]
+            \item $|f_k(x)| \leq M_k$ for all $x \in I$;
+    
+            \item $\displaystyle \infsumo M_k$ is convergent.
+        \end{enumerate}
+    \end{center}
+    Then $\infsumo f_k(x)$ converges uniformly
+    (and absolutely)
+    to a limit function $f(x)$.
+\end{theorem}
+
+\newpage
+
+\section{Methods}
+
+\textbf{Important}
+
+Remember that when we look at functions $f : I \to \R$ if you have $(x_n)_{n \in \N} \in I$ then we can look at $f(x_n)$ in the same way as we would $f(x)$.
+
+
+\subsection{Functions by derivatives}
+We can define functions through their derivatives.
+
+\begin{example}
+    Let
+    \[
+    \exp(x) \coloneqq \infsumo\frac{x ^ k}{k!}
+    \]
+    then we can show $\exp(x + y) = \exp(x)\exp(y)$ by the following.
+
+    Consider $f(t) \coloneqq \exp(x + t)\exp(y - t)$ then,
+    $f(0) = \exp(x)\exp(y)$ and $f(y) = \exp(x + y)$.
+    But
+    \[
+    f'(t) = \exp(x + t)\exp(y - t) - \exp(x + t)\exp(y - t) = 0
+    \]
+    meaning $f(t)$ is constant by the growth theorem,
+    thus we can see that
+    \[
+    f'(t) = f(t) + C
+    \]
+    since $f'(0) = 0$ and $f(0) = \exp(x)\exp(y)$,
+    $C = -\exp(x)\exp(y)$ we can conclude
+    \[
+    0 = f'(y) = \exp(x + y) - \exp(x)\exp(y) \iff \exp(x + y) = \exp(x)\exp(y).
+    \]
+\end{example}
+
+We can do a similar procedure for $\sin(x + y), \cos(x + y)$.
+\begin{example}
+    Define
+    \[
+    f(t) \coloneqq \sin(x + t)\cos(y - t) + \cos(x + t)\sin(y - t).
+    \]
+    \begin{align*}
+        f(0) &= \sin(x)\cos(y) + \cos(x)\sin(y) \\
+        f(t) &= \sin(x + y) \\
+        f'(t) &= \cos(x + t)\cos(y - t) + \sin(x + t)\sin(y - t) \\
+        &- \sin(x + t)\sin(y - t) - \cos(x + t)\cos(y - t) = 0.
+    \end{align*}
+    Then by the growth theorem this is constant hence
+    \begin{align*}
+        f'(t) &= f(t) + C \\
+        &\iff \\
+        0 = f'(0) &= \sin(x)\cos(y) + \cos(x)\sin(y) + C  \\
+        &\iff \\
+        C &= -\sin(x)\cos(y) - \cos(x)\sin(y)
+        \intertext{which means that}
+        0 = f'(t) &= f(t) + C \\
+        &\iff \\
+        f(t) &= -C \\
+        &\iff \\
+        \sin(x + y) &= \sin(x)\cos(y) + \cos(x)\sin(y).
+    \end{align*}
+    We can then just see that $\sin(x)' = \cos(x)$ so $\sin(x + y)' = \cos(x + y)$ then apply the product rule.
+\end{example}
+
+
+
+
 
 \end{document}
