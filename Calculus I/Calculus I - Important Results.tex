@@ -839,6 +839,34 @@ Let $f, g$ be two functions with Fourier transforms $\tilde{f}(p), \tilde{g}(p)$
 
 \section{Methods}
 
+\subsection{Solving ODEs using the Bernoulli equation}
+Given a non-linear ODE of the form
+\[
+y' + p(x)y = q(x)y ^ n
+\]
+then we can solve the ODE using a substitution $v = y ^ {1 - n}$.
+
+It is best to see this method through an example
+\begin{example}
+    \[
+    y' - \frac{2y}{x} = -x ^ 2y ^ 2
+    \]
+    then we use the substitution $v = \frac{1}{y}$.
+    Once we have the substitution we then use the chain rule/product rule
+    \[
+    v' = -\frac{y'}{y ^ 2}
+    \]
+    which eventually leads to
+    \[
+    v' + \frac{2}{x}v = x ^ 2
+    \]
+    then we can use an integrating factor to get the final result
+    \[
+    y = \frac{1}{v} = \frac{5x ^ 2}{x ^ 5 + c}.
+    \]
+\end{example}
+
+
 \subsection{Solving ODEs with Fourier transforms}
 Using the following
 \[

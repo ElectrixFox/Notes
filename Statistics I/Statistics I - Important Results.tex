@@ -363,4 +363,61 @@ f(p \mid x) \propto \binom{n}{x}p ^ x(1 - p) ^ {n - x}\times\frac{1}{B(a, b)}p ^
 giving us a posterior distribution:
 $\mathrm{Beta}(a + x, b + n - x)$.
 
+
+\subsection{Making quantile plots}
+
+To make a quantile plot find the data $x_k$ then find $\Phi(z_k) = \frac{k}{k + 1}$ and what $z_k$ would approximately be,
+this gives $(z_k, x_k)$ as the coordinate for the plot.
+
+
+\subsection{Finding the likelihood from a pdf}
+Given a continuous random quantity $X$ with pdf $f(x\mid \alpha)$.
+
+We will use the case $f(x\mid \alpha) = 4\alpha ^ 4x ^ 3e ^ {-(\alpha x) ^ 4}$ with $\alpha > 0$.
+
+If we assume $n$ i.i.d. observations $x_1, \dotsc, x_n$ are sampled from this distribution.
+Derive the likelihood function for $\alpha$ based on these data.
+
+We simply use
+\[
+\ell(\alpha\mid x_1, \dotsc, x_n) = \prod_{i = 1}^{n}f(x_i\mid \alpha).
+\]
+
+To find a sufficient statistic for estimating $\alpha$ we can use the factorisation theorem and rewrite the $\ell(\alpha\mid x_1, \dotsc, x_n)$ in terms
+\[
+g(T, \alpha)h(x_1, \dotsc, x_n)
+\]
+with $T = \sum_{i = 1}^{n}x_i ^ 4$ in our example.
+Thus $T = \sum_{i = 1}^{n}x_i ^ 4$ and $n$ are sufficient statistics for $\alpha$.
+
+To find the maximum likelihood estimate of $\alpha$ we can log the likelihood function and solve for when $\pd[\mathcal{L}]{\alpha} = 0$.
+\textbf{Don't forget to show it is a maximum by differentiating again and showing it is $< 0$}.
+
+To show that for general data $x_1, \dotsc, x_n$ conjugate priors for $\alpha$ can be specified using the probability density function
+\[
+f(a) \propto g(a)
+\]
+all we need to show is that we can write $g(a)$ in the form of $f(a)$,
+in our example this would be
+\begin{align*}
+    f(\alpha\mid x_1, \dotsc, x_n) &\propto f(x_1, \dotsc, x_n\mid \alpha)f(\alpha) \\
+    &\propto \ell(\alpha\mid x_1, \dotsc, x_n)f(\alpha) \\
+    &\propto \alpha ^ {4n + b\nu}e ^ {-(T\alpha ^ 4 + \tau\alpha ^ b)}
+\end{align*}
+so for our example $b = 4$.
+
+The parameter $\nu$ would be $y_1, \dotsc, y_{\nu}$ of prior sample and $\tau = \sum_{i = 1}^{\nu}y_i ^ 4$.
+
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}
