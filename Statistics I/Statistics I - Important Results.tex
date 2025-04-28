@@ -408,9 +408,35 @@ so for our example $b = 4$.
 
 The parameter $\nu$ would be $y_1, \dotsc, y_{\nu}$ of prior sample and $\tau = \sum_{i = 1}^{\nu}y_i ^ 4$.
 
+\subsection{Finding credible intervals with i.i.d's}
 
+Let $X_1, \dotsc, X_n$ be an i.i.d. sample of size $n$ from a $N(\mu, 1 / \tau)$ distribution,
+where the precision $\tau = 1 / \sigma ^ 2$ is assumed known.
 
+If the prior for $\mu$ is given a normal distribution such that $\mu \sim N(m, 1 / t)$,
+the posterior for $\mu$ will also be normal with
+\begin{align*}
+    \mu&\mid x_1, \dotsc, x_n \sim N\left(m_1, \frac{1}{t_1}\right), \\
+    \text{where}\quad t_1 &= t + n\tau,\quad\text{and}\qquad m_1 = \frac{tm + n\tau\bar{x}}{t_1}.
+\end{align*}
 
+If we want to find the posterior distribution for $\mu$ we would do the following:
+
+Obtain the prior precision using $t = \frac{1}{v ^ 2}$ and $\mu \sim N(m, v ^ 2)$.
+Then we can use the given information to work out the precision $\tau$ to get our conjugate prior.
+The posterior for $\mu\mid x_1, \dotsc, x_n$ will be given by
+\[
+\mu\mid x_1, \dotsc, x_n \sim N\left(m_1, v_1 ^ 2 = \frac{1}{t_1}\right)
+\]
+where $t_1 = t + n\tau$,
+and $m_1 = \frac{tm + n\tau\bar{x}}{t_1}$.
+
+Since the posterior is normal it is symmetric and therefore the EQT and HPD will be equal.
+
+We can fine the $95\%$ EQT credible interval by
+\[
+m \pm z_{\alpha / 2}v.
+\]
 
 
 
