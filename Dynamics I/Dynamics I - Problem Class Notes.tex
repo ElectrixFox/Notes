@@ -332,7 +332,117 @@
     \end{solution}
 \end{problem}
 
+\newpage
 
+\section{Questions from problem class \texorpdfstring{$4$}{}}
 
+\begin{problem}[2024 4.2.]
+    Unit mass $m$ attractive central force magnitude $\lambda ^ 2r$
+    ($\lambda > 0$ constant).
+    Initially $\mbf{r}(0) = \mbf{e}_r$,
+    $\mbf{v}(0) = u\mbf{e}_{\theta}$,
+    with $0 < u < \lambda$.
+    \begin{enumerate}[label = (\roman*)]
+        \item Find equation like $\ddot{r} ^ 2 = W(r)$.
+
+        \item Find $r_{\text{min}}$ and $r_{\text{max}}$.
+    \end{enumerate}
+
+    \begin{solution}
+        \begin{enumerate}[label = (\roman*)]
+            \item 
+            Angular momentum
+            \[
+            \mbf{L} = m\mbf{r} \times \mbf{v} \overset{t = 0}{=} \mbf{e}_r \times (u\mbf{e}_{\theta}) = u\mbf{e}_3  \implies L = u
+            \]
+            and $L = mr ^ 2\dot{\theta} = r ^ 2\dot{\theta} = u$,
+            therefore $\dot{\theta} = u / r ^ 2$.
+            Energy $E = K + V$ where $V = -\int f(r)\,dr$ with $f(r) = -\lambda ^ 2r$,
+            which implies $V = \frac{1}{2}\lambda ^ 2r ^ 2$.
+            So
+            \[
+            E \overset{t = 0}{=} \frac{1}{2}mv_0 ^ 2 + V_{t = 0} = \frac{1}{2}u ^ 2 + \frac{1}{2}\lambda ^ 2
+            \]
+            and $E = \frac{1}{2}m(\dot{r} + r ^ 2\dot{\theta} ^ 2) + V(r) = \frac{1}{2}\left(\dot{r} ^ 2 + \frac{u ^ 2}{r ^ 2}\right) + \frac{1}{2}\lambda ^ 2r ^ 2$,
+            which implies $\dot{r} ^ 2 = W(r) = (u ^ 2 + \lambda ^ 2) - \frac{u ^ 2}{r ^ 2} - \lambda ^ 2r ^ 2$.
+
+            \item
+            Max/min when $\dot{r} = 0$ and $W(r) = 0$,
+            $W(r) = (\lambda ^ 2 - u ^ 2 / r ^ 2)(1 - r ^ 2)$,
+            zeros at $r = 1, r = u / \lambda$.
+            $r_{\text{max}} = 1$,
+            $r_{\text{min}} = u / \lambda$.
+        \end{enumerate}
+    \end{solution}
+\end{problem}
+
+\begin{problem}[2024 3.2.]
+    Particle mass $M$ moves along $x$-axis collides with two particles both stationary with $m = 10$.
+    After the collision $M$ is at rest and the other two particles is moving at $\phi$ to the $x$-axis.
+
+    Find $R = \frac{M}{m}$ in terms of $\phi$.
+
+    \begin{solution}
+        Let the speed of the first particle be $v$ and the speeds of the other two particles after the collision $u$
+        (they have the same speedy by symmetry).
+
+        Momentum:
+        \[
+        Mv = 2mu\cos{\phi}.
+        \]
+        Energy:
+        \[
+        \frac{1}{2}Mv ^ 2 = mu ^ 2.
+        \]
+        So
+        \[
+        \frac{u ^ 2}{v ^ 2} = \frac{M}{2m} = \left(\frac{M}{2m\cos{\phi}}\right) ^ 2 = \frac{M ^ 2}{4m ^ 2\cos ^ 2{\phi}} \implies R = \frac{M}{m} = 2\cos ^ 2{\phi}.
+        \]
+    \end{solution}
+\end{problem}
+
+\begin{problem}[2024 5.2.]
+    Rod mass $M$ length $L$,
+    pivoted at one end,
+    mass $2M$ at other end and mass $3M$ in the middle.
+
+    \begin{enumerate}[label = (\roman*)]
+        \item Distance $D$ from pivot to centre of mass
+        (Regard rod as single particle).
+
+        \item Find moment of inertia $I$.
+
+        \item Find energy in terms of angle.
+
+        \item Release rod from horizontal position,
+        what is the speed $u$ of the end when vertical.
+    \end{enumerate}
+
+    \begin{solution}
+        \begin{enumerate}[label = (\roman*)]
+            \item 
+            \[
+            \frac{1}{6M}\left(M \cdot \frac{1}{2}L + 2M\cdot L + 3M \cdot \frac{1}{2}L\right) = \frac{2}{3}L.
+            \]
+
+            \item
+            \[
+            I = \int_{0}^{L}M\frac{1}{L}x ^ 2\,dx = \frac{1}{3}ML ^ 2
+            \]
+            so $I = \frac{1}{3}ML ^ 2 = 2ML ^ 2 + 3M\left(\frac{1}{2}L ^ 2\right) ^ 2 = \frac{37}{12}ML ^ 2$.
+
+            \item
+            \[
+            E = \frac{1}{2}I\dot{\theta} ^ 2 + V(\theta) = \frac{37}{24}ML ^ 2\dot{\theta} ^ 2 + (6M)g\left(\frac{2}{3}L\right)(1 - \cos{\theta}).
+            \]
+
+            \item
+            \[
+            4MgL = \frac{37}{24}ML ^ 2\dot{\theta} ^ 2 = \frac{37}{24}u ^ 2.
+            \]
+            $u = L\dot{\theta}$
+        \end{enumerate}
+    \end{solution}
+\end{problem}
 
 \end{document}
