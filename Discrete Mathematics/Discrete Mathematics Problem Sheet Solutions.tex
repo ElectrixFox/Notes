@@ -1,8 +1,6 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage{preamble}
 
-\declaretheorem[style = avgstyle, name = Problem]{problem}
-
 \title{Discrete Mathematics Problem Sheet Solutions}
 \author{Luke Phillips}
 \date{October 2024}
@@ -115,5 +113,125 @@
         
     \end{proof}
 \end{problem}
+
+\newpage
+
+\section{Revision lecture}
+
+\begin{problem}
+    $G(V, E)$ connected simple planar,
+    every vertex degree $3$,
+    every face with either $4, 6$ edges,
+    exactly $2$ faces with $6$ edges.
+    How many faces of $4$ edges are there?
+    Draw an example.
+
+    \begin{solution}
+        Euler's theorem:
+        \[
+        V - E + F = k + 1.
+        \]
+        Since complete $2k$ connected components
+        \[
+        V - E + F = 2k + 1.
+        \]
+        
+        Handshaking lemma:
+        \[
+        \sum_{G}d(v) = 2|E|
+        \]
+        \[
+        \sum_{f}b(f) = 2|E|.
+        \]
+
+        Two faces with six edges
+        \[
+        2|E| = 2 \cdot 6 + 4(F \cdot 2)
+        \]
+
+        since every vertex is of degree $3$:
+        \[
+        3V = 2E
+        \]
+        from the handshaking lemma.
+
+        \[
+        3V = 2E = 2 \cdot 6 + 4(F \cdot 2)
+        \]
+        \[
+        2V - 2E + 2F = 4 \iff -V + 2F = 4
+        \]
+        \begin{align*}
+            -3V &= 12 - 6F \\
+            3V &= 12 + 4F - 8 \\
+            &\iff \\
+            0 &= 24 - 2F - 8 \implies 2F = 16 \implies F = 8.
+        \end{align*}
+
+        There are $6$ faces with $4$ edges
+        (as there are two with six edges so $F - 2 = 6$).
+
+        Diamond inside of a diamond with each edge on the smaller diamond connecting the the respective one on the larger one.
+        Then there is one face of $6$ on the inside diamond and one on the exterior.
+        
+    \end{solution}
+\end{problem}
+
+\begin{problem}
+    Let $K_n$ be the complete graph on $n \geq 3$ edges.
+    \begin{enumerate}[label = (\alph*)]
+        \item For which values of $n$ is $K_n$ Hamiltonian?
+        
+        \item For which values of $n$ is $K_n$ Eulerian?
+        
+        \item For which values of $n$ is $K_n$ Planar?
+
+        \item Show that $K_{2n}$ is a union of $n$ edge disjoint walks in $K_{2m}$.
+    \end{enumerate}
+
+    \begin{solution}
+        \begin{enumerate}[label = (\alph*)]
+            \item $n \geq 3$.
+            Take $C_n = (v_1, v_2, \dotsc, v_n, v_1)$ is a Hamiltonian cycle.
+
+            \item $K_n$ is Eulerian if and only if every vertex has even degree if and only if $n$ is odd.
+
+            \item 
+            By some theorem,
+            $G$ is planar if and only if it contains no subgraph which is a subdivision of $K_5$ or $K_{3, 3}$.
+            If $n \geq 5$ then $K_5$ is a subset of $K_n$ and so $K_n$ is not planar.
+
+            \item
+            The union of $G = (V, E)$ and $G' = (V', E')$ is the graph $\tilde{G} = (\tilde{V}, \tilde{E})$ where $\tilde{V} = V \cup V'$ and $\tilde{E} = E \cup E'$.
+            Consider $K_{2n} \subset K_{2n + 1}$.
+            By Euler's theorem there is an Eulerian cycle $W$ in $K_{2n + 1}$
+            $W = (v_{2n + 2}, w_1, w_2, \dotsc, v_{2n + 1}, w_1, \dotsc, v_{2n + 1})$ so
+            \[
+            \#\{i \in \N\,:\,w_i = v_{n + i}\} = \frac{2m - 2}{2} + 2 = m + 1.
+            \]
+            \[
+            \{i \in \N\,:\,w_i = v_{2n + i}\} = \{0, i_1, i_2, \dotsc, i_n\}
+            \]
+            for $j \leq m$ let $W ^ {(j)} = (w_{i_{j - 1}}, w_{i_{j - 1} + 2}, \dotsc, w_{i_{j - 1}})$.
+            $W ^ {(j)} \subseteq K_{2n}$ because $W$ spans
+            (uses)
+            all the edges we have $\bigcup_{j = 1}W ^ {(j)} = K_{2n}$.
+            $W ^ {(j)} \cap W ^ {(j + 1)} = \emptyset$ by edge disjointness of Eulerian circuit.
+        \end{enumerate}
+    \end{solution}
+\end{problem}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \end{document}
