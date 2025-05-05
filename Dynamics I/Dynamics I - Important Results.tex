@@ -62,6 +62,20 @@ then differentiating
 \frac{dE}{dt} = \frac{dE}{dx}\dot{x} = 0.
 \]
 
+\subsection{Conservative forces}
+A conservative force is one which that
+\[
+\mbf{F} = \left(-\pd[V]{x}, -\pd[V]{y}, -\pd[V]{z}\right).
+\]
+The total energy is
+\[
+E(\mbf{r}, \mbf{v}) = \frac{1}{2}mv ^ 2 + V(\mbf{r}).
+\]
+
+In the $\mbf{F}$ conservative force case we would want to integrate with respect to the relative variables,
+we would have unknown functions,
+e.g. $g(y, z)$ for $\pd[V]{x}$.
+
 \newpage
 
 \section{Potential}
@@ -118,6 +132,8 @@ feels the following force
 \[
 \mbf{F} = q(\mbf{E} + \mbf{v} \times \mbf{B}).
 \]
+Once the relevant information has been substituted in,
+solve the vector equation. 
 
 \newpage
 
@@ -146,9 +162,61 @@ the rate of change of angular momentum equals the applied torque:
 \frac{d\mbf{L}}{dt} = \mbf{r} \times \dot{\mbf{p}} = \mbf{r} \times \mbf{F} = \mbf{T}.
 \]
 
+\subsection{Bound orbits}
+To find if the orbit is bounded we get the energy
+\[
+E = K + V \implies \frac{1}{2}mv ^ 2 + V(r)
+\]
+then this has to be greater than $0$ for the orbit to be unbounded,
+i.e.
+\[
+0 \leq E = \frac{1}{2}mv ^ 2 + V(r).
+\]
 
+\newpage
 
+\section{The Wave Equation}
+For $u(x, t) = f(x - ct) + g(x + ct)$.
+We will set
+\[
+u(x, 0) = R(x),\quad u_t(x, 0) = S(x).
+\]
+We then get the results
+\begin{align*}
+    R(x) &= f(x) + g(x) \\
+    S(x) &= -cf'(x) + cg'(x).
+    \intertext{giving us the $S(x)$ as}
+    \frac{1}{c}\int_{0}^{x}S(y)\,dy = -f(x) + g(x).
+\end{align*}
 
+We can then get
+\[
+u(x, t) = \frac{1}{2}\left[R(x - ct) + R(x + ct) + \frac{1}{c}\int_{x - ct}^{x + ct}S(y)\,dy\right].
+\]
+
+\newpage
+
+\section{Moments of Inertia}
+
+There are $N$ masses $m_1, \dotsc, m_N$ at positions $\mbf{r}_1, \dotsc, \mbf{r}_N$ giving us the centre of mass
+\[
+\mbf{R} = \frac{m_1\mbf{r}_1 + \dotsc + m_N\mbf{r}_N}{m_1 + m_2 + \dotsc + m_N}.
+\]
+
+The moment of inertia can be given by
+\[
+I = m_1r_1 ^ 2 + m_2r_2 ^ 2 + \dotsc + m_Nr_N ^ 2.
+\]
+
+For a rod we can use an integral
+\[
+I = \int_{0}^{L}(Mx ^ 2 / L)\,dx.
+\]
+
+The total energy of the system $E = K + V$ can be used to find the potential energy $V$:
+\[
+I\ddot{\theta} = -V'(\theta).
+\]
 
 
 
