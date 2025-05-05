@@ -68,6 +68,15 @@ If the test results are conditionally independent then we have
 \cP{T ^ {++}}{D ^ {+}} = \cP{T ^ {+}}{D ^ {+}} ^ 2\quad\text{and}\quad\cP{T ^ {++}}{D ^ {-}} = \cP{T ^ {+}}{D ^ {-}} ^ 2.
 \]
 
+We have the important formula
+\[
+\text{posterior odds} \times \text{prior odds} \times \text{likelihood ratio}
+\]
+which corresponds to
+\[
+\frac{\cP{A}{B}}{\cP{A ^ c}{B}} = \frac{\P(A)}{\P(A ^ c)}\times\frac{\cP{B}{A}}{\cP{B}{A ^ c}}.
+\]
+
 \newpage
 
 \section{Random variables}
@@ -275,6 +284,44 @@ which is equivalent to
 \text{Posterior} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Data probability}}
 \]
 
+\subsection{Credible intervals}
+For the equal tailed credible interval
+(EQT)
+we can find this $(1 - \alpha)100\%$ interval by simply finding
+\[
+\P(\ell \leq u) = \frac{\alpha}{2} \text{ and } \P(\ell \geq u) = \frac{\alpha}{2}
+\]
+with equal probability in each tail.
+
+For the highest posterior density interval
+(HPD)
+we find the region with the highest density,
+i.e.
+the "tallest" parts of the graph.
+The HPD has probability $(1 - \alpha)100\%$,
+to show that an interval is HPD we can simply show the probability in it is $(1 - \alpha)100\%$.
+
+\subsection{Point estimates}
+The posterior mode/maximum posterior density
+(MAP)
+is the mode of the posterior distribution.
+
+
+To find if a statistic is sufficient we can use the factorisation theorem
+\begin{definition}[Sufficiency]
+    If we have a sample of data $x_1, \dotsc, x_n$,
+    a statistic $T(x_1, \dotsc, x_n)$ is said to be sufficient for $\theta$ if any only if we can factorise the likelihood $\ell(\theta)$ in the following form:
+    \[
+    \ell(\theta) = f(x_1, \dotsc, x_n\mid\theta) = g(T, \theta)h(x_1, \dotsc, x_n)
+    \]
+    where we see that all the $\theta$ behaviour of the likelihood is tied together with $T$ through the function $g(T, \theta)$,
+    but the extra behaviour of $h(x_1, \dotsc, x_n)$ that contains additional details of the data,
+    is essentially irrelevant.
+
+    Therefore,
+    a sufficient statistic $T$ contains all of the information about the parameter $\theta$ that we can extract from the sample $x_1, \dotsc, x_n$.
+\end{definition}
+
 \newpage
 
 \section{Methods}
@@ -362,6 +409,10 @@ f(p \mid x) \propto \binom{n}{x}p ^ x(1 - p) ^ {n - x}\times\frac{1}{B(a, b)}p ^
 \]
 giving us a posterior distribution:
 $\mathrm{Beta}(a + x, b + n - x)$.
+
+
+
+\textbf{Using $\propto$ for finding this prior is very important}
 
 
 \subsection{Making quantile plots}
